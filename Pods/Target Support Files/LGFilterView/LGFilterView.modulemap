@@ -1,0 +1,6 @@
+framework module LGFilterView {
+  umbrella header "LGFilterView-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G26a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="FilterCell" customModule="XianHui" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Fc-kU-gso">
+                        <rect key="frame" x="8" y="9" width="42" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="42" id="BcT-cU-bsh"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QwZ-xV-59s">
+                        <rect key="frame" x="52" y="9" width="20" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="aPL-n4-wU0"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="6Fc-kU-gso" secondAttribute="bottom" constant="10" id="EqQ-lc-5MW"/>
+                <constraint firstAttribute="trailing" secondItem="QwZ-xV-59s" secondAttribute="trailing" constant="8" id="Mix-rM-vJY"/>
+                <constraint firstAttribute="bottom" secondItem="QwZ-xV-59s" secondAttribute="bottom" constant="10" id="Y5i-1I-O7j"/>
+                <constraint firstItem="6Fc-kU-gso" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="dy3-yr-IJq"/>
+                <constraint firstItem="6Fc-kU-gso" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="9" id="mbL-hd-Hxd"/>
+                <constraint firstItem="QwZ-xV-59s" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="9" id="ufu-7g-wre"/>
+            </constraints>
+            <connections>
+                <outlet property="arrowLabel" destination="QwZ-xV-59s" id="vLp-uu-TB3"/>
+                <outlet property="titleLabel" destination="6Fc-kU-gso" id="IPN-L8-dSa"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+</document>
