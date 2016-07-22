@@ -84,7 +84,9 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods-XianHui/AFViewShaker.framework"
   install_framework "Pods-XianHui/Alamofire.framework"
+  install_framework "Pods-XianHui/BKPasscodeView.framework"
   install_framework "Pods-XianHui/CTAssetsPickerController.framework"
   install_framework "Pods-XianHui/Charts.framework"
   install_framework "Pods-XianHui/CryptoSwift.framework"
@@ -112,6 +114,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-XianHui/Ruler.framework"
   install_framework "Pods-XianHui/SDWebImage.framework"
   install_framework "Pods-XianHui/SnapKit.framework"
+  install_framework "Pods-XianHui/SwiftDate.framework"
   install_framework "Pods-XianHui/SwiftString.framework"
   install_framework "Pods-XianHui/SwiftyJSON.framework"
   install_framework "Pods-XianHui/TWMessageBarManager.framework"
@@ -119,7 +122,9 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-XianHui/UITextView_Placeholder.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods-XianHui/AFViewShaker.framework"
   install_framework "Pods-XianHui/Alamofire.framework"
+  install_framework "Pods-XianHui/BKPasscodeView.framework"
   install_framework "Pods-XianHui/CTAssetsPickerController.framework"
   install_framework "Pods-XianHui/Charts.framework"
   install_framework "Pods-XianHui/CryptoSwift.framework"
@@ -147,6 +152,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-XianHui/Ruler.framework"
   install_framework "Pods-XianHui/SDWebImage.framework"
   install_framework "Pods-XianHui/SnapKit.framework"
+  install_framework "Pods-XianHui/SwiftDate.framework"
   install_framework "Pods-XianHui/SwiftString.framework"
   install_framework "Pods-XianHui/SwiftyJSON.framework"
   install_framework "Pods-XianHui/TWMessageBarManager.framework"

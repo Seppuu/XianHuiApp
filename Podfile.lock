@@ -1,10 +1,13 @@
 PODS:
+  - AFViewShaker (0.0.2)
   - Alamofire (3.4.1)
   - AVOSCloud (3.3.5)
   - AVOSCloudCrashReporting (3.3.5):
     - AVOSCloud
   - AVOSCloudIM (3.3.5):
     - AVOSCloud
+  - BKPasscodeView (0.2.3):
+    - AFViewShaker (~> 0.0)
   - Charts (2.2.5):
     - Charts/Core (= 2.2.5)
   - Charts/Core (2.2.5)
@@ -46,6 +49,7 @@ PODS:
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
   - SnapKit (0.15.0)
+  - SwiftDate (3.0.8)
   - SwiftString (0.5)
   - SwiftyJSON (2.3.2)
   - TWMessageBarManager (1.8.1)
@@ -57,6 +61,7 @@ DEPENDENCIES:
   - AVOSCloud
   - AVOSCloudCrashReporting
   - AVOSCloudIM
+  - BKPasscodeView
   - Charts
   - CryptoSwift
   - CTAssetsPickerController (~> 3.3.0)
@@ -79,6 +84,7 @@ DEPENDENCIES:
   - Ruler (~> 0.6)
   - SDWebImage
   - SnapKit (~> 0.15.0)
+  - SwiftDate
   - SwiftString
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
   - TWMessageBarManager
@@ -95,10 +101,12 @@ CHECKOUT OPTIONS:
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 SPEC CHECKSUMS:
+  AFViewShaker: 7e4bc215ca3e92347b78da436fca74e1730b52e8
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
   AVOSCloud: 1fe170768bee7e05bc3ea86e38d5bddb105cb957
   AVOSCloudCrashReporting: 7ad087db785a25d6ef03cb54c2c0b460eb32dabb
   AVOSCloudIM: dc307c48e951fcd861f4ae6db6d807e7b40639c8
+  BKPasscodeView: 4dd27931ad4e5938e9967fdb260f6e166fa82632
   Charts: b48fcc8d7190de910ff9e9748f5360c8ea7856e5
   CryptoSwift: df42dda18baf6c76347a94e227dbcc0a341304bd
   CTAssetsPickerController: b1d1d50ab87cf6b8b13531de5f4530482e7e53ed
@@ -126,6 +134,7 @@ SPEC CHECKSUMS:
   Ruler: ca20ae2a4a39d029d515daf9a8b8bb70b59ae441
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SnapKit: 4962eed2ee18e48cbd2b2292fffc57efe7235f87
+  SwiftDate: 971f8b9394f664f2226b9c3ab64e801a7291c612
   SwiftString: ec9c31c55b2aa147a1154f5f5f8483dc71e3165f
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   TWMessageBarManager: fd84e7948ba7968a2b5d9454859135761214ec56

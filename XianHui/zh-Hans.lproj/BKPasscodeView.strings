@@ -1,0 +1,56 @@
+/* 
+  BKPasscodeView.strings
+  XianHui
+
+  Created by Seppuu on 16/7/21.
+  Copyright © 2016年 mybook. All rights reserved.
+*/
+
+/* %d번의 암호 입력 시도 실패 */
+"%d Failed Passcode Attempts" = "%d 次尝试失败";
+
+/* 1번의 암호 입력 시도 실패 */
+"1 Failed Passcode Attempt" = "1 次尝试失败";
+
+/* Touch ID를 사용하시겠습니까? */
+"Do you want to use Touch ID for authentication?" = "你希望用Touch ID进行验证吗?";
+
+/* 확인 */
+"Done" = "完成";
+
+/* Touch ID 사용 */
+"Enable Touch ID" = "启用 Touch ID";
+
+/* 다른 암호를 입력하십시오. 동일한 암호를 다시 사용할 수 없습니다. */
+"Enter a different passcode. Cannot re-use the same passcode." = "请输入一个不同的密码.不能使用相同的密码.";
+
+/* 암호 입력 */
+"Enter a passcode" = "请输入密码";
+
+/* 새로운 암호 입력 */
+"Enter your new passcode" = "请输入新的密码";
+
+/* 기존 암호 입력 */
+"Enter your old passcode" = "请输入旧的密码";
+
+/* 암호 입력 */
+"Enter your passcode" = "请输入密码";
+
+/* 잘못된 암호 */
+"Invalid Passcode" = "无效的密码";
+
+/* 암호가 일치하지 않습니다.\n다시 시도하십시오. */
+"Passcodes did not match.\nTry again." = "密码不正确.\n再试一次.";
+
+/* 암호 재입력 */
+"Re-enter your passcode" = "再次输入密码";
+
+/* %d분 후에 다시 시도 */
+"Try again in %d minutes" = "在%d分钟内再试一次";
+
+/* 1분 후에 다시 시도 */
+"Try again in 1 minute" = "在1分钟内再试一次";
+
+
+
+

@@ -66,9 +66,16 @@
     }];
     UINavigationController *secondNavigationController = [[LCCKBaseNavigationController alloc]
                                                           initWithRootViewController:secondViewController];
+    
+    //Mine VC
+    MineVC *thirdVC = [[MineVC alloc] init];
+    UINavigationController *thirdNavigationController = [[LCCKBaseNavigationController alloc]
+                                                         initWithRootViewController:thirdVC];
+    
     NSArray *viewControllers = @[
                                  firstNavigationController,
                                  secondNavigationController,
+                                 thirdNavigationController
                                  ];
     return viewControllers;
 }
@@ -84,10 +91,18 @@
                             CYLTabBarItemImage : @"tabbar_contacts_normal",
                             CYLTabBarItemSelectedImage : @"tabbar_contacts_active",
                             };
+
     
+    NSDictionary *dict3 = @{
+                            //                            CYLTabBarItemTitle : @"联系人",
+                            CYLTabBarItemImage : @"tabbar_contacts_normal",
+                            CYLTabBarItemSelectedImage : @"tabbar_contacts_active",
+                            };
+
     NSArray *tabBarItemsAttributes = @[
                                        dict1,
                                        dict2,
+                                       dict3
                                        ];
     return tabBarItemsAttributes;
 }

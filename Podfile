@@ -16,6 +16,7 @@ pod 'LGFilterView', '~> 1.0.0'
 pod 'TWMessageBarManager'
 pod 'MWPhotoBrowser'
 pod 'UITextView+Placeholder', '~> 1.2'
+pod 'BKPasscodeView'
 
 pod 'Palau', '~> 1.0'
 pod 'SwiftString'

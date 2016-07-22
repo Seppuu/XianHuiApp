@@ -9,10 +9,13 @@
 import UIKit
 import UITextView_Placeholder
 import SwiftString
+import SwiftDate
 
 class CreateTaskVC: BaseViewController {
     
     var tableView: UITableView!
+    
+    @IBOutlet weak var addBarButton: UIBarButtonItem!
     
     let titleCellId = "formCell"
     //let positionCellId = "formCell"
@@ -41,7 +44,22 @@ class CreateTaskVC: BaseViewController {
         let timeInterval:Double = 1*60*60 //一小时
         endDate = NSDate(timeInterval: timeInterval, sinceDate: beginDate)
     }
+    
+    //标题
+    var taskTitle = ""
+    
+    //发起者(TODO:默认是当然用户)
+    var initiator = ""
+    
+    //参与者
+    var members = ""
 
+    //提醒
+    var remind:Int = 0
+    
+    //备注
+    var remark = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,15 +67,15 @@ class CreateTaskVC: BaseViewController {
         
         setTableView()
         
-        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
     
     func setTableView() {
+        
         tableView = UITableView(frame: CGRectMake(0, 0, screenWidth, screenHeight), style: .Grouped)
         tableView.delegate = self
         tableView.dataSource = self
@@ -69,7 +87,29 @@ class CreateTaskVC: BaseViewController {
         }
 
     }
-
+    
+    @IBAction func addButtonTap(sender: UIBarButtonItem) {
+        
+        if taskTitle == "" {
+            showAlertWith("请设定标题")
+            return
+        }
+        
+        if members == "" {
+            showAlertWith("请设定参与人员")
+            return
+        }
+        
+        //TODO:创建任务
+        showAlertWith("任务添加成功")
+        
+    }
+    
+    func showAlertWith(text:String) {
+        
+        DDAlert.alert(title: "提示", message: text, dismissTitle: "OK", inViewController: self, withDismissAction: nil)
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -157,6 +197,10 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
             if indexPath.row == 0 {
                 //标题
                 cell.leftTextField.placeholder = "标题"
+                cell.endEditHandler = { (textField) in
+                    
+                    
+                }
             }
             else {
                 //位置
@@ -173,7 +217,14 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
                     
                     let textCell = tableView.dequeueReusableCellWithIdentifier(timeSelectCellId, forIndexPath: indexPath) as! typeCell
                     textCell.leftLabel.text = text
-                    textCell.typeLabel.text = convertDateToTextWith(date)
+                    
+                    if date == beginDate {
+                        textCell.typeLabel.text = convertDateToTextWith(date)
+                    }
+                    else {
+                        textCell.typeLabel.text = convertDateToTextWithOutDay(date)
+                    }
+                    
                     return textCell
                 }
             
@@ -182,12 +233,15 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
                     let timePickerCell = tableView.dequeueReusableCellWithIdentifier(datePickerCellId, forIndexPath: indexPath) as! pickerCell
                     let picker = timePickerCell.datePickerView
                     if isBegin == true {
-                        let date = beginDate
+                        //开始时间的最早时间是当前时间.
+                        let date = NSDate()
                         setMinimumDateWith(picker, date: date)
                         
                     }
                     else {
-                        let date = endDate
+                        //结束时间的最早时间是开始时间的延后一个小时.
+                        let timeInterval:Double = 1*60*60 //一小时
+                        let date = NSDate(timeInterval: timeInterval, sinceDate: beginDate)
                         setMinimumDateWith(picker, date: date)
                     }
                     
@@ -277,6 +331,8 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
         
     }
     
+    
+    //MARK: 时间选择功能点如下.
     private func setMinimumDateWith(picker:UIDatePicker,date:NSDate) {
         
         picker.minimumDate = date
@@ -290,12 +346,19 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
         return dateFormatter.stringFromDate(date)
     }
     
+    private func convertDateToTextWithOutDay(date:NSDate) -> String {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = " ahh:mm"
+        
+        return dateFormatter.stringFromDate(date)
+    }
+    
     private func dateChangeHandler(date:NSDate) {
         
         if showBeginTimePicker == true {
             beginDate = date //此时endDate也会改变
-            let time = convertDateToTextWith(date)
-            updateEndTimeCellWith(time)
+            updateBeginTimeCellWith(beginDate)
+            updateEndTimeCellWith(endDate)
         }
         else {
             
@@ -303,8 +366,7 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
         
         if showEndTimePicker == true {
             endDate = date
-            if endDate
-            
+            updateEndTimeCellWith(endDate)
             
         }
         else {
@@ -312,11 +374,56 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
         }
     }
     
-    private func updateBeginTimeCellWith(string:String) {
+    private func updateBeginTimeCellWith(date:NSDate) {
+        
+        let time = convertDateToTextWith(date)
+        changeBeginDateCellText(time)
+    }
+    
+    private func updateEndTimeCellWith(date:NSDate) {
+        
+        if endDate.day == beginDate.day {
+            let time = convertDateToTextWithOutDay(endDate)
+            changeEndDateCellText(time)
+        }
+        else {
+            let time = convertDateToTextWith(endDate)
+            changeEndDateCellText(time)
+        }
+        
         
     }
     
-    private func updateEndTimeCellWith(string:String) {
+    private func changeEndDateCellText(time:String) {
+        
+        if showBeginTimePicker == true {
+            //end time cell is 2 1
+            let indexPath = NSIndexPath(forRow: 2, inSection: 1)
+            guard let cell = tableView.cellForRowAtIndexPath(indexPath) as? typeCell else {return}
+            cell.typeLabel.text = time
+        }
+        else {
+            
+        }
+        
+        if showEndTimePicker == true {
+            //end time cell is 1 1
+            let indexPath = NSIndexPath(forRow: 1, inSection: 1)
+            guard let cell = tableView.cellForRowAtIndexPath(indexPath) as? typeCell else {return}
+            cell.typeLabel.text = time
+        }
+        else {
+            
+        }
+        
+    }
+    
+    private func changeBeginDateCellText(time:String) {
+        
+        //beigin time cell is 0 1 always
+        let indexPath = NSIndexPath(forRow: 0, inSection: 1)
+        guard let cell = tableView.cellForRowAtIndexPath(indexPath) as? typeCell else {return}
+        cell.typeLabel.text = time
         
     }
     
@@ -372,4 +479,22 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
         }
         
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

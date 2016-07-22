@@ -62,5 +62,24 @@ extension PalauDefaults {
         }
     }
     
+    public static var useTouchID: PalauDefaultsEntry<Bool> {
+        get {
+            return value("useTouchID").whenNil(use:false )
+        }
+        set {
+            
+        }
+    }
+    
+    public static var localPassword: PalauDefaultsEntry<String> {
+        get {
+            return value("localPassword").whenNil(use:"")
+        }
+        set {
+            
+        }
+    }
+    
+    
   
 }

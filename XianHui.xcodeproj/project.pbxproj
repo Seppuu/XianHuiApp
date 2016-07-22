@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		372962991D40AF6500A947B4 /* BKPasscodeView.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3729629B1D40AF6500A947B4 /* BKPasscodeView.strings */; };
+		3729629D1D40B9E700A947B4 /* PasswordSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3729629C1D40B9E700A947B4 /* PasswordSettingVC.swift */; };
+		3739C2431D409D6800222D4A /* MineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3739C2421D409D6800222D4A /* MineVC.swift */; };
 		37B961791D3F5044004F6F92 /* TaskList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37B961771D3F5044004F6F92 /* TaskList.storyboard */; };
 		37B9617A1D3F5044004F6F92 /* TaskListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B961781D3F5044004F6F92 /* TaskListVC.swift */; };
 		37B9617D1D3F5829004F6F92 /* CreateTaskVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B9617C1D3F5829004F6F92 /* CreateTaskVC.swift */; };
@@ -236,6 +239,9 @@
 		37BAB9E21D3E124E001E4680 /* DDUserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BAB9DE1D3E124E001E4680 /* DDUserDefault.swift */; };
 		37BAB9E71D3E2335001E4680 /* ContactListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BAB9E61D3E2335001E4680 /* ContactListVC.swift */; };
 		37BAB9EC1D3F230D001E4680 /* ContactList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37BAB9EB1D3F230D001E4680 /* ContactList.storyboard */; };
+		37DE9D681D41B6AD0041A26B /* MessageListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE9D671D41B6AD0041A26B /* MessageListVC.swift */; };
+		37DE9D6A1D41B6FC0041A26B /* MessageListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE9D691D41B6FC0041A26B /* MessageListModel.swift */; };
+		37DE9D6C1D41B7310041A26B /* MessageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE9D6B1D41B7310041A26B /* MessageListCell.swift */; };
 		37EA568B1D3E0A7000D63498 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EA568A1D3E0A7000D63498 /* AppDelegate.swift */; };
 		37EA568D1D3E0A7000D63498 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EA568C1D3E0A7000D63498 /* ViewController.swift */; };
 		37EA56901D3E0A7000D63498 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37EA568E1D3E0A7000D63498 /* Main.storyboard */; };
@@ -246,6 +252,9 @@
 /* Begin PBXFileReference section */
 		0A503BC16E271BA2F18444F3 /* Pods-XianHui.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XianHui.release.xcconfig"; path = "Pods/Target Support Files/Pods-XianHui/Pods-XianHui.release.xcconfig"; sourceTree = "<group>"; };
 		2D802883ED5368B6081BC0AB /* Pods-XianHui.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XianHui.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XianHui/Pods-XianHui.debug.xcconfig"; sourceTree = "<group>"; };
+		3729629A1D40AF6500A947B4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BKPasscodeView.strings"; sourceTree = "<group>"; };
+		3729629C1D40B9E700A947B4 /* PasswordSettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordSettingVC.swift; sourceTree = "<group>"; };
+		3739C2421D409D6800222D4A /* MineVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineVC.swift; sourceTree = "<group>"; };
 		37B961771D3F5044004F6F92 /* TaskList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TaskList.storyboard; sourceTree = "<group>"; };
 		37B961781D3F5044004F6F92 /* TaskListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListVC.swift; sourceTree = "<group>"; };
 		37B9617C1D3F5829004F6F92 /* CreateTaskVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTaskVC.swift; sourceTree = "<group>"; };
@@ -594,6 +603,9 @@
 		37BAB9DE1D3E124E001E4680 /* DDUserDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDUserDefault.swift; sourceTree = "<group>"; };
 		37BAB9E61D3E2335001E4680 /* ContactListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactListVC.swift; sourceTree = "<group>"; };
 		37BAB9EB1D3F230D001E4680 /* ContactList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ContactList.storyboard; sourceTree = "<group>"; };
+		37DE9D671D41B6AD0041A26B /* MessageListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageListVC.swift; sourceTree = "<group>"; };
+		37DE9D691D41B6FC0041A26B /* MessageListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageListModel.swift; sourceTree = "<group>"; };
+		37DE9D6B1D41B7310041A26B /* MessageListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageListCell.swift; sourceTree = "<group>"; };
 		37EA56871D3E0A7000D63498 /* XianHui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XianHui.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EA568A1D3E0A7000D63498 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37EA568C1D3E0A7000D63498 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -623,6 +635,23 @@
 				0A503BC16E271BA2F18444F3 /* Pods-XianHui.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		372962881D40A41000A947B4 /* Password */ = {
+			isa = PBXGroup;
+			children = (
+				3729629C1D40B9E700A947B4 /* PasswordSettingVC.swift */,
+			);
+			name = Password;
+			path = PasswordSettingVC;
+			sourceTree = "<group>";
+		};
+		3739C2411D409D3C00222D4A /* MineVC */ = {
+			isa = PBXGroup;
+			children = (
+				3739C2421D409D6800222D4A /* MineVC.swift */,
+			);
+			path = MineVC;
 			sourceTree = "<group>";
 		};
 		37B961761D3F5044004F6F92 /* TaskListVC */ = {
@@ -1781,6 +1810,9 @@
 		37BAB9691D3E1059001E4680 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				372962881D40A41000A947B4 /* Password */,
+				37DE9D661D41B6780041A26B /* MessageList */,
+				3739C2411D409D3C00222D4A /* MineVC */,
 				37B9617B1D3F5811004F6F92 /* CreateTaskVC */,
 				37B961761D3F5044004F6F92 /* TaskListVC */,
 				37BAB9E51D3E2306001E4680 /* ContactListVC */,
@@ -1893,6 +1925,16 @@
 			path = ContactListVC;
 			sourceTree = "<group>";
 		};
+		37DE9D661D41B6780041A26B /* MessageList */ = {
+			isa = PBXGroup;
+			children = (
+				37DE9D671D41B6AD0041A26B /* MessageListVC.swift */,
+				37DE9D691D41B6FC0041A26B /* MessageListModel.swift */,
+				37DE9D6B1D41B7310041A26B /* MessageListCell.swift */,
+			);
+			path = MessageList;
+			sourceTree = "<group>";
+		};
 		37EA567E1D3E0A7000D63498 = {
 			isa = PBXGroup;
 			children = (
@@ -1926,6 +1968,7 @@
 				37BAB82A1D3E0F84001E4680 /* Assets.xcassets */,
 				37EA56931D3E0A7000D63498 /* LaunchScreen.storyboard */,
 				37EA56961D3E0A7000D63498 /* Info.plist */,
+				3729629B1D40AF6500A947B4 /* BKPasscodeView.strings */,
 			);
 			path = XianHui;
 			sourceTree = "<group>";
@@ -2005,6 +2048,7 @@
 				37BAB9781D3E1059001E4680 /* AddFriendSearchCell.xib in Resources */,
 				37EA56951D3E0A7000D63498 /* LaunchScreen.storyboard in Resources */,
 				37BAB86D1D3E0F84001E4680 /* LCChatKitString.strings in Resources */,
+				372962991D40AF6500A947B4 /* BKPasscodeView.strings in Resources */,
 				37BAB86A1D3E0F84001E4680 /* Common.bundle in Resources */,
 				37BAB98C1D3E1059001E4680 /* coverCell.xib in Resources */,
 				37BAB86E1D3E0F84001E4680 /* MBProgressHUD.bundle in Resources */,
@@ -2113,6 +2157,7 @@
 				37BAB88A1D3E0F84001E4680 /* LCChatKitExample.m in Sources */,
 				37BAB8BC1D3E1025001E4680 /* Once.swift in Sources */,
 				37BAB8411D3E0F84001E4680 /* LCCKConversationViewModel.m in Sources */,
+				3739C2431D409D6800222D4A /* MineVC.swift in Sources */,
 				37BAB8741D3E0F84001E4680 /* LCCKConversationListService.m in Sources */,
 				37BAB8F11D3E1045001E4680 /* UIViewController+RESideMenu.m in Sources */,
 				37BAB8431D3E0F84001E4680 /* NSString+LCCKExtension.m in Sources */,
@@ -2163,6 +2208,7 @@
 				37BAB8E71D3E1045001E4680 /* CYLTabBar.m in Sources */,
 				37BAB8331D3E0F84001E4680 /* NSMutableArray+LCCKMessageExtention.m in Sources */,
 				37BAB8371D3E0F84001E4680 /* LCCKBaseViewController.m in Sources */,
+				37DE9D6C1D41B7310041A26B /* MessageListCell.swift in Sources */,
 				37BAB8B01D3E101C001E4680 /* UINavigationBar+DD.swift in Sources */,
 				37BAB8ED1D3E1045001E4680 /* KCPinyinHelper.m in Sources */,
 				37B9617A1D3F5044004F6F92 /* TaskListVC.swift in Sources */,
@@ -2233,6 +2279,7 @@
 				37BAB88F1D3E0F84001E4680 /* DEMOCustomAutoCompleteObject.m in Sources */,
 				37BAB85E1D3E0F84001E4680 /* LCCKChatMessageCell.m in Sources */,
 				37BAB9B91D3E1059001E4680 /* BorderTextField.swift in Sources */,
+				37DE9D6A1D41B6FC0041A26B /* MessageListModel.swift in Sources */,
 				37BAB8771D3E0F84001E4680 /* LCCKSettingService.m in Sources */,
 				37BAB8EB1D3E1045001E4680 /* MLPAutoCompleteTextField.m in Sources */,
 				37BAB87A1D3E0F84001E4680 /* LCCKUserSystemService.m in Sources */,
@@ -2242,7 +2289,9 @@
 				37BAB87B1D3E0F84001E4680 /* LCCKError.m in Sources */,
 				37BAB8571D3E0F84001E4680 /* LCCKChatFaceView.m in Sources */,
 				37BAB9DF1D3E124E001E4680 /* DDConfigs.swift in Sources */,
+				37DE9D681D41B6AD0041A26B /* MessageListVC.swift in Sources */,
 				37BAB8A71D3E101C001E4680 /* Array+DD.swift in Sources */,
+				3729629D1D40B9E700A947B4 /* PasswordSettingVC.swift in Sources */,
 				37BAB8661D3E0F84001E4680 /* LCCKConversationListViewModel.m in Sources */,
 				37BAB8891D3E0F84001E4680 /* LCChatKit.m in Sources */,
 				37BAB8AA1D3E101C001E4680 /* NSTimeZone+DD.swift in Sources */,
@@ -2297,6 +2346,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		3729629B1D40AF6500A947B4 /* BKPasscodeView.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3729629A1D40AF6500A947B4 /* zh-Hans */,
+			);
+			name = BKPasscodeView.strings;
+			sourceTree = "<group>";
+		};
 		37BAB7C21D3E0F83001E4680 /* LCChatKitString.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

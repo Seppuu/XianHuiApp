@@ -14,6 +14,8 @@ class SwitchCell: UITableViewCell {
     @IBOutlet weak var leftLabel: UILabel!
     
     @IBOutlet weak var switchButton: UISwitch!
+    
+    var switchTapHandler:((on:Bool)->())?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,6 +30,9 @@ class SwitchCell: UITableViewCell {
     
     
     @IBAction func switchTap(sender: UISwitch) {
+        
+        switchTapHandler?(on: sender.on)
+        
     }
     
     

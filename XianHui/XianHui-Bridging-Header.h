@@ -14,6 +14,7 @@
 
 #import "LCCKLoginViewController.h"
 #import "LCCKTabBarControllerConfig.h"
+#import "LCCKConversationListCell.h"
 #import "CYLTabBarController.h"
 
 

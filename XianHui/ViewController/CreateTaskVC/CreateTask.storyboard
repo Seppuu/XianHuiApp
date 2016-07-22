@@ -18,7 +18,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="新建任务" id="aZG-RP-JTk"/>
+                    <navigationItem key="navigationItem" title="新建任务" id="aZG-RP-JTk">
+                        <barButtonItem key="rightBarButtonItem" title="添加" id="bjV-EI-g85">
+                            <connections>
+                                <action selector="addButtonTap:" destination="jpH-Bi-wPI" id="WQb-Dr-33n"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addBarButton" destination="bjV-EI-g85" id="mSx-4B-ThE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OVb-OJ-t8h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
