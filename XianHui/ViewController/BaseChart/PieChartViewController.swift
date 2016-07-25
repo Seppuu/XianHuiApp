@@ -256,12 +256,13 @@ extension PieChartViewController:OTPageScrollViewDataSource,OTPageScrollViewDele
     
     func pageScrollView(pageScrollView: OTPageScrollView!, viewForRowAtIndex index: Int32) -> UIView! {
         
-        let view = VoiceRecordSampleCell(frame: CGRect(x: 0, y: 0, width: 25, height: viewHeight * 0.4))
+        let view = VoiceRecordSampleCell(frame: CGRect(x: 0, y: 0, width: 25, height: viewHeight * 0.2))
         let item = Int(index)
         let val = listOfNumber2[item].toFloat()!
-        view.color = UIColor ( red: 0.8275, green: 0.7216, blue: 0.5529, alpha: 1.0 )
         
         view.value = val / 20000
+        
+        view.color = UIColor ( red: 0.8275, green: 0.7216, blue: 0.5529, alpha: 1.0 )
         
         return view
 
