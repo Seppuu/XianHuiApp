@@ -8,7 +8,8 @@
 
 import UIKit
 
-class MessageListModel: LCCKConversationViewModel {
+class MessageListModel: LCCKConversationListViewModel {
+    
     
     
     

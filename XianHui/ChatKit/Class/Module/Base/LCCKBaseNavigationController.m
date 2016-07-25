@@ -15,9 +15,9 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.navigationBar.translucent = YES;
-    self.navigationBar.barTintColor = [UIColor colorWithRed:0.2598 green:0.4689 blue:0.624 alpha:1.0];
-    self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
-    self.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationBar.barTintColor = [UIColor colorWithRed:0.7855 green:0.6676 blue:0.4805 alpha:1.0];
+    self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor colorWithRed:0.3779 green:0.3171 blue:0.3185 alpha:1.0]};
+    self.navigationBar.tintColor = [UIColor colorWithRed:0.3779 green:0.3171 blue:0.3185 alpha:1.0];
 }
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {

@@ -27,7 +27,7 @@ PODS:
   - IQKeyboardManagerSwift (4.0.4)
   - KeyboardMan (0.6.0)
   - Kingfisher (2.4.2)
-  - LGFilterView (1.0.3)
+  - LTInfiniteScrollView-Swift (0.1.0)
   - Masonry (1.0.1)
   - MBProgressHUD (0.9.2)
   - MJRefresh (3.1.10)
@@ -73,7 +73,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - KeyboardMan (~> 0.6.0)
   - Kingfisher (~> 2.3)
-  - LGFilterView (~> 1.0.0)
+  - LTInfiniteScrollView-Swift
   - Masonry
   - MJRefresh
   - MWPhotoBrowser
@@ -120,7 +120,7 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: e0964d04d6a29b71016fd346dca13ecb80a2823a
   KeyboardMan: 665211f180093f5bb3c6ff7e8b7f858c432c6ccf
   Kingfisher: 05bf8d04408aaa70fcd2c8c81b9f1d0f1ad313dd
-  LGFilterView: 97ac7330c74132ed06fd550e14d91516a1cef155
+  LTInfiniteScrollView-Swift: 4e5e0cfd742751acd3a122ef206c803be3ee8fba
   Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MJRefresh: bb72948c985914b0b5cecac573a2c69a8915fb02

@@ -35,19 +35,19 @@
         !sessionNotOpenedHandler ?: sessionNotOpenedHandler(self, nil);
     }
     self.navigationItem.title = @"消息";
-    self.tableView.delegate = self.conversationListViewModel;
-    self.tableView.dataSource = self.conversationListViewModel;
-    self.tableView.mj_header = ({
-        MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-            // 进入刷新状态后会自动调用这个 block
-            [self.conversationListViewModel refresh];
-            // 设置颜色
-        }];
-        header.stateLabel.textColor = [UIColor grayColor];
-        header.lastUpdatedTimeLabel.textColor = [UIColor grayColor];
-        header;
-    });
-    [self.tableView.mj_header beginRefreshing];
+//    self.tableView.delegate = self.conversationListViewModel;
+//    self.tableView.dataSource = self.conversationListViewModel;
+//    self.tableView.mj_header = ({
+//        MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//            // 进入刷新状态后会自动调用这个 block
+//            [self.conversationListViewModel refresh];
+//            // 设置颜色
+//        }];
+//        header.stateLabel.textColor = [UIColor grayColor];
+//        header.lastUpdatedTimeLabel.textColor = [UIColor grayColor];
+//        header;
+//    });
+//    [self.tableView.mj_header beginRefreshing];
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
 }
 

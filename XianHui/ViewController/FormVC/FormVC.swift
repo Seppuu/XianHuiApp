@@ -1,8 +1,8 @@
 //
-//  FormsViewController.swift
-//  MeiBu
+//  FormVC.swift
+//  XianHui
 //
-//  Created by Seppuu on 16/7/11.
+//  Created by Seppuu on 16/7/22.
 //  Copyright © 2016年 mybook. All rights reserved.
 //
 
@@ -13,7 +13,7 @@ import PageMenu
 import LGFilterView
 import SwiftString
 
-class FormsViewController: BaseViewController,CAPSPageMenuDelegate {
+class FormVC: UIViewController,CAPSPageMenuDelegate {
     
     var topView = SubscriptionTopView()
     var collectionView:UICollectionView!
@@ -37,7 +37,7 @@ class FormsViewController: BaseViewController,CAPSPageMenuDelegate {
         setBarItem()
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
@@ -46,13 +46,13 @@ class FormsViewController: BaseViewController,CAPSPageMenuDelegate {
     let pageMenuParameters: [CAPSPageMenuOption] = [
         .MenuItemSeparatorWidth(0.0),
         .ScrollMenuBackgroundColor(UIColor.whiteColor()),
-        .ViewBackgroundColor(UIColor(red: 247.0/255.0, green: 247.0/255.0, blue: 247.0/255.0, alpha: 1.0)),
+        .ViewBackgroundColor(UIColor(red: 254.9/255.0, green: 251.4/255.0, blue: 243.7/255.0, alpha: 1.0)),
         .BottomMenuHairlineColor(UIColor(red: 20.0/255.0, green: 20.0/255.0, blue: 20.0/255.0, alpha: 0.1)),
-        .SelectionIndicatorColor(UIColor(red: 18.0/255.0, green: 150.0/255.0, blue: 225.0/255.0, alpha: 1.0)),
+        .SelectionIndicatorColor(UIColor(red: 96.4/255.0, green: 80.8/255.0, blue: 81.2/255.0, alpha: 1.0)),
         .MenuMargin(20.0),
         .MenuHeight(40.0),
-        .SelectedMenuItemLabelColor(UIColor(red: 18.0/255.0, green: 150.0/255.0, blue: 225.0/255.0, alpha: 1.0)),
-        .UnselectedMenuItemLabelColor(UIColor(red: 40.0/255.0, green: 40.0/255.0, blue: 40.0/255.0, alpha: 1.0)),
+        .SelectedMenuItemLabelColor(UIColor(red: 96.4/255.0, green: 80.8/255.0, blue: 81.2/255.0, alpha: 1.0)),
+        .UnselectedMenuItemLabelColor(UIColor(red: 116.7/255.0, green: 96.1/255.0, blue: 97.2/255.0, alpha: 1.0)),
         .MenuItemFont(UIFont(name: "HelveticaNeue-Medium", size: 14.0)!),
         .UseMenuLikeSegmentedControl(true),
         .MenuItemSeparatorRoundEdges(false),
@@ -62,19 +62,17 @@ class FormsViewController: BaseViewController,CAPSPageMenuDelegate {
     
     func setSubView() {
         
-        
         // Initialize view controllers to display and place in array
         var controllerArray : [UIViewController] = []
-        
         
         let controller1 = PieChartViewController()
         
         controller1.parentNavigationController = self.navigationController
-        controller1.title = "员工"
+        controller1.title = "金额"
         controllerArray.append(controller1)
         
         let controller2 = LineChartViewController()
-        controller2.title = "金额"
+        controller2.title = "员工"
         controller2.parentNavigationController = self.navigationController
         controllerArray.append(controller2)
         
@@ -94,7 +92,7 @@ class FormsViewController: BaseViewController,CAPSPageMenuDelegate {
         
         // Optional delegate
         pageMenu!.delegate = self
-        
+        pageMenu?.controllerScrollView.scrollEnabled = false
         
         self.view.addSubview(pageMenu!.view)
         
@@ -106,33 +104,32 @@ class FormsViewController: BaseViewController,CAPSPageMenuDelegate {
         
         pageMenu = nil
         
-        
     }
     
     var rightBarItem = UIBarButtonItem()
     
     func setBarItem() {
         
-        let arrowImage = UIImage(named: "Arrow")
+//        let arrowImage = UIImage(named: "Arrow")
+//        
+//        titleButton.backgroundColor = UIColor.clearColor()
+//        titleButton.tag = 0
+//        titleButton.setTitle(titlesArray[0], forState: .Normal)
+//        titleButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+//        titleButton.setImage(arrowImage, forState: .Normal)
+//        
+//        titleButton.titleLabel?.font = UIFont.systemFontOfSize(20)
+//        titleButton.imageEdgeInsets = UIEdgeInsetsMake(0, -4, 0, 4)
+//        titleButton.titleEdgeInsets = UIEdgeInsetsMake(0, 4, 0, -4)
+//        
+//        titleButton.addTarget(self, action: #selector(FormVC.titleFilter(_:)), forControlEvents: .TouchUpInside)
+//        titleButton.sizeToFit()
+//        
+//        self.navigationItem.titleView = titleButton
         
-        titleButton.backgroundColor = UIColor.clearColor()
-        titleButton.tag = 0
-        titleButton.setTitle(titlesArray[0], forState: .Normal)
-        titleButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        titleButton.setImage(arrowImage, forState: .Normal)
+        //setupFilterViewsWithTransitionStyle(.Top)
         
-        titleButton.titleLabel?.font = UIFont.systemFontOfSize(20)
-        titleButton.imageEdgeInsets = UIEdgeInsetsMake(0, -4, 0, 4)
-        titleButton.titleEdgeInsets = UIEdgeInsetsMake(0, 4, 0, -4)
-        
-        titleButton.addTarget(self, action: #selector(FormsViewController.titleFilter(_:)), forControlEvents: .TouchUpInside)
-        titleButton.sizeToFit()
-        
-        self.navigationItem.titleView = titleButton
-        
-        setupFilterViewsWithTransitionStyle(.Top)
-        
-        rightBarItem = UIBarButtonItem(title: dateTypesArray[0], style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FormsViewController.dataFilterTap(_:)))
+        rightBarItem = UIBarButtonItem(title: "设置", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FormVC.dataFilterTap(_:)))
         navigationItem.rightBarButtonItem = rightBarItem
         
         setDateFilterViewWithTransitionStyle(.Top)
@@ -149,17 +146,17 @@ class FormsViewController: BaseViewController,CAPSPageMenuDelegate {
         filterView.transitionStyle = style
         filterView.numberOfLines = 0
         
-    
+        
         let isStatusBarHidden = UIApplication.sharedApplication().statusBarHidden
         let statusBarHeight   = isStatusBarHidden ? 0 : UIApplication.sharedApplication().statusBarFrame.size.height
         
         let topInset = (self.navigationController?.navigationBar.ddHeight)! +  statusBarHeight
         
-//        let version = UIDevice.currentDevice().systemVersion.toFloat()!
-//        
-//        if version < 7.0 {
-//            topInset = 0
-//        }
+        //        let version = UIDevice.currentDevice().systemVersion.toFloat()!
+        //
+        //        if version < 7.0 {
+        //            topInset = 0
+        //        }
         
         
         if (filterView.transitionStyle == .Top){
@@ -216,15 +213,20 @@ class FormsViewController: BaseViewController,CAPSPageMenuDelegate {
         }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func settingTap(sender:UIBarButtonItem) {
+        
+        
+        
     }
-    */
-
+    
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
-

@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '1E6B649E1599EEFE3D65E678'
+               BlueprintIdentifier = '932936F13CAA594C02F04897'
                BlueprintName = 'Palau'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Palau.framework'>

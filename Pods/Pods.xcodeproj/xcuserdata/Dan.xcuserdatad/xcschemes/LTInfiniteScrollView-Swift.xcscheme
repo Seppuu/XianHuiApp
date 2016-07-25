@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '1455BCFA7CD17F3DF74693D7'
-               BlueprintName = 'LGFilterView'
+               BlueprintIdentifier = '1659043B30A2B82ED16F7F75'
+               BlueprintName = 'LTInfiniteScrollView-Swift'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'LGFilterView.framework'>
+               BuildableName = 'LTInfiniteScrollView_Swift.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

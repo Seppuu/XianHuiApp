@@ -47,7 +47,9 @@
 }
 
 - (NSArray *)viewControllers {
-    LCCKConversationListViewController *firstViewController = [[LCCKConversationListViewController alloc] init];
+    
+    MessageListVC *firstViewController = [[MessageListVC alloc] init];
+
     UINavigationController *firstNavigationController = [[LCCKBaseNavigationController alloc]
                                                          initWithRootViewController:firstViewController];
     //FIXME:

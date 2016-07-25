@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '9135266530DDD8E4EC9F7F16'
+               BlueprintIdentifier = '8E65A6A92C7CC5190D184B78'
                BlueprintName = 'BKPasscodeView-MyResources'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'MyResources.bundle'>

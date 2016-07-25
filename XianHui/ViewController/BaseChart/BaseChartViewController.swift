@@ -20,8 +20,8 @@ class BaseChartViewController: BaseViewController {
     var filterNameArray = ["日期","日期","日期","日期"]
     
     var parties = [
-        "Party A", "Party B", "Party C", "Party D", "Party E", "Party F",
-        "Party G", "Party H", "Party I", "Party J", "Party K", "Party L",
+        "A", "B", "C", "D", "E", "F",
+        "G", "H", "I", "J", "K", "L",
         "Party M", "Party N", "Party O", "Party P", "Party Q", "Party R",
         "Party S", "Party T", "Party U", "Party V", "Party W", "Party X",
         "Party Y", "Party Z"
@@ -45,12 +45,12 @@ class BaseChartViewController: BaseViewController {
     
     func setupPieChartView(chartView:PieChartView) {
         
-        chartView.usePercentValuesEnabled = true
+        chartView.usePercentValuesEnabled = false
         chartView.drawSlicesUnderHoleEnabled = false
-        chartView.holeRadiusPercent = 0.58
-        chartView.transparentCircleRadiusPercent = 0.61
+        chartView.holeRadiusPercent = 0.0
+        chartView.transparentCircleRadiusPercent = 0.0
         chartView.descriptionText = ""
-        chartView.setExtraOffsets(left: 5, top: 10, right: 5, bottom: 5)
+        chartView.setExtraOffsets(left: 5, top: 40, right: 5, bottom: 5)
         chartView.drawCenterTextEnabled = true
         
         let paragraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
@@ -75,15 +75,19 @@ class BaseChartViewController: BaseViewController {
             NSForegroundColorAttributeName:UIColor.orangeColor()
             ], range: NSMakeRange(centerText.length - part2.characters.count, part2.characters.count))
         
-        chartView.centerAttributedText = centerText;
+        //chartView.centerAttributedText = centerText;
         
         chartView.drawHoleEnabled = true
         chartView.rotationAngle = 0
         chartView.rotationEnabled = true
         chartView.highlightPerTapEnabled = true
         
+        
         let l = chartView.legend
         l.horizontalAlignment = .Right
+        //l.labels = labels
+        l.font = UIFont.systemFontOfSize(12)
+        l.formSize = 12
         l.xEntrySpace = 7.0
         l.yEntrySpace = 0.0
         l.yOffset = 0.0

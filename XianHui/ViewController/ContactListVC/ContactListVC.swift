@@ -123,6 +123,9 @@ extension ContactListVC {
         if (tableView == topTableView) {
             
             if indexPath.item == 0 {
+                let vc = FormVC()
+                vc.title = "日报"
+                navigationController?.pushViewController(vc, animated: true)
                 
             }
             else if indexPath.item == 1 {

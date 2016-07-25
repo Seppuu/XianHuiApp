@@ -12,7 +12,6 @@ pod 'Masonry'
 pod 'FMDB'
 pod 'CTAssetsPickerController',  '~> 3.3.0'
 pod 'DZNEmptyDataSet'
-pod 'LGFilterView', '~> 1.0.0'
 pod 'TWMessageBarManager'
 pod 'MWPhotoBrowser'
 pod 'UITextView+Placeholder', '~> 1.2'
@@ -36,6 +35,7 @@ pod 'EAIntroView', '~> 2.9.0'
 pod 'CryptoSwift'
 pod 'Charts'
 pod 'SwiftDate'
+pod 'LTInfiniteScrollView-Swift'
 
 end
 

@@ -14,7 +14,7 @@ extension UIColor {
      导航栏背景色.
      */
     class func navBarColor() -> UIColor {
-        return UIColor(red: 82.0/255.0, green: 139.0/255.0, blue: 175.0/255.0, alpha: 1.0)
+        return UIColor(red: 200.3/255.0, green: 170.2/255.0, blue: 122.5/255.0, alpha: 1.0)
     }
     
     

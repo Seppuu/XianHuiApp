@@ -225,7 +225,6 @@
 		37BAB9BF1D3E1059001E4680 /* BaseChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BAB9701D3E1059001E4680 /* BaseChartViewController.swift */; };
 		37BAB9C01D3E1059001E4680 /* LineChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BAB9711D3E1059001E4680 /* LineChartViewController.swift */; };
 		37BAB9C11D3E1059001E4680 /* PieChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BAB9721D3E1059001E4680 /* PieChartViewController.swift */; };
-		37BAB9C21D3E1059001E4680 /* FormsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BAB9731D3E1059001E4680 /* FormsViewController.swift */; };
 		37BAB9D31D3E11B1001E4680 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 37BAB9C51D3E11B1001E4680 /* LICENSE */; };
 		37BAB9D41D3E11B1001E4680 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 37BAB9C61D3E11B1001E4680 /* README.md */; };
 		37BAB9D51D3E11B1001E4680 /* AMPopTip+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAB9C91D3E11B1001E4680 /* AMPopTip+Animation.m */; };
@@ -242,6 +241,13 @@
 		37DE9D681D41B6AD0041A26B /* MessageListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE9D671D41B6AD0041A26B /* MessageListVC.swift */; };
 		37DE9D6A1D41B6FC0041A26B /* MessageListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE9D691D41B6FC0041A26B /* MessageListModel.swift */; };
 		37DE9D6C1D41B7310041A26B /* MessageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE9D6B1D41B7310041A26B /* MessageListCell.swift */; };
+		37E78A9A1D41F198007425A3 /* OTPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E78A971D41F198007425A3 /* OTPageScrollView.m */; };
+		37E78A9B1D41F198007425A3 /* OTPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E78A991D41F198007425A3 /* OTPageView.m */; };
+		37E78A9E1D41F2B9007425A3 /* FormVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E78A9D1D41F2B9007425A3 /* FormVC.swift */; };
+		37E78AA41D4204DE007425A3 /* SampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E78AA01D4204DE007425A3 /* SampleView.swift */; };
+		37E78AA51D4204DE007425A3 /* VoiceRecordSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E78AA11D4204DE007425A3 /* VoiceRecordSampleView.swift */; };
+		37E78AA61D4204DE007425A3 /* Waver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E78AA21D4204DE007425A3 /* Waver.swift */; };
+		37E78AA71D4204DE007425A3 /* YepWaverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E78AA31D4204DE007425A3 /* YepWaverView.swift */; };
 		37EA568B1D3E0A7000D63498 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EA568A1D3E0A7000D63498 /* AppDelegate.swift */; };
 		37EA568D1D3E0A7000D63498 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EA568C1D3E0A7000D63498 /* ViewController.swift */; };
 		37EA56901D3E0A7000D63498 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37EA568E1D3E0A7000D63498 /* Main.storyboard */; };
@@ -583,7 +589,6 @@
 		37BAB9701D3E1059001E4680 /* BaseChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseChartViewController.swift; sourceTree = "<group>"; };
 		37BAB9711D3E1059001E4680 /* LineChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChartViewController.swift; sourceTree = "<group>"; };
 		37BAB9721D3E1059001E4680 /* PieChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartViewController.swift; sourceTree = "<group>"; };
-		37BAB9731D3E1059001E4680 /* FormsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormsViewController.swift; sourceTree = "<group>"; };
 		37BAB9C51D3E11B1001E4680 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		37BAB9C61D3E11B1001E4680 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		37BAB9C81D3E11B1001E4680 /* AMPopTip+Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AMPopTip+Animation.h"; sourceTree = "<group>"; };
@@ -606,6 +611,15 @@
 		37DE9D671D41B6AD0041A26B /* MessageListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageListVC.swift; sourceTree = "<group>"; };
 		37DE9D691D41B6FC0041A26B /* MessageListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageListModel.swift; sourceTree = "<group>"; };
 		37DE9D6B1D41B7310041A26B /* MessageListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageListCell.swift; sourceTree = "<group>"; };
+		37E78A961D41F198007425A3 /* OTPageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPageScrollView.h; sourceTree = "<group>"; };
+		37E78A971D41F198007425A3 /* OTPageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPageScrollView.m; sourceTree = "<group>"; };
+		37E78A981D41F198007425A3 /* OTPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPageView.h; sourceTree = "<group>"; };
+		37E78A991D41F198007425A3 /* OTPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPageView.m; sourceTree = "<group>"; };
+		37E78A9D1D41F2B9007425A3 /* FormVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormVC.swift; sourceTree = "<group>"; };
+		37E78AA01D4204DE007425A3 /* SampleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleView.swift; sourceTree = "<group>"; };
+		37E78AA11D4204DE007425A3 /* VoiceRecordSampleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceRecordSampleView.swift; sourceTree = "<group>"; };
+		37E78AA21D4204DE007425A3 /* Waver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Waver.swift; sourceTree = "<group>"; };
+		37E78AA31D4204DE007425A3 /* YepWaverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YepWaverView.swift; sourceTree = "<group>"; };
 		37EA56871D3E0A7000D63498 /* XianHui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XianHui.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EA568A1D3E0A7000D63498 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37EA568C1D3E0A7000D63498 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -1315,6 +1329,7 @@
 		37BAB8C41D3E1045001E4680 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				37E78A951D41F198007425A3 /* OTPageView */,
 				37BAB9C41D3E11B1001E4680 /* AMPopTip */,
 				37BAB8C71D3E1045001E4680 /* CYLTabBarController */,
 				37BAB8D11D3E1045001E4680 /* MBProgressHUD.h */,
@@ -1382,6 +1397,7 @@
 		37BAB8F21D3E1059001E4680 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				37E78A9F1D4204DE007425A3 /* AudioWaves */,
 				37BAB8F31D3E1059001E4680 /* AlbumSelectView */,
 				37BAB8F41D3E1059001E4680 /* AudioTrimView */,
 				37BAB8F51D3E1059001E4680 /* AudioWaves */,
@@ -1810,6 +1826,7 @@
 		37BAB9691D3E1059001E4680 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				37E78A9C1D41F2A3007425A3 /* FormVC */,
 				372962881D40A41000A947B4 /* Password */,
 				37DE9D661D41B6780041A26B /* MessageList */,
 				3739C2411D409D3C00222D4A /* MineVC */,
@@ -1818,7 +1835,6 @@
 				37BAB9E51D3E2306001E4680 /* ContactListVC */,
 				37BAB96A1D3E1059001E4680 /* Base */,
 				37BAB96F1D3E1059001E4680 /* BaseChart */,
-				37BAB9731D3E1059001E4680 /* FormsViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1933,6 +1949,36 @@
 				37DE9D6B1D41B7310041A26B /* MessageListCell.swift */,
 			);
 			path = MessageList;
+			sourceTree = "<group>";
+		};
+		37E78A951D41F198007425A3 /* OTPageView */ = {
+			isa = PBXGroup;
+			children = (
+				37E78A961D41F198007425A3 /* OTPageScrollView.h */,
+				37E78A971D41F198007425A3 /* OTPageScrollView.m */,
+				37E78A981D41F198007425A3 /* OTPageView.h */,
+				37E78A991D41F198007425A3 /* OTPageView.m */,
+			);
+			path = OTPageView;
+			sourceTree = "<group>";
+		};
+		37E78A9C1D41F2A3007425A3 /* FormVC */ = {
+			isa = PBXGroup;
+			children = (
+				37E78A9D1D41F2B9007425A3 /* FormVC.swift */,
+			);
+			path = FormVC;
+			sourceTree = "<group>";
+		};
+		37E78A9F1D4204DE007425A3 /* AudioWaves */ = {
+			isa = PBXGroup;
+			children = (
+				37E78AA01D4204DE007425A3 /* SampleView.swift */,
+				37E78AA11D4204DE007425A3 /* VoiceRecordSampleView.swift */,
+				37E78AA21D4204DE007425A3 /* Waver.swift */,
+				37E78AA31D4204DE007425A3 /* YepWaverView.swift */,
+			);
+			path = AudioWaves;
 			sourceTree = "<group>";
 		};
 		37EA567E1D3E0A7000D63498 = {
@@ -2171,11 +2217,14 @@
 				37BAB99B1D3E1059001E4680 /* typeCell.swift in Sources */,
 				37BAB8AD1D3E101C001E4680 /* UIColor+DD .swift in Sources */,
 				37BAB8401D3E0F84001E4680 /* AVIMConversation+LCCKAddition.m in Sources */,
+				37E78A9E1D41F2B9007425A3 /* FormVC.swift in Sources */,
 				37BAB9931D3E1059001E4680 /* ProfileCell.swift in Sources */,
 				37BAB8931D3E0F84001E4680 /* LCCKUtil.m in Sources */,
+				37E78AA51D4204DE007425A3 /* VoiceRecordSampleView.swift in Sources */,
 				37BAB9C01D3E1059001E4680 /* LineChartViewController.swift in Sources */,
 				37BAB8601D3E0F84001E4680 /* LCCKChatTextMessageCell.m in Sources */,
 				37BAB85F1D3E0F84001E4680 /* LCCKChatSystemMessageCell.m in Sources */,
+				37E78A9B1D41F198007425A3 /* OTPageView.m in Sources */,
 				37BAB8A91D3E101C001E4680 /* NSFileManager+DD.swift in Sources */,
 				37BAB9891D3E1059001E4680 /* CoverAddCell.swift in Sources */,
 				37BAB8391D3E0F84001E4680 /* LCCKContact.m in Sources */,
@@ -2189,15 +2238,16 @@
 				37BAB8EA1D3E1045001E4680 /* MBProgressHUD.m in Sources */,
 				37BAB8AF1D3E101C001E4680 /* UIImage+DD.swift in Sources */,
 				37BAB8EC1D3E1045001E4680 /* NSString+Levenshtein.m in Sources */,
+				37E78AA41D4204DE007425A3 /* SampleView.swift in Sources */,
 				37BAB9A11D3E1059001E4680 /* StaffPicksCardCell.swift in Sources */,
 				37BAB85A1D3E0F84001E4680 /* LCCKFacePageView.m in Sources */,
 				37BAB8501D3E0F84001E4680 /* LCCKCellRegisterController.m in Sources */,
 				37BAB84B1D3E0F84001E4680 /* NSMutableDictionary+LCCKWeakReference.m in Sources */,
 				37BAB8491D3E0F84001E4680 /* LCCKWeakReference.m in Sources */,
-				37BAB9C21D3E1059001E4680 /* FormsViewController.swift in Sources */,
 				37BAB8781D3E0F84001E4680 /* LCCKSignatureService.m in Sources */,
 				37BAB8471D3E0F84001E4680 /* UIView+LCCKExtension.m in Sources */,
 				37EA568D1D3E0A7000D63498 /* ViewController.swift in Sources */,
+				37E78A9A1D41F198007425A3 /* OTPageScrollView.m in Sources */,
 				37BAB8901D3E0F84001E4680 /* DEMODataSource.m in Sources */,
 				37BAB9E01D3E124E001E4680 /* DDHelper.swift in Sources */,
 				37BAB8821D3E0F84001E4680 /* UITableViewRowAction.m in Sources */,
@@ -2256,6 +2306,7 @@
 				37BAB8A81D3E101C001E4680 /* Dictionary+DD.swift in Sources */,
 				37BAB8B31D3E101C001E4680 /* UIViewController+DD.swift in Sources */,
 				37BAB8801D3E0F84001E4680 /* UITableViewCell+LCCKExtension.m in Sources */,
+				37E78AA71D4204DE007425A3 /* YepWaverView.swift in Sources */,
 				37BAB88D1D3E0F84001E4680 /* LCCKLoginViewController.m in Sources */,
 				37BAB9D51D3E11B1001E4680 /* AMPopTip+Animation.m in Sources */,
 				37BAB9751D3E1059001E4680 /* AddFriendMoreCell.swift in Sources */,
@@ -2266,6 +2317,7 @@
 				37BAB9D91D3E11B1001E4680 /* AMPopTip.m in Sources */,
 				37BAB9B61D3E1059001E4680 /* NavigationTitleLabel.swift in Sources */,
 				37B9617D1D3F5829004F6F92 /* CreateTaskVC.swift in Sources */,
+				37E78AA61D4204DE007425A3 /* Waver.swift in Sources */,
 				37BAB9BA1D3E1059001E4680 /* ActivityIndicatorTitleView.swift in Sources */,
 				37BAB9AE1D3E1059001E4680 /* CountDownView.swift in Sources */,
 				37BAB8961D3E0F84001E4680 /* MyChatManager.swift in Sources */,
