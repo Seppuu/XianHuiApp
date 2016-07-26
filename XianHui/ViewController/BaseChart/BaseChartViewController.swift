@@ -93,6 +93,11 @@ class BaseChartViewController: BaseViewController {
         l.yOffset = 0.0
     }
     
+    
+    func setupRadarChartView(radarChartView:RadarChartView) {
+        
+        radarChartView.noDataTextDescription = ""
+    }
 }
 
 

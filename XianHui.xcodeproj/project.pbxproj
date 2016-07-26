@@ -10,6 +10,8 @@
 		372962991D40AF6500A947B4 /* BKPasscodeView.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3729629B1D40AF6500A947B4 /* BKPasscodeView.strings */; };
 		3729629D1D40B9E700A947B4 /* PasswordSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3729629C1D40B9E700A947B4 /* PasswordSettingVC.swift */; };
 		3739C2431D409D6800222D4A /* MineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3739C2421D409D6800222D4A /* MineVC.swift */; };
+		378E07641D461B2C00B67621 /* RadarChartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378E07631D461B2C00B67621 /* RadarChartVC.swift */; };
+		378E07671D461EC000B67621 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378E07661D461EC000B67621 /* BalloonMarker.swift */; };
 		37B961791D3F5044004F6F92 /* TaskList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37B961771D3F5044004F6F92 /* TaskList.storyboard */; };
 		37B9617A1D3F5044004F6F92 /* TaskListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B961781D3F5044004F6F92 /* TaskListVC.swift */; };
 		37B9617D1D3F5829004F6F92 /* CreateTaskVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B9617C1D3F5829004F6F92 /* CreateTaskVC.swift */; };
@@ -261,6 +263,8 @@
 		3729629A1D40AF6500A947B4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BKPasscodeView.strings"; sourceTree = "<group>"; };
 		3729629C1D40B9E700A947B4 /* PasswordSettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordSettingVC.swift; sourceTree = "<group>"; };
 		3739C2421D409D6800222D4A /* MineVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineVC.swift; sourceTree = "<group>"; };
+		378E07631D461B2C00B67621 /* RadarChartVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadarChartVC.swift; sourceTree = "<group>"; };
+		378E07661D461EC000B67621 /* BalloonMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
 		37B961771D3F5044004F6F92 /* TaskList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TaskList.storyboard; sourceTree = "<group>"; };
 		37B961781D3F5044004F6F92 /* TaskListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListVC.swift; sourceTree = "<group>"; };
 		37B9617C1D3F5829004F6F92 /* CreateTaskVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTaskVC.swift; sourceTree = "<group>"; };
@@ -666,6 +670,14 @@
 				3739C2421D409D6800222D4A /* MineVC.swift */,
 			);
 			path = MineVC;
+			sourceTree = "<group>";
+		};
+		378E07651D461EB200B67621 /* ChartComponents */ = {
+			isa = PBXGroup;
+			children = (
+				378E07661D461EC000B67621 /* BalloonMarker.swift */,
+			);
+			path = ChartComponents;
 			sourceTree = "<group>";
 		};
 		37B961761D3F5044004F6F92 /* TaskListVC */ = {
@@ -1856,6 +1868,7 @@
 				37BAB9701D3E1059001E4680 /* BaseChartViewController.swift */,
 				37BAB9711D3E1059001E4680 /* LineChartViewController.swift */,
 				37BAB9721D3E1059001E4680 /* PieChartViewController.swift */,
+				378E07631D461B2C00B67621 /* RadarChartVC.swift */,
 			);
 			path = BaseChart;
 			sourceTree = "<group>";
@@ -1863,6 +1876,7 @@
 		37BAB9C31D3E1062001E4680 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				378E07651D461EB200B67621 /* ChartComponents */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2275,6 +2289,7 @@
 				37BAB88C1D3E0F84001E4680 /* LCCKUser.m in Sources */,
 				37BAB99F1D3E1059001E4680 /* SheetCell.swift in Sources */,
 				37BAB9B41D3E1059001E4680 /* FilterCollectionView.swift in Sources */,
+				378E07671D461EC000B67621 /* BalloonMarker.swift in Sources */,
 				37BAB9E71D3E2335001E4680 /* ContactListVC.swift in Sources */,
 				37BAB8621D3E0F84001E4680 /* LCCKContentView.m in Sources */,
 				37BAB8851D3E0F84001E4680 /* LCCKBadgeView.m in Sources */,
@@ -2295,6 +2310,7 @@
 				37BAB87D1D3E0F84001E4680 /* LCCKAlertController.m in Sources */,
 				37BAB8361D3E0F84001E4680 /* LCCKBaseTableViewController.m in Sources */,
 				37BAB9D41D3E11B1001E4680 /* README.md in Sources */,
+				378E07641D461B2C00B67621 /* RadarChartVC.swift in Sources */,
 				37BAB9791D3E1059001E4680 /* AlbumSelectCell.swift in Sources */,
 				37BAB8B11D3E101C001E4680 /* UINavigationItem+DD.swift in Sources */,
 				37BAB8E91D3E1045001E4680 /* UIViewController+CYLTabBarControllerExtention.m in Sources */,

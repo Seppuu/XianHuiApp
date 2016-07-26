@@ -65,14 +65,14 @@ class FormVC: UIViewController,CAPSPageMenuDelegate {
         // Initialize view controllers to display and place in array
         var controllerArray : [UIViewController] = []
         
-        let controller1 = PieChartViewController()
+        let controller1 = RadarChartVC()
         
         controller1.parentNavigationController = self.navigationController
-        controller1.title = "金额"
+        controller1.title = "分析"
         controllerArray.append(controller1)
         
-        let controller2 = LineChartViewController()
-        controller2.title = "员工"
+        let controller2 = PieChartViewController()
+        controller2.title = "金额"
         controller2.parentNavigationController = self.navigationController
         controllerArray.append(controller2)
         
