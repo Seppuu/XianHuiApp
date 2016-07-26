@@ -25,23 +25,19 @@ class PieCell: UICollectionViewCell {
 
 class PieChartViewController: BaseChartViewController {
     
-    var topPageView:OTPageView!
+    var topPageView:XHBarChartView!
     
     var bottomCollectionView:UICollectionView!
+    
+    var animePieChart = false
     
     var pageControl:UIPageControl!
     
     var pieTypelabel:UILabel!
-    
-    var topLabel:UILabel!
-    
+
     var tableView:UITableView!
     
-    var dataOfPieChart = ["张芳芳","李华","陈蕾","徐天天","吴悦"]
-    
-    var listOfNumber = ["2,341","4,232","12,313","11,233","7,777","8,466","3,456"]
-    
-    var listOfNumber2 = ["2341","4232","12313","11233","7777","8466","3456"]
+    var dataOfPieChart = ["X","F","G","V","B"]
     
     var pieChartTopConstraint:Constraint? = nil
     
@@ -59,35 +55,20 @@ class PieChartViewController: BaseChartViewController {
         super.viewDidLoad()
         
         
-        topPageView = OTPageView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: viewHeight * 0.4))
+        topPageView = XHBarChartView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: viewHeight * 0.4))
         topPageView.clipsToBounds = true
-        topPageView.pageScrollView.dataSource = self
-        topPageView.pageScrollView.delegate = self
-        topPageView.pageScrollView.padding = 25;
-        topPageView.pageScrollView.leftRightOffset = 0
-        topPageView.pageScrollView.frame = CGRectMake( (screenWidth - 50)/2 , viewHeight * 0.1, 50, viewHeight * 0.2)
-        topPageView.backgroundColor = UIColor ( red: 0.9294, green: 0.8941, blue: 0.8392, alpha: 1.0 )
+        topPageView.setScrollView()
+        topPageView.backgroundColor = UIColor(red: 0.9294, green: 0.8941, blue: 0.8392, alpha: 1.0)
         view.addSubview(topPageView)
         
-        
-        topLabel = UILabel()
-        topLabel.textColor = UIColor ( red: 0.5216, green: 0.3765, blue: 0.2863, alpha: 1.0 )
-        topLabel.text = listOfNumber.last
-        topLabel.textAlignment = .Center
-        topPageView.addSubview(topLabel)
-        topLabel.snp_makeConstraints { (make) in
-            make.width.equalTo(screenWidth)
-            make.centerX.equalTo(topPageView)
-            make.bottom.equalTo(topPageView.pageScrollView.snp_top)
-        }
-        
-        
         topPageView.pageScrollView.reloadData()
-        topPageView.pageScrollView.moveToPageAt(listOfNumber.count - 1, animeted: false)
-        let cell = topPageView.pageScrollView.viewForRowAtIndex(listOfNumber.count - 1) as! VoiceRecordSampleCell
-        cell.color = UIColor ( red: 0.5216, green: 0.3765, blue: 0.2863, alpha: 1.0 )
         
-        topLabel.text = listOfNumber.last
+        topPageView.moveToLastPage()
+        
+        topPageView.currentPageChangedHandler = {
+            (index) in
+            self.updatePieData(index)
+        }
         
         
         let layout = UICollectionViewFlowLayout()
@@ -153,12 +134,12 @@ class PieChartViewController: BaseChartViewController {
 
 extension PieChartViewController: ChartViewDelegate {
     
-    func updatePieChartData(pieView:PieChartView) -> [String?]{
+    func updatePieChartData(pieView:PieChartView) {
         
-        return  setDataCountWith(3, range: 10,pieView:pieView)
+        setDataCountWith(3, range: 10,pieView:pieView)
     }
     
-    func setDataCountWith(count:Int,range:Double,pieView:PieChartView) -> [String?] {
+    func setDataCountWith(count:Int,range:Double,pieView:PieChartView) {
         
         let mult = range
         
@@ -211,7 +192,6 @@ extension PieChartViewController: ChartViewDelegate {
         
         pieView.data = data
         
-        return xvs
         
     }
     
@@ -242,47 +222,7 @@ extension PieChartViewController: ChartViewDelegate {
 
 }
 
-extension PieChartViewController:OTPageScrollViewDataSource,OTPageScrollViewDelegate {
-    
-    func numberOfPageInPageScrollView(pageScrollView: OTPageScrollView!) -> Int {
-        if pageScrollView.superview == topPageView {
-            return listOfNumber.count
-        }
-        else {
-            return 3
-        }
-        
-    }
-    
-    func pageScrollView(pageScrollView: OTPageScrollView!, viewForRowAtIndex index: Int32) -> UIView! {
-        
-        let view = VoiceRecordSampleCell(frame: CGRect(x: 0, y: 0, width: 25, height: viewHeight * 0.2))
-        let item = Int(index)
-        let val = listOfNumber2[item].toFloat()!
-        
-        view.value = val / 20000
-        
-        view.color = UIColor ( red: 0.8275, green: 0.7216, blue: 0.5529, alpha: 1.0 )
-        
-        return view
-
-    }
-    
-    func sizeCellForPageScrollView(pageScrollView: OTPageScrollView!) -> CGSize {
-        if pageScrollView.superview == topPageView {
-            
-            return CGSizeMake(25, viewHeight * 0.2)
-        }
-        else {
-            return CGSizeMake(screenWidth, viewHeight * 0.6)
-        }
-        
-    }
-    
-    func pageScrollView(pageScrollView: OTPageScrollView!, didTapPageAtIndex index: Int) {
-        
-        updatePieData(index)
-    }
+extension PieChartViewController {
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         
@@ -290,117 +230,24 @@ extension PieChartViewController:OTPageScrollViewDataSource,OTPageScrollViewDele
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
-       // updateProgress(scrollView)
-        if scrollView.superview == topPageView {
-            
-            updateColor(scrollView)
-        }
-        
+        self.animePieChart = false
     }
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         
-        if scrollView == bottomCollectionView {
-            let pageWidth = bottomCollectionView.ddWidth
-            let currentpage = Int( bottomCollectionView.contentOffset.x / pageWidth )
-            pageControl.currentPage = currentpage
-            pieTypelabel.text = pieType[currentpage]
-        }
-        else {
-            let index = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
-            updatePieData(index)
-        }
-
+        let pageWidth = bottomCollectionView.ddWidth
+        let currentpage = Int( bottomCollectionView.contentOffset.x / pageWidth )
+        pageControl.currentPage = currentpage
+        pieTypelabel.text = pieType[currentpage]
+        
     }
+    
+    
     
     func updatePieData(index:Int) {
         
-        for i in 0..<pieType.count {
-            let indexPath = NSIndexPath(forRow: i, inSection: 0)
-            guard  let cell = bottomCollectionView.cellForItemAtIndexPath(indexPath) as? PieCell else {return}
-            
-            guard let pieView = cell.viewWithTag(10) as? PieChartView else {return}
-            
-            updatePieChartData(pieView)
-            
-            pieView.animate(xAxisDuration: 1.0, easingOption: .EaseOutBack)
-        }
-        
-    }
-    
-    func updateColor(scrollView:UIScrollView) {
-        
-        for index in 0..<listOfNumber.count {
-            let cell = topPageView.pageScrollView.viewForRowAtIndex(index) as! VoiceRecordSampleCell
-            cell.color = UIColor ( red: 0.8275, green: 0.7216, blue: 0.5529, alpha: 1.0 )
-        }
-        
-        let index = scrollView.contentOffset.x / scrollView.frame.size.width
-        guard let cell = topPageView.pageScrollView.viewForRowAtIndex(Int(index)) as? VoiceRecordSampleCell else {return}
-        cell.color = UIColor ( red: 0.5216, green: 0.3765, blue: 0.2863, alpha: 1.0 )
-        
-        topLabel.text = listOfNumber[Int(index)]
-    }
-    
-    func updateProgress(scrollView: UIScrollView) {
-        
-        let currentCenterX = currentCenter(scrollView).x
-        let bounds = topPageView.pageScrollView.bounds
-        
-        for view in allTopCell() {
-            
-            //let visibleViewCount = topPageView.pageScrollView.visibleCell.count
-
-            let progress = (view.center.x - currentCenterX) / CGRectGetWidth(bounds) * CGFloat(1)
-            updateView(view, withProgress: progress)
-        }
-        
-    }
-    
-    func allTopCell() -> [VoiceRecordSampleCell] {
-        
-        var cells = [VoiceRecordSampleCell]()
-        
-        for i in 0..<listOfNumber.count {
-            
-           let cell = topPageView.pageScrollView.viewForRowAtIndex(i) as! VoiceRecordSampleCell
-           cells.append(cell)
-            
-        }
-        
-        return cells
-    }
-    
-    
-    private func updateView(view: UIView, withProgress progress: CGFloat) {
-        
-        let size:CGFloat = 25
-        
-        var transform = CGAffineTransformIdentity
-        // scale
-        let scale = (1.4 - 0.3 * (fabs(progress)))
-        
-        transform = CGAffineTransformScale(transform, scale, scale)
-        
-        // translate
-        var translate = size / 4 * progress
-        if progress > 1 {
-            translate = size / 4
-        }
-        else if progress < -1 {
-            translate = -size / 4
-        }
-        transform = CGAffineTransformTranslate(transform, translate, 0)
-        
-        view.transform = transform
-        
-    }
-    
-    private func currentCenter(scrollView: UIScrollView) -> CGPoint {
-        let bounds = topPageView.pageScrollView.bounds
-        let x = scrollView.contentOffset.x + CGRectGetWidth(bounds) / 2.0
-        let y = scrollView.contentOffset.y
-        return CGPointMake(x, y)
+        animePieChart = true
+        bottomCollectionView.reloadData()
     }
     
     
@@ -427,10 +274,17 @@ extension PieChartViewController:UICollectionViewDelegateFlowLayout,UICollection
         pieChartView.backgroundColor = UIColor ( red: 1.0, green: 0.9882, blue: 0.9647, alpha: 1.0 )
         cell.addSubview(pieChartView)
         
-        
-        let labels = self.updatePieChartData(pieChartView)
+        self.updatePieChartData(pieChartView)
         
         setupPieChartView(pieChartView)
+        if animePieChart == true {
+            
+            pieChartView.animate(xAxisDuration: 1.0, easingOption: .EaseOutBack)
+        }
+        else {
+            
+        }
+        
         
         return cell
     }

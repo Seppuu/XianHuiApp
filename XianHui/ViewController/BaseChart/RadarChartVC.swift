@@ -17,12 +17,23 @@ class RadarChartVC: BaseChartViewController {
     
     let viewHeight = ( screenHeight - 64 - 44 )
     
+    var listOfType = ["客户","金额","技师","产品","顾问"]
+    
+    var currentType:String = "客户" {
+        didSet {
+            let set = NSIndexSet(index: 0)
+            tableView.reloadSections(set, withRowAnimation: .Fade)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setRadarChartView()
         
         setBottomTableView()
+        
+        currentType = listOfType[0]
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,8 +53,14 @@ class RadarChartVC: BaseChartViewController {
         chartView.innerWebLineWidth = 0.375
         chartView.webAlpha = 0.7
         chartView.yAxis.enabled = false
-        chartView.setExtraOffsets(left: 0, top: 20, right: 0, bottom: 10)
+        chartView.xAxis.enabled = false
+        chartView.xAxis.labelTextColor = UIColor.clearColor()
+
+        chartView.setExtraOffsets(left: 0, top: 30, right: 0, bottom: 15)
         chartView.rotationEnabled = false
+        chartView.backgroundColor = UIColor ( red: 0.9294, green: 0.8941, blue: 0.8392, alpha: 1.0 )
+
+        
         
         let inset = UIEdgeInsetsMake(0, 0, 5, 0)
         let color = UIColor.whiteColor()
@@ -53,13 +70,13 @@ class RadarChartVC: BaseChartViewController {
         chartView.marker = marker
         
         let xAxis = chartView.xAxis
-        xAxis.labelFont = UIFont(name: "HelveticaNeue-Light", size: 9.0)!
-        
+        xAxis.labelFont = UIFont(name: "HelveticaNeue-Light", size: 15.0)!
         
         let yAxis = chartView.yAxis
         yAxis.labelFont = UIFont(name: "HelveticaNeue-Light", size: 9.0)!
         yAxis.labelCount = 2
         yAxis.axisMinValue = 0.0
+        yAxis.axisMaxValue = 100
         
         let l = chartView.legend
         l.drawInside = true
@@ -91,7 +108,7 @@ class RadarChartVC: BaseChartViewController {
     
     func setChartData() {
         
-        let mult:Double = 150
+        let mult:Double = 100
         let count = 5
         
         var yVals1 = [ChartDataEntry]()
@@ -99,10 +116,12 @@ class RadarChartVC: BaseChartViewController {
         
         for i in 0..<count {
             let dd = Double(arc4random_uniform(UInt32(mult)))
-            let entry = ChartDataEntry(value: (dd + mult / 2), xIndex: i, data: i)
+            let entry = ChartDataEntry(value:dd, xIndex: i, data: i)
             
+            let yMax = chartView.yAxis.axisMaxValue
+            let entryEx = ChartDataEntry(value: yMax + 10 , xIndex: i, data: i)
             yVals1.append(entry)
-            yVals2.append(entry)
+            yVals2.append(entryEx)
             
         }
         
@@ -116,19 +135,11 @@ class RadarChartVC: BaseChartViewController {
         
         
         let set1 = RadarChartDataSet(yVals: yVals1, label: "set 1")
-        set1.setColor(UIColor ( red: 1.0, green: 0.5129, blue: 0.5935, alpha: 1.0 ))
-        set1.fillColor = UIColor ( red: 1.0, green: 0.5723, blue: 0.9247, alpha: 1.0 )
+        set1.setColor(UIColor ( red: 0.7855, green: 0.6676, blue: 0.4805, alpha: 1.0 ))
+        set1.fillColor = UIColor ( red: 0.7855, green: 0.6676, blue: 0.4805, alpha: 1.0 )
         set1.drawFilledEnabled = true
         set1.lineWidth = 2.0
         set1.drawFilledEnabled = true
-        
-//        
-//        let set2 = RadarChartDataSet(yVals: yVals2, label: "set 2")
-//        set2.setColor(UIColor ( red: 0.7589, green: 0.989, blue: 0.7129, alpha: 1.0 ))
-//        set2.fillColor = UIColor ( red: 0.5286, green: 0.9345, blue: 0.9893, alpha: 1.0 )
-//        set2.drawFilledEnabled = true
-//        set2.lineWidth = 2.0
-//        
         
         
         let data = RadarChartData(xVals: xVals, dataSets: [set1])
@@ -142,8 +153,86 @@ class RadarChartVC: BaseChartViewController {
         
         data.setValueFormatter(percentFormatter)
         
-        chartView.data = data;
+        chartView.data = data
+        
+        addCustomLabelToChartView(yVals2)
+    }
+    
+    func addCustomLabelToChartView(yVals:[ChartDataEntry]) {
+        
+        var labels = [UILabel]()
+        
+        for yVal in yVals {
+            
+            if yVal.xIndex == 0{
+                yVal.value += 20
+            }
+            else if yVal.xIndex == 4 {
+                yVal.value += 45
+            }
+            
+            let p = chartView.getMarkerPosition(entry: yVal, highlight: ChartHighlight())
+            
+            
+            let label = UILabel(frame: CGRect(x: p.x, y: p.y, width: 80, height: 20))
+            label.textColor = UIColor ( red: 0.4438, green: 0.3027, blue: 0.2227, alpha: 1.0 )
+            label.text = listOfType[yVal.xIndex]
+            label.userInteractionEnabled = true
+            label.tag = yVal.xIndex
+            
+            let tap = UITapGestureRecognizer(target: self, action: #selector(RadarChartVC.angleTypeTap(_:)))
+            label.addGestureRecognizer(tap)
+            chartView.addSubview(label)
+            
+            labels.append(label)
+            
+            //调整位置(顺时针0-4)
+            switch label.tag {
+            case 0:
+                
+                //设置x中心点为p.x
+                label.center.x = p.x
+                label.textAlignment = .Center
+                
+            case 1:
+                //设置y中心店为p.y
+                label.center.y = p.y
+                label.textAlignment = .Left
+            case 2 ,3:
+                //向左边移动一个合适的数值
+                label.frame.origin.x -= 10
+                label.textAlignment = .Left
+                
+            case 4:
+                //和1保持同一个水平线
+                label.textAlignment = .Left
+                
+            default:
+                break;
+            }
+        }
+        //调整04label
+        adjustLabelPosition(labels)
 
+    }
+    
+    
+    
+    func adjustLabelPosition(labels:[UILabel]) {
+        
+        let label01 = labels[1]
+        let label04 = labels[4]
+        
+        label04.center.y = label01.center.y
+
+    }
+    
+    func angleTypeTap(sender:UITapGestureRecognizer) {
+        let label = sender.view as! UILabel
+        let index = label.tag
+        
+        print("index:\(index)")
+        currentType = listOfType[index]
     }
     
 
@@ -164,8 +253,10 @@ extension RadarChartVC:UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let cell = UITableViewCell()
-        cell.textLabel?.text = "维度:\(indexPath.item)"
+        
+        cell.textLabel?.text = "\(currentType): 1/\(indexPath.item + 1)"
         return cell
     }
     

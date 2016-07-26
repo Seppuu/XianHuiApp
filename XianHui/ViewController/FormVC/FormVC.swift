@@ -72,12 +72,12 @@ class FormVC: UIViewController,CAPSPageMenuDelegate {
         controllerArray.append(controller1)
         
         let controller2 = PieChartViewController()
-        controller2.title = "金额"
+        controller2.title = "现金"
         controller2.parentNavigationController = self.navigationController
         controllerArray.append(controller2)
         
         let controller3 = PieChartViewController()
-        controller3.title = "项目"
+        controller3.title = "实操"
         controller3.parentNavigationController = self.navigationController
         controllerArray.append(controller3)
         
@@ -85,6 +85,11 @@ class FormVC: UIViewController,CAPSPageMenuDelegate {
         controller4.title = "产品"
         controller4.parentNavigationController = self.navigationController
         controllerArray.append(controller4)
+        
+        let controller5 = PieChartViewController()
+        controller5.title = "客流"
+        controller5.parentNavigationController = self.navigationController
+        controllerArray.append(controller5)
         
         
         // Initialize scroll menu

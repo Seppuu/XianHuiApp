@@ -12,6 +12,7 @@
 		3739C2431D409D6800222D4A /* MineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3739C2421D409D6800222D4A /* MineVC.swift */; };
 		378E07641D461B2C00B67621 /* RadarChartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378E07631D461B2C00B67621 /* RadarChartVC.swift */; };
 		378E07671D461EC000B67621 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378E07661D461EC000B67621 /* BalloonMarker.swift */; };
+		378E076A1D4757CC00B67621 /* XHBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378E07691D4757CC00B67621 /* XHBarChartView.swift */; };
 		37B961791D3F5044004F6F92 /* TaskList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37B961771D3F5044004F6F92 /* TaskList.storyboard */; };
 		37B9617A1D3F5044004F6F92 /* TaskListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B961781D3F5044004F6F92 /* TaskListVC.swift */; };
 		37B9617D1D3F5829004F6F92 /* CreateTaskVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B9617C1D3F5829004F6F92 /* CreateTaskVC.swift */; };
@@ -265,6 +266,7 @@
 		3739C2421D409D6800222D4A /* MineVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineVC.swift; sourceTree = "<group>"; };
 		378E07631D461B2C00B67621 /* RadarChartVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadarChartVC.swift; sourceTree = "<group>"; };
 		378E07661D461EC000B67621 /* BalloonMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
+		378E07691D4757CC00B67621 /* XHBarChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHBarChartView.swift; sourceTree = "<group>"; };
 		37B961771D3F5044004F6F92 /* TaskList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TaskList.storyboard; sourceTree = "<group>"; };
 		37B961781D3F5044004F6F92 /* TaskListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListVC.swift; sourceTree = "<group>"; };
 		37B9617C1D3F5829004F6F92 /* CreateTaskVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTaskVC.swift; sourceTree = "<group>"; };
@@ -678,6 +680,14 @@
 				378E07661D461EC000B67621 /* BalloonMarker.swift */,
 			);
 			path = ChartComponents;
+			sourceTree = "<group>";
+		};
+		378E07681D47579700B67621 /* XHBarChartView */ = {
+			isa = PBXGroup;
+			children = (
+				378E07691D4757CC00B67621 /* XHBarChartView.swift */,
+			);
+			path = XHBarChartView;
 			sourceTree = "<group>";
 		};
 		37B961761D3F5044004F6F92 /* TaskListVC */ = {
@@ -1409,6 +1419,7 @@
 		37BAB8F21D3E1059001E4680 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				378E07681D47579700B67621 /* XHBarChartView */,
 				37E78A9F1D4204DE007425A3 /* AudioWaves */,
 				37BAB8F31D3E1059001E4680 /* AlbumSelectView */,
 				37BAB8F41D3E1059001E4680 /* AudioTrimView */,
@@ -2368,6 +2379,7 @@
 				37BAB84E1D3E0F84001E4680 /* LCCKBubbleImageFactory.m in Sources */,
 				37BAB9B01D3E1059001E4680 /* DDPlaypartRecordAlertView.swift in Sources */,
 				37BAB8351D3E0F84001E4680 /* LCCKBaseNavigationController.m in Sources */,
+				378E076A1D4757CC00B67621 /* XHBarChartView.swift in Sources */,
 				37BAB9E11D3E124E001E4680 /* DDIMConfig.swift in Sources */,
 				37BAB8671D3E0F84001E4680 /* LCCKConversationListCell.m in Sources */,
 				37BAB8C21D3E1040001E4680 /* NetworkManager.swift in Sources */,

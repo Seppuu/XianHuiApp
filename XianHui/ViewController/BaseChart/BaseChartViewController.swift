@@ -20,7 +20,7 @@ class BaseChartViewController: BaseViewController {
     var filterNameArray = ["日期","日期","日期","日期"]
     
     var parties = [
-        "A", "B", "C", "D", "E", "F",
+        "金额", "客户", "产品", "产品", "金额", "F",
         "G", "H", "I", "J", "K", "L",
         "Party M", "Party N", "Party O", "Party P", "Party Q", "Party R",
         "Party S", "Party T", "Party U", "Party V", "Party W", "Party X",
