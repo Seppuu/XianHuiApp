@@ -19,6 +19,8 @@ class XHBarChartView: OTPageView ,OTPageScrollViewDataSource,OTPageScrollViewDel
     
     var rightLabel02 = UILabel()
     
+    var maxValue:Float = 20000
+    
     var listOfNumber = ["1","4,232","12,313","11,233","7,777","8,466","3,456"]
     
     var listOfNumber2 = ["1","4232","12313","11233","7777","8466","3456"]
@@ -104,7 +106,7 @@ class XHBarChartView: OTPageView ,OTPageScrollViewDataSource,OTPageScrollViewDel
         let item = Int(index)
         let val = listOfNumber2[item].toFloat()!
         
-        view.value = val / 20000
+        view.value = val / maxValue
         
         view.color = UIColor ( red: 0.8275, green: 0.7216, blue: 0.5529, alpha: 1.0 )
         

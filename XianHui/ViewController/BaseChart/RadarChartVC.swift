@@ -19,6 +19,8 @@ class RadarChartVC: BaseChartViewController {
     
     var listOfType = ["客户","金额","技师","产品","顾问"]
     
+    var topButtons = [UIButton]()
+    
     var currentType:String = "客户" {
         didSet {
             let set = NSIndexSet(index: 0)
@@ -51,6 +53,7 @@ class RadarChartVC: BaseChartViewController {
         chartView.descriptionText = ""
         chartView.webLineWidth = 0.75
         chartView.innerWebLineWidth = 0.375
+        chartView.highlightPerTapEnabled = false
         chartView.webAlpha = 0.7
         chartView.yAxis.enabled = false
         chartView.xAxis.enabled = false
@@ -160,7 +163,7 @@ class RadarChartVC: BaseChartViewController {
     
     func addCustomLabelToChartView(yVals:[ChartDataEntry]) {
         
-        var labels = [UILabel]()
+        var buttons = [UIButton]()
         
         for yVal in yVals {
             
@@ -174,51 +177,58 @@ class RadarChartVC: BaseChartViewController {
             let p = chartView.getMarkerPosition(entry: yVal, highlight: ChartHighlight())
             
             
-            let label = UILabel(frame: CGRect(x: p.x, y: p.y, width: 80, height: 20))
-            label.textColor = UIColor ( red: 0.4438, green: 0.3027, blue: 0.2227, alpha: 1.0 )
-            label.text = listOfType[yVal.xIndex]
-            label.userInteractionEnabled = true
-            label.tag = yVal.xIndex
+            let button = UIButton(frame: CGRect(x: p.x, y: p.y, width: 40, height: 20))
+            button.setTitleColor(UIColor ( red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0 ), forState: .Highlighted)
+            button.setTitleColor(UIColor.whiteColor(), forState: .Selected)
+            button.setTitleColor(UIColor ( red: 0.3779, green: 0.3171, blue: 0.3185, alpha: 1.0 ), forState: .Normal)
+            button.setTitle(listOfType[yVal.xIndex], forState: .Normal)
+            button.titleLabel?.font = UIFont.systemFontOfSize(12)
+            button.layer.cornerRadius = 4.0
+            button.layer.masksToBounds = true
+            button.layer.borderWidth = 0.8
+            button.layer.borderColor = UIColor ( red: 0.3779, green: 0.3171, blue: 0.3185, alpha: 1.0 ).CGColor
+            button.tag = yVal.xIndex
             
-            let tap = UITapGestureRecognizer(target: self, action: #selector(RadarChartVC.angleTypeTap(_:)))
-            label.addGestureRecognizer(tap)
-            chartView.addSubview(label)
+            button.addTarget(self, action:  #selector(RadarChartVC.angleTypeTap(_:)), forControlEvents: .TouchUpInside)
             
-            labels.append(label)
+            button.addTarget(self, action:  #selector(RadarChartVC.angleTypeTouchDown(_:)), forControlEvents: .TouchDown)
+            
+            button.addTarget(self, action:  #selector(RadarChartVC.angleTypeTouchCancel(_:)), forControlEvents: .TouchUpOutside)
+            
+            chartView.addSubview(button)
+            
+            buttons.append(button)
             
             //调整位置(顺时针0-4)
-            switch label.tag {
+            switch button.tag {
             case 0:
-                
                 //设置x中心点为p.x
-                label.center.x = p.x
-                label.textAlignment = .Center
-                
+                button.center.x = p.x
             case 1:
                 //设置y中心店为p.y
-                label.center.y = p.y
-                label.textAlignment = .Left
+                button.center.y = p.y
+                //button.contentHorizontalAlignment = .Left
             case 2 ,3:
                 //向左边移动一个合适的数值
-                label.frame.origin.x -= 10
-                label.textAlignment = .Left
-                
+                button.frame.origin.x -= 15
+                //button.contentHorizontalAlignment = .Left
             case 4:
                 //和1保持同一个水平线
-                label.textAlignment = .Left
-                
+                button.frame.origin.x -= 5
+                //button.contentHorizontalAlignment = .Left
             default:
                 break;
             }
         }
         //调整04label
-        adjustLabelPosition(labels)
-
+        adjustLabelPosition(buttons)
+        
+        makeButtonHightlighted(buttons, selected: buttons[0])
+        
+        topButtons = buttons
     }
     
-    
-    
-    func adjustLabelPosition(labels:[UILabel]) {
+    func adjustLabelPosition(labels:[UIButton]) {
         
         let label01 = labels[1]
         let label04 = labels[4]
@@ -227,12 +237,38 @@ class RadarChartVC: BaseChartViewController {
 
     }
     
-    func angleTypeTap(sender:UITapGestureRecognizer) {
-        let label = sender.view as! UILabel
-        let index = label.tag
+    func makeButtonHightlighted(buttons:[UIButton],selected button:UIButton) {
         
-        print("index:\(index)")
+        buttons.forEach {
+            $0.selected = false
+            $0.backgroundColor = UIColor.clearColor()
+            
+        }
+        
+        button.selected = true
+        button.backgroundColor = UIColor ( red: 0.3779, green: 0.3171, blue: 0.3185, alpha: 1.0 )
+        
+    }
+    
+    func angleTypeTap(sender:UIButton) {
+        let button = sender
+        let index = button.tag
+        sender.backgroundColor = UIColor.clearColor()
         currentType = listOfType[index]
+        
+        let buttons = topButtons
+        makeButtonHightlighted(buttons, selected: button)
+    }
+    
+    func angleTypeTouchDown(sender:UIButton) {
+        
+        sender.backgroundColor = UIColor ( red: 0.3779, green: 0.3171, blue: 0.3185, alpha: 1.0 )
+        
+    }
+    
+    func angleTypeTouchCancel(sender:UIButton) {
+        
+        sender.backgroundColor = UIColor.clearColor()
     }
     
 
