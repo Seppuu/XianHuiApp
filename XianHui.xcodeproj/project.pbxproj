@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37278D8F1D48A4850055842E /* FormSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37278D8E1D48A4850055842E /* FormSettingVC.swift */; };
+		37278D911D48A7290055842E /* MaxValueSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37278D901D48A7290055842E /* MaxValueSettingVC.swift */; };
 		372962991D40AF6500A947B4 /* BKPasscodeView.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3729629B1D40AF6500A947B4 /* BKPasscodeView.strings */; };
 		3729629D1D40B9E700A947B4 /* PasswordSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3729629C1D40B9E700A947B4 /* PasswordSettingVC.swift */; };
 		3739C2431D409D6800222D4A /* MineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3739C2421D409D6800222D4A /* MineVC.swift */; };
@@ -261,6 +263,8 @@
 /* Begin PBXFileReference section */
 		0A503BC16E271BA2F18444F3 /* Pods-XianHui.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XianHui.release.xcconfig"; path = "Pods/Target Support Files/Pods-XianHui/Pods-XianHui.release.xcconfig"; sourceTree = "<group>"; };
 		2D802883ED5368B6081BC0AB /* Pods-XianHui.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XianHui.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XianHui/Pods-XianHui.debug.xcconfig"; sourceTree = "<group>"; };
+		37278D8E1D48A4850055842E /* FormSettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSettingVC.swift; sourceTree = "<group>"; };
+		37278D901D48A7290055842E /* MaxValueSettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaxValueSettingVC.swift; sourceTree = "<group>"; };
 		3729629A1D40AF6500A947B4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BKPasscodeView.strings"; sourceTree = "<group>"; };
 		3729629C1D40B9E700A947B4 /* PasswordSettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordSettingVC.swift; sourceTree = "<group>"; };
 		3739C2421D409D6800222D4A /* MineVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineVC.swift; sourceTree = "<group>"; };
@@ -655,6 +659,15 @@
 				0A503BC16E271BA2F18444F3 /* Pods-XianHui.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		37278D8D1D48A4690055842E /* FormSetting */ = {
+			isa = PBXGroup;
+			children = (
+				37278D8E1D48A4850055842E /* FormSettingVC.swift */,
+				37278D901D48A7290055842E /* MaxValueSettingVC.swift */,
+			);
+			path = FormSetting;
 			sourceTree = "<group>";
 		};
 		372962881D40A41000A947B4 /* Password */ = {
@@ -1849,6 +1862,7 @@
 		37BAB9691D3E1059001E4680 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				37278D8D1D48A4690055842E /* FormSetting */,
 				37E78A9C1D41F2A3007425A3 /* FormVC */,
 				372962881D40A41000A947B4 /* Password */,
 				37DE9D661D41B6780041A26B /* MessageList */,
@@ -2234,6 +2248,7 @@
 				37BAB8431D3E0F84001E4680 /* NSString+LCCKExtension.m in Sources */,
 				37BAB8541D3E0F84001E4680 /* LCCKMessageVoiceFactory.m in Sources */,
 				37BAB8B21D3E101C001E4680 /* UIView+DD.swift in Sources */,
+				37278D911D48A7290055842E /* MaxValueSettingVC.swift in Sources */,
 				37BAB8AB1D3E101C001E4680 /* String+DD.swift in Sources */,
 				37BAB8321D3E0F84001E4680 /* LCCKMessage.m in Sources */,
 				37BAB85D1D3E0F84001E4680 /* LCCKChatLocationMessageCell.m in Sources */,
@@ -2371,6 +2386,7 @@
 				37DE9D681D41B6AD0041A26B /* MessageListVC.swift in Sources */,
 				37BAB8A71D3E101C001E4680 /* Array+DD.swift in Sources */,
 				3729629D1D40B9E700A947B4 /* PasswordSettingVC.swift in Sources */,
+				37278D8F1D48A4850055842E /* FormSettingVC.swift in Sources */,
 				37BAB8661D3E0F84001E4680 /* LCCKConversationListViewModel.m in Sources */,
 				37BAB8891D3E0F84001E4680 /* LCChatKit.m in Sources */,
 				37BAB8AA1D3E101C001E4680 /* NSTimeZone+DD.swift in Sources */,

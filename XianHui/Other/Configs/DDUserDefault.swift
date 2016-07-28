@@ -80,6 +80,13 @@ extension PalauDefaults {
         }
     }
     
-    
+    public static var maxValue: PalauDefaultsEntry<Int> {
+        get {
+            return value("maxValue").whenNil(use:0)
+        }
+        set {
+            
+        }
+    }
   
 }

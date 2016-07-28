@@ -10,7 +10,6 @@ import UIKit
 import SnapKit
 import Charts
 import PageMenu
-import LGFilterView
 import SwiftString
 
 class FormVC: UIViewController,CAPSPageMenuDelegate {
@@ -24,10 +23,7 @@ class FormVC: UIViewController,CAPSPageMenuDelegate {
     var titleButton = UIButton()
     var titlesArray = ["顾问","技师","店长"]
     
-    var filterView:LGFilterView!
     var dateTypesArray = ["当日","当周","当月"]
-    
-    var dateFilterView:LGFilterView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,113 +111,18 @@ class FormVC: UIViewController,CAPSPageMenuDelegate {
     
     func setBarItem() {
         
-//        let arrowImage = UIImage(named: "Arrow")
-//        
-//        titleButton.backgroundColor = UIColor.clearColor()
-//        titleButton.tag = 0
-//        titleButton.setTitle(titlesArray[0], forState: .Normal)
-//        titleButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-//        titleButton.setImage(arrowImage, forState: .Normal)
-//        
-//        titleButton.titleLabel?.font = UIFont.systemFontOfSize(20)
-//        titleButton.imageEdgeInsets = UIEdgeInsetsMake(0, -4, 0, 4)
-//        titleButton.titleEdgeInsets = UIEdgeInsetsMake(0, 4, 0, -4)
-//        
-//        titleButton.addTarget(self, action: #selector(FormVC.titleFilter(_:)), forControlEvents: .TouchUpInside)
-//        titleButton.sizeToFit()
-//        
-//        self.navigationItem.titleView = titleButton
-        
-        //setupFilterViewsWithTransitionStyle(.Top)
-        
-        rightBarItem = UIBarButtonItem(title: "设置", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FormVC.dataFilterTap(_:)))
+        rightBarItem = UIBarButtonItem(title: "设置", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FormVC.settingTap(_:)))
         navigationItem.rightBarButtonItem = rightBarItem
         
-        setDateFilterViewWithTransitionStyle(.Top)
     }
     
-    func setupFilterViewsWithTransitionStyle(style:LGFilterViewTransitionStyle) {
-        
-        filterView = LGFilterView(titles: titlesArray, actionHandler: { (filter, title, index) in
-            
-            self.titleButton.titleLabel?.text = title
-            
-            }, cancelHandler: nil)
-        
-        filterView.transitionStyle = style
-        filterView.numberOfLines = 0
-        
-        
-        let isStatusBarHidden = UIApplication.sharedApplication().statusBarHidden
-        let statusBarHeight   = isStatusBarHidden ? 0 : UIApplication.sharedApplication().statusBarFrame.size.height
-        
-        let topInset = (self.navigationController?.navigationBar.ddHeight)! +  statusBarHeight
-        
-        //        let version = UIDevice.currentDevice().systemVersion.toFloat()!
-        //
-        //        if version < 7.0 {
-        //            topInset = 0
-        //        }
-        
-        
-        if (filterView.transitionStyle == .Top){
-            filterView.contentInset = UIEdgeInsetsMake(topInset, 0, 0, 0)
-            filterView.offset = CGPointZero
-        }
-        
-        
-    }
-    
-    func setDateFilterViewWithTransitionStyle(style:LGFilterViewTransitionStyle) {
-        
-        dateFilterView = LGFilterView(titles: dateTypesArray, actionHandler: { (filter, title, index) in
-            
-            //TODO:更换日期范围
-            self.rightBarItem.title = title
-            
-            }, cancelHandler: nil)
-        
-        dateFilterView.transitionStyle = style
-        dateFilterView.numberOfLines = 0
-        
-        
-        let isStatusBarHidden = UIApplication.sharedApplication().statusBarHidden
-        let statusBarHeight   = isStatusBarHidden ? 0 : UIApplication.sharedApplication().statusBarFrame.size.height
-        
-        let topInset = (self.navigationController?.navigationBar.ddHeight)! +  statusBarHeight
-        
-        if (dateFilterView.transitionStyle == .Top){
-            dateFilterView.contentInset = UIEdgeInsetsMake(topInset, 0, 0, 0)
-            dateFilterView.offset = CGPointZero
-        }
-    }
-    
-    func dataFilterTap(sender:UIBarButtonItem) {
-        
-        if dateFilterView.showing == false {
-            
-            dateFilterView.showInView(view, animated: true, completionHandler: nil)
-        }
-        else {
-            dateFilterView.dismissAnimated(true, completionHandler: nil)
-        }
-    }
-    
-    func titleFilter(button:UIButton) {
-        
-        if filterView.showing == false {
-            
-            filterView.showInView(view, animated: true, completionHandler: nil)
-        }
-        else {
-            filterView.dismissAnimated(true, completionHandler: nil)
-        }
-    }
     
     func settingTap(sender:UIBarButtonItem) {
         
+        let vc = FormSettingVC()
+        vc.title = "设置"
         
-        
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     /*

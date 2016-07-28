@@ -15,7 +15,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="管理" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byd-5F-BFs">
-                        <rect key="frame" x="271" y="12" width="34" height="21"/>
+                        <rect key="frame" x="278" y="12" width="34" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="LPj-Ht-xB8"/>
                         </constraints>
@@ -34,7 +34,7 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="byd-5F-BFs" secondAttribute="trailing" constant="15" id="RMg-Ph-dGt"/>
+                    <constraint firstAttribute="trailing" secondItem="byd-5F-BFs" secondAttribute="trailing" constant="8" id="RMg-Ph-dGt"/>
                     <constraint firstItem="byd-5F-BFs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="aLL-v2-6cc"/>
                     <constraint firstItem="1C7-Lt-yfm" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="b6u-hu-a2x"/>
                     <constraint firstItem="1C7-Lt-yfm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="d1M-by-M1S"/>
