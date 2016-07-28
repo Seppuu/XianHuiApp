@@ -120,6 +120,29 @@ static NSMutableDictionary *_sharedInstances = nil;
     //        [LCChatKit setAllLogsEnabled:YES];
 #endif
     [LCChatKit setAppId:LCCKAPPID appKey:LCCKAPPKEY];
+    
+    [[LCChatKit sharedInstance] setFetchProfilesBlock:^(NSArray<NSString *> *userIds, LCCKFetchProfilesCallBack callback) {
+        NSMutableArray<id<LCCKUserDelegate>> *userList = [NSMutableArray array];
+        for (NSString *userId in userIds) {
+            //MyUser is a subclass of AVUser, conforming to the LCCKUserDelegate protocol.
+            AVQuery *query = [LCCKUser query];
+            NSError *error = nil;
+            LCCKUser *object = (LCCKUser *)[query getObjectWithId:userId error:&error];
+            if (error == nil) {
+                [userList addObject:object];
+            } else {
+                if (callback) {
+                    callback(nil, error);
+                    return;
+                }
+            }
+        }
+        if (callback) {
+            callback(userList, nil);
+        }
+    }
+     ];
+    
     [[LCChatKit sharedInstance] setFetchProfilesBlock:^(NSArray<NSString *> *userIds, LCCKFetchProfilesCallBack callback) {
         if (userIds.count == 0) {
             NSInteger code = 0;
@@ -156,6 +179,7 @@ static NSMutableDictionary *_sharedInstances = nil;
         }];
         !callback ?: callback([users copy], nil);
     }];
+    
     
     [[LCChatKit sharedInstance] setDidSelectConversationsListCellBlock:^(NSIndexPath *indexPath, AVIMConversation *conversation, LCCKConversationListViewController *controller) {
         [[self class] exampleOpenConversationViewControllerWithConversaionId:conversation.conversationId fromNavigationController:nil];

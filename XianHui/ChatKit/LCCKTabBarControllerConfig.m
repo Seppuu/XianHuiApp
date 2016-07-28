@@ -70,7 +70,7 @@
                                                           initWithRootViewController:secondViewController];
     
     //Mine VC
-    MineVC *thirdVC = [[MineVC alloc] init];
+    UserCentreVC *thirdVC = [[UserCentreVC alloc] init];
     UINavigationController *thirdNavigationController = [[LCCKBaseNavigationController alloc]
                                                          initWithRootViewController:thirdVC];
     
@@ -84,21 +84,21 @@
 
 - (NSArray *)tabBarItemsAttributesForController {
     NSDictionary *dict1 = @{
-                            //                            CYLTabBarItemTitle : @"消息",
+                            CYLTabBarItemTitle : @"消息",
                             CYLTabBarItemImage : @"tabbar_chat_normal",
                             CYLTabBarItemSelectedImage : @"tabbar_chat_active",
                             };
     NSDictionary *dict2 = @{
-                            //                            CYLTabBarItemTitle : @"联系人",
+                            CYLTabBarItemTitle : @"联系人",
                             CYLTabBarItemImage : @"tabbar_contacts_normal",
                             CYLTabBarItemSelectedImage : @"tabbar_contacts_active",
                             };
 
     
     NSDictionary *dict3 = @{
-                            //                            CYLTabBarItemTitle : @"联系人",
-                            CYLTabBarItemImage : @"tabbar_contacts_normal",
-                            CYLTabBarItemSelectedImage : @"tabbar_contacts_active",
+                            CYLTabBarItemTitle : @"设置",
+                            CYLTabBarItemImage : @"tabbar_settings_normal",
+                            CYLTabBarItemSelectedImage : @"tabbar_settings_active",
                             };
 
     NSArray *tabBarItemsAttributes = @[
@@ -120,12 +120,12 @@
     // set the text color for unselected state
     // 普通状态下的文字属性
     NSMutableDictionary *normalAttrs = [NSMutableDictionary dictionary];
-    normalAttrs[NSForegroundColorAttributeName] = [UIColor grayColor];
+    normalAttrs[NSForegroundColorAttributeName] = [UIColor colorWithRed:0.6118 green:0.6863 blue:0.7647 alpha:1.0];
     
     // set the text color for selected state
     // 选中状态下的文字属性
     NSMutableDictionary *selectedAttrs = [NSMutableDictionary dictionary];
-    selectedAttrs[NSForegroundColorAttributeName] = [UIColor blackColor];
+    selectedAttrs[NSForegroundColorAttributeName] = [UIColor colorWithRed:0.2157 green:0.6039 blue:1.0 alpha:1.0];
         
     // set the text Attributes
     // 设置文字属性

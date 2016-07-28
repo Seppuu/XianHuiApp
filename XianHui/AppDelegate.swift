@@ -22,13 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         LCChatKitExample.invokeThisMethodInDidFinishLaunching()
         
-        let loginViewController = LCCKLoginViewController(nibName: "LCCKLoginViewController", bundle: nil)
-        
-        loginViewController.setClientIDHandler { (clientID) in
-            
+        let loginVC = LoginViewController()
+        loginVC.clientIdHandler = {
+            (clientId) in
             LCCKUtil.showProgressText("open client ...", duration:10.0)
             
-            LCChatKitExample.invokeThisMethodAfterLoginSuccessWithClientId(clientID, success: {
+            LCChatKitExample.invokeThisMethodAfterLoginSuccessWithClientId(clientId, success: {
                 
                 LCCKUtil.hideProgress()
                 
@@ -42,9 +41,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     print(error.description)
             })
+            
+            
         }
         
-        self.window?.rootViewController = loginViewController
+        self.window?.rootViewController = loginVC
         self.window?.backgroundColor = UIColor.whiteColor()
         self.window?.makeKeyAndVisible()
         

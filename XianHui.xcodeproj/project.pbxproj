@@ -7,11 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		370AAEA21D49E550000C64D1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AAEA11D49E550000C64D1 /* LoginViewController.swift */; };
+		370AAEA61D49F1B3000C64D1 /* UserNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AAEA41D49F1B3000C64D1 /* UserNameCell.swift */; };
+		370AAEA71D49F1B3000C64D1 /* UserNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 370AAEA51D49F1B3000C64D1 /* UserNameCell.xib */; };
 		37278D8F1D48A4850055842E /* FormSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37278D8E1D48A4850055842E /* FormSettingVC.swift */; };
 		37278D911D48A7290055842E /* MaxValueSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37278D901D48A7290055842E /* MaxValueSettingVC.swift */; };
 		372962991D40AF6500A947B4 /* BKPasscodeView.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3729629B1D40AF6500A947B4 /* BKPasscodeView.strings */; };
 		3729629D1D40B9E700A947B4 /* PasswordSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3729629C1D40B9E700A947B4 /* PasswordSettingVC.swift */; };
 		3739C2431D409D6800222D4A /* MineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3739C2421D409D6800222D4A /* MineVC.swift */; };
+		377116161D49AE3C00008B36 /* UserCentreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377116151D49AE3C00008B36 /* UserCentreVC.swift */; };
 		378E07641D461B2C00B67621 /* RadarChartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378E07631D461B2C00B67621 /* RadarChartVC.swift */; };
 		378E07671D461EC000B67621 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378E07661D461EC000B67621 /* BalloonMarker.swift */; };
 		378E076A1D4757CC00B67621 /* XHBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378E07691D4757CC00B67621 /* XHBarChartView.swift */; };
@@ -263,11 +267,15 @@
 /* Begin PBXFileReference section */
 		0A503BC16E271BA2F18444F3 /* Pods-XianHui.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XianHui.release.xcconfig"; path = "Pods/Target Support Files/Pods-XianHui/Pods-XianHui.release.xcconfig"; sourceTree = "<group>"; };
 		2D802883ED5368B6081BC0AB /* Pods-XianHui.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XianHui.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XianHui/Pods-XianHui.debug.xcconfig"; sourceTree = "<group>"; };
+		370AAEA11D49E550000C64D1 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		370AAEA41D49F1B3000C64D1 /* UserNameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNameCell.swift; sourceTree = "<group>"; };
+		370AAEA51D49F1B3000C64D1 /* UserNameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserNameCell.xib; sourceTree = "<group>"; };
 		37278D8E1D48A4850055842E /* FormSettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSettingVC.swift; sourceTree = "<group>"; };
 		37278D901D48A7290055842E /* MaxValueSettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaxValueSettingVC.swift; sourceTree = "<group>"; };
 		3729629A1D40AF6500A947B4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BKPasscodeView.strings"; sourceTree = "<group>"; };
 		3729629C1D40B9E700A947B4 /* PasswordSettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordSettingVC.swift; sourceTree = "<group>"; };
 		3739C2421D409D6800222D4A /* MineVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineVC.swift; sourceTree = "<group>"; };
+		377116151D49AE3C00008B36 /* UserCentreVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCentreVC.swift; sourceTree = "<group>"; };
 		378E07631D461B2C00B67621 /* RadarChartVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadarChartVC.swift; sourceTree = "<group>"; };
 		378E07661D461EC000B67621 /* BalloonMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
 		378E07691D4757CC00B67621 /* XHBarChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHBarChartView.swift; sourceTree = "<group>"; };
@@ -495,7 +503,7 @@
 		37BAB8B81D3E1025001E4680 /* PhoneNumbers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumbers.swift; sourceTree = "<group>"; };
 		37BAB8B91D3E1025001E4680 /* PhotoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
 		37BAB8C01D3E1040001E4680 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		37BAB8C11D3E1040001E4680 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		37BAB8C11D3E1040001E4680 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = ../Other/Services/User.swift; sourceTree = "<group>"; };
 		37BAB8C81D3E1045001E4680 /* CYLConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYLConstants.h; sourceTree = "<group>"; };
 		37BAB8C91D3E1045001E4680 /* CYLPlusButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYLPlusButton.h; sourceTree = "<group>"; };
 		37BAB8CA1D3E1045001E4680 /* CYLPlusButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYLPlusButton.m; sourceTree = "<group>"; };
@@ -661,6 +669,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		370AAEA31D49F06F000C64D1 /* UserNameCell */ = {
+			isa = PBXGroup;
+			children = (
+				370AAEA41D49F1B3000C64D1 /* UserNameCell.swift */,
+				370AAEA51D49F1B3000C64D1 /* UserNameCell.xib */,
+			);
+			path = UserNameCell;
+			sourceTree = "<group>";
+		};
 		37278D8D1D48A4690055842E /* FormSetting */ = {
 			isa = PBXGroup;
 			children = (
@@ -685,6 +702,14 @@
 				3739C2421D409D6800222D4A /* MineVC.swift */,
 			);
 			path = MineVC;
+			sourceTree = "<group>";
+		};
+		377116141D49ADC300008B36 /* UserCentre */ = {
+			isa = PBXGroup;
+			children = (
+				377116151D49AE3C00008B36 /* UserCentreVC.swift */,
+			);
+			path = UserCentre;
 			sourceTree = "<group>";
 		};
 		378E07651D461EB200B67621 /* ChartComponents */ = {
@@ -1166,52 +1191,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		37BAB8091D3E0F84001E4680 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				37BAB80A1D3E0F84001E4680 /* Controller */,
-				37BAB80B1D3E0F84001E4680 /* Model */,
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
-		37BAB80A1D3E0F84001E4680 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		37BAB80B1D3E0F84001E4680 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		37BAB80C1D3E0F84001E4680 /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				37BAB80D1D3E0F84001E4680 /* Controller */,
-				37BAB80E1D3E0F84001E4680 /* View */,
-			);
-			path = Main;
-			sourceTree = "<group>";
-		};
-		37BAB80D1D3E0F84001E4680 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		37BAB80E1D3E0F84001E4680 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		37BAB80F1D3E0F84001E4680 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1245,6 +1224,7 @@
 				37BAB8151D3E0F84001E4680 /* LCCKLoginViewController.h */,
 				37BAB8161D3E0F84001E4680 /* LCCKLoginViewController.m */,
 				37BAB8171D3E0F84001E4680 /* LCCKLoginViewController.xib */,
+				370AAEA11D49E550000C64D1 /* LoginViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1356,7 +1336,6 @@
 			isa = PBXGroup;
 			children = (
 				37BAB8C01D3E1040001E4680 /* NetworkManager.swift */,
-				37BAB8C11D3E1040001E4680 /* User.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1499,6 +1478,7 @@
 		37BAB8F81D3E1059001E4680 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				370AAEA31D49F06F000C64D1 /* UserNameCell */,
 				37BAB8F91D3E1059001E4680 /* AddFriendMore */,
 				37BAB8FC1D3E1059001E4680 /* AddFriendSearch */,
 				37BAB9001D3E1059001E4680 /* AlbumSelectCell */,
@@ -1862,6 +1842,7 @@
 		37BAB9691D3E1059001E4680 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				377116141D49ADC300008B36 /* UserCentre */,
 				37278D8D1D48A4690055842E /* FormSetting */,
 				37E78A9C1D41F2A3007425A3 /* FormVC */,
 				372962881D40A41000A947B4 /* Password */,
@@ -1901,6 +1882,7 @@
 		37BAB9C31D3E1062001E4680 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				37BAB8C11D3E1040001E4680 /* User.swift */,
 				378E07651D461EB200B67621 /* ChartComponents */,
 			);
 			path = Model;
@@ -1963,8 +1945,6 @@
 				37BAB8071D3E0F84001E4680 /* LCCKTabBarControllerConfig.h */,
 				37BAB8081D3E0F84001E4680 /* LCCKTabBarControllerConfig.m */,
 				37BAB82C1D3E0F84001E4680 /* Tool */,
-				37BAB8091D3E0F84001E4680 /* Login */,
-				37BAB80C1D3E0F84001E4680 /* Main */,
 				37BAB80F1D3E0F84001E4680 /* Model */,
 				37BAB8121D3E0F84001E4680 /* Module */,
 			);
@@ -2174,6 +2154,7 @@
 				37BAB99A1D3E1059001E4680 /* SwitchCell.xib in Resources */,
 				37BAB9921D3E1059001E4680 /* pickerCell.xib in Resources */,
 				37BAB9AC1D3E1059001E4680 /* WorkCell.xib in Resources */,
+				370AAEA71D49F1B3000C64D1 /* UserNameCell.xib in Resources */,
 				37BAB9A81D3E1059001E4680 /* SubscriptionTopView.xib in Resources */,
 				37BAB9941D3E1059001E4680 /* ProfileCell.xib in Resources */,
 				37BAB9AD1D3E1059001E4680 /* CountDown.xib in Resources */,
@@ -2243,6 +2224,7 @@
 				37BAB8BC1D3E1025001E4680 /* Once.swift in Sources */,
 				37BAB8411D3E0F84001E4680 /* LCCKConversationViewModel.m in Sources */,
 				3739C2431D409D6800222D4A /* MineVC.swift in Sources */,
+				377116161D49AE3C00008B36 /* UserCentreVC.swift in Sources */,
 				37BAB8741D3E0F84001E4680 /* LCCKConversationListService.m in Sources */,
 				37BAB8F11D3E1045001E4680 /* UIViewController+RESideMenu.m in Sources */,
 				37BAB8431D3E0F84001E4680 /* NSString+LCCKExtension.m in Sources */,
@@ -2353,6 +2335,7 @@
 				37BAB9D51D3E11B1001E4680 /* AMPopTip+Animation.m in Sources */,
 				37BAB9751D3E1059001E4680 /* AddFriendMoreCell.swift in Sources */,
 				37BAB8561D3E0F84001E4680 /* LCCKChatBar.m in Sources */,
+				370AAEA61D49F1B3000C64D1 /* UserNameCell.swift in Sources */,
 				37BAB8BE1D3E1025001E4680 /* PhotoManager.swift in Sources */,
 				37BAB9D81D3E11B1001E4680 /* AMPopTip+Exit.m in Sources */,
 				37BAB83F1D3E0F84001E4680 /* LCCKTextFullScreenViewController.m in Sources */,
@@ -2385,6 +2368,7 @@
 				37BAB9DF1D3E124E001E4680 /* DDConfigs.swift in Sources */,
 				37DE9D681D41B6AD0041A26B /* MessageListVC.swift in Sources */,
 				37BAB8A71D3E101C001E4680 /* Array+DD.swift in Sources */,
+				370AAEA21D49E550000C64D1 /* LoginViewController.swift in Sources */,
 				3729629D1D40B9E700A947B4 /* PasswordSettingVC.swift in Sources */,
 				37278D8F1D48A4850055842E /* FormSettingVC.swift in Sources */,
 				37BAB8661D3E0F84001E4680 /* LCCKConversationListViewModel.m in Sources */,

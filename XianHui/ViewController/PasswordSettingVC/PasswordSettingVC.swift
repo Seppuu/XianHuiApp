@@ -21,6 +21,7 @@ class PasswordSettingVC: BaseViewController ,BKPasscodeViewControllerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = UIColor.whiteColor()
         setTableView()
         
     }

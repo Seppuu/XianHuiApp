@@ -34,7 +34,6 @@ class User {
                 return nil
             }
             
-            
         }
         return uwShared
     }

@@ -18,6 +18,7 @@ class MineVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = UIColor.whiteColor()
         setTableView()
         
     }

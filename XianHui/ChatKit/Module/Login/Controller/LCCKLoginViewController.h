@@ -18,8 +18,7 @@ typedef void (^LCCKClientIDHandler)(NSString *clientID);
 
 @property (strong, nonatomic) IBOutlet DEMODataSource *autocompleteDataSource;
 @property (weak) IBOutlet MLPAutoCompleteTextField *autocompleteTextField;
-@property (strong, nonatomic) IBOutlet UILabel *demoTitle;
-@property (strong, nonatomic) IBOutlet UILabel *author;
+
 
 - (void)setClientIDHandler:(LCCKClientIDHandler)clientIDHandler;
 
