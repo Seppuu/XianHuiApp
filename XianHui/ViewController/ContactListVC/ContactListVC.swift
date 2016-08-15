@@ -60,17 +60,6 @@ class ContactListVC: LCCKContactListViewController {
     
     func setTopView() {
         
-//        searchController = UISearchController(searchResultsController: nil)
-//        
-//        searchController.searchResultsUpdater = self
-//        
-//        // Determines whether the underlying content is dimmed during a search.
-//        // if we are presenting the display results in the same view, this should be false
-//        searchController.dimsBackgroundDuringPresentation = true
-//        
-//        // Make sure the that the search bar is visible within the navigation bar.
-//        searchController.searchBar.sizeToFit()
-       // self.searchController.searchBar.frame = CGRectMake(0, 0, screenWidth, 44)
         topView.addSubview(self.searchController.searchBar)
         
         tableView.tableHeaderView = topView
