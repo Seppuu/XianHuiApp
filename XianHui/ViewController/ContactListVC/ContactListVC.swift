@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import ChatKit
 
 class ContactListVC: LCCKContactListViewController {
 
-    var searchController: UISearchController!
+    //var searchController: UISearchController!
     
     var topTableView:UITableView!
+    
+    var topView:UIView!
     
     var cellId = "ChannelCell"
     
@@ -21,6 +24,9 @@ class ContactListVC: LCCKContactListViewController {
     var topColors = [UIColor.navBarColor(),UIColor.orangeColor(),UIColor.redColor()]
     
     override func viewDidLoad() {
+        
+        setTableView()
+        
         super.viewDidLoad()
         
         setTopView()
@@ -32,18 +38,11 @@ class ContactListVC: LCCKContactListViewController {
         
     }
     
-    func setTopView() {
-        
-        searchController = UISearchController(searchResultsController: nil)
-        
-        searchController.searchResultsUpdater = self
-        
-        // Determines whether the underlying content is dimmed during a search.
-        // if we are presenting the display results in the same view, this should be false
-        searchController.dimsBackgroundDuringPresentation = true
-        
-        // Make sure the that the search bar is visible within the navigation bar.
-        searchController.searchBar.sizeToFit()
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    func setTableView() {
         
         //tableView
         topTableView = UITableView(frame: CGRect(x: 0, y: 44, width: screenWidth, height:44*3), style: .Plain)
@@ -54,15 +53,29 @@ class ContactListVC: LCCKContactListViewController {
         let nib = UINib(nibName: cellId, bundle: nil)
         topTableView.registerNib(nib, forCellReuseIdentifier: cellId)
         
-        
-        let topView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 44 + 44*3))
+        topView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 44 + 44*3))
         
         topView.addSubview(topTableView)
-        topView.addSubview(searchController.searchBar)
+    }
+    
+    func setTopView() {
+        
+//        searchController = UISearchController(searchResultsController: nil)
+//        
+//        searchController.searchResultsUpdater = self
+//        
+//        // Determines whether the underlying content is dimmed during a search.
+//        // if we are presenting the display results in the same view, this should be false
+//        searchController.dimsBackgroundDuringPresentation = true
+//        
+//        // Make sure the that the search bar is visible within the navigation bar.
+//        searchController.searchBar.sizeToFit()
+       // self.searchController.searchBar.frame = CGRectMake(0, 0, screenWidth, 44)
+        topView.addSubview(self.searchController.searchBar)
         
         tableView.tableHeaderView = topView
+
         
-        definesPresentationContext = true
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -70,6 +83,9 @@ class ContactListVC: LCCKContactListViewController {
             
         }
     }
+    
+    
+    
     
 }
 
@@ -123,8 +139,8 @@ extension ContactListVC {
         if (tableView == topTableView) {
             
             if indexPath.item == 0 {
-                let vc = FormVC()
-                vc.title = "日报"
+                let vc = HelperVC()
+                vc.title = "助手"
                 navigationController?.pushViewController(vc, animated: true)
                 
             }

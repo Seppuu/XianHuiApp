@@ -21,7 +21,9 @@ class FormSettingVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getDailyReportMaxValues()
         setTableView()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,6 +48,28 @@ class FormSettingVC: UIViewController {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
+    
+    func getDailyReportMaxValues() {
+        
+        NetworkManager.sharedManager.getDailyReportMaxVaule { (success, json, error) in
+            
+            if success == true {
+                
+            }
+            else {
+                //use realm data
+            }
+        }
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
 }
 
 extension FormSettingVC:UITableViewDelegate,UITableViewDataSource {

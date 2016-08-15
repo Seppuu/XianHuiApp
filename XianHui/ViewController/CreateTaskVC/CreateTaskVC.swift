@@ -10,6 +10,7 @@ import UIKit
 import UITextView_Placeholder
 import SwiftString
 import SwiftDate
+import IQKeyboardManagerSwift
 
 class CreateTaskVC: BaseViewController {
     
@@ -52,10 +53,8 @@ class CreateTaskVC: BaseViewController {
     var initiator = ""
     
     //参与者
+    var listOfMember = [User]()
     var members = ""
-
-    //提醒
-    var remind:Int = 0
     
     //备注
     var remark = ""
@@ -66,6 +65,18 @@ class CreateTaskVC: BaseViewController {
         delayEndDate()
         
         setTableView()
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        IQKeyboardManager.sharedManager().enable = true
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        IQKeyboardManager.sharedManager().enable = false
         
     }
 
@@ -125,13 +136,13 @@ class CreateTaskVC: BaseViewController {
 extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 5
+        return 4
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            //标题,位置
-            return 2
+            //标题
+            return 1
         }
         else if section == 1 {
             //开始时间,结束时间
@@ -146,10 +157,6 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
             //发起者,参与者
             return 2
         }
-        else if section == 3 {
-            //提醒
-            return 1
-        }
         else {
             //备注
             return 1
@@ -157,7 +164,7 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.section == 4 {
+        if indexPath.section == 3 {
             return 100
         }
         else if indexPath.section == 1 {
@@ -202,12 +209,12 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
                     
                 }
             }
-            else {
-                //位置
-                cell.leftTextField.placeholder = "位置"
-                cell.leftTextField.userInteractionEnabled = false
-                
-            }
+//            else {
+//                //位置
+//                cell.leftTextField.placeholder = "位置"
+//                cell.leftTextField.userInteractionEnabled = false
+//                
+//            }
             
             return cell
         }
@@ -294,19 +301,34 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier(timeSelectCellId, forIndexPath: indexPath) as! typeCell
             if indexPath.row == 0 {
                 cell.leftLabel.text = "发起者"
-                cell.typeLabel.text = "陈红"
+                cell.typeLabel.text = User.currentUser().name
             }
             else {
                 cell.leftLabel.text = "参与者"
-                cell.typeLabel.text = "罗林等7人"
+                if listOfMember.count != 0 {
+                    
+                    let firstUser = listOfMember[0]
+                    
+                    if listOfMember.count == 1 {
+                        cell.typeLabel.text = firstUser.name
+                    }
+                    else if listOfMember.count == 2 {
+                        cell.typeLabel.text = firstUser.name + "," + listOfMember[1].name
+                    }
+                    else if listOfMember.count == 3 {
+                        cell.typeLabel.text = firstUser.name + "," + listOfMember[1].name + "," + listOfMember[2].name
+                    }
+                    else {
+                       cell.typeLabel.text = firstUser.name + "等\(listOfMember.count)人"
+                    }
+                    
+                }
+                else {
+                    cell.typeLabel.text = "无"
+                }
+                
                 cell.accessoryType = .DisclosureIndicator
             }
-            
-            return cell
-        }
-        else if indexPath.section == 3 {
-            let cell = tableView.dequeueReusableCellWithIdentifier(remindCellId, forIndexPath: indexPath) as! BasicInfoCell
-            cell.leftLabel.text = "提醒"
             
             return cell
         }
@@ -327,6 +349,20 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
             //时间section点击
             sectionOfTimeTapWith(tableView, indexPath: indexPath)
             
+        }
+        else if indexPath.section == 2 {
+            if indexPath.row == 1 {
+                //成员选择
+                let vc = MemberListVC()
+                vc.listOfMemberSelected = listOfMember
+                vc.memberSelectedHandler = {
+                    (listOfMemberSelected) in
+                    
+                    self.listOfMember = listOfMemberSelected
+                    self.tableView.reloadData()
+                }
+                navigationController?.pushViewController(vc, animated: true)
+            }
         }
         
     }

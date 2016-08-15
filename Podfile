@@ -2,14 +2,8 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'XianHui' do
-pod 'AVOSCloud'
-pod 'AVOSCloudIM'
 pod 'AVOSCloudCrashReporting'
-pod 'MJRefresh'
-pod 'UITableView+FDTemplateLayoutCell'
-pod 'SDWebImage'
-pod 'Masonry'
-pod 'FMDB'
+pod 'ChatKit','~> 0.4.2'
 pod 'CTAssetsPickerController',  '~> 3.3.0'
 pod 'DZNEmptyDataSet'
 pod 'TWMessageBarManager'

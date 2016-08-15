@@ -1,16 +1,35 @@
 PODS:
   - AFViewShaker (0.0.2)
   - Alamofire (3.4.1)
-  - AVOSCloud (3.3.5)
+  - AVOSCloud (3.4.0-beta.1)
   - AVOSCloudCrashReporting (3.3.5):
     - AVOSCloud
-  - AVOSCloudIM (3.3.5):
-    - AVOSCloud
+  - AVOSCloudIM (3.4.0-beta.1):
+    - AVOSCloud (= 3.4.0-beta.1)
+    - AVOSCloudIM/_ARC (= 3.4.0-beta.1)
+    - AVOSCloudIM/_NOARC (= 3.4.0-beta.1)
+  - AVOSCloudIM/_ARC (3.4.0-beta.1):
+    - AVOSCloud (= 3.4.0-beta.1)
+    - AVOSCloudIM/_NOARC (= 3.4.0-beta.1)
+  - AVOSCloudIM/_NOARC (3.4.0-beta.1):
+    - AVOSCloud (= 3.4.0-beta.1)
   - BKPasscodeView (0.2.3):
     - AFViewShaker (~> 0.0)
   - Charts (2.2.5):
     - Charts/Core (= 2.2.5)
   - Charts/Core (2.2.5)
+  - ChatKit (0.4.2):
+    - AVOSCloud (~> 3.4.0-beta)
+    - AVOSCloudIM (~> 3.4.0-beta)
+    - DACircularProgress (~> 2.3.1)
+    - FDStackView (~> 1.0)
+    - FMDB (~> 2.6.2)
+    - Masonry (~> 1.0.1)
+    - MJRefresh (~> 3.1.9)
+    - MLLabel (~> 1.9.2)
+    - pop (~> 1.0.9)
+    - SDWebImage (~> 3.8.0)
+    - UITableView+FDTemplateLayoutCell (~> 1.5.beta)
   - CryptoSwift (0.5.1)
   - CTAssetsPickerController (3.3.1):
     - PureLayout (~> 3.0.0)
@@ -19,6 +38,7 @@ PODS:
   - EAIntroView (2.9.0):
     - EARestrictedScrollView (~> 1.1.0)
   - EARestrictedScrollView (1.1.0)
+  - FDStackView (1.0)
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
@@ -30,13 +50,15 @@ PODS:
   - LTInfiniteScrollView-Swift (0.1.0)
   - Masonry (1.0.1)
   - MBProgressHUD (0.9.2)
-  - MJRefresh (3.1.10)
+  - MJRefresh (3.1.12)
+  - MLLabel (1.9.2)
   - MWPhotoBrowser (2.1.2):
     - DACircularProgress (~> 2.3)
     - MBProgressHUD (~> 0.9)
     - SDWebImage (!= 3.7.2, ~> 3.7)
   - PageMenu (1.2.9)
   - Palau (1.0.3)
+  - pop (1.0.9)
   - Proposer (0.7.1)
   - PureLayout (3.0.2)
   - Realm (1.0.2):
@@ -53,42 +75,36 @@ PODS:
   - SwiftString (0.5)
   - SwiftyJSON (2.3.2)
   - TWMessageBarManager (1.8.1)
-  - UITableView+FDTemplateLayoutCell (1.4)
+  - UITableView+FDTemplateLayoutCell (1.5.beta)
   - UITextView+Placeholder (1.2.0)
 
 DEPENDENCIES:
   - Alamofire (~> 3.3)
-  - AVOSCloud
   - AVOSCloudCrashReporting
-  - AVOSCloudIM
   - BKPasscodeView
   - Charts
+  - ChatKit (~> 0.4.2)
   - CryptoSwift
   - CTAssetsPickerController (~> 3.3.0)
   - DZNEmptyDataSet
   - EAIntroView (~> 2.9.0)
-  - FMDB
   - ICSPullToRefresh (~> 0.4)
   - ImagePickerSheetController
   - IQKeyboardManagerSwift
   - KeyboardMan (~> 0.6.0)
   - Kingfisher (~> 2.3)
   - LTInfiniteScrollView-Swift
-  - Masonry
-  - MJRefresh
   - MWPhotoBrowser
   - PageMenu
   - Palau (~> 1.0)
   - Proposer (~> 0.7.1)
   - RealmSwift
   - Ruler (~> 0.6)
-  - SDWebImage
   - SnapKit (~> 0.15.0)
   - SwiftDate
   - SwiftString
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
   - TWMessageBarManager
-  - UITableView+FDTemplateLayoutCell
   - UITextView+Placeholder (~> 1.2)
 
 EXTERNAL SOURCES:
@@ -103,17 +119,19 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AFViewShaker: 7e4bc215ca3e92347b78da436fca74e1730b52e8
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
-  AVOSCloud: 1fe170768bee7e05bc3ea86e38d5bddb105cb957
+  AVOSCloud: f3fdb671b88b02e9ea5583f2e3b980b1a4b7f883
   AVOSCloudCrashReporting: 7ad087db785a25d6ef03cb54c2c0b460eb32dabb
-  AVOSCloudIM: dc307c48e951fcd861f4ae6db6d807e7b40639c8
+  AVOSCloudIM: e64225b07ce8ba09049950164616e4d31ab05aa9
   BKPasscodeView: 4dd27931ad4e5938e9967fdb260f6e166fa82632
   Charts: b48fcc8d7190de910ff9e9748f5360c8ea7856e5
+  ChatKit: 5c766f54fbf090b4d845f200c60b6f56ee434f94
   CryptoSwift: df42dda18baf6c76347a94e227dbcc0a341304bd
   CTAssetsPickerController: b1d1d50ab87cf6b8b13531de5f4530482e7e53ed
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   EAIntroView: 76f68cc56242f2e25359419e6ecc2344ee7e1756
   EARestrictedScrollView: b0c2a3f92fb2610bb44d71c5e4893777c89e45ef
+  FDStackView: 3a4bbe0ce9c35e974246a585168b9da8c32213f1
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   ICSPullToRefresh: 9e6720df41f6d3e8a31e3cdd99a0b922850abe85
   ImagePickerSheetController: 3c58c9fee6dcf36485222358a021f6b734f997ba
@@ -123,10 +141,12 @@ SPEC CHECKSUMS:
   LTInfiniteScrollView-Swift: 4e5e0cfd742751acd3a122ef206c803be3ee8fba
   Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
-  MJRefresh: bb72948c985914b0b5cecac573a2c69a8915fb02
+  MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
+  MLLabel: df58127ce0bd1f87890ecc3232db77a85ce4cd97
   MWPhotoBrowser: 5836d7aa041dc05a13de380c246826578adc5ea5
   PageMenu: ba19ff267f7a19e444e93c20a7847b78954a7011
   Palau: 1a16ff9b456b08941cdac6e42f977ae5af5d78a7
+  pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   Proposer: e9759ad71a6702fd94315a0bff1f8c116edf6f07
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
   Realm: 9d5c46a4d7d27958530a8dfc58f63a99e5c2cba3
@@ -138,7 +158,7 @@ SPEC CHECKSUMS:
   SwiftString: ec9c31c55b2aa147a1154f5f5f8483dc71e3165f
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   TWMessageBarManager: fd84e7948ba7968a2b5d9454859135761214ec56
-  UITableView+FDTemplateLayoutCell: 234e1582bcc4e18461af91155123bb96538ed030
+  UITableView+FDTemplateLayoutCell: 02b508ab1cb4cea16a8c17ac83d2cd1fd72124f9
   UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
 
 COCOAPODS: 0.39.0

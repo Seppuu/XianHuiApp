@@ -32,6 +32,15 @@ extension PalauDefaults {
         }
     }
     
+    public static var actualApiUrl: PalauDefaultsEntry<String> {
+        get {
+            return value("actualApiUrl").whenNil(use:"")
+        }
+        set {
+            
+        }
+    }
+    
     //登录的时候返回,设置
     public static var userSSID: PalauDefaultsEntry<String> {
         get {

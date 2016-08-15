@@ -79,7 +79,13 @@ class TaskListVC: BaseViewController {
         
         tableView.tableHeaderView = searchController.searchBar
         
+        
+        //解决 搜索框点击之后,view 下移.
         definesPresentationContext = true
+        
+        self.edgesForExtendedLayout = .None
+        
+        
     }
     
     
@@ -144,8 +150,6 @@ extension TaskListVC:UITableViewDelegate,UITableViewDataSource {
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         

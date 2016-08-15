@@ -1,0 +1,36 @@
+framework module AVOSCloudIM {
+  umbrella header "AVOSCloudIM-umbrella.h"
+
+  export *
+  module * { export * }
+
+  private header "LCIMArray.h"
+  private header "LCIMArray_PackagePrivate.h"
+  private header "LCIMBootstrap.h"
+  private header "LCIMCodedInputStream.h"
+  private header "LCIMCodedInputStream_PackagePrivate.h"
+  private header "LCIMCodedOutputStream.h"
+  private header "LCIMCodedOutputStream_PackagePrivate.h"
+  private header "LCIMDescriptor.h"
+  private header "LCIMDescriptor_PackagePrivate.h"
+  private header "LCIMDictionary.h"
+  private header "LCIMDictionary_PackagePrivate.h"
+  private header "LCIMExtensionInternals.h"
+  private header "LCIMExtensionRegistry.h"
+  private header "LCIMMessage.h"
+  private header "LCIMMessage_PackagePrivate.h"
+  private header "LCIMProtocolBuffers.h"
+  private header "LCIMProtocolBuffers_RuntimeSupport.h"
+  private header "LCIMRootObject.h"
+  private header "LCIMRootObject_PackagePrivate.h"
+  private header "LCIMRuntimeTypes.h"
+  private header "LCIMUnknownField.h"
+  private header "LCIMUnknownField_PackagePrivate.h"
+  private header "LCIMUnknownFieldSet.h"
+  private header "LCIMUnknownFieldSet_PackagePrivate.h"
+  private header "LCIMUtilities.h"
+  private header "LCIMUtilities_PackagePrivate.h"
+  private header "LCIMWellKnownTypes.h"
+  private header "LCIMWireFormat.h"
+  private header "MessagesProtoOrig.pbobjc.h"
+}

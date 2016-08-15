@@ -72,6 +72,7 @@ class XHBarChartView: OTPageView ,OTPageScrollViewDataSource,OTPageScrollViewDel
     
     func setScrollView() {
         
+        
         pageScrollView.frame = CGRectMake((screenWidth - 50)/2 , ddHeight * 0.25, 50, ddHeight * 0.5)
         pageScrollView.delegate = self
         pageScrollView.dataSource = self
@@ -87,6 +88,7 @@ class XHBarChartView: OTPageView ,OTPageScrollViewDataSource,OTPageScrollViewDel
         cell.color = UIColor ( red: 0.5216, green: 0.3765, blue: 0.2863, alpha: 1.0 )
     }
 
+    
     /*
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

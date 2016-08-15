@@ -23,11 +23,18 @@ class NavigationController: UINavigationController {
         super.didReceiveMemoryWarning()
         
     }
-
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         
         return UIStatusBarStyle.LightContent
+    }
+    
+    override func pushViewController(viewController: UIViewController, animated: Bool) {
+        
+        if (self.viewControllers.count > 0) {
+            viewController.hidesBottomBarWhenPushed = true
+        }
+        super.pushViewController(viewController, animated: animated)
     }
 
 

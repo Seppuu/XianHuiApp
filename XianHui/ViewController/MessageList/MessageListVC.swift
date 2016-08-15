@@ -8,6 +8,7 @@
 
 import UIKit
 import MJRefresh
+import ChatKit
 
 class MessageListVC: LCCKConversationListViewController {
     
@@ -25,6 +26,8 @@ class MessageListVC: LCCKConversationListViewController {
         listModel = MessageListModel(conversationListViewController: self)
         
         setTableView()
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,6 +68,11 @@ class MessageListVC: LCCKConversationListViewController {
         tableView.dataSource = self
         
         return tableView
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
     }
 

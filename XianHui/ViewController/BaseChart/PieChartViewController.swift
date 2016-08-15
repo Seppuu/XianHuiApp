@@ -49,13 +49,16 @@ class PieChartViewController: BaseChartViewController {
     
     var pieType = ["业绩组成","顾问业绩","客户级别"]
     
-    let viewHeight = ( screenHeight - 64 - 44 )
+    let viewHeight = ( screenHeight - 64)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //遇到含导航栏的ViewController，其第一个子试图是UIScrollView会自动产生64像素偏移
+        //automaticallyAdjustsScrollViewInsets：是否根据按所在界面的navigationbar与tabbar的高度，自动调整scrollview的 inset。
+        self.automaticallyAdjustsScrollViewInsets = false
         
-        topPageView = XHBarChartView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: viewHeight * 0.4))
+        topPageView = XHBarChartView(frame: CGRect(x: 0, y: 64, width: screenWidth, height: viewHeight * 0.5))
         topPageView.clipsToBounds = true
         topPageView.setScrollView()
         topPageView.backgroundColor = UIColor(red: 0.9294, green: 0.8941, blue: 0.8392, alpha: 1.0)
@@ -71,14 +74,15 @@ class PieChartViewController: BaseChartViewController {
         }
         
         
+        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .Horizontal
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
-        layout.itemSize = CGSizeMake(screenWidth, viewHeight * 0.6)
+        layout.itemSize = CGSizeMake(screenWidth, viewHeight * 0.5)
         
         
-        bottomCollectionView = UICollectionView(frame: CGRect(x: 0, y: topPageView.ddHeight, width: screenWidth, height: viewHeight * 0.6), collectionViewLayout: layout)
+        bottomCollectionView = UICollectionView(frame: CGRect(x: 0, y: topPageView.ddHeight + 64, width: screenWidth, height: viewHeight * 0.5), collectionViewLayout: layout)
         
         bottomCollectionView.delegate = self
         bottomCollectionView.dataSource = self
@@ -91,7 +95,7 @@ class PieChartViewController: BaseChartViewController {
         
         
         //page control
-        pageControl = UIPageControl(frame: CGRect(x: 0, y: topPageView.ddHeight, width: screenWidth, height: 40))
+        pageControl = UIPageControl(frame: CGRect(x: 0, y: topPageView.ddHeight + 64, width: screenWidth, height: 40))
         view.addSubview(pageControl)
         
         pageControl.currentPage = 0
@@ -130,6 +134,12 @@ class PieChartViewController: BaseChartViewController {
         
     }
     
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+    }
 }
 
 extension PieChartViewController: ChartViewDelegate {
@@ -247,7 +257,7 @@ extension PieChartViewController {
     func updatePieData(index:Int) {
         
         animePieChart = true
-        bottomCollectionView.reloadData()
+        //bottomCollectionView.reloadData()
     }
     
     

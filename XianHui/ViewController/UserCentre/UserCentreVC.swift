@@ -147,8 +147,8 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
             //let user = User.currentUser()
             
             let cell = tableView.dequeueReusableCellWithIdentifier(AddUserAvatarCell) as! UserAvatarCell
-            
-            cell.nameLabel.text = "用户姓名"
+            let user = User.currentUser()
+            cell.nameLabel.text = user.name
             cell.levelTextLabel.text = "用户等级"
             
             if uploadingAvatar {
@@ -427,14 +427,14 @@ extension UserCentreVC: UIImagePickerControllerDelegate, UINavigationControllerD
         let imageData = UIImageJPEGRepresentation(image, 0.1)
         let user = User.currentUser()
         
-        user.saveUserInfoInBack(with: user.firstName, lastName: user.lastName, avatar: imageData) { (success,_,_) in
-            
-            if success {
-                self.uploadingAvatar = false
-                self.userTableView.reloadData()
-                NSNotificationCenter.defaultCenter().postNotificationName(UserAvatarUpdatedNoti, object: nil)
-            }
-        }
+//        user.saveUserInfoInBack(with: user.firstName, lastName: user.lastName, avatar: imageData) { (success,_,_) in
+//            
+//            if success {
+//                self.uploadingAvatar = false
+//                self.userTableView.reloadData()
+//                NSNotificationCenter.defaultCenter().postNotificationName(UserAvatarUpdatedNoti, object: nil)
+//            }
+//        }
         
     }
 }

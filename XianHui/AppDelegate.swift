@@ -7,66 +7,76 @@
 //
 
 import UIKit
-import IQKeyboardManagerSwift
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         
-        IQKeyboardManager.sharedManager().enable = true
+        ChatKitExample.invokeThisMethodInDidFinishLaunching()
         
-        LCChatKitExample.invokeThisMethodInDidFinishLaunching()
         
-        let loginVC = LoginViewController()
-        loginVC.clientIdHandler = {
-            (clientId) in
-            LCCKUtil.showProgressText("open client ...", duration:10.0)
-            
-            LCChatKitExample.invokeThisMethodAfterLoginSuccessWithClientId(clientId, success: {
-                
-                LCCKUtil.hideProgress()
-                
-                let tabBarControllerConfig = LCCKTabBarControllerConfig()
-                
-                self.window?.rootViewController = tabBarControllerConfig.tabBarController
-                
-                }, failed: { (error) in
-                    
-                    LCCKUtil.hideProgress()
-                    
-                    print(error.description)
-            })
-            
-            
+        let currentClientId = Defaults.clientId.value!
+        if currentClientId != "" {
+
+            User.setAlluserId()
+            self.openLeanCloudIMWith(currentClientId)
         }
-        
-        self.window?.rootViewController = loginVC
-        self.window?.backgroundColor = UIColor.whiteColor()
-        self.window?.makeKeyAndVisible()
+        else {
+            
+            let loginVC = LoginViewController()
+            loginVC.clientIdHandler = {
+                (clientId) in
+                self.openLeanCloudIMWith(clientId)
+            }
+            
+            self.window?.rootViewController = loginVC
+            self.window?.backgroundColor = UIColor.whiteColor()
+            self.window?.makeKeyAndVisible()
+        }
         
         return true
 
     }
+    
+    func openLeanCloudIMWith(clientId:String) {
+        
+        LCCKUtil.showProgressText("open client ...", duration:10.0)
+        
+        ChatKitExample.invokeThisMethodAfterLoginSuccessWithClientId(clientId, success: {
+            
+            LCCKUtil.hideProgress()
+            
+            let tabBarControllerConfig = LCCKTabBarControllerConfig()
+            
+            self.window?.rootViewController = tabBarControllerConfig.tabBarController
+            
+            }, failed: { (error) in
+                
+                LCCKUtil.hideProgress()
+                
+                print(error.description)
+        })
+    }
 
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        LCChatKitExample.invokeThisMethodInDidRegisterForRemoteNotificationsWithDeviceToken(deviceToken)
+        ChatKitExample.invokeThisMethodInDidRegisterForRemoteNotificationsWithDeviceToken(deviceToken)
     }
     
     func applicationWillResignActive(application: UIApplication) {
-         LCChatKitExample.invokeThisMethodInApplicationWillResignActive(application)
+         ChatKitExample.invokeThisMethodInApplicationWillResignActive(application)
     }
 
     func applicationWillTerminate(application: UIApplication) {
-       LCChatKitExample.invokeThisMethodInApplicationWillTerminate(application)
+       ChatKitExample.invokeThisMethodInApplicationWillTerminate(application)
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        LCChatKitExample.invokeThisMethodInApplication(application, didReceiveRemoteNotification: userInfo)
+        ChatKitExample.invokeThisMethodInApplication(application, didReceiveRemoteNotification: userInfo)
     }
 
 

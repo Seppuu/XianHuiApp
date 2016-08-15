@@ -21,9 +21,7 @@ class FormVC: UIViewController,CAPSPageMenuDelegate {
     var pageMenu : CAPSPageMenu?
     var chartTitleLabel = UILabel()
     var titleButton = UIButton()
-    var titlesArray = ["顾问","技师","店长"]
     
-    var dateTypesArray = ["当日","当周","当月"]
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ChatKit
 
 class MessageListCell: LCCKConversationListCell {
 
