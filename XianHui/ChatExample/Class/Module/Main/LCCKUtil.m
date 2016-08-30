@@ -2,7 +2,7 @@
 //  LCCKUtil.m
 //  LeanCloudChatKit-iOS
 //
-//  Created by ElonChan on 16/2/26.
+//  Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/2/26.
 //  Copyright © 2016年 LeanCloud. All rights reserved.
 //
 
@@ -21,7 +21,7 @@
     NSInteger code = 0;
     NSString *errorReasonText = text;
     NSDictionary *errorInfo = @{
-                                @"code":@(code),
+                                @"code" : @(code),
                                 NSLocalizedDescriptionKey : errorReasonText,
                                 };
     NSError *error = [NSError errorWithDomain:@"LeanCloudChatKitExample"

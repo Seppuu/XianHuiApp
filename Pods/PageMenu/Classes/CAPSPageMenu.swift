@@ -87,8 +87,9 @@ public enum CAPSPageMenuOption {
 public class CAPSPageMenu: UIViewController, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     
     // MARK: - Properties
-
+    
     let menuScrollView = UIScrollView()
+    //xianhui
     public let controllerScrollView = UIScrollView()
     var controllerArray : [UIViewController] = []
     var menuItems : [MenuItemView] = []

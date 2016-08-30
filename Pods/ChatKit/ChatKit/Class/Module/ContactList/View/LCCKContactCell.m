@@ -2,8 +2,8 @@
 //  LCCKContactCell.m
 //  LeanCloudChatKit-iOS
 //
-//  Created by 陈宜龙 on 16/3/9.
-//  Copyright © 2016年 ElonChan. All rights reserved.
+//  v0.6.0 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/3/9.
+//  Copyright © 2016年 LeanCloud. All rights reserved.
 //
 
 #import "LCCKContactCell.h"
@@ -63,10 +63,8 @@
     self.subtitleLabel.text = subtitle;
     if (subtitle.length == 0) {
         self.subtitleLabel.hidden = YES;
-//        [self.subtitleLabel removeFromSuperview];
     }
     if (model != LCCKContactListModeMultipleSelection) {
-//        [self.selectionStatusButton removeFromSuperview];
         self.selectionStatusButton.hidden = YES;
     }
 }

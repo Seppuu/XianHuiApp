@@ -2,13 +2,13 @@
 //  AVIMConversation+LCCKAddition.h
 //  LeanCloudChatKit-iOS
 //
-//  Created by 陈宜龙 on 16/3/11.
-//  Copyright © 2016年 ElonChan. All rights reserved.
+//  v0.6.0 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/3/11.
+//  Copyright © 2016年 ElonChan (wechat:chenyilong1010). All rights reserved.
 //
 #import <AVOSCloudIM/AVIMConversation.h>
 #import "LCCKConversationService.h"
 #import "LCCKConstants.h"
-#import "LCCKChatUntiles.h"
+#import "LCCKConstants.h"
 
 @interface AVIMConversation (LCCKAddition)
 

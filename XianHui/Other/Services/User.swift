@@ -233,12 +233,35 @@ class User:NSObject {
         
     }
     
+    class func saveAvatarWith(image:UIImage,completion:((success:Bool)->())) {
+        
+        NetworkManager.sharedManager.updateUserAvatarWith(image) { (success, avatarUrlString, error) in
+            
+            if success == true {
+                
+                let user = User.currentUser()
+                user.avatarURL = (avatarUrlString?.string)!
+                
+                Defaults.userAvatarURL.value = user.avatarURL
+                
+                completion(success: true)
+            }
+            else {
+                completion(success: false)
+            }
+            
+        }
+        
+    }
+    
     func logOut(completion:DDResultHandler) {
         
         NetworkManager.sharedManager.userLogOut { [weak self](success,json,error) in
             
             if success {
                 self?.clearUserDefaults()
+                //clean files
+                cleanRealmAndCaches()
                 completion(success: true,json:nil,error: nil)
             }
             else {

@@ -26,6 +26,9 @@ let loginURL          = BaseUrl + "/rest/login"
 //用户登出
 let logOutURL         = BaseUrl + "/rest/logout"
 
+//上传头像
+let updateAvatarURL      = DDBaseUrl + "/rest/employee/uploadavator"
+
 //完善用户资料
 let updateUserInfoURL = DDBaseUrl + "/user/index/rest?returnDataType=json&action=updateUserInfo"
 

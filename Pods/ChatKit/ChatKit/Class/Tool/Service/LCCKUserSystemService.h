@@ -2,7 +2,7 @@
 //  LCCKUserSystemService.h
 //  LeanCloudChatKit-iOS
 //
-//  Created by ElonChan on 16/2/22.
+//  v0.6.0 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/2/22.
 //  Copyright © 2016年 LeanCloud. All rights reserved.
 //  Service for User-System.
 
@@ -25,14 +25,14 @@
             if (error == nil) {
                 [userList addObject:object];
             } else {
-                if (callback) {
-                    callback(nil, error);
+                if (completionHandler) {
+                    completionHandler(nil, error);
                     return;
                 }
             }
         }
-        if (callback) {
-            callback(userList, nil);
+        if (completionHandler) {
+            completionHandler(userList, nil);
         }
     }
      ];

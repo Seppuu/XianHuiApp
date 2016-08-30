@@ -6,6 +6,7 @@
 #import <CommonCrypto/CommonCrypto.h>
 
 #import "LCChatKitExample.h"
+
 #import "LCCKUtil.h"
 #import "LCCKUser.h"
 #import "KCPinyinHelper.h"
@@ -16,5 +17,5 @@
 #import "CYLTabBarController.h"
 #import "OTPageView.h"
 
-#import "MBProgressHUD.h"
 #import "AMPopTip.h"
+#import "ANStepperView.h"

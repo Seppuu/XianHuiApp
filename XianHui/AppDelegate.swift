@@ -28,19 +28,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         else {
             
-            let loginVC = LoginViewController()
-            loginVC.clientIdHandler = {
-                (clientId) in
-                self.openLeanCloudIMWith(clientId)
-            }
-            
-            self.window?.rootViewController = loginVC
-            self.window?.backgroundColor = UIColor.whiteColor()
-            self.window?.makeKeyAndVisible()
+            showLoginVC()
         }
         
         return true
 
+    }
+    
+    func showLoginVC() {
+        
+        let loginVC = LoginViewController()
+        loginVC.clientIdHandler = {
+            (clientId) in
+            self.openLeanCloudIMWith(clientId)
+        }
+        
+        self.window?.rootViewController = loginVC
+        self.window?.backgroundColor = UIColor.whiteColor()
+        self.window?.makeKeyAndVisible()
     }
     
     func openLeanCloudIMWith(clientId:String) {

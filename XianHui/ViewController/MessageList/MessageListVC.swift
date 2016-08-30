@@ -12,9 +12,9 @@ import ChatKit
 
 class MessageListVC: LCCKConversationListViewController {
     
-    var listModel: MessageListModel!
-    
     var topTableView:UITableView!
+    
+    var topView:UIView!
     
     var topCellId = "LCCKConversationListCell"
     
@@ -23,10 +23,7 @@ class MessageListVC: LCCKConversationListViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        listModel = MessageListModel(conversationListViewController: self)
-        
         setTableView()
-        
         
     }
 
@@ -37,21 +34,8 @@ class MessageListVC: LCCKConversationListViewController {
     
     func setTableView() {
         
-        self.tableView.delegate = listModel
-        self.tableView.dataSource = listModel
-        
-        self.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
-            
-            self.listModel.refresh()
-            
-        })
-        
-        self.tableView.mj_header.beginRefreshing()
-        self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
-        
-        
         let cellHeight = LCCKConversationListCellDefaultHeight
-        let topView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: cellHeight * 3))
+        topView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: cellHeight * 3))
         topView.backgroundColor = UIColor ( red: 0.5, green: 0.5, blue: 0.5, alpha: 0.29 )
         
         topTableView = getTopTableView(cellHeight * 3)
@@ -73,6 +57,37 @@ class MessageListVC: LCCKConversationListViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+
+    }
+    
+    //顶部网络状态栏位置和三个标签重合
+    override func updateStatusView() {
+        
+        self.tableView.tableHeaderView = nil
+        
+        let isConnnect = LCCKSessionService.sharedInstance().connect
+        
+        if isConnnect == true {
+            let cellHeight = LCCKConversationListCellDefaultHeight
+            topTableView.frame.size.height = cellHeight * 3
+            topView.frame.size.height = cellHeight * 3
+            topTableView.tableHeaderView = nil
+            
+            self.tableView.tableHeaderView = topView
+        }
+        else {
+            let cellHeight = LCCKConversationListCellDefaultHeight
+            topView.frame.size.height = cellHeight * 3 + 44
+            topTableView.frame.size.height = cellHeight * 3 + 44
+            topTableView.tableHeaderView = self.clientStatusView
+            
+            self.tableView.tableHeaderView = topView
+        }
         
     }
 

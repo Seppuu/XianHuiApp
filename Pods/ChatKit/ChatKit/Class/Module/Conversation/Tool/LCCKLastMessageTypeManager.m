@@ -2,8 +2,8 @@
 //  LCCKLastMessageTypeManager.m
 //  LeanCloudChatKit-iOS
 //
-//  Created by 陈宜龙 on 16/3/22.
-//  Copyright © 2016年 ElonChan. All rights reserved.
+//  v0.6.0 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/3/22.
+//  Copyright © 2016年 LeanCloud. All rights reserved.
 //
 
 #import "LCCKLastMessageTypeManager.h"
@@ -11,6 +11,7 @@
 #import <AVOSCloudIM/AVOSCloudIM.h>
 #import "LCCKUserSystemService.h"
 #import "AVIMConversation+LCCKAddition.h"
+#import "NSObject+LCCKExtension.h"
 
 static NSMutableDictionary *attributedStringCache = nil;
 
@@ -46,7 +47,24 @@ static NSMutableDictionary *attributedStringCache = nil;
         case kAVIMMessageMediaTypeVideo:
             title = LCCKLocalizedStrings(@"Video");
             title = [NSString stringWithFormat:@"[%@]",title];
+            break;
 //TODO:
+            
+        default:
+            
+            if ([message lcck_isSupportThisCustomMessage]) {
+                @try {
+                    title = [message.attributes valueForKey:LCCKCustomMessageTypeTitleKey];
+                    title = [NSString stringWithFormat:@"[%@]",title];
+                } @catch (NSException *exception) {} @finally {
+                    if (!title) {
+                        title = LCCKLocalizedStrings(@"unknownMessageType");
+                    }
+                }
+            }
+            //自定义消息
+            
+            break;
     }
     return title;
 }

@@ -9,6 +9,7 @@
 #import "LCCKTabBarControllerConfig.h"
 #import <AVOSCloud/AVOSCloud.h>
 #import "LCChatKitExample.h"
+#import "LCCKContactManager.h"
 
 #if __has_include(<ChatKit/LCChatKit.h>)
     #import <ChatKit/LCChatKit.h>
@@ -23,6 +24,7 @@
 @property (nonatomic, readwrite, strong) CYLTabBarController *tabBarController;
 @property (nonatomic, strong) LCCKConversationListViewController *firstViewController;
 @property (nonatomic, strong) LCCKContactListViewController *secondViewController;
+
 @end
 
 @implementation LCCKTabBarControllerConfig
@@ -51,8 +53,16 @@
     
     MessageListVC *firstViewController = [[MessageListVC alloc] init];
     
+    firstViewController.navigationItem.rightBarButtonItem = ({
+        UIButton *createGroupConversationButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
+        [createGroupConversationButton addTarget:self action:@selector(createGroupConversation:) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:createGroupConversationButton];
+        rightBarButtonItem;
+    }
+                                                             );
+    self.firstViewController = firstViewController;
     NavigationController *firstNavigationController = [[NavigationController alloc]
-                                                         initWithRootViewController:firstViewController];
+                                                       initWithRootViewController:firstViewController];
     
     //联系人
     NSArray *userIds = [ChatKitExample getAllUserIds];
@@ -61,8 +71,9 @@
     NSString *currentClientID = [[LCChatKit sharedInstance] clientId];
     
     
-    ContactListVC *secondViewController = [[ContactListVC alloc] initWithContacts:users userIds:self.allPersonIds excludedUserIds:@[currentClientID] mode:LCCKContactListModeNormal];
+    ContactListVC *secondViewController = [[ContactListVC alloc] initWithContacts:[NSSet setWithArray:users] userIds:[NSSet setWithArray:self.allPersonIds] excludedUserIds:[NSSet setWithArray:@[currentClientID]] mode:LCCKContactListModeNormal];
     
+    self.secondViewController = secondViewController;
     [secondViewController setSelectedContactCallback:^(UIViewController *viewController, NSString *peerId) {
         [ChatKitExample exampleOpenConversationViewControllerWithPeerId:peerId fromNavigationController:self.tabBarController.navigationController];
     }];
@@ -70,12 +81,12 @@
         return [[LCCKContactManager defaultManager] removeContactForPeerId:peerId];
     }];
     NavigationController *secondNavigationController = [[NavigationController alloc]
-                                                          initWithRootViewController:secondViewController];
+                                                        initWithRootViewController:secondViewController];
     
     //Mine VC
     UserCentreVC *thirdVC = [[UserCentreVC alloc] init];
     NavigationController *thirdNavigationController = [[NavigationController alloc]
-                                                         initWithRootViewController:thirdVC];
+                                                       initWithRootViewController:thirdVC];
     
     NSArray *viewControllers = @[
                                  firstNavigationController,
@@ -83,7 +94,7 @@
                                  thirdNavigationController
                                  ];
     return viewControllers;
-
+    
 }
 
 - (NSArray *)tabBarItemsAttributesForController {
@@ -119,17 +130,17 @@
 - (void)customizeTabBarAppearance:(CYLTabBarController *)tabBarController {
     // Customize UITabBar height
     // 自定义 TabBar 高度
-    tabBarController.tabBarHeight = 49.f;
+    tabBarController.tabBarHeight = 40.f;
     
     // set the text color for unselected state
     // 普通状态下的文字属性
     NSMutableDictionary *normalAttrs = [NSMutableDictionary dictionary];
-    normalAttrs[NSForegroundColorAttributeName] = [UIColor colorWithRed:0.6118 green:0.6863 blue:0.7647 alpha:1.0];
+    normalAttrs[NSForegroundColorAttributeName] = [UIColor grayColor];
     
     // set the text color for selected state
     // 选中状态下的文字属性
     NSMutableDictionary *selectedAttrs = [NSMutableDictionary dictionary];
-    selectedAttrs[NSForegroundColorAttributeName] = [UIColor colorWithRed:0.2157 green:0.6039 blue:1.0 alpha:1.0];
+    selectedAttrs[NSForegroundColorAttributeName] = [UIColor blackColor];
     
     // set the text Attributes
     // 设置文字属性
@@ -208,10 +219,24 @@
 }
 
 - (void)createGroupConversation:(id)sender {
-    [ChatKitExample exampleCreateGroupConversationFromViewController:self.firstViewController];
+    [LCChatKitExample exampleCreateGroupConversationFromViewController:self.firstViewController];
 }
+
+- (NSString *)arc4randomString {
+    int a = arc4random_uniform(100000000);
+    NSString *arc4randomString = [NSString stringWithFormat:@"%@", @(a)];
+    return arc4randomString;
+}
+
+- (void)addFriend {
+    NSString *additionUserId = self.arc4randomString;
+    NSMutableSet *addedUserIds = [NSMutableSet setWithSet:self.secondViewController.userIds];
+    [addedUserIds addObject:additionUserId];
+    self.secondViewController.userIds = [addedUserIds copy];
+}
+
 - (void)signOut {
-    [ChatKitExample signOutFromViewController:self.secondViewController];
+    [LCChatKitExample signOutFromViewController:self.secondViewController];
 }
 
 @end

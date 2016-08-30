@@ -2,8 +2,8 @@
 //  NSString+LCCKExtension.m
 //  ChatKit
 //
-//  Created by 陈宜龙 on 16/7/12.
-//  Copyright © 2016年 ElonChan. All rights reserved.
+//  v0.6.0 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/7/12.
+//  Copyright © 2016年 LeanCloud. All rights reserved.
 //
 
 #import "NSString+LCCKExtension.h"
@@ -89,7 +89,6 @@ NSString *const LCCKPhoneRegex =  @"\\d{3,4}[- ]?\\d{7,8}";
 
 - (NSArray *)lcck_allRangesWithPattern:(NSString *)pattern error:(NSError **)error {
     NSArray *arrayOfAllMatches = [self lcck_allMatchsWithPattern:pattern error:error];
-    NSMutableArray *arrayOfCheckingType = [[NSMutableArray alloc] init];
     NSMutableArray *allRanges = [NSMutableArray arrayWithCapacity:1];
     for (NSTextCheckingResult *match in arrayOfAllMatches) {
         [allRanges addObject:[NSValue valueWithRange:match.range]];
@@ -99,7 +98,6 @@ NSString *const LCCKPhoneRegex =  @"\\d{3,4}[- ]?\\d{7,8}";
 
 - (NSArray<NSValue *> *)lcck_allURLsWithPattern:(NSString *)pattern error:(NSError **)error {
     NSArray *arrayOfAllMatches = [self lcck_allMatchsWithPattern:pattern error:error];
-    NSMutableArray *arrayOfCheckingType = [[NSMutableArray alloc] init];
     NSMutableArray *allRanges = [NSMutableArray arrayWithCapacity:1];
     for (NSTextCheckingResult *match in arrayOfAllMatches) {
         [allRanges addObject:[NSValue valueWithRange:match.range]];

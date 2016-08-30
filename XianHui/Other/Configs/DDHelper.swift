@@ -33,11 +33,7 @@ func cleanRealmAndCaches() {
     realm.refresh()
     
 }
-func cleanDingDongDocuments() {
-    
-    NSFileManager.cleanMakeLessonFiles()
-    
-}
+
 
 func isAppAlreadyLaunchedOnce()->Bool{
     

@@ -2,7 +2,7 @@
 //  LCChatKit.m
 //  LeanCloudChatKit-iOS
 //
-//  Created by ElonChan on 16/2/22.
+//  v0.6.0 Created by ElonChan (wechat:chenyilong1010) on 16/2/22.
 //  Copyright © 2016年 LeanCloud. All rights reserved.
 //
 
@@ -142,6 +142,7 @@ static NSMutableDictionary *_sharedInstances = nil;
 - (void)closeWithCallback:(LCCKBooleanResultBlock)callback {
     [self.sessionService closeWithCallback:callback];
 }
+
 - (void)setForceReconnectSessionBlock:(LCCKForceReconnectSessionBlock)forceReconnectSessionBlock {
     [self.sessionService setForceReconnectSessionBlock:forceReconnectSessionBlock];
 }
@@ -271,7 +272,10 @@ static NSMutableDictionary *_sharedInstances = nil;
 
 - (void)setFetchConversationHandler:(LCCKFetchConversationHandler)fetchConversationHandler {
     [self.conversationService setFetchConversationHandler:fetchConversationHandler];
+}
 
+- (void)setConversationInvalidedHandler:(LCCKConversationInvalidedHandler)conversationInvalidedHandler {
+    [self.conversationService setConversationInvalidedHandler:conversationInvalidedHandler];
 }
 
 - (void)setLoadLatestMessagesHandler:(LCCKLoadLatestMessagesHandler)loadLatestMessagesHandler {
@@ -308,6 +312,14 @@ static NSMutableDictionary *_sharedInstances = nil;
 
 - (BOOL)removeAllCachedRecentConversations {
     return [self.conversationService removeAllCachedRecentConversations];
+}
+
+- (void)sendWelcomeMessageToPeerId:(NSString *)peerId text:(NSString *)text block:(LCCKBooleanResultBlock)block {
+    [self.conversationService sendWelcomeMessageToPeerId:peerId text:text block:block];
+}
+
+- (void)sendWelcomeMessageToConversationId:(NSString *)conversationId text:(NSString *)text block:(LCCKBooleanResultBlock)block {
+    [self.conversationService sendWelcomeMessageToConversationId:conversationId text:text block:block];
 }
 
 #pragma mark - LCCKConversationsListService

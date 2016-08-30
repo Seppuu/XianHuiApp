@@ -173,12 +173,16 @@ extension LoginViewController:UITableViewDelegate,UITableViewDataSource {
     //login
     func tryLogin() {
         
-        User.loginWith("18652805163", passWord: "mybook", usertype: UserType.Employee) { (user, error) in
+        let text1 = "18321178306"
+        
+        let text2 = "18652805163"
+        
+        User.loginWith(text1, passWord: "mybook", usertype: UserType.Employee) { (user, error) in
             
             if error == nil {
                 print("login success")
-                let id = String(user!.id)
-                self.clientIdHandler?(clientId:id)
+                let clientId = String(user!.clientId)
+                self.clientIdHandler?(clientId:clientId)
             }
             
         }

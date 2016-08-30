@@ -2,7 +2,7 @@
 //  LCCKChatBar.h
 //  LCCKChatBarExample
 //
-//  Created by ElonChan ( https://github.com/leancloud/ChatKit-OC ) on 15/8/17.
+//  v0.6.0 Created by ElonChan (微信向我报BUG:chenyilong1010) ( https://github.com/leancloud/ChatKit-OC ) on 15/8/17.
 //  Copyright (c) 2015年 https://LeanCloud.cn . All rights reserved.
 //
 
@@ -40,6 +40,7 @@ typedef NS_ENUM(NSUInteger, LCCKFunctionViewShowType){
 @interface LCCKChatBar : UIView
 
 @property (weak, nonatomic) id<LCCKChatBarDelegate> delegate;
+@property (nonatomic, readonly) UIViewController *controllerRef;
 
 /*!
  *
@@ -64,7 +65,6 @@ typedef NS_ENUM(NSUInteger, LCCKFunctionViewShowType){
  */
 - (void)appendString:(NSString *)string;
 - (void)appendString:(NSString *)string beginInputing:(BOOL)beginInputing;
-- (void)appendString:(NSString *)string beginInputing:(BOOL)beginInputing animated:(BOOL)animated;
 
 /**
  *  结束输入状态

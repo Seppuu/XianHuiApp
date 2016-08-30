@@ -2,12 +2,14 @@
 //  LCCKFaceManager.m
 //  LCCKChatBarExample
 //
-//  Created by ElonChan ( https://github.com/leancloud/ChatKit-OC ) on 15/8/25.
+//  v0.6.0 Created by ElonChan (微信向我报BUG:chenyilong1010) ( https://github.com/leancloud/ChatKit-OC ) on 15/8/25.
 //  Copyright (c) 2015年 https://LeanCloud.cn . All rights reserved.
 //
 
 #import "LCCKFaceManager.h"
 #import "UIImage+LCCKExtension.h"
+#import "LCCKConstants.h"
+#import <ChatKit/LCChatKit.h>
 
 @interface LCCKFaceManager ()
 
@@ -158,7 +160,8 @@
 
 + (NSMutableAttributedString *)emotionStrWithString:(NSString *)text {
     if (!text.length) {
-        return [[NSMutableAttributedString alloc] initWithString:@"【此版本暂不支持该格式，请升级至最新版查看】"];
+        NSString *degradeContent = LCCKLocalizedStrings(@"unknownMessage");
+        return [[NSMutableAttributedString alloc] initWithString:degradeContent];
     }
     //1、创建一个可变的属性字符串
     NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:text];

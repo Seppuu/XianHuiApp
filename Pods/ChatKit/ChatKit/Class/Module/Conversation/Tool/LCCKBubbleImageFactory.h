@@ -2,16 +2,17 @@
 //  LCCKBubbleImageFactory.h
 //  LeanCloudChatKit-iOS
 //
-//  Created by 陈宜龙 on 16/3/21.
-//  Copyright © 2016年 ElonChan. All rights reserved.
+//  v0.6.0 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/3/21.
+//  Copyright © 2016年 LeanCloud. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "LCCKChatUntiles.h"
-@import UIKit;
+#import "LCCKConstants.h"
+#import <AVOSCloudIM/AVOSCloudIM.h>
 
 @interface LCCKBubbleImageFactory : NSObject
 
-+ (UIImage *)bubbleImageViewForType:(LCCKMessageOwnerType)owner messageType:(LCCKMessageType)messageType isHighlighted:(BOOL)isHighlighted;
-
++ (UIImage *)bubbleImageViewForType:(LCCKMessageOwnerType)owner
+                        messageType:(AVIMMessageMediaType)messageMediaType
+                      isHighlighted:(BOOL)isHighlighted;
 @end

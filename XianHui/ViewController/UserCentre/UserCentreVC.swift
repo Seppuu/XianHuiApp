@@ -10,6 +10,7 @@ import UIKit
 import SwiftString
 import Proposer
 import Kingfisher
+import MBProgressHUD
 
 let HistoryNoti = "HistoryNoti"
 let LessonsLikedNoti = "LessonsLikedNoti"
@@ -165,8 +166,9 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
                 cell.dimView.alpha = 0.0
                 cell.hudView.alpha = 0.0
                 cell.hudView.stopAnimating()
-                //let url = NSURL(string: user.avatarURL)!
-                cell.avatarView.backgroundColor = UIColor ( red: 1.0, green: 0.0, blue: 0.0, alpha: 0.72 )
+                let url = NSURL(string: user.avatarURL)!
+                cell.avatarView.kf_setImageWithURL(url)
+                
             }
             
             cell.avatarTapHandler = { (cell) in
@@ -183,23 +185,6 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
             
             cell.cancelTapHandler = { [weak self] in
                 self?.removeLogOutCell()
-            }
-            
-            cell.confirmTapHandler = { (firstName,secondName) in
-                cell.nameLabel.text = firstName + secondName
-                let currentFirstName = "名"
-                let currentSecondName = "姓"
-                if currentFirstName == firstName &&
-                    currentSecondName == secondName {
-                    
-                    return
-                }
-                
-//                user.saveUserInfoInBack(with: secondName, lastName: firstName, avatar: nil, completion: { (success) in
-//                    
-//                })
-                
-                
             }
             
             cell.nameNoneHandler = {
@@ -325,20 +310,16 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
                 
                 //show intro
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-               // appDelegate.startIntroStory()
                 
-                //clean files
-                cleanRealmAndCaches()
-                
-                cleanDingDongDocuments()
+                appDelegate.showLoginVC()
                 
             }
             else {
                 let hud = MBProgressHUD.showHUDAddedTo((self?.view)!, animated: true)
                 hud.mode = .Text
-                hud.label.text = error
+                hud.labelText = error
                 
-                hud.hideAnimated(true, afterDelay: 1.5)
+                hud.hide(true, afterDelay: 1.5)
             }
             })
         
@@ -423,18 +404,38 @@ extension UserCentreVC: UIImagePickerControllerDelegate, UINavigationControllerD
         self.imageUploading = image
         self.userTableView.reloadData()
         
-        
-        let imageData = UIImageJPEGRepresentation(image, 0.1)
-        let user = User.currentUser()
-        
-//        user.saveUserInfoInBack(with: user.firstName, lastName: user.lastName, avatar: imageData) { (success,_,_) in
-//            
-//            if success {
-//                self.uploadingAvatar = false
-//                self.userTableView.reloadData()
-//                NSNotificationCenter.defaultCenter().postNotificationName(UserAvatarUpdatedNoti, object: nil)
-//            }
-//        }
+        User.saveAvatarWith(image) { (success) in
+            
+            if success == true {
+                
+                self.uploadingAvatar = false
+                self.userTableView.reloadData()
+                NSNotificationCenter.defaultCenter().postNotificationName(UserAvatarUpdatedNoti, object: nil)
+            }
+            else {
+                
+            }
+            
+        }
         
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

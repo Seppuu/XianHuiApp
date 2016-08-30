@@ -19,7 +19,7 @@ class ContactListVC: LCCKContactListViewController {
     
     var cellId = "ChannelCell"
     
-    var topTitle = ["助手","提醒","任务"]
+    var topTitle = ["助手","提醒","计划"]
     
     var topColors = [UIColor.navBarColor(),UIColor.orangeColor(),UIColor.redColor()]
     
@@ -45,10 +45,12 @@ class ContactListVC: LCCKContactListViewController {
     func setTableView() {
         
         //tableView
-        topTableView = UITableView(frame: CGRect(x: 0, y: 44, width: screenWidth, height:44*3), style: .Plain)
+        topTableView = UITableView(frame: CGRect(x: 0, y: 0, width: screenWidth, height:44 + 44*3), style: .Plain)
         topTableView.delegate = self
         topTableView.dataSource = self
         topTableView.scrollEnabled = false
+        
+        
         
         let nib = UINib(nibName: cellId, bundle: nil)
         topTableView.registerNib(nib, forCellReuseIdentifier: cellId)
@@ -60,11 +62,12 @@ class ContactListVC: LCCKContactListViewController {
     
     func setTopView() {
         
-        topView.addSubview(self.searchController.searchBar)
+        topTableView.tableHeaderView = self.searchController.searchBar
+        
+        //topView.addSubview(self.searchController.searchBar)
         
         tableView.tableHeaderView = topView
 
-        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -72,9 +75,7 @@ class ContactListVC: LCCKContactListViewController {
             
         }
     }
-    
-    
-    
+
     
 }
 
@@ -138,8 +139,10 @@ extension ContactListVC {
             }
             else {
                 //performSegueWithIdentifier("toTaskVC", sender: nil)
-                let vc = UIStoryboard.init(name: "TaskList", bundle: nil).instantiateViewControllerWithIdentifier("TaskListVC") as! TaskListVC
-                
+//                let vc = UIStoryboard.init(name: "TaskList", bundle: nil).instantiateViewControllerWithIdentifier("TaskListVC") as! TaskListVC
+
+                let vc = MyWorkVC()
+                vc.title = "我的工作"
                 navigationController?.pushViewController(vc, animated: true)
 
             }

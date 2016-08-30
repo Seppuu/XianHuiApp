@@ -2,7 +2,7 @@
 //  LCCKUserSystemService.m
 //  ChatKit-iOS
 //
-//  Created by ElonChan on 16/2/22.
+//  v0.6.0 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/2/22.
 //  Copyright © 2016年 LeanCloud. All rights reserved.
 //
 
@@ -82,13 +82,14 @@ NSString *const LCCKUserSystemServiceErrorDomain = @"LCCKUserSystemServiceErrorD
         NSInteger code = 0;
         NSString *errorReasonText = @"UserId is nil";
         NSDictionary *errorInfo = @{
-                                    @"code":@(code),
+                                    @"code" : @(code),
                                     NSLocalizedDescriptionKey : errorReasonText,
                                     };
         NSError *error = [NSError errorWithDomain:LCCKUserSystemServiceErrorDomain
                                              code:code
                                          userInfo:errorInfo];
-        if (*theError == nil) {
+        
+        if (theError == nil) {
             *theError = error;
         }
         return nil;
@@ -110,7 +111,7 @@ NSString *const LCCKUserSystemServiceErrorDomain = @"LCCKUserSystemServiceErrorD
         NSInteger code = 0;
         NSString *errorReasonText = @"UserId is nil";
         NSDictionary *errorInfo = @{
-                                    @"code":@(code),
+                                    @"code" : @(code),
                                     NSLocalizedDescriptionKey : errorReasonText,
                                     };
         NSError *error = [NSError errorWithDomain:LCCKUserSystemServiceErrorDomain
@@ -144,13 +145,13 @@ NSString *const LCCKUserSystemServiceErrorDomain = @"LCCKUserSystemServiceErrorD
         NSInteger code = 0;
         NSString *errorReasonText = @"UserIds is nil";
         NSDictionary *errorInfo = @{
-                                    @"code":@(code),
+                                    @"code" : @(code),
                                     NSLocalizedDescriptionKey : errorReasonText,
                                     };
         NSError *error = [NSError errorWithDomain:LCCKUserSystemServiceErrorDomain
                                              code:code
                                          userInfo:errorInfo];
-        if (*theError == nil) {
+        if (theError) {
             *theError = error;
         }
         return nil;
@@ -186,13 +187,13 @@ NSString *const LCCKUserSystemServiceErrorDomain = @"LCCKUserSystemServiceErrorD
     NSInteger code = 0;
     NSString *errorReasonText = @"No cached profile";
     NSDictionary *errorInfo = @{
-                                @"code":@(code),
+                                @"code" : @(code),
                                 NSLocalizedDescriptionKey : errorReasonText,
                                 };
     NSError *error = [NSError errorWithDomain:LCCKUserSystemServiceErrorDomain
                                          code:code
                                      userInfo:errorInfo];
-    if (*theError == nil) {
+    if (theError) {
         *theError = error;
     }
 }
@@ -248,7 +249,7 @@ NSString *const LCCKUserSystemServiceErrorDomain = @"LCCKUserSystemServiceErrorD
     NSInteger code = 0;
     NSString *errorReasonText = @"No cached profile";
     NSDictionary *errorInfo = @{
-                                @"code":@(code),
+                                @"code" : @(code),
                                 NSLocalizedDescriptionKey : errorReasonText,
                                 };
     NSError *error = [NSError errorWithDomain:LCCKUserSystemServiceErrorDomain

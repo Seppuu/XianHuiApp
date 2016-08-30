@@ -2,8 +2,8 @@
 //  LCCKBaseConversationViewController.m
 //  LeanCloudIMKit-iOS
 //
-//  Created by 陈宜龙 on 16/3/21.
-//  Copyright © 2016年 ElonChan. All rights reserved.
+//  v0.6.0 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/3/21.
+//  Copyright © 2016年 ElonChan (微信向我报BUG:chenyilong1010). All rights reserved.
 //
 //#define LCCKDebugging 1
 #import "LCCKBaseConversationViewController.h"
@@ -12,7 +12,11 @@
 #import "LCCKConversationRefreshHeader.h"
 #import "LCCKDeallocBlockExecutor.h"
 
+#if __has_include(<Masonry/Masonry.h>)
+#import <Masonry/Masonry.h>
+#else
 #import "Masonry.h"
+#endif
 #if __has_include(<MJRefresh/MJRefresh.h>)
     #import <MJRefresh/MJRefresh.h>
 #else
@@ -28,6 +32,9 @@ static CGFloat const LCCKScrollViewInsetTop = 20.f;
 
 @implementation LCCKBaseConversationViewController
 
+- (void)dealloc {
+    _chatBar.delegate = nil;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initilzer];
@@ -51,14 +58,15 @@ static CGFloat const LCCKScrollViewInsetTop = 20.f;
     [self lcck_executeAtDealloc:^{
         [weakSelf removeObserver:weakSelf forKeyPath:@"loadingMoreMessage"];
     }];
-    [LCCKCellRegisterController registerLCCKChatMessageCellClassForTableView:self.tableView];
+    [LCCKCellRegisterController registerChatMessageCellClassForTableView:self.tableView];
 //    [self setTableViewInsetsWithBottomValue:kLCCKChatBarMinHeight];
+    __weak __typeof(self) weakSelf_ = self;
     self.tableView.mj_header = [LCCKConversationRefreshHeader headerWithRefreshingBlock:^{
-        if (self.shouldLoadMoreMessagesScrollToTop && !self.loadingMoreMessage) {
+        if (weakSelf_.shouldLoadMoreMessagesScrollToTop && !weakSelf_.loadingMoreMessage) {
             // 进入刷新状态后会自动调用这个block
-            [self loadMoreMessagesScrollTotop];
+            [weakSelf_ loadMoreMessagesScrollTotop];
         } else {
-            [self.tableView.mj_header endRefreshing];
+            [weakSelf_.tableView.mj_header endRefreshing];
         }
     }];
 }

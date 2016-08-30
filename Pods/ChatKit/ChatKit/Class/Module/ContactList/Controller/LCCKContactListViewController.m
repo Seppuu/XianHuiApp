@@ -2,16 +2,17 @@
 //  LCCKContactListViewController.m
 //  LeanCloudChatKit-iOS
 //
-//  Created by ElonChan on 16/2/22.
+//  v0.6.0 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/2/22.
 //  Copyright © 2016年 LeanCloud. All rights reserved.
 //
 
 #import "LCCKContactListViewController.h"
 #import "LCCKContactCell.h"
-#import "LCCKContactManager.h"
 #import "LCCKAlertController.h"
 #import "LCCKUIService.h"
+#import "LCCKDeallocBlockExecutor.h"
 
+NSString *const LCCKContactListViewControllerContactsDidChanged = @"LCCKContactListViewControllerContactsDidChanged";
 static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactListViewControllerIdentifier";
 
 @interface LCCKContactListViewController ()<UISearchBarDelegate,UISearchDisplayDelegate>
@@ -20,49 +21,72 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 @property (nonatomic, copy) LCCKSelectedContactsCallback selectedContactsCallback;
 @property (nonatomic, copy) LCCKDeleteContactCallback deleteContactCallback;
 
-//=========================================================
-//================== origin TableView =====================
-//=========================================================
+#pragma mark - origin TableView
+///=============================================================================
+/// @name origin TableView
+///=============================================================================
+
 @property (nonatomic, copy) NSDictionary *originSections;
 @property (nonatomic, copy) NSArray<NSString *> *userNames;
+@property (nonatomic, assign) NSInteger numberOfSectionsInTableView;
 
-//=========================================================
-//================ searchResults TableView ================
-//=========================================================
+#pragma mark - searchResults TableView
+///=============================================================================
+/// @name searchResults TableView
+///=============================================================================
+
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
 #pragma clang diagnostic pop
 @property (nonatomic, copy) NSArray *searchContacts;
 @property (nonatomic, copy) NSDictionary *searchSections;
-@property (nonatomic, copy) NSArray<NSString *> *searchUserIds;
+@property (nonatomic, copy) NSSet<NSString *> *searchUserIds;
 
-//=========================================================
-//================ TableView Contoller ====================
-//=========================================================
+#pragma mark - TableView Contoller
+///=============================================================================
+/// @name TableView Contoller
+///=============================================================================
+
 @property (nonatomic, strong) NSMutableDictionary *dictionaryTableRowCheckedState;
 @property (nonatomic, copy) NSString *selectedContact;
 @property (nonatomic, strong) NSMutableArray *selectedContacts;
-@property (nonatomic, strong) UISearchBar *searchBar;
-@property (nonatomic, copy, readwrite) NSArray<LCCKContact *> *contacts;
 
-@property (nonatomic, copy) NSArray *excludedUserNames;
+@property (nonatomic, strong) UISearchBar *searchBar;
+
+@property (nonatomic, copy) NSSet *visiableUserIds;
+@property (nonatomic, copy) NSSet *visiableContacts;
+@property (nonatomic, assign, getter=isNeedReloadDataSource) BOOL needReloadDataSource;
+
 @end
 
 @implementation LCCKContactListViewController
 
-- (instancetype)initWithMode:(LCCKContactListMode)mode {
-    return [self initWithExcludedUserIds:nil mode:mode];
+- (instancetype)initWithContacts:(NSSet<LCCKContact *> *)contacts
+                            mode:(LCCKContactListMode)mode {
+    return [self initWithContacts:contacts excludedUserIds:nil mode:mode];
 }
 
-- (instancetype)initWithExcludedUserIds:(NSArray *)excludedUserIds
-                                   mode:(LCCKContactListMode)mode {
-    return [self initWithContacts:nil excludedUserIds:excludedUserIds mode:mode];
+- (instancetype)initWithContacts:(NSSet<LCCKContact *> *)contacts
+                 excludedUserIds:(NSSet *)excludedUserIds
+                            mode:(LCCKContactListMode)mode {
+    return [self initWithContacts:contacts userIds:nil excludedUserIds:excludedUserIds mode:mode];
 }
 
-- (instancetype)initWithContacts:(NSArray<LCCKContact *> *)contacts
-                         userIds:(NSArray<NSString *> *)userIds
-                 excludedUserIds:(NSArray *)excludedUserIds
+- (instancetype)initWithUserIds:(NSSet<NSString *> *)userIds
+                excludedUserIds:(NSSet *)excludedUserIds
+                           mode:(LCCKContactListMode)contactListMode {
+    return [self initWithContacts:nil userIds:userIds excludedUserIds:excludedUserIds mode:contactListMode];
+}
+
+- (instancetype)initWithUserIds:(NSSet<NSString *> *)userIds
+                           mode:(LCCKContactListMode)contactListMode {
+    return [self initWithUserIds:userIds excludedUserIds:nil mode:contactListMode];
+}
+
+- (instancetype)initWithContacts:(NSSet<LCCKContact *> *)contacts
+                         userIds:(NSSet<NSString *> *)userIds
+                 excludedUserIds:(NSSet *)excludedUserIds
                             mode:(LCCKContactListMode)mode {
     self = [super init];
     if (!self) {
@@ -73,12 +97,6 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
     _mode = mode;
     _userIds = userIds;
     return self;
-}
-
-- (instancetype)initWithContacts:(NSArray<LCCKContact *> *)contacts
-                 excludedUserIds:(NSArray *)excludedUserIds
-                            mode:(LCCKContactListMode)mode {
-    return [self initWithContacts:contacts userIds:nil excludedUserIds:excludedUserIds mode:mode];
 }
 
 #pragma mark -
@@ -108,6 +126,43 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
     return _dictionaryTableRowCheckedState;
 }
 
+- (NSSet *)visiableUserIds {
+    if (_visiableUserIds) {
+        return _visiableUserIds;
+    }
+    if (!_userIds || _userIds == 0) {
+        return nil;
+    }
+    NSMutableSet *visiableUserIds = [NSMutableSet setWithSet:_userIds];
+    if (self.excludedUserIds.count > 0) {
+        [self.excludedUserIds enumerateObjectsUsingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
+            [visiableUserIds removeObject:obj];
+        }];
+    }
+    _visiableUserIds = [visiableUserIds copy];
+    return _visiableUserIds;
+}
+
+- (NSSet *)visiableContacts {
+    if (_visiableContacts) {
+        return _visiableContacts;
+    }
+    if (!_contacts || _contacts.count == 0) {
+        return nil;
+    }
+    NSMutableSet *visiableContacts = [NSMutableSet setWithSet:_contacts];
+    if (self.excludedUserIds.count > 0) {
+        [self.excludedUserIds enumerateObjectsUsingBlock:^(NSString * _Nonnull clientId, BOOL * _Nonnull stop) {
+            NSSet *removedSet = [visiableContacts filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"clientId == %@", clientId]];
+            [removedSet enumerateObjectsUsingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
+                [visiableContacts removeObject:obj];
+            }];
+        }];
+        _visiableContacts = [visiableContacts copy];
+    }
+    return _visiableContacts;
+}
+
 #pragma mark -
 #pragma mark - Setter Method
 
@@ -123,10 +178,19 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
         searchBar.delegate = self;
         searchBar.placeholder = @"搜索";
         _searchBar = searchBar;
-        //xianhui comment
         //self.tableView.tableHeaderView = _searchBar;
     }
     return _searchBar;
+}
+
+- (void)setNeedReloadDataSource:(BOOL)needReloadDataSource {
+    _needReloadDataSource = needReloadDataSource;
+    if (needReloadDataSource) {
+        _originSections = nil;
+        _visiableUserIds = nil;
+        _visiableContacts = nil;
+        _numberOfSectionsInTableView = nil;
+    }
 }
 
 #pragma mark -
@@ -135,7 +199,6 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"联系人";
-    //xianhui comment
     //self.tableView.tableHeaderView = self.searchBar;
     self.tableView.tableFooterView = [[UIView alloc] init];
     NSBundle *bundle = [NSBundle bundleForClass:[LCChatKit class]];
@@ -156,34 +219,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
                                                                                         action:@selector(doneBarButtonItemPressed:)];
         self.navigationItem.rightBarButtonItem = doneButtonItem;
     }
-    /**
-     *   这里不考虑查询人数与返回人数不一致的情况，比如查询100人，服务器只返回一人，那么也只显示一人，其余99人不予显示
-     */
-    if (!self.contacts || self.contacts.count == 0) {
-       LCCKHUDActionBlock theHUDActionBlock = [LCCKUIService sharedInstance].HUDActionBlock;
-        if (theHUDActionBlock) {
-            theHUDActionBlock(self, nil, @"获取联系人信息...", LCCKMessageHUDActionTypeShow);
-        }
-        [[LCChatKit sharedInstance] getProfilesInBackgroundForUserIds:self.userIds callback:^(NSArray<id<LCCKUserDelegate>> *users, NSError *error) {
-            if (theHUDActionBlock) {
-                theHUDActionBlock(self, nil, nil, LCCKMessageHUDActionTypeHide);
-            }
-            if (users.count > 0) {
-                if (theHUDActionBlock) {
-                    theHUDActionBlock(self, nil, @"获取成功", LCCKMessageHUDActionTypeSuccess);
-                }
-                self.contacts = [NSArray arrayWithArray:users];
-                self.originSections = nil;
-                dispatch_async(dispatch_get_main_queue(),^{
-                    [self.tableView reloadData];
-                });
-            } else {
-                if (theHUDActionBlock) {
-                    theHUDActionBlock(self, nil, @"获取失败", LCCKMessageHUDActionTypeError);
-                }
-            }
-        }];
-    }
+
     !self.viewDidLoadBlock ?: self.viewDidLoadBlock(self);
 }
 
@@ -219,7 +255,10 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self reloadData];
+//    [self _reloadData];
+    if (!_contacts || _contacts.count == 0) {
+        [self forceReloadByUserId];
+    }
     !self.viewDidAppearBlock ?: self.viewDidAppearBlock(self, animated);
 }
 
@@ -228,6 +267,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
     if (self.mode == LCCKContactListModeMultipleSelection) {
         //  Return an array of selectedContacts
         [self selectedContactsCallback](self, [self.selectedContacts copy]);
+
         return;
     }
     !self.viewWillDisappearBlock ?: self.viewWillDisappearBlock(self, animated);
@@ -235,7 +275,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    _originSections = nil;
+    self.needReloadDataSource = YES;
     !self.viewDidDisappearBlock ?: self.viewDidDisappearBlock(self, animated);
 }
 
@@ -251,12 +291,20 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 #pragma mark - tableview
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return (NSInteger)[self sortedSectionTitlesForTableView:tableView].count;
+    if (![tableView isEqual:self.searchDisplayController.searchResultsTableView]) {
+        if (_numberOfSectionsInTableView > 0) {
+            return _numberOfSectionsInTableView;
+        }
+        _numberOfSectionsInTableView = [self sortedSectionTitlesForTableView:tableView].count;
+        return _numberOfSectionsInTableView;
+    }
+    NSInteger numberOfSectionsInTableView = [self sortedSectionTitlesForTableView:tableView].count;
+    return numberOfSectionsInTableView;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSString *sectionKey = [self sortedSectionTitlesForTableView:tableView][(NSUInteger)section];
-    NSArray *array = [self currentSectionsForTableView:tableView][sectionKey];
+    NSSet *array = [self currentSectionsForTableView:tableView][sectionKey];
     return (NSInteger)array.count;
 }
 
@@ -280,7 +328,6 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
         name = contact_.name ?: contact_.clientId;
         clientId = contact_.clientId;
     }
-    [self contactAtIndexPath:indexPath tableView:tableView];
     [cell configureWithAvatarURL:avatarURL title:name subtitle:nil model:self.mode];
     BOOL isChecked = NO;
     if (self.mode == LCCKContactListModeSingleSelection) {
@@ -353,7 +400,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
             self.selectedContact = clientId;
         }
         [self.searchController setActive:NO animated:NO];
-        [self reloadData:tableView];
+        [self _reloadData:tableView];
         return;
     }
     if (self.mode == LCCKContactListModeMultipleSelection) {
@@ -366,13 +413,13 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
         } else {
             [self.selectedContacts removeObject:clientId];
         }
-        [self reloadData:tableView];
+        [self _reloadData:tableView];
         return;
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.searchController setActive:NO animated:NO];
     self.selectedContact = clientId;
-    [self reloadData:tableView];
+    [self _reloadData:tableView];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -392,12 +439,73 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
     return UITableViewCellEditingStyleDelete;
 }
 
+- (void)setUserIds:(NSSet<NSString *> *)userIds {
+    _userIds = [userIds copy];
+    [self forceReloadByUserId];
+}
+
+- (NSSet *)userIdsFrom:(NSSet *)contacts {
+    NSMutableSet *userIds = [NSMutableSet setWithCapacity:contacts.count];
+    [contacts enumerateObjectsUsingBlock:^(id<LCCKUserDelegate> _Nonnull contact, BOOL * _Nonnull stop) {
+        [userIds addObject:contact.clientId];
+    }];
+    return [userIds copy];
+}
+
+- (void)setContacts:(NSSet<LCCKContact *> *)contacts {
+    _contacts = [contacts copy];
+    _userIds = [self userIdsFrom:contacts];
+    [self forceReloadByContacts];
+}
+
+- (void)forceReloadByContacts {
+    self.needReloadDataSource = YES;
+}
+
+- (void)forceReloadByUserId {
+    if (!_userIds || _userIds.count == 0) {
+        return;
+    }
+    /**
+     *   这里不考虑查询人数与返回人数不一致的情况，比如查询100人，服务器只返回一人，那么也只显示一人，其余99人不予显示
+     */
+    LCCKHUDActionBlock theHUDActionBlock = [LCCKUIService sharedInstance].HUDActionBlock;
+    if (theHUDActionBlock) {
+        theHUDActionBlock(self, nil, @"获取联系人信息...", LCCKMessageHUDActionTypeShow);
+    }
+    [[LCChatKit sharedInstance] getProfilesInBackgroundForUserIds:_userIds callback:^(NSArray<id<LCCKUserDelegate>> *users, NSError *error) {
+        if (theHUDActionBlock) {
+            theHUDActionBlock(self, nil, nil, LCCKMessageHUDActionTypeHide);
+        }
+        if (users.count > 0) {
+            if (theHUDActionBlock) {
+                theHUDActionBlock(self, nil, @"获取成功", LCCKMessageHUDActionTypeSuccess);
+            }
+            self.contacts = [NSSet setWithArray:users];
+        } else {
+            //在添加 UserIds（ClientIds） 的情况下，但获取用户信息失败的情况下，也刷新，至少展示 UserIds（ClientIds）。
+            self.needReloadDataSource = YES;
+            if (theHUDActionBlock) {
+                theHUDActionBlock(self, nil, @"获取失败", LCCKMessageHUDActionTypeError);
+            }
+        }
+        [self.tableView reloadData];
+    }];
+}
+
 - (void)deleteClientId:(NSString *)clientId {
-    NSMutableArray<LCCKContact *> *array = [NSMutableArray arrayWithArray:self.contacts];
-    [array removeObjectsInArray:[array filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"clientId == %@", clientId]]];
-    NSAssert(self.contacts.count > array.count, @"self.contacts.count <= array.count?");
-    self.contacts = [array copy];
-    self.originSections = nil;
+    NSMutableSet<LCCKContact *> *allMutableSet = [NSMutableSet setWithSet:_contacts];
+    NSSet *deleteSet = [allMutableSet filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"clientId == %@", clientId]];
+    [deleteSet enumerateObjectsUsingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
+        [allMutableSet removeObject:obj];
+    }];
+    if (_contacts.count == allMutableSet.count) {
+         NSMutableSet<LCCKContact *> *array = [NSMutableSet setWithSet:_userIds];
+        [array removeObject:clientId];
+        self.userIds = [array copy];
+    } else {
+        self.contacts = [allMutableSet copy];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -419,7 +527,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
                                                                              BOOL delegateSuccess = self.deleteContactCallback(self, peerId);
                                                                              if (delegateSuccess) {
                                                                                  [self deleteClientId:peerId];
-                                                                                 [self reloadDataAfterDeleteData:tableView];
+                                                                                 [self _reloadDataAfterDeleteData:tableView];
                                                                              }
                                                                          }
                                                                      }];
@@ -441,47 +549,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
     return self.originSections;
 }
 
-- (NSArray *)excludedUserNames {
-    if (!_excludedUserNames) {
-        NSArray<id<LCCKUserDelegate>> *excludedUsers = [[LCChatKit sharedInstance] getCachedProfilesIfExists:self.excludedUserIds error:nil];
-//        if (excludedUsers.count > 0) {
-            NSMutableArray *excludedUserNames = [NSMutableArray arrayWithCapacity:excludedUsers.count];
-            [excludedUsers enumerateObjectsUsingBlock:^(id<LCCKUserDelegate>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                @try {
-                    if (obj.name) {
-                        [excludedUserNames addObject:obj.name];
-                    } else {
-                        [excludedUserNames addObject:obj.clientId];
-                    }
-                    
-                } @catch (NSException *exception) {}
-            }];
-            if (excludedUsers.count > 0) {
-                _excludedUserNames = [excludedUserNames copy];
-            } else {
-                _excludedUserNames = [_excludedUserIds copy];
-            }
-//        } else {
-//            NSString *formatString = @"\n\n\
-//            ------ BEGIN NSException Log ---------------\n \
-//            class name: %@                              \n \
-//            ------line: %@                              \n \
-//            ----reason: %@                              \n \
-//            ------ END -------------------------------- \n\n";
-//            NSString *reason = [NSString stringWithFormat:formatString,
-//                                @(__PRETTY_FUNCTION__),
-//                                @(__LINE__),
-//                                @"Before init LCCKContactListViewController, You should make sure all the user profiles are prepared."];
-//            //手动创建一个异常导致的崩溃事件 http://is.gd/EfVfN0
-//            @throw [NSException exceptionWithName:NSGenericException
-//                                           reason:reason
-//                                         userInfo:nil];
-//        }
-    }
-    return _excludedUserNames;
-}
-
-- (NSArray *)contactsFromContactsOrUserIds:(NSArray *)contacts userIds:(NSArray *)userIds{
+- (NSSet *)contactsFromContactsOrUserIds:(NSSet *)contacts userIds:(NSSet *)userIds{
     if (contacts.count > 0) {
         return contacts;
     } else {
@@ -489,9 +557,9 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
     }
 }
 
-- (NSMutableDictionary *)sortedSectionForUserNames:(NSArray *)contactsOrUserNames {
+- (NSMutableDictionary *)sortedSectionForUserNames:(NSSet *)contactsOrUserNames {
     NSMutableDictionary *originSections = [NSMutableDictionary dictionary];
-    [contactsOrUserNames enumerateObjectsUsingBlock:^(id  _Nonnull contactOrUserName, NSUInteger idx, BOOL * _Nonnull stop) {
+    [contactsOrUserNames enumerateObjectsUsingBlock:^(id  _Nonnull contactOrUserName, BOOL * _Nonnull stop) {
         NSString *userName;
         LCCKContact *contact;
         if ([contactOrUserName isKindOfClass:[NSString class]]) {
@@ -500,9 +568,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
             contact = (LCCKContact *)contactOrUserName;
             userName = contact.name ?: contact.clientId;
         }
-        if ([self.excludedUserNames containsObject:userName]) {
-            return;
-        }
+
         NSString *indexKey = [self indexTitleForName:userName];
         NSMutableArray *names = originSections[indexKey];
         if (!names) {
@@ -523,7 +589,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 
 - (NSDictionary *)originSections {
     if (!_originSections) {
-        _originSections = [self sortedSectionForUserNames:[self contactsFromContactsOrUserIds:self.contacts userIds:self.userIds]];
+        _originSections = [self sortedSectionForUserNames:[self contactsFromContactsOrUserIds:self.visiableContacts userIds:self.visiableUserIds]];
     }
     return _originSections;
 }
@@ -561,26 +627,25 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
     !self.viewDidDismissBlock ?: self.viewDidDismissBlock(self);
 }
 
-- (void)refresh {
-    //TODO: add refesh
-}
-
-- (void)reloadDataAfterDeleteData:(UITableView *)tableView {
+- (void)_reloadDataAfterDeleteData:(UITableView *)tableView {
     [tableView reloadData];
-    [self reloadData:tableView];
+    [self _reloadData:tableView];
 }
 
 - (void)reloadAllTableViewData:(UITableView *)tableView {
-    [self reloadData:tableView];
-    [self reloadData:self.tableView];
+    [self _reloadData:tableView];
+    [self _reloadData:self.tableView];
 }
 
-- (void)reloadData:(UITableView *)tableView {
+/*!
+ *  don't want to reload sections while reloading cells.
+ */
+- (void)_reloadData:(UITableView *)tableView {
     [tableView reloadRowsAtIndexPaths:[tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
 }
 
-- (void)reloadData {
-    [self reloadData:self.tableView];
+- (void)_reloadData {
+    [self _reloadData:self.tableView];
 }
 
 #pragma clang diagnostic push
@@ -593,27 +658,36 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 }
 
 - (void)searchDisplayController:(UISearchDisplayController *)controller didHideSearchResultsTableView:(UITableView *)tableView {
+    
     [self reloadAllTableViewData:tableView];
 }
 
-//xianhui comment 修复搜索框frame变大BUG.
-- (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller {
-    
-    self.searchController.searchBar.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 44);
-}
 
 - (void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller {
     UIButton *cancelButton;
     UIView *topView = self.searchBar.subviews[0];
     for (UIView *subView in topView.subviews) {
         if ([subView isKindOfClass:NSClassFromString(@"UINavigationButton")]) {
-            cancelButton = (UIButton*)subView;
+            cancelButton = (UIButton *)subView;
         }
     }
     if (cancelButton) {
         [cancelButton setTitle:LCCKLocalizedStrings(@"done") forState:UIControlStateNormal];
     }
 }
+
+//xianhui searchbar dismiss , reset searchbar frame
+- (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller {
+    
+    self.searchController.searchBar.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 44);
+
+    //[self reSetSearchBar];
+}
+
+- (void) reSetSearchBar {
+    
+}
+
 
 #pragma mark - UISearchDisplayDelegate
 
@@ -627,6 +701,9 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
     return YES;
 }
 
+
+
+
 #pragma clang diagnostic pop
 
 - (void)filterContentForSearchText:(NSString *)searchString {
@@ -637,14 +714,15 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
     // example if searchItems contains "iphone 599 2007":
     //      name CONTAINS[c] "lanmaq"
     //      id CONTAINS[c] "1568689942"
-    if (!self.contacts) {
+    if (!self.visiableContacts) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS %@", searchString];
-        self.searchUserIds = [self.userIds filteredArrayUsingPredicate:predicate];
+        self.searchUserIds = [self.visiableUserIds filteredSetUsingPredicate:predicate];
         self.searchContacts = nil;
         return;
     }
-    NSMutableArray *searchResults = [self.contacts mutableCopy];
-    
+    NSMutableSet *searchResults = [self.visiableContacts mutableCopy];
+
+
     NSMutableArray *andMatchPredicates = [NSMutableArray array];
     NSMutableArray *searchItemsPredicate = [NSMutableArray array];
     
@@ -691,8 +769,8 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
     // match up the fields of the Product object
     NSCompoundPredicate *finalCompoundPredicate =
     [NSCompoundPredicate andPredicateWithSubpredicates:andMatchPredicates];
-    self.searchContacts = [[searchResults filteredArrayUsingPredicate:finalCompoundPredicate] mutableCopy];
-    [self reloadData];
+    self.searchContacts = [searchResults filteredSetUsingPredicate:finalCompoundPredicate];
+    [self _reloadData];
 }
 
 @end

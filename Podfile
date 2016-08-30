@@ -1,16 +1,17 @@
-platform :ios, '8.0'
+platform :ios, ‘9.0’
 use_frameworks!
 
 target 'XianHui' do
-pod 'AVOSCloudCrashReporting'
-pod 'ChatKit','~> 0.4.2'
+pod 'ChatKit',  '~> 0.6.0’
 pod 'CTAssetsPickerController',  '~> 3.3.0'
 pod 'DZNEmptyDataSet'
 pod 'TWMessageBarManager'
 pod 'MWPhotoBrowser'
 pod 'UITextView+Placeholder', '~> 1.2'
 pod 'BKPasscodeView'
+pod 'UAProgressView'
 
+pod 'ValueStepper'
 pod 'Palau', '~> 1.0'
 pod 'SwiftString'
 pod 'IQKeyboardManagerSwift'

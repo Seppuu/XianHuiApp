@@ -1,1 +1,0 @@
-../../../ChatKit/ChatKit/Class/Module/Conversation/Model/AVIMConversation+LCCKAddition.h

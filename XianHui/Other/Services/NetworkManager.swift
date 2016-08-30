@@ -69,6 +69,64 @@ class NetworkManager {
         baseRequestWith(urlString, dict: dict, completion: completion)
     }
     
+    
+    func updateUserAvatarWith(avatar:UIImage,completion:DDResultHandler) {
+        
+        let dict = [
+            "token":Defaults.userToken.value!
+        ]
+        
+        let newDict = generatePostDictWithBaseDictOr(dict)
+        
+        let urlString = updateAvatarURL
+        
+        let zipData = UIImageJPEGRepresentation(avatar, 0.1)
+        
+        Alamofire.upload(.POST, urlString, multipartFormData: { (multipartFormData) in
+            
+            //json dict
+            for (key, value) in newDict {
+                let str = String(value)
+                multipartFormData.appendBodyPart(data: str.dataUsingEncoding(NSUTF8StringEncoding)!, name: key)
+            }
+            
+            //add iamge data if need
+            if zipData != nil {
+                multipartFormData.appendBodyPart(data: zipData!, name: "avator", fileName: "avator.jpg", mimeType: "image/jpg")
+            }
+            
+            
+        }) { (encodingResult) in
+            
+            switch encodingResult {
+            case .Success(let upload, _, _ ):
+                
+                upload.responseJSON(completionHandler: { (response) in
+                    
+                    let json = JSON(response.result.value!)
+                    
+                    if json["status"].string == "ok" {
+                        let avatarUrlString = json["data"]
+                        completion(success: true, json: avatarUrlString,error: nil)
+                    }
+                    else {
+                        let msg = self.getErrorMsgFrom(json)
+                        completion(success: false, json: nil,error: msg)
+                    }
+                    
+                })
+                
+                
+            case .Failure(let encodingError):
+                print("Failure")
+                print(encodingError)
+                completion(success: false, json: nil,error:"请求失败")
+            }
+            
+        }
+        
+    }
+    
     //完善用户信息
     func updateUserInfo(with firstName:String,lastName:String,avatarData:NSData?,completion:DDResultHandler) {
         

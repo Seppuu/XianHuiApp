@@ -2,12 +2,11 @@
 //  LCCKChatLocationMessageCell.m
 //  LCCKChatExample
 //
-//  Created by ElonChan ( https://github.com/leancloud/ChatKit-OC ) on 15/11/17.
+//  v0.6.0 Created by ElonChan (微信向我报BUG:chenyilong1010) ( https://github.com/leancloud/ChatKit-OC ) on 15/11/17.
 //  Copyright © 2015年 https://LeanCloud.cn . All rights reserved.
 //
 
 #import "LCCKChatLocationMessageCell.h"
-#import "Masonry.h"
 #import "UIImage+LCCKExtension.h"
 
 @interface LCCKChatLocationMessageCell ()
@@ -54,6 +53,8 @@
     [self.messageContentView addSubview:self.locationImageView];
     [self.messageContentView addSubview:self.locationAddressOverlay];   
     [super setup];
+    [self addGeneralView];
+
 }
 
 - (void)singleTaplocationImageViewGestureRecognizerHandler:(UITapGestureRecognizer *)tapGestureRecognizer {
@@ -93,6 +94,17 @@
         [_locationAddressOverlay addSubview:self.locationAddressLabel = progressLabel];
     }
     return _locationAddressOverlay;
+}
+
+#pragma mark -
+#pragma mark - LCCKChatMessageCellSubclassing Method
+
++ (void)load {
+    [self registerSubclass];
+}
+
++ (AVIMMessageMediaType)classMediaType {
+    return kAVIMMessageMediaTypeLocation;
 }
 
 @end

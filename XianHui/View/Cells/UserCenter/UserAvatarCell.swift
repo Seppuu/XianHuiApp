@@ -95,8 +95,8 @@ class UserAvatarCell: UITableViewCell {
         if edit {
             avatarView.userInteractionEnabled = true
             UIView.animateWithDuration(0.2, animations: {
-                self.nameLabel.alpha = 0.0
-                self.levelTextLabel.alpha = 0.0
+//                self.nameLabel.alpha = 0.0
+//                self.levelTextLabel.alpha = 0.0
                 self.editButton.setTitle("完成", forState: .Normal)
                 
                 self.cancelButton.alpha = 1.0
@@ -108,8 +108,8 @@ class UserAvatarCell: UITableViewCell {
                     
                    UIView.animateWithDuration(0.2, animations: { 
                     
-                    self.firstNameField.alpha = 1.0
-                    self.secondNameField.alpha = 1.0
+//                    self.firstNameField.alpha = 1.0
+//                    self.secondNameField.alpha = 1.0
                     
                    })
                     
@@ -122,8 +122,8 @@ class UserAvatarCell: UITableViewCell {
             
             avatarView.userInteractionEnabled = false
             UIView.animateWithDuration(0.2, animations: {
-                self.firstNameField.alpha = 0.0
-                self.secondNameField.alpha = 0.0
+//                self.firstNameField.alpha = 0.0
+//                self.secondNameField.alpha = 0.0
                 
                 self.cancelButton.alpha = 0.0
                 

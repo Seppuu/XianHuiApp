@@ -19,7 +19,7 @@ class HelperVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        listOfHelper = [Helper(),Helper(),Helper()]
+        listOfHelper = [Helper(),Helper()]
         
         setTableView()
         
@@ -71,19 +71,20 @@ extension HelperVC:UITableViewDelegate,UITableViewDataSource {
         let hepler = listOfHelper[indexPath.row]
         
         if indexPath.row == 0 {
-            cell.pushTimeLabel.text = "21:30"
-            cell.nameLabel.text     = "日报表"
-            cell.dayTimeLabel.text  = "8月11号"
-            cell.descLabel.text     = "今日的公司运营状况是...."
-            cell.middleImageView.backgroundColor = UIColor ( red: 0.1976, green: 0.5842, blue: 0.6739, alpha: 1.0 )
-        }
-        else {
-            
             cell.pushTimeLabel.text = hepler.pushTime
             cell.nameLabel.text     = hepler.name
             cell.dayTimeLabel.text  = hepler.dayTime
             cell.descLabel.text     = hepler.desc
             cell.middleImageView.backgroundColor = UIColor ( red: 0.1176, green: 0.7176, blue: 0.502, alpha: 1.0 )
+            
+        }
+        else {
+            
+            cell.pushTimeLabel.text = "21:30"
+            cell.nameLabel.text     = "日报表"
+            cell.dayTimeLabel.text  = "8月11号"
+            cell.descLabel.text     = "今日的公司运营状况是...."
+            cell.middleImageView.backgroundColor = UIColor ( red: 0.1976, green: 0.5842, blue: 0.6739, alpha: 1.0 )
         }
 
         return cell
@@ -92,14 +93,16 @@ extension HelperVC:UITableViewDelegate,UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         if indexPath.row == 0 {
-            let vc = DailyFormVC()
-            vc.title = "日报表"
-            navigationController?.pushViewController(vc, animated: true)
-        }
-        else {
             let vc = ApproveVC()
             vc.title = "折扣审批"
             navigationController?.pushViewController(vc, animated: true)
+            
+        }
+        else {
+            let vc = DailyFormVC()
+            vc.title = "日报表"
+            navigationController?.pushViewController(vc, animated: true)
+
         }
         
 
