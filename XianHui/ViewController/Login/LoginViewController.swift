@@ -177,7 +177,7 @@ extension LoginViewController:UITableViewDelegate,UITableViewDataSource {
         
         let text2 = "18652805163"
         
-        User.loginWith(text1, passWord: "mybook", usertype: UserType.Employee) { (user, error) in
+        User.loginWith(text2, passWord: "mybook", usertype: UserType.Employee) { (user, error) in
             
             if error == nil {
                 print("login success")

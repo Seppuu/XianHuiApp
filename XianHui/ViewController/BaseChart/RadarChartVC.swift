@@ -24,9 +24,9 @@ class RadarChartVC: BaseChartViewController {
     
     var cellId = "typeCell"
     
-    var names = ["现金","实操","产品","客流","员工"]
+    var names = ["现金","实操","产品","客流","客单价","人均项目数","项目均价"]
     
-    var numbers = ["131,000","8,400","2,300","13","1,213"]
+    var numbers = ["131,000","8,400","2,300","13","2,384","2.3","1,037"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -316,7 +316,13 @@ class RadarChartVC: BaseChartViewController {
             controller2.title = "客流"
         case 4:
             
-            controller2.title = "员工"
+            controller2.title = "客单价"
+        case 5:
+            
+            controller2.title = "人均项目数"
+        case 6:
+            
+            controller2.title = "项目均价"
         default:
             break;
         }
@@ -349,7 +355,7 @@ extension RadarChartVC:UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return names.count
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
