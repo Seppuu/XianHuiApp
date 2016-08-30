@@ -19,7 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         ChatKitExample.invokeThisMethodInDidFinishLaunching()
         
-        
         let currentClientId = Defaults.clientId.value!
         if currentClientId != "" {
 
