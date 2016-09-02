@@ -228,6 +228,35 @@ extension NetworkManager {
 }
 
 
+extension NetworkManager {
+    
+    func getCustomerListWith(type:CustomerLisType,completion:DDResultHandler) {
+        
+        let urlString = GetCustomerListUrl
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!
+        ]
+        
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+    }
+    
+    func getCustomerDetailWith(id:Int,type:CustomerLisType,completion:DDResultHandler) {
+        
+        let urlString = GetCustomerDetailUrl
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!,
+            "customer_id":id,
+            "type":type.rawValue
+        ]
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+    }
+    
+}
+
 //MARK:系统管理
 extension NetworkManager {
     

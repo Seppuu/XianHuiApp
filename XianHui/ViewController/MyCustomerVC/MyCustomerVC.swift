@@ -7,7 +7,16 @@
 //
 
 import UIKit
+import SwiftyJSON
 
+enum CustomerLisType:String {
+    case All = "all"
+    case Plan = "plan"
+    case Advice = "advice"
+    case Service = "service"
+}
+
+//待计划,待咨询,待售后,全部.
 class MyCustomerVC: BaseViewController {
     
     var tableView:UITableView!
@@ -18,12 +27,14 @@ class MyCustomerVC: BaseViewController {
     
     let cellId = "CustomerCell"
     
+    var type = CustomerLisType.All
+    
     var listOfCustommer = [Customer]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        listOfCustommer = getCustomList()
+        getCustomList()
         view.backgroundColor = UIColor.whiteColor()
         setTableView()
     }
@@ -33,56 +44,73 @@ class MyCustomerVC: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func getCustomList() -> [Customer]  {
+    func getCustomList() {
+        
+            NetworkManager.sharedManager.getCustomerListWith(type) { (success, json, error) in
+                
+                if success == true {
+                    
+                    let jsonArr = json!.array!
+                    self.listOfCustommer = self.makeCustomerListWith(jsonArr)
+                    
+                    self.tableView.reloadData()
+                    
+                }
+                else {
+                    
+                }
+                
+            }
+            
+        
+    }
+    
+    func makeCustomerListWith(dataArr:[JSON]) -> [Customer] {
         
         var list = [Customer]()
         
-        for i in 0..<6 {
+        for data in dataArr {
             
             let customer = Customer()
-            customer.name = "郑霞\(i) vip\(i)"
-            customer.avatarUrlString = ""
+            customer.id = data["customer_id"].int!
+            customer.guid = data["guid"].string!
+            customer.name = data["fullname"].string!
+            customer.avatarUrlString = data["avator_url"].string!
             
-            customer.happyLevel = "满意度:5分"
+            customer.happyLevel = "满意度:\(data["score"].int!)"
+            
+            
             customer.lastProject = "天地藏浴 冬阴功补"
             customer.lastProduction = "牛樟芝 益畅菌"
             customer.time = "4天"
             
-            switch i {
-            case 0,1:
-                customer.stage = "待咨询"
-            case 2,3:
-                customer.stage = "待计划"
-            case 4,5:
-                customer.stage = "待售后"
+
+            let type = data["type"].string!
+            switch  type {
+            case "plan":
+                customer.type = CustomerLisType.Plan
                 
-            default:break;
-            }
-            
-            switch title! {
-            case "全部":
                 list.append(customer)
-            case "待咨询":
-                if customer.stage == "待咨询" {list.append(customer)}
                 
-            case "待计划":
-                if customer.stage == "待计划" {list.append(customer)}
-            case "待售后":
-                if customer.stage == "待售后" {list.append(customer)}
+            case "advice":
+                customer.type = CustomerLisType.Advice
+                list.append(customer)
+            
+            case "service":
+                customer.type = CustomerLisType.Service
+                list.append(customer)
             default:
                 break;
             }
             
             
-            
-            
         }
         
-        
-        
         return list
-        
+
     }
+    
+    
     
     func setTableView() {
         
@@ -125,7 +153,7 @@ extension MyCustomerVC:UITableViewDelegate,UITableViewDataSource {
         cell.avatarView.layer.masksToBounds = true
         
         cell.nameLabel.text = customer.name
-        cell.stageLabel.text = customer.stage
+        cell.stageLabel.text = customer.type.rawValue
         cell.happyLevel.text = customer.happyLevel
         
         return cell
@@ -137,17 +165,7 @@ extension MyCustomerVC:UITableViewDelegate,UITableViewDataSource {
         
         let customer = listOfCustommer[indexPath.row]
         let vc = CustomerProfileVCViewController()
-        
-        switch customer.stage {
-        case "待计划":
-            vc.workType = .plan
-        case "待咨询":
-            vc.workType = .chat
-        case "待售后":
-            vc.workType = .track
-        default:
-            break;
-        }
+        vc.customer = customer
         
         parentVC?.presentViewController(vc, animated: true, completion: nil)
         

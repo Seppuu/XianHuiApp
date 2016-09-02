@@ -9,10 +9,13 @@
 import UIKit
 
 class Customer: NSObject {
-
+    
+    var id:Int!
+    //全局唯一ID,用于IM
+    var guid = ""
     var name = ""
     var avatarUrlString = ""
-    var stage = "" //消费阶段 (待计划,待咨询,待售后)
+    var type:CustomerLisType!
     var happyLevel = "6分"
     
     var lastProject = "" //最近的项目
