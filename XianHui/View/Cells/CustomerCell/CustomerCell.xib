@@ -31,16 +31,6 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="待咨询" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WOb-l8-8Fj">
-                        <rect key="frame" x="270" y="7" width="42" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="21" id="37I-Ro-hU1"/>
-                            <constraint firstAttribute="width" constant="42" id="9cR-Zg-vhW"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" red="1" green="0.50080846262005241" blue="0.81620089440016397" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="满意度: 8分" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyV-4D-Joc">
                         <rect key="frame" x="66" y="43" width="70" height="14"/>
                         <constraints>
@@ -51,16 +41,26 @@
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="待咨询" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WOb-l8-8Fj">
+                        <rect key="frame" x="212" y="21" width="100" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="wKZ-Yw-Esa"/>
+                            <constraint firstAttribute="width" constant="100" id="xWX-YM-FcT"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="nyS-AB-b1g" firstAttribute="leading" secondItem="e1O-BF-9I4" secondAttribute="trailing" constant="8" id="7nZ-PA-M1d"/>
-                    <constraint firstItem="WOb-l8-8Fj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="7rL-aH-CZ8"/>
                     <constraint firstItem="e1O-BF-9I4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="9A5-zn-kES"/>
-                    <constraint firstAttribute="trailing" secondItem="WOb-l8-8Fj" secondAttribute="trailing" constant="8" id="Qn2-9f-72m"/>
+                    <constraint firstAttribute="trailing" secondItem="WOb-l8-8Fj" secondAttribute="trailing" constant="8" id="Hpg-rQ-q12"/>
                     <constraint firstItem="e1O-BF-9I4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="RFt-E0-R7S"/>
                     <constraint firstAttribute="bottom" secondItem="yyV-4D-Joc" secondAttribute="bottom" constant="6.5" id="RQB-Vz-SJT"/>
                     <constraint firstItem="yyV-4D-Joc" firstAttribute="leading" secondItem="e1O-BF-9I4" secondAttribute="trailing" constant="8" id="U3K-fG-88T"/>
                     <constraint firstItem="nyS-AB-b1g" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="dNT-AG-XdK"/>
+                    <constraint firstItem="WOb-l8-8Fj" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="jRE-Ly-L2g"/>
                     <constraint firstAttribute="bottom" secondItem="e1O-BF-9I4" secondAttribute="bottom" constant="6.5" id="vxJ-CO-DGd"/>
                 </constraints>
             </tableViewCellContentView>

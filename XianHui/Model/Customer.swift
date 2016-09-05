@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftDate
 
 class Customer: NSObject {
     
@@ -18,11 +19,20 @@ class Customer: NSObject {
     var type:CustomerLisType!
     var happyLevel = "6分"
     
+    
+    var planned = "0"
+    
     var lastProject = "" //最近的项目
     var lastProduction = ""//最近的消费产品
     
     var time = "" //上次到店距今多久
+    //预约时间
+    var scheduleTime = ""
     
+    var scheduleDate:NSDate? {
+        return scheduleTime.toDate("yyyy-mm-dd")
+    }
+    var scheduleStatus = ""//预约状态
     
     var level = "VIP6"
     var sex   = "女"

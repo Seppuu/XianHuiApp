@@ -230,9 +230,10 @@ extension NetworkManager {
 
 extension NetworkManager {
     
-    func getCustomerListWith(type:CustomerLisType,completion:DDResultHandler) {
+    //计划顾客列表
+    func getCustomerPlanListWith(completion:DDResultHandler) {
         
-        let urlString = GetCustomerListUrl
+        let urlString = GetCustomerPlanListUrl
         
         let dict:JSONDictionary = [
             "token":Defaults.userToken.value!
@@ -241,6 +242,22 @@ extension NetworkManager {
         
         baseRequestWith(urlString, dict: dict, completion: completion)
     }
+    
+    //预约顾客列表
+    func getCustomerScheduleListWith(pageSize:Int,pageIndex:Int,completion:DDResultHandler) {
+        
+        let urlString = getCustomerScheduleListUrl
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!,
+            "pageSize":pageSize,
+            "pageNumber":pageIndex
+        ]
+        
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+    }
+    
     
     func getCustomerDetailWith(id:Int,type:CustomerLisType,completion:DDResultHandler) {
         

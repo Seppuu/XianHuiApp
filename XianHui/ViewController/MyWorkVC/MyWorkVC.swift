@@ -46,31 +46,24 @@ class MyWorkVC: BaseViewController,CAPSPageMenuDelegate {
         // Initialize view controllers to display and place in array
         var controllerArray : [UIViewController] = []
         
-        let controller1 = MyCustomerVC()
+        let controller1 = PlanningVC()
         
         controller1.parentNavigationController = self.navigationController
         controller1.parentVC = self
-        controller1.title = "全部"
+        controller1.title = "计划表"
         controllerArray.append(controller1)
         
-        let controller2 = MyCustomerVC()
-        controller2.title = "待计划"
+        let controller2 = ScheduleVC()
+        controller2.title = "预约表"
         controller2.parentNavigationController = self.navigationController
         controller2.parentVC = self
         controllerArray.append(controller2)
         
-        let controller3 = MyCustomerVC()
-        controller3.title = "待咨询"
-        controller3.parentNavigationController = self.navigationController
-        controller3.parentVC = self
-        controllerArray.append(controller3)
-        
-        let controller4 = MyCustomerVC()
-        controller4.title = "待售后"
-        controller4.parentNavigationController = self.navigationController
-        controller4.parentVC = self
-        controllerArray.append(controller4)
-        
+//        let controller3 = MyCustomerVC()
+//        controller3.title = "记录表"
+//        controller3.parentNavigationController = self.navigationController
+//        controller3.parentVC = self
+//        controllerArray.append(controller3)
         
         // Initialize scroll menu
         pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRectMake(0.0, 64, self.view.frame.width, self.view.frame.height - 64), pageMenuOptions: pageMenuParameters)

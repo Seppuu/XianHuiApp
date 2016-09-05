@@ -46,22 +46,22 @@ class MyCustomerVC: BaseViewController {
     
     func getCustomList() {
         
-            NetworkManager.sharedManager.getCustomerListWith(type) { (success, json, error) in
-                
-                if success == true {
-                    
-                    let jsonArr = json!.array!
-                    self.listOfCustommer = self.makeCustomerListWith(jsonArr)
-                    
-                    self.tableView.reloadData()
-                    
-                }
-                else {
-                    
-                }
-                
-            }
-            
+//            NetworkManager.sharedManager.getCustomerListWith(type) { (success, json, error) in
+//                
+//                if success == true {
+//                    
+//                    let jsonArr = json!.array!
+//                    self.listOfCustommer = self.makeCustomerListWith(jsonArr)
+//                    
+//                    self.tableView.reloadData()
+//                    
+//                }
+//                else {
+//                    
+//                }
+//                
+//            }
+//            
         
     }
     

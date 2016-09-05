@@ -44,12 +44,23 @@ let SaveDailyReportMaxVauleUrl = DDBaseUrl + "/rest/employee/setdailyreportsetti
 
 ///我的工作 -- 计划
 
-//获取顾客列表
-let GetCustomerListUrl = DDBaseUrl + "/rest/employee/getplancustomerlist"
+//获取计划顾客列表
+let GetCustomerPlanListUrl = DDBaseUrl + "/rest/employee/getplantable"
+
+
+//获取预约顾客列表
+let getCustomerScheduleListUrl = DDBaseUrl + "/rest/employee/getscheduletable"
 
 
 //获取某顾客明细
-let GetCustomerDetailUrl = DDBaseUrl + "/rest/employee/getplancustomerdetail"
+let GetCustomerDetailUrl = DDBaseUrl + "/rest/employee/getcustomerdetail"
+
+//获取顾客消费记录
+let GetCustomerConsumeUrl = DDBaseUrl + "/rest/employee/getcustomerconsumelist"
+
+//获取顾客预约记录
+let GetCustomerSchedulesUrl = DDBaseUrl + "/rest/employee/getcustomerschedulelist"
+
 
 /// 用户关系管理
 

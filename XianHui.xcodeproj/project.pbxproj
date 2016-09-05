@@ -55,6 +55,13 @@
 		37B7914E1D51CA780032C164 /* HeplerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37B7914C1D51CA780032C164 /* HeplerCell.xib */; };
 		37B791501D51D4230032C164 /* UITableView+DD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B7914F1D51D4230032C164 /* UITableView+DD.swift */; };
 		37B791531D51D7620032C164 /* ApproveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B791521D51D7620032C164 /* ApproveVC.swift */; };
+		37B79B491D7D088C00340C17 /* PlanningVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B79B481D7D088C00340C17 /* PlanningVC.swift */; };
+		37B79B4C1D7D10A300340C17 /* ScheduleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B79B4B1D7D10A300340C17 /* ScheduleVC.swift */; };
+		37B79B501D7D48E200340C17 /* CustomerLargeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B79B4E1D7D48E200340C17 /* CustomerLargeCell.swift */; };
+		37B79B511D7D48E200340C17 /* CustomerLargeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37B79B4F1D7D48E200340C17 /* CustomerLargeCell.xib */; };
+		37B79B551D7D4AB000340C17 /* CustomerProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B79B541D7D4AB000340C17 /* CustomerProfileVC.swift */; };
+		37B79B581D7D542F00340C17 /* ProjectPlanningVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B79B571D7D542F00340C17 /* ProjectPlanningVC.swift */; };
+		37B79B5B1D7D5A9E00340C17 /* ProjectPlannedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B79B5A1D7D5A9E00340C17 /* ProjectPlannedVC.swift */; };
 		37B961791D3F5044004F6F92 /* TaskList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37B961771D3F5044004F6F92 /* TaskList.storyboard */; };
 		37B9617A1D3F5044004F6F92 /* TaskListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B961781D3F5044004F6F92 /* TaskListVC.swift */; };
 		37B9617D1D3F5829004F6F92 /* CreateTaskVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B9617C1D3F5829004F6F92 /* CreateTaskVC.swift */; };
@@ -273,6 +280,13 @@
 		37B7914C1D51CA780032C164 /* HeplerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeplerCell.xib; sourceTree = "<group>"; };
 		37B7914F1D51D4230032C164 /* UITableView+DD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+DD.swift"; sourceTree = "<group>"; };
 		37B791521D51D7620032C164 /* ApproveVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApproveVC.swift; sourceTree = "<group>"; };
+		37B79B481D7D088C00340C17 /* PlanningVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanningVC.swift; sourceTree = "<group>"; };
+		37B79B4B1D7D10A300340C17 /* ScheduleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleVC.swift; sourceTree = "<group>"; };
+		37B79B4E1D7D48E200340C17 /* CustomerLargeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerLargeCell.swift; sourceTree = "<group>"; };
+		37B79B4F1D7D48E200340C17 /* CustomerLargeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomerLargeCell.xib; sourceTree = "<group>"; };
+		37B79B541D7D4AB000340C17 /* CustomerProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerProfileVC.swift; sourceTree = "<group>"; };
+		37B79B571D7D542F00340C17 /* ProjectPlanningVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectPlanningVC.swift; sourceTree = "<group>"; };
+		37B79B5A1D7D5A9E00340C17 /* ProjectPlannedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectPlannedVC.swift; sourceTree = "<group>"; };
 		37B961771D3F5044004F6F92 /* TaskList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TaskList.storyboard; sourceTree = "<group>"; };
 		37B961781D3F5044004F6F92 /* TaskListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListVC.swift; sourceTree = "<group>"; };
 		37B9617C1D3F5829004F6F92 /* CreateTaskVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTaskVC.swift; sourceTree = "<group>"; };
@@ -564,6 +578,7 @@
 			isa = PBXGroup;
 			children = (
 				37367B6B1D6AD8E900479E39 /* CustomerProfileVCViewController.swift */,
+				37B79B541D7D4AB000340C17 /* CustomerProfileVC.swift */,
 			);
 			path = CustomerProfileVC;
 			sourceTree = "<group>";
@@ -724,6 +739,47 @@
 				37B791521D51D7620032C164 /* ApproveVC.swift */,
 			);
 			path = ApproveVC;
+			sourceTree = "<group>";
+		};
+		37B79B471D7D087500340C17 /* PlanningVC */ = {
+			isa = PBXGroup;
+			children = (
+				37B79B481D7D088C00340C17 /* PlanningVC.swift */,
+			);
+			path = PlanningVC;
+			sourceTree = "<group>";
+		};
+		37B79B4A1D7D108200340C17 /* ScheduleVC */ = {
+			isa = PBXGroup;
+			children = (
+				37B79B4B1D7D10A300340C17 /* ScheduleVC.swift */,
+			);
+			path = ScheduleVC;
+			sourceTree = "<group>";
+		};
+		37B79B4D1D7D48BE00340C17 /* CustomerLargeCell */ = {
+			isa = PBXGroup;
+			children = (
+				37B79B4E1D7D48E200340C17 /* CustomerLargeCell.swift */,
+				37B79B4F1D7D48E200340C17 /* CustomerLargeCell.xib */,
+			);
+			path = CustomerLargeCell;
+			sourceTree = "<group>";
+		};
+		37B79B561D7D542200340C17 /* ProjectPlanningVC */ = {
+			isa = PBXGroup;
+			children = (
+				37B79B571D7D542F00340C17 /* ProjectPlanningVC.swift */,
+			);
+			path = ProjectPlanningVC;
+			sourceTree = "<group>";
+		};
+		37B79B591D7D5A9100340C17 /* ProjectPlannedVC */ = {
+			isa = PBXGroup;
+			children = (
+				37B79B5A1D7D5A9E00340C17 /* ProjectPlannedVC.swift */,
+			);
+			path = ProjectPlannedVC;
 			sourceTree = "<group>";
 		};
 		37B961761D3F5044004F6F92 /* TaskListVC */ = {
@@ -907,6 +963,7 @@
 		37BAB8F81D3E1059001E4680 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				37B79B4D1D7D48BE00340C17 /* CustomerLargeCell */,
 				37D46F7E1D6FD15E00A0BBCE /* GoodCell */,
 				37A76FE01D6D8D0200572B1D /* StepperCell */,
 				37A76FD71D6D7D8700572B1D /* ReMarkCell */,
@@ -1210,6 +1267,10 @@
 		37BAB9691D3E1059001E4680 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				37B79B591D7D5A9100340C17 /* ProjectPlannedVC */,
+				37B79B561D7D542200340C17 /* ProjectPlanningVC */,
+				37B79B4A1D7D108200340C17 /* ScheduleVC */,
+				37B79B471D7D087500340C17 /* PlanningVC */,
 				37A76FD41D6D371A00572B1D /* ProdDateSetVC */,
 				37367B7D1D6BDCF800479E39 /* ProjectListVC */,
 				37367B6A1D6AD56E00479E39 /* CustomerProfileVC */,
@@ -1711,6 +1772,7 @@
 				37BAB9AC1D3E1059001E4680 /* WorkCell.xib in Resources */,
 				37D46F871D6FD5D100A0BBCE /* GoodDetail.xib in Resources */,
 				37367B831D6BFED900479E39 /* chatTableViewCell.xib in Resources */,
+				37B79B511D7D48E200340C17 /* CustomerLargeCell.xib in Resources */,
 				370AAEA71D49F1B3000C64D1 /* UserNameCell.xib in Resources */,
 				37BAB9A81D3E1059001E4680 /* SubscriptionTopView.xib in Resources */,
 				37BAB9941D3E1059001E4680 /* ProfileCell.xib in Resources */,
@@ -1848,9 +1910,11 @@
 				37A76FD61D6D373300572B1D /* ProdDateSetVC.swift in Sources */,
 				37DFD2441D5D795700238A86 /* DailyFormVC.swift in Sources */,
 				378B17761D6C4A7B00758C13 /* Production.swift in Sources */,
+				37B79B551D7D4AB000340C17 /* CustomerProfileVC.swift in Sources */,
 				37BAB9D41D3E11B1001E4680 /* README.md in Sources */,
 				378E07641D461B2C00B67621 /* RadarChartVC.swift in Sources */,
 				37BAB9791D3E1059001E4680 /* AlbumSelectCell.swift in Sources */,
+				37B79B4C1D7D10A300340C17 /* ScheduleVC.swift in Sources */,
 				37BAB8B11D3E101C001E4680 /* UINavigationItem+DD.swift in Sources */,
 				37BAB8E91D3E1045001E4680 /* UIViewController+CYLTabBarControllerExtention.m in Sources */,
 				37367B7F1D6BDD1300479E39 /* ProjectListVC.swift in Sources */,
@@ -1902,9 +1966,11 @@
 				378E076A1D4757CC00B67621 /* XHBarChartView.swift in Sources */,
 				37BAB9E11D3E124E001E4680 /* DDIMConfig.swift in Sources */,
 				37BAB8C21D3E1040001E4680 /* NetworkManager.swift in Sources */,
+				37B79B501D7D48E200340C17 /* CustomerLargeCell.swift in Sources */,
 				37DFD2421D5C2B3C00238A86 /* MemberListVC.swift in Sources */,
 				37BAB9A91D3E1059001E4680 /* UserAvatarCell.swift in Sources */,
 				37C0C3A71D66BD4A002B8772 /* DEMODataSource.m in Sources */,
+				37B79B491D7D088C00340C17 /* PlanningVC.swift in Sources */,
 				37BAB9A71D3E1059001E4680 /* SubscriptionTopView.swift in Sources */,
 				37BAB9C11D3E1059001E4680 /* PieChartViewController.swift in Sources */,
 				37BAB9BD1D3E1059001E4680 /* NavigationController.swift in Sources */,
@@ -1919,6 +1985,7 @@
 				37C0C3A91D66BD4A002B8772 /* LCCKMapViewController.m in Sources */,
 				37BAB8E81D3E1045001E4680 /* CYLTabBarController.m in Sources */,
 				37BAB9B71D3E1059001E4680 /* PicksSheetView.swift in Sources */,
+				37B79B5B1D7D5A9E00340C17 /* ProjectPlannedVC.swift in Sources */,
 				37BAB9D71D3E11B1001E4680 /* AMPopTip+Entrance.m in Sources */,
 				37BAB9771D3E1059001E4680 /* AddFriendSearchCell.swift in Sources */,
 				372463B91D69F4180018CE37 /* Customer.swift in Sources */,
@@ -1931,6 +1998,7 @@
 				37BAB9B51D3E1059001E4680 /* InfoView.swift in Sources */,
 				37BAB8EE1D3E1045001E4680 /* Popover.swift in Sources */,
 				37BAB9BB1D3E1059001E4680 /* BaseViewController.swift in Sources */,
+				37B79B581D7D542F00340C17 /* ProjectPlanningVC.swift in Sources */,
 				37BAB9BF1D3E1059001E4680 /* BaseChartViewController.swift in Sources */,
 				37A76FDF1D6D8CBA00572B1D /* ANStepperView.m in Sources */,
 				37BAB8AE1D3E101C001E4680 /* UIFont+DD.swift in Sources */,
