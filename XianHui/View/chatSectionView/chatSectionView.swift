@@ -20,6 +20,10 @@ class chatSectionView: UIView {
     
     @IBOutlet weak var secondTagLabel: UILabel!
     
+    
+    @IBOutlet weak var dateLabel: UILabel!
+    
+    
     class func instanceFromNib() -> chatSectionView {
         
         return UINib(nibName: "chatSectionView", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! chatSectionView

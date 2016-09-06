@@ -67,13 +67,15 @@ class ScheduleVC: UIViewController {
     }
     var nextDate = ""
     
-    func getCustomList() {
+    func getCustomListWith(date:String) {
         
-        NetworkManager.sharedManager.getCustomerScheduleListWith(currentDate, days: 3) { (success, json, error) in
+        NetworkManager.sharedManager.getCustomerScheduleListWith(date, days: 3) { (success, json, error) in
             if success == true {
                 
                 self.nextDate = json!["nextDate"].string!
                 let jsonArr = json!["rows"].array!
+                self.listOfCustommerArr = [[Customer]]()
+                self.days = [String]()
                 self.listOfCustommerArr = self.makeCustomerListWith(jsonArr)
                 self.tableView.reloadData()
                 self.tableView.mj_header.endRefreshing()
@@ -94,7 +96,8 @@ class ScheduleVC: UIViewController {
         
         var lastDate = ""
         
-        for data in dataArr {
+        //做一下倒序排列.原来的顺序是反的
+        for data in dataArr.reverse() {
             
             let customer = Customer()
             customer.id = data["customer_id"].int!
@@ -102,9 +105,10 @@ class ScheduleVC: UIViewController {
             customer.name = data["fullname"].string!
             customer.avatarUrlString = data["avator_url"].string!
             
+            customer.projectTotal = data["project_total"].int!
             customer.scheduleTime = data["adate"].string!
             customer.scheduleStatus = data["status"].string!
-            
+            customer.scheduleStartTime = data["start_time"].string!
             //按照日期分组
             if customer.scheduleTime != lastDate {
                 //add new arr
@@ -132,7 +136,7 @@ class ScheduleVC: UIViewController {
                 
             })
             
-            listArr.append(list)
+            listArr.append(list.reverse())
         }
         
         
@@ -143,7 +147,27 @@ class ScheduleVC: UIViewController {
     
     func topRefresh() {
         
-         getCustomList()
+         getCustomListWith(currentDate)
+    }
+    
+    
+    func bottomRefresh() {
+        getCustomListWith(nextDate)
+    }
+    
+    func avatarTap(sender:UITapGestureRecognizer) {
+        
+        let point = sender.locationInView(tableView)
+        
+        let cellIndex = tableView.indexPathForRowAtPoint(point)!
+        
+        let customer = listOfCustommerArr[cellIndex.section][cellIndex.row]
+        
+        let vc = CustomerProfileVC()
+        vc.title = "详细资料"
+        vc.customer = customer
+        
+        self.parentNavigationController?.pushViewController(vc, animated: true)
     }
     
 }
@@ -163,10 +187,10 @@ extension ScheduleVC:UITableViewDelegate,UITableViewDataSource {
         
         let view = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 30))
         view.backgroundColor = UIColor.ddViewBackGroundColor()
-        let dayLabel = UILabel(frame: CGRect(x: 15, y: 5, width: 30, height: 20))
+        let dayLabel = UILabel(frame: CGRect(x: 15, y: 5, width: 150, height: 20))
         dayLabel.font = UIFont.systemFontOfSize(12)
         dayLabel.textColor = UIColor.darkGrayColor()
-        dayLabel.textAlignment = .Center
+        dayLabel.textAlignment = .Left
         dayLabel.text = days[section]
         view.addSubview(dayLabel)
         
@@ -174,7 +198,15 @@ extension ScheduleVC:UITableViewDelegate,UITableViewDataSource {
         rightLabel.font = UIFont.systemFontOfSize(12)
         rightLabel.textColor = UIColor.darkGrayColor()
         rightLabel.textAlignment = .Right
-        rightLabel.text = "3位会员 6个项目"
+        
+        
+        let customers = listOfCustommerArr[section]
+        var projectNumber = 0
+        
+        customers.forEach { projectNumber += $0.projectTotal }
+        
+        
+        rightLabel.text = "\(customers.count)位会员 \(projectNumber)个项目"
         view.addSubview(rightLabel)
         return view
     }
@@ -202,13 +234,19 @@ extension ScheduleVC:UITableViewDelegate,UITableViewDataSource {
         cell.avatarView.layer.cornerRadius = cell.avatarView.ddWidth/2
         cell.avatarView.layer.masksToBounds = true
         cell.happyLevel.textColor = UIColor ( red: 0.4377, green: 0.4377, blue: 0.4377, alpha: 1.0 )
-        cell.stageLabel.alpha = 0.0
+        
+        
+        cell.avatarView.userInteractionEnabled = true
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(ScheduleVC.avatarTap(_:)))
+        cell.avatarView.addGestureRecognizer(tap)
         
         let customer = listOfCustommerArr[indexPath.section][indexPath.row]
         
         cell.nameLabel.text = customer.name
         cell.happyLevel.text =  customer.scheduleStatus
-        
+        //开始时间+项目数
+        cell.stageLabel.text = customer.scheduleStartTime + "(\(customer.projectTotal))"
         
         
         return cell
@@ -216,12 +254,16 @@ extension ScheduleVC:UITableViewDelegate,UITableViewDataSource {
     }
     
     
+    
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        //let customer = listOfCustommer[indexPath.row]
-        let vc = CustomerProfileVC()
-        //vc.customer = customer
+        let customer = listOfCustommerArr[indexPath.section][indexPath.row]
 
+        
+        let vc = ProjectPlannedVC()
+        vc.title = "预约信息"
+        vc.customer = customer
         self.parentNavigationController?.pushViewController(vc, animated: true)
 
     }

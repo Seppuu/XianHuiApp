@@ -10,6 +10,7 @@
 		370AAEA61D49F1B3000C64D1 /* UserNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AAEA41D49F1B3000C64D1 /* UserNameCell.swift */; };
 		370AAEA71D49F1B3000C64D1 /* UserNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 370AAEA51D49F1B3000C64D1 /* UserNameCell.xib */; };
 		370AB0691D4AF6FE000C64D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 370AB0681D4AF6FE000C64D1 /* Assets.xcassets */; };
+		3710EC601D7E93CF005302E5 /* CustomerConsumeListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3710EC5F1D7E93CF005302E5 /* CustomerConsumeListVC.swift */; };
 		372463B41D69F11F0018CE37 /* MyWorkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372463B31D69F11F0018CE37 /* MyWorkVC.swift */; };
 		372463B71D69F3040018CE37 /* MyCustomerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372463B61D69F3040018CE37 /* MyCustomerVC.swift */; };
 		372463B91D69F4180018CE37 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372463B81D69F4180018CE37 /* Customer.swift */; };
@@ -18,7 +19,6 @@
 		372962991D40AF6500A947B4 /* BKPasscodeView.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3729629B1D40AF6500A947B4 /* BKPasscodeView.strings */; };
 		3729629D1D40B9E700A947B4 /* PasswordSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3729629C1D40B9E700A947B4 /* PasswordSettingVC.swift */; };
 		372A04221D4AF9260010D8E9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372A04211D4AF9260010D8E9 /* LoginViewController.swift */; };
-		37367B6C1D6AD8E900479E39 /* CustomerProfileVCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37367B6B1D6AD8E900479E39 /* CustomerProfileVCViewController.swift */; };
 		37367B6F1D6AD96B00479E39 /* CustomerCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37367B6E1D6AD96B00479E39 /* CustomerCardView.swift */; };
 		37367B711D6ADA2100479E39 /* CustomerCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37367B701D6ADA2100479E39 /* CustomerCard.xib */; };
 		37367B741D6AE68F00479E39 /* PlanningTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37367B731D6AE68F00479E39 /* PlanningTableView.swift */; };
@@ -234,6 +234,7 @@
 		370AAEA41D49F1B3000C64D1 /* UserNameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNameCell.swift; sourceTree = "<group>"; };
 		370AAEA51D49F1B3000C64D1 /* UserNameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserNameCell.xib; sourceTree = "<group>"; };
 		370AB0681D4AF6FE000C64D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3710EC5F1D7E93CF005302E5 /* CustomerConsumeListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerConsumeListVC.swift; sourceTree = "<group>"; };
 		372463B31D69F11F0018CE37 /* MyWorkVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyWorkVC.swift; sourceTree = "<group>"; };
 		372463B61D69F3040018CE37 /* MyCustomerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCustomerVC.swift; sourceTree = "<group>"; };
 		372463B81D69F4180018CE37 /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
@@ -242,7 +243,6 @@
 		3729629A1D40AF6500A947B4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BKPasscodeView.strings"; sourceTree = "<group>"; };
 		3729629C1D40B9E700A947B4 /* PasswordSettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordSettingVC.swift; sourceTree = "<group>"; };
 		372A04211D4AF9260010D8E9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		37367B6B1D6AD8E900479E39 /* CustomerProfileVCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerProfileVCViewController.swift; sourceTree = "<group>"; };
 		37367B6E1D6AD96B00479E39 /* CustomerCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerCardView.swift; sourceTree = "<group>"; };
 		37367B701D6ADA2100479E39 /* CustomerCard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomerCard.xib; sourceTree = "<group>"; };
 		37367B731D6AE68F00479E39 /* PlanningTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanningTableView.swift; sourceTree = "<group>"; };
@@ -532,6 +532,14 @@
 			path = ChatExample;
 			sourceTree = "<group>";
 		};
+		3710EC5E1D7E93C5005302E5 /* CustomerConsumeListVC */ = {
+			isa = PBXGroup;
+			children = (
+				3710EC5F1D7E93CF005302E5 /* CustomerConsumeListVC.swift */,
+			);
+			path = CustomerConsumeListVC;
+			sourceTree = "<group>";
+		};
 		372463B21D69F1040018CE37 /* MyWorkVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -577,7 +585,6 @@
 		37367B6A1D6AD56E00479E39 /* CustomerProfileVC */ = {
 			isa = PBXGroup;
 			children = (
-				37367B6B1D6AD8E900479E39 /* CustomerProfileVCViewController.swift */,
 				37B79B541D7D4AB000340C17 /* CustomerProfileVC.swift */,
 			);
 			path = CustomerProfileVC;
@@ -1267,6 +1274,7 @@
 		37BAB9691D3E1059001E4680 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				3710EC5E1D7E93C5005302E5 /* CustomerConsumeListVC */,
 				37B79B591D7D5A9100340C17 /* ProjectPlannedVC */,
 				37B79B561D7D542200340C17 /* ProjectPlanningVC */,
 				37B79B4A1D7D108200340C17 /* ScheduleVC */,
@@ -1944,9 +1952,9 @@
 				37BAB9AE1D3E1059001E4680 /* CountDownView.swift in Sources */,
 				37C0C3A61D66BD4A002B8772 /* DEMOCustomAutoCompleteObject.m in Sources */,
 				37BAB9D61D3E11B1001E4680 /* AMPopTip+Draw.m in Sources */,
+				3710EC601D7E93CF005302E5 /* CustomerConsumeListVC.swift in Sources */,
 				37BAB8E61D3E1045001E4680 /* CYLPlusButton.m in Sources */,
 				37BAB9B91D3E1059001E4680 /* BorderTextField.swift in Sources */,
-				37367B6C1D6AD8E900479E39 /* CustomerProfileVCViewController.swift in Sources */,
 				37DE9D6A1D41B6FC0041A26B /* MessageListModel.swift in Sources */,
 				37C0C3A81D66BD4A002B8772 /* LCCKLoginDataSource.m in Sources */,
 				37BAB8EB1D3E1045001E4680 /* MLPAutoCompleteTextField.m in Sources */,

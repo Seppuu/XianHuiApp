@@ -163,13 +163,13 @@ extension MyCustomerVC:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let customer = listOfCustommer[indexPath.row]
-        let vc = CustomerProfileVCViewController()
-        vc.customer = customer
-        
-        parentVC?.presentViewController(vc, animated: true, completion: nil)
-        
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+//        let customer = listOfCustommer[indexPath.row]
+//        let vc = CustomerProfileVCViewController()
+//        vc.customer = customer
+//        
+//        parentVC?.presentViewController(vc, animated: true, completion: nil)
+//        
+//        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     

@@ -47,6 +47,8 @@ class Good: NSObject {
     
     var time = ""
     
+    var addDate = ""
+    
     var type:GoodType = .project
     
     var cardType:Cardtype = .groupCard

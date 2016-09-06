@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class CustomerProfileVC: UIViewController {
     
@@ -35,16 +36,27 @@ class CustomerProfileVC: UIViewController {
     
     func getCustomerDetail() {
         
-        NetworkManager.sharedManager.getCustomerDetailWith(27799) { (success, json, error) in
+        NetworkManager.sharedManager.getCustomerDetailWith(customer.id) { (success, json, error) in
             
             if success == true {
                 
+                self.updateCustomerMsgWith(json!)
+                
+                self.tableView.reloadData()
             }
             else {
                 
             }
             
         }
+    }
+    
+    func updateCustomerMsgWith(json:JSON) {
+        
+        self.customer.customerManager = json["customer_manager"].string!
+        self.customer.lastConsumeDate = json["last_consume_date"].string
+        self.customer.cardTotal       = json["card_total"].int!
+        self.customer.certNo          = json["basic"]["cert_no"].string!
     }
     
     func setTableView() {
@@ -114,9 +126,9 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier(topCellId, forIndexPath: indexPath) as! CustomerLargeCell
             
             cell.avatarImageView.backgroundColor = UIColor.lightGrayColor()
-            cell.nameLabel.text = "顾客姓名"
-            cell.vipLabel.text = "vip4"
-            cell.numberLabel.text = "档案编号:13131313131"
+            cell.nameLabel.text = customer.name
+            cell.vipLabel.text = customer.vipStar
+            cell.numberLabel.text = customer.certNo
             
             
             return cell
@@ -127,16 +139,16 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier(typeCellId, forIndexPath: indexPath) as! typeCell
             cell.leftLabel.text = typeList[indexPath.row]
             if indexPath.row == 0 {
-                cell.typeLabel.text = "陈旭"
+                cell.typeLabel.text = customer.customerManager
                 
             }
             else if indexPath.row == 1 {
                 cell.accessoryType = .DisclosureIndicator
-                cell.typeLabel.text = "共4张"
+                cell.typeLabel.text = "共\(customer.cardTotal)张"
             }
             else if indexPath.row == 2 {
                 cell.accessoryType = .DisclosureIndicator
-                cell.typeLabel.text = "16/08/12"
+                cell.typeLabel.text = customer.lastConsumeDate == nil ? "暂无" : customer.lastConsumeDate
             }
             else if indexPath.row == 3 {
                 cell.accessoryType = .DisclosureIndicator
@@ -144,7 +156,7 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
             }
             else {
                 cell.accessoryType = .DisclosureIndicator
-                cell.typeLabel.text = "16/12/34"
+                cell.typeLabel.text = customer.scheduleTime == "" ? "暂无" : customer.scheduleTime
             }
             
             
@@ -163,8 +175,17 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
                 self.navigationController?.pushViewController(vc, animated: true)
                 
             }
+            else if indexPath.row == 2 {
+                let vc = CustomerConsumeListVC()
+                vc.title = "消费记录"
+                vc.customer = customer
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+            }
             else if indexPath.row == 4 {
                 let vc = ProjectPlannedVC()
+                vc.customer = customer
+                vc.allPlan = true
                 vc.title = "预约信息"
                 self.navigationController?.pushViewController(vc, animated: true)
                 

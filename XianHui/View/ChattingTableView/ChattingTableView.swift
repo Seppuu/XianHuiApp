@@ -15,7 +15,9 @@ class ChattingTableView: UIView ,UITableViewDelegate,UITableViewDataSource{
     
     //var addRowTapHandler:(()->())?
     
-    var listOfProject = [Project]()
+    var listOfProject = [[Project]]()
+    
+    var days = [String]()
     
     var sectionTitle = "客户计划"
     
@@ -38,12 +40,12 @@ class ChattingTableView: UIView ,UITableViewDelegate,UITableViewDataSource{
     
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return days.count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return listOfProject.count
+        return listOfProject[section].count
     
     }
     
@@ -56,27 +58,26 @@ class ChattingTableView: UIView ,UITableViewDelegate,UITableViewDataSource{
         return 30
     }
     
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.001
+    }
+    
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        if section == 0 {
-            
-            let view = chatSectionView.instanceFromNib()
-            view.backgroundColor = UIColor.ddViewBackGroundColor()
-            view.frame = CGRect(x: 0, y: 0, width: screenWidth, height: 22)
-            
-            return view
-
-        }
-        else {
-            return nil
-        }
+        let view = chatSectionView.instanceFromNib()
+        view.backgroundColor = UIColor.ddViewBackGroundColor()
+        view.frame = CGRect(x: 0, y: 0, width: screenWidth, height: 22)
+        
+        view.dateLabel.text = days[section]
+        
+        return view
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! chatTableViewCell
-        
-        let project = listOfProject[indexPath.row]
+        cell.selectionStyle = .None
+        let project = listOfProject[indexPath.section][indexPath.row]
         
         cell.nameLabel.text = project.name
         cell.timeLabel.text = project.time

@@ -271,6 +271,35 @@ extension NetworkManager {
         baseRequestWith(urlString, dict: dict, completion: completion)
     }
     
+    //详细的消费记录
+    func getCustomerConsumeListWith(id:Int,pageSize:Int,pageNumber:Int,completion:DDResultHandler) {
+        
+        let urlString = GetCustomerConsumeUrl
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!,
+            "customer_id":id,
+            "pageSize":pageSize,
+            "pageNumber":pageNumber
+        ]
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+        
+    }
+    
+    //详细的预约记录
+    func getCustomerSchedulesUrlWith(id:Int,date:String,completion:DDResultHandler) {
+        
+        let urlString = GetCustomerSchedulesUrl
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!,
+            "customer_id":id,
+            "date":date
+        ]
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+    }
 }
 
 //MARK:系统管理
