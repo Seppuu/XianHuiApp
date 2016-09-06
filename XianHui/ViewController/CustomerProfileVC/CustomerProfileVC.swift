@@ -24,12 +24,27 @@ class CustomerProfileVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.whiteColor()
+        getCustomerDetail()
         setTableView()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
+    }
+    
+    func getCustomerDetail() {
+        
+        NetworkManager.sharedManager.getCustomerDetailWith(27799) { (success, json, error) in
+            
+            if success == true {
+                
+            }
+            else {
+                
+            }
+            
+        }
     }
     
     func setTableView() {

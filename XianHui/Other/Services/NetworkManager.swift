@@ -244,14 +244,14 @@ extension NetworkManager {
     }
     
     //预约顾客列表
-    func getCustomerScheduleListWith(pageSize:Int,pageIndex:Int,completion:DDResultHandler) {
+    func getCustomerScheduleListWith(startDate:String,days:Int,completion:DDResultHandler) {
         
         let urlString = getCustomerScheduleListUrl
         
         let dict:JSONDictionary = [
             "token":Defaults.userToken.value!,
-            "pageSize":pageSize,
-            "pageNumber":pageIndex
+            "date":startDate,
+            "days":days
         ]
         
         
@@ -259,14 +259,13 @@ extension NetworkManager {
     }
     
     
-    func getCustomerDetailWith(id:Int,type:CustomerLisType,completion:DDResultHandler) {
+    func getCustomerDetailWith(id:Int,completion:DDResultHandler) {
         
         let urlString = GetCustomerDetailUrl
         
         let dict:JSONDictionary = [
             "token":Defaults.userToken.value!,
-            "customer_id":id,
-            "type":type.rawValue
+            "customer_id":id
         ]
         
         baseRequestWith(urlString, dict: dict, completion: completion)

@@ -8,6 +8,8 @@
 
 import UIKit
 import SwiftyJSON
+import SwiftDate
+import MJRefresh
 
 class ScheduleVC: UIViewController {
     
@@ -19,14 +21,13 @@ class ScheduleVC: UIViewController {
     
     let cellId = "CustomerCell"
     
-    var listOfCustommer = [Customer]()
+    var listOfCustommerArr = [[Customer]]()
     
-    var days = ["今日","明日","后天"]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getCustomList()
         view.backgroundColor = UIColor.whiteColor()
         
         setTableView()
@@ -51,32 +52,47 @@ class ScheduleVC: UIViewController {
         let nib = UINib(nibName: cellId, bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: cellId)
         
+        tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(ScheduleVC.topRefresh))
+        tableView.mj_header.beginRefreshing()
     }
+    
+    var currentDate:String {
+        
+        let currentDate = NSDate()
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let dayString = formatter.stringFromDate(currentDate)
+        
+        return dayString
+    }
+    var nextDate = ""
     
     func getCustomList() {
         
-        NetworkManager.sharedManager.getCustomerScheduleListWith(10, pageIndex: 1) { (success, json, error) in
-            
+        NetworkManager.sharedManager.getCustomerScheduleListWith(currentDate, days: 3) { (success, json, error) in
             if success == true {
                 
+                self.nextDate = json!["nextDate"].string!
                 let jsonArr = json!["rows"].array!
-                self.listOfCustommer = self.makeCustomerListWith(jsonArr)
-                
+                self.listOfCustommerArr = self.makeCustomerListWith(jsonArr)
                 self.tableView.reloadData()
-                
+                self.tableView.mj_header.endRefreshing()
             }
             else {
                 
             }
         }
-        
+
         
     }
     
+    var days = [String]()
     
-    func makeCustomerListWith(dataArr:[JSON]) -> [Customer] {
+    func makeCustomerListWith(dataArr:[JSON]) -> [[Customer]] {
         
-        var list = [Customer]()
+        var customers = [Customer]()
+        
+        var lastDate = ""
         
         for data in dataArr {
             
@@ -89,15 +105,46 @@ class ScheduleVC: UIViewController {
             customer.scheduleTime = data["adate"].string!
             customer.scheduleStatus = data["status"].string!
             
-            list.append(customer)
+            //按照日期分组
+            if customer.scheduleTime != lastDate {
+                //add new arr
+                lastDate = customer.scheduleTime
+                
+                days.append(lastDate)
+            }
+            
+            
+            customers.append(customer)
+            
         }
         
-        return list
+        var listArr = [[Customer]]()
+        
+        for day in days {
+            
+            var list = [Customer]()
+            
+            customers.forEach({ (customer) in
+                
+                if customer.scheduleTime == day {
+                    list.append(customer)
+                }
+                
+            })
+            
+            listArr.append(list)
+        }
+        
+        
+        return listArr
         
     }
     
     
-    
+    func topRefresh() {
+        
+         getCustomList()
+    }
     
 }
 
@@ -109,16 +156,7 @@ extension ScheduleVC:UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 3
-        }
-        else if section == 1{
-            return 2
-        }
-        else {
-            return 3
-        }
-        //return listOfCustommer.count
+        return listOfCustommerArr[section].count
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -166,51 +204,12 @@ extension ScheduleVC:UITableViewDelegate,UITableViewDataSource {
         cell.happyLevel.textColor = UIColor ( red: 0.4377, green: 0.4377, blue: 0.4377, alpha: 1.0 )
         cell.stageLabel.alpha = 0.0
         
+        let customer = listOfCustommerArr[indexPath.section][indexPath.row]
         
-        if indexPath.section == 0 {
-            
-            if indexPath.row == 0 {
-                cell.nameLabel.text = "顾客A"
-                cell.happyLevel.text = "进行中"
-                
-            }
-            else if indexPath.row == 1{
-                cell.nameLabel.text = "顾客B"
-                cell.happyLevel.text = "未开始"
-            }
-            else {
-                cell.nameLabel.text = "顾客C"
-                cell.happyLevel.text = "已结束"
-                
-            }
-        }
-        else if indexPath.row == 1{
-            if indexPath.row == 0 {
-                cell.nameLabel.text = "顾客D"
-                
-            }
-            else {
-                cell.nameLabel.text = "顾客E"
-                
-            }
-            
-            cell.happyLevel.text = "未开始"
-        }
-        else {
-            if indexPath.row == 0 {
-                cell.nameLabel.text = "顾客F"
-                
-            }
-            else if indexPath.row == 1{
-                cell.nameLabel.text = "顾客G"
-                
-            }
-            else {
-                cell.nameLabel.text = "顾客H"
-                
-            }
-            cell.happyLevel.text = "未开始"
-        }
+        cell.nameLabel.text = customer.name
+        cell.happyLevel.text =  customer.scheduleStatus
+        
+        
         
         return cell
         

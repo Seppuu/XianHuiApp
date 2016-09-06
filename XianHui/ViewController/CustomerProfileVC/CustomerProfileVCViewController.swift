@@ -30,7 +30,7 @@ class CustomerProfileVCViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getCustomerDetail()
+        
         customer.name = "松隆子"
         customer.sex = "女"
         customer.level = "Vip6"
@@ -45,14 +45,6 @@ class CustomerProfileVCViewController: BaseViewController {
 
     }
     
-    func getCustomerDetail() {
-        
-        NetworkManager.sharedManager.getCustomerDetailWith(customer.id, type: customer.type) { (success, json, error) in
-            
-            
-        }
-        
-    }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
