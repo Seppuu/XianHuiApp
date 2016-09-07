@@ -40,6 +40,7 @@ class Project: Good {
     var cardName = ""
     var cardType = ""
     var cardNo = ""
+    var cardPrice = ""
     
     //跟踪
     var remainingTime:CGFloat = 0.0
@@ -55,11 +56,19 @@ class Good: NSObject {
     
     var selected = false
     
+    //持续时间
     var time = ""
     
+    //预约的日期
     var addDate = ""
+    
+    //结单的日期
+    var saledate = ""
+    
+    //结单价格
+    var amount = ""
     
     var type:GoodType = .project
     
-    var cardType:Cardtype = .groupCard
+    
 }

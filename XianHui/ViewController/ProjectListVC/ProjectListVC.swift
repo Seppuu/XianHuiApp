@@ -39,7 +39,6 @@ class ProjectListVC: BaseViewController {
         view.backgroundColor = UIColor.whiteColor()
         
         setNavBarItem()
-
         
         getGoodList()
         
@@ -56,6 +55,15 @@ class ProjectListVC: BaseViewController {
                 
                 let productJson = json!["product"]["list"].array!
                 self.prods = self.getListOfProdWith(productJson)
+                
+                let projectConsumeJson = json!["project"]["consume"].array!
+                self.projectsBought = self.getLastBoughtProjectWith(projectConsumeJson)
+                
+                let productionConsumeJson = json!["product"]["consume"].array!
+                self.prodsBought = self.getLastBoughtProductionWith(productionConsumeJson)
+                
+                self.updateSegmemt()
+                
                 self.tableView.reloadData()
                 
             }
@@ -66,26 +74,44 @@ class ProjectListVC: BaseViewController {
         
     }
     
-    func getGoodsLastBought() {
-    
-        let pro0 = Project()
-        pro0.name = "天地藏浴"
-        pro0.time = "16.07.02"
+    func getLastBoughtProjectWith(json:[JSON]) -> [Project] {
         
-        let pro1 = Project()
-        pro1.name = "天地藏浴加强版"
-        pro1.time = "16.07.05"
+        var list = [Project]()
         
-        let prod0 = Production()
-        prod0.name = "牛樟芝"
-        prod0.time = "16.04.08  "
+        for p in json {
+            
+            let pro = Project()
+            pro.id = p["item_id"].int!
+            pro.name = p["fullname"].string!
+            pro.saledate = p["saledate"].string!
+            
+            list.append(pro)
+            
+        }
         
-        projectsBought = [pro0,pro1]
-        prodsBought = [prod0]
-
-        
+        return list
     }
     
+    
+    func getLastBoughtProductionWith(json:[JSON]) -> [Production] {
+        
+        var list = [Production]()
+        
+        for p in json {
+            
+            let pro = Production()
+            pro.id = p["item_id"].int!
+            pro.name = p["fullname"].string!
+            pro.saledate = p["saledate"].string!
+            
+            list.append(pro)
+            
+        }
+        
+        return list
+    }
+    
+
     func getListOfProjectWith(json:[JSON]) -> [Project] {
         
         var listOfPro = [Project]()
@@ -100,10 +126,13 @@ class ProjectListVC: BaseViewController {
                 
                 if cardList.count > 0 {
                     //有疗程卡
+                    pro.hasCardList = true
+                    
                     pro.cardName      = cardList[0]["fullname"].string!
                     pro.cardTimesLeft = cardList[0]["times"].int!
                     pro.cardType      = cardList[0]["card_class"].string!
                     pro.cardNo        = cardList[0]["card_num"].string!
+                    pro.cardPrice     = cardList[0]["price"].string!
                 }
                 else  {
                     //无疗程卡
@@ -189,12 +218,35 @@ class ProjectListVC: BaseViewController {
         
         navigationItem.leftBarButtonItem = leftBar
         
-        segment = UISegmentedControl(items: ["项目(10)","产品(2)"])
+        segment = UISegmentedControl(items: ["项目","产品"])
         segment.selectedSegmentIndex = 0
         segment.addTarget(self, action: #selector(ProjectListVC.segmentVauleChanged(_:)), forControlEvents: .ValueChanged)
         
         navigationItem.titleView = segment
         
+        
+    }
+    
+    func updateSegmemt() {
+        var projectSelectCount = 0
+        var productionSelectCount = 0
+        
+        projects.forEach({
+            if  $0.selected == true {
+                
+                projectSelectCount += 1
+            }
+        })
+        
+        prods.forEach({
+            if  $0.selected == true {
+                
+                productionSelectCount += 1
+            }
+        })
+        
+        segment.setTitle("项目(\(projectSelectCount))", forSegmentAtIndex: 0)
+        segment.setTitle("产品(\(productionSelectCount))", forSegmentAtIndex: 1)
     }
     
     func segmentVauleChanged(sender:UISegmentedControl) {
@@ -249,6 +301,10 @@ class ProjectListVC: BaseViewController {
     
     func toGoodRecordVC() {
         //TOOD:去消费记录
+        let vc = CustomerConsumeListVC()
+        vc.title = "消费记录"
+        vc.customer = customer
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     var showDetail = false
@@ -417,6 +473,11 @@ extension ProjectListVC:UITableViewDelegate,UITableViewDataSource {
                 detaileView.secondDetailLabel.text =  projectTapped?.cardType
                 
                 
+                detaileView.thirdLabel.text = "价格"
+                detaileView.thirdDetailLabel.text =  projectTapped?.cardPrice
+                
+                detaileView.forthLabel.text = "余次"
+                detaileView.forthDetailLabel.text =  String(projectTapped?.cardTimesLeft)
                 
                 return cell
                 
@@ -434,13 +495,15 @@ extension ProjectListVC:UITableViewDelegate,UITableViewDataSource {
                         cell.nameLabel.textColor = UIColor ( red: 0.0, green: 0.4868, blue: 0.9191, alpha: 1.0 )
                     }
                     else {
-                        
+                        cell.nameLabel.textColor = UIColor.darkTextColor()
                     }
                     
                     
                 }
                 else {
                     good = prods[indexPath.row]
+                    
+                    cell.nameLabel.textColor = UIColor.darkTextColor()
                 }
                 
                 
@@ -453,17 +516,14 @@ extension ProjectListVC:UITableViewDelegate,UITableViewDataSource {
                 
                 cell.nameLabel.text = good.name
                 
-                if (good.cardType == .groupCard) {
-                    cell.cardTypeImageView.backgroundColor = UIColor ( red: 1.0, green: 0.5808, blue: 0.5726, alpha: 1.0 )
-                }
-                else {
-                    cell.cardTypeImageView.backgroundColor = UIColor ( red: 0.6638, green: 0.9043, blue: 0.9901, alpha: 1.0 )
-                }
-                
+
+                cell.cardTypeImageView.backgroundColor = UIColor ( red: 1.0, green: 0.5808, blue: 0.5726, alpha: 1.0 )
                 
                 if good.type == .project {
                     let project = projects[indexPath.row]
                     cell.showDetailHandler = {
+                        
+                        if project.hasCardList == false {return}
                         
                         if self.showDetail == false {
                             self.showDetailViewWithInTableView(indexPath.row, good: project)
@@ -509,6 +569,11 @@ extension ProjectListVC:UITableViewDelegate,UITableViewDataSource {
                 cell?.accessoryType = .None
                 good.selected = false
             }
+            
+            //update segment title
+            updateSegmemt()
+            
+            
         }
         else {
             

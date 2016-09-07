@@ -7,21 +7,26 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class CustomerConsumeListVC: UIViewController {
     
     var tableView:UITableView!
-    
-    var records = [String]()
 
     var customer:Customer!
+    
+    var goodListArray = [[Good]]()
+    
+    var dateList = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getListWith(customer.id, pageSize: 20, pageNumber: 1)
-        setTableView()
         
+        
+        getListWith(customer.id, pageSize: 20, pageNumber: 1)
+        
+        setTableView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,7 +39,9 @@ class CustomerConsumeListVC: UIViewController {
         NetworkManager.sharedManager.getCustomerConsumeListWith(id, pageSize: pageSize, pageNumber: pageNumber) { (success, json, error) in
             
             if success == true {
-                
+                let jsonData = json!["rows"].array!
+                self.goodListArray = self.makeGoodListWith(jsonData)
+                self.tableView.reloadData()
             }
             else {
                 
@@ -43,15 +50,65 @@ class CustomerConsumeListVC: UIViewController {
         }
     }
     
-    let cellId = "type"
+    func makeGoodListWith(json:[JSON]) -> [[Good]] {
+        
+        var list = [Good]()
+        
+        for g in json {
+            
+            let good = Good()
+            good.name = g["fullname"].string!
+            good.id   = g["item_id"].int!
+            good.amount = g["amount"].string!
+            good.saledate = g["saledate"].string!
+            
+            list.append(good)
+        }
+        
+        var lastDate = ""
+        
+        list.forEach {
+            
+            if $0.saledate != lastDate {
+                lastDate = $0.saledate
+                
+                dateList.append(lastDate)
+            }
+        }
+        
+        var listArray = [[Good]]()
+        
+        for date in dateList {
+            
+            var aList = [Good]()
+            
+            list.forEach{
+                if $0.saledate == date {
+                    aList.append($0)
+                }
+            }
+            
+            listArray.append(aList)
+        }
+        
+        
+        return listArray
+        
+    }
+    
+    let cellId = "typeCell"
     
     func setTableView() {
         
         tableView = UITableView(frame: view.bounds, style:.Plain)
+        tableView.delegate = self
+        tableView.dataSource = self
         view.addSubview(tableView)
         
         let nib  = UINib(nibName: cellId, bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: cellId)
+        
+        
     }
 
 }
@@ -59,11 +116,15 @@ class CustomerConsumeListVC: UIViewController {
 extension CustomerConsumeListVC:UITableViewDelegate,UITableViewDataSource {
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return dateList.count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return records.count
+        return goodListArray[section].count
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return dateList[section]
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -74,8 +135,11 @@ extension CustomerConsumeListVC:UITableViewDelegate,UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! typeCell
         cell.selectionStyle = .None
-        cell.leftLabel.text = ""
-        cell.typeLabel.text = ""
+        
+        let good = goodListArray[indexPath.section][indexPath.row]
+        
+        cell.leftLabel.text = good.name
+        cell.typeLabel.text = good.amount + "元"
         
         return cell
         

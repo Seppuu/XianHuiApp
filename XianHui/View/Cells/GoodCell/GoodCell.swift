@@ -24,9 +24,9 @@ class GoodCell: UITableViewCell {
         let tap = UITapGestureRecognizer(target: self, action: #selector(GoodCell.showDetailView))
         cardTypeImageView.addGestureRecognizer(tap)
         
-        nameLabel.userInteractionEnabled = true
-        let tap2 = UITapGestureRecognizer(target: self, action: #selector(GoodCell.showDetailView))
-        nameLabel.addGestureRecognizer(tap2)
+//        nameLabel.userInteractionEnabled = true
+//        let tap2 = UITapGestureRecognizer(target: self, action: #selector(GoodCell.showDetailView))
+//        nameLabel.addGestureRecognizer(tap2)
         
     }
     

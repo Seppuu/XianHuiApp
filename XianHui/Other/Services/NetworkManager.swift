@@ -317,9 +317,9 @@ extension NetworkManager {
     }
     
     //保存项目,产品计划
-    func saveGoodPlanWith(id:Int,ids:[String],completion:DDResultHandler) {
+    func saveGoodPlanWith(id:Int,ids:String,completion:DDResultHandler) {
         
-        let urlString = GetGoodPlanListUrl
+        let urlString = SaveGoodPlanUrl
         
         let dict:JSONDictionary = [
             "token":Defaults.userToken.value!,

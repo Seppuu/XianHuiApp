@@ -176,7 +176,7 @@ extension PlanningVC: UITableViewDelegate,UITableViewDataSource {
             
         }
         else {
-            let customer = listOfCustommerNotPlanned[indexPath.row]
+            let customer = listOfCustommerPlanned[indexPath.row]
             
             cell.nameLabel.text = customer.name
             cell.stageLabel.text = "无"
@@ -192,10 +192,20 @@ extension PlanningVC: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        var customer = Customer()
         
-        let vc = CustomerProfileVC()
+        if indexPath.section == 0 {
+            
+            customer = listOfCustommerNotPlanned[indexPath.row]
+        }
+        else {
+            
+            customer = listOfCustommerPlanned[indexPath.row]
+        }
         
-        self.parentNavigationController?.pushViewController(vc, animated: true)
+        let vc = ProjectPlanningVC()
+        vc.customer = customer
+        self.parentNavigationController!.pushViewController(vc, animated: true)
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
