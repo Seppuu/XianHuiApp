@@ -300,6 +300,36 @@ extension NetworkManager {
         
         baseRequestWith(urlString, dict: dict, completion: completion)
     }
+    
+    
+    //获取项目,产品计划
+    func getGoodPlanListWith(id:Int,completion:DDResultHandler) {
+        
+        let urlString = GetGoodPlanListUrl
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!,
+            "customer_id":id
+        ]
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+        
+    }
+    
+    //保存项目,产品计划
+    func saveGoodPlanWith(id:Int,ids:[String],completion:DDResultHandler) {
+        
+        let urlString = GetGoodPlanListUrl
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!,
+            "customer_id":id,
+            "ids":ids
+        ]
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+        
+    }
 }
 
 //MARK:系统管理

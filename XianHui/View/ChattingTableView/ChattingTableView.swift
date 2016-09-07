@@ -70,6 +70,26 @@ class ChattingTableView: UIView ,UITableViewDelegate,UITableViewDataSource{
         
         view.dateLabel.text = days[section]
         
+        if section == 0 {
+            view.sectionTitleLabel.alpha = 1.0
+            view.firstTagView.alpha = 1.0
+            view.firsTagLabel.alpha = 1.0
+            
+            view.sectionTagView.alpha = 1.0
+            view.secondTagLabel.alpha = 1.0
+            
+            
+        }
+        else {
+            
+            view.sectionTitleLabel.alpha = 0.0
+            view.firstTagView.alpha = 0.0
+            view.firsTagLabel.alpha = 0.0
+            
+            view.sectionTagView.alpha = 0.0
+            view.secondTagLabel.alpha = 0.0
+        }
+        
         return view
     }
     

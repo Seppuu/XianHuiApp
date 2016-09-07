@@ -8,6 +8,7 @@
 
 import UIKit
 
+///项目计划
 class ProjectPlanningVC: UIViewController {
 
     var tableView:UITableView!
@@ -23,6 +24,7 @@ class ProjectPlanningVC: UIViewController {
         super.viewDidLoad()
         title = "项目计划"
         view.backgroundColor = UIColor.whiteColor()
+        getGoodList()
         setTableView()
     }
     
@@ -31,12 +33,26 @@ class ProjectPlanningVC: UIViewController {
         
     }
     
+    func getGoodList() {
+        
+        NetworkManager.sharedManager.getGoodPlanListWith(customer.id) { (success, json, error) in
+            
+            if success == true {
+                
+            }
+            else {
+                
+            }
+        }
+        
+    }
+    
     func setTableView() {
         
         let bottomView = PlanningTableView(frame:view.bounds)
         bottomView.addRowTapHandler = {
             let vc = ProjectListVC()
-            
+            vc.customer = self.customer
             vc.projectsPreSelected = bottomView.listOfProject
             vc.prodsPreSelected    = bottomView.listOfProd
             let nav = UINavigationController(rootViewController: vc)

@@ -62,6 +62,12 @@ let GetCustomerConsumeUrl = DDBaseUrl + "/rest/employee/getcustomerconsumelist"
 let GetCustomerSchedulesUrl = DDBaseUrl + "/rest/employee/getcustomerschedulelist"
 
 
+//获取项目,产品计划
+let GetGoodPlanListUrl = DDBaseUrl + "/rest/employee/getplanaddlist"
+
+//保存项目,产品计划
+let SaveGoodPlanUrl = DDBaseUrl + "/rest/employee/setplanitem"
+
 /// 用户关系管理
 
 //用户联系人列表

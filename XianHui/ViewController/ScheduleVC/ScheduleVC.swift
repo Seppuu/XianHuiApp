@@ -265,6 +265,8 @@ extension ScheduleVC:UITableViewDelegate,UITableViewDataSource {
         vc.title = "预约信息"
         vc.customer = customer
         self.parentNavigationController?.pushViewController(vc, animated: true)
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
 
     }
     

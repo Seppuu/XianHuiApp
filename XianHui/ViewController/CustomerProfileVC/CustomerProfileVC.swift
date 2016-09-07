@@ -172,6 +172,7 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
             if indexPath.row == 3 {
                 
                 let vc = ProjectPlanningVC()
+                vc.customer = customer
                 self.navigationController?.pushViewController(vc, animated: true)
                 
             }

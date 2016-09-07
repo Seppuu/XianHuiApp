@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class ProjectListVC: BaseViewController {
 
@@ -30,6 +31,7 @@ class ProjectListVC: BaseViewController {
     
     let cellId = "GoodCell"
     
+    var customer:Customer!
     
     var confirmTapHandler:((projectSelected:[Project],prodsSelected:[Production])->())?
     
@@ -37,10 +39,31 @@ class ProjectListVC: BaseViewController {
         view.backgroundColor = UIColor.whiteColor()
         
         setNavBarItem()
-        projects = getListOfProject()
-        prods = getListOfProd()
-        getGoodsLastBought()
+
+        
+        getGoodList()
+        
         setTableView()
+    }
+    
+    func getGoodList() {
+        
+        NetworkManager.sharedManager.getGoodPlanListWith(customer.id) { (success, json, error) in
+            
+            if success == true {
+                let peojectJson = json!["project"]["list"].array!
+                self.projects = self.getListOfProjectWith(peojectJson)
+                
+                let productJson = json!["product"]["list"].array!
+                self.prods = self.getListOfProdWith(productJson)
+                self.tableView.reloadData()
+                
+            }
+            else {
+                
+            }
+        }
+        
     }
     
     func getGoodsLastBought() {
@@ -63,68 +86,78 @@ class ProjectListVC: BaseViewController {
         
     }
     
-    func getListOfProject() -> [Project] {
-        
-        let listOfName = [
-            "天地藏浴",
-            "炸猪排",
-            "日式天地藏浴",
-            "泰式天地藏浴",
-            "家康麻薯",
-            "定海神针",
-            "源氏物语",
-            "赤城加贺",
-            "舰队收藏",
-            "山本五十六"
-        ]
+    func getListOfProjectWith(json:[JSON]) -> [Project] {
         
         var listOfPro = [Project]()
         
-        for name in listOfName {
+        for p in json {
+            
             let pro = Project()
-            pro.name = name
+            pro.name = p["fullname"].string!
+            pro.id   = p["item_id"].int!
+            
+            if let cardList = p["card_list"].array {
+                
+                if cardList.count > 0 {
+                    //有疗程卡
+                    pro.cardName      = cardList[0]["fullname"].string!
+                    pro.cardTimesLeft = cardList[0]["times"].int!
+                    pro.cardType      = cardList[0]["card_class"].string!
+                    pro.cardNo        = cardList[0]["card_num"].string!
+                }
+                else  {
+                    //无疗程卡
+                }
+                
+                
+                
+            }
             
             projectsPreSelected.forEach({ (projectPreSelected) in
                 
-                if name == projectPreSelected.name {
+                if pro.name == projectPreSelected.name {
                     pro.selected = true
                 }
             })
             
-            
             listOfPro.append(pro)
         }
-        
+
         
         return listOfPro
     }
     
-    func getListOfProd() -> [Production] {
+    func getListOfProdWith(json:[JSON]) -> [Production] {
+
+        var listOfProd = [Production]()
         
-        let listOfName = [
-            "牛樟芝",
-            "益畅菌"
-        ]
-        
-        var prods = [Production]()
-        
-        for name in listOfName {
-            let pro = Production()
-            pro.name = name
+        for p in json {
             
-            prodsPreSelected.forEach({ (projectPreSelected) in
+            let pro = Production()
+            pro.name = p["fullname"].string!
+            pro.id   = p["item_id"].int!
+            
+//            if let cardList = p["card_list"].array {
+//                
+//                pro.cardName      = cardList[0]["fullname"].string!
+//                pro.cardTimesLeft = cardList[0]["times"].int!
+//                pro.cardtype      = cardList[0]["card_class"].string!
+//                pro.cardNo        = cardList[0]["card_num"].string!
+//                
+//            }
+            
+            projectsPreSelected.forEach({ (projectPreSelected) in
                 
-                if name == projectPreSelected.name {
+                if pro.name == projectPreSelected.name {
                     pro.selected = true
                 }
             })
             
-            
-            prods.append(pro)
+            listOfProd.append(pro)
         }
         
         
-        return prods
+        return listOfProd
     }
 
     
@@ -187,8 +220,8 @@ class ProjectListVC: BaseViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        let path = NSIndexPath(forRow: 0, inSection: 1)
-        tableView.scrollToRowAtIndexPath(path, atScrollPosition: .Top, animated: false)
+//        let path = NSIndexPath(forRow: 0, inSection: 1)
+//        tableView.scrollToRowAtIndexPath(path, atScrollPosition: .Top, animated: false)
     }
     
     func passData() {
@@ -222,7 +255,11 @@ class ProjectListVC: BaseViewController {
     
     var detailCellRow:Int!
     
-    func showDetailViewWithInTableView(row:Int,good:Good) {
+    var projectTapped:Project?
+    
+    func showDetailViewWithInTableView(row:Int,good:Project) {
+        
+        projectTapped = good
         
         let path = NSIndexPath(forItem: row + 1, inSection: 1)
         showDetail = true
@@ -231,8 +268,8 @@ class ProjectListVC: BaseViewController {
         
     }
     
-    func hideDetailViewWithInTableView(row:Int,good:Good) {
-        
+    func hideDetailViewWithInTableView(row:Int,good:Project) {
+        projectTapped = nil
         let path = NSIndexPath(forItem: detailCellRow, inSection: 1)
         showDetail = false
         
@@ -373,14 +410,34 @@ extension ProjectListVC:UITableViewDelegate,UITableViewDataSource {
                 detaileView.frame = cell.bounds
                 cell.contentView.addSubview(detaileView)
                 
+                detaileView.firstLabel.text = "卡名"
+                detaileView.firstDetailLabel.text =  projectTapped?.cardName
+                
+                detaileView.secondLabel.text = "卡类型"
+                detaileView.secondDetailLabel.text =  projectTapped?.cardType
+                
+                
+                
                 return cell
                 
             }
             else {
                 let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! GoodCell
+                cell.selectionStyle = .None
                 var good:Good!
                 if segment.selectedSegmentIndex == 0 {
                     good = projects[indexPath.row]
+                    
+                    let project = projects[indexPath.row]
+                    
+                    if project.hasCardList == true {
+                        cell.nameLabel.textColor = UIColor ( red: 0.0, green: 0.4868, blue: 0.9191, alpha: 1.0 )
+                    }
+                    else {
+                        
+                    }
+                    
+                    
                 }
                 else {
                     good = prods[indexPath.row]
@@ -405,14 +462,14 @@ extension ProjectListVC:UITableViewDelegate,UITableViewDataSource {
                 
                 
                 if good.type == .project {
-                    
+                    let project = projects[indexPath.row]
                     cell.showDetailHandler = {
                         
                         if self.showDetail == false {
-                            self.showDetailViewWithInTableView(indexPath.row, good: good)
+                            self.showDetailViewWithInTableView(indexPath.row, good: project)
                         }
                         else {
-                            self.hideDetailViewWithInTableView(indexPath.row, good: good)
+                            self.hideDetailViewWithInTableView(indexPath.row, good: project)
                         }
                         
                     }
@@ -420,6 +477,8 @@ extension ProjectListVC:UITableViewDelegate,UITableViewDataSource {
                 else {
                     
                 }
+                
+                
                 
                 return cell
             }
@@ -455,7 +514,7 @@ extension ProjectListVC:UITableViewDelegate,UITableViewDataSource {
             
         }
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
     }
 }
 

@@ -33,6 +33,14 @@ class Project: Good {
 
     var planType = ProjectPlanType.salesman
     
+    //card list if has
+    var hasCardList = false
+    
+    var cardTimesLeft:Int = 0
+    var cardName = ""
+    var cardType = ""
+    var cardNo = ""
+    
     //跟踪
     var remainingTime:CGFloat = 0.0
     var remainingTimeString = ""
@@ -40,6 +48,8 @@ class Project: Good {
 
 
 class Good: NSObject {
+    
+    var id:Int!
     
     var name = ""
     
