@@ -229,6 +229,7 @@ class RadarChartVC: BaseChartViewController {
             button.setTitleColor(UIColor ( red: 0.3779, green: 0.3171, blue: 0.3185, alpha: 1.0 ), forState: .Normal)
             button.setTitle(listOfType[yVal.xIndex], forState: .Normal)
             button.titleLabel?.font = UIFont.systemFontOfSize(12)
+            button.backgroundColor = UIColor ( red: 1.0, green: 0.0, blue: 0.0, alpha: 0.45 )
 //            button.layer.cornerRadius = 4.0
 //            button.layer.masksToBounds = true
 //            button.layer.borderWidth = 0.8
@@ -274,12 +275,16 @@ class RadarChartVC: BaseChartViewController {
         topButtons = buttons
     }
     
-    func adjustLabelPosition(labels:[UIButton]) {
+    func adjustLabelPosition(buttons:[UIButton]) {
         
-        let label01 = labels[1]
-        let label04 = labels[4]
+        let button01 = buttons[1]
+        let button04 = buttons[4]
         
-        label04.center.y = label01.center.y
+        button04.center.y = button01.center.y
+        //调整button4 x 位置.让button4 和button1 对称
+        let x = screenWidth - button01.frame.origin.x - button01.ddWidth
+        
+        button04.frame.origin.x = x
 
     }
     
