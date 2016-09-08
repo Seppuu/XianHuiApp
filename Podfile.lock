@@ -1,35 +1,35 @@
 PODS:
   - AFViewShaker (0.0.2)
-  - Alamofire (3.4.1)
-  - AVOSCloud (3.4.0-beta.2)
-  - AVOSCloudIM (3.4.0-beta.2):
-    - AVOSCloud (= 3.4.0-beta.2)
-    - AVOSCloudIM/_ARC (= 3.4.0-beta.2)
-    - AVOSCloudIM/_NOARC (= 3.4.0-beta.2)
-  - AVOSCloudIM/_ARC (3.4.0-beta.2):
-    - AVOSCloud (= 3.4.0-beta.2)
-    - AVOSCloudIM/_NOARC (= 3.4.0-beta.2)
-  - AVOSCloudIM/_NOARC (3.4.0-beta.2):
-    - AVOSCloud (= 3.4.0-beta.2)
-  - BKPasscodeView (0.2.3):
+  - Alamofire (3.4.2)
+  - AVOSCloud (3.4.0-beta.4)
+  - AVOSCloudIM (3.4.0-beta.4):
+    - AVOSCloud (= 3.4.0-beta.4)
+    - AVOSCloudIM/_ARC (= 3.4.0-beta.4)
+    - AVOSCloudIM/_NOARC (= 3.4.0-beta.4)
+  - AVOSCloudIM/_ARC (3.4.0-beta.4):
+    - AVOSCloud (= 3.4.0-beta.4)
+    - AVOSCloudIM/_NOARC (= 3.4.0-beta.4)
+  - AVOSCloudIM/_NOARC (3.4.0-beta.4):
+    - AVOSCloud (= 3.4.0-beta.4)
+  - BKPasscodeView (0.2.4):
     - AFViewShaker (~> 0.0)
   - Charts (2.2.5):
     - Charts/Core (= 2.2.5)
   - Charts/Core (2.2.5)
-  - ChatKit (0.6.0):
-    - AVOSCloud (~> 3.4.0-beta.2)
-    - AVOSCloudIM (~> 3.4.0-beta.2)
+  - ChatKit (0.7.13):
+    - AVOSCloud (~> 3.4.0-beta.4)
+    - AVOSCloudIM (~> 3.4.0-beta.4)
     - DACircularProgress (~> 2.3.1)
     - FDStackView (~> 1.0)
     - FMDB (~> 2.6.2)
     - Masonry (~> 1.0.1)
     - MJRefresh (~> 3.1.9)
     - MLLabel (~> 1.9.2)
-    - MWPhotoBrowser (= 2.1.2)
+    - MWPhotoBrowser (~> 2.1.2)
     - pop (~> 1.0.9)
     - SDWebImage (~> 3.8.0)
     - UITableView+FDTemplateLayoutCell (~> 1.5.beta)
-  - CryptoSwift (0.5.1)
+  - CryptoSwift (0.5.2)
   - CTAssetsPickerController (3.3.1):
     - PureLayout (~> 3.0.0)
   - DACircularProgress (2.3.1)
@@ -43,9 +43,9 @@ PODS:
   - FMDB/standard (2.6.2)
   - ICSPullToRefresh (0.4)
   - ImagePickerSheetController (0.9.1)
-  - IQKeyboardManagerSwift (4.0.4)
-  - KeyboardMan (0.6.0)
-  - Kingfisher (2.4.2)
+  - IQKeyboardManagerSwift (4.0.5)
+  - KeyboardMan (0.6.1)
+  - Kingfisher (2.5.1)
   - LTInfiniteScrollView-Swift (0.1.0)
   - Masonry (1.0.1)
   - MBProgressHUD (0.9.2)
@@ -66,9 +66,9 @@ PODS:
   - RealmSwift (1.0.2):
     - Realm (= 1.0.2)
   - Ruler (0.7.1)
-  - SDWebImage (3.8.1):
-    - SDWebImage/Core (= 3.8.1)
-  - SDWebImage/Core (3.8.1)
+  - SDWebImage (3.8.2):
+    - SDWebImage/Core (= 3.8.2)
+  - SDWebImage/Core (3.8.2)
   - SnapKit (0.15.0)
   - SwiftDate (3.0.8)
   - SwiftString (0.5)
@@ -83,7 +83,7 @@ DEPENDENCIES:
   - Alamofire (~> 3.3)
   - BKPasscodeView
   - Charts
-  - ChatKit (~> 0.6.0)
+  - ChatKit (~> 0.7.13)
   - CryptoSwift
   - CTAssetsPickerController (~> 3.3.0)
   - DZNEmptyDataSet
@@ -120,13 +120,13 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AFViewShaker: 7e4bc215ca3e92347b78da436fca74e1730b52e8
-  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
-  AVOSCloud: f74dd461e47d8825a434c52282e2882e4af468cc
-  AVOSCloudIM: 0f5b637617d653939a905d5f08d5b083b45925c2
-  BKPasscodeView: 4dd27931ad4e5938e9967fdb260f6e166fa82632
+  Alamofire: 6aa33201d20d069e1598891cf928883ff1888c7a
+  AVOSCloud: aacde3dcb0b35658cc72d0c04ec029b254dbf1e3
+  AVOSCloudIM: 4e91aa7068d367270338289ff4b8d1be6d278919
+  BKPasscodeView: 947e3542c126a9fa41c46318759d928919636e96
   Charts: b48fcc8d7190de910ff9e9748f5360c8ea7856e5
-  ChatKit: edd6e1f2abfa3ae91afe2de660f030eed1b87a9e
-  CryptoSwift: df42dda18baf6c76347a94e227dbcc0a341304bd
+  ChatKit: 8e85637ee5e2b0412408ce5a179208275e0a00f5
+  CryptoSwift: c1ef79f901b86099a6fe8b3c7524cf9f3f3c8c40
   CTAssetsPickerController: b1d1d50ab87cf6b8b13531de5f4530482e7e53ed
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
@@ -136,9 +136,9 @@ SPEC CHECKSUMS:
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   ICSPullToRefresh: 9e6720df41f6d3e8a31e3cdd99a0b922850abe85
   ImagePickerSheetController: 3c58c9fee6dcf36485222358a021f6b734f997ba
-  IQKeyboardManagerSwift: e0964d04d6a29b71016fd346dca13ecb80a2823a
-  KeyboardMan: 665211f180093f5bb3c6ff7e8b7f858c432c6ccf
-  Kingfisher: 05bf8d04408aaa70fcd2c8c81b9f1d0f1ad313dd
+  IQKeyboardManagerSwift: 41fd3a45a2cdb2a0e031af697708a95b865068a1
+  KeyboardMan: 18b2e800fffd3142e62b7669f7df01ffce2f0d9d
+  Kingfisher: 9b82e0e1f1a296f149a50bbc2214532eaa4df4f1
   LTInfiniteScrollView-Swift: 4e5e0cfd742751acd3a122ef206c803be3ee8fba
   Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
@@ -153,7 +153,7 @@ SPEC CHECKSUMS:
   Realm: 9d5c46a4d7d27958530a8dfc58f63a99e5c2cba3
   RealmSwift: 82f3ac5e24530143dddfde2033acc0d308f27d96
   Ruler: ca20ae2a4a39d029d515daf9a8b8bb70b59ae441
-  SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
+  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SnapKit: 4962eed2ee18e48cbd2b2292fffc57efe7235f87
   SwiftDate: 971f8b9394f664f2226b9c3ab64e801a7291c612
   SwiftString: ec9c31c55b2aa147a1154f5f5f8483dc71e3165f
@@ -164,6 +164,6 @@ SPEC CHECKSUMS:
   UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
   ValueStepper: 499e970b2e8e60aa133f03c941de9dca4fe88ed3
 
-PODFILE CHECKSUM: a48584f4d6d65366c85b0d926a5dfd683ff67082
+PODFILE CHECKSUM: 566fb9fc765ae1a12084ac9aa12ba8afbd4c6797
 
 COCOAPODS: 1.0.1

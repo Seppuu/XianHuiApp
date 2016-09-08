@@ -1,7 +1,7 @@
 #import <UIKit/UIKit.h>
 
 #import "LCChatKit.h"
-#import "AVIMEmotionMessage.h"
+#import "AVIMMessage+LCCKExtension.h"
 #import "AVIMTypedMessage+LCCKExtension.h"
 #import "LCCKMessage.h"
 #import "LCCKMessageDelegate.h"
@@ -18,7 +18,7 @@
 #import "LCCKConversationViewController.h"
 #import "LCCKLocationController.h"
 #import "LCCKTextFullScreenViewController.h"
-#import "AVIMConversation+LCCKAddition.h"
+#import "AVIMConversation+LCCKExtension.h"
 #import "LCCKConversationViewModel.h"
 #import "LCCKImageManager.h"
 #import "LCCKWeakReference.h"
@@ -59,6 +59,7 @@
 #import "LCCKConversationListViewModel.h"
 #import "LCCKConversationListCell.h"
 #import "NSBundle+LCCKExtension.h"
+#import "NSFileManager+LCCKExtension.h"
 #import "NSString+LCCKExtension.h"
 #import "NSString+LCCKMD5.h"
 #import "UIColor+LCCKExtension.h"

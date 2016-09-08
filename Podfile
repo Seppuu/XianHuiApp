@@ -2,7 +2,7 @@ platform :ios, ‘9.0’
 use_frameworks!
 
 target 'XianHui' do
-pod 'ChatKit',  '~> 0.6.0’
+pod 'ChatKit',  '~> 0.7.13’
 pod 'CTAssetsPickerController',  '~> 3.3.0'
 pod 'DZNEmptyDataSet'
 pod 'TWMessageBarManager'

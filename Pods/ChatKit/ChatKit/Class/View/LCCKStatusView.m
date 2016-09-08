@@ -2,13 +2,16 @@
 //  LCCKStatusView.m
 //  LeanCloudChatKit-iOS
 //
-//  v0.6.0 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/3/11.
+//  v0.7.10 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/3/11.
 //  Copyright © 2016年 LeanCloud. All rights reserved.
 //
 
 #import "LCCKStatusView.h"
+#if __has_include(<ChatKit/LCChatKit.h>)
+#import <ChatKit/LCChatKit.h>
+#else
 #import "LCChatKit.h"
-#import "UIImage+LCCKExtension.h"
+#endif
 
 static CGFloat LCCKStatusImageViewHeight = 20;
 static CGFloat LCCKHorizontalSpacing = 15;

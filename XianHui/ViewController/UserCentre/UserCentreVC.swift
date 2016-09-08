@@ -33,8 +33,8 @@ class UserCentreVC: BaseViewController {
     private var uploadingAvatar = false
     
     let section1 = ["隐私与安全"]
-    let section2 = ["row 0","row 1"]
-    let section3 = ["row 0"]
+//    let section2 = ["暂无","暂无"]
+//    let section3 = ["暂无"]
     
     private var imageUploading = UIImage()
     
@@ -62,12 +62,8 @@ class UserCentreVC: BaseViewController {
         userTableView.delegate = self
         userTableView.dataSource = self
         
-        
         userTableView.registerNib(UINib(nibName: AddUserAvatarCell, bundle: nil), forCellReuseIdentifier: AddUserAvatarCell)
-        
         userTableView.registerNib(UINib(nibName: UserAvatarEditCellId, bundle: nil), forCellReuseIdentifier: UserAvatarEditCellId)
-        
-        
         userTableView.registerNib(UINib(nibName: logOutCellId, bundle: nil), forCellReuseIdentifier: logOutCellId)
     }
     
@@ -76,8 +72,6 @@ class UserCentreVC: BaseViewController {
         super.didReceiveMemoryWarning()
         
     }
-    
-    
     
     // MARK: - Navigation
     
@@ -110,12 +104,12 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
         else if section == 1 {
             return section1.count
         }
-        else if section == 2 {
-            return section2.count
-        }
-        else if section == 3 {
-            return section3.count
-        }
+//        else if section == 2 {
+//            return section2.count
+//        }
+//        else if section == 3 {
+//            return section3.count
+//        }
         else {
             if editUserInfo == true {
                 return 1
@@ -205,30 +199,30 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
             return cell
         }
             
-        else if indexPath.section == 2 {
-            let cellID = "cellIDs2"
-            let cell = UITableViewCell(style: .Default, reuseIdentifier: cellID)
-            cell.imageView?.layer.cornerRadius = (cell.imageView?.ddWidth)!/2
-            cell.imageView?.layer.masksToBounds = true
-            cell.imageView?.backgroundColor = UIColor ( red: 1.0, green: 0.874, blue: 0.7309, alpha: 1.0 )
-            cell.textLabel?.text = section2[indexPath.row]
-            
-            cell.selectionStyle = .None
-            
-            return cell
-        }
-        else if indexPath.section == 3 {
-            let cellID = "cellIDs2"
-            let cell = UITableViewCell(style: .Default, reuseIdentifier: cellID)
-            cell.imageView?.layer.cornerRadius = (cell.imageView?.ddWidth)!/2
-            cell.imageView?.layer.masksToBounds = true
-            cell.imageView?.backgroundColor = UIColor ( red: 1.0, green: 0.874, blue: 0.7309, alpha: 1.0 )
-            cell.textLabel?.text = section3[indexPath.row]
-            
-            cell.selectionStyle = .None
-            
-            return cell
-        }
+//        else if indexPath.section == 2 {
+//            let cellID = "cellIDs2"
+//            let cell = UITableViewCell(style: .Default, reuseIdentifier: cellID)
+//            cell.imageView?.layer.cornerRadius = (cell.imageView?.ddWidth)!/2
+//            cell.imageView?.layer.masksToBounds = true
+//            cell.imageView?.backgroundColor = UIColor ( red: 1.0, green: 0.874, blue: 0.7309, alpha: 1.0 )
+//            cell.textLabel?.text = section2[indexPath.row]
+//            
+//            cell.selectionStyle = .None
+//            
+//            return cell
+//        }
+//        else if indexPath.section == 3 {
+//            let cellID = "cellIDs2"
+//            let cell = UITableViewCell(style: .Default, reuseIdentifier: cellID)
+//            cell.imageView?.layer.cornerRadius = (cell.imageView?.ddWidth)!/2
+//            cell.imageView?.layer.masksToBounds = true
+//            cell.imageView?.backgroundColor = UIColor ( red: 1.0, green: 0.874, blue: 0.7309, alpha: 1.0 )
+//            cell.textLabel?.text = section3[indexPath.row]
+//            
+//            cell.selectionStyle = .None
+//            
+//            return cell
+//        }
         else {
             //退出
             let cell = tableView.dequeueReusableCellWithIdentifier(logOutCellId, forIndexPath: indexPath) as! SingleTapCell
@@ -251,27 +245,10 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
             vc.title = "隐私与安全"
             navigationController?.pushViewController(vc, animated: true)
         }
-        else if indexPath.section == 2 {
-            if indexPath.row == 0 {
-                //历史记录
-                NSNotificationCenter.defaultCenter().postNotificationName(HistoryNoti, object: nil)
-                
-            }
-            else if indexPath.row == 1{
-                //赞过的课程
-                NSNotificationCenter.defaultCenter().postNotificationName(LessonsLikedNoti, object: nil)
-                
-            }
-        }
-        else if indexPath.section == 3 {
-            
-            if indexPath.row == 0 {
-                //反馈
-                NSNotificationCenter.defaultCenter().postNotificationName(FeedBackNoti, object: nil)
-            }
+        else if indexPath.section == 0 {
             
         }
-        else if indexPath.section == 4 {
+        else {
             
             if indexPath.row == 0 {
                 //退出
@@ -286,7 +263,7 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
         
         self.editUserInfo = true
         
-        let indexPath = NSIndexPath(forRow: 0, inSection: 4)
+        let indexPath = NSIndexPath(forRow: 0, inSection: 2)
         
         
         userTableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
@@ -296,7 +273,7 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
         
         self.editUserInfo = false
         
-        let indexPath = NSIndexPath(forRow: 0, inSection: 4)
+        let indexPath = NSIndexPath(forRow: 0, inSection: 2)
         
         
         userTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)

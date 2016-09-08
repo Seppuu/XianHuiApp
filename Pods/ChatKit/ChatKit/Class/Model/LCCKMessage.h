@@ -2,7 +2,7 @@
 //  LCCKMessage.h
 //  LeanCloudChatKit-iOS
 //
-//  v0.6.0 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/3/21.
+//  v0.7.10 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/3/21.
 //  Copyright © 2016年 LeanCloud. All rights reserved.
 //
 
@@ -51,6 +51,8 @@
  * just for failed message store, its value is always not same to serverMessageId. value is same to timestamp.
  */
 @property (nonatomic, copy, readwrite) NSString *localMessageId;
+
+@property (nonatomic, copy, readonly) NSString *localDisplayName;
 
 - (instancetype)initWithText:(NSString *)text
                       senderId:(NSString *)senderId
@@ -152,6 +154,6 @@
                                  timestamp:(NSTimeInterval)timestamp
                            serverMessageId:(NSString *)serverMessageId;
 
-+ (LCCKMessage *)messageWithAVIMTypedMessage:(AVIMTypedMessage *)message;
++ (id)messageWithAVIMTypedMessage:(AVIMTypedMessage *)message;
 
 @end

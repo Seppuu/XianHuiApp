@@ -2,7 +2,7 @@
 //  LCCKContactListViewController.h
 //  LeanCloudChatKit-iOS
 //
-//  v0.6.0 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/2/22.
+//  v0.7.10 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/2/22.
 //  Copyright © 2016年 LeanCloud. All rights reserved.
 //
 
@@ -32,8 +32,6 @@ typedef BOOL (^LCCKDeleteContactCallback)(UIViewController *viewController, NSSt
 
 @interface LCCKContactListViewController : LCCKBaseTableViewController
 
-@property (nonatomic, strong) UISearchDisplayController *searchController;
-
 /*!
  * 不参与展示的名单，可以是黑名单或者当前用户。该数组是client id的集合。
  */
@@ -43,8 +41,6 @@ typedef BOOL (^LCCKDeleteContactCallback)(UIViewController *viewController, NSSt
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSSet<LCCKContact *> *contacts;
 @property (nonatomic, copy) NSSet<NSString *> *userIds;
-
-- (void)reSetSearchBar;
 
 - (void)setDeleteContactCallback:(LCCKDeleteContactCallback)deleteContactCallback;
 - (LCCKDeleteContactCallback)deleteContactCallback;
@@ -77,7 +73,6 @@ NS_ASSUME_NONNULL_BEGIN
                          userIds:(NSSet<NSString *> *)userIds
                  excludedUserIds:(NSSet * __nullable)excludedUserIds
                             mode:(LCCKContactListMode)contactListMode;
-
 NS_ASSUME_NONNULL_END
 
 @end

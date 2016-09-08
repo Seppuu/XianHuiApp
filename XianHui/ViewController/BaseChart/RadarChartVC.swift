@@ -228,8 +228,7 @@ class RadarChartVC: BaseChartViewController {
             //button.setTitleColor(UIColor.whiteColor(), forState: .Selected)
             button.setTitleColor(UIColor ( red: 0.3779, green: 0.3171, blue: 0.3185, alpha: 1.0 ), forState: .Normal)
             button.setTitle(listOfType[yVal.xIndex], forState: .Normal)
-            button.titleLabel?.font = UIFont.systemFontOfSize(12)
-            button.backgroundColor = UIColor ( red: 1.0, green: 0.0, blue: 0.0, alpha: 0.45 )
+            button.titleLabel?.font = UIFont.systemFontOfSize(13)
 //            button.layer.cornerRadius = 4.0
 //            button.layer.masksToBounds = true
 //            button.layer.borderWidth = 0.8

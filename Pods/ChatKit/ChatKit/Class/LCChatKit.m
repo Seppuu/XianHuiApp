@@ -2,14 +2,11 @@
 //  LCChatKit.m
 //  LeanCloudChatKit-iOS
 //
-//  v0.6.0 Created by ElonChan (wechat:chenyilong1010) on 16/2/22.
+//  v0.7.10 Created by ElonChan (wechat:chenyilong1010) on 16/2/22.
 //  Copyright © 2016年 LeanCloud. All rights reserved.
 //
 
 #import "LCChatKit.h"
-
-// Dictionary that holds all instances of Singleton include subclasses
-static NSMutableDictionary *_sharedInstances = nil;
 
 @interface LCChatKit ()
 /*!
@@ -44,39 +41,21 @@ static NSMutableDictionary *_sharedInstances = nil;
 
 #pragma mark -
 
-+ (void)initialize {
-    if (_sharedInstances == nil) {
-        _sharedInstances = [NSMutableDictionary dictionary];
-    }
-}
-
-+ (id)allocWithZone:(NSZone *)zone {
-    // Not allow allocating memory in a different zone
-    return [self sharedInstance];
-}
-
 + (id)copyWithZone:(NSZone *)zone {
     // Not allow copying to a different zone
     return [self sharedInstance];
 }
 
+/**
+ * create a singleton instance of LCChatKit
+ */
 + (instancetype)sharedInstance {
-    id sharedInstance = nil;
-    
-    @synchronized(self) {
-        NSString *instanceClass = NSStringFromClass(self);
-        
-        // Looking for existing instance
-        sharedInstance = [_sharedInstances objectForKey:instanceClass];
-        
-        // If there's no instance – create one and add it to the dictionary
-        if (sharedInstance == nil) {
-            sharedInstance = [[super allocWithZone:nil] init];
-            [_sharedInstances setObject:sharedInstance forKey:instanceClass];
-        }
-    }
-    
-    return sharedInstance;
+    static LCChatKit *_sharedLCChatKit = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _sharedLCChatKit = [[self alloc] init];
+    });
+    return _sharedLCChatKit;
 }
 
 #pragma mark -
@@ -87,7 +66,7 @@ static NSMutableDictionary *_sharedInstances = nil;
     [LCChatKit sharedInstance].appId = appId;
     [LCChatKit sharedInstance].appKey = appKey;
     if ([LCCKSettingService allLogsEnabled]) {
-        NSLog(@"LeanCloudKit Version is %@", [LCCKSettingService ChatKitVersion]);
+        LCCKLog(@"ChatKit Version is %@", [LCCKSettingService ChatKitVersion]);
     }
 }
 
@@ -139,12 +118,20 @@ static NSMutableDictionary *_sharedInstances = nil;
     [self.sessionService openWithClientId:clientId callback:callback];
 }
 
+- (void)openWithClientId:(NSString *)clientId force:(BOOL)force callback:(AVIMBooleanResultBlock)callback {
+    [self.sessionService openWithClientId:clientId force:force callback:callback];
+}
+
 - (void)closeWithCallback:(LCCKBooleanResultBlock)callback {
     [self.sessionService closeWithCallback:callback];
 }
 
 - (void)setForceReconnectSessionBlock:(LCCKForceReconnectSessionBlock)forceReconnectSessionBlock {
     [self.sessionService setForceReconnectSessionBlock:forceReconnectSessionBlock];
+}
+
+- (void)setDisableSingleSignOn:(BOOL)disableSingleSignOn {
+    self.sessionService.disableSingleSignOn = disableSingleSignOn;
 }
 
 #pragma mark - LCCKUserSystemService
@@ -154,6 +141,10 @@ static NSMutableDictionary *_sharedInstances = nil;
 
 - (void)setFetchProfilesBlock:(LCCKFetchProfilesBlock)fetchProfilesBlock {
     [self.userSystemService setFetchProfilesBlock:fetchProfilesBlock];
+}
+
+- (void)removeCachedProfileForPeerId:(NSString *)peerId {
+    [self.userSystemService removeCachedProfileForPeerId:peerId];
 }
 
 - (void)removeAllCachedProfiles {
@@ -254,15 +245,27 @@ static NSMutableDictionary *_sharedInstances = nil;
 }
 
 - (void)syncBadge {
-    [[LCCKSettingService sharedInstance] syncBadge];
+    [self.settingService syncBadge];
 }
 
 - (BOOL)useDevPushCerticate {
-    return [[LCCKSettingService sharedInstance] useDevPushCerticate];
+    return [self.settingService useDevPushCerticate];
 }
 
 - (void)setUseDevPushCerticate:(BOOL)useDevPushCerticate {
-    [LCCKSettingService sharedInstance].useDevPushCerticate = useDevPushCerticate;
+    self.settingService.useDevPushCerticate = useDevPushCerticate;
+}
+
+- (BOOL)isDisablePreviewUserId {
+    return self.settingService.isDisablePreviewUserId;
+}
+
+- (void)setDisablePreviewUserId:(BOOL)disablePreviewUserId {
+    self.settingService.disablePreviewUserId = disablePreviewUserId;
+}
+
+- (void)setBackgroundImage:(UIImage *)image forConversationId:(NSString *)conversationId scaledToSize:(CGSize)scaledToSize {
+    [self.settingService setBackgroundImage:image forConversationId:conversationId scaledToSize:scaledToSize];
 }
 
 #pragma mark - LCCKConversationService
@@ -282,6 +285,10 @@ static NSMutableDictionary *_sharedInstances = nil;
     [self.conversationService setLoadLatestMessagesHandler:loadLatestMessagesHandler];
 }
 
+- (void)setFilterMessagesBlock:(LCCKFilterMessagesBlock)filterMessagesBlock {
+    [self.conversationService setFilterMessagesBlock:filterMessagesBlock];
+}
+
 - (void)createConversationWithMembers:(NSArray *)members type:(LCCKConversationType)type unique:(BOOL)unique callback:(AVIMConversationResultBlock)callback {
     [self.conversationService createConversationWithMembers:members type:type unique:unique callback:callback];
 }
@@ -296,6 +303,10 @@ static NSMutableDictionary *_sharedInstances = nil;
 
 - (void)didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [self.conversationService didReceiveRemoteNotification:userInfo];
+}
+
+- (void)insertRecentConversation:(AVIMConversation *)conversation {
+    [self.conversationService insertRecentConversation:conversation];
 }
 
 - (void)increaseUnreadCountWithConversationId:(NSString *)conversationId {

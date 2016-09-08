@@ -2,7 +2,7 @@
 //  LCCKContactListViewController.m
 //  LeanCloudChatKit-iOS
 //
-//  v0.6.0 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/2/22.
+//  v0.7.10 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/2/22.
 //  Copyright © 2016年 LeanCloud. All rights reserved.
 //
 
@@ -37,7 +37,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-
+@property (nonatomic, strong) UISearchDisplayController *searchController;
 #pragma clang diagnostic pop
 @property (nonatomic, copy) NSArray *searchContacts;
 @property (nonatomic, copy) NSDictionary *searchSections;
@@ -96,6 +96,12 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
     _excludedUserIds = excludedUserIds;
     _mode = mode;
     _userIds = userIds;
+    //TODO:
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataSourceUpdated:) name:LCCKNotificationContactListDataSourceUpdated object:nil];
+    __unsafe_unretained typeof(self) weakSelf = self;
+    [self lcck_executeAtDealloc:^{
+        [[NSNotificationCenter defaultCenter] removeObserver:weakSelf];
+    }];
     return self;
 }
 
@@ -178,7 +184,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
         searchBar.delegate = self;
         searchBar.placeholder = @"搜索";
         _searchBar = searchBar;
-        //self.tableView.tableHeaderView = _searchBar;
+        self.tableView.tableHeaderView = _searchBar;
     }
     return _searchBar;
 }
@@ -199,7 +205,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"联系人";
-    //self.tableView.tableHeaderView = self.searchBar;
+    self.tableView.tableHeaderView = self.searchBar;
     self.tableView.tableFooterView = [[UIView alloc] init];
     NSBundle *bundle = [NSBundle bundleForClass:[LCChatKit class]];
     [self setupSearchBarControllerWithSearchBar:self.searchBar bundle:bundle];
@@ -458,6 +464,21 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
     [self forceReloadByContacts];
 }
 
+- (void)dataSourceUpdated:(NSNotification *)notification {
+    if (notification.object == nil) {
+        return;
+    }
+    //TODO:
+//    NSDictionary *userInfo = [notification object];
+//    NSSet *dataSource = userInfo[LCCKNotificationContactListDataSourceUpdatedUserInfoDataSourceKey];
+//    NSString *dataSourceType = userInfo[LCCKNotificationContactListDataSourceUpdatedUserInfoDataSourceTypeKey];
+//    if ([dataSourceType isEqualToString:LCCKNotificationContactListDataSourceContactObjType]) {
+//        self.contacts = dataSource;
+//    } else {
+//        
+//    }
+}
+
 - (void)forceReloadByContacts {
     self.needReloadDataSource = YES;
 }
@@ -508,6 +529,12 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
     }
 }
 
+//TOO:
+//- (void)deletePeerId:(NSString *)peerId callback:(LCCKDeleteContactCallback)deleteContactCallback {
+//    [self deleteClientId:peerId];
+//    !deleteContactCallback ?: deleteContactCallback(self, peerId);
+//}
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.mode == LCCKContactListModeNormal) {
         NSString *peerId = [self currentClientIdAtIndexPath:indexPath tableView:tableView];
@@ -518,10 +545,12 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
             LCCKAlertController *alert = [LCCKAlertController alertControllerWithTitle:title
                                                                                message:@""
                                                                         preferredStyle:LCCKAlertControllerStyleAlert];
-            NSString *cancelActionTitle = LCCKLocalizedStrings(@"cancel");            LCCKAlertAction* cancelAction = [LCCKAlertAction actionWithTitle:cancelActionTitle style:LCCKAlertActionStyleDefault
+            NSString *cancelActionTitle = LCCKLocalizedStrings(@"cancel");
+            LCCKAlertAction* cancelAction = [LCCKAlertAction actionWithTitle:cancelActionTitle style:LCCKAlertActionStyleDefault
                                                                      handler:^(LCCKAlertAction * action) {}];
             [alert addAction:cancelAction];
-            NSString *resendActionTitle = LCCKLocalizedStrings(@"ok");            LCCKAlertAction* resendAction = [LCCKAlertAction actionWithTitle:resendActionTitle style:LCCKAlertActionStyleDefault
+            NSString *resendActionTitle = LCCKLocalizedStrings(@"ok");
+            LCCKAlertAction* resendAction = [LCCKAlertAction actionWithTitle:resendActionTitle style:LCCKAlertActionStyleDefault
                                                                      handler:^(LCCKAlertAction * action) {
                                                                          if (self.deleteContactCallback) {
                                                                              BOOL delegateSuccess = self.deleteContactCallback(self, peerId);
@@ -658,10 +687,8 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 }
 
 - (void)searchDisplayController:(UISearchDisplayController *)controller didHideSearchResultsTableView:(UITableView *)tableView {
-    
     [self reloadAllTableViewData:tableView];
 }
-
 
 - (void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller {
     UIButton *cancelButton;
@@ -676,19 +703,6 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
     }
 }
 
-//xianhui searchbar dismiss , reset searchbar frame
-- (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller {
-    
-    self.searchController.searchBar.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 44);
-
-    //[self reSetSearchBar];
-}
-
-- (void) reSetSearchBar {
-    
-}
-
-
 #pragma mark - UISearchDisplayDelegate
 
 // return YES to reload table. called when search string/option changes. convenience methods on top UISearchBar delegate methods
@@ -700,9 +714,6 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption NS_DEPRECATED_IOS(3_0,8_0){
     return YES;
 }
-
-
-
 
 #pragma clang diagnostic pop
 

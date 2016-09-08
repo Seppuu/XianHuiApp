@@ -2,7 +2,7 @@
 //  LCCKContactCell.m
 //  LeanCloudChatKit-iOS
 //
-//  v0.6.0 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/3/9.
+//  v0.7.10 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/3/9.
 //  Copyright © 2016年 LeanCloud. All rights reserved.
 //
 
@@ -44,12 +44,12 @@
     LCCKAvatarImageViewCornerRadiusBlock avatarImageViewCornerRadiusBlock = [LCChatKit sharedInstance].avatarImageViewCornerRadiusBlock;
     if (avatarImageViewCornerRadiusBlock) {
         CGFloat avatarImageViewCornerRadius = avatarImageViewCornerRadiusBlock(self.avatarImageView.frame.size);
-        [self.avatarImageView lcck_cornerRadiusAdvance:avatarImageViewCornerRadius rectCornerType:UIRectCornerAllCorners];
+        self.avatarImageView.lcck_cornerRadius = avatarImageViewCornerRadius;
     }
     NSString *selectionStatusButtonNormalImageName = @"CellGraySelected";
     NSString *selectionStatusButtonSelectedImageName = @"CellBlueSelected";
-    UIImage *selectionStatusButtonNormalImage = [UIImage lcck_imageNamed:selectionStatusButtonNormalImageName bundleName:@"Common" bundleForClass:[LCChatKit class]];
-    UIImage *selectionStatusButtonSelectedImage = [UIImage lcck_imageNamed:selectionStatusButtonSelectedImageName bundleName:@"Common" bundleForClass:[LCChatKit class]];
+    UIImage *selectionStatusButtonNormalImage = [UIImage lcck_imageNamed:selectionStatusButtonNormalImageName bundleName:@"Other" bundleForClass:[LCChatKit class]];
+    UIImage *selectionStatusButtonSelectedImage = [UIImage lcck_imageNamed:selectionStatusButtonSelectedImageName bundleName:@"Other" bundleForClass:[LCChatKit class]];
     [self.selectionStatusButton setImage:selectionStatusButtonNormalImage forState:UIControlStateNormal];
     [self.selectionStatusButton setImage:selectionStatusButtonSelectedImage forState:UIControlStateSelected];
 }

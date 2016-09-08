@@ -2,11 +2,13 @@
 //  LCChatKit_Internal.h
 //  LeanCloudChatKit-iOS
 //
-//  v0.6.0 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/3/9.
+//  v0.7.10 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/3/9.
 //  Copyright © 2016年 LeanCloud. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+
+FOUNDATION_EXTERN NSMutableDictionary const *_sharedInstances;
 
 /**
  `LCCKSingleton` is a generic class for Mac OSX and iOS that implements all the required methods to implement a singleton object. It's designed for subclassing.
