@@ -8,7 +8,9 @@
 
 import UIKit
 import SwiftyJSON
+import MJRefresh
 
+//顾客消费记录列表(分页)
 class CustomerConsumeListVC: UIViewController {
     
     var tableView:UITableView!
@@ -19,14 +21,20 @@ class CustomerConsumeListVC: UIViewController {
     
     var dateList = [String]()
     
+    var pageSize = 100
+    
+    var pageNumber = 1
+    
+    var totalPage = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-        
-        getListWith(customer.id, pageSize: 20, pageNumber: 1)
+        getListWith(customer.id, pageSize: pageSize, pageNumber: pageNumber)
         
         setTableView()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,7 +48,14 @@ class CustomerConsumeListVC: UIViewController {
             
             if success == true {
                 let jsonData = json!["rows"].array!
-                self.goodListArray = self.makeGoodListWith(jsonData)
+                self.totalPage = json!["totalPage"].int!
+                self.goodListArray += self.makeGoodListWith(jsonData)
+                //self.pageNumber += 1
+                
+//                if self.pageNumber > self.totalPage {
+//                    self.hasNoData = true
+//                }
+                
                 self.tableView.reloadData()
             }
             else {
@@ -98,6 +113,8 @@ class CustomerConsumeListVC: UIViewController {
     
     let cellId = "typeCell"
     
+    var hasNoData = false
+    
     func setTableView() {
         
         tableView = UITableView(frame: view.bounds, style:.Plain)
@@ -108,6 +125,13 @@ class CustomerConsumeListVC: UIViewController {
         let nib  = UINib(nibName: cellId, bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: cellId)
         
+//        tableView.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
+//            
+//            if self.hasNoData == true {return}
+//            
+//            self.getListWith(self.customer.id, pageSize: self.pageSize, pageNumber: self.pageNumber)
+//            
+//        })
         
     }
 

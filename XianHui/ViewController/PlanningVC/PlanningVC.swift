@@ -113,6 +113,29 @@ class PlanningVC: UIViewController {
         tableView.registerNib(nib, forCellReuseIdentifier: cellId)
         
     }
+    
+    func avatarTap(sender:UITapGestureRecognizer) {
+        
+        let point = sender.locationInView(tableView)
+        
+        let cellIndex = tableView.indexPathForRowAtPoint(point)!
+        
+        var customer:Customer!
+        
+        if cellIndex.section == 0 {
+            customer = listOfCustommerNotPlanned[cellIndex.row]
+        }
+        else {
+            customer = listOfCustommerPlanned[cellIndex.row]
+        }
+        
+        
+        let vc = CustomerProfileVC()
+        vc.title = "详细资料"
+        vc.customer = customer
+        
+        self.parentNavigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension PlanningVC: UITableViewDelegate,UITableViewDataSource {
@@ -163,6 +186,10 @@ extension PlanningVC: UITableViewDelegate,UITableViewDataSource {
         cell.avatarView.layer.cornerRadius = cell.avatarView.ddWidth/2
         cell.avatarView.layer.masksToBounds = true
         cell.accessoryType = .DisclosureIndicator
+        
+        cell.avatarView.userInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(PlanningVC.avatarTap(_:)))
+        cell.avatarView.addGestureRecognizer(tap)
         
         if indexPath.section == 0 {
             

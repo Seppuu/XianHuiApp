@@ -349,7 +349,8 @@ extension ProjectListVC:UITableViewDelegate,UITableViewDataSource {
     
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        
+       return 2
         
     }
     
@@ -398,7 +399,7 @@ extension ProjectListVC:UITableViewDelegate,UITableViewDataSource {
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         if section == 0 {
-
+            
             let container = UIView(frame: CGRect(x: 0, y: 0, width:screenWidth, height: 42))
             let label = UILabel(frame: CGRect(x: 15, y: 0, width:200, height: 21))
             label.center.y = container.center.y
@@ -413,7 +414,14 @@ extension ProjectListVC:UITableViewDelegate,UITableViewDataSource {
             label.addGestureRecognizer(tap)
             
             container.addSubview(label)
-            return container
+            
+            
+            if segment.selectedSegmentIndex == 0 {
+                return projectsBought.count > 0 ? container : nil
+            }
+            else {
+                return prodsBought.count > 0 ? container : nil
+            }
         }
         else {
 
