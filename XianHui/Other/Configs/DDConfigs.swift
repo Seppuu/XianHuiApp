@@ -42,6 +42,17 @@ let GetDailyReportMaxVauleUrl = DDBaseUrl + "/rest/employee/getdailyreportsettin
 let SaveDailyReportMaxVauleUrl = DDBaseUrl + "/rest/employee/setdailyreportsetting"
 
 
+//获取日报表数据
+let GetDailyReportDataUrl = DDBaseUrl + "/rest/employee/getdailyreportdata"
+
+
+
+
+
+
+
+
+
 ///我的工作 -- 计划
 
 //获取计划顾客列表

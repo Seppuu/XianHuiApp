@@ -15,6 +15,9 @@ class HelperVC: BaseViewController {
     var listOfHelper = [Helper]()
     
     var cellId = "HeplerCell"
+    
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +32,9 @@ class HelperVC: BaseViewController {
         super.didReceiveMemoryWarning()
         
     }
+    
+   
+    
     
     func setTableView() {
         tableView = UITableView(frame: view.bounds, style: .Grouped)

@@ -12,11 +12,37 @@ class DailyFormVC: RadarChartVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        getDailyReportDataWith(date)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        
+    }
+    
+    var date:String {
+        
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "YYYY-MM-dd"
+        
+        let date = NSDate()
+        
+        return formatter.stringFromDate(date)
+    }
+    
+    func getDailyReportDataWith(date:String) {
+        
+        NetworkManager.sharedManager.getDailyReportDataWith(date) { (success, json, error) in
+            
+            if success == true {
+                
+            }
+            else {
+                
+            }
+            
+        }
         
     }
     

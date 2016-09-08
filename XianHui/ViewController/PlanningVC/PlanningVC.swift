@@ -78,8 +78,6 @@ class PlanningVC: UIViewController {
             
             customer.happyLevel = "满意度:\(data["score"].int!)"
             
-            customer.time = "4天"
-            
             customer.planned = data["planed"].string!
             
             if customer.planned == "0" {
@@ -104,7 +102,7 @@ class PlanningVC: UIViewController {
     
     func setTableView() {
         
-        tableView = UITableView(frame: view.bounds, style: .Grouped)
+        tableView = UITableView(frame: CGRectMake(0.0,0.0, self.view.frame.width, self.view.frame.height - 64 - 40), style: .Grouped)
         view.addSubview(tableView)
         
         tableView.delegate = self
@@ -166,23 +164,25 @@ extension PlanningVC: UITableViewDelegate,UITableViewDataSource {
         cell.accessoryType = .DisclosureIndicator
         
         if indexPath.section == 0 {
+            
             let customer = listOfCustommerNotPlanned[indexPath.row]
             
             cell.nameLabel.text = customer.name
-            cell.stageLabel.text = "无"
+            cell.stageLabel.text = ""
            
             cell.happyLevel.text = "待计划"
             cell.happyLevel.textColor = UIColor.redColor()
             
         }
         else {
+            
             let customer = listOfCustommerPlanned[indexPath.row]
             
             cell.nameLabel.text = customer.name
-            cell.stageLabel.text = "无"
             
-            cell.happyLevel.text = "计划:无"
-            cell.stageLabel.text = "16/11/06"
+            cell.stageLabel.text = ""
+            
+            cell.happyLevel.text = ""
         }
         
         return cell

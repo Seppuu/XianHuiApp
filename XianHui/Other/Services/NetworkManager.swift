@@ -204,6 +204,23 @@ extension NetworkManager {
 
 //MARK:日报表
 extension NetworkManager {
+    
+    //获取日报表数据
+    func getDailyReportDataWith(date:String,completion:DDResultHandler) {
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!,
+            "date":date
+        ]
+        
+        let urlString = GetDailyReportDataUrl
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+        
+    }
+    
+    
+    
     func getDailyReportMaxVaule(completion:DDResultHandler) {
         
         let dict:JSONDictionary = [
