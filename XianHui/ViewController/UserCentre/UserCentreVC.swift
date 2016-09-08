@@ -304,9 +304,29 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
     
     private func userLogOut() {
         
+        //先退出IM
+        ChatKitExample.invokeThisMethodBeforeLogoutSuccess({
+            
+            self.logOutOwnUserSystem()
+            
+            }, failed: { (error) in
+                //TODO:leanCloud IM 退出失败
+                let hud = MBProgressHUD.showHUDAddedTo((self.view)!, animated: true)
+                hud.mode = .Text
+                hud.labelText = error.description
+                
+                hud.hide(true, afterDelay: 1.5)
+        })
+        
+    }
+    
+    
+    private func logOutOwnUserSystem() {
+        
         let user = User.currentUser()
         user.logOut({ [weak self] (success,_,error) in
             if success {
+                
                 
                 //show intro
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -322,7 +342,6 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
                 hud.hide(true, afterDelay: 1.5)
             }
             })
-        
     }
     
     

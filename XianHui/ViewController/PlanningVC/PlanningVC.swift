@@ -102,6 +102,7 @@ class PlanningVC: UIViewController {
     
     func setTableView() {
         
+        //64是navbar+status 高度 40是"pageMenu"高度
         tableView = UITableView(frame: CGRectMake(0.0,0.0, self.view.frame.width, self.view.frame.height - 64 - 40), style: .Grouped)
         view.addSubview(tableView)
         
