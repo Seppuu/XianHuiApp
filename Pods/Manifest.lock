@@ -1,6 +1,6 @@
 PODS:
   - AFViewShaker (0.0.2)
-  - Alamofire (3.4.2)
+  - Alamofire (3.5.0)
   - AVOSCloud (3.4.0-beta.4)
   - AVOSCloudIM (3.4.0-beta.4):
     - AVOSCloud (= 3.4.0-beta.4)
@@ -16,7 +16,7 @@ PODS:
   - Charts (2.2.5):
     - Charts/Core (= 2.2.5)
   - Charts/Core (2.2.5)
-  - ChatKit (0.7.13):
+  - ChatKit (0.7.15):
     - AVOSCloud (~> 3.4.0-beta.4)
     - AVOSCloudIM (~> 3.4.0-beta.4)
     - DACircularProgress (~> 2.3.1)
@@ -37,6 +37,7 @@ PODS:
   - EAIntroView (2.9.0):
     - EARestrictedScrollView (~> 1.1.0)
   - EARestrictedScrollView (1.1.0)
+  - EBForeNotification (1.0.7)
   - FDStackView (1.0)
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
@@ -83,11 +84,12 @@ DEPENDENCIES:
   - Alamofire (~> 3.3)
   - BKPasscodeView
   - Charts
-  - ChatKit (~> 0.7.13)
+  - ChatKit
   - CryptoSwift
   - CTAssetsPickerController (~> 3.3.0)
   - DZNEmptyDataSet
   - EAIntroView (~> 2.9.0)
+  - EBForeNotification
   - ICSPullToRefresh (~> 0.4)
   - ImagePickerSheetController
   - IQKeyboardManagerSwift
@@ -120,18 +122,19 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AFViewShaker: 7e4bc215ca3e92347b78da436fca74e1730b52e8
-  Alamofire: 6aa33201d20d069e1598891cf928883ff1888c7a
+  Alamofire: b70a7352335f8ea5babd0a923eb7e8eacc67b877
   AVOSCloud: aacde3dcb0b35658cc72d0c04ec029b254dbf1e3
   AVOSCloudIM: 4e91aa7068d367270338289ff4b8d1be6d278919
   BKPasscodeView: 947e3542c126a9fa41c46318759d928919636e96
   Charts: b48fcc8d7190de910ff9e9748f5360c8ea7856e5
-  ChatKit: 8e85637ee5e2b0412408ce5a179208275e0a00f5
+  ChatKit: 3fefc4294765494b04b347ab4897f74c4ff62910
   CryptoSwift: c1ef79f901b86099a6fe8b3c7524cf9f3f3c8c40
   CTAssetsPickerController: b1d1d50ab87cf6b8b13531de5f4530482e7e53ed
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   EAIntroView: 76f68cc56242f2e25359419e6ecc2344ee7e1756
   EARestrictedScrollView: b0c2a3f92fb2610bb44d71c5e4893777c89e45ef
+  EBForeNotification: d2426fa084f7af912c665b80529cfb3fe5dbdb79
   FDStackView: 3a4bbe0ce9c35e974246a585168b9da8c32213f1
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   ICSPullToRefresh: 9e6720df41f6d3e8a31e3cdd99a0b922850abe85
@@ -164,6 +167,6 @@ SPEC CHECKSUMS:
   UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
   ValueStepper: 499e970b2e8e60aa133f03c941de9dca4fe88ed3
 
-PODFILE CHECKSUM: 566fb9fc765ae1a12084ac9aa12ba8afbd4c6797
+PODFILE CHECKSUM: f5d28c87765091151962b5f532e1bb0f61f87227
 
 COCOAPODS: 1.0.1

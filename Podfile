@@ -2,7 +2,7 @@ platform :ios, ‘9.0’
 use_frameworks!
 
 target 'XianHui' do
-pod 'ChatKit',  '~> 0.7.13’
+pod 'ChatKit'
 pod 'CTAssetsPickerController',  '~> 3.3.0'
 pod 'DZNEmptyDataSet'
 pod 'TWMessageBarManager'
@@ -10,6 +10,7 @@ pod 'MWPhotoBrowser'
 pod 'UITextView+Placeholder', '~> 1.2'
 pod 'BKPasscodeView'
 pod 'UAProgressView'
+pod 'EBForeNotification'
 
 pod 'ValueStepper'
 pod 'Palau', '~> 1.0'

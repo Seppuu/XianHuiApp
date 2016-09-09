@@ -2,7 +2,7 @@
 //  LCCKUserSystemService.m
 //  ChatKit-iOS
 //
-//  v0.7.10 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/2/22.
+//  v0.7.15 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/2/22.
 //  Copyright © 2016年 LeanCloud. All rights reserved.
 //
 
@@ -145,7 +145,7 @@ NSString *const LCCKUserSystemServiceErrorDomain = @"LCCKUserSystemServiceErrorD
 }
 
 - (NSArray<id<LCCKUserDelegate>> *)getCachedProfilesIfExists:(NSArray<NSString *> *)userIds shouldSameCount:(BOOL)shouldSameCount error:(NSError * __autoreleasing *)theError {
-   NSArray *cachedProfiles = [self getCachedProfilesIfExists:userIds error:theError];
+    NSArray *cachedProfiles = [self getCachedProfilesIfExists:userIds error:theError];
     if (!shouldSameCount) {
         return cachedProfiles;
     }
@@ -185,8 +185,7 @@ NSString *const LCCKUserSystemServiceErrorDomain = @"LCCKUserSystemServiceErrorD
     if (userId) {
         NSString *userName_ = nil;
         NSURL *avatarURL_ = nil;
-        id<LCCKUserDelegate> user;
-        user = [self getUserForClientId:userId];
+        id<LCCKUserDelegate> user = [self getUserForClientId:userId];
         userName_ = user.name;
         avatarURL_ = user.avatarURL;
         if (userName_ || avatarURL_) {
@@ -300,7 +299,7 @@ NSString *const LCCKUserSystemServiceErrorDomain = @"LCCKUserSystemServiceErrorD
             !callback ?: callback(YES, error);
         }];
     } else {
-       !callback ?: callback(YES, nil);
+        !callback ?: callback(YES, nil);
     }
 }
 
@@ -324,13 +323,22 @@ NSString *const LCCKUserSystemServiceErrorDomain = @"LCCKUserSystemServiceErrorD
 - (NSMutableDictionary *)cachedUsers {
     if (_cachedUsers == nil) {
         _cachedUsers = [[NSMutableDictionary alloc] init];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {});
-        NSString *queueBaseLabel = [NSString stringWithFormat:@"com.ChatKit.%@", NSStringFromClass([self class])];
-        const char *queueName = [[NSString stringWithFormat:@"%@.ForIsolation",queueBaseLabel] UTF8String];
-        self.isolationQueue = dispatch_queue_create(queueName, NULL);
     }
     return _cachedUsers;
 }
+
+- (dispatch_queue_t)isolationQueue {
+    if (_isolationQueue) {
+        return _isolationQueue;
+    }
+    NSString *queueBaseLabel = [NSString stringWithFormat:@"com.ChatKit.%@", NSStringFromClass([self class])];
+    const char *queueName = [[NSString stringWithFormat:@"%@.ForIsolation",queueBaseLabel] UTF8String];
+    _isolationQueue = dispatch_queue_create(queueName, NULL);
+    return _isolationQueue;
+}
+
+#pragma mark -
+#pragma mark - set or get cached user Method
 
 - (void)setUser:(id<LCCKUserDelegate>)user forClientId:(NSString *)clientId {
     NSString *clientId_ = [clientId copy];
@@ -352,8 +360,7 @@ NSString *const LCCKUserSystemServiceErrorDomain = @"LCCKUserSystemServiceErrorD
     }
     __block id<LCCKUserDelegate> user = nil;
     dispatch_sync(self.isolationQueue, ^(){
-        NSString *clientId_ = [NSString stringWithString:clientId];
-        user = self.cachedUsers[clientId_];
+        user = self.cachedUsers[clientId];
     });
     return user;
 }

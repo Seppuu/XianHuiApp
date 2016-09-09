@@ -138,9 +138,6 @@ extension ContactListVC {
                 
             }
             else {
-                //performSegueWithIdentifier("toTaskVC", sender: nil)
-//                let vc = UIStoryboard.init(name: "TaskList", bundle: nil).instantiateViewControllerWithIdentifier("TaskListVC") as! TaskListVC
-
                 let vc = MyWorkVC()
                 vc.title = "我的工作"
                 navigationController?.pushViewController(vc, animated: true)

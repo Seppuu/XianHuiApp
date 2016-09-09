@@ -14,6 +14,8 @@ class MyWorkVC: BaseViewController,CAPSPageMenuDelegate {
 
     var pageMenu : CAPSPageMenu?
     
+    var pageIndex = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.whiteColor()
@@ -70,7 +72,9 @@ class MyWorkVC: BaseViewController,CAPSPageMenuDelegate {
         
         // Optional delegate
         pageMenu!.delegate = self
-        pageMenu?.controllerScrollView.scrollEnabled = true
+        pageMenu!.controllerScrollView.scrollEnabled = true
+        
+        pageMenu!.moveToPage(pageIndex)
         
         self.view.addSubview(pageMenu!.view)
         

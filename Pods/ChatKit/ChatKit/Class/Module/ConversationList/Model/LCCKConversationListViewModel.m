@@ -2,7 +2,7 @@
 //  LCCKConversationListViewModel.m
 //  LeanCloudChatKit-iOS
 //
-//  v0.7.10 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/3/22.
+//  v0.7.15 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/3/22.
 //  Copyright © 2016年 LeanCloud. All rights reserved.
 //
 
@@ -36,7 +36,7 @@
 
 @interface LCCKConversationListViewModel ()
 
-@property (nonatomic, strong) LCCKConversationListViewController *conversationListViewController;
+@property (nonatomic, weak) LCCKConversationListViewController *conversationListViewController;
 @property (nonatomic, assign, getter=isFreshing) BOOL freshing;
 
 @end
@@ -55,10 +55,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:LCCKNotificationMessageReceived object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:LCCKNotificationUnreadsUpdated object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:LCCKNotificationConversationListDataSourceUpdated object:nil];
-        __unsafe_unretained typeof(self) weakSelf = self;
-        [self lcck_executeAtDealloc:^{
-               [[NSNotificationCenter defaultCenter] removeObserver:weakSelf];
-            }];
+    __unsafe_unretained typeof(self) weakSelf = self;
+    [self lcck_executeAtDealloc:^{
+        [[NSNotificationCenter defaultCenter] removeObserver:weakSelf];
+    }];
     _conversationListViewController = conversationListViewController;
     return self;
 }

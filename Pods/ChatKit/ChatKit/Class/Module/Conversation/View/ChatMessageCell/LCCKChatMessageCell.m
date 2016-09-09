@@ -2,7 +2,7 @@
 //  LCCKChatMessageCell.m
 //  LCCKChatExample
 //
-//  v0.7.10 Created by ElonChan (微信向我报BUG:chenyilong1010) ( https://github.com/leancloud/ChatKit-OC ) on 15/11/13.
+//  v0.7.15 Created by ElonChan (微信向我报BUG:chenyilong1010) ( https://github.com/leancloud/ChatKit-OC ) on 15/11/13.
 //  Copyright © 2015年 https://LeanCloud.cn . All rights reserved.
 //
 
@@ -46,7 +46,6 @@ static CGFloat const LCCKAvatarBottomToMessageContentTop = -1.f;
 
 
 static CGFloat const LCCK_MSG_CELL_EDGES_OFFSET = 16;
-static CGFloat const LCCK_MSG_CELL_EDGES_TOP = LCCK_MSG_CELL_EDGES_OFFSET;
 static CGFloat const LCCK_MSG_CELL_NICKNAME_HEIGHT = 16;
 static CGFloat const LCCK_MSG_CELL_NICKNAME_FONT_SIZE = 12;
 
@@ -314,7 +313,7 @@ static CGFloat const LCCK_MSG_CELL_NICKNAME_FONT_SIZE = 12;
         [[LCCKUserSystemService sharedInstance] getCachedProfileIfExists:senderClientId name:&nickName avatarURL:&avatarURL error:&error];
         if (!nickName)  { nickName = senderClientId; }
         self.message = nil;
-        sendStatus = [(AVIMTypedMessage *)message status];
+        sendStatus = (LCCKMessageSendState)[(AVIMTypedMessage *)message status];
     } else {
         self.message = message;
         nickName = self.message.localDisplayName;

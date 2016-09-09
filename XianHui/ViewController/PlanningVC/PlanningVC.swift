@@ -47,10 +47,15 @@ class PlanningVC: UIViewController {
             
             if success == true {
                 
-                let jsonArr = json!.array!
-                self.makeCustomerListWith(jsonArr)
+                if let jsonArr = json!.array {
+                    self.makeCustomerListWith(jsonArr)
+                    
+                    self.tableView.reloadData()
+                }
+                else {
+                    //no data
+                }
                 
-                self.tableView.reloadData()
                 
             }
             else {

@@ -2,7 +2,7 @@
 //  LCCKConversationViewController.m
 //  LCCKChatBarExample
 //
-//  v0.7.10 Created by ElonChan (微信向我报BUG:chenyilong1010) ( https://github.com/leancloud/ChatKit-OC ) on 15/11/20.
+//  v0.7.15 Created by ElonChan (微信向我报BUG:chenyilong1010) ( https://github.com/leancloud/ChatKit-OC ) on 15/11/20.
 //  Copyright © 2015年 https://LeanCloud.cn . All rights reserved.
 //
 
@@ -41,7 +41,7 @@
 
 NSString *const LCCKConversationViewControllerErrorDomain = @"LCCKConversationViewControllerErrorDomain";
 
-@interface LCCKConversationViewController () <LCCKChatBarDelegate, LCCKAVAudioPlayerDelegate, LCCKChatMessageCellDelegate, LCCKConversationViewModelDelegate, LCCKPhotoBrowserDelegate>
+@interface LCCKConversationViewController () <LCCKChatBarDelegate, LCCKChatMessageCellDelegate, LCCKConversationViewModelDelegate, LCCKPhotoBrowserDelegate>
 
 @property (nonatomic, strong, readwrite) AVIMConversation *conversation;
 //@property (copy, nonatomic) NSString *messageSender /**< 正在聊天的用户昵称 */;
@@ -214,7 +214,6 @@ NSString *const LCCKConversationViewControllerErrorDomain = @"LCCKConversationVi
     self.tableView.delegate = self.chatViewModel;
     self.tableView.dataSource = self.chatViewModel;
     self.chatBar.delegate = self;
-    [LCCKAVAudioPlayer sharePlayer].delegate = self;
     [self.view addSubview:self.chatBar];
     [self.view addSubview:self.clientStatusView];
     [self updateStatusView];
@@ -270,7 +269,6 @@ NSString *const LCCKConversationViewControllerErrorDomain = @"LCCKConversationVi
 
 - (void)dealloc {
     _chatViewModel.delegate = nil;
-    [[LCCKAVAudioPlayer sharePlayer] setDelegate:nil];
     !self.viewControllerWillDeallocBlock ?: self.viewControllerWillDeallocBlock(self);
 }
 
@@ -911,7 +909,11 @@ NSString *const LCCKConversationViewControllerErrorDomain = @"LCCKConversationVi
 - (void)messageCell:(LCCKChatMessageCell *)messageCell didTapLinkText:(NSString *)linkText linkType:(MLLinkType)linkType {
     switch (linkType) {
         case MLLinkTypeURL: {
+            linkText =  [linkText lowercaseString];
             LCCKWebViewController *webViewController = [[LCCKWebViewController alloc] init];
+            if (![linkText hasPrefix:@"http"]) {
+                linkText = [NSString stringWithFormat:@"http://%@", linkText];
+            }
             webViewController.URL = [NSURL URLWithString:linkText];
             LCCKSafariActivity *activity = [[LCCKSafariActivity alloc] init];
             webViewController.applicationActivities = @[activity];

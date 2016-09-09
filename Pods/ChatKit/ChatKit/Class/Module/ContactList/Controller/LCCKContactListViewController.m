@@ -2,7 +2,7 @@
 //  LCCKContactListViewController.m
 //  LeanCloudChatKit-iOS
 //
-//  v0.7.10 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/2/22.
+//  v0.7.15 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/2/22.
 //  Copyright © 2016年 LeanCloud. All rights reserved.
 //
 
@@ -37,7 +37,6 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-//xianhui
 //@property (nonatomic, strong) UISearchDisplayController *searchController;
 #pragma clang diagnostic pop
 @property (nonatomic, copy) NSArray *searchContacts;
@@ -62,6 +61,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 @end
 
 @implementation LCCKContactListViewController
+@synthesize title = _title;
 
 - (instancetype)initWithContacts:(NSSet<LCCKContact *> *)contacts
                             mode:(LCCKContactListMode)mode {
@@ -71,7 +71,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 - (instancetype)initWithContacts:(NSSet<LCCKContact *> *)contacts
                  excludedUserIds:(NSSet *)excludedUserIds
                             mode:(LCCKContactListMode)mode {
-    return [self initWithContacts:contacts userIds:nil excludedUserIds:excludedUserIds mode:mode];
+    return [self initWithContacts:contacts userIds:[NSSet set] excludedUserIds:excludedUserIds mode:mode];
 }
 
 - (instancetype)initWithUserIds:(NSSet<NSString *> *)userIds
@@ -137,7 +137,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
     if (_visiableUserIds) {
         return _visiableUserIds;
     }
-    if (!_userIds || _userIds == 0) {
+    if (!_userIds || _userIds.count == 0) {
         return nil;
     }
     NSMutableSet *visiableUserIds = [NSMutableSet setWithSet:_userIds];
@@ -197,7 +197,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
         _originSections = nil;
         _visiableUserIds = nil;
         _visiableContacts = nil;
-        _numberOfSectionsInTableView = nil;
+        _numberOfSectionsInTableView = 0;
     }
 }
 
@@ -207,7 +207,6 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"联系人";
-    //xianhui
     //self.tableView.tableHeaderView = self.searchBar;
     self.tableView.tableFooterView = [[UIView alloc] init];
     NSBundle *bundle = [NSBundle bundleForClass:[LCChatKit class]];
@@ -497,7 +496,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
     if (theHUDActionBlock) {
         theHUDActionBlock(self, nil, @"获取联系人信息...", LCCKMessageHUDActionTypeShow);
     }
-    [[LCChatKit sharedInstance] getProfilesInBackgroundForUserIds:_userIds callback:^(NSArray<id<LCCKUserDelegate>> *users, NSError *error) {
+    [[LCChatKit sharedInstance] getProfilesInBackgroundForUserIds:[NSArray arrayWithArray:[_userIds allObjects]] callback:^(NSArray<id<LCCKUserDelegate>> *users, NSError *error) {
         if (theHUDActionBlock) {
             theHUDActionBlock(self, nil, nil, LCCKMessageHUDActionTypeHide);
         }
@@ -524,7 +523,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
         [allMutableSet removeObject:obj];
     }];
     if (_contacts.count == allMutableSet.count) {
-         NSMutableSet<LCCKContact *> *array = [NSMutableSet setWithSet:_userIds];
+         NSMutableSet<NSString *> *array = [NSMutableSet setWithSet:_userIds];
         [array removeObject:clientId];
         self.userIds = [array copy];
     } else {
@@ -614,7 +613,9 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 
 - (NSDictionary *)searchSections {
     if (!_searchSections) {
-        _searchSections = [self sortedSectionForUserNames:[self contactsFromContactsOrUserIds:self.searchContacts userIds:self.searchUserIds]];
+        NSSet *set = [[NSSet alloc] init];
+        [set setByAddingObjectsFromArray:self.searchContacts];
+        _searchSections = [self sortedSectionForUserNames:[self contactsFromContactsOrUserIds:set userIds:self.searchUserIds]];
     }
     return _searchSections;
 }
@@ -718,7 +719,6 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
     
 }
 
-
 #pragma mark - UISearchDisplayDelegate
 
 // return YES to reload table. called when search string/option changes. convenience methods on top UISearchBar delegate methods
@@ -796,7 +796,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
     // match up the fields of the Product object
     NSCompoundPredicate *finalCompoundPredicate =
     [NSCompoundPredicate andPredicateWithSubpredicates:andMatchPredicates];
-    self.searchContacts = [searchResults filteredSetUsingPredicate:finalCompoundPredicate];
+    self.searchContacts = [NSArray arrayWithArray:[[searchResults filteredSetUsingPredicate:finalCompoundPredicate] allObjects]];
     [self _reloadData];
 }
 

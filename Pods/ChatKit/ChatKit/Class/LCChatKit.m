@@ -2,7 +2,7 @@
 //  LCChatKit.m
 //  LeanCloudChatKit-iOS
 //
-//  v0.7.10 Created by ElonChan (wechat:chenyilong1010) on 16/2/22.
+//  v0.7.15 Created by ElonChan (wechat:chenyilong1010) on 16/2/22.
 //  Copyright © 2016年 LeanCloud. All rights reserved.
 //
 
@@ -38,6 +38,11 @@
 @synthesize didDeleteConversationsListCellBlock = _didDeleteConversationsListCellBlock;
 @synthesize conversationEditActionBlock = _conversationEditActionBlock;
 @synthesize markBadgeWithTotalUnreadCountBlock = _markBadgeWithTotalUnreadCountBlock;
+@synthesize conversationInvalidedHandler = _conversationInvalidedHandler;
+@synthesize fetchConversationHandler = _fetchConversationHandler;
+@synthesize loadLatestMessagesHandler = _loadLatestMessagesHandler;
+@synthesize disableSingleSignOn = _disableSingleSignOn;
+@synthesize filterMessagesBlock = _filterMessagesBlock;
 
 #pragma mark -
 
