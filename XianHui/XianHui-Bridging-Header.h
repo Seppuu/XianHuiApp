@@ -6,6 +6,7 @@
 #import <CommonCrypto/CommonCrypto.h>
 
 #import "LCChatKitExample.h"
+#import "LCChatKitExample+Setting.h"
 
 #import "LCCKUtil.h"
 #import "LCCKUser.h"

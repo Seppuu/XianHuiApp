@@ -10,11 +10,14 @@
 #import <AVOSCloud/AVOSCloud.h>
 #import "LCChatKitExample.h"
 #import "LCCKContactManager.h"
+#import "NSObject+LCCKHUD.h"
+#import "FTPopOverMenu.h"
+#import "LCCKExampleConstants.h"
 
 #if __has_include(<ChatKit/LCChatKit.h>)
-    #import <ChatKit/LCChatKit.h>
+#import <ChatKit/LCChatKit.h>
 #else
-    #import "LCChatKit.h"
+#import "LCChatKit.h"
 #endif
 
 #import "XianHui-Swift.h"
@@ -235,8 +238,22 @@
     self.secondViewController.userIds = [addedUserIds copy];
 }
 
+- (void)showPopOverMenu:(UIBarButtonItem *)sender event:(UIEvent *)event {
+    [FTPopOverMenu showFromEvent:event
+                        withMenu:@[ @"创建群聊" ]
+                       doneBlock:^(NSInteger selectedIndex) {
+                           if (selectedIndex == 0) {
+                               [self createGroupConversation:sender];
+                           }
+                       } dismissBlock:nil];
+}
+
 - (void)signOut {
     [LCChatKitExample signOutFromViewController:self.secondViewController];
+}
+
+- (void)changeGroupAvatar {
+    [LCChatKitExample exampleChangeGroupAvatarURLsForConversationId:@"570da6a9daeb3a63ca5b07b0"];
 }
 
 @end

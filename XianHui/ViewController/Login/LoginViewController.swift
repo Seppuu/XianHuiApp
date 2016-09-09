@@ -184,6 +184,9 @@ extension LoginViewController:UITableViewDelegate,UITableViewDataSource {
                 let clientId = String(user!.clientId)
                 self.clientIdHandler?(clientId:clientId)
             }
+            else {
+                //TODO:error handler
+            }
             
         }
         

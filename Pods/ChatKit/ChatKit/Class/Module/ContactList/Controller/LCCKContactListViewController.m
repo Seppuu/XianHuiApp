@@ -37,7 +37,8 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-@property (nonatomic, strong) UISearchDisplayController *searchController;
+//xianhui
+//@property (nonatomic, strong) UISearchDisplayController *searchController;
 #pragma clang diagnostic pop
 @property (nonatomic, copy) NSArray *searchContacts;
 @property (nonatomic, copy) NSDictionary *searchSections;
@@ -184,7 +185,8 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
         searchBar.delegate = self;
         searchBar.placeholder = @"搜索";
         _searchBar = searchBar;
-        self.tableView.tableHeaderView = _searchBar;
+        //xianhui
+        //self.tableView.tableHeaderView = _searchBar;
     }
     return _searchBar;
 }
@@ -205,7 +207,8 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"联系人";
-    self.tableView.tableHeaderView = self.searchBar;
+    //xianhui
+    //self.tableView.tableHeaderView = self.searchBar;
     self.tableView.tableFooterView = [[UIView alloc] init];
     NSBundle *bundle = [NSBundle bundleForClass:[LCChatKit class]];
     [self setupSearchBarControllerWithSearchBar:self.searchBar bundle:bundle];
@@ -702,6 +705,19 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
         [cancelButton setTitle:LCCKLocalizedStrings(@"done") forState:UIControlStateNormal];
     }
 }
+
+//xianhui searchbar dismiss , reset searchbar frame
+- (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller {
+    
+    self.searchController.searchBar.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 44);
+    
+    //[self reSetSearchBar];
+}
+
+- (void) reSetSearchBar {
+    
+}
+
 
 #pragma mark - UISearchDisplayDelegate
 

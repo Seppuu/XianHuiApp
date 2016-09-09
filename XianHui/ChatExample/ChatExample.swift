@@ -20,6 +20,10 @@ class ChatKitExample: LCChatKitExample {
     override func exampleInit() {
         
         super.exampleInit()
+    }
+    
+    
+    override func lcck_setFetchProfiles() {
         
         LCChatKit.sharedInstance().fetchProfilesBlock = {
             (userIds,callback) in
@@ -34,8 +38,13 @@ class ChatKitExample: LCChatKitExample {
                     ]
                 
                 let error = NSError(domain: "LCChatKit", code: code, userInfo: errorInfo as [NSObject : AnyObject])
+                if callback != nil {
+                    callback(nil,error)
+                }
+                else {
+                    
+                }
                 
-                callback(nil,error)
                 return
             }
             var users = [XHUser]()
@@ -51,14 +60,18 @@ class ChatKitExample: LCChatKitExample {
                 
             })
             
-            callback(users,nil)
+            if callback != nil {
+                callback(users,nil)
+            }
+            else {
+                
+            }
+            
             
         }
-        
-        
+
         
     }
-    
 
     //群聊
     override class func exampleCreateGroupConversationFromViewController(viewController: UIViewController!) {
