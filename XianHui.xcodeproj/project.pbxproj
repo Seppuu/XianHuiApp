@@ -70,6 +70,7 @@
 		37A76FDF1D6D8CBA00572B1D /* ANStepperView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A76FDE1D6D8CBA00572B1D /* ANStepperView.m */; };
 		37A76FE31D6D8D1200572B1D /* StepperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A76FE11D6D8D1200572B1D /* StepperCell.swift */; };
 		37A76FE41D6D8D1200572B1D /* StepperCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37A76FE21D6D8D1200572B1D /* StepperCell.xib */; };
+		37B7591B1D82EA7000D03D2D /* NoticeListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B7591A1D82EA7000D03D2D /* NoticeListVC.swift */; };
 		37B791471D51C5480032C164 /* HelperVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B791461D51C5480032C164 /* HelperVC.swift */; };
 		37B791491D51C9070032C164 /* Hepler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B791481D51C9070032C164 /* Hepler.swift */; };
 		37B7914D1D51CA780032C164 /* HeplerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B7914B1D51CA780032C164 /* HeplerCell.swift */; };
@@ -318,6 +319,7 @@
 		37A76FDE1D6D8CBA00572B1D /* ANStepperView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANStepperView.m; sourceTree = "<group>"; };
 		37A76FE11D6D8D1200572B1D /* StepperCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepperCell.swift; sourceTree = "<group>"; };
 		37A76FE21D6D8D1200572B1D /* StepperCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepperCell.xib; sourceTree = "<group>"; };
+		37B7591A1D82EA7000D03D2D /* NoticeListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticeListVC.swift; sourceTree = "<group>"; };
 		37B791461D51C5480032C164 /* HelperVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperVC.swift; sourceTree = "<group>"; };
 		37B791481D51C9070032C164 /* Hepler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hepler.swift; sourceTree = "<group>"; };
 		37B7914B1D51CA780032C164 /* HeplerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeplerCell.swift; sourceTree = "<group>"; };
@@ -910,6 +912,14 @@
 			path = StepperCell;
 			sourceTree = "<group>";
 		};
+		37B759191D82EA6100D03D2D /* NoticeListVC */ = {
+			isa = PBXGroup;
+			children = (
+				37B7591A1D82EA7000D03D2D /* NoticeListVC.swift */,
+			);
+			path = NoticeListVC;
+			sourceTree = "<group>";
+		};
 		37B791451D51C5300032C164 /* Hepler */ = {
 			isa = PBXGroup;
 			children = (
@@ -1476,6 +1486,7 @@
 				377AB1A61D61B35800777DC7 /* ConversationVC */,
 				37B791511D51D7420032C164 /* ApproveVC */,
 				37B791451D51C5300032C164 /* Hepler */,
+				37B759191D82EA6100D03D2D /* NoticeListVC */,
 				372A04201D4AF9160010D8E9 /* Login */,
 				377116141D49ADC300008B36 /* UserCentre */,
 				37278D8D1D48A4690055842E /* FormSetting */,
@@ -1974,6 +1985,7 @@
 				378B17761D6C4A7B00758C13 /* Production.swift in Sources */,
 				37B79B551D7D4AB000340C17 /* CustomerProfileVC.swift in Sources */,
 				37BAB9D41D3E11B1001E4680 /* README.md in Sources */,
+				37B7591B1D82EA7000D03D2D /* NoticeListVC.swift in Sources */,
 				378E07641D461B2C00B67621 /* RadarChartVC.swift in Sources */,
 				37BAB9791D3E1059001E4680 /* AlbumSelectCell.swift in Sources */,
 				37B79B4C1D7D10A300340C17 /* ScheduleVC.swift in Sources */,

@@ -24,9 +24,11 @@ class RadarChartVC: BaseChartViewController {
     
     var cellId = "typeCell"
     
-    var names = ["现金","实操","产品","客流","客单价","人均项目数","项目均价"]
+    var names = [String]()
     
-    var numbers = ["131,000","8,400","2,300","13","2,384","2.3","1,037"]
+    var numbers = [String]()
+    
+    var form = Form()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,7 +88,7 @@ class RadarChartVC: BaseChartViewController {
         yAxis.drawAxisLineEnabled = false
         yAxis.setLabelCount(1, force: true)
         yAxis.axisMinValue = 0.0
-        yAxis.axisMaxValue = 100
+        yAxis.axisMaxValue = 100.0
         
         let l = chartView.legend
         l.drawInside = true
@@ -127,46 +129,56 @@ class RadarChartVC: BaseChartViewController {
     
     func setChartData() {
         
-        let mult:Double = 100
-        let count = 5
+        //最大值
+       // let mult:Double = form.totalScore
+        
+        //维度数量
+        let count = form.viewCount
         
         
         var yValsButton = [ChartDataEntry]() //button 位置
         
-        var yVals0 = [ChartDataEntry]() //这一层作为背景
+        var yVals0Back = [ChartDataEntry]() //这一层作为背景
         
         var yVals1 = [ChartDataEntry]() //基本数据
         
         var yVals2 = [ChartDataEntry]() //七日平均值
         
         for i in 0..<count {
-            let dd = Double(arc4random_uniform(UInt32(mult)))
-            let entry = ChartDataEntry(value:dd, xIndex: i, data: i)
+            
+            //某天值 原值最大值是5 这里*20
+            let point = Double(form.pointArray[i] * 20)
+            let entry = ChartDataEntry(value:point, xIndex: i, data: i)
+            yVals1.append(entry)
+            
+            //七日均值
+            let avgPoint = Double(form.avgPointArray[i] * 20 )
+            let entryAvarage = ChartDataEntry(value: avgPoint , xIndex: i, data: i)
+            yVals2.append(entryAvarage)
+
             
             let yMax = chartView.yAxis.axisMaxValue
-            let entryEx = ChartDataEntry(value: yMax + 10 , xIndex: i, data: i)
-            yVals1.append(entry)
+            let entryEx = ChartDataEntry(value: yMax + 5 , xIndex: i, data: i)
             yValsButton.append(entryEx)
             
             
             let entryBack = ChartDataEntry(value: yMax , xIndex: i, data: i)
-            yVals0.append(entryBack)
+            yVals0Back.append(entryBack)
             
-            let entryAvarage = ChartDataEntry(value: yMax/2 , xIndex: i, data: i)
-            yVals2.append(entryAvarage)
             
         }
         
         
         var xVals = [String]()
         
+        //原生的维度Tag
         for i in 0..<count {
             let v = parties[i % parties.count]
             xVals.append(v)
         }
         
         
-        let set0 = RadarChartDataSet(yVals: yVals0, label: "")
+        let set0 = RadarChartDataSet(yVals: yVals0Back, label: "")
         set0.setColor(UIColor ( red: 0.7855, green: 0.6676, blue: 0.4805, alpha: 1.0 ))
         set0.fillColor = UIColor ( red: 0.7855, green: 0.6676, blue: 0.4805, alpha: 1.0 )
         set0.drawFilledEnabled = true
@@ -191,7 +203,6 @@ class RadarChartVC: BaseChartViewController {
         
         
         let data = RadarChartData(xVals: xVals, dataSets: [set0,set2,set1])
-        //data.setValueFont(UIFont(name: "HelveticaNeue-Light", size: 8.0))
         data.setValueTextColor(UIColor.clearColor())
         data.setDrawValues(false)
         

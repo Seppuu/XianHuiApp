@@ -16,14 +16,12 @@ class HelperVC: BaseViewController {
     
     var cellId = "HeplerCell"
     
-    
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         listOfHelper = [Helper(),Helper()]
-        
+        getHelperList()
         setTableView()
         
     }
@@ -33,7 +31,24 @@ class HelperVC: BaseViewController {
         
     }
     
-   
+    var pageSize = 20
+    
+    var pageNumber = 1
+    
+    func getHelperList() {
+        
+        
+        NetworkManager.sharedManager.getHelperListWith(pageSize, pageNumber: pageNumber) { (success, json, error) in
+            
+            if success == true {
+                
+            }
+            else {
+                
+            }
+            
+        }
+    }
     
     
     func setTableView() {

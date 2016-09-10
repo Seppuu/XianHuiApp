@@ -62,4 +62,7 @@ class Customer: NSObject {
     }
     
     
+    //报表用 某日消费金额
+    var consumeNumDay = ""
+    
 }

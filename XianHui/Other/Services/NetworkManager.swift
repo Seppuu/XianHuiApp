@@ -247,6 +247,52 @@ extension NetworkManager {
 
 extension NetworkManager {
     
+    //获取助手列表
+    func getHelperListWith(pageSize:Int,pageNumber:Int,completion:DDResultHandler) {
+        
+        let urlString = GetHelperListUrl
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!,
+            "pageSize":pageSize,
+            "pageNumber":pageNumber
+        ]
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+        
+    }
+    
+    
+    //获取提醒,通知列表
+    func getNoticeListWith(pageSize:Int,pageNumber:Int,completion:DDResultHandler) {
+        
+        let urlString = GetNoticeListUrl
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!,
+            "pageSize":pageSize,
+            "pageNumber":pageNumber
+        ]
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+        
+    }
+    
+    
+    //获取提醒,通知明细
+    func getNoticeDetailWith(notice_id:Int,completion:DDResultHandler) {
+        
+        let urlString = GetNoticeListUrl
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!,
+            "notice_id":notice_id
+        ]
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+        
+    }
+    
     //计划顾客列表
     func getCustomerPlanListWith(completion:DDResultHandler) {
         

@@ -35,6 +35,9 @@ let updateUserInfoURL = DDBaseUrl + "/user/index/rest?returnDataType=json&action
 
 /// 日报表
 
+//获取助手列表
+
+
 //获取日报表峰值
 let GetDailyReportMaxVauleUrl = DDBaseUrl + "/rest/employee/getdailyreportsetting"
 
@@ -42,13 +45,20 @@ let GetDailyReportMaxVauleUrl = DDBaseUrl + "/rest/employee/getdailyreportsettin
 let SaveDailyReportMaxVauleUrl = DDBaseUrl + "/rest/employee/setdailyreportsetting"
 
 
+//获取助手列表
+let GetHelperListUrl = DDBaseUrl +  "/rest/employee/gethelperlist"
+
+
+
 //获取日报表数据
 let GetDailyReportDataUrl = DDBaseUrl + "/rest/employee/getdailyreportdata"
 
 
+//提醒,通知列表
+let GetNoticeListUrl = DDBaseUrl + "/rest/employee/getnoticelist"
 
-
-
+//获取通知明细
+let GetNoticeDetailUrl = DDBaseUrl +  "/rest/employee/getnoticedetail"
 
 
 
