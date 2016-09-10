@@ -220,7 +220,7 @@ extension NetworkManager {
     }
     
     
-    
+    //获取报表峰值
     func getDailyReportMaxVaule(completion:DDResultHandler) {
         
         let dict:JSONDictionary = [
@@ -232,6 +232,7 @@ extension NetworkManager {
         baseRequestWith(urlString, dict: dict, completion: completion)
     }
     
+    //保存报表峰值
     func saveDailyReportMaxVaule(completion:DDResultHandler) {
         let dict:JSONDictionary = [
             "token":Defaults.userToken.value!

@@ -109,7 +109,7 @@ class DailyFormVC: RadarChartVC {
                     let p = FormDetailList()
                     p.name = unit["fullname"].string!
                     p.amount = unit["amount"].string!
-                    form.customerList.list.append(p)
+                    form.cashList.list.append(p)
                 }
             }
             
@@ -124,7 +124,7 @@ class DailyFormVC: RadarChartVC {
                     let p = FormDetailList()
                     p.name = unit["fullname"].string!
                     p.amount = unit["amount"].string!
-                    form.customerList.list.append(p)
+                    form.projectList.list.append(p)
                 }
             }
             
@@ -139,7 +139,7 @@ class DailyFormVC: RadarChartVC {
                     let p = FormDetailList()
                     p.name = unit["fullname"].string!
                     p.amount = unit["amount"].string!
-                    form.customerList.list.append(p)
+                    form.productList.list.append(p)
                 }
             }
             
@@ -167,7 +167,7 @@ class DailyFormVC: RadarChartVC {
                     let p = FormDetailList()
                     p.name = unit["fullname"].string!
                     p.amount = unit["amount"].string!
-                    form.customerList.list.append(p)
+                    form.customerUnitPriceList.list.append(p)
                 }
                 
             }
@@ -183,7 +183,7 @@ class DailyFormVC: RadarChartVC {
                     let p = FormDetailList()
                     p.name = unit["fullname"].string!
                     p.amount = unit["amount"].string!
-                    form.customerList.list.append(p)
+                    form.employeeList.list.append(p)
                 }
                 
             }
@@ -197,39 +197,40 @@ class DailyFormVC: RadarChartVC {
                     let p = FormDetailList()
                     p.name = unit["fullname"].string!
                     p.amount = unit["amount"].string!
-                    form.customerList.list.append(p)
+                    form.projectPriceList.list.append(p)
                 }
                 
             }
             
-            
-            //五个维度,当月平均和累计
-            let monthlyAvg = json["monthly_avg"]
-            let today = formList[0]
-            today.monthlyAvgCash = monthlyAvg["cash"].int!
-            
-            today.monthlyAvgProject = monthlyAvg["project"].int!
-            
-            today.monthlyAvgProduct = monthlyAvg["product"].int!
-            
-            today.monthlyAvgCustomer = monthlyAvg["customer"].int!
-            
-            today.monthlyAvgEmployee = monthlyAvg["employee"].int!
-            
-            
-            let monthlyTotal = json["monthly_total"]
-            
-            today.monthlyTotalCash = monthlyTotal["cash"].int!
-            
-            today.monthlyTotalProject = monthlyTotal["project"].int!
-            
-            today.monthlyTotalProduct = monthlyTotal["product"].int!
-            
-            today.monthlyTotalCustomer = monthlyTotal["customer"].int!
-            
-            today.monthlyTotalEmployee = monthlyTotal["employee"].int!
+            formList.append(form)
             
         }
+        
+        //五个维度,当月平均和累计
+        let monthlyAvg = json["monthly_avg"]
+        let today = formList[0]
+        today.monthlyAvgCash = monthlyAvg["cash"].int!
+        
+        today.monthlyAvgProject = monthlyAvg["project"].int!
+        
+        today.monthlyAvgProduct = monthlyAvg["product"].int!
+        
+        today.monthlyAvgCustomer = monthlyAvg["customer"].int!
+        
+        today.monthlyAvgEmployee = monthlyAvg["employee"].int!
+        
+        
+        let monthlyTotal = json["monthly_total"]
+        
+        today.monthlyTotalCash = monthlyTotal["cash"].int!
+        
+        today.monthlyTotalProject = monthlyTotal["project"].int!
+        
+        today.monthlyTotalProduct = monthlyTotal["product"].int!
+        
+        today.monthlyTotalCustomer = monthlyTotal["customer"].int!
+        
+        today.monthlyTotalEmployee = monthlyTotal["employee"].int!
         
        return formList
     }
@@ -275,6 +276,26 @@ class DailyFormVC: RadarChartVC {
         
         var grandTotalValue:Float = 0.0
         
+        //饼图类型 这里先写死
+        var pieType = [String]()
+        
+        //饼图模型 多个一组
+        var chartDatasArray = [[XHChartData]]()
+        
+        
+        func getChartDataListArry(datas:[JSON]) -> [XHChartData] {
+            var chartDatas = [XHChartData]()
+            for data in datas {
+                let c = XHChartData()
+                c.x = data["name"].string!
+                c.y = Double(data["amount"].int!)
+                chartDatas.append(c)
+            }
+            
+            return chartDatas
+        }
+        
+        
         switch index {
         case 0:
             
@@ -287,7 +308,32 @@ class DailyFormVC: RadarChartVC {
                 nums.append(num)
             }
             
-            currentMonthAvgVaule = formToday.avgPointArray
+            currentMonthAvgVaule = Float(formToday.monthlyAvgCash)
+            grandTotalValue = Float(formToday.monthlyTotalCash)
+            
+            pieType = ["消费类型","客户类型","顾问业绩"]
+            if let datas = jsonData!["weekly_daily"].array {
+                
+                let formThisDay = datas[index]
+                
+                //消费类型
+                if let customer_typeArr = formThisDay["chart_data"]["cash"]["customer_type"].array {
+                    let datas = getChartDataListArry(customer_typeArr)
+                    chartDatasArray.append(datas)
+                }
+                //客户类型
+                if let consume_type = formThisDay["chart_data"]["cash"]["consume_type"].array {
+                    let datas = getChartDataListArry(consume_type)
+                    chartDatasArray.append(datas)
+                }
+            
+                //顾问业绩
+                if let adviser = formThisDay["chart_data"]["cash"]["adviser"].array {
+                    let datas = getChartDataListArry(adviser)
+                    chartDatasArray.append(datas)
+                }
+                
+            }
             
         case 1:
             
@@ -298,6 +344,35 @@ class DailyFormVC: RadarChartVC {
                 let num = form.project
                 nums.append(num)
             }
+            
+            currentMonthAvgVaule = Float(formToday.monthlyAvgProject)
+            grandTotalValue = Float(formToday.monthlyTotalProject)
+            
+            pieType = ["项目类型","员工类型","折实价"]
+            if let datas = jsonData!["weekly_daily"].array {
+                
+                let formThisDay = datas[index]
+                
+                //消费类型
+                if let project_type = formThisDay["chart_data"]["project"]["project_type"].array {
+                    let datas = getChartDataListArry(project_type)
+                    chartDatasArray.append(datas)
+                }
+                //客户类型
+                if let employee_type = formThisDay["chart_data"]["project"]["employee_type"].array {
+                    let datas = getChartDataListArry(employee_type)
+                    chartDatasArray.append(datas)
+                }
+                
+                //顾问业绩
+                if let real_amount = formThisDay["chart_data"]["project"]["real_amount"].array {
+                    let datas = getChartDataListArry(real_amount)
+                    chartDatasArray.append(datas)
+                }
+                
+            }
+            
+            
         case 2:
             
             vc.title = "产品"
@@ -307,6 +382,34 @@ class DailyFormVC: RadarChartVC {
                 let num = form.product
                 nums.append(num)
             }
+            currentMonthAvgVaule = Float(formToday.monthlyAvgProduct)
+            grandTotalValue = Float(formToday.monthlyTotalProduct)
+            
+            pieType = ["产品类型","周转周期","生命周期"]
+            
+            if let datas = jsonData!["weekly_daily"].array {
+                
+                let formThisDay = datas[index]
+                
+                //消费类型
+                if let product_type = formThisDay["chart_data"]["product"]["product_type"].array {
+                    let datas = getChartDataListArry(product_type)
+                    chartDatasArray.append(datas)
+                }
+                //客户类型
+                if let turn_over = formThisDay["chart_data"]["product"]["turn_over"].array {
+                    let datas = getChartDataListArry(turn_over)
+                    chartDatasArray.append(datas)
+                }
+                
+                //顾问业绩
+                if let life_cycle = formThisDay["chart_data"]["product"]["life_cycle"].array {
+                    let datas = getChartDataListArry(life_cycle)
+                    chartDatasArray.append(datas)
+                }
+                
+            }
+            
         case 3:
             
             vc.title = "客流"
@@ -316,6 +419,34 @@ class DailyFormVC: RadarChartVC {
                 let num = form.customerCount
                 nums.append(num)
             }
+            currentMonthAvgVaule = Float(formToday.monthlyAvgCustomer)
+            grandTotalValue = Float(formToday.monthlyTotalCustomer)
+            
+            pieType = ["顾问","客户类型","本月到店"]
+            
+            if let datas = jsonData!["weekly_daily"].array {
+                
+                let formThisDay = datas[index]
+                
+                //消费类型
+                if let adviser = formThisDay["chart_data"]["customer"]["adviser"].array {
+                    let datas = getChartDataListArry(adviser)
+                    chartDatasArray.append(datas)
+                }
+                //客户类型
+                if let customer_type = formThisDay["chart_data"]["customer"]["customer_type"].array {
+                    let datas = getChartDataListArry(customer_type)
+                    chartDatasArray.append(datas)
+                }
+                
+                //顾问业绩
+                if let arrival_total = formThisDay["chart_data"]["customer"]["arrival_total"].array {
+                    let datas = getChartDataListArry(arrival_total)
+                    chartDatasArray.append(datas)
+                }
+                
+            }
+            
         case 4:
             
             vc.title = "员工"
@@ -326,6 +457,28 @@ class DailyFormVC: RadarChartVC {
                 nums.append(num)
             }
             
+            currentMonthAvgVaule = Float(formToday.monthlyAvgEmployee)
+            grandTotalValue = Float(formToday.monthlyTotalEmployee)
+            
+            pieType = ["有效工时","个人产值"]
+            
+            if let datas = jsonData!["weekly_daily"].array {
+                
+                let formThisDay = datas[index]
+                
+                //消费类型
+                if let hours = formThisDay["chart_data"]["employee"]["hours"].array {
+                    let datas = getChartDataListArry(hours)
+                    chartDatasArray.append(datas)
+                }
+                //客户类型
+                if let amount = formThisDay["chart_data"]["employee"]["amount"].array {
+                    let datas = getChartDataListArry(amount)
+                    chartDatasArray.append(datas)
+                }
+                
+            }
+            
         default:
             break;
         }
@@ -334,6 +487,12 @@ class DailyFormVC: RadarChartVC {
         
         vc.numbers = nums.reverse()
         
+        vc.currentMonthAvgVaule = currentMonthAvgVaule
+        vc.grandTotalValue = grandTotalValue
+        
+        
+        vc.pieType = pieType
+        vc.listOfChartDataArray = chartDatasArray
         
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -344,6 +503,15 @@ class DailyFormVC: RadarChartVC {
         var dataArray = [FormData]()
         
         let title = self.names[indexPath.row]
+        
+        let list = formToday.listArray[indexPath.row]
+        
+        for l in list.list {
+            let d = FormData()
+            d.name = l.name
+            d.detail = l.amount
+            dataArray.append(d)
+        }
         
         
         let vc = FormDetailVC()

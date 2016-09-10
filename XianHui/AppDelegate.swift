@@ -71,12 +71,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             self.checkIfNeedPushVC()
             
+            //self.getDailyMaxValue()
+            
             }, failed: { (error) in
                 
                 LCCKUtil.hideProgress()
                 
                 print(error.description)
         })
+    }
+    
+    func getDailyMaxValue() {
+        
+        NetworkManager.sharedManager.getDailyReportMaxVaule { (success, json, error) in
+            if success == true {
+                
+            }
+        }
     }
     
     func checkIfNeedPushVC() {

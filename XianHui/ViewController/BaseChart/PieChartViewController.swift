@@ -23,8 +23,15 @@ class PieCell: UICollectionViewCell {
     }
 }
 
-class PieChartViewController: BaseChartViewController {
+//TODO:移动到Model file
+class XHChartData:NSObject {
     
+    var x:String = ""
+    var y:Double = 0.0
+    
+}
+
+class PieChartViewController: BaseChartViewController {
     
     //顶部数组
     
@@ -37,6 +44,8 @@ class PieChartViewController: BaseChartViewController {
     var topPageView:XHBarChartView!
     
     var bottomCollectionView:UICollectionView!
+    
+    var listOfChartDataArray = [[XHChartData]]()
     
     var animePieChart = false
     
@@ -56,7 +65,8 @@ class PieChartViewController: BaseChartViewController {
     
     let pieCellID = "Piecell"
     
-    var pieType = ["业绩组成","顾问业绩","客户级别"]
+    //TODO:需要后端自动化 饼图类型
+    var pieType = [String]()
     
     let viewHeight = ( screenHeight - 64)
     
@@ -70,6 +80,9 @@ class PieChartViewController: BaseChartViewController {
         topPageView = XHBarChartView(frame: CGRect(x: 0, y: 64, width: screenWidth, height: viewHeight * 0.5))
         
         topPageView.listOfNumber2 = numbers
+        
+        topPageView.currentMonthAvgVaule = currentMonthAvgVaule
+        topPageView.grandTotalValue = grandTotalValue
         //TODO:日期数组
         
         topPageView.clipsToBounds = true
@@ -114,7 +127,7 @@ class PieChartViewController: BaseChartViewController {
         pageControl.currentPage = 0
         pageControl.currentPageIndicatorTintColor = UIColor ( red: 0.8275, green: 0.7216, blue: 0.5529, alpha: 1.0 )
         pageControl.pageIndicatorTintColor = UIColor ( red: 0.949, green: 0.902, blue: 0.8196, alpha: 1.0 )
-        pageControl.numberOfPages = 3
+        pageControl.numberOfPages = listOfChartDataArray.count
         
         
         pieTypelabel = UILabel(frame: CGRect(x: 0, y:pageControl.frame.origin.y + pageControl.ddHeight, width: screenWidth, height: 20))
@@ -157,20 +170,20 @@ class PieChartViewController: BaseChartViewController {
 
 extension PieChartViewController: ChartViewDelegate {
     
-    func updatePieChartData(pieView:PieChartView) {
+    func updatePieChartData(index:Int,pieView:PieChartView) {
         
-        setDataCountWith(3, range: 10,pieView:pieView)
+        setDataCountWith(index, pieView: pieView)
     }
     
-    func setDataCountWith(count:Int,range:Double,pieView:PieChartView) {
+    func setDataCountWith(index:Int,pieView:PieChartView) {
         
-        let mult = range
         
         var yVals1 = [BarChartDataEntry]()
         
-        for i in 0..<count {
+        
+        for i in 0..<listOfChartDataArray[index].count {
             
-            let val  = Double(arc4random_uniform(UInt32(mult))) + mult/4
+            let val  = listOfChartDataArray[index][i].y
             
             let chartDataEntry = BarChartDataEntry(value: val, xIndex: i)
             
@@ -181,13 +194,12 @@ extension PieChartViewController: ChartViewDelegate {
         
         var xvs = [String?]()
         
-        for i in 0..<count {
-            
-            let str = parties[i % parties.count]
+        for chartData in listOfChartDataArray[index] {
+            let str = chartData.x
             xVals.append(str)
             xvs.append(str)
-            
         }
+
         
         let dataSet = PieChartDataSet(yVals: yVals1, label: "分布结果")
         
@@ -270,7 +282,8 @@ extension PieChartViewController {
     func updatePieData(index:Int) {
         
         animePieChart = true
-        //bottomCollectionView.reloadData()
+        
+        bottomCollectionView.reloadData()
     }
     
     
@@ -283,7 +296,7 @@ extension PieChartViewController:UICollectionViewDelegateFlowLayout,UICollection
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return listOfChartDataArray.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -297,8 +310,7 @@ extension PieChartViewController:UICollectionViewDelegateFlowLayout,UICollection
         pieChartView.backgroundColor = UIColor ( red: 1.0, green: 0.9882, blue: 0.9647, alpha: 1.0 )
         cell.addSubview(pieChartView)
         
-        self.updatePieChartData(pieChartView)
-        
+        self.updatePieChartData(indexPath.row, pieView: pieChartView)
         setupPieChartView(pieChartView)
         if animePieChart == true {
             
