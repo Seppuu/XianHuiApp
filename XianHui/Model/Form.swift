@@ -84,23 +84,21 @@ class Form: NSObject {
     
     //雷达图下面列表
     //现金
-    var cashList = CashList()
+    var cashList = CashList() 
     
     //项目
     var projectList = ProjectList()
     
     //产品
-    var productList = ProductList()
-    
+    var productList = ProductList() 
     //客流
     var customerList = CustomerList()
-    
     
     //客单价
     var customerUnitPriceList = CustomerUnitPriceList()
     
     //员工人均项目
-    var employeeList = EmployeeList()
+    var employeeList = EmployeeList() 
     
     
     //项目均价
@@ -121,7 +119,7 @@ class ProjectPriceList: NSObject {
     
     var amount = 0
     
-    var dict = [String:JSON]()
+    var dict = [FormDetailList]()
 }
 
 //员工项目数和分布列表
@@ -129,7 +127,7 @@ class EmployeeList: NSObject {
     
     var amount = 0
     
-    var dict = [String:JSON]()
+    var dict = [FormDetailList]()
 }
 
 
@@ -138,7 +136,7 @@ class CustomerUnitPriceList: NSObject {
     
     var amount = 0
     
-    var dict = [String:JSON]()
+    var dict = [FormDetailList]()
 }
 
 //客流
@@ -146,7 +144,7 @@ class CustomerList: NSObject {
     
     var amount = 0
     
-    var list = [Customer]()
+    var list = [FormDetailList]()
 }
 
 //产品列表
@@ -155,7 +153,7 @@ class ProductList: NSObject {
     var amount = 0
     
     //fullname amount
-    var list = [Good]()
+    var list = [FormDetailList]()
 }
 
 
@@ -165,7 +163,7 @@ class ProjectList: NSObject {
     var amount = 0
     
     //fullname amount
-    var list = [Good]()
+    var list = [FormDetailList]()
 }
 
 //现金列表
@@ -173,7 +171,7 @@ class CashList: NSObject {
     
     var amount = 0
     
-    var list = [Good]()
+    var list = [FormDetailList]()
 }
 
 

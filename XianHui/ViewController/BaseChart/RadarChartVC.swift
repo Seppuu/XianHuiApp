@@ -313,40 +313,8 @@ class RadarChartVC: BaseChartViewController {
     }
     
     func angleTypeTap(sender:UIButton) {
-        let button = sender
-        let index = button.tag
-        let controller2 = PieViewController()
-        switch index {
-        case 0:
-            
-            controller2.title = "现金"
-        case 1:
-            
-            controller2.title = "实操"
-        case 2:
-            
-            controller2.title = "产品"
-        case 3:
-            
-            controller2.title = "客流"
-        case 4:
-            
-            controller2.title = "客单价"
-        case 5:
-            
-            controller2.title = "人均项目数"
-        case 6:
-            
-            controller2.title = "项目均价"
-        default:
-            break;
-        }
         
-        controller2.parentNavigationController = self.navigationController
 
-        navigationController?.pushViewController(controller2, animated: true)
-        //let buttons = topButtons
-        //makeButtonHightlighted(buttons, selected: button)
     }
     
     func angleTypeTouchDown(sender:UIButton) {

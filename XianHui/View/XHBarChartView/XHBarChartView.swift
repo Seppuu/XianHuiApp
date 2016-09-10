@@ -19,11 +19,34 @@ class XHBarChartView: OTPageView ,OTPageScrollViewDataSource,OTPageScrollViewDel
     
     var rightLabel02 = UILabel()
     
-    var maxValue:Float = 20000
+    var currentMonthAvgVaule:Float = 0.0
     
-    var listOfNumber = ["1","4,232","12,313","11,233","7,777","8,466","3,456"]
+    var grandTotalValue:Float = 0.0
     
-    var listOfNumber2 = ["1","4232","12313","11233","7777","8466","3456"]
+    var maxValue:Float {
+        
+        //TODO:设置的最大值
+        
+        return 10000
+    }
+    
+    var listOfNumber: [String] {
+        //将Int转化为千位数逗号String
+        var numsString = [String]()
+        
+        for num in listOfNumber2 {
+            let fmt = NSNumberFormatter()
+            fmt.numberStyle = .DecimalStyle
+            let numString = fmt.stringFromNumber(num)!
+            
+            numsString.append(numString)
+        }
+        
+        return numsString
+
+    }
+    
+    var listOfNumber2 = [Int]()
     
     var currentPageChangedHandler:((index:Int)->())?
     
@@ -44,7 +67,7 @@ class XHBarChartView: OTPageView ,OTPageScrollViewDataSource,OTPageScrollViewDel
         
         rightLabel01.textColor = UIColor ( red: 0.5216, green: 0.3765, blue: 0.2863, alpha: 1.0 )
         rightLabel01.font = UIFont.systemFontOfSize(12)
-        rightLabel01.text = "当月平均:8K"
+        rightLabel01.text = "当月平均:\(currentMonthAvgVaule)"
         rightLabel01.textAlignment = .Right
         addSubview(rightLabel01)
         rightLabel01.snp_makeConstraints { (make) in
@@ -57,7 +80,7 @@ class XHBarChartView: OTPageView ,OTPageScrollViewDataSource,OTPageScrollViewDel
         
         rightLabel02.textColor = UIColor ( red: 0.5216, green: 0.3765, blue: 0.2863, alpha: 1.0 )
         rightLabel02.font = UIFont.systemFontOfSize(12)
-        rightLabel02.text = "当月累计:250K"
+        rightLabel02.text = "当月累计:\(grandTotalValue)"
         rightLabel02.textAlignment = .Right
         addSubview(rightLabel02)
         rightLabel02.snp_makeConstraints { (make) in
@@ -88,15 +111,6 @@ class XHBarChartView: OTPageView ,OTPageScrollViewDataSource,OTPageScrollViewDel
         cell.color = UIColor ( red: 0.5216, green: 0.3765, blue: 0.2863, alpha: 1.0 )
     }
 
-    
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
-    }
-    */
-    
     func numberOfPageInPageScrollView(pageScrollView: OTPageScrollView!) -> Int {
         
         return listOfNumber.count
@@ -106,7 +120,12 @@ class XHBarChartView: OTPageView ,OTPageScrollViewDataSource,OTPageScrollViewDel
         
         let view = VoiceRecordSampleCell(frame: CGRect(x: 0, y: 0, width: 25, height: ddHeight * 0.5))
         let item = Int(index)
-        let val = listOfNumber2[item].toFloat()!
+        var val = Float(listOfNumber2[item])
+        
+        if val == 0 {
+            //如果数值是0.加一点.防止UI界面消失
+            val = 10
+        }
         
         view.value = val / maxValue
         
@@ -134,7 +153,6 @@ class XHBarChartView: OTPageView ,OTPageScrollViewDataSource,OTPageScrollViewDel
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
         updateColor(scrollView)
-        //updateProgress(scrollView)
     }
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
@@ -164,8 +182,6 @@ class XHBarChartView: OTPageView ,OTPageScrollViewDataSource,OTPageScrollViewDel
         let bounds = self.pageScrollView.bounds
         
         for view in allTopCell() {
-            
-            //let visibleViewCount = topPageView.pageScrollView.visibleCell.count
             
             let progress = (view.center.x - currentCenterX) / CGRectGetWidth(bounds) * CGFloat(1)
             updateView(view, withProgress: progress)

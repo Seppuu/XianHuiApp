@@ -12,7 +12,7 @@ import SnapKit
 
 class VoiceRecordSampleCell: UIView {
     
-    var shapeView:UIView!
+    var shapeView = UIView()
 
     var value: Float = 0 {
         didSet {

@@ -23,6 +23,7 @@ class DailyFormVC: RadarChartVC {
         
     }
     
+    var jsonData:JSON!
     
     var date:String {
         
@@ -57,6 +58,8 @@ class DailyFormVC: RadarChartVC {
                 self.names = ["现金","实操","产品","客流","客单价","人均项目数","项目均价"]
                 
                 self.form = self.formToday
+                
+                self.jsonData = json!
                 
                 self.setChartData()
                 self.tableView.reloadData()
@@ -98,79 +101,134 @@ class DailyFormVC: RadarChartVC {
             //现金
             form.cashList.amount = dailyData["cash_amount"].int!
             
+            form.cash = dailyData["cash_amount"].int!
+            
             if let cashList = dailyData["cash_list"].array {
                 
                 for unit in cashList {
-                    let p = Good()
+                    let p = FormDetailList()
                     p.name = unit["fullname"].string!
                     p.amount = unit["amount"].string!
-                    form.cashList.list.append(p)
+                    form.customerList.list.append(p)
                 }
             }
             
             //项目
             form.projectList.amount = dailyData["project_amount"].int!
             
+            form.project = dailyData["project_amount"].int!
+            
             if let projectList = dailyData["project_list"].array {
                 
                 for unit in projectList {
-                    let p = Project()
+                    let p = FormDetailList()
                     p.name = unit["fullname"].string!
                     p.amount = unit["amount"].string!
-                    form.projectList.list.append(p)
+                    form.customerList.list.append(p)
                 }
             }
             
             //产品
             form.productList.amount = dailyData["product_amount"].int!
+            
+            form.product = dailyData["product_amount"].int!
+            
             if let productList = dailyData["product_list"].array {
                 
                 for unit in productList {
-                    let p = Project()
+                    let p = FormDetailList()
                     p.name = unit["fullname"].string!
                     p.amount = unit["amount"].string!
-                    form.productList.list.append(p)
+                    form.customerList.list.append(p)
                 }
             }
             
             //客流
             form.customerList.amount = dailyData["customer_num"].int!
+            
+            form.customerCount = dailyData["customer_num"].int!
+            
             if let customerList = dailyData["customer_list"].array {
                 
                 for unit in customerList {
-                    let p = Customer()
+                    let p = FormDetailList()
                     p.name = unit["fullname"].string!
-                    p.consumeNumDay = unit["num"].string!
+                    p.amount = unit["amount"].string!
                     form.customerList.list.append(p)
                 }
             }
             
             //客单价
             form.customerUnitPriceList.amount = dailyData["customer_price"].int!
-            if let dict = dailyData["customer_price_list"].dictionary {
-                form.customerUnitPriceList.dict = dict
+            
+            if let data = dailyData["customer_price_list"].array {
+                
+                for unit in data {
+                    let p = FormDetailList()
+                    p.name = unit["fullname"].string!
+                    p.amount = unit["amount"].string!
+                    form.customerList.list.append(p)
+                }
                 
             }
             
             //员工项目数
             form.employeeList.amount = dailyData["employee_project_num"].int!
             
-            if let dict = dailyData["employee_project_list"].dictionary {
-                form.employeeList.dict = dict
+            form.employee = dailyData["employee_project_num"].int!
+            
+            if let data = dailyData["employee_project_list"].array {
+                
+                for unit in data {
+                    let p = FormDetailList()
+                    p.name = unit["fullname"].string!
+                    p.amount = unit["amount"].string!
+                    form.customerList.list.append(p)
+                }
                 
             }
             
             //项目均价
             form.projectPriceList.amount = dailyData["project_avg_price"].int!
             
-            if let dict = dailyData["project_avg_list"].dictionary {
-                form.projectPriceList.dict = dict
+            if let data = dailyData["project_avg_list"].array {
+                
+                for unit in data {
+                    let p = FormDetailList()
+                    p.name = unit["fullname"].string!
+                    p.amount = unit["amount"].string!
+                    form.customerList.list.append(p)
+                }
                 
             }
             
             
+            //五个维度,当月平均和累计
+            let monthlyAvg = json["monthly_avg"]
+            let today = formList[0]
+            today.monthlyAvgCash = monthlyAvg["cash"].int!
             
-            formList.append(form)
+            today.monthlyAvgProject = monthlyAvg["project"].int!
+            
+            today.monthlyAvgProduct = monthlyAvg["product"].int!
+            
+            today.monthlyAvgCustomer = monthlyAvg["customer"].int!
+            
+            today.monthlyAvgEmployee = monthlyAvg["employee"].int!
+            
+            
+            let monthlyTotal = json["monthly_total"]
+            
+            today.monthlyTotalCash = monthlyTotal["cash"].int!
+            
+            today.monthlyTotalProject = monthlyTotal["project"].int!
+            
+            today.monthlyTotalProduct = monthlyTotal["product"].int!
+            
+            today.monthlyTotalCustomer = monthlyTotal["customer"].int!
+            
+            today.monthlyTotalEmployee = monthlyTotal["employee"].int!
+            
         }
         
        return formList
@@ -205,145 +263,92 @@ class DailyFormVC: RadarChartVC {
         return numsString
     }
     
+    override func angleTypeTap(sender: UIButton) {
+        
+        let button = sender
+        let index = button.tag
+        let vc = PieViewController()
+        
+        var nums = [Int]()
+        
+        var currentMonthAvgVaule:Float = 0.0
+        
+        var grandTotalValue:Float = 0.0
+        
+        switch index {
+        case 0:
+            
+            vc.title = "现金"
+            
+            vc.data = self.jsonData["chart_data"]["cash"]
+            
+            for form in formList {
+                let num = form.cash
+                nums.append(num)
+            }
+            
+            currentMonthAvgVaule = formToday.avgPointArray
+            
+        case 1:
+            
+            vc.title = "实操"
+            vc.data = self.jsonData["chart_data"]["project"]
+            
+            for form in formList {
+                let num = form.project
+                nums.append(num)
+            }
+        case 2:
+            
+            vc.title = "产品"
+            vc.data = self.jsonData["chart_data"]["product"]
+            
+            for form in formList {
+                let num = form.product
+                nums.append(num)
+            }
+        case 3:
+            
+            vc.title = "客流"
+            vc.data = self.jsonData["chart_data"]["customer"]
+            
+            for form in formList {
+                let num = form.customerCount
+                nums.append(num)
+            }
+        case 4:
+            
+            vc.title = "员工"
+            vc.data = self.jsonData["chart_data"]["employee"]
+            
+            for form in formList {
+                let num = form.employee
+                nums.append(num)
+            }
+            
+        default:
+            break;
+        }
+        
+        vc.parentNavigationController = self.navigationController
+        
+        vc.numbers = nums.reverse()
+        
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         super.tableView(tableView, didSelectRowAtIndexPath: indexPath)
         
-        var dataArray = [[FormData]]()
+        var dataArray = [FormData]()
         
         let title = self.names[indexPath.row]
         
-        var sections = [String]()
-        
-        var names = [[String]]()
-        
-        var details = [[String]]()
-        
-        if indexPath.row == 0 {
-            
-            sections = ["会员卡","产品"]
-            
-            names = [
-                
-                ["A卡","B卡","C卡"],
-                ["产品A","产品B"]
-                         ]
-            details = [
-                
-                ["10,000","20,000","100,000"],
-                       
-                ["500","500"]
-                           ]
-            
-        }
-        else if indexPath.row == 1 {
-            
-            sections = ["会员卡","产品"]
-            
-            names = [
-                
-                ["A卡","B卡"],
-                ["产品A","产品B"]
-            ]
-            details = [
-                
-                ["10,000","20,000"],
-                
-                ["500","500"]
-            ]
-            
-        }
-        else if indexPath.row == 2 {
-            
-            sections = ["产品"]
-            
-            names = [
-                
-                ["产品A","产品B","产品C"]
-            ]
-            details = [
-                
-                ["8000","3000","3000"]
-                
-            ]
-
-            
-        }
-        else if indexPath.row == 3 {
-            
-            sections = [" "]
-            
-            names = [
-                
-                ["客户A","客户B","客户C"]
-            ]
-            details = [
-                
-                ["8000","3000","3000"]
-                
-            ]
-            
-        }
-        else if indexPath.row == 4 {
-            
-            sections = [" "]
-            
-            names = [
-                
-                ["1000元以内","1000-2000元","2000元以上"]
-            ]
-            details = [
-                
-                ["2人","2人","5人"]
-                
-            ]
-            
-        }
-        else if indexPath.row == 5 {
-            
-            sections = [" "]
-            
-            names = [
-                
-                ["1个","2个","3个"]
-            ]
-            details = [
-                
-                ["2人","2人","2人"]
-                
-            ]
-        }
-        else {
-            
-            sections = [" "]
-            
-            names = [
-                
-                ["500元以内","500-1000元","1000元以上"]
-            ]
-            details = [
-                
-                ["3个","10个","15个"]
-                
-            ]
-        }
-        
-        
-        for section in 0..<sections.count {
-            var sectionData = [FormData]()
-            for row in 0..<names[section].count {
-                let data = FormData()
-                data.name = names[section][row]
-                data.detail = details[section][row]
-                
-                sectionData.append(data)
-                
-            }
-            dataArray.append(sectionData)
-        }
         
         let vc = FormDetailVC()
         vc.title = title
-        vc.sections = sections
+        
         vc.dataArray = dataArray
         
         self.navigationController?.pushViewController(vc, animated: true)
@@ -366,9 +371,7 @@ class FormDetailVC: UIViewController ,UITableViewDelegate,UITableViewDataSource 
     
     var tableView:UITableView!
     
-    var sections = [String]()
-    
-    var dataArray = [[FormData]]()
+    var dataArray = [FormData]()
     
     let cellId = "typeCell"
     
@@ -387,18 +390,12 @@ class FormDetailVC: UIViewController ,UITableViewDelegate,UITableViewDataSource 
         
     }
     
-    
-   func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section]
-    }
-    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return sections.count
+        return 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let datas = dataArray[section]
-        return datas.count
+        return dataArray.count
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -411,9 +408,9 @@ class FormDetailVC: UIViewController ,UITableViewDelegate,UITableViewDataSource 
         
         let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! typeCell
         cell.selectionStyle = .None
-        let datas = dataArray[indexPath.section]
-        cell.leftLabel.text = datas[indexPath.row].name
-        cell.typeLabel.text = datas[indexPath.row].detail
+        let datas = dataArray[indexPath.row]
+        cell.leftLabel.text = datas.name
+        cell.typeLabel.text = datas.detail
         
         return cell
         
@@ -425,6 +422,8 @@ class FormDetailVC: UIViewController ,UITableViewDelegate,UITableViewDataSource 
 
 
 class  PieViewController: PieChartViewController {
+    
+    var data:JSON!
     
     override func viewDidLoad() {
         super.viewDidLoad()

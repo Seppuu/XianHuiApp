@@ -25,6 +25,15 @@ class PieCell: UICollectionViewCell {
 
 class PieChartViewController: BaseChartViewController {
     
+    
+    //顶部数组
+    
+    var currentMonthAvgVaule:Float = 0.0
+    
+    var grandTotalValue:Float = 0.0
+    
+    var numbers = [Int]()
+    
     var topPageView:XHBarChartView!
     
     var bottomCollectionView:UICollectionView!
@@ -59,6 +68,10 @@ class PieChartViewController: BaseChartViewController {
         self.automaticallyAdjustsScrollViewInsets = false
         
         topPageView = XHBarChartView(frame: CGRect(x: 0, y: 64, width: screenWidth, height: viewHeight * 0.5))
+        
+        topPageView.listOfNumber2 = numbers
+        //TODO:日期数组
+        
         topPageView.clipsToBounds = true
         topPageView.setScrollView()
         topPageView.backgroundColor = UIColor(red: 0.9294, green: 0.8941, blue: 0.8392, alpha: 1.0)
