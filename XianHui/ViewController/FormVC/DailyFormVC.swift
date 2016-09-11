@@ -282,6 +282,7 @@ class DailyFormVC: RadarChartVC {
         //饼图模型 多个一组
         var chartDatasArray = [[XHChartData]]()
         
+        var maxValue:Float = 0.0
         
         func getChartDataListArry(datas:[JSON]) -> [XHChartData] {
             var chartDatas = [XHChartData]()
@@ -308,6 +309,8 @@ class DailyFormVC: RadarChartVC {
                 nums.append(num)
             }
             
+            
+            maxValue = Float(Defaults.cashMaxValue.value!)
             currentMonthAvgVaule = Float(formToday.monthlyAvgCash)
             grandTotalValue = Float(formToday.monthlyTotalCash)
             
@@ -344,7 +347,7 @@ class DailyFormVC: RadarChartVC {
                 let num = form.project
                 nums.append(num)
             }
-            
+            maxValue = Float(Defaults.projectMaxValue.value!)
             currentMonthAvgVaule = Float(formToday.monthlyAvgProject)
             grandTotalValue = Float(formToday.monthlyTotalProject)
             
@@ -382,6 +385,8 @@ class DailyFormVC: RadarChartVC {
                 let num = form.product
                 nums.append(num)
             }
+            
+            maxValue = Float(Defaults.productMaxValue.value!)
             currentMonthAvgVaule = Float(formToday.monthlyAvgProduct)
             grandTotalValue = Float(formToday.monthlyTotalProduct)
             
@@ -419,6 +424,8 @@ class DailyFormVC: RadarChartVC {
                 let num = form.customerCount
                 nums.append(num)
             }
+            
+            maxValue = Float(Defaults.customerMaxValue.value!)
             currentMonthAvgVaule = Float(formToday.monthlyAvgCustomer)
             grandTotalValue = Float(formToday.monthlyTotalCustomer)
             
@@ -457,6 +464,7 @@ class DailyFormVC: RadarChartVC {
                 nums.append(num)
             }
             
+            maxValue = Float(Defaults.employeeMaxValue.value!)
             currentMonthAvgVaule = Float(formToday.monthlyAvgEmployee)
             grandTotalValue = Float(formToday.monthlyTotalEmployee)
             
@@ -490,7 +498,7 @@ class DailyFormVC: RadarChartVC {
         vc.currentMonthAvgVaule = currentMonthAvgVaule
         vc.grandTotalValue = grandTotalValue
         
-        
+        vc.maxVaule = maxValue
         vc.pieType = pieType
         vc.listOfChartDataArray = chartDatasArray
         
@@ -619,7 +627,9 @@ class  PieViewController: PieChartViewController {
         let vc = FormSettingVC()
         vc.title = "设置"
         
-        navigationController?.pushViewController(vc, animated: true)
+        let nav = UINavigationController(rootViewController: vc)
+        
+        self.presentViewController(nav, animated: true, completion: nil)
     }
     
 }

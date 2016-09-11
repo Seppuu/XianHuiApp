@@ -16,18 +16,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    var remotenoti:[NSObject: AnyObject]?
+    var app:UIApplication?
+    
+    var remoteNotiData:[NSObject: AnyObject]?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         
         ChatKitExample.invokeThisMethodInDidFinishLaunching()
         
-        remotenoti = launchOptions
+        if launchOptions != nil {
+            if let notificationPayload = launchOptions![UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSObject: AnyObject] {
+                app = application
+                remoteNotiData = notificationPayload
+
+            }
+            
+        }
+        else {
+            
+        }
         
         let currentClientId = Defaults.clientId.value!
         if currentClientId != "" {
-
+            
             User.setAlluserId()
             self.openLeanCloudIMWith(currentClientId)
         }
@@ -67,11 +79,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let tabBarControllerConfig = LCCKTabBarControllerConfig()
             
             self.window?.rootViewController = tabBarControllerConfig.tabBarController
-
             
-            self.checkIfNeedPushVC()
+            self.appHasLoginSuccess = true
             
-            //self.getDailyMaxValue()
+            if self.remoteNotiData != nil {
+                self.application(self.app!, didReceiveRemoteNotification: self.remoteNotiData!, fetchCompletionHandler: { (result) in
+                    
+                })
+                
+            }
+            
+            
+//            let time = dispatch_time(dispatch_time_t(DISPATCH_TIME_NOW), 2 * Int64(NSEC_PER_SEC))
+//            dispatch_after(time, dispatch_get_main_queue()) {
+//                //put your code which should be executed with a delay here
+//                
+//            }
             
             }, failed: { (error) in
                 
@@ -81,51 +104,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
     }
     
-    func getDailyMaxValue() {
+    func applicationDidBecomeActive(application: UIApplication) {
         
-        NetworkManager.sharedManager.getDailyReportMaxVaule { (success, json, error) in
-            if success == true {
-                
-            }
-        }
     }
     
-    func checkIfNeedPushVC() {
-        
-        if remotenoti != nil {
-            
-            // Extract the notification data
-            if let notificationPayload = remotenoti![UIApplicationLaunchOptionsRemoteNotificationKey] {
-                
-                // Create a pointer to the Photo object
-                if let type = notificationPayload["notice_type"] as? String {
-                    
-                    if type == "daily_report" {
-                        
-                    }
-                    else if type == "project_plan" {
-                        
-                        let viewController = window?.visibleViewController!
-                        let vc = MyWorkVC()
-                        vc.title = "我的工作"
-                        viewController!.navigationController?.pushViewController(vc, animated: true)
-                    }
-                    else if type == "common_notice" {
-                        
-                        
-                    }
-                    else {
-                        
-                    }
-                    
-                }
-            }
-        }
-        
-        remotenoti = nil
-        
-    }
-
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         ChatKitExample.invokeThisMethodInDidRegisterForRemoteNotificationsWithDeviceToken(deviceToken)
     }
@@ -139,11 +121,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        ChatKitExample.invokeThisMethodInApplication(application, didReceiveRemoteNotification: userInfo)
+        //ChatKitExample.invokeThisMethodInApplication(application, didReceiveRemoteNotification: userInfo)
     }
 
     
-    var appComeFromBack = false
+    var appComeFromBack = true
     
     //这个方法只会在app,从后台进入前台是触发,第一次启动不会触发.
     func applicationWillEnterForeground(application: UIApplication) {
@@ -151,9 +133,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appComeFromBack = true
     }
     
+    var appHasLoginSuccess = false
     
     //通知到达的时候,应用已经打开.
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        
+        //如果此时app没有完全登陆成功.return.
+        guard appHasLoginSuccess == true else {return}
+        
         
         if appComeFromBack == true {
             
@@ -188,7 +175,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let type =  userInfo["notice_type"] as? String {
                 if type == "daily_report" {
                     
-                    
+                    let viewController = window?.visibleViewController!
+                    let vc = HelperVC()
+                    vc.title = "助手"
+                    viewController!.navigationController?.pushViewController(vc, animated: true)
                 }
                 else if type == "project_plan" {
                     

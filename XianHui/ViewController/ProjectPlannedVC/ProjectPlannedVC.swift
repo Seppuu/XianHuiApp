@@ -53,11 +53,16 @@ class ProjectPlannedVC: UIViewController {
             
             if success == true {
                 
-                let dataArr = json!.array!
-                self.datasArray = self.getListOfProjectPlannedWith(dataArr)
-                self.bottomView.listOfProject = self.datasArray
-                self.bottomView.days = self.days
-                self.bottomView.tableView.reloadData()
+                if let dataArr = json!.array {
+                    self.datasArray = self.getListOfProjectPlannedWith(dataArr)
+                    self.bottomView.listOfProject = self.datasArray
+                    self.bottomView.days = self.days
+                    self.bottomView.tableView.reloadData()
+                }
+                else {
+                    //TODO:无数据
+                }
+                
             }
             else {
                 

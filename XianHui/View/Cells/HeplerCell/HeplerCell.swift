@@ -18,9 +18,6 @@ class HeplerCell: UITableViewCell {
     
     @IBOutlet weak var dayTimeLabel: UILabel!
     
-    
-    @IBOutlet weak var middleImageView: UIImageView!
-    
     @IBOutlet weak var descLabel: UILabel!
     
     override func awakeFromNib() {

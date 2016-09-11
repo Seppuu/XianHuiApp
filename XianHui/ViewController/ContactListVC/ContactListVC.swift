@@ -137,6 +137,9 @@ extension ContactListVC {
             else if indexPath.item == 1 {
                 
                 //通知,提醒
+                let vc = NoticeListVC()
+                vc.title = "提醒"
+                navigationController?.pushViewController(vc, animated: true)
                 
                 
             }

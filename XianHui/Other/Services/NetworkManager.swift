@@ -233,9 +233,14 @@ extension NetworkManager {
     }
     
     //保存报表峰值
-    func saveDailyReportMaxVaule(completion:DDResultHandler) {
+    func saveDailyReportMaxVaule(cashMax:Int,projectmax:Int,prodMax:Int,customerMax:Int,employeemax:Int,completion:DDResultHandler) {
         let dict:JSONDictionary = [
-            "token":Defaults.userToken.value!
+            "token":Defaults.userToken.value!,
+            "cash_amount":cashMax,
+            "project_amount":projectmax,
+            "product_amount":prodMax,
+            "customer_total":customerMax,
+            "employee_amount":employeemax
         ]
         
         let urlString = SaveDailyReportMaxVauleUrl

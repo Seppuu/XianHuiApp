@@ -23,12 +23,7 @@ class XHBarChartView: OTPageView ,OTPageScrollViewDataSource,OTPageScrollViewDel
     
     var grandTotalValue:Float = 0.0
     
-    var maxValue:Float {
-        
-        //TODO:设置的最大值
-        
-        return 10000
-    }
+    var maxValue:Float = 100
     
     var listOfNumber: [String] {
         //将Int转化为千位数逗号String

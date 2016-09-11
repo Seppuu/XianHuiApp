@@ -41,6 +41,9 @@ class PieChartViewController: BaseChartViewController {
     
     var numbers = [Int]()
     
+    
+    var maxVaule:Float = 0.0
+    
     var topPageView:XHBarChartView!
     
     var bottomCollectionView:UICollectionView!
@@ -83,6 +86,7 @@ class PieChartViewController: BaseChartViewController {
         
         topPageView.currentMonthAvgVaule = currentMonthAvgVaule
         topPageView.grandTotalValue = grandTotalValue
+        topPageView.maxValue = maxVaule //柱形图最大值
         //TODO:日期数组
         
         topPageView.clipsToBounds = true

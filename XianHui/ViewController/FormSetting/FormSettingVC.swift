@@ -7,28 +7,72 @@
 //
 
 import UIKit
+import SwiftyJSON
+import MBProgressHUD
+
+class MaxValue: NSObject {
+    
+    var name = ""
+    
+    var value = 0
+    
+    var list = [String:String]()
+    
+}
+
 
 class FormSettingVC: UIViewController {
     
     var tableView: UITableView!
     
-    var listOfCellTitle = ["现金","实操","产品","客流"]
-    
-    var listOfTitle = ["10K","30K","50K"]
-    
     var cellId = "typeCell"
+    
+    var listOfMaxVal = [MaxValue]()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getDailyReportMaxValues()
+        getDailyMaxValue()
         setTableView()
-        
+        setNavBarItem()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
+    }
+    
+    func getDailyMaxValue() {
+        
+        NetworkManager.sharedManager.getDailyReportMaxVaule { (success, json, error) in
+            if success == true {
+               self.listOfMaxVal =  self.makeMaxValueListWith(json!)
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    var maxValKey = ["cash_amount","project_amount","product_amount","customer_total","employee_amount"]
+    var maxKeyName = ["现金","项目","产品","客流","员工"]
+    
+    func makeMaxValueListWith(json:JSON) -> [MaxValue] {
+        var list = [MaxValue]()
+        for i in 0..<maxValKey.count {
+            let someMaxVal = MaxValue()
+            
+            someMaxVal.name = maxKeyName[i]
+            let key = maxValKey[i]
+            
+            if let defaultVal = json[key]["value"].int {
+                someMaxVal.value = defaultVal
+            }
+            someMaxVal.list = json[key]["list"].dictionaryObject as! [String:String]
+            
+            list.append(someMaxVal)
+        }
+
+        return list
     }
     
     func setTableView() {
@@ -48,27 +92,54 @@ class FormSettingVC: UIViewController {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
-    
-    func getDailyReportMaxValues() {
+
+    func setNavBarItem() {
         
-        NetworkManager.sharedManager.getDailyReportMaxVaule { (success, json, error) in
-            
-            if success == true {
-                
-            }
-            else {
-                //use realm data
-            }
-        }
+        let rightBar = UIBarButtonItem(title: "确定", style: .Done, target: self, action: #selector(FormSettingVC.confirmTap))
+        
+        self.navigationItem.rightBarButtonItem = rightBar
         
     }
     
-    
-    
-    
-    
-    
-    
+    func confirmTap() {
+        
+        //TODO:check if all set done
+        for maxVal in listOfMaxVal {
+            if maxVal.value == 0 {
+                
+                DDAlert.alert(title: "提示", message: "请设置所有的项目", dismissTitle: "好的", inViewController: self, withDismissAction: nil)
+                
+                return
+            }
+        }
+        
+        //Save to back
+        let cashMax = listOfMaxVal[0].value
+        let projectmax = listOfMaxVal[1].value
+        let prodMax = listOfMaxVal[2].value
+        let customerMax = listOfMaxVal[3].value
+        let employeemax = listOfMaxVal[4].value
+        
+        let hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        hud.mode = .AnnularDeterminate
+        
+        NetworkManager.sharedManager.saveDailyReportMaxVaule(cashMax, projectmax: projectmax, prodMax: prodMax, customerMax: customerMax, employeemax: employeemax) { (success, json, error) in
+            
+            if success == true {
+                hud.hide(true)
+                self.dismissViewControllerAnimated(true, completion: nil)
+                //save local seeting
+                Defaults.cashMaxValue.value = cashMax
+                Defaults.projectMaxValue.value = projectmax
+                Defaults.productMaxValue.value = prodMax
+                Defaults.customerMaxValue.value = customerMax
+                Defaults.employeeMaxValue.value = employeemax
+                
+            }
+        }
+        
+        
+    }
     
 }
 
@@ -89,7 +160,7 @@ extension FormSettingVC:UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return listOfMaxVal.count
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -101,9 +172,17 @@ extension FormSettingVC:UITableViewDelegate,UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! typeCell
         
         cell.accessoryType = .DisclosureIndicator
-        cell.leftLabel.text = listOfCellTitle[indexPath.row]
-        let index = Defaults.maxValue.value!
-        cell.typeLabel.text = listOfTitle[index]
+        
+        let maxVal = listOfMaxVal[indexPath.row]
+        
+        cell.leftLabel.text = maxVal.name
+        
+        if maxVal.value == 0 {
+            cell.typeLabel.text = "请设置"
+        }
+        else {
+            cell.typeLabel.text = String(maxVal.value)
+        }
         
         return cell
     }
@@ -112,8 +191,9 @@ extension FormSettingVC:UITableViewDelegate,UITableViewDataSource {
         
         let vc = MaxValueSettingVC()
         vc.title = "最大值"
+        vc.maxValue = listOfMaxVal[indexPath.row]
         
-        navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         

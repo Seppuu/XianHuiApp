@@ -89,9 +89,45 @@ extension PalauDefaults {
         }
     }
     
-    public static var maxValue: PalauDefaultsEntry<Int> {
+    public static var cashMaxValue: PalauDefaultsEntry<Int> {
         get {
-            return value("maxValue").whenNil(use:0)
+            return value("cashMaxValue").whenNil(use:15000)
+        }
+        set {
+            
+        }
+    }
+    
+    public static var projectMaxValue: PalauDefaultsEntry<Int> {
+        get {
+            return value("projectMaxValue").whenNil(use:7000)
+        }
+        set {
+            
+        }
+    }
+    
+    public static var productMaxValue: PalauDefaultsEntry<Int> {
+        get {
+            return value("productMaxValue").whenNil(use:5000)
+        }
+        set {
+            
+        }
+    }
+    
+    public static var customerMaxValue: PalauDefaultsEntry<Int> {
+        get {
+            return value("customerMaxValue").whenNil(use:20)
+        }
+        set {
+            
+        }
+    }
+    
+    public static var employeeMaxValue: PalauDefaultsEntry<Int> {
+        get {
+            return value("employeeMaxValue").whenNil(use:500)
         }
         set {
             
