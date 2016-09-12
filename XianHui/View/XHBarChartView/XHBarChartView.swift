@@ -21,9 +21,9 @@ class XHBarChartView: OTPageView ,OTPageScrollViewDataSource,OTPageScrollViewDel
     
     var rightLabel02 = UILabel()
     
-    var currentMonthAvgVaule:Float = 0.0
+    var currentMonthAvgVaule:Int = 0
     
-    var grandTotalValue:Float = 0.0
+    var grandTotalValue:Int = 0
     
     var maxValue:Float = 100
     
@@ -70,7 +70,7 @@ class XHBarChartView: OTPageView ,OTPageScrollViewDataSource,OTPageScrollViewDel
         dateLabel.snp_makeConstraints { (make) in
             make.width.equalTo(screenWidth)
             make.centerX.equalTo(self)
-            make.top.equalTo(topLabel.snp_bottom).offset(5)
+            make.bottom.equalTo(self)
         }
         
         dateLabel.text = listOfDateString.last
@@ -78,8 +78,11 @@ class XHBarChartView: OTPageView ,OTPageScrollViewDataSource,OTPageScrollViewDel
         
         rightLabel01.textColor = UIColor ( red: 0.5216, green: 0.3765, blue: 0.2863, alpha: 1.0 )
         rightLabel01.font = UIFont.systemFontOfSize(12)
-        rightLabel01.text = "当月平均:\(currentMonthAvgVaule)"
-        rightLabel01.textAlignment = .Right
+        
+        let str01 = String(currentMonthAvgVaule)
+        
+        rightLabel01.text = "当月平均:" + str01
+        rightLabel01.textAlignment = .Left
         addSubview(rightLabel01)
         rightLabel01.snp_makeConstraints { (make) in
             make.left.equalTo(self).offset(15)
@@ -91,8 +94,9 @@ class XHBarChartView: OTPageView ,OTPageScrollViewDataSource,OTPageScrollViewDel
         
         rightLabel02.textColor = UIColor ( red: 0.5216, green: 0.3765, blue: 0.2863, alpha: 1.0 )
         rightLabel02.font = UIFont.systemFontOfSize(12)
-        rightLabel02.text = "当月累计:\(grandTotalValue)"
-        rightLabel02.textAlignment = .Right
+        let str02 = String(currentMonthAvgVaule)
+        rightLabel02.text = "当月累计:" + str02
+        rightLabel02.textAlignment = .Left
         addSubview(rightLabel02)
         rightLabel02.snp_makeConstraints { (make) in
             make.left.equalTo(self).offset(15)
@@ -103,6 +107,7 @@ class XHBarChartView: OTPageView ,OTPageScrollViewDataSource,OTPageScrollViewDel
         
         
     }
+    
     
     func setScrollView() {
         
@@ -135,7 +140,7 @@ class XHBarChartView: OTPageView ,OTPageScrollViewDataSource,OTPageScrollViewDel
         
         if val == 0 {
             //如果数值是0.加一点.防止UI界面消失
-            val = 10
+            val = 1
         }
         
         view.value = val / maxValue

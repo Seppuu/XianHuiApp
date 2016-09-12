@@ -35,9 +35,9 @@ class PieChartViewController: BaseChartViewController {
     
     //顶部数组
     
-    var currentMonthAvgVaule:Float = 0.0
+    var currentMonthAvgVaule = 0
     
-    var grandTotalValue:Float = 0.0
+    var grandTotalValue = 0
     
     var numbers = [Int]()
     
@@ -55,7 +55,7 @@ class PieChartViewController: BaseChartViewController {
     
     var pageControl:UIPageControl!
     
-    var pieTypelabel:UILabel!
+    //var pieTypelabel:UILabel!
 
     var tableView:UITableView!
     
@@ -125,7 +125,7 @@ class PieChartViewController: BaseChartViewController {
         
         
         //page control
-        pageControl = UIPageControl(frame: CGRect(x: 0, y: topPageView.ddHeight + 64, width: screenWidth, height: 40))
+        pageControl = UIPageControl(frame: CGRect(x: 0, y:screenHeight - 20, width: screenWidth, height: 20))
         view.addSubview(pageControl)
         
         pageControl.currentPage = 0
@@ -133,12 +133,13 @@ class PieChartViewController: BaseChartViewController {
         pageControl.pageIndicatorTintColor = UIColor ( red: 0.949, green: 0.902, blue: 0.8196, alpha: 1.0 )
         pageControl.numberOfPages = listOfChartDataArray.count
         
-        
-        pieTypelabel = UILabel(frame: CGRect(x: 0, y:pageControl.frame.origin.y + pageControl.ddHeight, width: screenWidth, height: 20))
-        pieTypelabel.textAlignment = .Center
-        pieTypelabel.textColor = UIColor ( red: 0.4549, green: 0.3922, blue: 0.3922, alpha: 1.0 )
-        pieTypelabel.text = pieType[0]
-        view.addSubview(pieTypelabel)
+//        
+//        pieTypelabel = UILabel(frame: CGRect(x: 0, y:pageControl.frame.origin.y - 15 , width: screenWidth, height: 20))
+//        pieTypelabel.textAlignment = .Center
+//        pieTypelabel.font = UIFont.systemFontOfSize(12)
+//        pieTypelabel.textColor = UIColor ( red: 0.4549, green: 0.3922, blue: 0.3922, alpha: 1.0 )
+//        pieTypelabel.text = pieType[0]
+//        view.addSubview(pieTypelabel)
         
         //tableViewSet
         tableView = UITableView(frame: CGRectZero, style: .Plain)
@@ -193,29 +194,32 @@ extension PieChartViewController: ChartViewDelegate {
             
             yVals1.append(chartDataEntry)
         }
-        
+       
         var xVals = [String?]()
         
-        var xvs = [String?]()
+        //var xvs = [String?]()
         
         for chartData in listOfChartDataArray[index] {
             let str = chartData.x
+            
             xVals.append(str)
-            xvs.append(str)
+          
         }
 
         
         let dataSet = PieChartDataSet(yVals: yVals1, label: "分布结果")
+        dataSet.sliceSpace = 2.0
         
-        let colors = [
-            UIColor ( red: 0.5216, green: 0.3765, blue: 0.2863, alpha: 1.0 ),
-            UIColor ( red: 0.8715, green: 0.7948, blue: 0.6786, alpha: 1.0 ),
-            UIColor ( red: 0.7855, green: 0.6676, blue: 0.4805, alpha: 1.0 ),
-            UIColor ( red: 0.5216, green: 0.3765, blue: 0.2863, alpha: 1.0 ),
-            UIColor ( red: 0.897, green: 0.609, blue: 0.4544, alpha: 1.0 ),
-            UIColor ( red: 0.763, green: 0.4454, blue: 0.2472, alpha: 1.0 )
-        ]
-        
+        var colors = [UIColor]()
+
+        colors += ChartColorTemplates.vordiplom()
+        colors += ChartColorTemplates.joyful()
+        colors += ChartColorTemplates.colorful()
+        colors += ChartColorTemplates.liberty()
+        colors += ChartColorTemplates.pastel()
+        colors += ChartColorTemplates.material()
+        colors += [UIColor ( red: 0.0, green: 0.6426, blue: 0.9191, alpha: 1.0 )]
+
         dataSet.colors = colors
         
         let data = PieChartData(xVals: xVals, dataSet: dataSet)
@@ -224,10 +228,10 @@ extension PieChartViewController: ChartViewDelegate {
         pFormatter.numberStyle = .PercentStyle
         pFormatter.maximumFractionDigits = 1
         pFormatter.multiplier = 1.0
-        pFormatter.percentSymbol = ""
+        pFormatter.percentSymbol = " %"
         data.setValueFormatter(pFormatter)
         data.setValueFont(UIFont(name: "HelveticaNeue-Light", size: 11.0))
-        data.setValueTextColor(UIColor.whiteColor())
+        data.setValueTextColor(UIColor ( red: 0.3078, green: 0.3078, blue: 0.3078, alpha: 1.0 ))
         
         pieView.data = data
         
@@ -277,7 +281,12 @@ extension PieChartViewController {
         let pageWidth = bottomCollectionView.ddWidth
         let currentpage = Int( bottomCollectionView.contentOffset.x / pageWidth )
         pageControl.currentPage = currentpage
-        pieTypelabel.text = pieType[currentpage]
+        
+        //get cell with index
+        let path = NSIndexPath(forItem: currentpage, inSection: 0)
+        let cell = bottomCollectionView.cellForItemAtIndexPath(path) as! PieCell
+        let pieChartView = cell.viewWithTag(10) as! PieChartView
+        pieChartView.centerText = pieType[currentpage]
         
     }
     
@@ -311,7 +320,8 @@ extension PieChartViewController:UICollectionViewDelegateFlowLayout,UICollection
         pieChartView.tag = 10
         pieChartView.delegate = self
         
-        pieChartView.backgroundColor = UIColor ( red: 1.0, green: 0.9882, blue: 0.9647, alpha: 1.0 )
+        pieChartView.backgroundColor = UIColor ( red: 0.9997, green: 0.9858, blue: 0.9558, alpha: 1.0 )
+        pieChartView.centerText = pieType[indexPath.row]
         cell.addSubview(pieChartView)
         
         self.updatePieChartData(indexPath.row, pieView: pieChartView)
@@ -319,11 +329,11 @@ extension PieChartViewController:UICollectionViewDelegateFlowLayout,UICollection
         if animePieChart == true {
             
             pieChartView.animate(xAxisDuration: 1.0, easingOption: .EaseOutBack)
+            
         }
         else {
             
         }
-        
         
         return cell
     }

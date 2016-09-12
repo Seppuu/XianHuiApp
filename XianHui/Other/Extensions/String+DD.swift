@@ -12,6 +12,18 @@ import CryptoSwift
 
 extension String {
     
+    
+    mutating func removeCharsFromEnd(count:Int) -> String {
+        
+        for _ in 0..<count {
+            
+            self.removeAtIndex(self.endIndex.predecessor())
+            
+        }
+        
+        return self
+    }
+    
     func textSizeWithFont(font: UIFont, constrainedToSize size:CGSize) -> CGSize {
         
         var textSize:CGSize!

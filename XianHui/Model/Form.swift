@@ -11,8 +11,15 @@ import SwiftyJSON
 
 class Form: NSObject {
     
-    //日期
-    var date = ""
+    //日期 yyyy-MM-dd
+    var date = "" {
+        didSet {
+            let year = date[0...4]
+            dateWithOutYear = date.chompLeft(year)
+        }
+    }
+    
+    var dateWithOutYear = ""
     
     //man
     var totalScore:Double = 5
