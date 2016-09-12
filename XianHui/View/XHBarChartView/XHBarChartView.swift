@@ -15,6 +15,8 @@ class XHBarChartView: OTPageView ,OTPageScrollViewDataSource,OTPageScrollViewDel
     
     var topLabel = UILabel()
     
+    var dateLabel = UILabel()
+    
     var rightLabel01 = UILabel()
     
     var rightLabel02 = UILabel()
@@ -43,6 +45,8 @@ class XHBarChartView: OTPageView ,OTPageScrollViewDataSource,OTPageScrollViewDel
     
     var listOfNumber2 = [Int]()
     
+    var listOfDateString = [String]()
+    
     var currentPageChangedHandler:((index:Int)->())?
     
     override func layoutSubviews() {
@@ -59,6 +63,18 @@ class XHBarChartView: OTPageView ,OTPageScrollViewDataSource,OTPageScrollViewDel
         
         topLabel.text = listOfNumber.last
         
+        dateLabel.textColor = UIColor ( red: 0.5216, green: 0.3765, blue: 0.2863, alpha: 1.0 )
+        dateLabel.text = listOfNumber.last
+        dateLabel.textAlignment = .Center
+        addSubview(dateLabel)
+        dateLabel.snp_makeConstraints { (make) in
+            make.width.equalTo(screenWidth)
+            make.centerX.equalTo(self)
+            make.top.equalTo(topLabel.snp_bottom).offset(5)
+        }
+        
+        dateLabel.text = listOfDateString.last
+        
         
         rightLabel01.textColor = UIColor ( red: 0.5216, green: 0.3765, blue: 0.2863, alpha: 1.0 )
         rightLabel01.font = UIFont.systemFontOfSize(12)
@@ -66,7 +82,7 @@ class XHBarChartView: OTPageView ,OTPageScrollViewDataSource,OTPageScrollViewDel
         rightLabel01.textAlignment = .Right
         addSubview(rightLabel01)
         rightLabel01.snp_makeConstraints { (make) in
-            make.right.equalTo(self).offset(-15)
+            make.left.equalTo(self).offset(15)
             make.top.equalTo(self).offset(10)
             make.width.equalTo(self)
             make.height.equalTo(21)
@@ -79,7 +95,7 @@ class XHBarChartView: OTPageView ,OTPageScrollViewDataSource,OTPageScrollViewDel
         rightLabel02.textAlignment = .Right
         addSubview(rightLabel02)
         rightLabel02.snp_makeConstraints { (make) in
-            make.right.equalTo(self).offset(-15)
+            make.left.equalTo(self).offset(15)
             make.top.equalTo(rightLabel01.snp_bottom).offset(10)
             make.width.equalTo(self)
             make.height.equalTo(21)
@@ -169,6 +185,8 @@ class XHBarChartView: OTPageView ,OTPageScrollViewDataSource,OTPageScrollViewDel
         cell.color = UIColor ( red: 0.5216, green: 0.3765, blue: 0.2863, alpha: 1.0 )
         
         topLabel.text = listOfNumber[Int(index)]
+        
+        dateLabel.text = listOfDateString[Int(index)]
     }
     
     func updateProgress(scrollView: UIScrollView) {

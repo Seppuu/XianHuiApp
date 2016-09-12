@@ -29,7 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let notificationPayload = launchOptions![UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSObject: AnyObject] {
                 app = application
                 remoteNotiData = notificationPayload
-
             }
             
         }
@@ -70,11 +69,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func openLeanCloudIMWith(clientId:String) {
         
-        LCCKUtil.showProgressText("open client ...", duration:10.0)
+        //LCCKUtil.showProgressText("open client ...", duration:10.0)
         
         ChatKitExample.invokeThisMethodAfterLoginSuccessWithClientId(clientId, success: {
             
-            LCCKUtil.hideProgress()
+            //LCCKUtil.hideProgress()
             
             let tabBarControllerConfig = LCCKTabBarControllerConfig()
             
@@ -88,13 +87,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 })
                 
             }
-            
-            
-//            let time = dispatch_time(dispatch_time_t(DISPATCH_TIME_NOW), 2 * Int64(NSEC_PER_SEC))
-//            dispatch_after(time, dispatch_get_main_queue()) {
-//                //put your code which should be executed with a delay here
-//                
-//            }
             
             }, failed: { (error) in
                 
@@ -121,7 +113,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        //ChatKitExample.invokeThisMethodInApplication(application, didReceiveRemoteNotification: userInfo)
+        ChatKitExample.invokeThisMethodInApplication(application, didReceiveRemoteNotification: userInfo)
     }
 
     

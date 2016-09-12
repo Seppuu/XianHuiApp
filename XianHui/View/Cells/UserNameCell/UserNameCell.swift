@@ -31,6 +31,8 @@ class UserNameCell: UITableViewCell,UITextFieldDelegate {
     
     var textFieldDidTapHandler:((text:String)->())?
     
+    var textFieldDidReturnHandler:(()->())?
+    
     func setSubviews() {
         
         textField = UITextField()
@@ -41,6 +43,7 @@ class UserNameCell: UITableViewCell,UITextFieldDelegate {
             make.left.equalTo(self).offset(15)
         }
         textField.addTarget(self, action: #selector(UserNameCell.textFieldDidChange(_:)), forControlEvents: .EditingChanged)
+        
         textField.delegate = self
         
         codeButton = UIButton()
@@ -70,4 +73,17 @@ class UserNameCell: UITableViewCell,UITextFieldDelegate {
         
         textFieldDidTapHandler?(text:textField.text!)
     }
+    
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        textFieldDidReturnHandler?()
+        
+        return true
+    }
+    
+    
+    
+    
+    
 }

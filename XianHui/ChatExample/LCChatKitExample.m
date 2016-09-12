@@ -84,9 +84,9 @@
     [defaultsSet setObject:clientId forKey:LCCK_KEY_USERID];
     [defaultsSet synchronize];
     NSString *subtitle = [NSString stringWithFormat:@"User Id 是 : %@", clientId];
-    [LCCKUtil showNotificationWithTitle:@"登陆成功"
-                               subtitle:subtitle
-                                   type:LCCKMessageNotificationTypeSuccess];
+//    [LCCKUtil showNotificationWithTitle:@"登陆成功"
+//                               subtitle:subtitle
+//                                   type:LCCKMessageNotificationTypeSuccess];
 }
 
 + (void)invokeThisMethodAfterLoginSuccessWithClientId:(NSString *)clientId
@@ -180,8 +180,8 @@
          callback:^(AVIMConversation *conversation, NSError *error) {
              [self lcck_hideHUDForView:fromViewController.view];
              if (conversation) {
-                 [self lcck_showSuccess:@"创建成功"
-                                 toView:fromViewController.view];
+//                 [self lcck_showSuccess:@"创建成功"
+//                                 toView:fromViewController.view];
                  [self
                   exampleOpenConversationViewControllerWithConversaionId:
                   conversation.conversationId

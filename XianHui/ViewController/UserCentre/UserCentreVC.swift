@@ -93,7 +93,7 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
-        return 5
+        return 3
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -111,10 +111,7 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
 //            return section3.count
 //        }
         else {
-            if editUserInfo == true {
-                return 1
-            }
-            return 0
+            return 1
         }
     }
     
@@ -173,12 +170,10 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
                 cell.firstNameField.text = "名"
                 cell.secondNameField.text = "姓"
                 
-                self?.insertLogOutCell()
-                
             }
             
             cell.cancelTapHandler = { [weak self] in
-                self?.removeLogOutCell()
+               
             }
             
             cell.nameNoneHandler = {
@@ -198,31 +193,6 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
             cell.selectionStyle = .None
             return cell
         }
-            
-//        else if indexPath.section == 2 {
-//            let cellID = "cellIDs2"
-//            let cell = UITableViewCell(style: .Default, reuseIdentifier: cellID)
-//            cell.imageView?.layer.cornerRadius = (cell.imageView?.ddWidth)!/2
-//            cell.imageView?.layer.masksToBounds = true
-//            cell.imageView?.backgroundColor = UIColor ( red: 1.0, green: 0.874, blue: 0.7309, alpha: 1.0 )
-//            cell.textLabel?.text = section2[indexPath.row]
-//            
-//            cell.selectionStyle = .None
-//            
-//            return cell
-//        }
-//        else if indexPath.section == 3 {
-//            let cellID = "cellIDs2"
-//            let cell = UITableViewCell(style: .Default, reuseIdentifier: cellID)
-//            cell.imageView?.layer.cornerRadius = (cell.imageView?.ddWidth)!/2
-//            cell.imageView?.layer.masksToBounds = true
-//            cell.imageView?.backgroundColor = UIColor ( red: 1.0, green: 0.874, blue: 0.7309, alpha: 1.0 )
-//            cell.textLabel?.text = section3[indexPath.row]
-//            
-//            cell.selectionStyle = .None
-//            
-//            return cell
-//        }
         else {
             //退出
             let cell = tableView.dequeueReusableCellWithIdentifier(logOutCellId, forIndexPath: indexPath) as! SingleTapCell
@@ -258,27 +228,7 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
         }
     }
     
-    
-    private func insertLogOutCell() {
         
-        self.editUserInfo = true
-        
-        let indexPath = NSIndexPath(forRow: 0, inSection: 2)
-        
-        
-        userTableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-    }
-    
-    private func removeLogOutCell() {
-        
-        self.editUserInfo = false
-        
-        let indexPath = NSIndexPath(forRow: 0, inSection: 2)
-        
-        
-        userTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-    }
-    
     private func userLogOut() {
         
         //先退出IM

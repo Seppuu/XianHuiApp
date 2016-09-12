@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import UITextView_Placeholder
 import SwiftString
+import MBProgressHUD
 
 class LoginTopView: UIView {
     
@@ -57,6 +58,8 @@ class LoginViewController: UIViewController {
     
     var clientIdHandler:((clientId:String)->())?
 
+    var hud = MBProgressHUD()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -84,7 +87,6 @@ class LoginViewController: UIViewController {
         
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 20))
         tableView.tableFooterView = footerView
-        
         
     }
 }
@@ -126,7 +128,7 @@ extension LoginViewController:UITableViewDelegate,UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! UserNameCell
             
             cell.textField.placeholder = "用户名"
-            cell.textField.keyboardType = .NumberPad
+            cell.textField.keyboardType = .Default
             cell.codeButton.alpha = 0.0
             cell.codeButtonTapHandler = {
                 cell.codeButton.setTitle("验证码已发送", forState: .Normal)
@@ -137,16 +139,14 @@ extension LoginViewController:UITableViewDelegate,UITableViewDataSource {
         }
         else if indexPath.row == 2 {
             let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! UserNameCell
-            cell.textField.keyboardType = .NumberPad
-            cell.textFieldDidTapHandler = {
-                (text) in
-                if text == "1234" {
-                    cell.textField.endEditing(true)
-                    self.tryLogin()
-                   
-                }
-                
+            cell.textField.keyboardType = .Default
+            cell.textField.returnKeyType = .Go
+            cell.textField.secureTextEntry = true
+            cell.textFieldDidReturnHandler = {
+               
+                self.tryLogin()
             }
+            
             cell.textField.placeholder = "密码"
             cell.codeButton.alpha = 0.0
             return cell
@@ -170,22 +170,58 @@ extension LoginViewController:UITableViewDelegate,UITableViewDataSource {
         
     }
     
+    func showHudWith(text:String) {
+        
+        hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        hud.mode = .Text
+        hud.labelText = text
+        hud.hide(true, afterDelay: 2.0)
+    }
+    
+    func showLoginHud() {
+        hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        hud.mode = .Indeterminate
+    }
+    
+    func hideLoginHud() {
+        hud.hide(true)
+    }
+    
     //login
     func tryLogin() {
         
-        let text1 = "18321178306"
+        let indexPath0 = NSIndexPath(forRow: 1, inSection: 0)
+        let cell = tableView.cellForRowAtIndexPath(indexPath0) as! UserNameCell
+        let userName = cell.textField.text!
         
-        let text2 = "18652805163"
+        let indexPath1 = NSIndexPath(forRow: 2, inSection: 0)
+        let cell2 = tableView.cellForRowAtIndexPath(indexPath1) as! UserNameCell
+        let passWord = cell2.textField.text!
         
-        User.loginWith(text2, passWord: "mybook", usertype: UserType.Employee) { (user, error) in
+        if userName == "" {
             
+            showHudWith("请输入用户名")
+            return
+        }
+        
+        if passWord == "" {
+            
+            showHudWith("请输入密码")
+            return
+        }
+        
+        User.loginWith(userName, passWord: passWord, usertype: UserType.Employee) { (user, error) in
+            self.showLoginHud()
             if error == nil {
-                print("login success")
+                self.hideLoginHud()
                 let clientId = String(user!.clientId)
                 self.clientIdHandler?(clientId:clientId)
             }
             else {
-                //TODO:error handler
+                self.hideLoginHud()
+                //TODO:错误分类
+                let textError = "用户名或者密码不正确"
+                self.showHudWith(textError)
             }
             
         }

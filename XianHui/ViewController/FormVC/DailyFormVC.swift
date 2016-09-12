@@ -272,6 +272,8 @@ class DailyFormVC: RadarChartVC {
         
         var nums = [Int]()
         
+        var dateArray = [String]()
+        
         var currentMonthAvgVaule:Float = 0.0
         
         var grandTotalValue:Float = 0.0
@@ -296,6 +298,11 @@ class DailyFormVC: RadarChartVC {
             return chartDatas
         }
         
+        
+        for form in formList {
+            let date = form.date
+            dateArray.append(date)
+        }
         
         switch index {
         case 0:
@@ -494,6 +501,7 @@ class DailyFormVC: RadarChartVC {
         vc.parentNavigationController = self.navigationController
         
         vc.numbers = nums.reverse()
+        vc.listOfDateString = dateArray
         
         vc.currentMonthAvgVaule = currentMonthAvgVaule
         vc.grandTotalValue = grandTotalValue

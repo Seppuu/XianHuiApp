@@ -92,52 +92,7 @@ static NSString *const LCCKAPPKEY = @"eXUtSMYSxVCJhE4IHOiGWabv";
  *  ChatKit 会在需要用到 User信息时调用设置的这个逻辑。
  */
 - (void)lcck_setFetchProfiles {
-//#warning 注意：setFetchProfilesBlock 方法必须实现，如果不实现，ChatKit将无法显示用户头像、用户昵称。以下方法循环模拟了通过 userIds 同步查询 users 信息的过程，这里需要替换为 App 的 API 同步查询
-//    [[LCChatKit sharedInstance] setFetchProfilesBlock:^(NSArray<NSString *> *userIds,
-//                             LCCKFetchProfilesCompletionHandler completionHandler) {
-//         if (userIds.count == 0) {
-//             NSInteger code = 0;
-//             NSString *errorReasonText = @"User ids is nil";
-//             NSDictionary *errorInfo = @{
-//                                         @"code":@(code),
-//                                         NSLocalizedDescriptionKey : errorReasonText,
-//                                         };
-//             NSError *error = [NSError errorWithDomain:NSStringFromClass([self class])
-//                                                  code:code
-//                                              userInfo:errorInfo];
-//             
-//             !completionHandler ?: completionHandler(nil, error);
-//             return;
-//         }
-//         
-//         NSMutableArray *users = [NSMutableArray arrayWithCapacity:userIds.count];
-//#warning 注意：以下方法循环模拟了通过 userIds 同步查询 users 信息的过程，这里需要替换为 App 的 API 同步查询
-//         
-//         [userIds enumerateObjectsUsingBlock:^(NSString *_Nonnull clientId, NSUInteger idx,
-//                                               BOOL *_Nonnull stop) {
-//             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"peerId like %@", clientId];
-//             //这里的LCCKContactProfiles，LCCKProfileKeyPeerId都为事先的宏定义，
-//             NSArray *searchedUsers = [LCCKContactProfiles filteredArrayUsingPredicate:predicate];
-//             if (searchedUsers.count > 0) {
-//                 NSDictionary *user = searchedUsers[0];
-//                 NSURL *avatarURL = [NSURL URLWithString:user[LCCKProfileKeyAvatarURL]];
-//                 LCCKUser *user_ = [LCCKUser userWithUserId:user[LCCKProfileKeyPeerId]
-//                                                       name:user[LCCKProfileKeyName]
-//                                                  avatarURL:avatarURL
-//                                                   clientId:clientId];
-//                 [users addObject:user_];
-//             } else {
-//                 //注意：如果网络请求失败，请至少提供 ClientId！
-//                 LCCKUser *user_ = [LCCKUser userWithClientId:clientId];
-//                 [users addObject:user_];
-//             }
-//         }];
-//         // 模拟网络延时，3秒
-//         //         sleep(3);
-//         
-//#warning 重要：completionHandler 这个 Bock 必须执行，需要在你**获取到用户信息结束**后，将信息传给该Block！
-//         !completionHandler ?: completionHandler([users copy], nil);
-//     }];
+    //TODO:在子类中重写
 }
 
 #pragma mark - 最近联系人列表的设置
@@ -183,7 +138,7 @@ static NSString *const LCCKAPPKEY = @"eXUtSMYSxVCJhE4IHOiGWabv";
         if (!conversation.createAt) { //如果没有创建时间，直接return
             return;
         }
-        [[self class] lcck_showMessage:@"加载历史记录..." toView:aConversationController.view];
+        //[[self class] lcck_showMessage:@"加载历史记录..." toView:aConversationController.view];
         //判断会话的成员是否超过两个(即是否为群聊)
         if (conversation.members.count > 2) { //设置点击rightButton为群聊Style,和对应事件
             [aConversationController
@@ -278,7 +233,7 @@ setLoadLatestMessagesHandler:^(LCCKConversationViewController *conversationContr
              type = LCCKMessageNotificationTypeError;
          }
 #ifndef __OPTIMIZE__
-         [LCCKUtil showNotificationWithTitle:title subtitle:nil type:type];
+         //[LCCKUtil showNotificationWithTitle:title subtitle:nil type:type];
 #else
 #endif
      }];
