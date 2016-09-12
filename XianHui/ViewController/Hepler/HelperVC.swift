@@ -17,8 +17,6 @@ class HelperVC: BaseViewController {
     
     var cellId = "HeplerCell"
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -159,6 +157,7 @@ extension HelperVC:UITableViewDelegate,UITableViewDataSource {
         switch no.type {
         case .daily_report:
             let vc = DailyFormVC()
+            vc.date = no.day
             vc.title = "日报表"
             navigationController?.pushViewController(vc, animated: true)
             

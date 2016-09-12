@@ -39,8 +39,7 @@ class PlanningVC: UIViewController {
         super.didReceiveMemoryWarning()
         
     }
-    
-    
+
     func getCustomList() {
         
         NetworkManager.sharedManager.getCustomerPlanListWith() { (success, json, error) in
@@ -61,10 +60,7 @@ class PlanningVC: UIViewController {
             else {
                 
             }
-            
         }
-        
-       
     }
     
     func makeCustomerListWith(dataArr:[JSON]) {
@@ -238,6 +234,11 @@ extension PlanningVC: UITableViewDelegate,UITableViewDataSource {
         
         let vc = ProjectPlanningVC()
         vc.customer = customer
+        vc.saveGoodListCompletion = {
+            
+            self.getCustomList()
+        }
+        
         self.parentNavigationController!.pushViewController(vc, animated: true)
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)

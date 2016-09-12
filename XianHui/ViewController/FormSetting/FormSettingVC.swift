@@ -29,7 +29,8 @@ class FormSettingVC: UIViewController {
     
     var listOfMaxVal = [MaxValue]()
     
-
+    var saveCompletion:(()->())?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -121,7 +122,7 @@ class FormSettingVC: UIViewController {
         let employeemax = listOfMaxVal[4].value
         
         let hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
-        hud.mode = .AnnularDeterminate
+        hud.mode = .Indeterminate
         
         NetworkManager.sharedManager.saveDailyReportMaxVaule(cashMax, projectmax: projectmax, prodMax: prodMax, customerMax: customerMax, employeemax: employeemax) { (success, json, error) in
             
@@ -134,6 +135,8 @@ class FormSettingVC: UIViewController {
                 Defaults.productMaxValue.value = prodMax
                 Defaults.customerMaxValue.value = customerMax
                 Defaults.employeeMaxValue.value = employeemax
+                
+                self.saveCompletion?()
                 
             }
         }

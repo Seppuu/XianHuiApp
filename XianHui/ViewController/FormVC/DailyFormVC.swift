@@ -25,15 +25,7 @@ class DailyFormVC: RadarChartVC {
     
     var jsonData:JSON!
     
-    var date:String {
-        
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "YYYY-MM-dd"
-        
-        let date = NSDate()
-        
-        return formatter.stringFromDate(date)
-    }
+    var date = ""
     
     
     var formToday:Form {
@@ -640,6 +632,13 @@ class  PieViewController: PieChartViewController {
     func settingTap(sender:UIBarButtonItem) {
         
         let vc = FormSettingVC()
+        
+        vc.saveCompletion = {
+            
+            //设置完之后,重新刷新UI.
+            self.topPageView.pageScrollView.reloadData()
+        }
+        
         vc.title = "设置"
         
         let nav = UINavigationController(rootViewController: vc)

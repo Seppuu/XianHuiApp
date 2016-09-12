@@ -22,6 +22,8 @@ class ProjectPlanningVC: UIViewController {
     //Data
     var customer:Customer!
     
+    var saveGoodListCompletion:(()->())?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "项目计划"
@@ -36,7 +38,6 @@ class ProjectPlanningVC: UIViewController {
     }
     
     var projects = [Project]()
-    
     
     var prods = [Production]()
     
@@ -215,6 +216,8 @@ class ProjectPlanningVC: UIViewController {
                 self.bottomView.listOfProject = projectsSelected
                 self.bottomView.listOfProd = prodsSelected
                 self.bottomView.tableView.reloadData()
+                
+                self.saveGoodListCompletion?()
             }
             else {
                 
