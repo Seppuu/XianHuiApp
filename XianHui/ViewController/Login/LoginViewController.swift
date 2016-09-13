@@ -225,20 +225,7 @@ extension LoginViewController:UITableViewDelegate,UITableViewDataSource {
             }
             
         }
-        
-        
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 }
 

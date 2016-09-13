@@ -117,7 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     
-    var appComeFromBack = true
+    var appComeFromBack = false
     
     //这个方法只会在app,从后台进入前台是触发,第一次启动不会触发.
     func applicationWillEnterForeground(application: UIApplication) {
@@ -133,6 +133,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //如果此时app没有完全登陆成功.return.
         guard appHasLoginSuccess == true else {return}
         
+        NSNotificationCenter.defaultCenter().postNotificationName(NoticeComingNoti, object: userInfo)
         
         if appComeFromBack == true {
             
@@ -153,6 +154,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let data  = noti.object as? [NSObject : AnyObject] {
             
             pushToViewControllerWith(data)
+            
         }
         else {
             

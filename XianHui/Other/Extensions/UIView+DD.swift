@@ -11,13 +11,13 @@ import UIKit
 
 extension UIView {
 
-    /// Shortcut for frame.origin.x
+    /// Shortcut for frame.size.width
     var ddWidth :CGFloat {
         
         return self.frame.size.width
     }
     
-    /// Shortcut for frame.origin.y
+    /// Shortcut for frame.size.height
     var ddHeight :CGFloat {
         
         return self.frame.size.height
