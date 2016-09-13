@@ -42,17 +42,35 @@ class NetworkManager {
     //MARK:用户
     
     //login
-    func loginWith(userName:String,passWord:String,usertype:UserType,completion:DDResultHandler) {
+    func loginWith(userName:String,passWord:String,usertype:UserType,agentId:Int?,completion:DDResultHandler) {
         
-        let dict:JSONDictionary = [
-            "username":userName,
-            "password":passWord,
-            "type"    :usertype.rawValue
-        ]
         
-        let urlString = loginURL
+        if agentId == nil {
+            let dict:JSONDictionary = [
+                "username":userName,
+                "password":passWord,
+                "type"    :usertype.rawValue
+            ]
+            
+            let urlString = loginURL
+            
+            baseRequestWith(urlString, dict: dict, completion: completion)
+        }
+        else {
+            
+            let dict:JSONDictionary = [
+                "username":userName,
+                "password":passWord,
+                "type"    :usertype.rawValue,
+                "agent_id":agentId!
+            ]
+            
+            let urlString = loginURL
+            
+            baseRequestWith(urlString, dict: dict, completion: completion)
+        }
         
-        baseRequestWith(urlString, dict: dict, completion: completion)
+        
     }
     
     //登出
@@ -492,7 +510,8 @@ extension NetworkManager {
                     }
                     else {
                         let msg = self.getErrorMsgFrom(json)
-                        completion(success: false, json: nil, error: msg)
+                        let dataInfo = json["data"]
+                        completion(success: false, json: dataInfo, error: msg)
                     }
                 case .Failure(let error):
                     completion(success: false, json: nil, error: error.description)

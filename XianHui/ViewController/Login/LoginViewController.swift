@@ -11,6 +11,7 @@ import SnapKit
 import UITextView_Placeholder
 import SwiftString
 import MBProgressHUD
+import SwiftyJSON
 
 class LoginTopView: UIView {
     
@@ -48,6 +49,12 @@ class LoginTopView: UIView {
 }
 
 
+class Agent: NSObject {
+    
+    var name = ""
+    var id = ""
+}
+
 class LoginViewController: UIViewController {
     
     var tableView:UITableView!
@@ -59,6 +66,8 @@ class LoginViewController: UIViewController {
     var clientIdHandler:((clientId:String)->())?
 
     var hud = MBProgressHUD()
+    
+    var agentId:Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,7 +123,7 @@ extension LoginViewController:UITableViewDelegate,UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell()
-        
+        cell.selectionStyle = .None
         if indexPath.row == 0 {
             
             let view = LoginTopView()
@@ -179,12 +188,14 @@ extension LoginViewController:UITableViewDelegate,UITableViewDataSource {
     }
     
     func showLoginHud() {
+        
         hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
         hud.mode = .Indeterminate
     }
     
     func hideLoginHud() {
         hud.hide(true)
+        hud = MBProgressHUD()
     }
     
     //login
@@ -210,7 +221,8 @@ extension LoginViewController:UITableViewDelegate,UITableViewDataSource {
             return
         }
         
-        User.loginWith(userName, passWord: passWord, usertype: UserType.Employee) { (user, error) in
+        User.loginWith(userName, passWord: passWord, usertype: UserType.Employee,agentId:self.agentId) { (user, data, error) in
+            
             self.showLoginHud()
             if error == nil {
                 self.hideLoginHud()
@@ -220,11 +232,72 @@ extension LoginViewController:UITableViewDelegate,UITableViewDataSource {
             else {
                 self.hideLoginHud()
                 //TODO:错误分类
-                let textError = "用户名或者密码不正确"
+                if let errorCode = data!["errorCode"].string {
+                    
+                    if errorCode == "1002" {
+                        
+                        //让用户选择门店
+                        self.makeAgentListWith(data!)
+                        
+                        return
+                    }
+                    else {
+                        
+                    }
+                    
+                }
+                
+                let textError = error!
                 self.showHudWith(textError)
+                self.agentId = nil
+            }
+        }
+        
+    }
+    
+    func makeAgentListWith(data:JSON) {
+        
+        var list = [Agent]()
+        
+        if let agentList = data["agent_list"].array {
+            
+            for agent in agentList {
+                
+                let a = Agent()
+                a.name = agent["agent_name"].string!
+                a.id = agent["agent_id"].string!
+                
+                list.append(a)
             }
             
+            self.showAgentListAlertViewWith(list)
+            
         }
+        else {
+            
+        }
+        
+    }
+    
+    func showAgentListAlertViewWith(agentList:[Agent]) {
+        
+        let alert = UIAlertController(title: "选择门店", message: "您的账号目前属于多个门店", preferredStyle: .ActionSheet)
+        
+        for agent in agentList {
+            
+            
+            let action = UIAlertAction(title: agent.name, style: .Default, handler: { (alert) in
+                
+                self.agentId = agent.id.toInt()
+                
+                self.tryLogin()
+            })
+            
+            alert.addAction(action)
+        }
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+        
     }
     
 }

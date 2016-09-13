@@ -54,14 +54,15 @@ class User:NSObject {
 
 
     //Action
-    class func loginWith(userName:String,passWord:String,usertype:UserType ,completion:((user:User?,error:String?)->())) {
+    class func loginWith(userName:String,passWord:String,usertype:UserType ,agentId:Int?,completion:((user:User?,data:JSON?,error:String?)->())) {
         
-        NetworkManager.sharedManager.loginWith(userName, passWord: passWord, usertype: usertype) { (success, data, error) in
+        NetworkManager.sharedManager.loginWith(userName, passWord: passWord,usertype: usertype,agentId:agentId) { (success, data, error) in
             
             if success {
                 
-                //获取其他接口的前缀地址
+                //获取其他接口的前缀地址  拼接 代理ID
                 if let apiUrl = data!["api_url"].string {
+                    
                     Defaults.actualApiUrl.value = apiUrl
                 }
                 
@@ -87,31 +88,41 @@ class User:NSObject {
                     Defaults.userAvatarURL.value = avatarURL
                 }
                 
-                let currentUser = User.currentUser()
-                currentUser.getUserList()
-                completion(user: currentUser, error: nil)
+                //获取联系人列表之后,完成登陆
+                NetworkManager.sharedManager.getUserList { (success, json, error) in
+                    
+                    if success == true {
+                        if let listOfData = json?.array {
+                            
+                            self.saveUserListWith(listOfData)
+                            completion(user: User.currentUser(),data: data, error: nil)
+                            
+                        }
+                    }
+                    else {
+                        //TODO:获取联系人失败.
+                        completion(user: nil, data: json, error: error)
+                    }
+                }
+                
+                
             }
             else {
-                completion(user: nil, error: error)
-            }
+                
+                completion(user: nil, data: data, error: error)
             
         }
         
+    }
+    
     }
     
     func getUserList() {
         
-        NetworkManager.sharedManager.getUserList { (success, json, error) in
-            
-            if success == true {
-                if let listOfData = json?.array {
-                    self.saveUserListWith(listOfData)
-                }
-            }
-        }
+        
     }
     
-    func saveUserListWith(listOfData:[JSON]) {
+    class func saveUserListWith(listOfData:[JSON]) {
         
         var clientIds = [String]()
         
