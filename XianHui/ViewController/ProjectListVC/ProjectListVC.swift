@@ -129,7 +129,10 @@ class ProjectListVC: BaseViewController {
                     pro.hasCardList = true
                     
                     pro.cardName      = cardList[0]["fullname"].string!
-                    pro.cardTimesLeft = cardList[0]["times"].int!
+                    if let times = cardList[0]["times"].int {
+                        pro.cardTimesLeft = times
+                    }
+                    
                     pro.cardType      = cardList[0]["card_class"].string!
                     pro.cardNo        = cardList[0]["card_num"].string!
                     pro.cardPrice     = cardList[0]["price"].string!
@@ -150,6 +153,18 @@ class ProjectListVC: BaseViewController {
             })
             
             listOfPro.append(pro)
+        }
+        
+        //将有疗程卡的项目置顶
+        listOfPro.forEach{
+            
+            if $0.hasCardList == true {
+                let index = listOfPro.indexOf($0)!
+                let item = listOfPro.removeAtIndex(index)
+                
+                listOfPro.insert(item, atIndex: 0)
+            }
+            
         }
 
         
@@ -475,17 +490,17 @@ extension ProjectListVC:UITableViewDelegate,UITableViewDataSource {
                 cell.contentView.addSubview(detaileView)
                 
                 detaileView.firstLabel.text = "卡名"
-                detaileView.firstDetailLabel.text =  projectTapped?.cardName
+                detaileView.firstDetailLabel.text =  projectTapped!.cardName
                 
                 detaileView.secondLabel.text = "卡类型"
-                detaileView.secondDetailLabel.text =  projectTapped?.cardType
+                detaileView.secondDetailLabel.text =  projectTapped!.cardType
                 
                 
                 detaileView.thirdLabel.text = "价格"
-                detaileView.thirdDetailLabel.text =  projectTapped?.cardPrice
+                detaileView.thirdDetailLabel.text =  projectTapped!.cardPrice
                 
                 detaileView.forthLabel.text = "余次"
-                detaileView.forthDetailLabel.text =  String(projectTapped?.cardTimesLeft)
+                detaileView.forthDetailLabel.text =  "\(projectTapped!.cardTimesLeft)"
                 
                 return cell
                 
