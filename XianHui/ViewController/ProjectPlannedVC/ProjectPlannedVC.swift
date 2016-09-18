@@ -139,9 +139,10 @@ class ProjectPlannedVC: UIViewController {
     
     func addNewPlan() {
         
-        let vc = MyWorkVC()
-        vc.title = "我的工作"
-        navigationController?.pushViewController(vc, animated: true)
+        let vc = ProjectPlanningVC()
+        vc.customer = customer
+        
+        self.navigationController?.pushViewController(vc, animated: true)
         
     }
     

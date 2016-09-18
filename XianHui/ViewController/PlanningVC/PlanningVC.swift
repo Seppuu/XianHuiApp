@@ -39,6 +39,12 @@ class PlanningVC: UIViewController {
         super.didReceiveMemoryWarning()
         
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.getCustomList()
+    }
 
     func getCustomList() {
         
