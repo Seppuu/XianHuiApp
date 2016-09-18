@@ -21,7 +21,7 @@ class CustomerConsumeListVC: UIViewController {
     
     var dateList = [String]()
     
-    var pageSize = 100
+    var pageSize = 200
     
     var pageNumber = 1
     
@@ -31,7 +31,7 @@ class CustomerConsumeListVC: UIViewController {
         super.viewDidLoad()
         
         
-        getListWith(customer.id, pageSize: pageSize, pageNumber: pageNumber)
+       // getListWith(customer.id, pageSize: pageSize, pageNumber: pageNumber)
         
         setTableView()
         
@@ -48,15 +48,20 @@ class CustomerConsumeListVC: UIViewController {
             
             if success == true {
                 let jsonData = json!["rows"].array!
-                self.totalPage = json!["totalPage"].int!
-                self.goodListArray += self.makeGoodListWith(jsonData)
-                //self.pageNumber += 1
                 
-//                if self.pageNumber > self.totalPage {
-//                    self.hasNoData = true
-//                }
+                if jsonData.count == 0 {
+
+                    self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                }
+                else {
+                    self.totalPage = json!["totalPage"].int!
+                    self.goodListArray += self.makeGoodListWith(jsonData)
+                    self.pageNumber += 1
+                    self.tableView.reloadData()
+                    self.tableView.mj_footer.endRefreshing()
+                }
                 
-                self.tableView.reloadData()
+                
             }
             else {
                 
@@ -106,32 +111,29 @@ class CustomerConsumeListVC: UIViewController {
             listArray.append(aList)
         }
         
-        
         return listArray
-        
     }
     
     let cellId = "typeCell"
-    
-    var hasNoData = false
     
     func setTableView() {
         
         tableView = UITableView(frame: view.bounds, style:.Plain)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.tableFooterView = UIView()
         view.addSubview(tableView)
         
         let nib  = UINib(nibName: cellId, bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: cellId)
         
-//        tableView.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
-//            
-//            if self.hasNoData == true {return}
-//            
-//            self.getListWith(self.customer.id, pageSize: self.pageSize, pageNumber: self.pageNumber)
-//            
-//        })
+        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: { 
+            
+            self.getListWith(self.customer.id, pageSize: self.pageSize, pageNumber: self.pageNumber)
+            
+        })
+        
+        tableView.mj_footer.beginRefreshing()
         
     }
 

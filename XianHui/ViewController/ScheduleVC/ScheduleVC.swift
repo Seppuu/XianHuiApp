@@ -254,14 +254,10 @@ extension ScheduleVC:UITableViewDelegate,UITableViewDataSource {
         
     }
     
-    
-    
-    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let customer = listOfCustommerArr[indexPath.section][indexPath.row]
 
-        
         let vc = ProjectPlannedVC()
         vc.title = "预约信息"
         vc.customer = customer
@@ -270,6 +266,9 @@ extension ScheduleVC:UITableViewDelegate,UITableViewDataSource {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
 
     }
+    
+    
+    
     
     
     

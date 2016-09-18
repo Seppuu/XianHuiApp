@@ -219,6 +219,7 @@ extension PlanningVC: UITableViewDelegate,UITableViewDataSource {
     }
     
     
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         var customer = Customer()

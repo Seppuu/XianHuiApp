@@ -51,7 +51,6 @@ class ProjectPlanningVC: UIViewController {
             
             if success == true {
                 
-                
                 if let idArr = json!["project"]["selected"].arrayObject as? [Int] {
                     
                     self.projectPlannedId = idArr
