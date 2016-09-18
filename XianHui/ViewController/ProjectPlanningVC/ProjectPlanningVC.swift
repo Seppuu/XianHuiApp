@@ -90,20 +90,28 @@ class ProjectPlanningVC: UIViewController {
             
             if let cardList = p["card_list"].array {
                 
-                if cardList.count > 0 {
+                for card in cardList {
                     //有疗程卡
                     pro.hasCardList = true
                     
-                    pro.cardName      = cardList[0]["fullname"].string!
-                    pro.cardTimesLeft = cardList[0]["times"].int!
-                    pro.cardType      = cardList[0]["card_class"].string!
-                    pro.cardNo        = cardList[0]["card_num"].string!
-                    pro.cardPrice     = cardList[0]["price"].string!
+                    let goodCard = GoodCard()
+                    
+                    goodCard.cardName      = card["fullname"].string!
+                    if let times = card["times"].int {
+                        goodCard.cardTimesLeft = times
+                    }
+                    
+                    goodCard.cardType      = card["card_class"].string!
+                    goodCard.cardNo        = card["card_num"].string!
+                    goodCard.cardPrice     = card["price"].string!
+                    
+                    
+                    pro.cardList.append(goodCard)
                 }
-                else  {
-                    //无疗程卡
-                }
+                
+                
             }
+            
             
             var planned = false
             
@@ -138,6 +146,30 @@ class ProjectPlanningVC: UIViewController {
             let pro = Production()
             pro.name = p["fullname"].string!
             pro.id   = p["item_id"].int!
+            
+            if let cardList = p["card_list"].array {
+                
+                for card in cardList {
+                    //有疗程卡
+                    pro.hasCardList = true
+                    
+                    let goodCard = GoodCard()
+                    
+                    goodCard.cardName      = card["fullname"].string!
+                    if let times = card["times"].int {
+                        goodCard.cardTimesLeft = times
+                    }
+                    
+                    goodCard.cardType      = card["card_class"].string!
+                    goodCard.cardNo        = card["card_num"].string!
+                    goodCard.cardPrice     = card["price"].string!
+                    
+                    
+                    pro.cardList.append(goodCard)
+                }
+                
+                
+            }
             
             var planned = false
             

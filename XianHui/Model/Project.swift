@@ -33,20 +33,21 @@ class Project: Good {
 
     var planType = ProjectPlanType.salesman
     
-    //card list if has
-    var hasCardList = false
+    //跟踪
+    var remainingTime:CGFloat = 0.0
+    var remainingTimeString = ""
+}
+
+
+//卡项
+class GoodCard:NSObject {
     
     var cardTimesLeft:Int = 0
     var cardName = ""
     var cardType = ""
     var cardNo = ""
     var cardPrice = ""
-    
-    //跟踪
-    var remainingTime:CGFloat = 0.0
-    var remainingTimeString = ""
 }
-
 
 class Good: NSObject {
     
@@ -70,5 +71,9 @@ class Good: NSObject {
     
     var type:GoodType = .project
     
+    //card list if has
+    var hasCardList = false
+    
+    var cardList = [GoodCard]()
     
 }

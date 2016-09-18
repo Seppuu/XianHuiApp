@@ -19,17 +19,9 @@ class GoodDetailView: UIView {
     
     @IBOutlet weak var forthLabel: UILabel!
     
+    var cardList = [GoodCard]()
     
-    @IBOutlet weak var detailContainer: UIView!
-    
-    
-    @IBOutlet weak var firstDetailLabel: UILabel!
-    
-    @IBOutlet weak var secondDetailLabel: UILabel!
-    
-    @IBOutlet weak var thirdDetailLabel: UILabel!
-    
-    @IBOutlet weak var forthDetailLabel: UILabel!
+    @IBOutlet weak var detailTableView: UITableView!
     
     
     class func instanceFromNib() -> GoodDetailView {
@@ -43,18 +35,64 @@ class GoodDetailView: UIView {
     
     func makeUI() {
         
+        detailTableView.delegate = self
+        detailTableView.dataSource = self
+        detailTableView.scrollEnabled = false
+        detailTableView.tableFooterView = UIView()
+        
+        
         firstLabel.text = "卡名"
-        firstDetailLabel.text = "卡名A"
+        
         
         secondLabel.text = "卡类型"
-        secondDetailLabel.text = "多项卡"
         
-        thirdLabel.text = "可用项目"
-        thirdDetailLabel.text = "--"
+        
+        
+        thirdLabel.text = "价格"
+        
         
         forthLabel.text = "余次"
-        forthDetailLabel.text = "3"
+        
         
     }
     
 }
+
+extension GoodDetailView: UITableViewDelegate,UITableViewDataSource {
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 44
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return cardList.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = UITableViewCell()
+        cell.selectionStyle = .None
+        
+        let detailView = GoodDetailContainerView.instanceFromNib()
+        detailView.frame = cell.bounds
+        cell.addSubview(detailView)
+        
+        let card = cardList[indexPath.row]
+        
+        detailView.firstLabel.text = card.cardName
+        detailView.secondLabel.text = card.cardType
+        detailView.thirdLabel.text = card.cardPrice
+        detailView.forthLabel.text = "\(card.cardTimesLeft)"
+        
+        return cell
+        
+    }
+    
+    
+    
+}
+

@@ -124,23 +124,24 @@ class ProjectListVC: BaseViewController {
             
             if let cardList = p["card_list"].array {
                 
-                if cardList.count > 0 {
+                for card in cardList {
                     //有疗程卡
                     pro.hasCardList = true
                     
-                    pro.cardName      = cardList[0]["fullname"].string!
-                    if let times = cardList[0]["times"].int {
-                        pro.cardTimesLeft = times
+                    let goodCard = GoodCard()
+                    
+                    goodCard.cardName      = card["fullname"].string!
+                    if let times = card["times"].int {
+                        goodCard.cardTimesLeft = times
                     }
                     
-                    pro.cardType      = cardList[0]["card_class"].string!
-                    pro.cardNo        = cardList[0]["card_num"].string!
-                    pro.cardPrice     = cardList[0]["price"].string!
+                    goodCard.cardType      = card["card_class"].string!
+                    goodCard.cardNo        = card["card_num"].string!
+                    goodCard.cardPrice     = card["price"].string!
+                    
+                    
+                    pro.cardList.append(goodCard)
                 }
-                else  {
-                    //无疗程卡
-                }
-                
                 
                 
             }
@@ -181,14 +182,29 @@ class ProjectListVC: BaseViewController {
             pro.name = p["fullname"].string!
             pro.id   = p["item_id"].int!
             
-//            if let cardList = p["card_list"].array {
-//                
-//                pro.cardName      = cardList[0]["fullname"].string!
-//                pro.cardTimesLeft = cardList[0]["times"].int!
-//                pro.cardtype      = cardList[0]["card_class"].string!
-//                pro.cardNo        = cardList[0]["card_num"].string!
-//                
-//            }
+            if let cardList = p["card_list"].array {
+                
+                for card in cardList {
+                    //有疗程卡
+                    pro.hasCardList = true
+                    
+                    let goodCard = GoodCard()
+                    
+                    goodCard.cardName      = card["fullname"].string!
+                    if let times = card["times"].int {
+                        goodCard.cardTimesLeft = times
+                    }
+                    
+                    goodCard.cardType      = card["card_class"].string!
+                    goodCard.cardNo        = card["card_num"].string!
+                    goodCard.cardPrice     = card["price"].string!
+                    
+                    
+                    pro.cardList.append(goodCard)
+                }
+                
+                
+            }
             
             projectsPreSelected.forEach({ (projectPreSelected) in
                 
@@ -388,7 +404,20 @@ extension ProjectListVC:UITableViewDelegate,UITableViewDataSource {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         if showDetail == true && indexPath.row == detailCellRow {
-            return 80
+            
+            if segment.selectedSegmentIndex == 0 {
+                //项目
+                let pro = projects[detailCellRow - 1]
+                
+                return 36 + CGFloat(pro.cardList.count) * 44
+            }
+            else {
+                //产品
+                let prod = prods[detailCellRow - 1]
+                
+                return 36 + CGFloat(prod.cardList.count) * 44
+
+            }
         }
         else {
             return 44
@@ -479,7 +508,7 @@ extension ProjectListVC:UITableViewDelegate,UITableViewDataSource {
         }
         else {
             
-            if showDetail == true && detailCellRow == indexPath.row && segment.selectedSegmentIndex == 0 {
+            if showDetail == true && detailCellRow == indexPath.row{
                 
                 //show detail cell
                 let cellID = "cell"
@@ -487,20 +516,19 @@ extension ProjectListVC:UITableViewDelegate,UITableViewDataSource {
                 
                 let detaileView = GoodDetailView.instanceFromNib()
                 detaileView.frame = cell.bounds
+                
+                if segment.selectedSegmentIndex == 0  {
+                    
+                    let pro = projects[detailCellRow - 1]
+                    detaileView.cardList = pro.cardList
+                    
+                }
+                else {
+                    let prod = prods[detailCellRow - 1]
+                    detaileView.cardList = prod.cardList
+                }
+                
                 cell.contentView.addSubview(detaileView)
-                
-                detaileView.firstLabel.text = "卡名"
-                detaileView.firstDetailLabel.text =  projectTapped!.cardName
-                
-                detaileView.secondLabel.text = "卡类型"
-                detaileView.secondDetailLabel.text =  projectTapped!.cardType
-                
-                
-                detaileView.thirdLabel.text = "价格"
-                detaileView.thirdDetailLabel.text =  projectTapped!.cardPrice
-                
-                detaileView.forthLabel.text = "余次"
-                detaileView.forthDetailLabel.text =  "\(projectTapped!.cardTimesLeft)"
                 
                 return cell
                 

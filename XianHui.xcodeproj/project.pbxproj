@@ -229,6 +229,8 @@
 		37EA568B1D3E0A7000D63498 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EA568A1D3E0A7000D63498 /* AppDelegate.swift */; };
 		37EA56901D3E0A7000D63498 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37EA568E1D3E0A7000D63498 /* Main.storyboard */; };
 		37EA56951D3E0A7000D63498 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37EA56931D3E0A7000D63498 /* LaunchScreen.storyboard */; };
+		37F70E131D8E367100C55AC8 /* GoodDetailContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F70E121D8E367100C55AC8 /* GoodDetailContainerView.swift */; };
+		37F70E151D8E369400C55AC8 /* GoodDetailContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F70E141D8E369400C55AC8 /* GoodDetailContainer.xib */; };
 		37F905311D69F9370078C06B /* CustomerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F9052F1D69F9370078C06B /* CustomerCell.swift */; };
 		37F905321D69F9370078C06B /* CustomerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F905301D69F9370078C06B /* CustomerCell.xib */; };
 		7BF7C59FF39FAE1F05986482 /* Pods_XianHui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0677814338CEF00D20F722E0 /* Pods_XianHui.framework */; };
@@ -504,6 +506,8 @@
 		37EA568F1D3E0A7000D63498 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		37EA56941D3E0A7000D63498 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		37EA56961D3E0A7000D63498 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		37F70E121D8E367100C55AC8 /* GoodDetailContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodDetailContainerView.swift; sourceTree = "<group>"; };
+		37F70E141D8E369400C55AC8 /* GoodDetailContainer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoodDetailContainer.xib; sourceTree = "<group>"; };
 		37F9052F1D69F9370078C06B /* CustomerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerCell.swift; sourceTree = "<group>"; };
 		37F905301D69F9370078C06B /* CustomerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomerCell.xib; sourceTree = "<group>"; };
 		663D87182AC2C2DAAEDADDF3 /* Pods-XianHui.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XianHui.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XianHui/Pods-XianHui.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1613,6 +1617,8 @@
 			children = (
 				37D46F841D6FD46B00A0BBCE /* GoodDetailView.swift */,
 				37D46F861D6FD5D100A0BBCE /* GoodDetail.xib */,
+				37F70E121D8E367100C55AC8 /* GoodDetailContainerView.swift */,
+				37F70E141D8E369400C55AC8 /* GoodDetailContainer.xib */,
 			);
 			path = GoodDetailView;
 			sourceTree = "<group>";
@@ -1841,6 +1847,7 @@
 				37D46F871D6FD5D100A0BBCE /* GoodDetail.xib in Resources */,
 				37367B831D6BFED900479E39 /* chatTableViewCell.xib in Resources */,
 				37B79B511D7D48E200340C17 /* CustomerLargeCell.xib in Resources */,
+				37F70E151D8E369400C55AC8 /* GoodDetailContainer.xib in Resources */,
 				370AAEA71D49F1B3000C64D1 /* UserNameCell.xib in Resources */,
 				37BAB9A81D3E1059001E4680 /* SubscriptionTopView.xib in Resources */,
 				37BAB9941D3E1059001E4680 /* ProfileCell.xib in Resources */,
@@ -2027,6 +2034,7 @@
 				37367B771D6AE6DB00479E39 /* ChattingTableView.swift in Sources */,
 				37BAB97F1D3E1059001E4680 /* ContactsCell.swift in Sources */,
 				37BAB9DF1D3E124E001E4680 /* DDConfigs.swift in Sources */,
+				37F70E131D8E367100C55AC8 /* GoodDetailContainerView.swift in Sources */,
 				37DE9D681D41B6AD0041A26B /* MessageListVC.swift in Sources */,
 				37BAB8A71D3E101C001E4680 /* Array+DD.swift in Sources */,
 				3729629D1D40B9E700A947B4 /* PasswordSettingVC.swift in Sources */,
