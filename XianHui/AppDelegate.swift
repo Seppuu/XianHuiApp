@@ -155,6 +155,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             pushToViewControllerWith(data)
             
+            
         }
         else {
             
@@ -170,9 +171,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if type == "daily_report" {
                     
                     let viewController = window?.visibleViewController!
-                    let vc = HelperVC()
-                    vc.title = "助手"
-                    viewController!.navigationController?.pushViewController(vc, animated: true)
+                    let vc = DailyFormVC()
+                    
+                    if let noticeId = userInfo["notice_id"] as? String {
+                        
+                        vc.noticeId = noticeId.toInt()!
+                        vc.title = "日报表"
+                        viewController!.navigationController?.pushViewController(vc, animated: true)
+                    }
+                    
+                    
                 }
                 else if type == "project_plan" {
                     

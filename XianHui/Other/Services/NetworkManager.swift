@@ -224,12 +224,24 @@ extension NetworkManager {
 extension NetworkManager {
     
     //获取日报表数据
-    func getDailyReportDataWith(date:String,completion:DDResultHandler) {
+    func getDailyReportDataWith(date:String,noticeId:Int?,completion:DDResultHandler) {
         
-        let dict:JSONDictionary = [
-            "token":Defaults.userToken.value!,
-            "date":date
-        ]
+        var dict:JSONDictionary!
+        
+        if noticeId != nil {
+            //从推送来
+            dict = [
+                "token":Defaults.userToken.value!,
+                "notice_id":noticeId!
+            ]
+        }
+        else {
+            //从助手列表来
+            dict = [
+                "token":Defaults.userToken.value!,
+                "date":date
+            ]
+        }
         
         let urlString = GetDailyReportDataUrl
         

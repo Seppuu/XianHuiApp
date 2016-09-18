@@ -27,6 +27,7 @@ class DailyFormVC: RadarChartVC {
     
     var date = ""
     
+    var noticeId:Int?
     
     var formToday:Form {
         if formList.count > 0 {
@@ -41,7 +42,7 @@ class DailyFormVC: RadarChartVC {
     
     func getDailyReportDataWith(date:String) {
         
-        NetworkManager.sharedManager.getDailyReportDataWith(date) { (success, json, error) in
+        NetworkManager.sharedManager.getDailyReportDataWith(date, noticeId: noticeId) { (success, json, error) in
             
             if success == true {
                 self.formList = self.makeFormDataWith(json!)
@@ -60,7 +61,10 @@ class DailyFormVC: RadarChartVC {
             else {
                 
             }
+            
+            
         }
+        
     }
     
     func makeFormDataWith(json:JSON) -> [Form] {
