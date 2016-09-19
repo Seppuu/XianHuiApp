@@ -285,21 +285,32 @@ class User:NSObject {
     
     private func clearUserDefaults() {
         
-//        Defaults.userId.clear()
-//        Defaults.userPhone.clear()
-//        Defaults.userFirstName.clear()
-//        Defaults.userLastName.clear()
-//        Defaults.userAvatarURL.clear()
+        Defaults.userId.clear()
+        Defaults.clientId.clear()
+        Defaults.userName.clear()
+        Defaults.userAvatarURL.clear()
+        Defaults.userLevelText.clear()
         
-        if let bid = NSBundle.mainBundle().bundleIdentifier {
-            NSUserDefaults.standardUserDefaults().removePersistentDomainForName(bid)
-        }
+        User.sharedUser = nil
+        
+        
+        self.name = ""
+    
+        self.id = 0
+        
+        self.levelText = ""
+        
+        self.name = ""
+        
+        self.avatarURL = ""
+        
+        self.clientId = ""
+        
     }
     
 }
 
 extension PalauDefaults {
-    
     
     public static var userId: PalauDefaultsEntry<Int> {
         get {
@@ -347,13 +358,5 @@ extension PalauDefaults {
         }
     }
     
-    public static var lessonIdFromScheme: PalauDefaultsEntry<String> {
-        get {
-            return value("lessonIdFromScheme").whenNil(use: "")
-        }
-        set {
-            
-        }
-    }
     
 }

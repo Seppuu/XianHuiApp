@@ -15,7 +15,9 @@ let screenHeight = UIScreen.mainScreen().bounds.size.height
 let DDTimeNeverReach = 12000
 
 let BaseUrl = "http://sso.sosys.cn:8080/mybook"
-var DDBaseUrl = Defaults.actualApiUrl.value!
+var DDBaseUrl:String {
+    return Defaults.actualApiUrl.value!
+}
 let DefaultThemeUrl = "http://dingdong.sosys.cn:8080/themes/common/background/default.png"
 
 var allUserIds = [String]()
@@ -92,7 +94,9 @@ let SaveGoodPlanUrl = DDBaseUrl + "/rest/employee/setplanitem"
 /// 用户关系管理
 
 //用户联系人列表
-let userListUrl       = DDBaseUrl + "/rest/employee/getuserlist"
+var userListUrl:String {
+    return DDBaseUrl + "/rest/employee/getuserlist"
+}
 
 /// 系统管理
 let submitFeedBackURL = DDBaseUrl + "/system/index/rest?returnDataType=json&action=submitFeedback"

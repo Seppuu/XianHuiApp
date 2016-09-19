@@ -222,10 +222,32 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
             
             if indexPath.row == 0 {
                 //退出
-                userLogOut()
+                showAlertView()
+                
             }
             
         }
+    }
+    
+    func showAlertView() {
+        
+        let alert = UIAlertController(title: "提示", message: "退出应用", preferredStyle: .Alert)
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .Default, handler: nil)
+        
+        let confirmAction = UIAlertAction(title: "确认", style: .Destructive) { (action) in
+            
+            self.userLogOut()
+            
+        }
+        
+        
+        alert.addAction(cancelAction)
+        alert.addAction(confirmAction)
+        
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+     
     }
     
         
