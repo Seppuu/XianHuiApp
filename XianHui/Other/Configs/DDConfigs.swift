@@ -29,10 +29,14 @@ let loginURL          = BaseUrl + "/rest/login"
 let logOutURL         = BaseUrl + "/rest/logout"
 
 //上传头像
-let updateAvatarURL      = DDBaseUrl + "/rest/employee/uploadavator"
+var updateAvatarURL:String {
+    return DDBaseUrl + "/rest/employee/uploadavator"
+}
 
 //完善用户资料
-let updateUserInfoURL = DDBaseUrl + "/user/index/rest?returnDataType=json&action=updateUserInfo"
+var updateUserInfoURL:String {
+    return DDBaseUrl + "/user/index/rest?returnDataType=json&action=updateUserInfo"
+}
 
 
 /// 日报表
@@ -41,55 +45,80 @@ let updateUserInfoURL = DDBaseUrl + "/user/index/rest?returnDataType=json&action
 
 
 //获取日报表峰值
-let GetDailyReportMaxVauleUrl = DDBaseUrl + "/rest/employee/getdailyreportsetting"
+var GetDailyReportMaxVauleUrl:String {
+    return DDBaseUrl + "/rest/employee/getdailyreportsetting"
+}
 
 //保存日报表峰值
-let SaveDailyReportMaxVauleUrl = DDBaseUrl + "/rest/employee/setdailyreportsetting"
+var SaveDailyReportMaxVauleUrl:String {
+    return DDBaseUrl + "/rest/employee/setdailyreportsetting"
+}
 
 
 //获取助手列表
-let GetHelperListUrl = DDBaseUrl +  "/rest/employee/gethelperlist"
+var GetHelperListUrl:String {
+    return DDBaseUrl +  "/rest/employee/gethelperlist"
+}
 
 
 
 //获取日报表数据
-let GetDailyReportDataUrl = DDBaseUrl + "/rest/employee/getdailyreportdata"
+var GetDailyReportDataUrl:String {
+    return DDBaseUrl + "/rest/employee/getdailyreportdata"
+}
 
 
 //提醒,通知列表
-let GetNoticeListUrl = DDBaseUrl + "/rest/employee/getnoticelist"
+var GetNoticeListUrl:String {
+    return  DDBaseUrl + "/rest/employee/getnoticelist"
+}
 
 //获取通知明细
-let GetNoticeDetailUrl = DDBaseUrl +  "/rest/employee/getnoticedetail"
-
+var GetNoticeDetailUrl:String {
+    return DDBaseUrl +  "/rest/employee/getnoticedetail"
+}
 
 
 
 ///我的工作 -- 计划
 
 //获取计划顾客列表
-let GetCustomerPlanListUrl = DDBaseUrl + "/rest/employee/getplantable"
+var GetCustomerPlanListUrl:String {
+    return DDBaseUrl + "/rest/employee/getplantable"
+}
 
 
 //获取预约顾客列表
-let getCustomerScheduleListUrl = DDBaseUrl + "/rest/employee/getscheduletable"
+var getCustomerScheduleListUrl:String {
+    return DDBaseUrl + "/rest/employee/getscheduletable"
+}
 
 
 //获取某顾客明细
-let GetCustomerDetailUrl = DDBaseUrl + "/rest/employee/getcustomerdetail"
+var GetCustomerDetailUrl:String {
+    return DDBaseUrl + "/rest/employee/getcustomerdetail"
+}
 
 //获取顾客消费记录
-let GetCustomerConsumeUrl = DDBaseUrl + "/rest/employee/getcustomerconsumelist"
+var GetCustomerConsumeUrl:String {
+    return DDBaseUrl + "/rest/employee/getcustomerconsumelist"
+}
 
 //获取顾客预约记录
-let GetCustomerSchedulesUrl = DDBaseUrl + "/rest/employee/getcustomerschedulelist"
+var GetCustomerSchedulesUrl:String {
+    return DDBaseUrl + "/rest/employee/getcustomerschedulelist"
+}
 
 
 //获取项目,产品计划
-let GetGoodPlanListUrl = DDBaseUrl + "/rest/employee/getplanaddlist"
+var GetGoodPlanListUrl:String {
+    return DDBaseUrl + "/rest/employee/getplanaddlist"
+}
 
 //保存项目,产品计划
-let SaveGoodPlanUrl = DDBaseUrl + "/rest/employee/setplanitem"
+var SaveGoodPlanUrl:String {
+    return DDBaseUrl + "/rest/employee/setplanitem"
+}
 
 /// 用户关系管理
 
@@ -99,11 +128,15 @@ var userListUrl:String {
 }
 
 /// 系统管理
-let submitFeedBackURL = DDBaseUrl + "/system/index/rest?returnDataType=json&action=submitFeedback"
+var submitFeedBackURL:String {
+    return DDBaseUrl + "/system/index/rest?returnDataType=json&action=submitFeedback"
+}
 
 //用户协议
-let userArgeementURL = DDBaseUrl + "/user/signup/agreement"
+var userArgeementURL:String {
+    return DDBaseUrl + "/user/signup/agreement"
+}
 
 //暂时的固定的token
-let defaultToken = ""
+var defaultToken = ""
 
