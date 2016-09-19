@@ -24,7 +24,6 @@ class ScheduleVC: UIViewController {
     var listOfCustommerArr = [[Customer]]()
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,8 +52,11 @@ class ScheduleVC: UIViewController {
         let nib = UINib(nibName: cellId, bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: cellId)
         
-        tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(ScheduleVC.topRefresh))
-        tableView.mj_header.beginRefreshing()
+//        tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(ScheduleVC.topRefresh))
+//        tableView.mj_header.beginRefreshing()
+        topRefresh()
+        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(ScheduleVC.bottomRefresh))
+        
     }
     
     var currentDate:String {
@@ -73,13 +75,23 @@ class ScheduleVC: UIViewController {
         NetworkManager.sharedManager.getCustomerScheduleListWith(date, days: 3) { (success, json, error) in
             if success == true {
                 
-                self.nextDate = json!["nextDate"].string!
+                
                 let jsonArr = json!["rows"].array!
-                self.listOfCustommerArr = [[Customer]]()
-                self.days = [String]()
-                self.listOfCustommerArr = self.makeCustomerListWith(jsonArr)
-                self.tableView.reloadData()
-                self.tableView.mj_header.endRefreshing()
+                
+                if jsonArr.count > 0 {
+                    //有数据
+                    self.nextDate = json!["nextDate"].string!
+                    self.makeCustomerListWith(jsonArr)
+                    self.tableView.reloadData()
+                    self.tableView.mj_footer.endRefreshing()
+                }
+                else {
+                    //已经没有数据
+                    self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                }
+                
+                
+                
             }
             else {
                 
@@ -91,7 +103,7 @@ class ScheduleVC: UIViewController {
     
     var days = [String]()
     
-    func makeCustomerListWith(dataArr:[JSON]) -> [[Customer]] {
+    func makeCustomerListWith(dataArr:[JSON]) {
         
         var customers = [Customer]()
         
@@ -123,7 +135,7 @@ class ScheduleVC: UIViewController {
             
         }
         
-        var listArr = [[Customer]]()
+        
         
         for day in days {
             
@@ -137,11 +149,15 @@ class ScheduleVC: UIViewController {
                 
             })
             
-            listArr.append(list.reverse())
+            if list.count > 0 {
+                self.listOfCustommerArr.append(list.reverse())
+            }
+            else {
+                //上一页的日期,不需要,添加.
+            }
+            
+            
         }
-        
-        
-        return listArr
         
     }
     
