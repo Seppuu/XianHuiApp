@@ -217,6 +217,7 @@
 		37DE9D681D41B6AD0041A26B /* MessageListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE9D671D41B6AD0041A26B /* MessageListVC.swift */; };
 		37DE9D6A1D41B6FC0041A26B /* MessageListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE9D691D41B6FC0041A26B /* MessageListModel.swift */; };
 		37DE9D6C1D41B7310041A26B /* MessageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE9D6B1D41B7310041A26B /* MessageListCell.swift */; };
+		37DF88E51D8FD3D700B8DB73 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DF88E41D8FD3D700B8DB73 /* UserManager.swift */; };
 		37DFD2421D5C2B3C00238A86 /* MemberListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DFD2411D5C2B3C00238A86 /* MemberListVC.swift */; };
 		37DFD2441D5D795700238A86 /* DailyFormVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DFD2431D5D795700238A86 /* DailyFormVC.swift */; };
 		37E78A9A1D41F198007425A3 /* OTPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E78A971D41F198007425A3 /* OTPageScrollView.m */; };
@@ -490,6 +491,7 @@
 		37DE9D671D41B6AD0041A26B /* MessageListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageListVC.swift; sourceTree = "<group>"; };
 		37DE9D691D41B6FC0041A26B /* MessageListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageListModel.swift; sourceTree = "<group>"; };
 		37DE9D6B1D41B7310041A26B /* MessageListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageListCell.swift; sourceTree = "<group>"; };
+		37DF88E41D8FD3D700B8DB73 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		37DFD2411D5C2B3C00238A86 /* MemberListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberListVC.swift; sourceTree = "<group>"; };
 		37DFD2431D5D795700238A86 /* DailyFormVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyFormVC.swift; sourceTree = "<group>"; };
 		37E78A961D41F198007425A3 /* OTPageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPageScrollView.h; sourceTree = "<group>"; };
@@ -1058,6 +1060,7 @@
 			isa = PBXGroup;
 			children = (
 				37BAB8C01D3E1040001E4680 /* NetworkManager.swift */,
+				37DF88E41D8FD3D700B8DB73 /* UserManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -2071,6 +2074,7 @@
 				37BAB9771D3E1059001E4680 /* AddFriendSearchCell.swift in Sources */,
 				372463B91D69F4180018CE37 /* Customer.swift in Sources */,
 				376D6D451D59C8E500F9A272 /* ChatExample.swift in Sources */,
+				37DF88E51D8FD3D700B8DB73 /* UserManager.swift in Sources */,
 				37BAB9BC1D3E1059001E4680 /* BaseWebViewController.swift in Sources */,
 				37BAB8F01D3E1045001E4680 /* RESideMenu.m in Sources */,
 				37BAB97B1D3E1059001E4680 /* ChannelCell.swift in Sources */,

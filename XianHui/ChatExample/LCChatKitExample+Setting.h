@@ -21,4 +21,6 @@
 + (void)lcck_clearLocalClientInfo;
 + (void)lcck_exampleChangeGroupAvatarURLsForConversationId:(NSString *)conversationId
                                          shouldInsert:(BOOL)shouldInsert;
+
+
 @end
