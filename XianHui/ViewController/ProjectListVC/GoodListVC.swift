@@ -9,7 +9,8 @@
 import UIKit
 import SwiftyJSON
 
-class ProjectListVC: BaseViewController {
+//所有的产品和项目列表
+class GoodListVC: BaseViewController {
 
     var tableView:UITableView!
     
@@ -206,7 +207,7 @@ class ProjectListVC: BaseViewController {
                 
             }
             
-            projectsPreSelected.forEach({ (projectPreSelected) in
+            prodsPreSelected.forEach({ (projectPreSelected) in
                 
                 if pro.name == projectPreSelected.name {
                     pro.selected = true
@@ -241,17 +242,17 @@ class ProjectListVC: BaseViewController {
     
     func setNavBarItem() {
         
-        let rightBar = UIBarButtonItem(title: "确定", style: .Done, target: self, action: #selector(ProjectListVC.confirmTap))
+        let rightBar = UIBarButtonItem(title: "确定", style: .Done, target: self, action: #selector(GoodListVC.confirmTap))
         
         navigationItem.rightBarButtonItem = rightBar
         
-        let leftBar = UIBarButtonItem(title: "撤销", style: .Done, target: self, action: #selector(ProjectListVC.cancelTap))
+        let leftBar = UIBarButtonItem(title: "撤销", style: .Done, target: self, action: #selector(GoodListVC.cancelTap))
         
         navigationItem.leftBarButtonItem = leftBar
         
         segment = UISegmentedControl(items: ["项目","产品"])
         segment.selectedSegmentIndex = 0
-        segment.addTarget(self, action: #selector(ProjectListVC.segmentVauleChanged(_:)), forControlEvents: .ValueChanged)
+        segment.addTarget(self, action: #selector(GoodListVC.segmentVauleChanged(_:)), forControlEvents: .ValueChanged)
         
         navigationItem.titleView = segment
         
@@ -376,7 +377,7 @@ class ProjectListVC: BaseViewController {
     
 }
 
-extension ProjectListVC:UITableViewDelegate,UITableViewDataSource {
+extension GoodListVC:UITableViewDelegate,UITableViewDataSource {
     
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -454,7 +455,7 @@ extension ProjectListVC:UITableViewDelegate,UITableViewDataSource {
             label.font = UIFont.systemFontOfSize(14)
             label.backgroundColor = UIColor.ddViewBackGroundColor()
             
-            let tap = UITapGestureRecognizer(target: self, action: #selector(ProjectListVC.toGoodRecordVC))
+            let tap = UITapGestureRecognizer(target: self, action: #selector(GoodListVC.toGoodRecordVC))
             label.addGestureRecognizer(tap)
             
             container.addSubview(label)

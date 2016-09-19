@@ -46,7 +46,7 @@
 		37367B771D6AE6DB00479E39 /* ChattingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37367B761D6AE6DB00479E39 /* ChattingTableView.swift */; };
 		37367B7A1D6AE70300479E39 /* TrackingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37367B791D6AE70300479E39 /* TrackingTableView.swift */; };
 		37367B7C1D6AE7FD00479E39 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37367B7B1D6AE7FD00479E39 /* Project.swift */; };
-		37367B7F1D6BDD1300479E39 /* ProjectListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37367B7E1D6BDD1300479E39 /* ProjectListVC.swift */; };
+		37367B7F1D6BDD1300479E39 /* GoodListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37367B7E1D6BDD1300479E39 /* GoodListVC.swift */; };
 		37367B821D6BFED900479E39 /* chatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37367B801D6BFED900479E39 /* chatTableViewCell.swift */; };
 		37367B831D6BFED900479E39 /* chatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37367B811D6BFED900479E39 /* chatTableViewCell.xib */; };
 		37367B861D6C13F900479E39 /* chatSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37367B851D6C13F900479E39 /* chatSectionView.swift */; };
@@ -296,7 +296,7 @@
 		37367B761D6AE6DB00479E39 /* ChattingTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingTableView.swift; sourceTree = "<group>"; };
 		37367B791D6AE70300479E39 /* TrackingTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackingTableView.swift; sourceTree = "<group>"; };
 		37367B7B1D6AE7FD00479E39 /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
-		37367B7E1D6BDD1300479E39 /* ProjectListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectListVC.swift; sourceTree = "<group>"; };
+		37367B7E1D6BDD1300479E39 /* GoodListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodListVC.swift; sourceTree = "<group>"; };
 		37367B801D6BFED900479E39 /* chatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = chatTableViewCell.swift; sourceTree = "<group>"; };
 		37367B811D6BFED900479E39 /* chatTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = chatTableViewCell.xib; sourceTree = "<group>"; };
 		37367B851D6C13F900479E39 /* chatSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = chatSectionView.swift; sourceTree = "<group>"; };
@@ -816,11 +816,12 @@
 			path = TrackingTableView;
 			sourceTree = "<group>";
 		};
-		37367B7D1D6BDCF800479E39 /* ProjectListVC */ = {
+		37367B7D1D6BDCF800479E39 /* GoodListVC */ = {
 			isa = PBXGroup;
 			children = (
-				37367B7E1D6BDD1300479E39 /* ProjectListVC.swift */,
+				37367B7E1D6BDD1300479E39 /* GoodListVC.swift */,
 			);
+			name = GoodListVC;
 			path = ProjectListVC;
 			sourceTree = "<group>";
 		};
@@ -1483,7 +1484,7 @@
 				37B79B4A1D7D108200340C17 /* ScheduleVC */,
 				37B79B471D7D087500340C17 /* PlanningVC */,
 				37A76FD41D6D371A00572B1D /* ProdDateSetVC */,
-				37367B7D1D6BDCF800479E39 /* ProjectListVC */,
+				37367B7D1D6BDCF800479E39 /* GoodListVC */,
 				37367B6A1D6AD56E00479E39 /* CustomerProfileVC */,
 				372463B51D69F2F60018CE37 /* MyCustomerVC */,
 				372463B21D69F1040018CE37 /* MyWorkVC */,
@@ -1998,7 +1999,7 @@
 				37B79B4C1D7D10A300340C17 /* ScheduleVC.swift in Sources */,
 				37BAB8B11D3E101C001E4680 /* UINavigationItem+DD.swift in Sources */,
 				37BAB8E91D3E1045001E4680 /* UIViewController+CYLTabBarControllerExtention.m in Sources */,
-				37367B7F1D6BDD1300479E39 /* ProjectListVC.swift in Sources */,
+				37367B7F1D6BDD1300479E39 /* GoodListVC.swift in Sources */,
 				3724809A1D8151CD00B95C54 /* LCChatKitExample+Setting.m in Sources */,
 				37BAB8BD1D3E1025001E4680 /* PhoneNumbers.swift in Sources */,
 				37BAB8A81D3E101C001E4680 /* Dictionary+DD.swift in Sources */,

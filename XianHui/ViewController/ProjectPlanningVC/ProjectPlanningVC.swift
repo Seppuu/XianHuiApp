@@ -10,7 +10,7 @@ import UIKit
 import MBProgressHUD
 import SwiftyJSON
 
-///项目计划
+///添加项目计划和产品计划
 class ProjectPlanningVC: UIViewController {
 
     var tableView:UITableView!
@@ -201,7 +201,7 @@ class ProjectPlanningVC: UIViewController {
         
         bottomView = PlanningTableView(frame:view.bounds)
         bottomView.addRowTapHandler = {
-            let vc = ProjectListVC()
+            let vc = GoodListVC()
             vc.customer = self.customer
             vc.projectsPreSelected = self.bottomView.listOfProject
             vc.prodsPreSelected    = self.bottomView.listOfProd
