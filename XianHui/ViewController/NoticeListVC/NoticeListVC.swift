@@ -29,6 +29,8 @@ class Notice: NSObject {
     var text = ""
     
     var createTime = ""
+    
+    var hasRead = false
 }
 
 class NoticeListVC: UIViewController {

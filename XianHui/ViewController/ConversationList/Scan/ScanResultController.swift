@@ -9,11 +9,12 @@
 import UIKit
 import swiftScan
 import SnapKit
+import MBProgressHUD
 
 //扫码成功界面
 class ScanResultController: UIViewController {
 
-    var codeResult:LBXScanResult?
+    var codeResult:LBXScanResult!
     
     var topLabel = UILabel()
     
@@ -52,10 +53,52 @@ class ScanResultController: UIViewController {
     }
     
     
+    
     func confirmTap() {
-       //TODO:确认登陆.向后台发送二维码
-        //        codeTypeLabel.text = "码的类型:" + (codeResult?.strBarCodeType)!
-        //        codeStringLabel.text = "码的内容:" + (codeResult?.strScanned)!
+       //确认登陆.向后台发送二维码
+        if codeResult.strScanned != nil {
+            let qrCode = codeResult.strScanned!
+            LCCKUtil.showProgressText("登陆中", duration: 10.0)
+            NetworkManager.sharedManager.logInERPWith(qrCode, completion: { (success, json, error) in
+                
+                if success == true {
+                    LCCKUtil.hideProgress()
+                    self.backToTopViewController()
+                    
+                }
+                else{
+                    //TODO: error
+                    LCCKUtil.showProgressText("登陆失败", duration: 2.0)
+                }
+                
+            })
+        }
+        else {
+            //解码错误
+        }
+        
+        
+        
+        
     }
 
+    
+    func backToTopViewController() {
+        
+        self.navigationController?.popToRootViewControllerAnimated(true)
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

@@ -20,6 +20,9 @@ class HeplerCell: UITableViewCell {
     
     @IBOutlet weak var descLabel: UILabel!
     
+    
+    @IBOutlet weak var statusLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         

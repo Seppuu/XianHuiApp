@@ -78,6 +78,16 @@ class HelperVC: BaseViewController {
             no.day = json["extra_id"].string!
             no.createTime = json["create_time"].string!
             
+            let status = json["status"].int!
+            
+            if status == 0 {
+                no.hasRead = false
+            }
+            else if status == 1{
+                no.hasRead = true
+            }
+            
+            
             switch json["notice_type"].string! {
             case "daily_report":
                 no.type = NoticeType.daily_report
@@ -146,6 +156,16 @@ extension HelperVC:UITableViewDelegate,UITableViewDataSource {
         cell.dayTimeLabel.text  = no.day
         cell.descLabel.text     = no.text
         
+        if no.hasRead == true {
+            
+            cell.statusLabel.text = "已读"
+            cell.statusLabel.textColor = UIColor ( red: 1.0, green: 0.2072, blue: 0.2616, alpha: 1.0 )
+        }
+        else {
+            cell.statusLabel.text = "未读"
+            cell.statusLabel.textColor = UIColor ( red: 0.0019, green: 0.6729, blue: 0.003, alpha: 1.0 )
+        }
+        
         return cell
     }
     
@@ -157,7 +177,7 @@ extension HelperVC:UITableViewDelegate,UITableViewDataSource {
         switch no.type {
         case .daily_report:
             let vc = DailyFormVC()
-            vc.date = no.day
+            vc.noticeId = no.id
             vc.title = "日报表"
             navigationController?.pushViewController(vc, animated: true)
             
@@ -166,6 +186,19 @@ extension HelperVC:UITableViewDelegate,UITableViewDataSource {
             vc.title = "我的工作"
             navigationController?.pushViewController(vc, animated: true)
         case .common_notice: break;
+        }
+        
+        //设置已读
+        NetworkManager.sharedManager.getNoticeDetailWith(no.id) { (success, json, error) in
+            
+            if success == true {
+                no.hasRead = true
+                self.tableView.reloadData()
+            }
+            else {
+                //TODO:设置失败
+            }
+            
         }
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)

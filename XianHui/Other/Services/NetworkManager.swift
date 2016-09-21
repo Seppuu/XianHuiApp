@@ -205,6 +205,50 @@ class NetworkManager {
 
 }
 
+
+//MARK:二维码
+extension NetworkManager {
+
+    //二维码登陆ERP
+    func logInERPWith(qrCode:String,completion:DDResultHandler) {
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!,
+            "webtoken":qrCode
+        ]
+        
+        let urlString = logInERPWithQRCodeUrl
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+    }
+    
+    //二维码退出ERP
+    func logOutERPWith(qrCode:String,completion:DDResultHandler) {
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!,
+            "webtoken":qrCode
+        ]
+        
+        let urlString = logOutERPWithQRCodeUrl
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+    }
+    
+    //获取二维码登陆ERP状态.
+    func getERPLogInStatus(qrCode:String,completion:DDResultHandler) {
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!
+        ]
+        
+        let urlString = getERPLogInStatusUrl
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+    }
+}
+
+
 //MARK:用户关系管理
 extension NetworkManager {
     
@@ -224,24 +268,14 @@ extension NetworkManager {
 extension NetworkManager {
     
     //获取日报表数据
-    func getDailyReportDataWith(date:String,noticeId:Int?,completion:DDResultHandler) {
+    func getDailyReportDataWith(noticeId:Int,completion:DDResultHandler) {
         
         var dict:JSONDictionary!
         
-        if noticeId != nil {
-            //从推送来
-            dict = [
-                "token":Defaults.userToken.value!,
-                "notice_id":noticeId!
-            ]
-        }
-        else {
-            //从助手列表来
-            dict = [
-                "token":Defaults.userToken.value!,
-                "date":date
-            ]
-        }
+        dict = [
+            "token":Defaults.userToken.value!,
+            "notice_id":noticeId
+        ]
         
         let urlString = GetDailyReportDataUrl
         
@@ -315,10 +349,10 @@ extension NetworkManager {
     }
     
     
-    //获取提醒,通知明细
+    //获取提醒,通知明细,同时也是设置notice 已读的接口.调用成功即已读
     func getNoticeDetailWith(notice_id:Int,completion:DDResultHandler) {
         
-        let urlString = GetNoticeListUrl
+        let urlString = GetNoticeDetailUrl
         
         let dict:JSONDictionary = [
             "token":Defaults.userToken.value!,
@@ -328,6 +362,9 @@ extension NetworkManager {
         baseRequestWith(urlString, dict: dict, completion: completion)
         
     }
+    
+    
+
     
     //计划顾客列表
     func getCustomerPlanListWith(completion:DDResultHandler) {

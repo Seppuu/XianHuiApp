@@ -38,11 +38,26 @@ var updateUserInfoURL:String {
     return DDBaseUrl + "/user/index/rest?returnDataType=json&action=updateUserInfo"
 }
 
+///二维码
+//通过扫码登陆ERP
+var logInERPWithQRCodeUrl:String {
+    return DDBaseUrl + "/rest/employee/loginqrdo"
+}
+
+
+//手机端指挥退出ERP
+var logOutERPWithQRCodeUrl:String {
+    return DDBaseUrl + "/rest/employee/logoutqrdo"
+}
+
+//获取二维码登陆状态
+var getERPLogInStatusUrl:String {
+    return DDBaseUrl + "/rest/employee/loginqrstatus"
+}
+
+
 
 /// 日报表
-
-//获取助手列表
-
 
 //获取日报表峰值
 var GetDailyReportMaxVauleUrl:String {

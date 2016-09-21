@@ -11,23 +11,22 @@ import SwiftyJSON
 
 //日报表
 class DailyFormVC: RadarChartVC {
+    
+    
+    var jsonData:JSON!
+    
+    var noticeId:Int!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getDailyReportDataWith(date)
+        getDailyReportDataWith(noticeId)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
     }
-    
-    var jsonData:JSON!
-    
-    var date = ""
-    
-    var noticeId:Int?
     
     var formToday:Form {
         if formList.count > 0 {
@@ -40,9 +39,9 @@ class DailyFormVC: RadarChartVC {
     
     var formList = [Form]()
     
-    func getDailyReportDataWith(date:String) {
+    func getDailyReportDataWith(noticeId:Int) {
         
-        NetworkManager.sharedManager.getDailyReportDataWith(date, noticeId: noticeId) { (success, json, error) in
+        NetworkManager.sharedManager.getDailyReportDataWith(noticeId) { (success, json, error) in
             
             if success == true {
                 self.formList = self.makeFormDataWith(json!)
