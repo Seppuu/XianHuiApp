@@ -22,15 +22,14 @@ class LoginTopView: UIView {
     override func layoutSubviews() {
         
         imageView = UIImageView()
-        imageView.backgroundColor = UIColor ( red: 0.9868, green: 0.1651, blue: 0.2019, alpha: 0.66 )
+        imageView.image = UIImage(named: "logoIcon")
+        imageView.contentMode = .ScaleAspectFit
         addSubview(imageView)
         imageView.snp_makeConstraints { (make) in
             make.top.equalTo(self).offset(22 + 10)
             make.centerX.equalTo(self)
             make.width.height.equalTo(80)
         }
-        imageView.layer.cornerRadius = 80/2
-        imageView.layer.masksToBounds = true
         
         topLabel = UILabel()
         addSubview(topLabel)
@@ -41,9 +40,9 @@ class LoginTopView: UIView {
             make.height.equalTo(21)
         }
         topLabel.textAlignment = .Center
-        topLabel.text = "登录"
+        topLabel.text = "闲惠-商家版"
+        topLabel.textColor = UIColor.lightGrayColor()
         topLabel.font = UIFont.systemFontOfSize(15)
-        
         
     }
 }
@@ -164,9 +163,25 @@ extension LoginViewController:UITableViewDelegate,UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier(singleCellId, forIndexPath: indexPath) as! SingleTapCell
             
             cell.middleLabel.text = "忘记了密码?"
-            cell.middleLabel.textAlignment = .Center
-            cell.middleLabel.font = UIFont.systemFontOfSize(10)
+            cell.middleLabel.textAlignment = .Right
+            cell.middleLabel.font = UIFont.systemFontOfSize(13)
             cell.middleLabel.textColor = UIColor ( red: 0.4079, green: 0.6937, blue: 1.0, alpha: 1.0 )
+            
+            let codeButton = UIButton()
+            cell.addSubview(codeButton)
+            codeButton.snp_makeConstraints(closure: { (make) in
+                make.centerY.equalTo(cell.middleLabel)
+                make.left.equalTo(cell).offset(15)
+                make.width.equalTo(150)
+                make.height.equalTo(21)
+            })
+            
+            codeButton.setTitle("短信验证码登陆", forState: .Normal)
+            codeButton.contentHorizontalAlignment = .Left
+            codeButton.titleLabel?.font = UIFont.systemFontOfSize(13)
+            codeButton.setTitleColor(UIColor ( red: 0.4079, green: 0.6937, blue: 1.0, alpha: 1.0 ), forState: .Normal)
+            codeButton.addTarget(self, action: #selector(LoginViewController.openCodeLoginVC), forControlEvents: .TouchUpInside)
+            
             
             return cell
         }
@@ -175,7 +190,14 @@ extension LoginViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+    }
+    
+    func openCodeLoginVC() {
         
+        let vc = LoginByPhoneVC()
+        let nav = UINavigationController(rootViewController: vc)
+        
+        self.presentViewController(nav, animated: true, completion: nil)
         
     }
     

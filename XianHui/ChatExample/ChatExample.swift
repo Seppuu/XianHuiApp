@@ -72,6 +72,14 @@ class ChatKitExample: LCChatKitExample {
 
         
     }
+    
+    class func openQRCodeVCForm(viewController:UIViewController) {
+        
+        let vc = QQScanViewController()
+        vc.title = "扫一扫"
+        viewController.navigationController?.pushViewController(vc, animated: true)
+        
+    }
 
     //群聊
     override class func exampleCreateGroupConversationFromViewController(viewController: UIViewController!) {

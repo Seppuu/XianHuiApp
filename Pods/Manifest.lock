@@ -72,6 +72,7 @@ PODS:
   - SDWebImage/Core (3.8.2)
   - SnapKit (0.15.0)
   - SwiftDate (3.0.8)
+  - swiftScan (1.0.8)
   - SwiftString (0.5)
   - SwiftyJSON (2.3.2)
   - TWMessageBarManager (1.8.1)
@@ -104,6 +105,7 @@ DEPENDENCIES:
   - Ruler (~> 0.6)
   - SnapKit (~> 0.15.0)
   - SwiftDate
+  - swiftScan
   - SwiftString
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
   - TWMessageBarManager
@@ -159,6 +161,7 @@ SPEC CHECKSUMS:
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SnapKit: 4962eed2ee18e48cbd2b2292fffc57efe7235f87
   SwiftDate: 971f8b9394f664f2226b9c3ab64e801a7291c612
+  swiftScan: 2dc76303bc7c2dcb7bde9c539f9bd6a7520abc8e
   SwiftString: ec9c31c55b2aa147a1154f5f5f8483dc71e3165f
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   TWMessageBarManager: fd84e7948ba7968a2b5d9454859135761214ec56
@@ -167,6 +170,6 @@ SPEC CHECKSUMS:
   UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
   ValueStepper: 499e970b2e8e60aa133f03c941de9dca4fe88ed3
 
-PODFILE CHECKSUM: f5d28c87765091151962b5f532e1bb0f61f87227
+PODFILE CHECKSUM: 8c13b6ebbc173d0ce175f7f8921b62d82c0a7c72
 
 COCOAPODS: 1.0.1

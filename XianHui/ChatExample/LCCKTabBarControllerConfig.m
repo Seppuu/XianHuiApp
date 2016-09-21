@@ -57,12 +57,13 @@
     MessageListVC *firstViewController = [[MessageListVC alloc] init];
     
     firstViewController.navigationItem.rightBarButtonItem = ({
-        UIButton *createGroupConversationButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
-        [createGroupConversationButton addTarget:self action:@selector(createGroupConversation:) forControlEvents:UIControlEventTouchUpInside];
-        UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:createGroupConversationButton];
+        UIButton *addButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
+        [addButton addTarget:self action:@selector(showPopOverMenu:event:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addButton];
         rightBarButtonItem;
-    }
-                                                             );
+    });
+    
     self.firstViewController = firstViewController;
     NavigationController *firstNavigationController = [[NavigationController alloc]
                                                        initWithRootViewController:firstViewController];
@@ -225,6 +226,10 @@
     [LCChatKitExample exampleCreateGroupConversationFromViewController:self.firstViewController];
 }
 
+-(void)openReadQRCodeVC{
+    [ChatKitExample openQRCodeVCForm:self.firstViewController];
+}
+
 - (NSString *)arc4randomString {
     int a = arc4random_uniform(100000000);
     NSString *arc4randomString = [NSString stringWithFormat:@"%@", @(a)];
@@ -240,10 +245,12 @@
 
 - (void)showPopOverMenu:(UIBarButtonItem *)sender event:(UIEvent *)event {
     [FTPopOverMenu showFromEvent:event
-                        withMenu:@[ @"创建群聊" ]
+                        withMenu:@[ @"扫一扫" ]
                        doneBlock:^(NSInteger selectedIndex) {
                            if (selectedIndex == 0) {
-                               [self createGroupConversation:sender];
+                               //[self createGroupConversation:sender];
+                               [self openReadQRCodeVC];
+                               
                            }
                        } dismissBlock:nil];
 }

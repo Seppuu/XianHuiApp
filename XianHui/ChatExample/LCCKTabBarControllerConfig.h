@@ -13,4 +13,6 @@
 
 @property (nonatomic, readonly, strong) CYLTabBarController *tabBarController;
 
+- (void)openReadQRCodeVC;
+
 @end

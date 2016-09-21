@@ -32,6 +32,7 @@ pod 'CryptoSwift'
 pod 'Charts'
 pod 'SwiftDate'
 pod 'LTInfiniteScrollView-Swift'
+pod 'swiftScan'
 
 end
 

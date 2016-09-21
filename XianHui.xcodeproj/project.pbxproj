@@ -56,6 +56,13 @@
 		376D6D451D59C8E500F9A272 /* ChatExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376D6D441D59C8E500F9A272 /* ChatExample.swift */; };
 		377116161D49AE3C00008B36 /* UserCentreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377116151D49AE3C00008B36 /* UserCentreVC.swift */; };
 		3771EC941D7555F50064A060 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 3771EC931D7555F50064A060 /* .gitignore */; };
+		3776B8991D922B1800A9C9DB /* CodeScan.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3776B8971D922B1800A9C9DB /* CodeScan.bundle */; };
+		3776B89A1D922B1800A9C9DB /* QQScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8981D922B1800A9C9DB /* QQScanViewController.swift */; };
+		3776B89C1D922B3500A9C9DB /* ScanResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B89B1D922B3500A9C9DB /* ScanResultController.swift */; };
+		3776B8A71D9269CC00A9C9DB /* LoginByPhoneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8A51D9269CC00A9C9DB /* LoginByPhoneVC.swift */; };
+		3776B8A81D9269CC00A9C9DB /* LoginByPhoneVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3776B8A61D9269CC00A9C9DB /* LoginByPhoneVC.xib */; };
+		3776B8AB1D92713800A9C9DB /* CodeLoginVerifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8A91D92713800A9C9DB /* CodeLoginVerifyVC.swift */; };
+		3776B8AC1D92713800A9C9DB /* CodeLoginVerifyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3776B8AA1D92713800A9C9DB /* CodeLoginVerifyVC.xib */; };
 		377AB1A81D61B36800777DC7 /* ConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AB1A71D61B36800777DC7 /* ConversationVC.swift */; };
 		378B17731D6C360800758C13 /* progressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378B17711D6C360800758C13 /* progressCell.swift */; };
 		378B17741D6C360800758C13 /* progressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 378B17721D6C360800758C13 /* progressCell.xib */; };
@@ -310,6 +317,13 @@
 		376D6D441D59C8E500F9A272 /* ChatExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatExample.swift; sourceTree = "<group>"; };
 		377116151D49AE3C00008B36 /* UserCentreVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCentreVC.swift; sourceTree = "<group>"; };
 		3771EC931D7555F50064A060 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		3776B8971D922B1800A9C9DB /* CodeScan.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CodeScan.bundle; sourceTree = "<group>"; };
+		3776B8981D922B1800A9C9DB /* QQScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QQScanViewController.swift; sourceTree = "<group>"; };
+		3776B89B1D922B3500A9C9DB /* ScanResultController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanResultController.swift; sourceTree = "<group>"; };
+		3776B8A51D9269CC00A9C9DB /* LoginByPhoneVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginByPhoneVC.swift; sourceTree = "<group>"; };
+		3776B8A61D9269CC00A9C9DB /* LoginByPhoneVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginByPhoneVC.xib; sourceTree = "<group>"; };
+		3776B8A91D92713800A9C9DB /* CodeLoginVerifyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeLoginVerifyVC.swift; sourceTree = "<group>"; };
+		3776B8AA1D92713800A9C9DB /* CodeLoginVerifyVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CodeLoginVerifyVC.xib; sourceTree = "<group>"; };
 		377AB1A71D61B36800777DC7 /* ConversationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationVC.swift; sourceTree = "<group>"; };
 		378B17711D6C360800758C13 /* progressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = progressCell.swift; sourceTree = "<group>"; };
 		378B17721D6C360800758C13 /* progressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = progressCell.xib; sourceTree = "<group>"; };
@@ -780,6 +794,10 @@
 			isa = PBXGroup;
 			children = (
 				372A04211D4AF9260010D8E9 /* LoginViewController.swift */,
+				3776B8A51D9269CC00A9C9DB /* LoginByPhoneVC.swift */,
+				3776B8A61D9269CC00A9C9DB /* LoginByPhoneVC.xib */,
+				3776B8A91D92713800A9C9DB /* CodeLoginVerifyVC.swift */,
+				3776B8AA1D92713800A9C9DB /* CodeLoginVerifyVC.xib */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -857,6 +875,24 @@
 				377116151D49AE3C00008B36 /* UserCentreVC.swift */,
 			);
 			path = UserCentre;
+			sourceTree = "<group>";
+		};
+		3776B8901D9227C500A9C9DB /* ConversationList */ = {
+			isa = PBXGroup;
+			children = (
+				3776B8961D922B1800A9C9DB /* Scan */,
+			);
+			path = ConversationList;
+			sourceTree = "<group>";
+		};
+		3776B8961D922B1800A9C9DB /* Scan */ = {
+			isa = PBXGroup;
+			children = (
+				3776B8971D922B1800A9C9DB /* CodeScan.bundle */,
+				3776B8981D922B1800A9C9DB /* QQScanViewController.swift */,
+				3776B89B1D922B3500A9C9DB /* ScanResultController.swift */,
+			);
+			path = Scan;
 			sourceTree = "<group>";
 		};
 		377AB1A61D61B35800777DC7 /* ConversationVC */ = {
@@ -1489,6 +1525,7 @@
 		37BAB9691D3E1059001E4680 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				3776B8901D9227C500A9C9DB /* ConversationList */,
 				3710EC5E1D7E93C5005302E5 /* CustomerConsumeListVC */,
 				37B79B591D7D5A9100340C17 /* ProjectPlannedVC */,
 				37B79B561D7D542200340C17 /* ProjectPlanningVC */,
@@ -1832,8 +1869,10 @@
 				37BAB9A61D3E1059001E4680 /* SubscriptionTopCell.xib in Resources */,
 				37BAB9781D3E1059001E4680 /* AddFriendSearchCell.xib in Resources */,
 				37EA56951D3E0A7000D63498 /* LaunchScreen.storyboard in Resources */,
+				3776B8A81D9269CC00A9C9DB /* LoginByPhoneVC.xib in Resources */,
 				372962991D40AF6500A947B4 /* BKPasscodeView.strings in Resources */,
 				37BAB98C1D3E1059001E4680 /* coverCell.xib in Resources */,
+				3776B8AC1D92713800A9C9DB /* CodeLoginVerifyVC.xib in Resources */,
 				372480DB1D8151EF00B95C54 /* calling_card_bg@2x.png in Resources */,
 				37BAB9881D3E1059001E4680 /* CertificateCell.xib in Resources */,
 				37367B881D6C141500479E39 /* chatSectionView.xib in Resources */,
@@ -1876,6 +1915,7 @@
 				37BAB9AC1D3E1059001E4680 /* WorkCell.xib in Resources */,
 				37D46F871D6FD5D100A0BBCE /* GoodDetail.xib in Resources */,
 				37367B831D6BFED900479E39 /* chatTableViewCell.xib in Resources */,
+				3776B8991D922B1800A9C9DB /* CodeScan.bundle in Resources */,
 				37B79B511D7D48E200340C17 /* CustomerLargeCell.xib in Resources */,
 				37F70E151D8E369400C55AC8 /* GoodDetailContainer.xib in Resources */,
 				370AAEA71D49F1B3000C64D1 /* UserNameCell.xib in Resources */,
@@ -1960,6 +2000,7 @@
 				372480991D8151CD00B95C54 /* LCChatKitExample.m in Sources */,
 				37BAB9741D3E1059001E4680 /* MenuSheetView.swift in Sources */,
 				37BAB99B1D3E1059001E4680 /* typeCell.swift in Sources */,
+				3776B89C1D922B3500A9C9DB /* ScanResultController.swift in Sources */,
 				372480E61D8151EF00B95C54 /* LCCKUtil.m in Sources */,
 				37FF8EE41D90D98D00676780 /* FirstLaunchRemindVC.swift in Sources */,
 				37BAB8AD1D3E101C001E4680 /* UIColor+DD .swift in Sources */,
@@ -2037,6 +2078,7 @@
 				372480E01D8151EF00B95C54 /* LCCKLoginViewController.m in Sources */,
 				37BAB8B31D3E101C001E4680 /* UIViewController+DD.swift in Sources */,
 				37C0C3B61D66BD77002B8772 /* XHUser.swift in Sources */,
+				3776B8A71D9269CC00A9C9DB /* LoginByPhoneVC.swift in Sources */,
 				37E78AA71D4204DE007425A3 /* YepWaverView.swift in Sources */,
 				37BAB9D51D3E11B1001E4680 /* AMPopTip+Animation.m in Sources */,
 				37BAB9751D3E1059001E4680 /* AddFriendMoreCell.swift in Sources */,
@@ -2071,6 +2113,7 @@
 				37BAB8A71D3E101C001E4680 /* Array+DD.swift in Sources */,
 				3729629D1D40B9E700A947B4 /* PasswordSettingVC.swift in Sources */,
 				37278D8F1D48A4850055842E /* FormSettingVC.swift in Sources */,
+				3776B8AB1D92713800A9C9DB /* CodeLoginVerifyVC.swift in Sources */,
 				37BAB8AA1D3E101C001E4680 /* NSTimeZone+DD.swift in Sources */,
 				37BAB8BA1D3E1025001E4680 /* DDAlert.swift in Sources */,
 				37BAB9951D3E1059001E4680 /* SegmentCell.swift in Sources */,
@@ -2113,6 +2156,7 @@
 				37BAB8EE1D3E1045001E4680 /* Popover.swift in Sources */,
 				37BAB9BB1D3E1059001E4680 /* BaseViewController.swift in Sources */,
 				37B79B581D7D542F00340C17 /* ProjectPlanningVC.swift in Sources */,
+				3776B89A1D922B1800A9C9DB /* QQScanViewController.swift in Sources */,
 				372480E51D8151EF00B95C54 /* LCCKMapViewController.m in Sources */,
 				37BAB9BF1D3E1059001E4680 /* BaseChartViewController.swift in Sources */,
 				37A76FDF1D6D8CBA00572B1D /* ANStepperView.m in Sources */,

@@ -35,12 +35,19 @@ class MessageListVC: LCCKConversationListViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setCustomerCell()
         setTableView()
         showRemindNoticeIfFirstLaunch()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        
+    }
+    
+    func setCustomerCell() {
+        
+        LCChatKit.sharedInstance()
         
     }
     
