@@ -35,6 +35,7 @@ class HelperVC: BaseViewController {
     
     var pageNumber = 1
     
+    var firstLoad = true
     
     func getHelperList() {
         
@@ -50,6 +51,11 @@ class HelperVC: BaseViewController {
                     self.tableView.reloadData()
                     
                     self.tableView.mj_header.endRefreshing()
+                    
+                    if self.firstLoad == true {
+                        self.firstLoad = false
+                        self.scrollTableViewBottom()
+                    }
                 }
                 
             }
@@ -126,6 +132,9 @@ class HelperVC: BaseViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    
+    func scrollTableViewBottom() {
         guard listOfNotice.count > 0 else {return}
         let indexPath = NSIndexPath(forItem: listOfNotice.count - 1, inSection: 0)
         tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: false)
