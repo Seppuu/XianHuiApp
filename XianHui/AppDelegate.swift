@@ -88,6 +88,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
             }
             
+            //TODO:first launch
+            let launchedBefore = NSUserDefaults.standardUserDefaults().boolForKey("launchedBefore")
+            if launchedBefore  {
+                print("Not first launch.")
+            }
+            else {
+                print("First launch, setting NSUserDefault.")
+                NSUserDefaults.standardUserDefaults().setBool(true, forKey: "launchedBefore")
+            }
+            
             }, failed: { (error) in
                 
                 LCCKUtil.hideProgress()

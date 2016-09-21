@@ -234,6 +234,9 @@
 		37F70E151D8E369400C55AC8 /* GoodDetailContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F70E141D8E369400C55AC8 /* GoodDetailContainer.xib */; };
 		37F905311D69F9370078C06B /* CustomerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F9052F1D69F9370078C06B /* CustomerCell.swift */; };
 		37F905321D69F9370078C06B /* CustomerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F905301D69F9370078C06B /* CustomerCell.xib */; };
+		37FF8EE01D90D58900676780 /* NSUserDefaults+DD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FF8EDF1D90D58900676780 /* NSUserDefaults+DD.swift */; };
+		37FF8EE41D90D98D00676780 /* FirstLaunchRemindVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FF8EE31D90D98D00676780 /* FirstLaunchRemindVC.swift */; };
+		37FF8EE71D9143B200676780 /* CustomizedChatKitOther.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 37FF8EE61D9143B200676780 /* CustomizedChatKitOther.bundle */; };
 		7BF7C59FF39FAE1F05986482 /* Pods_XianHui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0677814338CEF00D20F722E0 /* Pods_XianHui.framework */; };
 /* End PBXBuildFile section */
 
@@ -512,6 +515,9 @@
 		37F70E141D8E369400C55AC8 /* GoodDetailContainer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoodDetailContainer.xib; sourceTree = "<group>"; };
 		37F9052F1D69F9370078C06B /* CustomerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerCell.swift; sourceTree = "<group>"; };
 		37F905301D69F9370078C06B /* CustomerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomerCell.xib; sourceTree = "<group>"; };
+		37FF8EDF1D90D58900676780 /* NSUserDefaults+DD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSUserDefaults+DD.swift"; sourceTree = "<group>"; };
+		37FF8EE31D90D98D00676780 /* FirstLaunchRemindVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstLaunchRemindVC.swift; sourceTree = "<group>"; };
+		37FF8EE61D9143B200676780 /* CustomizedChatKitOther.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CustomizedChatKitOther.bundle; sourceTree = "<group>"; };
 		663D87182AC2C2DAAEDADDF3 /* Pods-XianHui.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XianHui.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XianHui/Pods-XianHui.debug.xcconfig"; sourceTree = "<group>"; };
 		8DE5361F0FC88D4B133ED962 /* Pods-XianHui.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XianHui.release.xcconfig"; path = "Pods/Target Support Files/Pods-XianHui/Pods-XianHui.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -540,6 +546,7 @@
 		370AAEA81D4AF3F6000C64D1 /* ChatExample */ = {
 			isa = PBXGroup;
 			children = (
+				37FF8EE51D91439D00676780 /* CustomizedChatKit */,
 				372480931D8151CD00B95C54 /* LCChatKitExample.h */,
 				372480941D8151CD00B95C54 /* LCChatKitExample.m */,
 				372480951D8151CD00B95C54 /* LCChatKitExample+Setting.h */,
@@ -1040,6 +1047,7 @@
 				37BAB8A51D3E101C001E4680 /* UIView+DD.swift */,
 				37BAB8A61D3E101C001E4680 /* UIViewController+DD.swift */,
 				37B7914F1D51D4230032C164 /* UITableView+DD.swift */,
+				37FF8EDF1D90D58900676780 /* NSUserDefaults+DD.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1500,6 +1508,7 @@
 				37278D8D1D48A4690055842E /* FormSetting */,
 				37E78A9C1D41F2A3007425A3 /* FormVC */,
 				372962881D40A41000A947B4 /* Password */,
+				37FF8EE21D90D97400676780 /* FirstLaunchRemindVC */,
 				37DE9D661D41B6780041A26B /* MessageList */,
 				3739C2411D409D3C00222D4A /* MineVC */,
 				37B9617B1D3F5811004F6F92 /* CreateTaskVC */,
@@ -1723,6 +1732,22 @@
 			path = CustomerCell;
 			sourceTree = "<group>";
 		};
+		37FF8EE21D90D97400676780 /* FirstLaunchRemindVC */ = {
+			isa = PBXGroup;
+			children = (
+				37FF8EE31D90D98D00676780 /* FirstLaunchRemindVC.swift */,
+			);
+			path = FirstLaunchRemindVC;
+			sourceTree = "<group>";
+		};
+		37FF8EE51D91439D00676780 /* CustomizedChatKit */ = {
+			isa = PBXGroup;
+			children = (
+				37FF8EE61D9143B200676780 /* CustomizedChatKitOther.bundle */,
+			);
+			path = CustomizedChatKit;
+			sourceTree = "<group>";
+		};
 		B6931119C14E45DB42D8A126 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1838,6 +1863,7 @@
 				37367B711D6ADA2100479E39 /* CustomerCard.xib in Resources */,
 				3729D33B1D82838700CF71A0 /* Assets.xcassets in Resources */,
 				37BAB9981D3E1059001E4680 /* SingleTapCell.xib in Resources */,
+				37FF8EE71D9143B200676780 /* CustomizedChatKitOther.bundle in Resources */,
 				37B9617F1D3F583A004F6F92 /* CreateTask.storyboard in Resources */,
 				37BAB9821D3E1059001E4680 /* ConversationCell.xib in Resources */,
 				37BAB9AA1D3E1059001E4680 /* UserAvatarCell.xib in Resources */,
@@ -1935,6 +1961,7 @@
 				37BAB9741D3E1059001E4680 /* MenuSheetView.swift in Sources */,
 				37BAB99B1D3E1059001E4680 /* typeCell.swift in Sources */,
 				372480E61D8151EF00B95C54 /* LCCKUtil.m in Sources */,
+				37FF8EE41D90D98D00676780 /* FirstLaunchRemindVC.swift in Sources */,
 				37BAB8AD1D3E101C001E4680 /* UIColor+DD .swift in Sources */,
 				37E78A9E1D41F2B9007425A3 /* FormVC.swift in Sources */,
 				37BAB9931D3E1059001E4680 /* ProfileCell.swift in Sources */,
@@ -1989,6 +2016,7 @@
 				37BAB8EF1D3E1045001E4680 /* RECommonFunctions.m in Sources */,
 				37BAB9871D3E1059001E4680 /* CertificateCell.swift in Sources */,
 				372480DD1D8151EF00B95C54 /* LCCKVCardMessageCell.m in Sources */,
+				37FF8EE01D90D58900676780 /* NSUserDefaults+DD.swift in Sources */,
 				372480D81D8151EF00B95C54 /* LCCKUser.m in Sources */,
 				37D46F851D6FD46B00A0BBCE /* GoodDetailView.swift in Sources */,
 				37A76FD61D6D373300572B1D /* ProdDateSetVC.swift in Sources */,

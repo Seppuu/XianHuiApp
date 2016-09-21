@@ -45,7 +45,7 @@ class PlanningVC: UIViewController {
         
         self.getCustomList()
     }
-
+    
     func getCustomList() {
         
         NetworkManager.sharedManager.getCustomerPlanListWith() { (success, json, error) in
@@ -60,7 +60,6 @@ class PlanningVC: UIViewController {
                 else {
                     //no data
                 }
-                
                 
             }
             else {

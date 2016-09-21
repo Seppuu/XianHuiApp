@@ -36,7 +36,7 @@ class MessageListVC: LCCKConversationListViewController {
         super.viewDidLoad()
 
         setTableView()
-        
+        showRemindNoticeIfFirstLaunch()
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,6 +60,32 @@ class MessageListVC: LCCKConversationListViewController {
         self.tableView.tableHeaderView = topView
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MessageListVC.addNewNoticeType(_:)), name:NoticeComingNoti , object: nil)
+        
+    }
+    
+    //展示提示,教学等cell.如果是第一次打开app
+    func showRemindNoticeIfFirstLaunch() {
+        
+        if isFirstLaunch == true {
+            
+            let hepler = XHMessageNoti()
+            hepler.name = "助手"
+            hepler.time = "新手提示"
+            hepler.isCommonNotice = false
+            self.noticeList.append(hepler)
+            
+            let remind = XHMessageNoti()
+            remind.name = "提醒"
+            remind.time = "新手提示"
+            remind.isCommonNotice = true
+            self.noticeList.append(remind)
+            
+            self.updateTopView()
+            
+        }
+        else {
+            
+        }
         
     }
     
@@ -149,8 +175,6 @@ class MessageListVC: LCCKConversationListViewController {
         
     }
     
-   
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -223,14 +247,36 @@ extension MessageListVC {
         let notice = noticeList[indexPath.row]
         
         if notice.name == "助手" {
-            let vc = HelperVC()
-            vc.title = "助手"
-            navigationController?.pushViewController(vc, animated: true)
+            
+            if isFirstLaunch == true {
+                let vc = FirstLaunchRemindVC()
+                vc.title = "助手新手教学"
+                navigationController?.pushViewController(vc, animated: true)
+                
+            }
+            else {
+                let vc = HelperVC()
+                vc.title = "助手"
+                navigationController?.pushViewController(vc, animated: true)
+            }
+            
+            
         }
         else {
-            let vc = NoticeListVC()
-            vc.title = "提醒"
-            navigationController?.pushViewController(vc, animated: true)
+            
+            if isFirstLaunch == true {
+                let vc = FirstLaunchRemindVC()
+                vc.title = "提醒新手教学"
+                navigationController?.pushViewController(vc, animated: true)
+                
+            }
+            else {
+                let vc = NoticeListVC()
+                vc.title = "提醒"
+                navigationController?.pushViewController(vc, animated: true)
+            }
+            
+            
         }
         
     }

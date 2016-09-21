@@ -57,6 +57,7 @@ class CustomerProfileVC: UIViewController {
         self.customer.lastConsumeDate = json["last_consume_date"].string
         self.customer.cardTotal       = json["card_total"].int!
         self.customer.certNo          = json["basic"]["cert_no"].string!
+        self.customer.planned         = String(json["planed"].int!)
     }
     
     func setTableView() {
@@ -152,7 +153,13 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
             }
             else if indexPath.row == 3 {
                 cell.accessoryType = .DisclosureIndicator
-                cell.typeLabel.text = "去设置"
+                if customer.planned == "1" {
+                    cell.typeLabel.text = "已计划"
+                }
+                else {
+                    cell.typeLabel.text = "去设置"
+                }
+                
             }
             else {
                 cell.accessoryType = .DisclosureIndicator
