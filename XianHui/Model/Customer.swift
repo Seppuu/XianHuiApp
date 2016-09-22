@@ -9,6 +9,14 @@
 import UIKit
 import SwiftDate
 
+
+enum CustomerLisType:String {
+    case All = "all"
+    case Plan = "plan"
+    case Advice = "advice"
+    case Service = "service"
+}
+
 class Customer: NSObject {
     
     var id:Int!

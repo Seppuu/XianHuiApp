@@ -138,11 +138,14 @@ class ChatKitExample: LCChatKitExample {
                     title = "正在强制登录..."
                 }
                 
-                NSObject.lcck_showMessage(title, toView: viewController.view)
+                //get current viewController
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let vc = appDelegate.window?.visibleViewController!
+                NSObject.lcck_showMessage(title, toView: vc!.view)
                 let clientId = LCChatKit.sharedInstance().clientId
                 LCChatKit.sharedInstance().openWithClientId(clientId, force: force, callback: { (succeeded, error) in
                     
-                    NSObject.lcck_hideHUDForView(viewController.view)
+                    NSObject.lcck_hideHUDForView(vc!.view)
                     completionHandler(succeeded, error)
                 })
                 
