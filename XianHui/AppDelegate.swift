@@ -71,6 +71,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //LCCKUtil.showProgressText("open client ...", duration:10.0)
         
+        //登陆成功前继续显示登陆画面
+        let storyboard = UIStoryboard(name: "LaunchScreen", bundle: nil)
+        let launchVC = storyboard.instantiateViewControllerWithIdentifier("LaunchScreenVC")
+        
+        self.window?.rootViewController = launchVC
+        self.window?.makeKeyAndVisible()
+        
         ChatKitExample.invokeThisMethodAfterLoginSuccessWithClientId(clientId, success: {
             
             //LCCKUtil.hideProgress()
