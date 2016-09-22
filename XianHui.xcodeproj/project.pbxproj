@@ -64,6 +64,7 @@
 		3776B8AB1D92713800A9C9DB /* CodeLoginVerifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8A91D92713800A9C9DB /* CodeLoginVerifyVC.swift */; };
 		3776B8AC1D92713800A9C9DB /* CodeLoginVerifyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3776B8AA1D92713800A9C9DB /* CodeLoginVerifyVC.xib */; };
 		3776B8AE1D937FAC00A9C9DB /* CKSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8AD1D937FAC00A9C9DB /* CKSessionService.swift */; };
+		3776B8B21D93A45700A9C9DB /* HelperVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8B11D93A45700A9C9DB /* HelperVC.swift */; };
 		377AB1A81D61B36800777DC7 /* ConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AB1A71D61B36800777DC7 /* ConversationVC.swift */; };
 		378B17731D6C360800758C13 /* progressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378B17711D6C360800758C13 /* progressCell.swift */; };
 		378B17741D6C360800758C13 /* progressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 378B17721D6C360800758C13 /* progressCell.xib */; };
@@ -79,7 +80,6 @@
 		37A76FE31D6D8D1200572B1D /* StepperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A76FE11D6D8D1200572B1D /* StepperCell.swift */; };
 		37A76FE41D6D8D1200572B1D /* StepperCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37A76FE21D6D8D1200572B1D /* StepperCell.xib */; };
 		37B7591B1D82EA7000D03D2D /* NoticeListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B7591A1D82EA7000D03D2D /* NoticeListVC.swift */; };
-		37B791471D51C5480032C164 /* HelperVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B791461D51C5480032C164 /* HelperVC.swift */; };
 		37B791491D51C9070032C164 /* Hepler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B791481D51C9070032C164 /* Hepler.swift */; };
 		37B7914D1D51CA780032C164 /* HeplerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B7914B1D51CA780032C164 /* HeplerCell.swift */; };
 		37B7914E1D51CA780032C164 /* HeplerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37B7914C1D51CA780032C164 /* HeplerCell.xib */; };
@@ -326,6 +326,7 @@
 		3776B8A91D92713800A9C9DB /* CodeLoginVerifyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeLoginVerifyVC.swift; sourceTree = "<group>"; };
 		3776B8AA1D92713800A9C9DB /* CodeLoginVerifyVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CodeLoginVerifyVC.xib; sourceTree = "<group>"; };
 		3776B8AD1D937FAC00A9C9DB /* CKSessionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKSessionService.swift; sourceTree = "<group>"; };
+		3776B8B11D93A45700A9C9DB /* HelperVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperVC.swift; sourceTree = "<group>"; };
 		377AB1A71D61B36800777DC7 /* ConversationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationVC.swift; sourceTree = "<group>"; };
 		378B17711D6C360800758C13 /* progressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = progressCell.swift; sourceTree = "<group>"; };
 		378B17721D6C360800758C13 /* progressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = progressCell.xib; sourceTree = "<group>"; };
@@ -342,7 +343,6 @@
 		37A76FE11D6D8D1200572B1D /* StepperCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepperCell.swift; sourceTree = "<group>"; };
 		37A76FE21D6D8D1200572B1D /* StepperCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepperCell.xib; sourceTree = "<group>"; };
 		37B7591A1D82EA7000D03D2D /* NoticeListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticeListVC.swift; sourceTree = "<group>"; };
-		37B791461D51C5480032C164 /* HelperVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperVC.swift; sourceTree = "<group>"; };
 		37B791481D51C9070032C164 /* Hepler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hepler.swift; sourceTree = "<group>"; };
 		37B7914B1D51CA780032C164 /* HeplerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeplerCell.swift; sourceTree = "<group>"; };
 		37B7914C1D51CA780032C164 /* HeplerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeplerCell.xib; sourceTree = "<group>"; };
@@ -883,6 +883,7 @@
 		3776B8901D9227C500A9C9DB /* ConversationList */ = {
 			isa = PBXGroup;
 			children = (
+				37DE9D661D41B6780041A26B /* MessageList */,
 				3776B8961D922B1800A9C9DB /* Scan */,
 			);
 			path = ConversationList;
@@ -896,6 +897,23 @@
 				3776B89B1D922B3500A9C9DB /* ScanResultController.swift */,
 			);
 			path = Scan;
+			sourceTree = "<group>";
+		};
+		3776B8AF1D93A3FD00A9C9DB /* SecondTab */ = {
+			isa = PBXGroup;
+			children = (
+				3776B8B01D93A45700A9C9DB /* Hepler */,
+				37BAB9E51D3E2306001E4680 /* ContactListVC */,
+			);
+			path = SecondTab;
+			sourceTree = "<group>";
+		};
+		3776B8B01D93A45700A9C9DB /* Hepler */ = {
+			isa = PBXGroup;
+			children = (
+				3776B8B11D93A45700A9C9DB /* HelperVC.swift */,
+			);
+			path = Hepler;
 			sourceTree = "<group>";
 		};
 		377AB1A61D61B35800777DC7 /* ConversationVC */ = {
@@ -971,14 +989,6 @@
 				37B7591A1D82EA7000D03D2D /* NoticeListVC.swift */,
 			);
 			path = NoticeListVC;
-			sourceTree = "<group>";
-		};
-		37B791451D51C5300032C164 /* Hepler */ = {
-			isa = PBXGroup;
-			children = (
-				37B791461D51C5480032C164 /* HelperVC.swift */,
-			);
-			path = Hepler;
 			sourceTree = "<group>";
 		};
 		37B7914A1D51CA4F0032C164 /* HeplerCell */ = {
@@ -1529,6 +1539,7 @@
 			isa = PBXGroup;
 			children = (
 				3776B8901D9227C500A9C9DB /* ConversationList */,
+				3776B8AF1D93A3FD00A9C9DB /* SecondTab */,
 				3710EC5E1D7E93C5005302E5 /* CustomerConsumeListVC */,
 				37B79B591D7D5A9100340C17 /* ProjectPlannedVC */,
 				37B79B561D7D542200340C17 /* ProjectPlanningVC */,
@@ -1541,7 +1552,6 @@
 				372463B21D69F1040018CE37 /* MyWorkVC */,
 				377AB1A61D61B35800777DC7 /* ConversationVC */,
 				37B791511D51D7420032C164 /* ApproveVC */,
-				37B791451D51C5300032C164 /* Hepler */,
 				37B759191D82EA6100D03D2D /* NoticeListVC */,
 				372A04201D4AF9160010D8E9 /* Login */,
 				377116141D49ADC300008B36 /* UserCentre */,
@@ -1549,12 +1559,10 @@
 				37E78A9C1D41F2A3007425A3 /* FormVC */,
 				372962881D40A41000A947B4 /* Password */,
 				37FF8EE21D90D97400676780 /* FirstLaunchRemindVC */,
-				37DE9D661D41B6780041A26B /* MessageList */,
 				3739C2411D409D3C00222D4A /* MineVC */,
 				37B9617B1D3F5811004F6F92 /* CreateTaskVC */,
 				37DFD2401D5C2AC200238A86 /* MemberListVC */,
 				37B961761D3F5044004F6F92 /* TaskListVC */,
-				37BAB9E51D3E2306001E4680 /* ContactListVC */,
 				37BAB96A1D3E1059001E4680 /* Base */,
 				37BAB96F1D3E1059001E4680 /* BaseChart */,
 			);
@@ -1643,7 +1651,8 @@
 				37BAB9E61D3E2335001E4680 /* ContactListVC.swift */,
 				37BAB9EB1D3F230D001E4680 /* ContactList.storyboard */,
 			);
-			path = ContactListVC;
+			name = ContactListVC;
+			path = ../ContactListVC;
 			sourceTree = "<group>";
 		};
 		37C0C3611D66BD4A002B8772 /* Class */ = {
@@ -1683,7 +1692,8 @@
 				37DE9D691D41B6FC0041A26B /* MessageListModel.swift */,
 				37DE9D6B1D41B7310041A26B /* MessageListCell.swift */,
 			);
-			path = MessageList;
+			name = MessageList;
+			path = ../MessageList;
 			sourceTree = "<group>";
 		};
 		37DFD2401D5C2AC200238A86 /* MemberListVC */ = {
@@ -2003,6 +2013,7 @@
 				372480991D8151CD00B95C54 /* LCChatKitExample.m in Sources */,
 				37BAB9741D3E1059001E4680 /* MenuSheetView.swift in Sources */,
 				37BAB99B1D3E1059001E4680 /* typeCell.swift in Sources */,
+				3776B8B21D93A45700A9C9DB /* HelperVC.swift in Sources */,
 				3776B89C1D922B3500A9C9DB /* ScanResultController.swift in Sources */,
 				372480E61D8151EF00B95C54 /* LCCKUtil.m in Sources */,
 				37FF8EE41D90D98D00676780 /* FirstLaunchRemindVC.swift in Sources */,
@@ -2035,7 +2046,6 @@
 				37367B6F1D6AD96B00479E39 /* CustomerCardView.swift in Sources */,
 				37BAB9971D3E1059001E4680 /* SingleTapCell.swift in Sources */,
 				37BAB9AB1D3E1059001E4680 /* WorkCell.swift in Sources */,
-				37B791471D51C5480032C164 /* HelperVC.swift in Sources */,
 				37BAB8E71D3E1045001E4680 /* CYLTabBar.m in Sources */,
 				37C710DB1D825D3F000FE4DE /* FTPopOverMenu.m in Sources */,
 				3724809B1D8151CD00B95C54 /* LCCKTabBarControllerConfig.m in Sources */,

@@ -61,11 +61,8 @@ class MyWorkVC: BaseViewController,CAPSPageMenuDelegate {
         controller2.parentVC = self
         controllerArray.append(controller2)
         
-//        let controller3 = MyCustomerVC()
-//        controller3.title = "记录表"
-//        controller3.parentNavigationController = self.navigationController
-//        controller3.parentVC = self
-//        controllerArray.append(controller3)
+        
+        
         
         // Initialize scroll menu
         pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRectMake(0.0, 64, self.view.frame.width, self.view.frame.height - 64), pageMenuOptions: pageMenuParameters)

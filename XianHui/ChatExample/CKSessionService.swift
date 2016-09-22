@@ -10,6 +10,13 @@ import Foundation
 import ChatKit
 
 //ChatKit 会话服务
+
+extension LCCKSessionService {
+    
+    
+}
+
+
 class CKSessionService: LCCKSessionService {
     
 
