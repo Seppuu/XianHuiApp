@@ -22,7 +22,7 @@ NSString *const LCCKSessionServiceErrorDomain = @"LCCKSessionServiceErrorDomain"
 
 @property (nonatomic, assign, readwrite) BOOL connect;
 @property (nonatomic, assign, getter=isPlayingSound) BOOL playingSound;
-@property (nonatomic, assign, getter=isRequestingSingleSignOn) BOOL requestingSingleSignOn;
+
 
 @end
 

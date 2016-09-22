@@ -7,6 +7,9 @@
 
 #import "LCChatKitExample.h"
 #import "LCChatKitExample+Setting.h"
+#import "NSObject+LCCKHUD.h"
+
+
 
 #import "LCCKUtil.h"
 #import "LCCKUser.h"

@@ -73,6 +73,7 @@ class ChatKitExample: LCChatKitExample {
         
     }
     
+    //打开扫一扫
     class func openQRCodeVCForm(viewController:UIViewController) {
         
         let vc = QQScanViewController()
@@ -80,7 +81,7 @@ class ChatKitExample: LCChatKitExample {
         viewController.navigationController?.pushViewController(vc, animated: true)
         
     }
-
+    
     //群聊
     override class func exampleCreateGroupConversationFromViewController(viewController: UIViewController!) {
         
@@ -117,6 +118,62 @@ class ChatKitExample: LCChatKitExample {
         let navigationViewController = UINavigationController(rootViewController: contactListViewController)
         
         viewController.presentViewController(navigationViewController, animated: true, completion: nil)
+        
+    }
+    
+    //强制重连
+    override func lcck_setupForceReconect() {
+        
+        LCChatKit.sharedInstance().forceReconnectSessionBlock = {
+            
+            (aError,granted,viewController,completionHandler) in
+            
+            let isSingleSignOnOffline = (aError.code == 4111)
+            // - 用户允许重连请求，发起重连或强制登录
+            if (granted == true) {
+                var force = false
+                var title = "正在重连聊天服务..."
+                if (isSingleSignOnOffline) {
+                    force = true
+                    title = "正在强制登录..."
+                }
+                
+                NSObject.lcck_showMessage(title, toView: viewController.view)
+                let clientId = LCChatKit.sharedInstance().clientId
+                LCChatKit.sharedInstance().openWithClientId(clientId, force: force, callback: { (succeeded, error) in
+                    
+                    NSObject.lcck_hideHUDForView(viewController.view)
+                    completionHandler(succeeded, error)
+                })
+                
+                return
+            }
+            
+            // 用户拒绝了重连请求
+            // - 退回登录页面
+            LCChatKitExample.lcck_clearLocalClientInfo()
+            
+            //show intro
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            
+            appDelegate.showLoginVC()
+
+            // - 显示返回信息
+            let  code = 0
+            let errorReasonText = "not granted"
+            let errorInfo:[NSObject:AnyObject] = [
+                "code" : code,
+                NSLocalizedDescriptionKey : errorReasonText
+            ]
+            
+            let klass: AnyClass = object_getClass(self)
+            
+            let classString = NSStringFromClass(klass)
+            let error = NSError(domain: classString, code: code, userInfo: errorInfo)
+            
+            completionHandler(false, error)
+ 
+        }
         
     }
     

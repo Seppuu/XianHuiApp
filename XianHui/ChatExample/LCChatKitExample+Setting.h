@@ -22,5 +22,7 @@
 + (void)lcck_exampleChangeGroupAvatarURLsForConversationId:(NSString *)conversationId
                                          shouldInsert:(BOOL)shouldInsert;
 
+//强制重连
+- (void)lcck_setupForceReconect;
 
 @end

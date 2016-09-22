@@ -63,6 +63,7 @@
 		3776B8A81D9269CC00A9C9DB /* LoginByPhoneVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3776B8A61D9269CC00A9C9DB /* LoginByPhoneVC.xib */; };
 		3776B8AB1D92713800A9C9DB /* CodeLoginVerifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8A91D92713800A9C9DB /* CodeLoginVerifyVC.swift */; };
 		3776B8AC1D92713800A9C9DB /* CodeLoginVerifyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3776B8AA1D92713800A9C9DB /* CodeLoginVerifyVC.xib */; };
+		3776B8AE1D937FAC00A9C9DB /* CKSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8AD1D937FAC00A9C9DB /* CKSessionService.swift */; };
 		377AB1A81D61B36800777DC7 /* ConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AB1A71D61B36800777DC7 /* ConversationVC.swift */; };
 		378B17731D6C360800758C13 /* progressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378B17711D6C360800758C13 /* progressCell.swift */; };
 		378B17741D6C360800758C13 /* progressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 378B17721D6C360800758C13 /* progressCell.xib */; };
@@ -324,6 +325,7 @@
 		3776B8A61D9269CC00A9C9DB /* LoginByPhoneVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginByPhoneVC.xib; sourceTree = "<group>"; };
 		3776B8A91D92713800A9C9DB /* CodeLoginVerifyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeLoginVerifyVC.swift; sourceTree = "<group>"; };
 		3776B8AA1D92713800A9C9DB /* CodeLoginVerifyVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CodeLoginVerifyVC.xib; sourceTree = "<group>"; };
+		3776B8AD1D937FAC00A9C9DB /* CKSessionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKSessionService.swift; sourceTree = "<group>"; };
 		377AB1A71D61B36800777DC7 /* ConversationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationVC.swift; sourceTree = "<group>"; };
 		378B17711D6C360800758C13 /* progressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = progressCell.swift; sourceTree = "<group>"; };
 		378B17721D6C360800758C13 /* progressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = progressCell.xib; sourceTree = "<group>"; };
@@ -570,6 +572,7 @@
 				37C0C3611D66BD4A002B8772 /* Class */,
 				376D6D441D59C8E500F9A272 /* ChatExample.swift */,
 				37C0C3B51D66BD77002B8772 /* XHUser.swift */,
+				3776B8AD1D937FAC00A9C9DB /* CKSessionService.swift */,
 			);
 			path = ChatExample;
 			sourceTree = "<group>";
@@ -2014,6 +2017,7 @@
 				372480DA1D8151EF00B95C54 /* LCCKVCardMessage.m in Sources */,
 				37A76FD31D6D314600572B1D /* ProdDateSetTableView.swift in Sources */,
 				37BAB9891D3E1059001E4680 /* CoverAddCell.swift in Sources */,
+				3776B8AE1D937FAC00A9C9DB /* CKSessionService.swift in Sources */,
 				37BAB9851D3E1059001E4680 /* BasicInfoCell.swift in Sources */,
 				37367B861D6C13F900479E39 /* chatSectionView.swift in Sources */,
 				37BAB9911D3E1059001E4680 /* pickerCell.swift in Sources */,
