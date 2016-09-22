@@ -221,6 +221,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 public extension UIWindow {
+    //当前可见的ViewController
     public var visibleViewController: UIViewController? {
         return UIWindow.getVisibleViewControllerFrom(self.rootViewController)
     }

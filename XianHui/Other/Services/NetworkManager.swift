@@ -19,10 +19,11 @@ enum  VerifyCodeType: String{
     
 }
 
-enum UserType:String {
+enum UserLoginType:String {
     case Customer = "customer"
     case Employee = "employee"
 }
+
 
 ///网络请求基本回调
 typealias DDResultHandler = (success:Bool,json:JSON?,error:String?) -> Void
@@ -42,7 +43,7 @@ class NetworkManager {
     //MARK:用户
     
     //login
-    func loginWith(userName:String,passWord:String,usertype:UserType,agentId:Int?,completion:DDResultHandler) {
+    func loginWith(userName:String,passWord:String,usertype:UserLoginType,agentId:Int?,completion:DDResultHandler) {
         
         
         if agentId == nil {

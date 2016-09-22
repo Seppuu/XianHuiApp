@@ -11,6 +11,16 @@ import Palau
 import SwiftyJSON
 import RealmSwift
 
+//雇员
+enum UserType:String {
+    
+    case Default = "default"
+    case Manager = "manager"
+    case Market  = "market"
+    case Worker  = "worker"
+    
+}
+
 class User:NSObject {
     
     private static var sharedUser : User?
@@ -51,10 +61,12 @@ class User:NSObject {
     var avatarURL = ""
     
     var clientId = ""
+    
+    var userType = UserType.Default
 
 
     //Action
-    class func loginWith(userName:String,passWord:String,usertype:UserType ,agentId:Int?,completion:((user:User?,data:JSON?,error:String?)->())) {
+    class func loginWith(userName:String,passWord:String,usertype:UserLoginType ,agentId:Int?,completion:((user:User?,data:JSON?,error:String?)->())) {
         
         NetworkManager.sharedManager.loginWith(userName, passWord: passWord,usertype: usertype,agentId:agentId) { (success, data, error) in
             

@@ -243,7 +243,7 @@ extension LoginViewController:UITableViewDelegate,UITableViewDataSource {
             return
         }
         
-        User.loginWith(userName, passWord: passWord, usertype: UserType.Employee,agentId:self.agentId) { (user, data, error) in
+        User.loginWith(userName, passWord: passWord, usertype: UserLoginType.Employee,agentId:self.agentId) { (user, data, error) in
             
             self.showLoginHud()
             if error == nil {
