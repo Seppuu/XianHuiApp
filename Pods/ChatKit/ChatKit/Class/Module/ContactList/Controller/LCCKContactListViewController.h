@@ -44,7 +44,6 @@ typedef BOOL (^LCCKDeleteContactCallback)(UIViewController *viewController, NSSt
 
 //xianhui
 @property (nonatomic, strong) UISearchDisplayController *searchController;
-
 - (void)reSetSearchBar;
 
 - (void)setDeleteContactCallback:(LCCKDeleteContactCallback)deleteContactCallback;

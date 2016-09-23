@@ -187,7 +187,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
         searchBar.placeholder = @"搜索";
         _searchBar = searchBar;
         //xianhui
-        //self.tableView.tableHeaderView = _searchBar;
+//        self.tableView.tableHeaderView = _searchBar;
     }
     return _searchBar;
 }
@@ -720,6 +720,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 - (void) reSetSearchBar {
     
 }
+
 
 #pragma mark - UISearchDisplayDelegate
 

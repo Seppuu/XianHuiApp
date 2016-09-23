@@ -125,7 +125,7 @@ class ChatKitExample: LCChatKitExample {
     override func lcck_setupForceReconect() {
         
         LCChatKit.sharedInstance().forceReconnectSessionBlock = {
-            
+
             (aError,granted,viewController,completionHandler) in
             
             let isSingleSignOnOffline = (aError.code == 4111)
