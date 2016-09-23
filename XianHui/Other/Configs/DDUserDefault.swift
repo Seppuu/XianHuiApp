@@ -62,14 +62,6 @@ extension PalauDefaults {
         }
     }
     
-    public static var defaultTheme: PalauDefaultsEntry<String> {
-        get {
-            return value("defaultTheme").whenNil(use:DefaultThemeUrl )
-        }
-        set {
-            
-        }
-    }
     
     public static var useTouchID: PalauDefaultsEntry<Bool> {
         get {

@@ -62,7 +62,7 @@ class LoginViewController: UIViewController {
     
     var singleCellId = "SingleTapCell"
     
-    var clientIdHandler:((clientId:String)->())?
+   
 
     var hud = MBProgressHUD()
     
@@ -135,7 +135,7 @@ extension LoginViewController:UITableViewDelegate,UITableViewDataSource {
         else if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! UserNameCell
             
-            cell.textField.placeholder = "用户名"
+            cell.textField.placeholder = "手机号码"
             cell.textField.keyboardType = .Default
             cell.codeButton.alpha = 0.0
             cell.codeButtonTapHandler = {
@@ -233,7 +233,7 @@ extension LoginViewController:UITableViewDelegate,UITableViewDataSource {
         
         if userName == "" {
             
-            showHudWith("请输入用户名")
+            showHudWith("请输入手机号")
             return
         }
         
@@ -249,7 +249,7 @@ extension LoginViewController:UITableViewDelegate,UITableViewDataSource {
             if error == nil {
                 self.hideLoginHud()
                 let clientId = String(user!.clientId)
-                self.clientIdHandler?(clientId:clientId)
+                NSNotificationCenter.defaultCenter().postNotificationName(OwnSystemLoginSuccessNoti, object: clientId)
             }
             else {
                 self.hideLoginHud()

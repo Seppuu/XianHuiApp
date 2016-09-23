@@ -9,6 +9,14 @@
 import UIKit
 import CoreLocation
 
+let OwnSystemLoginSuccessNoti = "OwnSystemLoginSuccessNoti"
+
+
+
+
+
+
+
 let screenWidth = UIScreen.mainScreen().bounds.size.width
 let screenHeight = UIScreen.mainScreen().bounds.size.height
 
@@ -18,15 +26,21 @@ let BaseUrl = "http://sso.sosys.cn:8080/mybook"
 var DDBaseUrl:String {
     return Defaults.actualApiUrl.value!
 }
-let DefaultThemeUrl = "http://dingdong.sosys.cn:8080/themes/common/background/default.png"
 
 var allUserIds = [String]()
 
 ///用户登录
-let loginURL          = BaseUrl + "/rest/login"
+let loginWithPhoneURL          = BaseUrl + "/rest/loginmobile"
 
 //用户登出
 let logOutURL         = BaseUrl + "/rest/logout"
+
+//获取手机验证码
+let getPhoneCodeUrl   = BaseUrl + "/rest/loginsmsgot"
+
+//验证手机验证码
+let verifyPhoneCodeUrl   = BaseUrl + "/rest/loginsmsverify"
+
 
 //上传头像
 var updateAvatarURL:String {
@@ -54,7 +68,6 @@ var logOutERPWithQRCodeUrl:String {
 var getERPLogInStatusUrl:String {
     return DDBaseUrl + "/rest/employee/loginqrstatus"
 }
-
 
 
 /// 日报表

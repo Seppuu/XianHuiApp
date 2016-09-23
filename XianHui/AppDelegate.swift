@@ -57,14 +57,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func showLoginVC() {
         
         let loginVC = LoginViewController()
-        loginVC.clientIdHandler = {
-            (clientId) in
-            self.openLeanCloudIMWith(clientId,autoLogin:false)
-        }
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.ownSystemLoginSuccess(_:)), name: OwnSystemLoginSuccessNoti, object: nil)
         
         self.window?.rootViewController = loginVC
         self.window?.backgroundColor = UIColor.whiteColor()
         self.window?.makeKeyAndVisible()
+    }
+    
+    func ownSystemLoginSuccess(noti:NSNotification) {
+        
+        if let clientId = noti.object as? String {
+            
+            self.openLeanCloudIMWith(clientId,autoLogin:false)
+        }
+        
     }
     
     func openLeanCloudIMWith(clientId:String,autoLogin:Bool) {

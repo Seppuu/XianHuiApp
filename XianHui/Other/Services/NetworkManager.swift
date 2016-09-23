@@ -24,6 +24,11 @@ enum UserLoginType:String {
     case Employee = "employee"
 }
 
+enum PhoneCodeType:String {
+    case sms = "sms"
+    case voice = "voice"
+}
+
 
 ///网络请求基本回调
 typealias DDResultHandler = (success:Bool,json:JSON?,error:String?) -> Void
@@ -43,35 +48,32 @@ class NetworkManager {
     //MARK:用户
     
     //login
-    func loginWith(userName:String,passWord:String,usertype:UserLoginType,agentId:Int?,completion:DDResultHandler) {
+    func loginWith(mobile:String,passWord:String,usertype:UserLoginType,agentId:Int?,completion:DDResultHandler) {
         
-        
+        var dict:JSONDictionary!
         if agentId == nil {
-            let dict:JSONDictionary = [
-                "username":userName,
+            dict = [
+                "mobile":mobile,
                 "password":passWord,
                 "type"    :usertype.rawValue
             ]
-            
-            let urlString = loginURL
-            
-            baseRequestWith(urlString, dict: dict, completion: completion)
+
         }
         else {
             
-            let dict:JSONDictionary = [
-                "username":userName,
+            dict = [
+                "mobile":mobile,
                 "password":passWord,
                 "type"    :usertype.rawValue,
                 "agent_id":agentId!
             ]
             
-            let urlString = loginURL
             
-            baseRequestWith(urlString, dict: dict, completion: completion)
         }
         
+        let urlString = loginWithPhoneURL
         
+        baseRequestWith(urlString, dict: dict, completion: completion)
     }
     
     //登出
@@ -88,6 +90,37 @@ class NetworkManager {
         baseRequestWith(urlString, dict: dict, completion: completion)
     }
     
+    
+    //获取手机验证码
+    func getPhoneCodeWith(mobile:String,usertype:UserLoginType,codeType:PhoneCodeType,completion:DDResultHandler) {
+        
+        let dict:JSONDictionary = [
+            "mobile":mobile,
+            "type":usertype.rawValue,
+            "sms_type":codeType.rawValue
+        ]
+        
+        let urlString = getPhoneCodeUrl
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+        
+    }
+    
+    
+    //验证手机验证码
+    func verifyPhoneCodeWith(mobile:String,usertype:UserLoginType,code:String,completion:DDResultHandler) {
+        
+        let dict:JSONDictionary = [
+            "mobile":mobile,
+            "type":usertype.rawValue,
+            "sms_code":code
+        ]
+        
+        let urlString = verifyPhoneCodeUrl
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+        
+    }
     
     func updateUserAvatarWith(avatar:UIImage,completion:DDResultHandler) {
         

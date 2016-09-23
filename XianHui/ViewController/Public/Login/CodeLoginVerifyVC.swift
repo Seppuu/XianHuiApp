@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SwiftyJSON
+import MBProgressHUD
 
 class CodeLoginVerifyVC: UIViewController {
     
@@ -17,20 +19,36 @@ class CodeLoginVerifyVC: UIViewController {
     
     @IBOutlet weak var phoneLabel: UILabel!
     
-    
     @IBOutlet weak var codeTextField: BorderTextField!
-
+    
+    @IBOutlet weak var phoneComingLabel: UILabel!
+    
+    @IBOutlet weak var PhoneCallLabel: UILabel!
+    
+    @IBOutlet weak var callCountLabel: UILabel!
+    
+    private var callMeInSeconds = 60 //60s
+    
+    private lazy var callMeTimer: NSTimer = {
+        let timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(CodeLoginVerifyVC.tryCallMe(_:)), userInfo: nil, repeats: true)
+        return timer
+    }()
+    
+    var agentId:Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "验证码"
-
         phoneLabel.text = mobile
-        
         codeTextField.placeholder = " "
         codeTextField.backgroundColor = UIColor.whiteColor()
         codeTextField.delegate = self
         codeTextField.addTarget(self, action: #selector(CodeLoginVerifyVC.textFieldDidChange(_:)), forControlEvents: .EditingChanged)
+        
+        phoneComingLabel.alpha = 0.0
+        PhoneCallLabel.alpha = 1.0
+        callCountLabel.alpha = 1.0
         
     }
 
@@ -46,7 +64,7 @@ class CodeLoginVerifyVC: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
+        callMeTimer.fire()
         codeTextField.becomeFirstResponder()
     }
     
@@ -59,41 +77,168 @@ class CodeLoginVerifyVC: UIViewController {
             
         }
     }
+    
+    func tryCallMe(timer:NSTimer){
+        
+        if callMeInSeconds > 1 {
+            
+            UIView.performWithoutAnimation {
+                self.callCountLabel.text = String(self.callMeInSeconds) + "秒"
+                self.callCountLabel.layoutIfNeeded()
+            }
+            
+        } else {
+            UIView.performWithoutAnimation {
+                
+                self.callCountLabel.alpha = 0.0
+                
+                self.callCountLabel.layoutIfNeeded()
+            }
+            
+            //call code phone
+            timer.invalidate()
+            phoneComingLabel.alpha = 1.0
+            PhoneCallLabel.alpha = 0.0
+            callCountLabel.alpha = 0.0
+            CallMe()
+        }
+        
+        if (callMeInSeconds > 1) {
+            callMeInSeconds -= 1
+        }
+        
+    }
+    
+    func CallMe() {
+        
+        NetworkManager.sharedManager.getPhoneCodeWith(mobile, usertype: .Employee, codeType: .voice) { (success, json, error) in
+            
+            if success == true {
+                
+                
+                
+            }
+            else {
+                
+                //TODO:电话失败
+            }
+            
+        }
+        
+    }
+
+    
+    var hud = MBProgressHUD()
+    
+    func showHudWith(text:String) {
+        
+        hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        hud.mode = .Text
+        hud.labelText = text
+        hud.hide(true, afterDelay: 2.0)
+    }
+    
+    func showLoginHud() {
+        
+        hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        hud.mode = .Indeterminate
+    }
+    
+    func hideLoginHud() {
+        hud.hide(true)
+        hud = MBProgressHUD()
+    }
 
     
     private func tryLogin(smsCode:String) {
         
         codeTextField.resignFirstResponder()
         
-        //TODO:code login
-        //        User.signUpOrLogin(with: mobile, smsCode: smsCode) {[weak self] (user, error) in
-        //
-        //            if (error == nil) {
-        //                //print("登录成功")
-        //
-        //                //检测用户是否有姓名,如果没有,则是第一次注册.前往.信息页面.
-        //
-        //                if (user?.firstName == "") {
-        //
-        //                    self?.performSegueWithIdentifier("addUserInfo", sender: nil)
-        //
-        //                }
-        //                else {
-        //                    //是已经注册用户,进入主页面
-        //                    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
-        //                        appDelegate.startMainStory()
-        //                    }
-        //                }
-        //
-        //            }
-        //            else {
-        //                //TODO:错误提示,无效的验证码之类.
-        //                DDAlert.alert(title: "提示", message:error, dismissTitle:"OK", inViewController: self, withDismissAction: nil)
-        //            }
-        //        }
+        User.loginWithCode(mobile, code: smsCode, usertype: UserLoginType.Employee) { (user, data, error) in
+            
+            self.showLoginHud()
+            if error == nil {
+                self.hideLoginHud()
+                self.callMeTimer.invalidate()
+                let clientId = String(user!.clientId)
+                
+                NSNotificationCenter.defaultCenter().postNotificationName(OwnSystemLoginSuccessNoti, object: clientId)
+            }
+            else {
+                self.hideLoginHud()
+                //TODO:错误分类
+                if let errorCode = data!["errorCode"].string {
+                    
+                    if errorCode == "1002" {
+                        
+                        //让用户选择门店
+                        self.makeAgentListWith(data!)
+                        
+                        return
+                    }
+                    else {
+                        
+                    }
+                    
+                }
+                
+                let textError = error!
+                self.showHudWith(textError)
+                self.agentId = nil
+            }
+            
+            
+        }
+
+    }
+    
+    
+    func makeAgentListWith(data:JSON) {
         
+        var list = [Agent]()
+        
+        if let agentList = data["agent_list"].array {
+            
+            for agent in agentList {
+                
+                let a = Agent()
+                a.name = agent["agent_name"].string!
+                a.id = agent["agent_id"].string!
+                
+                list.append(a)
+            }
+            
+            self.showAgentListAlertViewWith(list)
+            
+        }
+        else {
+            
+        }
         
     }
+    
+    func showAgentListAlertViewWith(agentList:[Agent]) {
+        
+//        let alert = UIAlertController(title: "选择门店", message: "您的账号目前属于多个门店", preferredStyle: .ActionSheet)
+//        
+//        for agent in agentList {
+//            
+//            
+//            let action = UIAlertAction(title: agent.name, style: .Default, handler: { (alert) in
+//                
+//                self.agentId = agent.id.toInt()
+//                
+//                self.tryLogin()
+//            })
+//            
+//            alert.addAction(action)
+//        }
+//        
+//        self.presentViewController(alert, animated: true, completion: nil)
+//        
+    }
+    
+    
     
     func filterError(error: NSError?) -> Bool{
         if error != nil {

@@ -111,21 +111,18 @@ class LoginByPhoneVC: UIViewController {
             return
         }
         
-        //        NetworkManager.sharedManager.requestVerifyCodeWith(.sms, phone: mobile) { (success,_,error) in
-        //
-        //
-        //            if success {
-        //
-        //                self.showLoginVerifyMobile()
-        //            }
-        //            else {
-        //
-        //                DDAlert.alert(title: "提示", message:error! , dismissTitle: "OK", inViewController: self, withDismissAction: nil)
-        //            }
-        //            
-        //        }
-        
-        showLoginVerifyMobile()
+        NetworkManager.sharedManager.getPhoneCodeWith(mobile, usertype: UserLoginType.Employee, codeType: PhoneCodeType.sms) { (success, json, error) in
+            
+            if success {
+                
+                self.showLoginVerifyMobile()
+            }
+            else {
+                
+                DDAlert.alert(title: "提示", message:error! , dismissTitle: "OK", inViewController: self, withDismissAction: nil)
+            }
+            
+        }
         
     }
     

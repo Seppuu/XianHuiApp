@@ -53,8 +53,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fhj-LQ-VuL" userLabel="codeVerifyView">
-                                <frame key="frameInset" minX="253" minY="149" width="94" height="40"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fhj-LQ-VuL" userLabel="codeVerifyView">
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="11" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="验证码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RV5-EW-Nic">
                                         <constraints>
@@ -118,8 +117,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qzT-An-Bdc" userLabel="Verify CodeTexField" customClass="BorderTextField" customModule="XianHui" customModuleProvider="target">
-                                <frame key="frameInset" minX="20" minY="128" width="560" height="55"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qzT-An-Bdc" userLabel="Verify CodeTexField" customClass="BorderTextField" customModule="XianHui" customModuleProvider="target">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="eJj-Zz-biR"/>
                                 </constraints>
