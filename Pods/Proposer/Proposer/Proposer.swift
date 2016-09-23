@@ -10,6 +10,8 @@ import Foundation
 import AVFoundation
 import Photos
 import AddressBook
+import Contacts
+import EventKit
 import CoreLocation
 
 public enum PrivateResource {
@@ -17,6 +19,8 @@ public enum PrivateResource {
     case Camera
     case Microphone
     case Contacts
+    case Reminders
+    case Calendar
 
     public enum LocationUsage {
         case WhenInUse
@@ -34,6 +38,10 @@ public enum PrivateResource {
             return AVAudioSession.sharedInstance().recordPermission() == .Undetermined
         case .Contacts:
             return ABAddressBookGetAuthorizationStatus() == .NotDetermined
+        case .Reminders:
+            return EKEventStore.authorizationStatusForEntityType(.Reminder) == .NotDetermined
+        case .Calendar:
+            return EKEventStore.authorizationStatusForEntityType(.Event) == .NotDetermined
         case .Location:
             return CLLocationManager.authorizationStatus() == .NotDetermined
         }
@@ -49,6 +57,10 @@ public enum PrivateResource {
             return AVAudioSession.sharedInstance().recordPermission() == .Granted
         case .Contacts:
             return ABAddressBookGetAuthorizationStatus() == .Authorized
+        case .Reminders:
+            return EKEventStore.authorizationStatusForEntityType(.Reminder) == .Authorized
+        case .Calendar:
+            return EKEventStore.authorizationStatusForEntityType(.Event) == .Authorized
         case .Location(let usage):
             switch usage {
             case .WhenInUse:
@@ -79,6 +91,12 @@ public func proposeToAccess(resource: PrivateResource, agreed successAction: Pro
 
     case .Contacts:
         proposeToAccessContacts(agreed: successAction, rejected: failureAction)
+
+    case .Reminders:
+        proposeToAccessEventForEntityType(.Reminder, agreed: successAction, rejected: failureAction)
+
+    case .Calendar:
+        proposeToAccessEventForEntityType(.Event, agreed: successAction, rejected: failureAction)
 
     case .Location(let usage):
         proposeToAccessLocation(usage, agreed: successAction, rejected: failureAction)
@@ -116,14 +134,14 @@ private func proposeToAccessMicrophone(agreed successAction: ProposerAction, rej
 
 private func proposeToAccessContacts(agreed successAction: ProposerAction, rejected failureAction: ProposerAction) {
 
-    switch ABAddressBookGetAuthorizationStatus() {
-
-    case .Authorized:
-        successAction()
-
-    case .NotDetermined:
-        if let addressBook: ABAddressBook = ABAddressBookCreateWithOptions(nil, nil)?.takeRetainedValue() {
-            ABAddressBookRequestAccessWithCompletion(addressBook, { granted, error in
+    if #available(iOS 9.0, *) {
+        switch CNContactStore.authorizationStatusForEntityType(.Contacts) {
+            
+        case .Authorized:
+            successAction()
+            
+        case .NotDetermined:
+            CNContactStore().requestAccessForEntityType(.Contacts) { granted, error in
                 dispatch_async(dispatch_get_main_queue()) {
                     if granted {
                         successAction()
@@ -131,9 +149,52 @@ private func proposeToAccessContacts(agreed successAction: ProposerAction, rejec
                         failureAction()
                     }
                 }
-            })
+            }
+            
+        default:
+            failureAction()
         }
 
+    } else {
+        switch ABAddressBookGetAuthorizationStatus() {
+
+        case .Authorized:
+            successAction()
+
+        case .NotDetermined:
+            if let addressBook: ABAddressBook = ABAddressBookCreateWithOptions(nil, nil)?.takeRetainedValue() {
+                ABAddressBookRequestAccessWithCompletion(addressBook) { granted, error in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if granted {
+                            successAction()
+                        } else {
+                            failureAction()
+                        }
+                    }
+                }
+            }
+            
+        default:
+            failureAction()
+        }
+    }
+}
+
+private func proposeToAccessEventForEntityType(entityYype: EKEntityType, agreed successAction: ProposerAction, rejected failureAction: ProposerAction) {
+
+    switch EKEventStore.authorizationStatusForEntityType(entityYype) {
+    case .Authorized:
+        successAction()
+    case .NotDetermined:
+        EKEventStore().requestAccessToEntityType(entityYype) { granted, error in
+            dispatch_async(dispatch_get_main_queue()) {
+                if granted {
+                    successAction()
+                } else {
+                    failureAction()
+                }
+            }
+        }
     default:
         failureAction()
     }

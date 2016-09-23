@@ -18,16 +18,16 @@ extension UIImage {
         let ctx = UIGraphicsGetCurrentContext()
         let area = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
         
-        CGContextScaleCTM(ctx, 1, -1)
-        CGContextTranslateCTM(ctx, 0, -area.size.height)
-        CGContextSetBlendMode(ctx, .Multiply)
-        CGContextSetAlpha(ctx, value);
-        CGContextDrawImage(ctx, area, self.CGImage);
+        CGContextScaleCTM(ctx!, 1, -1)
+        CGContextTranslateCTM(ctx!, 0, -area.size.height)
+        CGContextSetBlendMode(ctx!, .Multiply)
+        CGContextSetAlpha(ctx!, value);
+        CGContextDrawImage(ctx!, area, self.CGImage!);
         
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return newImage
+        return newImage!
     }
     
     
@@ -36,13 +36,13 @@ extension UIImage {
         UIGraphicsBeginImageContext(rect.size)
         let context = UIGraphicsGetCurrentContext()
         
-        CGContextSetFillColorWithColor(context, color.CGColor)
-        CGContextFillRect(context, rect)
+        CGContextSetFillColorWithColor(context!, color.CGColor)
+        CGContextFillRect(context!, rect)
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return image
+        return image!
     }
     
 

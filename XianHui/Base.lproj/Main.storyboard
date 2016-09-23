@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -14,9 +15,9 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -31,11 +32,10 @@
                         <viewControllerLayoutGuide type="bottom" id="V2i-gT-1zH"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="IO7-SH-ja6">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="手机号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xNd-fu-U7T" customClass="BorderTextField" customModule="XianHui" customModuleProvider="target">
-                                <rect key="frame" x="20" y="86" width="565" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="Swj-IE-aOq"/>
                                 </constraints>
@@ -43,7 +43,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
-                                        <color key="value" red="0.83440896740000003" green="0.83440896740000003" blue="0.83440896740000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="value" red="0.83440896740000003" green="0.83440896740000003" blue="0.83440896740000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
                                         <real key="value" value="1"/>
@@ -53,11 +53,10 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fhj-LQ-VuL" userLabel="codeVerifyView">
-                                <rect key="frame" x="253" y="149" width="94" height="40"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fhj-LQ-VuL" userLabel="codeVerifyView">
+                                <frame key="frameInset" minX="253" minY="149" width="94" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="11" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="验证码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RV5-EW-Nic">
-                                        <rect key="frame" x="0.0" y="0.0" width="76" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="76" id="3oY-8m-Ds0"/>
                                             <constraint firstAttribute="width" constant="76" id="GDN-e9-LCQ"/>
@@ -65,11 +64,10 @@
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="bvE-Vj-uWF"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                        <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" tag="12" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="codeArrow" translatesAutoresizingMaskIntoConstraints="NO" id="k56-UC-2HA">
-                                        <rect key="frame" x="78" y="1" width="15" height="39"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="39" id="15b-c4-Uwa"/>
                                             <constraint firstAttribute="width" constant="15" id="2ND-7h-oIs"/>
@@ -88,7 +86,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="fhj-LQ-VuL" firstAttribute="top" secondItem="xNd-fu-U7T" secondAttribute="bottom" constant="8" id="UGI-AG-qnz"/>
                             <constraint firstItem="xNd-fu-U7T" firstAttribute="leading" secondItem="IO7-SH-ja6" secondAttribute="leading" constant="20" id="aUz-m6-h4b"/>
@@ -117,11 +115,11 @@
                         <viewControllerLayoutGuide type="bottom" id="T5y-5K-tHV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ltW-ta-xfM">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qzT-An-Bdc" userLabel="Verify CodeTexField" customClass="BorderTextField" customModule="XianHui" customModuleProvider="target">
-                                <rect key="frame" x="20" y="128" width="560" height="55"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qzT-An-Bdc" userLabel="Verify CodeTexField" customClass="BorderTextField" customModule="XianHui" customModuleProvider="target">
+                                <frame key="frameInset" minX="20" minY="128" width="560" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="eJj-Zz-biR"/>
                                 </constraints>
@@ -129,7 +127,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
-                                        <color key="value" red="0.83440896740000003" green="0.83440896740000003" blue="0.83440896740000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="value" red="0.83440896740000003" green="0.83440896740000003" blue="0.83440896740000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
                                         <real key="value" value="1"/>
@@ -137,17 +135,16 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+86 186 5280 5163" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nsD-c5-DsH" userLabel="phoneNumberLabel">
-                                <rect key="frame" x="150" y="84" width="300" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="3xH-AB-wSW"/>
                                     <constraint firstAttribute="width" constant="300" id="8Sm-33-AUI"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="24"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="qzT-An-Bdc" secondAttribute="trailing" constant="20" id="0F6-xv-Tfo"/>
                             <constraint firstItem="qzT-An-Bdc" firstAttribute="centerX" secondItem="ltW-ta-xfM" secondAttribute="centerX" id="9mM-hJ-4KU"/>

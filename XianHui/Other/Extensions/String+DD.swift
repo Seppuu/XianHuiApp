@@ -73,7 +73,7 @@ extension String {
     
     var md5: String! {
         
-        return self.md5()
+        return self.md5
     }
     
     

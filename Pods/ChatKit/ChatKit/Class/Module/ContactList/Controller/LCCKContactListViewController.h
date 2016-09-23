@@ -42,8 +42,8 @@ typedef BOOL (^LCCKDeleteContactCallback)(UIViewController *viewController, NSSt
 @property (nonatomic, copy) NSSet<LCCKContact *> *contacts;
 @property (nonatomic, copy) NSSet<NSString *> *userIds;
 
+//xianhui
 @property (nonatomic, strong) UISearchDisplayController *searchController;
-
 
 - (void)reSetSearchBar;
 

@@ -37,6 +37,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+//xianhui
 //@property (nonatomic, strong) UISearchDisplayController *searchController;
 #pragma clang diagnostic pop
 @property (nonatomic, copy) NSArray *searchContacts;
@@ -207,6 +208,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"联系人";
+    //xianhui
     //self.tableView.tableHeaderView = self.searchBar;
     self.tableView.tableFooterView = [[UIView alloc] init];
     NSBundle *bundle = [NSBundle bundleForClass:[LCChatKit class]];

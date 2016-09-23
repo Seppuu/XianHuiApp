@@ -13,8 +13,7 @@
 /*!
  * LCCKSessionService error demain
  */
-FOUNDATION_EXTERN NSString *const LCCKSessionServiceErrorDomain;
-
+FOUNDATION_EXTERN NSString *const LCCKSessionServiceErrorDemain;
 
 @interface LCCKSessionService : LCCKSingleton <LCCKSessionService>
 
@@ -31,11 +30,5 @@ FOUNDATION_EXTERN NSString *const LCCKSessionServiceErrorDomain;
 @property (nonatomic, assign, readonly) BOOL connect;
 
 - (void)reconnectForViewController:(UIViewController *)reconnectForViewController callback:(LCCKBooleanResultBlock)aCallback;
-
-
-//xianhui
-
-@property (nonatomic, assign, getter=isRequestingSingleSignOn) BOOL requestingSingleSignOn;
-- (void)requestForceSingleSignOnAuthorizationWithCallback:(LCCKRequestAuthorizationBoolResultBlock)callback;
 
 @end

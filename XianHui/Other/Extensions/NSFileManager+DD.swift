@@ -35,7 +35,7 @@ extension NSFileManager {
         let dingDongDocsURL = ddDocsURL().URLByAppendingPathComponent("DingDong", isDirectory: true)
         
         do {
-            try fileManager.createDirectoryAtURL(dingDongDocsURL, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectoryAtURL(dingDongDocsURL!, withIntermediateDirectories: true, attributes: nil)
             return dingDongDocsURL
         } catch _ {
             
@@ -53,7 +53,7 @@ extension NSFileManager {
         let schoolDocsURL = ddDingDongDocsURL()!.URLByAppendingPathComponent("School", isDirectory: true)
         
         do {
-            try fileManager.createDirectoryAtURL(schoolDocsURL, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectoryAtURL(schoolDocsURL!, withIntermediateDirectories: true, attributes: nil)
             return schoolDocsURL
         } catch _ {
             
@@ -72,7 +72,7 @@ extension NSFileManager {
         let makeLessonDocsURL = ddSchoolDocsURL()!.URLByAppendingPathComponent("MakeLesson", isDirectory: true)
         
         do {
-            try fileManager.createDirectoryAtURL(makeLessonDocsURL, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectoryAtURL(makeLessonDocsURL!, withIntermediateDirectories: true, attributes: nil)
             return makeLessonDocsURL
         } catch _ {
             
@@ -90,7 +90,7 @@ extension NSFileManager {
         let recordsDocsURL = ddMakeLessonDocsURL()!.URLByAppendingPathComponent("Records", isDirectory: true)
         
         do {
-            try fileManager.createDirectoryAtURL(recordsDocsURL, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectoryAtURL(recordsDocsURL!, withIntermediateDirectories: true, attributes: nil)
             return recordsDocsURL
         } catch _ {
             
@@ -108,7 +108,7 @@ extension NSFileManager {
         let photosDocsURL = ddMakeLessonDocsURL()!.URLByAppendingPathComponent("Photos", isDirectory: true)
         
         do {
-            try fileManager.createDirectoryAtURL(photosDocsURL, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectoryAtURL(photosDocsURL!, withIntermediateDirectories: true, attributes: nil)
             return photosDocsURL
         } catch _ {
             
@@ -129,7 +129,7 @@ extension NSFileManager {
         let transferDocsURL = ddMakeLessonDocsURL()!.URLByAppendingPathComponent("Transfer", isDirectory: true)
         
         do {
-            try fileManager.createDirectoryAtURL(transferDocsURL, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectoryAtURL(transferDocsURL!, withIntermediateDirectories: true, attributes: nil)
             return transferDocsURL
         } catch _ {
             
@@ -149,7 +149,7 @@ extension NSFileManager {
         let samplesArry = ddMakeLessonDocsURL()!.URLByAppendingPathComponent("SamplesArry", isDirectory: true)
         
         do {
-            try fileManager.createDirectoryAtURL(samplesArry, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectoryAtURL(samplesArry!, withIntermediateDirectories: true, attributes: nil)
             return samplesArry
         } catch _ {
             
@@ -180,7 +180,7 @@ extension NSFileManager {
         let lessonFileURL = ddRecordsDocsURL()!.URLByAppendingPathComponent(uuidName, isDirectory: true)
         
         do {
-            try fileManager.createDirectoryAtURL(lessonFileURL, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectoryAtURL(lessonFileURL!, withIntermediateDirectories: true, attributes: nil)
             return lessonFileURL
         }catch _ {
             
@@ -216,7 +216,7 @@ extension NSFileManager {
         let myAlbumsDocsURL = ddSchoolDocsURL()!.URLByAppendingPathComponent("MyAlbums", isDirectory: true)
         
         do {
-            try fileManager.createDirectoryAtURL(myAlbumsDocsURL, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectoryAtURL(myAlbumsDocsURL!, withIntermediateDirectories: true, attributes: nil)
             return myAlbumsDocsURL
         } catch _ {
             
@@ -235,7 +235,7 @@ extension NSFileManager {
         let albumIndexFileURL = ddMyAlbumsDocsURL()!.URLByAppendingPathComponent("Album\(index)", isDirectory: true)
         
         do {
-            try fileManager.createDirectoryAtURL(albumIndexFileURL, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectoryAtURL(albumIndexFileURL!, withIntermediateDirectories: true, attributes: nil)
             return albumIndexFileURL
         }catch _ {
             
@@ -255,7 +255,7 @@ extension NSFileManager {
         let albumAudiosFileURL = ddAlbumFileURL(index)!.URLByAppendingPathComponent("Audios", isDirectory: true)
         
         do {
-            try fileManager.createDirectoryAtURL(albumAudiosFileURL, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectoryAtURL(albumAudiosFileURL!, withIntermediateDirectories: true, attributes: nil)
             return albumAudiosFileURL
         }catch _ {
             
@@ -274,7 +274,7 @@ extension NSFileManager {
         let albumImagesFileURL = ddAlbumFileURL(index)!.URLByAppendingPathComponent("Images", isDirectory: true)
         
         do {
-            try fileManager.createDirectoryAtURL(albumImagesFileURL, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectoryAtURL(albumImagesFileURL!, withIntermediateDirectories: true, attributes: nil)
             return albumImagesFileURL
         }catch _ {
             

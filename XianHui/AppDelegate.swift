@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if currentClientId != "" {
             
             User.setAlluserId()
-            self.openLeanCloudIMWith(currentClientId)
+            self.openLeanCloudIMWith(currentClientId,autoLogin:true)
         }
         else {
             
@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let loginVC = LoginViewController()
         loginVC.clientIdHandler = {
             (clientId) in
-            self.openLeanCloudIMWith(clientId)
+            self.openLeanCloudIMWith(clientId,autoLogin:false)
         }
         
         self.window?.rootViewController = loginVC
@@ -67,16 +67,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
     }
     
-    func openLeanCloudIMWith(clientId:String) {
+    func openLeanCloudIMWith(clientId:String,autoLogin:Bool) {
         
         //LCCKUtil.showProgressText("open client ...", duration:10.0)
         
         //登陆成功前继续显示登陆画面
-        let storyboard = UIStoryboard(name: "LaunchScreen", bundle: nil)
-        let launchVC = storyboard.instantiateViewControllerWithIdentifier("LaunchScreenVC")
+        if autoLogin == true {
+            let storyboard = UIStoryboard(name: "LaunchScreen", bundle: nil)
+            let launchVC = storyboard.instantiateViewControllerWithIdentifier("LaunchScreenVC")
+            
+            self.window?.rootViewController = launchVC
+            self.window?.makeKeyAndVisible()
+        }
+        else {
+            
+        }
         
-        self.window?.rootViewController = launchVC
-        self.window?.makeKeyAndVisible()
         
         ChatKitExample.invokeThisMethodAfterLoginSuccessWithClientId(clientId, success: {
             

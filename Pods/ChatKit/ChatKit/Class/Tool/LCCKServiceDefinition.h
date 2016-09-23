@@ -37,7 +37,6 @@ typedef void (^LCCKForceReconnectSessionBlock)(NSError *error, BOOL granted, __k
 @property (nonatomic, copy, readonly) NSString *clientId;
 @property (nonatomic, strong, readonly) AVIMClient *client;
 @property (nonatomic, assign) BOOL disableSingleSignOn;
-//xianhui
 @property (nonatomic, copy) LCCKForceReconnectSessionBlock forceReconnectSessionBlock;
 
 /*!
