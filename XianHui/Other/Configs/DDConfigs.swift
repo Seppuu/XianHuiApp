@@ -12,17 +12,13 @@ import CoreLocation
 let OwnSystemLoginSuccessNoti = "OwnSystemLoginSuccessNoti"
 
 
-
-
-
-
-
 let screenWidth = UIScreen.mainScreen().bounds.size.width
 let screenHeight = UIScreen.mainScreen().bounds.size.height
 
 let DDTimeNeverReach = 12000
 
 let BaseUrl = "http://sso.sosys.cn:8080/mybook"
+let XHPublicKey = "1addfcf4296d60f0f8e0c81cea87a099"
 var DDBaseUrl:String {
     return Defaults.actualApiUrl.value!
 }
@@ -40,6 +36,10 @@ let getPhoneCodeUrl   = BaseUrl + "/rest/loginsmsgot"
 
 //验证手机验证码
 let verifyPhoneCodeUrl   = BaseUrl + "/rest/loginsmsverify"
+
+//更新密码
+let updatePassWordUrl = BaseUrl + "/rest/changeloginpassword"
+
 
 
 //上传头像

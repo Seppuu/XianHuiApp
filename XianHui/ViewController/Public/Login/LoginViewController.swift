@@ -93,8 +93,24 @@ class LoginViewController: UIViewController {
         let singleTapCellNib = UINib(nibName: singleCellId, bundle: nil)
         tableView.registerNib(singleTapCellNib, forCellReuseIdentifier: singleCellId)
         
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 20))
-        tableView.tableFooterView = footerView
+        setFooterView()
+    }
+    
+    
+    func setFooterView() {
+        let label = UILabel(frame: CGRect(x: 15, y: 0, width: screenWidth, height: 20))
+        
+        label.font = UIFont.systemFontOfSize(12)
+        label.textColor = UIColor.lightGrayColor()
+        label.textAlignment = .Left
+        label.text = "提示:从MyBook激活后,初次登录的密码是手机号码!"
+        tableView.tableFooterView = label
+        
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
     }
 }
@@ -209,13 +225,13 @@ extension LoginViewController:UITableViewDelegate,UITableViewDataSource {
         hud.hide(true, afterDelay: 2.0)
     }
     
-    func showLoginHud() {
+    func showHud() {
         
         hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
         hud.mode = .Indeterminate
     }
     
-    func hideLoginHud() {
+    func hideHud() {
         hud.hide(true)
         hud = MBProgressHUD()
     }
@@ -245,29 +261,43 @@ extension LoginViewController:UITableViewDelegate,UITableViewDataSource {
         
         User.loginWith(userName, passWord: passWord, usertype: UserLoginType.Employee,agentId:self.agentId) { (user, data, error) in
             
-            self.showLoginHud()
+            self.showHud()
             if error == nil {
-                self.hideLoginHud()
-                let clientId = String(user!.clientId)
-                NSNotificationCenter.defaultCenter().postNotificationName(OwnSystemLoginSuccessNoti, object: clientId)
-            }
-            else {
-                self.hideLoginHud()
-                //TODO:错误分类
-                if let errorCode = data!["errorCode"].string {
-                    
-                    if errorCode == "1002" {
-                        
-                        //让用户选择门店
-                        self.makeAgentListWith(data!)
-                        
-                        return
+                self.hideHud()
+                
+                //检车是否是默认密码,如果是,需要强制修改.否则无法登陆
+                if let no = data!["init_login_password"].int {
+                    if no == 1 {
+                        self.showChangePassWordAlert()
                     }
                     else {
-                        
+                        let clientId = String(user!.clientId)
+                        NSNotificationCenter.defaultCenter().postNotificationName(OwnSystemLoginSuccessNoti, object: clientId)
                     }
+                }
+                else {
                     
                 }
+                
+                
+            }
+            else {
+                self.hideHud()
+                //TODO:错误分类
+//                if let errorCode = data!["errorCode"].string {
+//                    
+//                    if errorCode == "1002" {
+//                        
+//                        //让用户选择门店
+//                        self.makeAgentListWith(data!)
+//                        
+//                        return
+//                    }
+//                    else {
+//                        
+//                    }
+//                    
+//                }
                 
                 let textError = error!
                 self.showHudWith(textError)
@@ -321,6 +351,78 @@ extension LoginViewController:UITableViewDelegate,UITableViewDataSource {
         self.presentViewController(alert, animated: true, completion: nil)
         
     }
+    
+    
+    func showChangePassWordAlert() {
+        
+        let title = "提示"
+        let message = "初次登录请更换默认密码"
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        
+        alert.addTextFieldWithConfigurationHandler { (textField) in
+            
+            textField.placeholder = "新密码"
+        }
+        
+        let passWordTextField = alert.textFields?.first!
+        
+        let submitButton = UIAlertAction(title: "确认", style: .Default) { (action) in
+            
+            let password = passWordTextField?.text
+            
+            self.updatePassWord(with: password!)
+            
+        }
+        
+        alert.addAction(submitButton)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
+    
+    
+    func updatePassWord(with password:String) {
+        
+        
+        if password == "" {
+            //show hud password is ""
+             showHudWith("请输入新的密码")
+            
+            //show alert anagin
+            self.showChangePassWordAlert()
+        }
+        else {
+            //update password
+            let indexPath0 = NSIndexPath(forRow: 1, inSection: 0)
+            let cell = tableView.cellForRowAtIndexPath(indexPath0) as! UserNameCell
+            let userName = cell.textField.text!
+            showHud()
+            NetworkManager.sharedManager.updatePassWordWith(userName, usertype: .Employee, passWord: password, completion: { (success, json, error) in
+                
+                if success == true {
+                    self.hideHud()
+                    self.showHudWith("修改成功,请再次登录")
+                    let indexPath1 = NSIndexPath(forRow: 2, inSection: 0)
+                    let cell2 = self.tableView.cellForRowAtIndexPath(indexPath1) as! UserNameCell
+                    cell2.textField.text = ""
+                }
+                else {
+                    self.hideHud()
+                    self.showHudWith(error!)
+                }
+                
+            })
+        }
+        
+        
+    }
+    
+    
+    
+    
+    
+    
     
 }
 

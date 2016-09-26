@@ -12,7 +12,6 @@ import MBProgressHUD
 
 class CodeLoginVerifyVC: UIViewController {
     
-    
     var mobile: String!
    
     var code:String!
@@ -138,13 +137,13 @@ class CodeLoginVerifyVC: UIViewController {
         hud.hide(true, afterDelay: 2.0)
     }
     
-    func showLoginHud() {
+    func showHud() {
         
         hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
         hud.mode = .Indeterminate
     }
     
-    func hideLoginHud() {
+    func hideHud() {
         hud.hide(true)
         hud = MBProgressHUD()
     }
@@ -156,16 +155,28 @@ class CodeLoginVerifyVC: UIViewController {
         
         User.loginWithCode(mobile, code: smsCode, usertype: UserLoginType.Employee) { (user, data, error) in
             
-            self.showLoginHud()
+            self.showHud()
             if error == nil {
-                self.hideLoginHud()
+                self.hideHud()
                 self.callMeTimer.invalidate()
-                let clientId = String(user!.clientId)
                 
-                NSNotificationCenter.defaultCenter().postNotificationName(OwnSystemLoginSuccessNoti, object: clientId)
+                //检车是否是默认密码,如果是,需要强制修改.否则无法登陆
+                if let no = data!["init_login_password"].int {
+                    if no == 1 {
+                        self.showChangePassWordAlert()
+                    }
+                    else {
+                        let clientId = String(user!.clientId)
+                        NSNotificationCenter.defaultCenter().postNotificationName(OwnSystemLoginSuccessNoti, object: clientId)
+                    }
+                }
+                else {
+                    
+                }
+                
             }
             else {
-                self.hideLoginHud()
+                self.hideHud()
                 //TODO:错误分类
                 if let errorCode = data!["errorCode"].string {
                     
@@ -249,6 +260,65 @@ class CodeLoginVerifyVC: UIViewController {
         }
     }
 
+    
+    func showChangePassWordAlert() {
+        
+        let title = "提示"
+        let message = "初次登录请更换默认密码"
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        
+        alert.addTextFieldWithConfigurationHandler { (textField) in
+            
+            textField.placeholder = "新密码"
+        }
+        
+        let passWordTextField = alert.textFields?.first!
+        
+        let submitButton = UIAlertAction(title: "确认", style: .Default) { (action) in
+            
+            let password = passWordTextField?.text
+            
+            self.updatePassWord(with: password!)
+            
+        }
+        
+        alert.addAction(submitButton)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
+    
+    func updatePassWord(with password:String) {
+        
+        
+        if password == "" {
+            //show hud password is ""
+            showHudWith("请输入新的密码")
+            
+            //show alert anagin
+            self.showChangePassWordAlert()
+        }
+        else {
+            //update password
+            let userName = mobile
+            showHud()
+            NetworkManager.sharedManager.updatePassWordWith(userName, usertype: .Employee, passWord: password, completion: { (success, json, error) in
+                
+                if success == true {
+                    self.hideHud()
+                    self.showHudWith("修改成功,请再次登录")
+                }
+                else {
+                    self.hideHud()
+                    self.showHudWith(error!)
+                }
+                
+            })
+        }
+        
+        
+    }
 }
 
 extension CodeLoginVerifyVC:UITextFieldDelegate {

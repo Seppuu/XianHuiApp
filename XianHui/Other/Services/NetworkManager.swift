@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 import RealmSwift
-
+import SwiftDate
 
 enum  VerifyCodeType: String{
     
@@ -107,6 +107,7 @@ class NetworkManager {
     }
     
     
+    
     //验证手机验证码
     func verifyPhoneCodeWith(mobile:String,usertype:UserLoginType,code:String,completion:DDResultHandler) {
         
@@ -121,6 +122,29 @@ class NetworkManager {
         baseRequestWith(urlString, dict: dict, completion: completion)
         
     }
+    
+    //更新密码
+    func updatePassWordWith(userName:String,usertype:UserLoginType,passWord:String,completion:DDResultHandler) {
+        
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "YYYYMMdd"
+        let date = formatter.stringFromDate(NSDate())
+        
+        let sign = (userName + "-" + usertype.rawValue + "-" + passWord + "-" + date + "-" + XHPublicKey).md5()
+        
+        let dict = [
+            "username":userName,
+            "type":usertype.rawValue,
+            "password":passWord,
+            "sign":sign
+        ]
+        
+        let urlString = updatePassWordUrl
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+        
+    }
+    
     
     func updateUserAvatarWith(avatar:UIImage,completion:DDResultHandler) {
         
