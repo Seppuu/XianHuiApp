@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 LeanCloud Inc. All rights reserved.
 //
 
-#import "AVIMTypedMessage.h"
+#import <AVOSCloudIM/AVOSCloudIM.h>
 
 /**
  *  文件消息类

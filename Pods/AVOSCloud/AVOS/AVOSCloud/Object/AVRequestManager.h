@@ -12,8 +12,6 @@
 
 @property (nonatomic, readwrite, strong) NSMutableArray * dictArray;
 
-- (void)synchronize:(void(^)(void))action;
-
 -(void)setRequestForKey:(NSString *)key
                  object:(id)object;
 

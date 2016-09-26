@@ -89,8 +89,7 @@ public class CAPSPageMenu: UIViewController, UIScrollViewDelegate, UIGestureReco
     // MARK: - Properties
     
     let menuScrollView = UIScrollView()
-    //xianhui
-    public let controllerScrollView = UIScrollView()
+    public var controllerScrollView = UIScrollView()
     var controllerArray : [UIViewController] = []
     var menuItems : [MenuItemView] = []
     var menuItemWidths : [CGFloat] = []

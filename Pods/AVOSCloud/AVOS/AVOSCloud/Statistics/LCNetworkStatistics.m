@@ -12,7 +12,6 @@
 #import "AVPaasClient.h"
 #import "AVUtils.h"
 #import <libkern/OSAtomic.h>
-#import "EXTScope.h"
 
 #define LC_INTERVAL_HALF_AN_HOUR 30 * 60
 
@@ -30,11 +29,11 @@ static NSInteger LCNetworkStatisticsCacheSize = 20;
 @property (atomic, strong) NSMutableDictionary *cachedStatisticDict;
 @property (atomic, assign) NSTimeInterval cachedLastUpdatedAt;
 
-@property (nonatomic, strong) NSRecursiveLock *lock;
-
 @end
 
-@implementation LCNetworkStatistics
+@implementation LCNetworkStatistics {
+    OSSpinLock _statisticDataLock;
+}
 
 + (instancetype)sharedInstance {
     static LCNetworkStatistics *instance = nil;
@@ -51,23 +50,10 @@ static NSInteger LCNetworkStatisticsCacheSize = 20;
     self = [super init];
 
     if (self) {
-        _lock = [[NSRecursiveLock alloc] init];
+        _statisticDataLock = OS_SPINLOCK_INIT;
     }
 
     return self;
-}
-
-- (void)synchronize:(void (^)(void))action {
-    if (!action)
-        return;
-
-    [_lock lock];
-
-    @onExit {
-        [_lock unlock];
-    };
-
-    action();
 }
 
 - (NSMutableDictionary *)statisticsInfo {
@@ -91,53 +77,53 @@ static NSInteger LCNetworkStatisticsCacheSize = 20;
 }
 
 - (void)saveStatisticsDict:(NSDictionary *)statisticsDict {
-    [self synchronize:^{
-        self.cachedStatisticDict = [statisticsDict mutableCopy];
-    }];
+    self.cachedStatisticDict = [statisticsDict mutableCopy];
 }
 
 - (void)writeCachedStatisticsDict {
-    [self synchronize:^{
-        if (!self.cachedStatisticDict) return;
+    if (!self.cachedStatisticDict) return;
 
-        LCKeyValueStore *store = [LCKeyValueStore sharedInstance];
+    LCKeyValueStore *store = [LCKeyValueStore sharedInstance];
 
-        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.cachedStatisticDict];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.cachedStatisticDict];
 
-        [store setData:data forKey:LCNetworkStatisticsInfoKey];
-    }];
+    [store setData:data forKey:LCNetworkStatisticsInfoKey];
 }
 
 - (void)addIncrementalAttribute:(NSInteger)amount forKey:(NSString *)key {
-    [self synchronize:^{
-        NSMutableDictionary *statisticsInfo = [self statisticsInfo];
+    OSSpinLockLock(&_statisticDataLock);
 
-        NSNumber *value = statisticsInfo[key];
+    NSMutableDictionary *statisticsInfo = [self statisticsInfo];
 
-        if (value) {
-            statisticsInfo[key] = @([value integerValue] + amount);
-        } else {
-            statisticsInfo[key] = @(amount);
-        }
+    NSNumber *value = statisticsInfo[key];
 
-        [self saveStatisticsDict:statisticsInfo];
-    }];
+    if (value) {
+        statisticsInfo[key] = @([value integerValue] + amount);
+    } else {
+        statisticsInfo[key] = @(amount);
+    }
+
+    [self saveStatisticsDict:statisticsInfo];
+
+    OSSpinLockUnlock(&_statisticDataLock);
 }
 
 - (void)addAverageAttribute:(double)amount forKey:(NSString *)key {
-    [self synchronize:^{
-        NSMutableDictionary *statisticsInfo = [self statisticsInfo];
+    OSSpinLockLock(&_statisticDataLock);
 
-        NSNumber *value = statisticsInfo[key];
+    NSMutableDictionary *statisticsInfo = [self statisticsInfo];
 
-        if (value) {
-            statisticsInfo[key] = @(([value doubleValue] + amount) / 2.0);
-        } else {
-            statisticsInfo[key] = @(amount);
-        }
+    NSNumber *value = statisticsInfo[key];
 
-        [self saveStatisticsDict:statisticsInfo];
-    }];
+    if (value) {
+        statisticsInfo[key] = @(([value doubleValue] + amount) / 2.0);
+    } else {
+        statisticsInfo[key] = @(amount);
+    }
+
+    [self saveStatisticsDict:statisticsInfo];
+
+    OSSpinLockUnlock(&_statisticDataLock);
 }
 
 - (void)uploadStatisticsInfo:(NSDictionary *)statisticsInfo {
@@ -162,13 +148,6 @@ static NSInteger LCNetworkStatisticsCacheSize = 20;
     [client
      performRequest:request
      success:^(NSHTTPURLResponse *response, id responseObject) {
-         [self statisticsInfoDidUpload];
-     }
-     failure:nil];
-}
-
-- (void)statisticsInfoDidUpload {
-    [self synchronize:^{
          // Reset network statistics data
          LCKeyValueStore *store = [LCKeyValueStore sharedInstance];
          [store deleteKey:LCNetworkStatisticsInfoKey];
@@ -180,7 +159,8 @@ static NSInteger LCNetworkStatisticsCacheSize = 20;
          LCNetworkStatisticsCheckInterval = LC_INTERVAL_HALF_AN_HOUR;
 
          [self updateLastUpdateAt];
-    }];
+     }
+     failure:nil];
 }
 
 - (void)updateLastUpdateAt {

@@ -86,10 +86,7 @@
     deviceToken = [deviceToken stringByReplacingOccurrencesOfString:@" " withString:@""];
     if (submit || ![self.deviceToken isEqualToString:deviceToken]) {
         self.deviceToken = deviceToken;
-
-        [self.requestManager synchronize:^{
-            [self updateInstallationDictionary:[self.requestManager setDict]];
-        }];
+        [self updateInstallationDictionary:[self.requestManager setDict]];
     }
 }
 
@@ -133,9 +130,7 @@
 
 -(NSError *)preSave {
     if ([self isDirty]) {
-        [self.requestManager synchronize:^{
-            [self updateInstallationDictionary:[self.requestManager setDict]];
-        }];
+        [self updateInstallationDictionary:[self.requestManager setDict]];
     }
     if (self.installationId==nil && self.deviceToken==nil) {
         return [AVErrorUtils errorWithCode:kAVErrorInvalidDeviceToken errorText:@"无法保存Installation数据, 请检查deviceToken是否在`application: didRegisterForRemoteNotificationsWithDeviceToken`方法中正常设置"];

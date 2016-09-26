@@ -8,7 +8,6 @@
 
 #import "LCRouterCache.h"
 #import "LCKeyValueStore.h"
-#import "EXTScope.h"
 
 static NSString *LCRouterKey = @"LCRouterKey";
 
@@ -23,18 +22,8 @@ extern NSString *LCTTLKey;
 
 /// The table of router info indexed by service region.
 @property (nonatomic, strong) NSMutableDictionary *routerInfoTable;
-@property (nonatomic, strong) NSRecursiveLock     *routerInfoTableLock;
 
 @end
-
-#define LOCK_ROUTER_INFO_TABLE()            \
-do {                                        \
-    [self.routerInfoTableLock lock];        \
-                                            \
-    @onExit {                               \
-        [self.routerInfoTableLock unlock];  \
-    };                                      \
-} while(0)
 
 @implementation LCRouterCache
 
@@ -53,7 +42,6 @@ do {                                        \
     self = [super init];
 
     if (self) {
-        _routerInfoTableLock = [[NSRecursiveLock alloc] init];
         [self loadRouterInfoTableFromCache];
     }
 
@@ -71,8 +59,6 @@ do {                                        \
 }
 
 - (NSMutableDictionary *)loadRouterInfoForServiceRegion:(AVServiceRegion)serviceRegion {
-    LOCK_ROUTER_INFO_TABLE();
-
     NSNumber *key = @(serviceRegion);
     NSMutableDictionary *routerInfo = self.routerInfoTable[key];
 
@@ -88,8 +74,6 @@ do {                                        \
                          lastModified:(NSTimeInterval)lastModified
                                   TTL:(NSTimeInterval)TTL
 {
-    LOCK_ROUTER_INFO_TABLE();
-
     NSDictionary *entry = @{
         LCURLKey: host,
         LCLastModifiedKey: @(lastModified),
@@ -106,8 +90,6 @@ do {                                        \
                                 lastModified:(NSTimeInterval)lastModified
                                          TTL:(NSTimeInterval)TTL
 {
-    LOCK_ROUTER_INFO_TABLE();
-
     NSDictionary *entry = @{
         LCURLKey: host,
         LCLastModifiedKey: @(lastModified),
@@ -120,8 +102,6 @@ do {                                        \
 }
 
 - (void)save {
-    LOCK_ROUTER_INFO_TABLE();
-
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.routerInfoTable];
     [[LCKeyValueStore sharedInstance] setData:data forKey:LCRouterKey];
 }
@@ -143,8 +123,6 @@ do {                                        \
 }
 
 - (NSString *)URLStringForServiceRegion:(AVServiceRegion)serviceRegion entryKey:(NSString *)entryKey {
-    LOCK_ROUTER_INFO_TABLE();
-
     NSMutableDictionary *routerInfo = self.routerInfoTable[@(serviceRegion)];
     NSDictionary *entry = routerInfo[entryKey];
 

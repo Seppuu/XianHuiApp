@@ -664,8 +664,6 @@ SecCertificateRef LCGetCertificateFromBase64String(NSString *base64);
 }
 
 - (AVIMGenericCommand *)dequeueCommandWithId:(NSNumber *)num {
-    if (!num)
-        return nil;
     AVIMCommandCarrier *carrier = [_commandDictionary objectForKey:num];
     AVIMGenericCommand *command = carrier.command;
     [_commandDictionary removeObjectForKey:num];

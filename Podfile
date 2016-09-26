@@ -13,6 +13,7 @@ pod 'BKPasscodeView'
 pod 'UAProgressView'
 pod 'EBForeNotification'
 pod 'EAIntroView', '~> 2.9.0'
+pod 'EBForeNotification'
 
 
 #Swift 2.3
