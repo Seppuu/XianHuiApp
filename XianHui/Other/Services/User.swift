@@ -10,6 +10,7 @@ import Foundation
 import Palau
 import SwiftyJSON
 import RealmSwift
+import ChatKit
 
 //雇员
 enum UserType:String {
@@ -18,6 +19,7 @@ enum UserType:String {
     case Manager = "manager"
     case Market  = "market"
     case Worker  = "worker"
+    case Boss    = "Boss"
     
 }
 
@@ -35,7 +37,8 @@ class User:NSObject {
                 sharedUser = User()
                 sharedUser!.id = id
                 sharedUser!.clientId = Defaults.clientId.value!
-                sharedUser!.name = Defaults.userName.value!
+                sharedUser!.userName = Defaults.userName.value!
+                sharedUser!.displayName = Defaults.userDisplayName.value!
                 sharedUser!.levelText = Defaults.userLevelText.value!
                 sharedUser!.avatarURL = Defaults.userAvatarURL.value!
                 return sharedUser!
@@ -56,14 +59,20 @@ class User:NSObject {
     
     var levelText = ""
     
-    var name = ""
+    //账户名
+    var userName = ""
+    
+    var displayName = ""
 
     var avatarURL = ""
     
     var clientId = ""
     
+    
+    
     var userType = UserType.Default
 
+    var passWord = ""
     
     class func loginWithCode(mobile:String,code:String,usertype:UserLoginType,completion:((user:User?,data:JSON?,error:String?)->())) {
         
@@ -93,8 +102,14 @@ class User:NSObject {
                 }
                 
                 
-                if let  userName = data!["display_name"].string {
+                //账户名
+                if let  userName = data!["user_name"].string {
                     Defaults.userName.value = userName
+                }
+                
+                
+                if let  userDisplayName = data!["display_name"].string {
+                    Defaults.userDisplayName.value = userDisplayName
                 }
                 
                 if let avatarURL = data!["avator_url"].string  {
@@ -133,9 +148,9 @@ class User:NSObject {
     
 
     //Action
-    class func loginWith(mobile:String,passWord:String,usertype:UserLoginType ,agentId:Int?,completion:((user:User?,data:JSON?,error:String?)->())) {
+    class func loginWith(mobile:String,passWord:String,usertype:UserLoginType ,completion:((user:User?,data:JSON?,error:String?)->())) {
         
-        NetworkManager.sharedManager.loginWith(mobile, passWord: passWord,usertype: usertype,agentId:agentId) { (success, data, error) in
+        NetworkManager.sharedManager.loginWith(mobile, passWord: passWord,usertype: usertype) { (success, data, error) in
             
             if success {
                 
@@ -158,14 +173,23 @@ class User:NSObject {
                     Defaults.clientId.value = clientId
                 }
                 
-                
-                if let  userName = data!["display_name"].string {
+                //账户名
+                if let  userName = data!["user_name"].string {
                     Defaults.userName.value = userName
+                }
+                
+                
+                if let  userDisplayName = data!["display_name"].string {
+                    Defaults.userDisplayName.value = userDisplayName
                 }
                 
                 if let avatarURL = data!["avator_url"].string  {
                     Defaults.userAvatarURL.value = avatarURL
                 }
+                
+                //save passWord and account for auto change account
+                Defaults.currentPassWord.value = passWord
+                Defaults.currentAccountName.value = mobile
                 
                 //获取联系人列表之后,完成登陆
                 NetworkManager.sharedManager.getUserList { (success, json, error) in
@@ -203,6 +227,11 @@ class User:NSObject {
     
     class func saveUserListWith(listOfData:[JSON]) {
         
+        let realm = try! Realm()
+        
+        try! realm.write {
+            realm.deleteAll()
+        }
         var clientIds = [String]()
         
         for data in listOfData {
@@ -226,7 +255,7 @@ class User:NSObject {
                 rmUser.avatarUrl = avatarUrl
             }
             
-            let realm = try! Realm()
+            
             
             try! realm.write {
                 realm.add(rmUser)
@@ -292,7 +321,8 @@ class User:NSObject {
                 let user = User()
                 user.id = Int(rmUser.userId)!
                 user.clientId = rmUser.clientId
-                user.name = rmUser.userName
+                user.userName = rmUser.userName
+                user.displayName = rmUser.displayName
                 user.avatarURL = rmUser.avatarUrl
                 
                 users.append(user)
@@ -344,6 +374,18 @@ class User:NSObject {
         
     }
     
+    class func logOut(completion:DDResultHandler ,failed:LCCKErrorBlock) {
+        
+        //先退出IM
+        ChatKitExample.invokeThisMethodBeforeLogoutSuccess({
+            //log out xianhui server
+            let user = User.currentUser()
+            user.logOut(completion)
+            }, failed: failed)
+        
+    }
+    
+    
     func logOut(completion:DDResultHandler) {
         
         NetworkManager.sharedManager.userLogOut { [weak self](success,json,error) in
@@ -367,19 +409,20 @@ class User:NSObject {
         Defaults.userId.clear()
         Defaults.clientId.clear()
         Defaults.userName.clear()
+        Defaults.userDisplayName.clear()
         Defaults.userAvatarURL.clear()
         Defaults.userLevelText.clear()
         
         User.sharedUser = nil
         
         
-        self.name = ""
+        self.userName = ""
     
         self.id = 0
         
         self.levelText = ""
         
-        self.name = ""
+        self.displayName = ""
         
         self.avatarURL = ""
         
@@ -419,6 +462,16 @@ extension PalauDefaults {
     }
     
     
+    public static var userDisplayName: PalauDefaultsEntry<String> {
+        get {
+            return value("userDisplayName").whenNil(use: "")
+        }
+        set {
+            
+        }
+    }
+    
+    
     public static var userAvatarURL: PalauDefaultsEntry<String> {
         get {
             return value("userAvatarURL").whenNil(use: "")
@@ -431,6 +484,26 @@ extension PalauDefaults {
     public static var userLevelText: PalauDefaultsEntry<String> {
         get {
             return value("userLevelText").whenNil(use: "普通用户")
+        }
+        set {
+            
+        }
+    }
+    
+    
+    //多企业的时候.共享密码
+    public static var currentPassWord: PalauDefaultsEntry<String> {
+        get {
+            return value("currentPassWord").whenNil(use: "")
+        }
+        set {
+            
+        }
+    }
+    
+    public static var currentAccountName: PalauDefaultsEntry<String> {
+        get {
+            return value("currentAccountName").whenNil(use: "")
         }
         set {
             

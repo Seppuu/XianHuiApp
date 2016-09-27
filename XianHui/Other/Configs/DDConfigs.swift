@@ -29,17 +29,22 @@ var allUserIds = [String]()
 let loginWithPhoneURL          = BaseUrl + "/rest/loginmobile"
 
 //用户登出
-let logOutURL         = BaseUrl + "/rest/logout"
+let logOutURL          = BaseUrl + "/rest/logout"
 
 //获取手机验证码
-let getPhoneCodeUrl   = BaseUrl + "/rest/loginsmsgot"
+let getPhoneCodeUrl    = BaseUrl + "/rest/loginsmsgot"
 
 //验证手机验证码
-let verifyPhoneCodeUrl   = BaseUrl + "/rest/loginsmsverify"
+let verifyPhoneCodeUrl = BaseUrl + "/rest/loginsmsverify"
 
 //更新密码
-let updatePassWordUrl = BaseUrl + "/rest/changeloginpassword"
+let updatePassWordUrl  = BaseUrl + "/rest/changeloginpassword"
 
+//获取端口(企业)列表
+let getCompanyListUrl  = BaseUrl + "/rest/getagentlist"
+
+//设置当前端口(企业)
+let setCurrentCompanyUrl = BaseUrl + "/rest/setdefaultagent"
 
 
 //上传头像

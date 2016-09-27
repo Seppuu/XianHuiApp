@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import MBProgressHUD
 
 func delay(delay:Double, closure:()->()) {
     dispatch_after(
@@ -67,6 +68,20 @@ func cleanDiskCacheFolder() {
         }
         
     }
+}
+
+
+
+//HUD
+func showHudWith(view:UIView,animated:Bool,mode:MBProgressHUDMode,text:String) {
+    let hud = MBProgressHUD.showHUDAddedTo(view, animated: animated)
+    hud.mode = mode
+    hud.labelText = text
+}
+
+
+func hideHudFrom(view:UIView) {
+    MBProgressHUD.hideHUDForView(view, animated: true)
 }
 
 

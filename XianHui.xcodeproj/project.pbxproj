@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		311DC2DB1D9A09E1006EC8AB /* NSDate+DD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311DC2DA1D9A09E1006EC8AB /* NSDate+DD.swift */; };
+		311DC2DE1D9A3D01006EC8AB /* AccountManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311DC2DD1D9A3D01006EC8AB /* AccountManagerVC.swift */; };
 		370AAEA61D49F1B3000C64D1 /* UserNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AAEA41D49F1B3000C64D1 /* UserNameCell.swift */; };
 		370AAEA71D49F1B3000C64D1 /* UserNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 370AAEA51D49F1B3000C64D1 /* UserNameCell.xib */; };
 		37159E411D81082E00542B57 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37159E401D81082E00542B57 /* Form.swift */; };
@@ -251,6 +253,8 @@
 
 /* Begin PBXFileReference section */
 		0677814338CEF00D20F722E0 /* Pods_XianHui.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XianHui.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		311DC2DA1D9A09E1006EC8AB /* NSDate+DD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+DD.swift"; sourceTree = "<group>"; };
+		311DC2DD1D9A3D01006EC8AB /* AccountManagerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountManagerVC.swift; sourceTree = "<group>"; };
 		370AAEA41D49F1B3000C64D1 /* UserNameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNameCell.swift; sourceTree = "<group>"; };
 		370AAEA51D49F1B3000C64D1 /* UserNameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserNameCell.xib; sourceTree = "<group>"; };
 		37159E401D81082E00542B57 /* Form.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
@@ -552,6 +556,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		311DC2DC1D9A3CDF006EC8AB /* AccountManagerVC */ = {
+			isa = PBXGroup;
+			children = (
+				311DC2DD1D9A3D01006EC8AB /* AccountManagerVC.swift */,
+			);
+			path = AccountManagerVC;
+			sourceTree = "<group>";
+		};
 		370AAEA31D49F06F000C64D1 /* UserNameCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -846,6 +858,7 @@
 		3776B8C41D93A55100A9C9DB /* ThirdTab */ = {
 			isa = PBXGroup;
 			children = (
+				311DC2DC1D9A3CDF006EC8AB /* AccountManagerVC */,
 				3776B9241D93A84800A9C9DB /* PasswordSettingVC */,
 				3776B9261D93A84800A9C9DB /* UserCentre */,
 			);
@@ -1236,6 +1249,7 @@
 				37BAB8A61D3E101C001E4680 /* UIViewController+DD.swift */,
 				37B7914F1D51D4230032C164 /* UITableView+DD.swift */,
 				37FF8EDF1D90D58900676780 /* NSUserDefaults+DD.swift */,
+				311DC2DA1D9A09E1006EC8AB /* NSDate+DD.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2066,6 +2080,7 @@
 				37BAB8A91D3E101C001E4680 /* NSFileManager+DD.swift in Sources */,
 				3776B8E11D93A81D00A9C9DB /* ProjectPlanningVC.swift in Sources */,
 				372480DA1D8151EF00B95C54 /* LCCKVCardMessage.m in Sources */,
+				311DC2DB1D9A09E1006EC8AB /* NSDate+DD.swift in Sources */,
 				37A76FD31D6D314600572B1D /* ProdDateSetTableView.swift in Sources */,
 				3776B8D11D93A62E00A9C9DB /* MessageListVC.swift in Sources */,
 				37BAB9891D3E1059001E4680 /* CoverAddCell.swift in Sources */,
@@ -2144,6 +2159,7 @@
 				37BAB9D51D3E11B1001E4680 /* AMPopTip+Animation.m in Sources */,
 				37BAB9751D3E1059001E4680 /* AddFriendMoreCell.swift in Sources */,
 				3776B9221D93A83900A9C9DB /* CustomerProfileVC.swift in Sources */,
+				311DC2DE1D9A3D01006EC8AB /* AccountManagerVC.swift in Sources */,
 				37367B741D6AE68F00479E39 /* PlanningTableView.swift in Sources */,
 				3776B8D01D93A62E00A9C9DB /* MessageListModel.swift in Sources */,
 				370AAEA61D49F1B3000C64D1 /* UserNameCell.swift in Sources */,

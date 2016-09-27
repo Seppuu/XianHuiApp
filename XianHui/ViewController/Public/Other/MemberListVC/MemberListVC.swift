@@ -104,7 +104,7 @@ extension MemberListVC:UITableViewDelegate,UITableViewDataSource {
             }
         }
         
-        cell.textLabel!.text = members[indexPath.row].name
+        cell.textLabel!.text = members[indexPath.row].displayName
         
         return cell
     }

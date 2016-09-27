@@ -64,7 +64,7 @@ static NSString *const LCCKAPPKEY = @"eXUtSMYSxVCJhE4IHOiGWabv";
     [self lcck_setupHud];
     [self lcck_setupOpenProfile];
     //开启圆角
-    //[self lcck_setupAvatarImageCornerRadius];
+    [self lcck_setupAvatarImageCornerRadius];
     [self lcck_setupFilterMessage];
     [self lcck_setupNotification];
     [self lcck_setupPreviewLocationMessage];

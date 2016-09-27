@@ -11,12 +11,14 @@ import SwiftString
 import Proposer
 import Kingfisher
 import MBProgressHUD
+import SwiftyJSON
 
 let HistoryNoti = "HistoryNoti"
 let LessonsLikedNoti = "LessonsLikedNoti"
 let FeedBackNoti = "FeedBackNoti"
 let CertificateNoti = "CertificateNoti"
 let UserAvatarUpdatedNoti = "UserAvatarUpdatedNoti"
+
 
 class UserCentreVC: BaseViewController {
     
@@ -32,9 +34,9 @@ class UserCentreVC: BaseViewController {
     
     private var uploadingAvatar = false
     
-    let section1 = ["隐私与安全"]
-//    let section2 = ["暂无","暂无"]
-//    let section3 = ["暂无"]
+    var section1 = [String]()
+
+    var agentId:Int?
     
     private var imageUploading = UIImage()
     
@@ -50,8 +52,16 @@ class UserCentreVC: BaseViewController {
         
         title = "设置"
         
-        setTableView()
+        let user = User.currentUser()
+        switch user.userType {
+        case .Boss:
+            section1 = ["切换端口"]
+        default:
+            section1 = ["切换端口模拟"]
+        }
         
+        setTableView()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UserCentreVC.changeAllContacts), name: accountHasChangedNoti, object: nil)
     }
     
     func setTableView() {
@@ -73,18 +83,8 @@ class UserCentreVC: BaseViewController {
         
     }
     
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == "ViewHistory" {
-            
-        }
-        else if segue.identifier == "LessonsLiked" {
-            
-        }
-        
+    func changeAllContacts() {
+        userTableView.reloadData()
     }
     
 }
@@ -93,7 +93,7 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
-        return 3
+        return 2
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -101,17 +101,8 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
         if section == 0 {
             return 1
         }
-        else if section == 1 {
-            return section1.count
-        }
-//        else if section == 2 {
-//            return section2.count
-//        }
-//        else if section == 3 {
-//            return section3.count
-//        }
         else {
-            return 1
+            return section1.count
         }
     }
     
@@ -140,7 +131,7 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
             
             let cell = tableView.dequeueReusableCellWithIdentifier(AddUserAvatarCell) as! UserAvatarCell
             let user = User.currentUser()
-            cell.nameLabel.text = user.name
+            cell.nameLabel.text = user.displayName
             cell.levelTextLabel.text = "用户等级"
             
             if uploadingAvatar {
@@ -184,24 +175,25 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
             return cell
             
         }
-        else if indexPath.section == 1 {
-            //隐私与安全
+        else {
             let cellID = "cellIDs1"
             let cell = UITableViewCell(style: .Default, reuseIdentifier: cellID)
+            let user = User.currentUser()
+            if user.userType == .Boss {
+                //隐私与安全
+                cell.textLabel?.text = section1[indexPath.row]
+                cell.selectionStyle = .None
+                return cell
+                
+            }
+            else {
+                //切换企业端口.
+                cell.textLabel?.text = section1[indexPath.row]
+                cell.selectionStyle = .None
+                return cell
+            }
             
-            cell.textLabel?.text = section1[indexPath.row]
-            cell.selectionStyle = .None
-            return cell
-        }
-        else {
-            //退出
-            let cell = tableView.dequeueReusableCellWithIdentifier(logOutCellId, forIndexPath: indexPath) as! SingleTapCell
-            
-            cell.middleLabel.text = "退出"
-            cell.middleLabel.textColor = UIColor.redColor()
-            
-            return cell
-            
+
         }
         
     }
@@ -210,89 +202,22 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         if indexPath.section == 1 {
-            //认证
-            let vc = MineVC()
-            vc.title = "隐私与安全"
-            navigationController?.pushViewController(vc, animated: true)
-        }
-        else if indexPath.section == 0 {
             
-        }
-        else {
-            
-            if indexPath.row == 0 {
-                //退出
-                showAlertView()
-                
-            }
-            
-        }
-    }
-    
-    func showAlertView() {
-        
-        let alert = UIAlertController(title: "提示", message: "退出应用", preferredStyle: .Alert)
-        
-        let cancelAction = UIAlertAction(title: "取消", style: .Default, handler: nil)
-        
-        let confirmAction = UIAlertAction(title: "确认", style: .Destructive) { (action) in
-            
-            self.userLogOut()
-            
-        }
-        
-        
-        alert.addAction(cancelAction)
-        alert.addAction(confirmAction)
-        
-        
-        self.presentViewController(alert, animated: true, completion: nil)
-     
-    }
-    
-        
-    private func userLogOut() {
-        
-        //先退出IM
-        ChatKitExample.invokeThisMethodBeforeLogoutSuccess({
-            
-            self.logOutOwnUserSystem()
-            
-            }, failed: { (error) in
-                //TODO:leanCloud IM 退出失败
-                let hud = MBProgressHUD.showHUDAddedTo((self.view)!, animated: true)
-                hud.mode = .Text
-                hud.labelText = error.description
-                
-                hud.hide(true, afterDelay: 1.5)
-        })
-        
-    }
-    
-    
-    private func logOutOwnUserSystem() {
-        
-        let user = User.currentUser()
-        user.logOut({ [weak self] (success,_,error) in
-            if success {
-                
-                
-                //show intro
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                
-                appDelegate.showLoginVC()
-                
+            let user = User.currentUser()
+            if user.userType == .Boss {
+                let vc = MineVC()
+                vc.title = "隐私与安全"
+                navigationController?.pushViewController(vc, animated: true)
             }
             else {
-                let hud = MBProgressHUD.showHUDAddedTo((self?.view)!, animated: true)
-                hud.mode = .Text
-                hud.labelText = error
-                
-                hud.hide(true, afterDelay: 1.5)
+                //
+                let vc = AccountManagerVC()
+                vc.title = "账号管理"
+                navigationController?.pushViewController(vc, animated: true)
             }
-            })
+            
+        }
     }
-    
     
     
 }

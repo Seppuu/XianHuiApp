@@ -17,6 +17,8 @@ class RealmUser: Object {
     
     dynamic var userName = ""
     
+    dynamic var displayName = ""
+    
     dynamic var avatarUrl = ""
     
     //设置主键

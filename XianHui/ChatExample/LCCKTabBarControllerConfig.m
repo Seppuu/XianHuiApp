@@ -75,15 +75,15 @@
     NSString *currentClientID = [[LCChatKit sharedInstance] clientId];
     
     
-    ContactListVC *secondViewController = [[ContactListVC alloc] initWithContacts:[NSSet setWithArray:users] userIds:[NSSet setWithArray:self.allPersonIds] excludedUserIds:[NSSet setWithArray:@[currentClientID]] mode:LCCKContactListModeNormal];
+    ContactListVC *secondViewController = [[ContactListVC alloc] initWithContacts:[NSSet setWithArray:users] userIds:[NSSet setWithArray:userIds] excludedUserIds:[NSSet setWithArray:@[currentClientID]] mode:LCCKContactListModeNormal];
     
     self.secondViewController = secondViewController;
     [secondViewController setSelectedContactCallback:^(UIViewController *viewController, NSString *peerId) {
         [ChatKitExample exampleOpenConversationViewControllerWithPeerId:peerId fromNavigationController:self.tabBarController.navigationController];
     }];
-    [secondViewController setDeleteContactCallback:^BOOL(UIViewController *viewController, NSString *peerId) {
-        return [[LCCKContactManager defaultManager] removeContactForPeerId:peerId];
-    }];
+//    [secondViewController setDeleteContactCallback:^BOOL(UIViewController *viewController, NSString *peerId) {
+//        return [[LCCKContactManager defaultManager] removeContactForPeerId:peerId];
+//    }];
     NavigationController *secondNavigationController = [[NavigationController alloc]
                                                         initWithRootViewController:secondViewController];
     

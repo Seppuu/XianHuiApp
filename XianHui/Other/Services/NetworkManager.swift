@@ -48,28 +48,15 @@ class NetworkManager {
     //MARK:用户
     
     //login
-    func loginWith(mobile:String,passWord:String,usertype:UserLoginType,agentId:Int?,completion:DDResultHandler) {
+    func loginWith(mobile:String,passWord:String,usertype:UserLoginType,completion:DDResultHandler) {
         
         var dict:JSONDictionary!
-        if agentId == nil {
-            dict = [
+        
+        dict = [
                 "mobile":mobile,
                 "password":passWord,
                 "type"    :usertype.rawValue
             ]
-
-        }
-        else {
-            
-            dict = [
-                "mobile":mobile,
-                "password":passWord,
-                "type"    :usertype.rawValue,
-                "agent_id":agentId!
-            ]
-            
-            
-        }
         
         let urlString = loginWithPhoneURL
         
@@ -126,13 +113,10 @@ class NetworkManager {
     //更新密码
     func updatePassWordWith(userName:String,usertype:UserLoginType,passWord:String,completion:DDResultHandler) {
         
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "YYYYMMdd"
-        let date = formatter.stringFromDate(NSDate())
         
-        let sign = (userName + "-" + usertype.rawValue + "-" + passWord + "-" + date + "-" + XHPublicKey).md5()
+        let sign = (userName + "-" + usertype.rawValue + "-" + passWord + "-" + NSDate.currentDateString() + "-" + XHPublicKey).md5()
         
-        let dict = [
+        let dict:JSONDictionary = [
             "username":userName,
             "type":usertype.rawValue,
             "password":passWord,
@@ -145,6 +129,42 @@ class NetworkManager {
         
     }
     
+    
+    //获取企业列表
+    func getCompanyListWith(userName:String,usertype:UserLoginType,completion:DDResultHandler) {
+
+        let sign = (userName + "-" + usertype.rawValue + "-" + NSDate.currentDateString() + "-" + XHPublicKey).md5()
+        
+        let dict:JSONDictionary = [
+            "username":userName,
+            "type":usertype.rawValue,
+            "sign":sign
+        ]
+        
+        let urlString = getCompanyListUrl
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+        
+    }
+    
+    //设置当前企业
+    func setCurrentCompanyWith(userName:String,usertype:UserLoginType,agentId:Int,completion:DDResultHandler) {
+        
+        let sign = (userName + "-" + usertype.rawValue + "-" + String(agentId) + "-" + NSDate.currentDateString() + "-" + XHPublicKey).md5()
+        
+        let dict:JSONDictionary = [
+            "username":userName,
+            "type":usertype.rawValue,
+            "agent_id":agentId,
+            "sign":sign
+        ]
+        
+        let urlString = setCurrentCompanyUrl
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+        
+        
+    }
     
     func updateUserAvatarWith(avatar:UIImage,completion:DDResultHandler) {
         

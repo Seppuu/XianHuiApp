@@ -301,7 +301,7 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier(timeSelectCellId, forIndexPath: indexPath) as! typeCell
             if indexPath.row == 0 {
                 cell.leftLabel.text = "发起者"
-                cell.typeLabel.text = User.currentUser().name
+                cell.typeLabel.text = User.currentUser().displayName
             }
             else {
                 cell.leftLabel.text = "参与者"
@@ -310,16 +310,16 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
                     let firstUser = listOfMember[0]
                     
                     if listOfMember.count == 1 {
-                        cell.typeLabel.text = firstUser.name
+                        cell.typeLabel.text = firstUser.displayName
                     }
                     else if listOfMember.count == 2 {
-                        cell.typeLabel.text = firstUser.name + "," + listOfMember[1].name
+                        cell.typeLabel.text = firstUser.displayName + "," + listOfMember[1].displayName
                     }
                     else if listOfMember.count == 3 {
-                        cell.typeLabel.text = firstUser.name + "," + listOfMember[1].name + "," + listOfMember[2].name
+                        cell.typeLabel.text = firstUser.displayName + "," + listOfMember[1].displayName + "," + listOfMember[2].displayName
                     }
                     else {
-                       cell.typeLabel.text = firstUser.name + "等\(listOfMember.count)人"
+                       cell.typeLabel.text = firstUser.displayName + "等\(listOfMember.count)人"
                     }
                     
                 }

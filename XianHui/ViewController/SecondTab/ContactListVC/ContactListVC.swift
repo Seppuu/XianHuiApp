@@ -9,6 +9,8 @@
 import UIKit
 import ChatKit
 
+let accountHasChangedNoti = "accountHasChangedNoti"
+
 class ContactListVC: LCCKContactListViewController {
 
     //var searchController: UISearchController!
@@ -31,6 +33,7 @@ class ContactListVC: LCCKContactListViewController {
         
         setTopView()
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ContactListVC.changeAllContacts), name: accountHasChangedNoti, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -76,6 +79,13 @@ class ContactListVC: LCCKContactListViewController {
         }
     }
 
+    
+    func changeAllContacts() {
+        
+        let ids = ChatKitExample.getAllUserIds()
+        
+        self.userIds = NSSet(array: ids) as! Set<String>
+    }
     
 }
 
