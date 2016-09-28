@@ -209,7 +209,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
     [super viewDidLoad];
     self.navigationItem.title = @"联系人";
     //xianhui
-    //self.tableView.tableHeaderView = self.searchBar;
+//    self.tableView.tableHeaderView = self.searchBar;
     self.tableView.tableFooterView = [[UIView alloc] init];
     NSBundle *bundle = [NSBundle bundleForClass:[LCChatKit class]];
     [self setupSearchBarControllerWithSearchBar:self.searchBar bundle:bundle];
@@ -720,6 +720,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 - (void) reSetSearchBar {
     
 }
+
 
 #pragma mark - UISearchDisplayDelegate
 

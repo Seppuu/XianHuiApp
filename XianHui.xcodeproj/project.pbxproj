@@ -2370,9 +2370,10 @@
 					"$(PROJECT_DIR)/XianHui/ChatKit/Class/Tool/Vendor/VoiceLib",
 					"$(PROJECT_DIR)/XianHui/ChatKit/Tool/Vendor/VoiceLib",
 				);
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = XianHui/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mybook.XianHui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2397,9 +2398,10 @@
 					"$(PROJECT_DIR)/XianHui/ChatKit/Class/Tool/Vendor/VoiceLib",
 					"$(PROJECT_DIR)/XianHui/ChatKit/Tool/Vendor/VoiceLib",
 				);
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = XianHui/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mybook.XianHui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

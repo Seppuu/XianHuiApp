@@ -1,24 +1,24 @@
 PODS:
   - AFViewShaker (0.0.2)
   - Alamofire (3.5.0)
-  - AVOSCloud (3.4.0-beta.4)
-  - AVOSCloudIM (3.4.0-beta.4):
-    - AVOSCloud (= 3.4.0-beta.4)
-    - AVOSCloudIM/_ARC (= 3.4.0-beta.4)
-    - AVOSCloudIM/_NOARC (= 3.4.0-beta.4)
-  - AVOSCloudIM/_ARC (3.4.0-beta.4):
-    - AVOSCloud (= 3.4.0-beta.4)
-    - AVOSCloudIM/_NOARC (= 3.4.0-beta.4)
-  - AVOSCloudIM/_NOARC (3.4.0-beta.4):
-    - AVOSCloud (= 3.4.0-beta.4)
+  - AVOSCloud (3.4.3)
+  - AVOSCloudIM (3.4.3):
+    - AVOSCloud (= 3.4.3)
+    - AVOSCloudIM/_ARC (= 3.4.3)
+    - AVOSCloudIM/_NOARC (= 3.4.3)
+  - AVOSCloudIM/_ARC (3.4.3):
+    - AVOSCloud (= 3.4.3)
+    - AVOSCloudIM/_NOARC (= 3.4.3)
+  - AVOSCloudIM/_NOARC (3.4.3):
+    - AVOSCloud (= 3.4.3)
   - BKPasscodeView (0.2.4):
     - AFViewShaker (~> 0.0)
   - Charts (2.3.0):
     - Charts/Core (= 2.3.0)
   - Charts/Core (2.3.0)
-  - ChatKit (0.7.15):
-    - AVOSCloud (~> 3.4.0-beta.4)
-    - AVOSCloudIM (~> 3.4.0-beta.4)
+  - ChatKit (0.7.16):
+    - AVOSCloud (~> 3.4.0)
+    - AVOSCloudIM (~> 3.4.0)
     - DACircularProgress (~> 2.3.1)
     - FDStackView (~> 1.0)
     - FMDB (~> 2.6.2)
@@ -46,7 +46,7 @@ PODS:
   - IQKeyboardManagerSwift (4.0.5)
   - Kingfisher (2.5.1)
   - LTInfiniteScrollView-Swift (0.1.0)
-  - Masonry (1.0.1)
+  - Masonry (1.0.2)
   - MBProgressHUD (0.9.2)
   - MJRefresh (3.1.12)
   - MLLabel (1.9.2)
@@ -132,11 +132,11 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AFViewShaker: 7e4bc215ca3e92347b78da436fca74e1730b52e8
   Alamofire: b70a7352335f8ea5babd0a923eb7e8eacc67b877
-  AVOSCloud: aacde3dcb0b35658cc72d0c04ec029b254dbf1e3
-  AVOSCloudIM: 4e91aa7068d367270338289ff4b8d1be6d278919
+  AVOSCloud: 0108153c6b7130c399707442f3059ea6016da6c3
+  AVOSCloudIM: b8e6dba33a4f9af6e3137e09d8e9722570720af7
   BKPasscodeView: 947e3542c126a9fa41c46318759d928919636e96
   Charts: 55d7fd9af175b500208601bea872f0fc72c1d19e
-  ChatKit: 3fefc4294765494b04b347ab4897f74c4ff62910
+  ChatKit: b0a38a2b6e55e7835cf8bf69cf6686e05840a783
   CryptoSwift: c1ef79f901b86099a6fe8b3c7524cf9f3f3c8c40
   CTAssetsPickerController: b1d1d50ab87cf6b8b13531de5f4530482e7e53ed
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
@@ -150,7 +150,7 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: 41fd3a45a2cdb2a0e031af697708a95b865068a1
   Kingfisher: 9b82e0e1f1a296f149a50bbc2214532eaa4df4f1
   LTInfiniteScrollView-Swift: 4e5e0cfd742751acd3a122ef206c803be3ee8fba
-  Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
+  Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   MLLabel: df58127ce0bd1f87890ecc3232db77a85ce4cd97
@@ -174,6 +174,6 @@ SPEC CHECKSUMS:
   UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
   ValueStepper: 499e970b2e8e60aa133f03c941de9dca4fe88ed3
 
-PODFILE CHECKSUM: 987e46de7933aff5db04dc666b52feb492db0bae
+PODFILE CHECKSUM: 0abb23bba4d2ea8157edfae10c8b040b0ed15f25
 
 COCOAPODS: 1.0.1
