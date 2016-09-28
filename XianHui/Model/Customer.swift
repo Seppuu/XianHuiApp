@@ -26,6 +26,7 @@ class Customer: NSObject {
     var avatarUrlString = ""
     var type:CustomerLisType!
     var happyLevel = "6分"
+    var place = ""
     
     //档案编号
     var certNo = ""

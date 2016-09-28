@@ -314,7 +314,7 @@ extension NetworkManager {
     }
     
     //获取二维码登陆ERP状态.
-    func getERPLogInStatus(qrCode:String,completion:DDResultHandler) {
+    func getERPLogInStatus(completion:DDResultHandler) {
         
         let dict:JSONDictionary = [
             "token":Defaults.userToken.value!

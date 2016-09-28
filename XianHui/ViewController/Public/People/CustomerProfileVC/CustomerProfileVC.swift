@@ -53,11 +53,25 @@ class CustomerProfileVC: UIViewController {
     
     func updateCustomerMsgWith(json:JSON) {
         
-        self.customer.customerManager = json["customer_manager"].string!
-        self.customer.lastConsumeDate = json["last_consume_date"].string
-        self.customer.cardTotal       = json["card_total"].int!
-        self.customer.certNo          = json["basic"]["cert_no"].string!
-        self.customer.planned         = String(json["planed"].int!)
+        if let customer_manager = json["customer_manager"].string {
+            self.customer.customerManager = customer_manager
+        }
+        
+        if let last_consume_date = json["last_consume_date"].string {
+            self.customer.lastConsumeDate = last_consume_date
+        }
+        
+        if let card_total = json["card_total"].int {
+            self.customer.cardTotal  = card_total
+        }
+        
+        if let certNo = json["basic"]["cert_no"].string {
+            self.customer.certNo    = certNo
+        }
+        
+        if let planned = json["planed"].int {
+            self.customer.planned   =  String(planned)
+        }
     }
     
     func setTableView() {

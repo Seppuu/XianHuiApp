@@ -184,12 +184,25 @@ class MessageListVC: LCCKConversationListViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+        getMyBookERPLoginStatus()
     }
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
 
+    }
+    
+    //当前的策略是每次进入这个页面,检查mybook登陆状态.
+    func getMyBookERPLoginStatus() {
+        NetworkManager.sharedManager.getERPLogInStatus { (success, json, error) in
+            
+            if success == true {
+                
+            }
+            else {
+                
+            }
+        }
     }
     
     //顶部网络状态栏位置和三个标签重合
