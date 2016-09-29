@@ -168,6 +168,18 @@ class GoodListVC: BaseViewController {
             }
             
         }
+        
+        //将所有已经选择的置顶.
+        listOfPro.forEach{
+            
+            if $0.selected == true {
+                let index = listOfPro.indexOf($0)!
+                let item = listOfPro.removeAtIndex(index)
+                
+                listOfPro.insert(item, atIndex: 0)
+            }
+            
+        }
 
         
         return listOfPro
@@ -217,6 +229,30 @@ class GoodListVC: BaseViewController {
             listOfProd.append(pro)
         }
         
+        //将有疗程卡的项目置顶
+        listOfProd.forEach{
+            
+            if $0.hasCardList == true {
+                let index = listOfProd.indexOf($0)!
+                let item = listOfProd.removeAtIndex(index)
+                
+                listOfProd.insert(item, atIndex: 0)
+            }
+            
+        }
+        
+        //将所有已经选择的置顶.
+        listOfProd.forEach{
+            
+            if $0.selected == true {
+                let index = listOfProd.indexOf($0)!
+                let item = listOfProd.removeAtIndex(index)
+                
+                listOfProd.insert(item, atIndex: 0)
+            }
+            
+        }
+        
         
         return listOfProd
     }
@@ -251,6 +287,7 @@ class GoodListVC: BaseViewController {
         navigationItem.leftBarButtonItem = leftBar
         
         segment = UISegmentedControl(items: ["项目","产品"])
+        segment.frame = CGRect(x: 0, y: 0, width: 120, height: 30)
         segment.selectedSegmentIndex = 0
         segment.addTarget(self, action: #selector(GoodListVC.segmentVauleChanged(_:)), forControlEvents: .ValueChanged)
         
@@ -536,13 +573,13 @@ extension GoodListVC:UITableViewDelegate,UITableViewDataSource {
             }
             else {
                 
-                let cellID = "checkBoxCell"
-                var cell = tableView.dequeueReusableCellWithIdentifier(cellID) as? checkBoxCell
+                let cellID = "CheckBoxCell"
+                var cell = tableView.dequeueReusableCellWithIdentifier(cellID) as? CheckBoxCell
                 
                 if cell == nil {
                     let nib = UINib(nibName: cellID, bundle: nil)
                     tableView.registerNib(nib, forCellReuseIdentifier: cellID)
-                    cell = tableView.dequeueReusableCellWithIdentifier(cellID) as? checkBoxCell
+                    cell = tableView.dequeueReusableCellWithIdentifier(cellID) as? CheckBoxCell
                 }
                 
                 
@@ -557,34 +594,61 @@ extension GoodListVC:UITableViewDelegate,UITableViewDataSource {
                     let project = projects[indexPath.row]
                     
                     if project.hasCardList == true {
-                        cell!.titleLabel.textColor = UIColor ( red: 0.0, green: 0.4868, blue: 0.9191, alpha: 1.0 )
+                        cell!.nameLabel.textColor = UIColor ( red: 0.0, green: 0.4868, blue: 0.9191, alpha: 1.0 )
+                        cell!.rightButton.alpha = 1.0
+                        
+                        var times = 0
+                        for card in project.cardList {
+                            times += card.cardTimesLeft
+                        }
+                        let title = String(times) + "次"
+                        cell!.rightButton.setTitle(title, forState: .Normal)
                     }
                     else {
-                        cell!.titleLabel.textColor = UIColor.darkTextColor()
+                        cell!.nameLabel.textColor = UIColor.darkTextColor()
+                        cell!.rightButton.alpha = 0.0
                     }
                     
                     
                 }
                 else {
+                    
+                    
                     good = prods[indexPath.row]
                     
-                    cell!.titleLabel.textColor = UIColor.darkTextColor()
+                    let prod = prods[indexPath.row]
+                    
+                    if prod.hasCardList == true {
+                        cell!.nameLabel.textColor = UIColor ( red: 0.0, green: 0.4868, blue: 0.9191, alpha: 1.0 )
+                        cell!.rightButton.alpha = 1.0
+                        
+                        var times = 0
+                        for card in prod.cardList {
+                            times += card.cardTimesLeft
+                        }
+                        let title = String(times) + "次"
+                        cell!.rightButton.setTitle(title, forState: .Normal)
+                    }
+                    else {
+                        cell!.nameLabel.textColor = UIColor.darkTextColor()
+                        cell!.rightButton.alpha = 0.0
+                    }
                 }
                 
                 
                 if good.selected == false {
-                    cell!.accessoryType = .None
+                    cell!.isChecked = false
                 }
                 else {
-                    cell!.accessoryType = .Checkmark
+                    cell!.isChecked = true
                 }
                 
-                cell!.titleLabel.text = good.name
+                cell!.nameLabel.text = good.name
 
                 
                 if good.type == .project {
                     let project = projects[indexPath.row]
-                    cell!.showDetailHandler = {
+                    cell!.rightButtonTapHandler = {
                         
                         if project.hasCardList == false {return}
                         
@@ -621,15 +685,16 @@ extension GoodListVC:UITableViewDelegate,UITableViewDataSource {
                 good = prods[indexPath.row]
             }
             
-            let cell = tableView.cellForRowAtIndexPath(indexPath)
+            guard let cell = tableView.cellForRowAtIndexPath(indexPath) as? CheckBoxCell else {return}
+            
             if good.selected == false {
                 
-                cell?.accessoryType = .Checkmark
+                cell.isChecked = true
                 good.selected = true
                 
             }
             else {
-                cell?.accessoryType = .None
+                cell.isChecked = false
                 good.selected = false
             }
             

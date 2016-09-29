@@ -14,7 +14,7 @@ pod 'UAProgressView'
 pod 'EBForeNotification'
 pod 'EAIntroView', '~> 2.9.0'
 pod 'EBForeNotification'
-pod 'DLRadioButton', '~> 1.4'
+
 
 
 #Swift 2.3
