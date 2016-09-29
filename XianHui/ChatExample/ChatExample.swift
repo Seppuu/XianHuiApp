@@ -8,6 +8,7 @@
 
 import Foundation
 import ChatKit
+import UIKit
 
 class ChatKitExample: LCChatKitExample {
     
@@ -20,6 +21,28 @@ class ChatKitExample: LCChatKitExample {
     override func exampleInit() {
         
         super.exampleInit()
+        
+        addCustomerCellIntoMessageList()
+    }
+    
+    func addCustomerCellIntoMessageList() {
+        
+        LCChatKit.sharedInstance().conversationListService.cellForRowBlock = {
+            (tableView,indexPath,conversation)  in
+            
+            let cellId = "cell"
+            let cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
+            cell.textLabel?.text = "这是一个自定义cell."
+            
+            return cell
+        }
+        
+        
+        LCChatKit.sharedInstance().conversationListService.configureCellBlock = {
+            (cell,tableView,indexPath,conversation) in
+            
+            
+        }
     }
     
     

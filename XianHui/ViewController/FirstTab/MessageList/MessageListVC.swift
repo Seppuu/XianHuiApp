@@ -32,8 +32,14 @@ class MessageListVC: LCCKConversationListViewController {
     
     var noticeList = [XHMessageNoti]()
     
+    var tableViewModel = MessageListModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        self.tableView.delegate = tableViewModel
+        self.tableView.dataSource = tableViewModel
 
         setCustomerCell()
         setTableView()

@@ -13,6 +13,8 @@ class MessageListModel: LCCKConversationListViewModel {
     
     
     
-    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.dataArray.count
+    }
     
 }

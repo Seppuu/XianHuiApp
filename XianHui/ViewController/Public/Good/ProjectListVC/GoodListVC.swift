@@ -296,6 +296,7 @@ class GoodListVC: BaseViewController {
         
     }
     
+    
     func updateSegmemt() {
         var projectSelectCount = 0
         var productionSelectCount = 0
