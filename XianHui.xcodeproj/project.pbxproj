@@ -113,6 +113,8 @@
 		379C737E1D9CA53400B41BA6 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C737D1D9CA53400B41BA6 /* Manager.swift */; };
 		379C73811D9CAC3100B41BA6 /* CustomerCardListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C73801D9CAC3100B41BA6 /* CustomerCardListVC.swift */; };
 		379C73831D9CAC5100B41BA6 /* CustomerCardDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C73821D9CAC5100B41BA6 /* CustomerCardDetailVC.swift */; };
+		379C73861D9CBFE500B41BA6 /* checkBoxCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C73841D9CBFE500B41BA6 /* checkBoxCell.swift */; };
+		379C73871D9CBFE500B41BA6 /* checkBoxCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 379C73851D9CBFE500B41BA6 /* checkBoxCell.xib */; };
 		37A76FD31D6D314600572B1D /* ProdDateSetTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A76FD21D6D314600572B1D /* ProdDateSetTableView.swift */; };
 		37A76FDA1D6D7DA200572B1D /* ReMarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A76FD81D6D7DA200572B1D /* ReMarkCell.swift */; };
 		37A76FDB1D6D7DA200572B1D /* ReMarkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37A76FD91D6D7DA200572B1D /* ReMarkCell.xib */; };
@@ -387,6 +389,8 @@
 		379C737D1D9CA53400B41BA6 /* Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		379C73801D9CAC3100B41BA6 /* CustomerCardListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerCardListVC.swift; sourceTree = "<group>"; };
 		379C73821D9CAC5100B41BA6 /* CustomerCardDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerCardDetailVC.swift; sourceTree = "<group>"; };
+		379C73841D9CBFE500B41BA6 /* checkBoxCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = checkBoxCell.swift; sourceTree = "<group>"; };
+		379C73851D9CBFE500B41BA6 /* checkBoxCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = checkBoxCell.xib; sourceTree = "<group>"; };
 		37A76FD21D6D314600572B1D /* ProdDateSetTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProdDateSetTableView.swift; sourceTree = "<group>"; };
 		37A76FD81D6D7DA200572B1D /* ReMarkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReMarkCell.swift; sourceTree = "<group>"; };
 		37A76FD91D6D7DA200572B1D /* ReMarkCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReMarkCell.xib; sourceTree = "<group>"; };
@@ -1442,6 +1446,8 @@
 				37BAB93F1D3E1059001E4680 /* WorkCell */,
 				371430751D9B96C60006A314 /* MyWorkCell.swift */,
 				371430761D9B96C60006A314 /* MyWorkCell.xib */,
+				379C73841D9CBFE500B41BA6 /* checkBoxCell.swift */,
+				379C73851D9CBFE500B41BA6 /* checkBoxCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -2025,6 +2031,7 @@
 				37F70E151D8E369400C55AC8 /* GoodDetailContainer.xib in Resources */,
 				370AAEA71D49F1B3000C64D1 /* UserNameCell.xib in Resources */,
 				37BAB9A81D3E1059001E4680 /* SubscriptionTopView.xib in Resources */,
+				379C73871D9CBFE500B41BA6 /* checkBoxCell.xib in Resources */,
 				37BAB9941D3E1059001E4680 /* ProfileCell.xib in Resources */,
 				37BAB9AD1D3E1059001E4680 /* CountDown.xib in Resources */,
 				372480E11D8151EF00B95C54 /* LCCKLoginViewController.xib in Resources */,
@@ -2182,6 +2189,7 @@
 				3776B8E01D93A81D00A9C9DB /* ProjectPlannedVC.swift in Sources */,
 				37BAB8B11D3E101C001E4680 /* UINavigationItem+DD.swift in Sources */,
 				37BAB8E91D3E1045001E4680 /* UIViewController+CYLTabBarControllerExtention.m in Sources */,
+				379C73861D9CBFE500B41BA6 /* checkBoxCell.swift in Sources */,
 				3724809A1D8151CD00B95C54 /* LCChatKitExample+Setting.m in Sources */,
 				3776B9331D93AC5B00A9C9DB /* ScheduleVC.swift in Sources */,
 				37BAB8BD1D3E1025001E4680 /* PhoneNumbers.swift in Sources */,

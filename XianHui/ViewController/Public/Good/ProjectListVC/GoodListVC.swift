@@ -509,7 +509,7 @@ extension GoodListVC:UITableViewDelegate,UITableViewDataSource {
         }
         else {
             
-            if showDetail == true && detailCellRow == indexPath.row{
+            if showDetail == true && detailCellRow == indexPath.row {
                 
                 //show detail cell
                 let cellID = "cell"
@@ -535,8 +535,21 @@ extension GoodListVC:UITableViewDelegate,UITableViewDataSource {
                 
             }
             else {
-                let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! GoodCell
-                cell.selectionStyle = .None
+                
+                let cellID = "checkBoxCell"
+                var cell = tableView.dequeueReusableCellWithIdentifier(cellID) as? checkBoxCell
+                
+                if cell == nil {
+                    let nib = UINib(nibName: cellID, bundle: nil)
+                    tableView.registerNib(nib, forCellReuseIdentifier: cellID)
+                    cell = tableView.dequeueReusableCellWithIdentifier(cellID) as? checkBoxCell
+                }
+                
+                
+                cell?.rightButtonTapHandler = {
+                    
+                }
+                cell!.selectionStyle = .None
                 var good:Good!
                 if segment.selectedSegmentIndex == 0 {
                     good = projects[indexPath.row]
@@ -544,10 +557,10 @@ extension GoodListVC:UITableViewDelegate,UITableViewDataSource {
                     let project = projects[indexPath.row]
                     
                     if project.hasCardList == true {
-                        cell.nameLabel.textColor = UIColor ( red: 0.0, green: 0.4868, blue: 0.9191, alpha: 1.0 )
+                        cell!.titleLabel.textColor = UIColor ( red: 0.0, green: 0.4868, blue: 0.9191, alpha: 1.0 )
                     }
                     else {
-                        cell.nameLabel.textColor = UIColor.darkTextColor()
+                        cell!.titleLabel.textColor = UIColor.darkTextColor()
                     }
                     
                     
@@ -555,25 +568,23 @@ extension GoodListVC:UITableViewDelegate,UITableViewDataSource {
                 else {
                     good = prods[indexPath.row]
                     
-                    cell.nameLabel.textColor = UIColor.darkTextColor()
+                    cell!.titleLabel.textColor = UIColor.darkTextColor()
                 }
                 
                 
                 if good.selected == false {
-                    cell.accessoryType = .None
+                    cell!.accessoryType = .None
                 }
                 else {
-                    cell.accessoryType = .Checkmark
+                    cell!.accessoryType = .Checkmark
                 }
                 
-                cell.nameLabel.text = good.name
-                
+                cell!.titleLabel.text = good.name
 
-                cell.cardTypeImageView.backgroundColor = UIColor ( red: 1.0, green: 0.5808, blue: 0.5726, alpha: 1.0 )
                 
                 if good.type == .project {
                     let project = projects[indexPath.row]
-                    cell.showDetailHandler = {
+                    cell!.showDetailHandler = {
                         
                         if project.hasCardList == false {return}
                         
@@ -592,7 +603,7 @@ extension GoodListVC:UITableViewDelegate,UITableViewDataSource {
                 
                 
                 
-                return cell
+                return cell!
             }
         }
         
