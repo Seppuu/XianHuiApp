@@ -180,7 +180,6 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
                 cell.typeLabel.text = customer.scheduleTime == "" ? "暂无" : customer.scheduleTime
             }
             
-            
             return cell
         }
         
@@ -190,7 +189,18 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         if indexPath.section == 1 {
-            if indexPath.row == 3 {
+            
+            if indexPath.row == 0 {
+                let vc = CustomerManagerSelectVC()
+                vc.customer = customer
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            else if indexPath.row == 1 {
+                let vc = CustomerCardListVC()
+                vc.customer = customer
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            else if indexPath.row == 3 {
                 
                 let vc = ProjectPlanningVC()
                 vc.customer = customer

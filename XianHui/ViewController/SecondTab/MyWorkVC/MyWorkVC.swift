@@ -48,13 +48,13 @@ class MyWorkVC: BaseViewController,CAPSPageMenuDelegate {
         // Initialize view controllers to display and place in array
         var controllerArray : [UIViewController] = []
         
-//        let controller1 = PlanningVC()
-//        
-//        controller1.parentNavigationController = self.navigationController
-//        controller1.parentVC = self
-//        controller1.title = "计划表"
-//        controllerArray.append(controller1)
-//        
+        let controller0 = PlanningVC()
+        
+        controller0.parentNavigationController = self.navigationController
+        controller0.parentVC = self
+        controller0.title = "计划表"
+        controllerArray.append(controller0)
+//
 //        let controller2 = ScheduleVC()
 //        controller2.title = "预约表"
 //        controller2.parentNavigationController = self.navigationController

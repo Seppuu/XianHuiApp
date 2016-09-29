@@ -109,6 +109,10 @@
 		378B17761D6C4A7B00758C13 /* Production.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378B17751D6C4A7B00758C13 /* Production.swift */; };
 		378E07671D461EC000B67621 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378E07661D461EC000B67621 /* BalloonMarker.swift */; };
 		378E076A1D4757CC00B67621 /* XHBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378E07691D4757CC00B67621 /* XHBarChartView.swift */; };
+		379C737C1D9CA20300B41BA6 /* CustomerManagerSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C737B1D9CA20300B41BA6 /* CustomerManagerSelectVC.swift */; };
+		379C737E1D9CA53400B41BA6 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C737D1D9CA53400B41BA6 /* Manager.swift */; };
+		379C73811D9CAC3100B41BA6 /* CustomerCardListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C73801D9CAC3100B41BA6 /* CustomerCardListVC.swift */; };
+		379C73831D9CAC5100B41BA6 /* CustomerCardDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C73821D9CAC5100B41BA6 /* CustomerCardDetailVC.swift */; };
 		37A76FD31D6D314600572B1D /* ProdDateSetTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A76FD21D6D314600572B1D /* ProdDateSetTableView.swift */; };
 		37A76FDA1D6D7DA200572B1D /* ReMarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A76FD81D6D7DA200572B1D /* ReMarkCell.swift */; };
 		37A76FDB1D6D7DA200572B1D /* ReMarkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37A76FD91D6D7DA200572B1D /* ReMarkCell.xib */; };
@@ -379,6 +383,10 @@
 		378B17751D6C4A7B00758C13 /* Production.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Production.swift; sourceTree = "<group>"; };
 		378E07661D461EC000B67621 /* BalloonMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
 		378E07691D4757CC00B67621 /* XHBarChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHBarChartView.swift; sourceTree = "<group>"; };
+		379C737B1D9CA20300B41BA6 /* CustomerManagerSelectVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomerManagerSelectVC.swift; path = ../../../SecondTab/MyWorkVC/CustomerManagerSelectVC.swift; sourceTree = "<group>"; };
+		379C737D1D9CA53400B41BA6 /* Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
+		379C73801D9CAC3100B41BA6 /* CustomerCardListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerCardListVC.swift; sourceTree = "<group>"; };
+		379C73821D9CAC5100B41BA6 /* CustomerCardDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerCardDetailVC.swift; sourceTree = "<group>"; };
 		37A76FD21D6D314600572B1D /* ProdDateSetTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProdDateSetTableView.swift; sourceTree = "<group>"; };
 		37A76FD81D6D7DA200572B1D /* ReMarkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReMarkCell.swift; sourceTree = "<group>"; };
 		37A76FD91D6D7DA200572B1D /* ReMarkCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReMarkCell.xib; sourceTree = "<group>"; };
@@ -1080,6 +1088,7 @@
 		3776B9041D93A83900A9C9DB /* People */ = {
 			isa = PBXGroup;
 			children = (
+				379C737F1D9CAC1400B41BA6 /* Customer */,
 				3776B9051D93A83900A9C9DB /* CustomerConsumeListVC */,
 				3776B9071D93A83900A9C9DB /* CustomerProfileVC */,
 				3776B9091D93A83900A9C9DB /* MineVC */,
@@ -1177,6 +1186,16 @@
 				378E07691D4757CC00B67621 /* XHBarChartView.swift */,
 			);
 			path = XHBarChartView;
+			sourceTree = "<group>";
+		};
+		379C737F1D9CAC1400B41BA6 /* Customer */ = {
+			isa = PBXGroup;
+			children = (
+				379C737B1D9CA20300B41BA6 /* CustomerManagerSelectVC.swift */,
+				379C73801D9CAC3100B41BA6 /* CustomerCardListVC.swift */,
+				379C73821D9CAC5100B41BA6 /* CustomerCardDetailVC.swift */,
+			);
+			path = Customer;
 			sourceTree = "<group>";
 		};
 		37A76FD11D6D313400572B1D /* ProdDateSetTableView */ = {
@@ -1716,6 +1735,7 @@
 				37367B7B1D6AE7FD00479E39 /* Project.swift */,
 				378B17751D6C4A7B00758C13 /* Production.swift */,
 				37159E401D81082E00542B57 /* Form.swift */,
+				379C737D1D9CA53400B41BA6 /* Manager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2080,6 +2100,7 @@
 				37BAB8B21D3E101C001E4680 /* UIView+DD.swift in Sources */,
 				37BAB8AB1D3E101C001E4680 /* String+DD.swift in Sources */,
 				372480DE1D8151EF00B95C54 /* LCCKVCardView.m in Sources */,
+				379C737C1D9CA20300B41BA6 /* CustomerManagerSelectVC.swift in Sources */,
 				372480991D8151CD00B95C54 /* LCChatKitExample.m in Sources */,
 				37BAB9741D3E1059001E4680 /* MenuSheetView.swift in Sources */,
 				37BAB99B1D3E1059001E4680 /* typeCell.swift in Sources */,
@@ -2171,6 +2192,7 @@
 				37C0C3B61D66BD77002B8772 /* XHUser.swift in Sources */,
 				37E78AA71D4204DE007425A3 /* YepWaverView.swift in Sources */,
 				3776B8CF1D93A62E00A9C9DB /* MessageListCell.swift in Sources */,
+				379C73831D9CAC5100B41BA6 /* CustomerCardDetailVC.swift in Sources */,
 				3776B8DF1D93A81D00A9C9DB /* GoodListVC.swift in Sources */,
 				3776B9201D93A83900A9C9DB /* TaskListVC.swift in Sources */,
 				37BAB9D51D3E11B1001E4680 /* AMPopTip+Animation.m in Sources */,
@@ -2215,7 +2237,9 @@
 				37BAB8BA1D3E1025001E4680 /* DDAlert.swift in Sources */,
 				37BAB9951D3E1059001E4680 /* SegmentCell.swift in Sources */,
 				3714307C1D9BC0350006A314 /* MyWorkDetailVC.swift in Sources */,
+				379C73811D9CAC3100B41BA6 /* CustomerCardListVC.swift in Sources */,
 				372480ED1D8151EF00B95C54 /* LCCKContactManager.m in Sources */,
+				379C737E1D9CA53400B41BA6 /* Manager.swift in Sources */,
 				37BAB9B01D3E1059001E4680 /* DDPlaypartRecordAlertView.swift in Sources */,
 				378E076A1D4757CC00B67621 /* XHBarChartView.swift in Sources */,
 				37BAB9E11D3E124E001E4680 /* DDIMConfig.swift in Sources */,

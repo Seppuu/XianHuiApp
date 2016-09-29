@@ -142,6 +142,16 @@ var GetCustomerSchedulesUrl:String {
     return DDBaseUrl + "/rest/employee/getcustomerschedulelist"
 }
 
+//获取顾客卡包列表
+var GetCustomerCardListUrl:String {
+    return DDBaseUrl + "/rest/employee/getcustomercardlist"
+}
+
+//TODO:获取顾客卡包明细
+var GetCustomerCardDetail:String {
+    return DDBaseUrl + ""
+}
+
 
 //获取项目,产品计划
 var GetGoodPlanListUrl:String {

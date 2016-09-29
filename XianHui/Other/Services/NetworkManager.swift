@@ -544,6 +544,32 @@ extension NetworkManager {
         baseRequestWith(urlString, dict: dict, completion: completion)
         
     }
+    
+    //获取顾客卡包列表
+    func getCustomerCardListWith(customerId:Int,completion:DDResultHandler) {
+        
+        let urlString = GetCustomerCardListUrl
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!,
+            "customer_id":customerId
+        ]
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+    }
+    
+    //获取顾客卡包明细
+    func getCustomerCardDetailWith(customerId:Int,completion:DDResultHandler) {
+        
+//        let urlString = GetCustomerCardListUrl
+//        
+//        let dict:JSONDictionary = [
+//            "token":Defaults.userToken.value!,
+//            "customer_id":customerId
+//        ]
+//        
+//        baseRequestWith(urlString, dict: dict, completion: completion)
+    }
 }
 
 //MARK:系统管理
