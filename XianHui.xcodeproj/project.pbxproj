@@ -11,6 +11,7 @@
 		311DC2DE1D9A3D01006EC8AB /* AccountManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311DC2DD1D9A3D01006EC8AB /* AccountManagerVC.swift */; };
 		370AAEA61D49F1B3000C64D1 /* UserNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AAEA41D49F1B3000C64D1 /* UserNameCell.swift */; };
 		370AAEA71D49F1B3000C64D1 /* UserNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 370AAEA51D49F1B3000C64D1 /* UserNameCell.xib */; };
+		370C4E7A1D9E346400312E9C /* MyWorkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370C4E791D9E346400312E9C /* MyWorkManager.swift */; };
 		371430721D9B8D2D0006A314 /* MyCustomerListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371430711D9B8D2D0006A314 /* MyCustomerListVC.swift */; };
 		371430741D9B8D8D0006A314 /* MyWorkListHepler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371430731D9B8D8D0006A314 /* MyWorkListHepler.swift */; };
 		371430771D9B96C60006A314 /* MyWorkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371430751D9B96C60006A314 /* MyWorkCell.swift */; };
@@ -121,6 +122,8 @@
 		37A76FDF1D6D8CBA00572B1D /* ANStepperView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A76FDE1D6D8CBA00572B1D /* ANStepperView.m */; };
 		37A76FE31D6D8D1200572B1D /* StepperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A76FE11D6D8D1200572B1D /* StepperCell.swift */; };
 		37A76FE41D6D8D1200572B1D /* StepperCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37A76FE21D6D8D1200572B1D /* StepperCell.xib */; };
+		37A81FC21D9E0DE1002720D3 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A81FC11D9E0DE1002720D3 /* BaseTableViewController.swift */; };
+		37A81FC51D9E2EC2002720D3 /* BaseProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A81FC41D9E2EC2002720D3 /* BaseProfileViewController.swift */; };
 		37B791491D51C9070032C164 /* Hepler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B791481D51C9070032C164 /* Hepler.swift */; };
 		37B7914D1D51CA780032C164 /* HeplerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B7914B1D51CA780032C164 /* HeplerCell.swift */; };
 		37B7914E1D51CA780032C164 /* HeplerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37B7914C1D51CA780032C164 /* HeplerCell.xib */; };
@@ -268,6 +271,7 @@
 		311DC2DD1D9A3D01006EC8AB /* AccountManagerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountManagerVC.swift; sourceTree = "<group>"; };
 		370AAEA41D49F1B3000C64D1 /* UserNameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNameCell.swift; sourceTree = "<group>"; };
 		370AAEA51D49F1B3000C64D1 /* UserNameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserNameCell.xib; sourceTree = "<group>"; };
+		370C4E791D9E346400312E9C /* MyWorkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyWorkManager.swift; sourceTree = "<group>"; };
 		371430711D9B8D2D0006A314 /* MyCustomerListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCustomerListVC.swift; sourceTree = "<group>"; };
 		371430731D9B8D8D0006A314 /* MyWorkListHepler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyWorkListHepler.swift; sourceTree = "<group>"; };
 		371430751D9B96C60006A314 /* MyWorkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyWorkCell.swift; sourceTree = "<group>"; };
@@ -398,6 +402,8 @@
 		37A76FDE1D6D8CBA00572B1D /* ANStepperView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANStepperView.m; sourceTree = "<group>"; };
 		37A76FE11D6D8D1200572B1D /* StepperCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepperCell.swift; sourceTree = "<group>"; };
 		37A76FE21D6D8D1200572B1D /* StepperCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepperCell.xib; sourceTree = "<group>"; };
+		37A81FC11D9E0DE1002720D3 /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
+		37A81FC41D9E2EC2002720D3 /* BaseProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseProfileViewController.swift; sourceTree = "<group>"; };
 		37B791481D51C9070032C164 /* Hepler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hepler.swift; sourceTree = "<group>"; };
 		37B7914B1D51CA780032C164 /* HeplerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeplerCell.swift; sourceTree = "<group>"; };
 		37B7914C1D51CA780032C164 /* HeplerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeplerCell.xib; sourceTree = "<group>"; };
@@ -894,6 +900,7 @@
 			isa = PBXGroup;
 			children = (
 				3776B8E21D93A83900A9C9DB /* Base */,
+				37A81FC31D9E2E97002720D3 /* Custom */,
 				3776B8E71D93A83900A9C9DB /* Chart */,
 				3776B8F01D93A83900A9C9DB /* Chat */,
 				3776B8F11D93A83900A9C9DB /* Login */,
@@ -983,6 +990,8 @@
 				3776B8E41D93A83900A9C9DB /* BaseWebViewController.swift */,
 				3776B8E51D93A83900A9C9DB /* NavigationController.swift */,
 				3776B8E61D93A83900A9C9DB /* SegueViewController.swift */,
+				37A81FC11D9E0DE1002720D3 /* BaseTableViewController.swift */,
+				37A81FC41D9E2EC2002720D3 /* BaseProfileViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1235,6 +1244,13 @@
 				37A76FE21D6D8D1200572B1D /* StepperCell.xib */,
 			);
 			path = StepperCell;
+			sourceTree = "<group>";
+		};
+		37A81FC31D9E2E97002720D3 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Custom;
 			sourceTree = "<group>";
 		};
 		37B7914A1D51CA4F0032C164 /* HeplerCell */ = {
@@ -1742,6 +1758,7 @@
 				378B17751D6C4A7B00758C13 /* Production.swift */,
 				37159E401D81082E00542B57 /* Form.swift */,
 				379C737D1D9CA53400B41BA6 /* Manager.swift */,
+				370C4E791D9E346400312E9C /* MyWorkManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2108,6 +2125,7 @@
 				37BAB8AB1D3E101C001E4680 /* String+DD.swift in Sources */,
 				372480DE1D8151EF00B95C54 /* LCCKVCardView.m in Sources */,
 				379C737C1D9CA20300B41BA6 /* CustomerManagerSelectVC.swift in Sources */,
+				37A81FC51D9E2EC2002720D3 /* BaseProfileViewController.swift in Sources */,
 				372480991D8151CD00B95C54 /* LCChatKitExample.m in Sources */,
 				37BAB9741D3E1059001E4680 /* MenuSheetView.swift in Sources */,
 				37BAB99B1D3E1059001E4680 /* typeCell.swift in Sources */,
@@ -2177,6 +2195,7 @@
 				3776B90F1D93A83900A9C9DB /* BaseChartViewController.swift in Sources */,
 				3776B8BD1D93A4D700A9C9DB /* MyWorkVC.swift in Sources */,
 				372480DD1D8151EF00B95C54 /* LCCKVCardMessageCell.m in Sources */,
+				37A81FC21D9E0DE1002720D3 /* BaseTableViewController.swift in Sources */,
 				37FF8EE01D90D58900676780 /* NSUserDefaults+DD.swift in Sources */,
 				372480D81D8151EF00B95C54 /* LCCKUser.m in Sources */,
 				37D46F851D6FD46B00A0BBCE /* GoodDetailView.swift in Sources */,
@@ -2284,6 +2303,7 @@
 				37BAB8EE1D3E1045001E4680 /* Popover.swift in Sources */,
 				372480E51D8151EF00B95C54 /* LCCKMapViewController.m in Sources */,
 				37A76FDF1D6D8CBA00572B1D /* ANStepperView.m in Sources */,
+				370C4E7A1D9E346400312E9C /* MyWorkManager.swift in Sources */,
 				37BAB8AE1D3E101C001E4680 /* UIFont+DD.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

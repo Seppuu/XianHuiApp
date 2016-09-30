@@ -1,5 +1,5 @@
 //
-//  checkBoxCellTableView.swift
+//  CheckBoxCell.swift
 //  XianHui
 //
 //  Created by jidanyu on 2016/9/29.
@@ -7,41 +7,50 @@
 //
 
 import UIKit
-import DLRadioButton
 
-class checkBoxCell: UITableViewCell {
+class CheckBoxCell: UITableViewCell {
     
+    @IBOutlet weak var checkImageView: UIImageView!
     
-    @IBOutlet var checkButton: DLRadioButton!
-    
-    @IBOutlet weak var titleLabel: UILabel!
-    
+    @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var rightButton: UIButton!
 
     var rightButtonTapHandler:(()->())?
     
+    var isChecked = false {
+        didSet {
+            if isChecked == true {
+                checkImageView.image = UIImage(named: "checkBox_checked")
+            }
+            else {
+                checkImageView.image = UIImage(named: "checkBox_uncheck")
+            }
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        rightButton.addTarget(self, action: #selector(checkBoxCell.rightButtonTap), forControlEvents: .TouchUpInside)
+        
+        
+        rightButton.addTarget(self, action: #selector(CheckBoxCell.rightButtonTap), forControlEvents: .TouchUpInside)
         
         rightButton.layer.cornerRadius = 8
         rightButton.layer.masksToBounds = true
         
-        rightButton.backgroundColor = UIColor.DDBlueTextColor()
+        rightButton.layer.borderColor = UIColor ( red: 0.0, green: 0.4868, blue: 0.9191, alpha: 1.0 ).CGColor
+        rightButton.layer.borderWidth = 1.0
         
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         
     }
     
     func rightButtonTap() {
         rightButtonTapHandler?()
     }
-    
-    
 }

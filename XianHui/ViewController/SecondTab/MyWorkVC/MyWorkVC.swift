@@ -48,12 +48,12 @@ class MyWorkVC: BaseViewController,CAPSPageMenuDelegate {
         // Initialize view controllers to display and place in array
         var controllerArray : [UIViewController] = []
         
-        let controller0 = PlanningVC()
-        
-        controller0.parentNavigationController = self.navigationController
-        controller0.parentVC = self
-        controller0.title = "计划表"
-        controllerArray.append(controller0)
+//        let controller0 = PlanningVC()
+//        
+//        controller0.parentNavigationController = self.navigationController
+//        controller0.parentVC = self
+//        controller0.title = "计划表"
+//        controllerArray.append(controller0)
 //
 //        let controller2 = ScheduleVC()
 //        controller2.title = "预约表"
@@ -66,28 +66,28 @@ class MyWorkVC: BaseViewController,CAPSPageMenuDelegate {
         controller1.parentNavigationController = self.navigationController
         controller1.parentVC = self
         controller1.title = "客户"
-        controller1.type = .Customer
+        controller1.type = .customer
         controllerArray.append(controller1)
         
         let controller2 = MyCustomerListVC()
         controller2.title = "同事"
         controller2.parentNavigationController = self.navigationController
         controller2.parentVC = self
-        controller2.type = .Employee
+        controller2.type = .employee
         controllerArray.append(controller2)
         
         let controller3 = MyCustomerListVC()
         controller3.title = "项目"
         controller3.parentNavigationController = self.navigationController
         controller3.parentVC = self
-        controller3.type = .Project
+        controller3.type = .project
         controllerArray.append(controller3)
         
         let controller4 = MyCustomerListVC()
         controller4.title = "产品"
         controller4.parentNavigationController = self.navigationController
         controller4.parentVC = self
-        controller4.type = .Production
+        controller4.type = .prod
         controllerArray.append(controller4)
         
         
