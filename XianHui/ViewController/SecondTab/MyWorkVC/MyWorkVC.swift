@@ -56,7 +56,7 @@ class MyWorkVC: BaseViewController,CAPSPageMenuDelegate {
 //        controllerArray.append(controller0)
 //
 //        let controller2 = ScheduleVC()
-//        controller2.title = "预约表"
+//        controller2.title = "预约表"00
 //        controller2.parentNavigationController = self.navigationController
 //        controller2.parentVC = self
 //        controllerArray.append(controller2)

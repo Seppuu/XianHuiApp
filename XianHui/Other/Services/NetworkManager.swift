@@ -473,6 +473,57 @@ extension NetworkManager {
     }
     
     
+    //我的工作四种列表
+    func getMyWorkListWith(urlString:String,completion:DDResultHandler) {
+        
+        let urlString = urlString
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!
+        ]
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+        
+    }
+    
+    //我的工作四种列表点击cell.
+    func getMyWorkScheduleListWith(urlString:String,idPramName:String,id:Int,completion:DDResultHandler) {
+        
+        let urlString = urlString
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!,
+            idPramName:id
+        ]
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+        
+    }
+    
+    func getProjectProfileWith(id:Int,completion:DDResultHandler) {
+        
+        let urlString = getMyWorkProjectProfileUrl
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!,
+            "project_id":id
+        ]
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+    }
+    
+    func getProdProfileWith(id:Int,completion:DDResultHandler) {
+        
+        let urlString = getMyWorkProdProfileUrl
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!,
+            "item_id":id
+        ]
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+    }
+    
     func getCustomerDetailWith(id:Int,completion:DDResultHandler) {
         
         let urlString = GetCustomerDetailUrl

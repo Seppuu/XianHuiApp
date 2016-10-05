@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class ProfileModel: NSObject {
     
@@ -24,6 +25,10 @@ class BaseProfileViewController: BaseTableViewController {
     
     var type:MyWorkType!
 
+    var profileJSON:JSON!
+    
+    var profileDetailJSON:JSON!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,9 +42,12 @@ class BaseProfileViewController: BaseTableViewController {
     
     func getData() {
         
-        profileModel = MyWorkManager.sharedManager.getBasicInfo(type)
+        //顶部cell信息
+        profileModel = MyWorkManager.sharedManager.getBasicInfo(self.type, data: profileJSON)
         
-        self.listArray = MyWorkManager.sharedManager.getBasicTableViewData(type)
+        //下面的cell信息
+        
+        self.listArray = MyWorkManager.sharedManager.getBasicTableViewData(self.type, data: profileDetailJSON)
         
         self.tableView.reloadData()
     }
@@ -100,30 +108,7 @@ class BaseProfileViewController: BaseTableViewController {
         }
     }
     
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 0 {
-            return
-        }
-        else {
-            let currentPath = NSIndexPath(forItem: indexPath.item, inSection: indexPath.section - 1)
-            super.tableView(tableView, didSelectRowAtIndexPath: currentPath)
-        }
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+   
     
     
 }

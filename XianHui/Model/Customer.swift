@@ -53,7 +53,7 @@ class Customer: NSObject {
     }
     
     //项目数
-    var projectTotal = 1
+    var projectTotal = 0
     //预约状态
     var scheduleStatus = ""
     //预约开始的时间
@@ -73,5 +73,14 @@ class Customer: NSObject {
     
     //报表用 某日消费金额
     var consumeNumDay = ""
+    
+}
+
+class Employee: User {
+    
+    var place = ""
+    var projectTotal = 0
+    var workTime = 0
+    var status = ""
     
 }

@@ -53,6 +53,10 @@
 		37367B881D6C141500479E39 /* chatSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37367B871D6C141500479E39 /* chatSectionView.xib */; };
 		376D6D411D59B37000F9A272 /* RealmUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376D6D401D59B37000F9A272 /* RealmUser.swift */; };
 		376D6D451D59C8E500F9A272 /* ChatExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376D6D441D59C8E500F9A272 /* ChatExample.swift */; };
+		3770DD7F1DA492A900786FB2 /* OrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3770DD7E1DA492A900786FB2 /* OrderView.swift */; };
+		3770DD811DA492BC00786FB2 /* OrderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3770DD801DA492BC00786FB2 /* OrderView.xib */; };
+		3770DD841DA4FB2200786FB2 /* GoodDetailListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3770DD831DA4FB2200786FB2 /* GoodDetailListVC.swift */; };
+		3770DD861DA506A800786FB2 /* GoodProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3770DD851DA506A800786FB2 /* GoodProfileVC.swift */; };
 		3771EC941D7555F50064A060 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 3771EC931D7555F50064A060 /* .gitignore */; };
 		3776B8AE1D937FAC00A9C9DB /* CKSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8AD1D937FAC00A9C9DB /* CKSessionService.swift */; };
 		3776B8B21D93A45700A9C9DB /* HelperVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8B11D93A45700A9C9DB /* HelperVC.swift */; };
@@ -332,6 +336,10 @@
 		37367B871D6C141500479E39 /* chatSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = chatSectionView.xib; sourceTree = "<group>"; };
 		376D6D401D59B37000F9A272 /* RealmUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmUser.swift; sourceTree = "<group>"; };
 		376D6D441D59C8E500F9A272 /* ChatExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatExample.swift; sourceTree = "<group>"; };
+		3770DD7E1DA492A900786FB2 /* OrderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderView.swift; sourceTree = "<group>"; };
+		3770DD801DA492BC00786FB2 /* OrderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderView.xib; sourceTree = "<group>"; };
+		3770DD831DA4FB2200786FB2 /* GoodDetailListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodDetailListVC.swift; sourceTree = "<group>"; };
+		3770DD851DA506A800786FB2 /* GoodProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodProfileVC.swift; sourceTree = "<group>"; };
 		3771EC931D7555F50064A060 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		3776B8AD1D937FAC00A9C9DB /* CKSessionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKSessionService.swift; sourceTree = "<group>"; };
 		3776B8B11D93A45700A9C9DB /* HelperVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperVC.swift; sourceTree = "<group>"; };
@@ -835,6 +843,24 @@
 			path = chatSectionView;
 			sourceTree = "<group>";
 		};
+		3770DD7D1DA4928B00786FB2 /* OrderView */ = {
+			isa = PBXGroup;
+			children = (
+				3770DD7E1DA492A900786FB2 /* OrderView.swift */,
+				3770DD801DA492BC00786FB2 /* OrderView.xib */,
+			);
+			path = OrderView;
+			sourceTree = "<group>";
+		};
+		3770DD821DA4FAC900786FB2 /* ProjectProfileVCList */ = {
+			isa = PBXGroup;
+			children = (
+				3770DD831DA4FB2200786FB2 /* GoodDetailListVC.swift */,
+				3770DD851DA506A800786FB2 /* GoodProfileVC.swift */,
+			);
+			path = ProjectProfileVCList;
+			sourceTree = "<group>";
+		};
 		3776B8AF1D93A3FD00A9C9DB /* SecondTab */ = {
 			isa = PBXGroup;
 			children = (
@@ -875,6 +901,7 @@
 		3776B8BB1D93A4D700A9C9DB /* MyWorkVC */ = {
 			isa = PBXGroup;
 			children = (
+				3770DD821DA4FAC900786FB2 /* ProjectProfileVCList */,
 				3776B8BC1D93A4D700A9C9DB /* MyWorkVC.swift */,
 				3776B9341D93AC8300A9C9DB /* ManagerWork */,
 				3776B92F1D93AC5B00A9C9DB /* MarketWork */,
@@ -1399,6 +1426,7 @@
 		37BAB8F21D3E1059001E4680 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3770DD7D1DA4928B00786FB2 /* OrderView */,
 				37D46F831D6FD45100A0BBCE /* GoodDetailView */,
 				37A76FD11D6D313400572B1D /* ProdDateSetTableView */,
 				37367B841D6C13E400479E39 /* chatSectionView */,
@@ -2037,6 +2065,7 @@
 				37BAB9AA1D3E1059001E4680 /* UserAvatarCell.xib in Resources */,
 				37A76FDB1D6D7DA200572B1D /* ReMarkCell.xib in Resources */,
 				37D46F821D6FD16E00A0BBCE /* GoodCell.xib in Resources */,
+				3770DD811DA492BC00786FB2 /* OrderView.xib in Resources */,
 				37BAB9841D3E1059001E4680 /* FilterCell.xib in Resources */,
 				3776B9181D93A83900A9C9DB /* LoginByPhoneVC.xib in Resources */,
 				37BAB99C1D3E1059001E4680 /* typeCell.xib in Resources */,
@@ -2135,6 +2164,7 @@
 				3776B93B1D93B6F600A9C9DB /* WorkerSkillListVC.swift in Sources */,
 				37BAB9931D3E1059001E4680 /* ProfileCell.swift in Sources */,
 				3776B9291D93A84800A9C9DB /* UserCentreVC.swift in Sources */,
+				3770DD7F1DA492A900786FB2 /* OrderView.swift in Sources */,
 				3776B9371D93AD4B00A9C9DB /* AllCustomerListVC.swift in Sources */,
 				3776B9121D93A83900A9C9DB /* RadarChartVC.swift in Sources */,
 				37E78AA51D4204DE007425A3 /* VoiceRecordSampleView.swift in Sources */,
@@ -2180,6 +2210,7 @@
 				37BAB9A51D3E1059001E4680 /* SubscriptionTopCell.swift in Sources */,
 				37BAB99F1D3E1059001E4680 /* SheetCell.swift in Sources */,
 				3776B9321D93AC5B00A9C9DB /* PlanningVC.swift in Sources */,
+				3770DD861DA506A800786FB2 /* GoodProfileVC.swift in Sources */,
 				3776B9141D93A83900A9C9DB /* MaxValueSettingVC.swift in Sources */,
 				3776B9131D93A83900A9C9DB /* FormSettingVC.swift in Sources */,
 				372480E41D8151EF00B95C54 /* LCCKLoginDataSource.m in Sources */,
@@ -2279,6 +2310,7 @@
 				37BAB9B11D3E1059001E4680 /* DDPopSheetView.swift in Sources */,
 				37BAB9A31D3E1059001E4680 /* SubscriptionDetailCell.swift in Sources */,
 				37BAB98B1D3E1059001E4680 /* coverCell.swift in Sources */,
+				3770DD841DA4FB2200786FB2 /* GoodDetailListVC.swift in Sources */,
 				372480E21D8151EF00B95C54 /* DEMOCustomAutoCompleteObject.m in Sources */,
 				37A76FDA1D6D7DA200572B1D /* ReMarkCell.swift in Sources */,
 				37BAB8BB1D3E1025001E4680 /* DecibelObserver.swift in Sources */,

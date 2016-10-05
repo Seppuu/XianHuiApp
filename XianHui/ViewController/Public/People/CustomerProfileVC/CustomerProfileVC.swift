@@ -18,7 +18,9 @@ class CustomerProfileVC: UIViewController {
     let typeCellId = "typeCell"
     
     //Data
-    var customer:Customer!
+    var customer = Customer()
+    
+    var customerId:Int!
 
     let typeList = ["客服经理","他的卡包","消费记录","项目计划","预约信息"]
     
@@ -36,7 +38,7 @@ class CustomerProfileVC: UIViewController {
     
     func getCustomerDetail() {
         
-        NetworkManager.sharedManager.getCustomerDetailWith(customer.id) { (success, json, error) in
+        NetworkManager.sharedManager.getCustomerDetailWith(customerId) { (success, json, error) in
             
             if success == true {
                 
@@ -52,6 +54,11 @@ class CustomerProfileVC: UIViewController {
     }
     
     func updateCustomerMsgWith(json:JSON) {
+        
+        self.customer.id = self.customerId
+        self.customer.certNo = json["basic"]["cert_no"].string!
+        self.customer.name = json["basic"]["fullname"].string!
+        self.customer.avatarUrlString = json["basic"]["avator_url"].string!
         
         if let customer_manager = json["customer_manager"].string {
             self.customer.customerManager = customer_manager

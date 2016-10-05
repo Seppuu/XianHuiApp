@@ -163,6 +163,50 @@ var SaveGoodPlanUrl:String {
     return DDBaseUrl + "/rest/employee/setplanitem"
 }
 
+//获取顾客列表
+var GetMyWorkCustomerUrl:String {
+    return DDBaseUrl + "/rest/employee/gethelpercustomerlist"
+}
+
+//获取同事列表
+var GetMyWorkEmployeeUrl:String {
+    return DDBaseUrl + "/rest/employee/gethelperworkerlist"
+}
+
+//获取项目列表
+var GetMyWorkProjectUrl:String {
+    return DDBaseUrl + "/rest/employee/gethelperprojectlist"
+}
+
+//获取产品列表
+var GetMyWorkProdUrl:String {
+    return DDBaseUrl + "/rest/employee/gethelperproductlist"
+}
+
+//获取预约列表(顾客)
+var getMyWorkScheduleListFromCustomerUrl:String {
+    return DDBaseUrl + "/rest/employee/gethelpercustomerschedulelist"
+}
+
+//获取预约列表(同事)
+var getMyWorkScheduleListFromEmployeeUrl:String {
+    return DDBaseUrl + "/rest/employee/gethelperworkerschedulelist"
+}
+
+//详细资料
+
+//项目
+var getMyWorkProjectProfileUrl:String {
+    return DDBaseUrl + "/rest/employee/gethelperprojectdetail"
+}
+
+//产品
+var getMyWorkProdProfileUrl:String {
+    return DDBaseUrl + "/rest/employee/gethelperproductdetail"
+}
+
+
+
 /// 用户关系管理
 
 //用户联系人列表

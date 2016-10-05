@@ -23,6 +23,9 @@ class MyWorkObject:NSObject {
     var thirdTagString = ""
     
     var rightLabelString = ""
+    
+    
+    var id:Int!
 }
 
 
@@ -33,8 +36,8 @@ class MyWorkListHepler: NSObject, UITableViewDelegate, UITableViewDataSource {
     var cellHeight:CGFloat = 64
     var cellId = "MyWorkCell"
     
-    var cellSelectedHandler:(()->())?
-    
+    var cellSelectedHandler:((index:Int,objectId:Int,objectName:String)->())?
+
     override init() {
         super.init()
         
@@ -97,9 +100,10 @@ class MyWorkListHepler: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //TODO:
         
-        cellSelectedHandler?()
+        
+        let obj = self.dataArray[indexPath.row]
+        cellSelectedHandler?(index:indexPath.row,objectId:obj.id,objectName:obj.nameLabelString)
         
     }
     

@@ -15,6 +15,8 @@ class BaseTableViewModel: NSObject {
     var desc = ""
     //有列表 需要展开
     var hasList = false
+    
+    var listData = [BaseTableViewModel]()
 }
 
 class BaseTableViewModelList:NSObject {
@@ -126,7 +128,10 @@ extension BaseTableViewController:UITableViewDelegate,UITableViewDataSource {
         
         if baseModel.hasList == true {
             let vc = BaseTableViewController()
-            
+            let listArr = BaseTableViewModelList()
+            listArr.listName = ""
+            listArr.list = baseModel.listData
+            vc.listArray = [listArr]
             self.navigationController?.pushViewController(vc, animated: true)
         }
         else {

@@ -36,6 +36,12 @@ class Project: Good {
     //跟踪
     var remainingTime:CGFloat = 0.0
     var remainingTimeString = ""
+    
+    //今日预约人数
+    var scheduleNum = 0
+    
+    //今日结单人数
+    var paidNum = 0
 }
 
 
@@ -55,7 +61,17 @@ class Good: NSObject {
     
     var name = ""
     
+    var place = ""
+    
+    var avatarUrl = ""
+    
     var selected = false
+    
+    //库存
+    var stockNum = ""
+    
+    //当日销售数量
+    var saleNum = ""
     
     //持续时间
     var time = ""

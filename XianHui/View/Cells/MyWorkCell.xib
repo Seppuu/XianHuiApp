@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -12,7 +13,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="320" height="64"/>
+                <frame key="frameInset" width="320" height="63.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kKh-qp-pB6">
@@ -24,7 +25,6 @@
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JKB-Qa-hbv">
                         <constraints>
-                            <constraint firstAttribute="width" constant="90" id="6Lk-ag-hRw"/>
                             <constraint firstAttribute="height" constant="21" id="Wka-NP-3wi"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -99,6 +99,7 @@
                     <constraint firstItem="PlQ-E3-46d" firstAttribute="leading" secondItem="dqe-fB-hjG" secondAttribute="trailing" constant="8" id="XHw-vj-1r5"/>
                     <constraint firstAttribute="bottom" secondItem="kKh-qp-pB6" secondAttribute="bottom" constant="7" id="aeZ-3K-4kC"/>
                     <constraint firstItem="kKh-qp-pB6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="ckY-zh-UXF"/>
+                    <constraint firstItem="JKB-Qa-hbv" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="fs1-Qc-uqL"/>
                     <constraint firstItem="dqe-fB-hjG" firstAttribute="leading" secondItem="CaV-jk-9Fc" secondAttribute="trailing" constant="8" id="hRr-9y-HCv"/>
                     <constraint firstAttribute="bottom" secondItem="CaV-jk-9Fc" secondAttribute="bottom" constant="8" id="i47-kB-2F1"/>
                     <constraint firstAttribute="bottom" secondItem="PlQ-E3-46d" secondAttribute="bottom" constant="8" id="iOB-9d-UI5"/>
