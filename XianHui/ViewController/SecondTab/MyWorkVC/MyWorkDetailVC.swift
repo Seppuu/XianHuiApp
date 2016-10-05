@@ -90,7 +90,7 @@ class MyWorkDetailVC: UIViewController {
         else if self.type == .employee {
             
             
-            let vc = BaseProfileViewController()
+            let vc = EmployeeProfileVC()
             vc.title = "详细资料"
             vc.type = self.type
             vc.profileJSON = profileJSON
@@ -168,23 +168,28 @@ class MyWorkDetailVC: UIViewController {
             pramName = "user_id"
         case .project:
             urlString = getMyWorkScheduleListFromEmployeeUrl
-            pramName = "user_id"
+            pramName = "project_id"
         case .prod:
             urlString = getMyWorkScheduleListFromEmployeeUrl
-            pramName = "user_id"
+            pramName = "item_id"
             
         }
         
-        NetworkManager.sharedManager.getMyWorkScheduleListWith(urlString, idPramName: pramName, id: objectId) { (success, json, error) in
-            
-            if success == true {
-                //TODO:现在都是空数据.
-            }
-            else {
-                
-            }
-            
-        }
+//        NetworkManager.sharedManager.getMyWorkScheduleListWith(urlString, idPramName: pramName, id: objectId) { (success, json, error) in
+//            
+//            if success == true {
+//                
+//            }
+//            else {
+//                
+//            }
+//            
+//        }
+        
+    }
+    
+    
+    func makeData(data:[JSON]) {
         
     }
     
@@ -206,9 +211,22 @@ extension MyWorkDetailVC:UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .Default, reuseIdentifier: "cell")
+        let cellId = "OrderCell"
+        var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? OrderCell
+        if cell == nil {
+            let nib = UINib(nibName: cellId, bundle: nil)
+            tableView.registerNib(nib, forCellReuseIdentifier: cellId)
+            cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? OrderCell
+        }
         
-        return cell
+        
+        
+        
+        
+        
+        
+        
+        return cell!
     }
     
     

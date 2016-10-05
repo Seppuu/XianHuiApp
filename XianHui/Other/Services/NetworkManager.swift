@@ -621,6 +621,31 @@ extension NetworkManager {
 //        
 //        baseRequestWith(urlString, dict: dict, completion: completion)
     }
+    
+    //获取顾客顾问列表
+    func getCustomerAdviserWith(customerId:Int,completion:DDResultHandler) {
+        let urlString = GetcustomerAdviserlistUrl
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!,
+            "customer_id":customerId
+        ]
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+    }
+    
+    //设置顾客顾问
+    func setCustomerAdviserWith(customerId:Int,advisderId:Int,completion:DDResultHandler) {
+        let urlString = SetCustomerAdviserUrl
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!,
+            "customer_id":customerId,
+            "adviser":advisderId
+        ]
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+    }
 }
 
 //MARK:系统管理

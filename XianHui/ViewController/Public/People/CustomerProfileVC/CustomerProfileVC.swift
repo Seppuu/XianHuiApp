@@ -200,6 +200,9 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
             if indexPath.row == 0 {
                 let vc = CustomerManagerSelectVC()
                 vc.customer = customer
+                vc.setManagerHandler = {
+                    self.getCustomerDetail()
+                }
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             else if indexPath.row == 1 {

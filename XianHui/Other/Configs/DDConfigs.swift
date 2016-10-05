@@ -111,6 +111,17 @@ var GetNoticeDetailUrl:String {
     return DDBaseUrl +  "/rest/employee/getnoticedetail"
 }
 
+//获取顾客顾问列表
+var GetcustomerAdviserlistUrl:String {
+    return DDBaseUrl + "/rest/employee/getcustomeradviserlist"
+}
+
+//设置顾客顾问
+var SetCustomerAdviserUrl:String {
+    
+    return DDBaseUrl + "/rest/employee/setcustomeradviser"
+}
+
 
 
 ///我的工作 -- 计划
@@ -192,6 +203,17 @@ var getMyWorkScheduleListFromCustomerUrl:String {
 var getMyWorkScheduleListFromEmployeeUrl:String {
     return DDBaseUrl + "/rest/employee/gethelperworkerschedulelist"
 }
+
+//获取预约列表(项目)
+var getMyWorkScheduleListFromProjectUrl:String {
+    return DDBaseUrl + "/rest/employee/gethelperprojectorders"
+}
+
+//获取预约列表(产品)
+var getMyWorkScheduleListFromProdUrl:String {
+    return DDBaseUrl + "/rest/employee/gethelperproductorders"
+}
+
 
 //详细资料
 

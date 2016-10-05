@@ -13,6 +13,7 @@ class BaseTableViewModel: NSObject {
     
     var name = ""
     var desc = ""
+    var id:Int?
     //有列表 需要展开
     var hasList = false
     

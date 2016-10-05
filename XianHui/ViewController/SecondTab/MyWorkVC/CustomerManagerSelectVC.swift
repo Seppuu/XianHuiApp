@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SwiftyJSON
+import MBProgressHUD
 
 class CustomerManagerSelectVC: UIViewController {
     
@@ -17,6 +19,10 @@ class CustomerManagerSelectVC: UIViewController {
     var customer = Customer()
 
     let cellId = "typeCell"
+    
+    var updateTime = "无"
+    
+    var setManagerHandler:(()->())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,20 +50,46 @@ class CustomerManagerSelectVC: UIViewController {
     }
     
     func getListOfManager() {
-        //TODO:net work
-        for i in 0...8 {
-            var m = Manager()
-            m.displayName = "赵微微"
+        
+        NetworkManager.sharedManager.getCustomerAdviserWith(customer.id) { (success, json, error) in
             
-            if i == 4 {
-                m.selected = true
+            if success == true {
+                    self.makeDataModel(json!)
             }
-            
-            listOfEmployee.append(m)
+            else {
+                
+            }
         }
         
-        tableView.reloadData()
         
+        
+        
+    }
+    
+    func makeDataModel(data:JSON) {
+        
+        if let updateTime = data["update_time"].string {
+            self.updateTime = updateTime
+        }
+        
+        var list = [Manager]()
+        for e in data["rows"].array! {
+            
+            let m = Manager()
+            m.displayName = e["display_name"].string!
+            if let selected = e["selected"].bool {
+                m.selected = selected
+            }
+            
+            m.id = e["user_id"].int!
+            
+            list.append(m)
+            
+            
+            
+        }
+        listOfEmployee = list
+        tableView.reloadData()
     }
     
 
@@ -95,7 +127,7 @@ extension CustomerManagerSelectVC:UITableViewDelegate,UITableViewDataSource {
         if indexPath.section == 0 {
             
             cell!.leftLabel.text = "变更日期"
-            cell!.typeLabel.text = "16/12/05"
+            cell!.typeLabel.text = updateTime
             
             
             
@@ -118,14 +150,38 @@ extension CustomerManagerSelectVC:UITableViewDelegate,UITableViewDataSource {
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //TODO:
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! typeCell
-        cell.accessoryType = .Checkmark
+        
+        if indexPath.section == 0 {
+            return
+        }
+        
+        let manger = listOfEmployee[indexPath.row]
+        let hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        hud.mode = .Indeterminate
+        
+        NetworkManager.sharedManager.setCustomerAdviserWith(customer.id, advisderId: manger.id) { (success, json, error) in
+            
+            if success == true {
+                hud.hide(true, afterDelay: 0.5)
+                
+                self.getListOfManager()
+                
+                self.setManagerHandler?()
+            }
+            else {
+                
+            }
+        }
+        
+        
+        
     }
     
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! typeCell
-        cell.accessoryType = .None
-    }
+    
+//    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+//        let cell = tableView.cellForRowAtIndexPath(indexPath)
+//        cell?.accessoryType = .None
+//        
+//    }
     
 }

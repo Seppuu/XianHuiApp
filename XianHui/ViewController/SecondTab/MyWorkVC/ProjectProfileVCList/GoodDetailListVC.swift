@@ -76,12 +76,12 @@ class GoodDetailListVC: BaseTableViewController {
             let m4 = BaseTableViewModel()
             m4.name = "操作类型"
             if let manual_type = json["manual_type"].string {
-                m4.desc = manual_type
+                m4.desc = "暂无查询功能"
             }
             
             let m5 = BaseTableViewModel()
             m5.name = "产品配料"
-            m5.desc = "找不到字段"
+            m5.desc = "暂无查询功能"
             
             let list = BaseTableViewModelList()
             list.listName = ""

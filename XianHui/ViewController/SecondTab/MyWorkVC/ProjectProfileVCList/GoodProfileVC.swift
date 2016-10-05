@@ -70,3 +70,26 @@ class GoodProfileVC: BaseProfileViewController {
     }
 
 }
+
+class EmployeeProfileVC: BaseProfileViewController {
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+    }
+    
+    
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+
+    }
+    
+}
