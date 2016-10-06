@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import DZNEmptyDataSet
 
 class Order: NSObject {
     
@@ -22,7 +23,7 @@ class Order: NSObject {
     
 }
 
-class MyWorkDetailVC: UIViewController {
+class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
     var type:MyWorkType = .customer
     
@@ -153,6 +154,18 @@ class MyWorkDetailVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        self.tableView.emptyDataSetSource = self
+        self.tableView.emptyDataSetDelegate = self
+        
+    }
+    
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        
+        let text = "暂无数据"
+        
+        let attrString = NSAttributedString(string: text)
+        
+        return attrString
     }
     
     func getOrderList() {
@@ -167,29 +180,69 @@ class MyWorkDetailVC: UIViewController {
             urlString = getMyWorkScheduleListFromEmployeeUrl
             pramName = "user_id"
         case .project:
-            urlString = getMyWorkScheduleListFromEmployeeUrl
+            urlString = getMyWorkScheduleListFromProjectUrl
             pramName = "project_id"
         case .prod:
-            urlString = getMyWorkScheduleListFromEmployeeUrl
+            urlString = getMyWorkScheduleListFromProdUrl
             pramName = "item_id"
             
         }
         
-//        NetworkManager.sharedManager.getMyWorkScheduleListWith(urlString, idPramName: pramName, id: objectId) { (success, json, error) in
-//            
-//            if success == true {
-//                
-//            }
-//            else {
-//                
-//            }
-//            
-//        }
+        NetworkManager.sharedManager.getMyWorkScheduleListWith(urlString, idPramName: pramName, id: objectId) { (success, json, error) in
+            
+            if success == true {
+                if let rows = json!["rows"].array {
+                    self.makeData(rows)
+                }
+            }
+            else {
+                
+            }
+            
+        }
         
     }
     
     
-    func makeData(data:[JSON]) {
+    func makeData(datas:[JSON]) {
+        
+        var list = [Order]()
+        
+        for data in datas {
+            let o = Order()
+            if let customer_name = data["customer_name"].string {
+               o.customerName = customer_name
+            }
+            
+            if let number = data["project_code"].string {
+                o.number = number
+            }
+            
+            if let goodName = data["project_name"].string {
+                o.goodName = goodName
+            }
+            
+            if let bedName = data["bed_name"].string {
+                o.bedName = bedName
+            }
+            
+            if let engineer_name = data["engineer_name"].string {
+                o.employee = engineer_name
+            }
+            
+            if let status = data["status"].string {
+                o.status = status
+            }
+            
+            if let startTime  = data["start_time"].string {
+                o.startTime = startTime
+            }
+            
+            list.append(o)
+        }
+        
+        self.listOfOrder = list
+        self.tableView.reloadData()
         
     }
     
@@ -207,7 +260,7 @@ extension MyWorkDetailVC:UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 44
+        return 150
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -219,12 +272,18 @@ extension MyWorkDetailVC:UITableViewDelegate,UITableViewDataSource {
             cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? OrderCell
         }
         
+        cell?.selectionStyle = .None
         
+        let order = self.listOfOrder[indexPath.row]
         
+        cell?.firstLabel.text = "顾客:" + order.customerName
+        cell?.secondLabel.text = "编号:" + order.number
+        cell?.thirdLabel.text = "品名:" + order.goodName
+        cell?.forthlabel.text = "床位:" + order.bedName
+        cell?.fifthLabel.text = "技师:" + order.employee
         
-        
-        
-        
+        cell?.rightLabel.text = order.status
+        cell?.secondRightLabel.text =  "开始时间:" + order.startTime
         
         return cell!
     }

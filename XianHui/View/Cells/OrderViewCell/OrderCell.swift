@@ -26,6 +26,10 @@ class OrderCell: UITableViewCell {
     @IBOutlet weak var fifthLabel: UILabel!
     
     
+    
+    @IBOutlet weak var secondRightLabel: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

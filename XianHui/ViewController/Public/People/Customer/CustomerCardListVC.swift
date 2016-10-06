@@ -53,16 +53,33 @@ class CustomerCardListVC: BaseTableViewController {
             if card_sort == 1 {
                 //会员卡
                 let model = BaseTableViewModel()
-                model.name = data["fullname"].string!
-                model.desc = "余" + data["amount"].string!
+                if let fullName = data["fullname"].string {
+                    model.name = fullName
+                }
+                
+                if let amount = data["amount"].string {
+                    model.desc = "余"  + amount
+                }
+                
+                if let cardNum = data["card_num"].string {
+                    model.num = cardNum
+                }
+                
                 model.hasList = true
                 section0.listName = "会员卡"
                 section0.list.append(model)
             }
-            else if card_sort == 3{
+            else if card_sort == 3 {
                 //疗程卡
                 let model = BaseTableViewModel()
-                model.name = data["fullname"].string!
+                if let fullName = data["fullname"].string {
+                    model.name = fullName
+                }
+                
+                if let cardNum = data["card_num"].string {
+                    model.num = cardNum
+                }
+                
                 if let project_list = data["project_list"].array {
                     for p in project_list {
                         var times = 0
@@ -85,6 +102,19 @@ class CustomerCardListVC: BaseTableViewController {
         
         self.listArray = [section0,section1]
         self.tableView.reloadData()
+        
+    }
+    
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let model = self.listArray[indexPath.section].list[indexPath.row]
+        
+        let vc = CustomerCardDetailVC()
+        vc.cardNum = model.num
+        vc.title = model.name
+        self.navigationController?.pushViewController(vc, animated: true)
+        
         
     }
 

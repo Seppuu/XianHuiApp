@@ -75,8 +75,8 @@ class GoodDetailListVC: BaseTableViewController {
             
             let m4 = BaseTableViewModel()
             m4.name = "操作类型"
-            if let manual_type = json["manual_type"].string {
-                m4.desc = "暂无查询功能"
+            if let op_type = json["op_type"].string {
+                m4.desc = op_type
             }
             
             let m5 = BaseTableViewModel()

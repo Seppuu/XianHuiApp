@@ -44,8 +44,14 @@ class MyWorkManager {
     private func converCustomerInfo(data:JSON) -> ProfileModel {
         let model = ProfileModel()
         
-        model.avatarUrl = data["avator_url"].string!
-        model.firstLabelString = data["fullname"].string!
+        if let avatarUrl = data["avator_url"].string {
+            model.avatarUrl = avatarUrl
+        }
+        
+        if let fullName = data["fullname"].string {
+            model.firstLabelString = fullName
+        }
+        
         if let vip = data["vip_star"].string {
             model.secondLabelString = "会员级别:" + vip
         }
@@ -53,18 +59,32 @@ class MyWorkManager {
             model.secondLabelString = "会员级别:" + "暂无"
         }
         
-        model.thirdLabelString = "档案编号:" + data["cert_no"].string!
+        if let certNo =  data["cert_no"].string {
+            model.thirdLabelString = "档案编号:" + certNo
+        }
+        
         
         return model
     }
     
     private func converEmployeeInfo(data:JSON) -> ProfileModel {
         let model = ProfileModel()
+        if let avatarUrl = data["avator_url"].string {
+            model.avatarUrl = avatarUrl
+        }
         
-        model.avatarUrl = data["avator_url"].string!
-        model.firstLabelString = data["display_name"].string!
-        model.secondLabelString = "职务:" + data["job"].string!
-        model.thirdLabelString = "工号:" + data["user_code"].string!
+        if let displayName = data["display_name"].string {
+            model.firstLabelString = displayName
+        }
+        
+        if let job = data["job"].string {
+            model.secondLabelString = "职务:" + job
+        }
+        
+        if let userCode = data["user_code"].string {
+            model.thirdLabelString = "工号:" + userCode
+        }
+    
         
         return model
     }
@@ -73,9 +93,17 @@ class MyWorkManager {
         let model = ProfileModel()
         
         model.avatarUrl = ""
-        model.firstLabelString = data["fullname"].string!
-        model.secondLabelString = "品牌:" + data["brand_name"].string!
-        model.thirdLabelString = "编号:" + data["project_code"].string!
+        if let fullName = data["fullname"].string {
+            model.firstLabelString = fullName
+        }
+        
+        if let brandName = data["brand_name"].string {
+            model.secondLabelString = "品牌:" + brandName
+        }
+        
+        if let projectCode = data["project_code"].string {
+            model.thirdLabelString = "编号:" + projectCode
+        }
         
         return model
     }
@@ -84,10 +112,18 @@ class MyWorkManager {
         let model = ProfileModel()
         
         model.avatarUrl = ""
-        model.firstLabelString = data["fullname"].string!
-        model.secondLabelString = "品牌:" + data["brand_name"].string!
-        model.thirdLabelString = "编号:" + data["item_code"].string!
+        if let fullName = data["fullname"].string {
+            model.firstLabelString = fullName
+        }
         
+        if let brandName = data["brand_name"].string {
+            model.secondLabelString = "品牌:" + brandName
+        }
+        
+        if let itemCode = data["item_code"].string {
+            model.thirdLabelString = "编号:" + itemCode
+        }
+
         return model
     }
     
@@ -154,10 +190,8 @@ class MyWorkManager {
             default:break;
             }
             
-            
             list0.list.append(model)
         }
-        
         
         listOfArr = [list0]
         
@@ -182,13 +216,25 @@ class MyWorkManager {
             
             switch title {
             case "所属店铺":
-                model.desc = data["org_name"].string!
+                if let orgName = data["org_name"].string {
+                   model.desc = orgName
+                }
+                
             case "入职日期":
-                model.desc = data["entry_date"].string!
+                if let date = data["entry_date"].string {
+                   model.desc = date
+                }
+                
             case "手机号码":
-                model.desc = data["mobile"].string!
+                if let mobile = data["mobile"].string {
+                   model.desc = mobile
+                }
+                
             case "级别":
-                model.desc = "缺失"
+                if let level =  data["user_level"].string {
+                    model.desc = level
+                }
+                
             default:break;
             }
             
@@ -328,23 +374,25 @@ class MyWorkManager {
             
             switch title {
             case "持卡顾客":
-                model.desc = String(data["card_total"].int!) + "人"
-                
-                if data["card_total"].int!   == 0 {
-                    model.hasList = false
-                }
-                else {
-                    model.hasList = true
+                if let cardTotal = data["card_total"].int {
+                    model.desc = String(cardTotal) + "人"
                     
-                    if let card_customer_list = data["card_customer_list"].array {
+                    if data["card_total"].int!   == 0 {
+                        model.hasList = false
+                    }
+                    else {
+                        model.hasList = true
                         
-                        for customer in card_customer_list {
-                            let nextModel = BaseTableViewModel()
-                            nextModel.name = customer["fullname"].string!
+                        if let card_customer_list = data["card_customer_list"].array {
                             
-                            model.listData.append(nextModel)
-                        }
-                    }   
+                            for customer in card_customer_list {
+                                let nextModel = BaseTableViewModel()
+                                nextModel.name = customer["fullname"].string!
+                                
+                                model.listData.append(nextModel)
+                            }
+                        }   
+                    }
                 }
                 
             default:break;
@@ -358,14 +406,6 @@ class MyWorkManager {
         
         return listOfArr
     }
-    
-    
-    
-    
-    
-    
-    
-    
     
     
 }

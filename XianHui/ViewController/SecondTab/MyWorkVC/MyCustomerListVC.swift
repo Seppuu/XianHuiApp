@@ -8,8 +8,9 @@
 
 import UIKit
 import SwiftyJSON
+import DZNEmptyDataSet
 
-class MyCustomerListVC: UIViewController {
+class MyCustomerListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
 
     var tableView:UITableView!
     
@@ -58,6 +59,20 @@ class MyCustomerListVC: UIViewController {
             self.parentNavigationController?.pushViewController(vc, animated: true)
             
         }
+        
+        self.tableView.emptyDataSetSource = self
+        self.tableView.emptyDataSetDelegate = self
+        
+    }
+    
+    
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        
+        let text = "暂无数据"
+        
+        let attrString = NSAttributedString(string: text)
+        
+        return attrString
     }
     
     func getDataFromServer() {
@@ -116,28 +131,44 @@ class MyCustomerListVC: UIViewController {
         
         for data in datas {
             let c = Customer()
-            c.name = data["fullname"].string!
-            c.place = data["org_name"].string!
-            c.time  = data["days"].string! + "天"
-            c.avatarUrlString = data["avator_url"].string!
-            c.id = data["customer_id"].int!
-            let statusInt = data["status"].int!
+            if let fullName = data["fullname"].string {
+               c.name = fullName
+            }
+            if let orgName = data["org_name"].string {
+                c.place = orgName
+            }
+            if let days = data["days"].string {
+                c.time  = days + "天"
+            }
             
-            switch statusInt {
-            case 1:
-                c.scheduleStatus = "服务中"
-            case 2:
-                c.scheduleStatus = "未到店"
-            case 3:
-                c.scheduleStatus = "已离店"
-            case 4:
-                c.scheduleStatus = "未计已约"
-            case 5:
-                c.scheduleStatus = "已计未约"
-            case 6:
-                c.scheduleStatus = "未计未约"
-            default:
-                break;
+            if let avatarUrl = data["avator_url"].string {
+                c.avatarUrlString = avatarUrl
+            }
+            
+            if let customer_id = data["customer_id"].int {
+               c.id = customer_id
+            }
+            
+            if let status = data["status"].int {
+                let statusInt = status
+                
+                switch statusInt {
+                case 1:
+                    c.scheduleStatus = "服务中"
+                case 2:
+                    c.scheduleStatus = "未到店"
+                case 3:
+                    c.scheduleStatus = "已离店"
+                case 4:
+                    c.scheduleStatus = "未计已约"
+                case 5:
+                    c.scheduleStatus = "已计未约"
+                case 6:
+                    c.scheduleStatus = "未计未约"
+                default:
+                    break;
+                }
+                
             }
             
             if let total = data["project_total"].int {
@@ -175,20 +206,37 @@ class MyCustomerListVC: UIViewController {
         
         for data in datas {
             let employee = Employee()
-            employee.displayName = data["display_name"].string!
-            employee.avatarURL = data["avator_url"].string!
-            employee.place = data["org_name"].string!
-            employee.workTime = data["project_hours"].int!
-            employee.id = data["user_id"].int!
-            let statusInt = data["status"].int!
+            if let displayName = data["display_name"].string {
+                employee.displayName = displayName
+            }
             
-            switch statusInt {
-            case 1:
-                employee.status = "服务中"
-            case 2,3:
-                employee.status = "等待中"
-            default:
-                break;
+            if let avatarUrl = data["avator_url"].string {
+                employee.avatarURL = avatarUrl
+            }
+            
+            if let orgName = data["org_name"].string {
+                employee.place = orgName
+            }
+            
+            if let project_hours = data["project_hours"].int {
+                employee.workTime = project_hours
+            }
+            
+            if let userId = data["user_id"].int {
+                employee.id = userId
+            }
+            
+            if let status = data["status"].int {
+                let statusInt = status
+                
+                switch statusInt {
+                case 1:
+                    employee.status = "服务中"
+                case 2,3:
+                    employee.status = "等待中"
+                default:
+                    break;
+                }
             }
             
             list.append(employee)
@@ -222,11 +270,28 @@ class MyCustomerListVC: UIViewController {
         
         for data in datas {
             let p = Project()
-            p.name = data["project_name"].string!
-            p.place = data["org_name"].string!
-            p.scheduleNum = data["schedule_num"].int!
-            p.paidNum  = data["paid_num"].string!.toInt()!
-            p.id       = data["project_id"].int!
+            if let projectName = data["project_name"].string {
+                p.name = projectName
+            }
+            
+            if let orgName = data["org_name"].string {
+                p.place = orgName
+            }
+            
+            if let scheduleNum = data["schedule_num"].int {
+                p.scheduleNum = scheduleNum
+            }
+            
+            if let paidNum = data["paid_num"].string {
+                if let paidNumInt = paidNum.toInt() {
+                    p.paidNum  = paidNumInt
+                }
+            }
+            
+            if let projectId = data["project_id"].int {
+                p.id = projectId
+            }
+            
             list.append(p)
         }
         
@@ -252,13 +317,18 @@ class MyCustomerListVC: UIViewController {
     }
     
     func getProductionData(datas:[JSON])  -> [MyWorkObject] {
-        //TODO:需要一些产品的数据.
+        
         var list = [Production]()
         
         for data in datas {
             let prod = Production()
-            prod.id = data["item_id"].int!
-            prod.name = data["item_name"].string!
+            if let itemId = data["item_id"].int {
+                prod.id = itemId
+            }
+            if let itemName = data["item_name"].string {
+                prod.name = itemName
+            }
+            
             if let stockNum = data["stock_qty"].string {
                     prod.stockNum = stockNum
             }

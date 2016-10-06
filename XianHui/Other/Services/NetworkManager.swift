@@ -610,16 +610,16 @@ extension NetworkManager {
     }
     
     //获取顾客卡包明细
-    func getCustomerCardDetailWith(customerId:Int,completion:DDResultHandler) {
+    func getCustomerCardDetailWith(cardNum:String,completion:DDResultHandler) {
         
-//        let urlString = GetCustomerCardListUrl
-//        
-//        let dict:JSONDictionary = [
-//            "token":Defaults.userToken.value!,
-//            "customer_id":customerId
-//        ]
-//        
-//        baseRequestWith(urlString, dict: dict, completion: completion)
+        let urlString = GetCustomerCardDetailUrl
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!,
+            "card_num":cardNum
+        ]
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
     }
     
     //获取顾客顾问列表

@@ -90,14 +90,26 @@ class NoticeListVC: UIViewController {
             return
         }
         
-        
         for json in jsons {
             let no = Notice()
-            no.id =  json["notice_id"].int!
-            no.text = json["body"].string!
-            no.title = json["subject"].string!
-            no.day = json["extra_id"].string!
-            no.createTime = json["create_time"].string!
+            if let noticeId = json["notice_id"].int {
+                no.id =  noticeId
+            }
+            if let body = json["body"].string {
+                no.text = body
+            }
+            
+            if let subject = json["subject"].string {
+                no.title = subject
+            }
+            
+            if let extra_id = json["extra_id"].string {
+                no.day = extra_id
+            }
+            
+            if let create_time = json["create_time"].string {
+                no.createTime = create_time
+            }
             
             switch json["notice_type"].string! {
             case "daily_report":
@@ -170,7 +182,6 @@ extension NoticeListVC:UITableViewDelegate,UITableViewDataSource {
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }

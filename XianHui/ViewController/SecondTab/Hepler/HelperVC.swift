@@ -78,6 +78,7 @@ class HelperVC: BaseViewController {
         
         for json in jsons {
             let no = Notice()
+            
             no.id =  json["notice_id"].int!
             no.text = json["body"].string!
             no.title = json["subject"].string!
@@ -93,17 +94,21 @@ class HelperVC: BaseViewController {
                 no.hasRead = true
             }
             
-            
-            switch json["notice_type"].string! {
-            case "daily_report":
+            if let notice_type = json["notice_type"].string {
+                
+                switch notice_type {
+                case "daily_report":
                 no.type = NoticeType.daily_report
-            case "project_plan":
+                case "project_plan":
                 no.type = NoticeType.project_plan
-            case "common_notice":
+                case "common_notice":
                 no.type = NoticeType.common_notice
-            default:
+                default:
                 break;
+                }
             }
+            
+            
             
             listOfNotice.insert(no, atIndex: 0)
         }

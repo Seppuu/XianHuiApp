@@ -8,12 +8,14 @@
 
 import UIKit
 import SwiftyJSON
+import DZNEmptyDataSet
 
 class BaseTableViewModel: NSObject {
     
     var name = ""
     var desc = ""
     var id:Int?
+    var num = ""
     //有列表 需要展开
     var hasList = false
     
@@ -31,18 +33,13 @@ typealias CellForRowHandler = ((UITableView,NSIndexPath) -> (UITableViewCell))
 
 typealias CellSelectedRowHandler = ((UITableView,NSIndexPath) -> ())
 
-class BaseTableViewController: UIViewController {
+class BaseTableViewController: UIViewController,DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
     var tableView:UITableView!
-    
     
     let typeCellId = "typeCell"
     
     var dataID:Int!
-
-//    var cellForRowHandler:CellForRowHandler?
-//    
-//    var cellSelectedHandler:CellSelectedRowHandler?
     
     var cellHeight:CGFloat = 44
     
@@ -67,6 +64,20 @@ class BaseTableViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        
+        self.tableView.emptyDataSetSource = self
+        self.tableView.emptyDataSetDelegate = self
+        
+    }
+    
+    
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        
+        let text = "暂无数据"
+        
+        let attrString = NSAttributedString(string: text)
+        
+        return attrString
     }
     
     
@@ -133,6 +144,7 @@ extension BaseTableViewController:UITableViewDelegate,UITableViewDataSource {
             listArr.listName = ""
             listArr.list = baseModel.listData
             vc.listArray = [listArr]
+            vc.title = baseModel.name
             self.navigationController?.pushViewController(vc, animated: true)
         }
         else {

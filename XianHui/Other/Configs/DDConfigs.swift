@@ -158,9 +158,9 @@ var GetCustomerCardListUrl:String {
     return DDBaseUrl + "/rest/employee/getcustomercardlist"
 }
 
-//TODO:获取顾客卡包明细
-var GetCustomerCardDetail:String {
-    return DDBaseUrl + ""
+//获取顾客卡包明细 会员卡/疗程卡操作记录
+var GetCustomerCardDetailUrl:String {
+    return DDBaseUrl + "/rest/employee/getcustomercardlog"
 }
 
 

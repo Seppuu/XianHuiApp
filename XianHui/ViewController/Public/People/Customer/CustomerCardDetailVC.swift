@@ -7,81 +7,61 @@
 //
 
 import UIKit
+import SwiftyJSON
 
-class CustomerCardDetailVC: UIViewController {
+class CustomerCardDetailVC: BaseTableViewController {
 
-    var tableView:UITableView!
-    
-    var dataArray = [String]()
+    var cardNum = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
+        getCardDetail()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
     }
-    
 
-    func setTableview() {
-        tableView = UITableView(frame: view.bounds, style: .Grouped)
-        view.addSubview(tableView)
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        
-    }
-    
     
     func getCardDetail() {
-        dataArray = ["a","b","c"]
-        tableView.reloadData()
-    }
-
-}
-
-extension CustomerCardDetailVC:UITableViewDelegate,UITableViewDataSource {
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataArray.count
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 44
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cellId = "typeCell"
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? typeCell
-        if cell == nil {
-            let nib = UINib(nibName: cellId, bundle: nil)
-            tableView.registerNib(nib, forCellReuseIdentifier: cellId)
-            cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? typeCell
+        NetworkManager.sharedManager.getCustomerCardDetailWith(cardNum) { (success, json, error) in
+            
+            if success == true {
+                if let rows = json!["rows"].array {
+                    self.makeData(rows)
+                }
+            }
+            else {
+                
+            }
         }
         
-        
-        cell?.leftLabel.text = "AAAA"
-        
-        return cell!
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    func makeData(datas:[JSON]) {
+        
+        let section0 = BaseTableViewModelList()
+        
+        for data in datas {
+            let model = BaseTableViewModel()
+            if let fullName = data["fullname"].string{
+                model.name = fullName
+            }
+            
+            if let amount = data["amount"].string{
+                model.desc = amount
+            }
+            section0.listName = "消费明细"
+            section0.list.append(model)
+        }
+        
+        self.listArray = [section0]
+        
+        self.tableView.reloadData()
+        
+    }
+
 }
+
