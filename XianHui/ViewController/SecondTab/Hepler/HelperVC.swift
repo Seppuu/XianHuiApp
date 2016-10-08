@@ -79,19 +79,40 @@ class HelperVC: BaseViewController {
         for json in jsons {
             let no = Notice()
             
-            no.id =  json["notice_id"].int!
-            no.text = json["body"].string!
-            no.title = json["subject"].string!
-            no.day = json["extra_id"].string!
-            no.createTime = json["create_time"].string!
-            
-            let status = json["status"].int!
-            
-            if status == 0 {
-                no.hasRead = false
+            if let noticeId = json["notice_id"].int {
+                no.id = noticeId
             }
-            else if status == 1{
-                no.hasRead = true
+            
+            if let body = json["body"].string {
+                no.text = body
+            }
+            if let subject = json["subject"].string {
+                no.title = subject
+            }
+            if let extraId = json["extra_id"].string {
+                no.day = extraId
+            }
+            
+            if let createTime = json["create_time"].string {
+                if let date = createTime.toDate("yyyy-MM-dd HH:mm:ss") {
+                    
+                    let dateFormatter = NSDateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd"
+                    no.createTime = dateFormatter.stringFromDate(date)
+                    
+                }
+                
+            }
+            
+            if let status = json["status"].int {
+                let status = status
+                
+                if status == 0 {
+                    no.hasRead = false
+                }
+                else if status == 1{
+                    no.hasRead = true
+                }
             }
             
             if let notice_type = json["notice_type"].string {
@@ -107,8 +128,6 @@ class HelperVC: BaseViewController {
                 break;
                 }
             }
-            
-            
             
             listOfNotice.insert(no, atIndex: 0)
         }
