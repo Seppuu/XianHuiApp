@@ -52,8 +52,9 @@ class AccountManagerVC: UIViewController {
     
     func getAgentList() {
         
+        showHudWith(view, animated: true, mode: .Indeterminate, text: "")
         NetworkManager.sharedManager.getCompanyListWith(User.currentUser().userName, usertype: .Employee) { (success, json, error) in
-
+            hideHudFrom(self.view)
             if success == true {
                 
                 self.listOfAgent = self.makeAgentListWith(json!)

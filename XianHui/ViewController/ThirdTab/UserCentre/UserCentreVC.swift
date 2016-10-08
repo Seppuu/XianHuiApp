@@ -52,13 +52,8 @@ class UserCentreVC: BaseViewController {
         
         title = "设置"
         
-        let user = User.currentUser()
-        switch user.userType {
-        case .Boss:
-            section1 = ["切换端口"]
-        default:
-            section1 = ["切换端口模拟"]
-        }
+        section1 = ["账号管理"]
+        
         
         setTableView()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UserCentreVC.changeAllContacts), name: accountHasChangedNoti, object: nil)

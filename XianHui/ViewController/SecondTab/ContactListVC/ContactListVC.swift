@@ -21,11 +21,19 @@ class ContactListVC: LCCKContactListViewController {
     
     var cellId = "ChannelCell"
     
-    var topTitle = ["助手","提醒","计划"]
+    var topTitle = ["助手","提醒","工作"]
+    
+    var topIcon = [UIImage]()
     
     var topColors = [UIColor.navBarColor(),UIColor.orangeColor(),UIColor.redColor()]
     
     override func viewDidLoad() {
+        
+        topIcon = [
+            UIImage(named: "analyze")!,
+            UIImage(named: "bell")!,
+            UIImage(named: "paperPencil")!
+        ]
         
         setTableView()
         
@@ -48,7 +56,7 @@ class ContactListVC: LCCKContactListViewController {
     func setTableView() {
         
         //tableView
-        topTableView = UITableView(frame: CGRect(x: 0, y: 0, width: screenWidth, height:44 + 44*3), style: .Plain)
+        topTableView = UITableView(frame: CGRect(x: 0, y: 0, width: screenWidth, height:44 + 64*3), style: .Plain)
         topTableView.delegate = self
         topTableView.dataSource = self
         topTableView.scrollEnabled = false
@@ -58,7 +66,7 @@ class ContactListVC: LCCKContactListViewController {
         let nib = UINib(nibName: cellId, bundle: nil)
         topTableView.registerNib(nib, forCellReuseIdentifier: cellId)
         
-        topView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 44 + 44*3))
+        topView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 44 + 64*3))
         
         topView.addSubview(topTableView)
     }
@@ -110,12 +118,7 @@ extension ContactListVC {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if (tableView == topTableView) {
-            return 44
-        }
-        else {
-            return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
-        }
+        return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -124,8 +127,8 @@ extension ContactListVC {
             cell.accessoryType = .DisclosureIndicator
             cell.nameLabel.text = topTitle[indexPath.item]
             
-            cell.leftImageView.backgroundColor = topColors[indexPath.item]
-            
+            cell.leftImageView.image = topIcon[indexPath.item]
+            cell.leftImageView.contentMode = .Center
             return cell
             
         }
