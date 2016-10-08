@@ -14,7 +14,7 @@
 		370AAEA61D49F1B3000C64D1 /* UserNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AAEA41D49F1B3000C64D1 /* UserNameCell.swift */; };
 		370AAEA71D49F1B3000C64D1 /* UserNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 370AAEA51D49F1B3000C64D1 /* UserNameCell.xib */; };
 		370C4E7A1D9E346400312E9C /* MyWorkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370C4E791D9E346400312E9C /* MyWorkManager.swift */; };
-		371430721D9B8D2D0006A314 /* MyCustomerListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371430711D9B8D2D0006A314 /* MyCustomerListVC.swift */; };
+		371430721D9B8D2D0006A314 /* MyWorkListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371430711D9B8D2D0006A314 /* MyWorkListVC.swift */; };
 		371430741D9B8D8D0006A314 /* MyWorkListHepler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371430731D9B8D8D0006A314 /* MyWorkListHepler.swift */; };
 		371430771D9B96C60006A314 /* MyWorkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371430751D9B96C60006A314 /* MyWorkCell.swift */; };
 		371430781D9B96C60006A314 /* MyWorkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 371430761D9B96C60006A314 /* MyWorkCell.xib */; };
@@ -273,7 +273,7 @@
 		370AAEA41D49F1B3000C64D1 /* UserNameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNameCell.swift; sourceTree = "<group>"; };
 		370AAEA51D49F1B3000C64D1 /* UserNameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserNameCell.xib; sourceTree = "<group>"; };
 		370C4E791D9E346400312E9C /* MyWorkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyWorkManager.swift; sourceTree = "<group>"; };
-		371430711D9B8D2D0006A314 /* MyCustomerListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCustomerListVC.swift; sourceTree = "<group>"; };
+		371430711D9B8D2D0006A314 /* MyWorkListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyWorkListVC.swift; sourceTree = "<group>"; };
 		371430731D9B8D8D0006A314 /* MyWorkListHepler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyWorkListHepler.swift; sourceTree = "<group>"; };
 		371430751D9B96C60006A314 /* MyWorkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyWorkCell.swift; sourceTree = "<group>"; };
 		371430761D9B96C60006A314 /* MyWorkCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyWorkCell.xib; sourceTree = "<group>"; };
@@ -848,7 +848,8 @@
 				3770DD831DA4FB2200786FB2 /* GoodDetailListVC.swift */,
 				3770DD851DA506A800786FB2 /* GoodProfileVC.swift */,
 			);
-			path = ProjectProfileVCList;
+			name = ProjectProfileVCList;
+			path = ../../SecondTab/MyWorkVC/ProjectProfileVCList;
 			sourceTree = "<group>";
 		};
 		3776B8AF1D93A3FD00A9C9DB /* SecondTab */ = {
@@ -891,10 +892,8 @@
 		3776B8BB1D93A4D700A9C9DB /* MyWorkVC */ = {
 			isa = PBXGroup;
 			children = (
-				3770DD821DA4FAC900786FB2 /* ProjectProfileVCList */,
 				3776B8BC1D93A4D700A9C9DB /* MyWorkVC.swift */,
-				3776B92F1D93AC5B00A9C9DB /* MarketWork */,
-				371430711D9B8D2D0006A314 /* MyCustomerListVC.swift */,
+				371430711D9B8D2D0006A314 /* MyWorkListVC.swift */,
 				371430731D9B8D8D0006A314 /* MyWorkListHepler.swift */,
 				3714307B1D9BC0350006A314 /* MyWorkDetailVC.swift */,
 			);
@@ -958,6 +957,7 @@
 		3776B8D51D93A68B00A9C9DB /* Good */ = {
 			isa = PBXGroup;
 			children = (
+				3770DD821DA4FAC900786FB2 /* ProjectProfileVCList */,
 				3776B8D61D93A81D00A9C9DB /* ProdDateSetVC */,
 				3776B8D81D93A81D00A9C9DB /* ProjectListVC */,
 				3776B8DA1D93A81D00A9C9DB /* ProjectPlannedVC */,
@@ -1116,6 +1116,7 @@
 		3776B9041D93A83900A9C9DB /* People */ = {
 			isa = PBXGroup;
 			children = (
+				3776B92F1D93AC5B00A9C9DB /* MarketWork */,
 				379C737F1D9CAC1400B41BA6 /* Customer */,
 				3776B9051D93A83900A9C9DB /* CustomerConsumeListVC */,
 				3776B9071D93A83900A9C9DB /* CustomerProfileVC */,
@@ -1178,7 +1179,8 @@
 			children = (
 				3776B9311D93AC5B00A9C9DB /* ScheduleVC.swift */,
 			);
-			path = MarketWork;
+			name = MarketWork;
+			path = ../../SecondTab/MyWorkVC/MarketWork;
 			sourceTree = "<group>";
 		};
 		378E07651D461EB200B67621 /* ChartComponents */ = {
@@ -2252,7 +2254,7 @@
 				3776B91C1D93A83900A9C9DB /* CreateTaskVC.swift in Sources */,
 				37F70E131D8E367100C55AC8 /* GoodDetailContainerView.swift in Sources */,
 				37BAB8A71D3E101C001E4680 /* Array+DD.swift in Sources */,
-				371430721D9B8D2D0006A314 /* MyCustomerListVC.swift in Sources */,
+				371430721D9B8D2D0006A314 /* MyWorkListVC.swift in Sources */,
 				37BAB8AA1D3E101C001E4680 /* NSTimeZone+DD.swift in Sources */,
 				37BAB8BA1D3E1025001E4680 /* DDAlert.swift in Sources */,
 				37BAB9951D3E1059001E4680 /* SegmentCell.swift in Sources */,

@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyJSON
 import DZNEmptyDataSet
+import MJRefresh
 
 class Order: NSObject {
     
@@ -43,7 +44,7 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
         view.backgroundColor = UIColor.whiteColor()
         setNavBarItem()
         setTableView()
-        getOrderList()
+        
         getProfileDetailData()
     }
 
@@ -58,7 +59,6 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
         navigationItem.rightBarButtonItem = rightBarItem
         
     }
-    
     
     var profileDetailJSON:JSON!
     
@@ -157,6 +157,15 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
         self.tableView.emptyDataSetSource = self
         self.tableView.emptyDataSetDelegate = self
         
+        // add MJRefresh
+        tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+            
+            self.getOrderList()
+            
+        })
+        
+        tableView.mj_header.beginRefreshing()
+        
     }
     
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
@@ -189,7 +198,7 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
         }
         
         NetworkManager.sharedManager.getMyWorkScheduleListWith(urlString, idPramName: pramName, id: objectId) { (success, json, error) in
-            
+            self.tableView.mj_header.endRefreshing()
             if success == true {
                 if let rows = json!["rows"].array {
                     self.makeData(rows)

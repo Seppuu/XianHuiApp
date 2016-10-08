@@ -9,8 +9,9 @@
 import UIKit
 import SwiftyJSON
 import DZNEmptyDataSet
+import MJRefresh
 
-class MyCustomerListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
 
     var tableView:UITableView!
     
@@ -31,8 +32,6 @@ class MyCustomerListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSet
         view.backgroundColor = UIColor.whiteColor()
         
         setTableView()
-        getDataFromServer()
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,6 +45,13 @@ class MyCustomerListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSet
         view.addSubview(tableView)
         tableView.delegate = dataHelper
         tableView.dataSource = dataHelper
+        
+        // add MJRefresh
+        tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+            
+            self.getDataFromServer()
+            
+        })
         
         
         dataHelper.cellSelectedHandler = {
@@ -62,6 +68,8 @@ class MyCustomerListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSet
         
         self.tableView.emptyDataSetSource = self
         self.tableView.emptyDataSetDelegate = self
+        
+        tableView.mj_header.beginRefreshing()
         
     }
     
@@ -88,7 +96,10 @@ class MyCustomerListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSet
             urlString = GetMyWorkProdUrl
         }
         
+        //showHudWith(view, animated: true, mode: .Indeterminate, text: "")
         NetworkManager.sharedManager.getMyWorkListWith(urlString) { (success, json, error) in
+          //  hideHudFrom(self.view)
+            self.tableView.mj_header.endRefreshing()
             if success == true {
                 if let rows = json!["rows"].array {
                     self.jsons = rows
@@ -98,7 +109,6 @@ class MyCustomerListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSet
             
         }
         
-
     }
     
     

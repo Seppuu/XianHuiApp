@@ -48,8 +48,7 @@ class MyWorkVC: BaseViewController,CAPSPageMenuDelegate {
         // Initialize view controllers to display and place in array
         var controllerArray : [UIViewController] = []
         
-        
-        let controller1 = MyCustomerListVC()
+        let controller1 = MyWorkListVC()
         
         controller1.parentNavigationController = self.navigationController
         controller1.parentVC = self
@@ -57,21 +56,21 @@ class MyWorkVC: BaseViewController,CAPSPageMenuDelegate {
         controller1.type = .customer
         controllerArray.append(controller1)
         
-        let controller2 = MyCustomerListVC()
+        let controller2 = MyWorkListVC()
         controller2.title = "同事"
         controller2.parentNavigationController = self.navigationController
         controller2.parentVC = self
         controller2.type = .employee
         controllerArray.append(controller2)
         
-        let controller3 = MyCustomerListVC()
+        let controller3 = MyWorkListVC()
         controller3.title = "项目"
         controller3.parentNavigationController = self.navigationController
         controller3.parentVC = self
         controller3.type = .project
         controllerArray.append(controller3)
         
-        let controller4 = MyCustomerListVC()
+        let controller4 = MyWorkListVC()
         controller4.title = "产品"
         controller4.parentNavigationController = self.navigationController
         controller4.parentVC = self
