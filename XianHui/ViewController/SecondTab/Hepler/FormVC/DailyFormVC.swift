@@ -65,37 +65,70 @@ class DailyFormVC: RadarChartVC {
         
     }
     
-    func makeFormDataWith(json:JSON) -> [Form] {
+    func makeFormDataWith(json:JSON) -> [Form]? {
         
         var formList = [Form]()
         
-        let daysData = json["weekly_daily"].array!
+        guard let daysData = json["weekly_daily"].array else {return nil}
         //今天的数据是数组第一个.
         for dailyData in daysData {
             
             let form = Form()
             
-            form.date = dailyData["date"].string!
+            if let date = dailyData["date"].string {
+               form.date = date
+            }
             
             //雷达图单日分数
-            form.cashPoint = dailyData["radar_data"]["today"]["cash"].int!
-            form.projectPoint = dailyData["radar_data"]["today"]["project"].int!
-            form.productionPoint = dailyData["radar_data"]["today"]["product"].int!
-            form.customerCountPoint = dailyData["radar_data"]["today"]["customer"].int!
-            form.employeePoint = dailyData["radar_data"]["today"]["employee"].int!
+            if let cashPoint = dailyData["radar_data"]["today"]["cash"].int {
+                form.cashPoint = cashPoint
+            }
+            
+            if let projectPoint = dailyData["radar_data"]["today"]["project"].int {
+                form.projectPoint = projectPoint
+            }
+            
+            if let productionPoint = dailyData["radar_data"]["today"]["product"].int {
+                form.productionPoint = productionPoint
+            }
+            
+            if let customerCountPoint = dailyData["radar_data"]["today"]["customer"].int {
+                form.customerCountPoint = customerCountPoint
+            }
+            
+            if let employeePoint = dailyData["radar_data"]["today"]["employee"].int {
+                form.employeePoint = employeePoint
+            }
             
             //雷达图七日均价
-            form.cashAvgPoint = dailyData["radar_data"]["avg"]["cash"].int!
-            form.projectAvgPoint = dailyData["radar_data"]["avg"]["project"].int!
-            form.productionAvgPoint = dailyData["radar_data"]["avg"]["product"].int!
-            form.customerCountAvgPoint = dailyData["radar_data"]["avg"]["customer"].int!
-            form.employeeAvgPoint = dailyData["radar_data"]["avg"]["employee"].int!
+            if let cashAvgPoint = dailyData["radar_data"]["avg"]["cash"].int{
+                form.cashAvgPoint = cashAvgPoint
+            }
+            
+            if let projectAvgPoint = dailyData["radar_data"]["avg"]["project"].int {
+                form.projectAvgPoint = projectAvgPoint
+            }
+            if let productionAvgPoint = dailyData["radar_data"]["avg"]["product"].int {
+                form.productionAvgPoint = productionAvgPoint
+            }
+            
+            if let customerCountAvgPoint = dailyData["radar_data"]["avg"]["customer"].int {
+                form.customerCountAvgPoint = customerCountAvgPoint
+            }
+            
+            if let employeeAvgPoint = dailyData["radar_data"]["avg"]["employee"].int {
+                form.employeeAvgPoint = employeeAvgPoint
+            }
             
             //下方列表
             //现金
-            form.cashList.amount = dailyData["cash_amount"].int!
+            if let amount = dailyData["cash_amount"].int {
+                form.cashList.amount = amount
+            }
             
-            form.cash = dailyData["cash_amount"].int!
+            if let cash = dailyData["cash_amount"].int {
+                form.cash = cash
+            }
             
             if let cashList = dailyData["cash_list"].array {
                 
