@@ -213,8 +213,12 @@ class CodeLoginVerifyVC: UIViewController {
             for agent in agentList {
                 
                 let a = Agent()
-                a.name = agent["agent_name"].string!
-                a.id = agent["agent_id"].string!
+                if let name = agent["agent_name"].string{
+                    a.name = name
+                }
+                if let id = agent["agent_id"].string{
+                    a.id = id
+                }
                 
                 list.append(a)
             }

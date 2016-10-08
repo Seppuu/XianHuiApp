@@ -163,15 +163,20 @@ class ProjectPlannedVC: UIViewController {
         for data in json.reverse() {
             
             let p = Project()
-            p.name = data["fullname"].string!
+            if let name = data["fullname"].string {
+                p.name = name
+            }
             p.planType = .customer
-            p.addDate = data["adate"].string!
+            if let addDate = data["adate"].string {
+                p.addDate = addDate
+            }
             
-            let startTime = data["start_time"].string!
-            let endTime = data["end_time"].string!
-            
-            
-            p.time = "\(startTime) - \(endTime)"
+            if let startTime = data["start_time"].string {
+                
+                if let endTime = data["end_time"].string {
+                   p.time = "\(startTime) - \(endTime)"
+                }
+            }
             
             allProject.append(p)
             
@@ -208,21 +213,6 @@ class ProjectPlannedVC: UIViewController {
         return listArray
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

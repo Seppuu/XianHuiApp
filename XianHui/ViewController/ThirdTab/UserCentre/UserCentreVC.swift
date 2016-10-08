@@ -157,13 +157,13 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
                 self.avatarTap()
             }
             
-            cell.editTapHandler =  { [weak self] in
+            cell.editTapHandler =  {
                 cell.firstNameField.text = "名"
                 cell.secondNameField.text = "姓"
                 
             }
             
-            cell.cancelTapHandler = { [weak self] in
+            cell.cancelTapHandler = {
                
             }
             
@@ -300,7 +300,6 @@ extension UserCentreVC: UIImagePickerControllerDelegate, UINavigationControllerD
         User.saveAvatarWith(image) { (success) in
             
             if success == true {
-                
                 self.uploadingAvatar = false
                 self.userTableView.reloadData()
                 NSNotificationCenter.defaultCenter().postNotificationName(UserAvatarUpdatedNoti, object: nil)
@@ -308,9 +307,7 @@ extension UserCentreVC: UIImagePickerControllerDelegate, UINavigationControllerD
             else {
                 
             }
-            
         }
-        
     }
 }
 

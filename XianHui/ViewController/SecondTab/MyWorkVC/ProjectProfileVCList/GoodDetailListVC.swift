@@ -150,8 +150,6 @@ class GoodDetailListVC: BaseTableViewController {
                 m2.desc = retail_price
             }
             
-
-            
             let list = BaseTableViewModelList()
             list.listName = ""
             list.list = [m0,m1,m2]

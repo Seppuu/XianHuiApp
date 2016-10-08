@@ -348,13 +348,6 @@ extension LoginViewController:UITableViewDelegate,UITableViewDataSource {
         
         
     }
-    
-    
-    
-    
-    
-    
-    
 }
 
 

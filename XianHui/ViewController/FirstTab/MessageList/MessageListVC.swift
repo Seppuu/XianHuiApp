@@ -38,8 +38,8 @@ class MessageListVC: LCCKConversationListViewController {
         super.viewDidLoad()
         
         
-        self.tableView.delegate = tableViewModel
-        self.tableView.dataSource = tableViewModel
+//        self.tableView.delegate = tableViewModel
+//        self.tableView.dataSource = tableViewModel
 
         setCustomerCell()
         setTableView()

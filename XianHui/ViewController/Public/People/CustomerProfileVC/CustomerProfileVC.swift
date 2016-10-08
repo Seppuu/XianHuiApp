@@ -93,13 +93,7 @@ class CustomerProfileVC: UIViewController {
         
         let nib1 = UINib(nibName: typeCellId, bundle: nil)
         tableView.registerNib(nib1, forCellReuseIdentifier: typeCellId)
-        
-        
-        
     }
-    
-    
-
 }
 
 extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {

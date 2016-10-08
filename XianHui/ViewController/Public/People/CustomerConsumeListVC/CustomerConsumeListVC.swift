@@ -54,11 +54,14 @@ class CustomerConsumeListVC: UIViewController {
                     self.tableView.mj_footer.endRefreshingWithNoMoreData()
                 }
                 else {
-                    self.totalPage = json!["totalPage"].int!
-                    self.goodListArray += self.makeGoodListWith(jsonData)
-                    self.pageNumber += 1
-                    self.tableView.reloadData()
-                    self.tableView.mj_footer.endRefreshing()
+                    if let totalPage = json!["totalPage"].int {
+                        self.totalPage = totalPage
+                        self.goodListArray += self.makeGoodListWith(jsonData)
+                        self.pageNumber += 1
+                        self.tableView.reloadData()
+                        self.tableView.mj_footer.endRefreshing()
+                    }
+                    
                 }
                 
                 
@@ -77,10 +80,18 @@ class CustomerConsumeListVC: UIViewController {
         for g in json {
             
             let good = Good()
-            good.name = g["fullname"].string!
-            good.id   = g["item_id"].int!
-            good.amount = g["amount"].string!
-            good.saledate = g["saledate"].string!
+            if let name = g["fullname"].string {
+                good.name  = name
+            }
+            if let id   = g["item_id"].int {
+                good.id = id
+            }
+            if let amount = g["amount"].string {
+                good.amount = amount
+            }
+            if let saledate = g["saledate"].string {
+                good.saledate = saledate
+            }
             
             list.append(good)
         }
@@ -170,33 +181,7 @@ extension CustomerConsumeListVC:UITableViewDelegate,UITableViewDataSource {
         return cell
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+   
 }
 
 

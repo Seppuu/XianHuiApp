@@ -73,15 +73,24 @@ class AccountManagerVC: UIViewController {
         for agent in data.array! {
             
             let a = Agent()
-            a.name = agent["agent_name"].string!
-            a.id = agent["agent_id"].string!
-            let isCurrentUse = agent["is_default"].string!
-            if isCurrentUse == "1" {
-                a.isCurrentUse = true
+            if let name = agent["agent_name"].string {
+                a.name = name
             }
-            else {
-                a.isCurrentUse = false
+            
+            if let id = agent["agent_id"].string {
+                a.id = id
             }
+            
+            if let isCurrentUse = agent["is_default"].string {
+                
+                if isCurrentUse == "1" {
+                    a.isCurrentUse = true
+                }
+                else {
+                    a.isCurrentUse = false
+                }
+            }
+            
             list.append(a)
         }
         

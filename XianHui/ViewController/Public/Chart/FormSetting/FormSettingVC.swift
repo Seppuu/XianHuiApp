@@ -68,8 +68,9 @@ class FormSettingVC: UIViewController {
             if let defaultVal = json[key]["value"].int {
                 someMaxVal.value = defaultVal
             }
-            someMaxVal.list = json[key]["list"].dictionaryObject as! [String:String]
-            
+            if let list = json[key]["list"].dictionaryObject as? [String:String] {
+                someMaxVal.list = list
+            }
             list.append(someMaxVal)
         }
 

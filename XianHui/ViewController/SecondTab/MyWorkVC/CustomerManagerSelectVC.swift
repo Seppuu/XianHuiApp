@@ -44,9 +44,6 @@ class CustomerManagerSelectVC: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        
-        
-        
     }
     
     func getListOfManager() {
@@ -60,10 +57,6 @@ class CustomerManagerSelectVC: UIViewController {
                 
             }
         }
-        
-        
-        
-        
     }
     
     func makeDataModel(data:JSON) {
@@ -84,9 +77,6 @@ class CustomerManagerSelectVC: UIViewController {
             m.id = e["user_id"].int!
             
             list.append(m)
-            
-            
-            
         }
         listOfEmployee = list
         tableView.reloadData()
@@ -128,9 +118,6 @@ extension CustomerManagerSelectVC:UITableViewDelegate,UITableViewDataSource {
             
             cell!.leftLabel.text = "变更日期"
             cell!.typeLabel.text = updateTime
-            
-            
-            
         }
         else {
             
@@ -172,9 +159,6 @@ extension CustomerManagerSelectVC:UITableViewDelegate,UITableViewDataSource {
                 
             }
         }
-        
-        
-        
     }
     
     

@@ -51,9 +51,7 @@ class ScheduleVC: UIViewController {
         
         let nib = UINib(nibName: cellId, bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: cellId)
-        
-//        tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(ScheduleVC.topRefresh))
-//        tableView.mj_header.beginRefreshing()
+
         topRefresh()
         tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(ScheduleVC.bottomRefresh))
         
@@ -80,10 +78,13 @@ class ScheduleVC: UIViewController {
                 
                 if jsonArr.count > 0 {
                     //有数据
-                    self.nextDate = json!["nextDate"].string!
-                    self.makeCustomerListWith(jsonArr)
-                    self.tableView.reloadData()
-                    self.tableView.mj_footer.endRefreshing()
+                    if let nextDate = json!["nextDate"].string {
+                        self.nextDate = nextDate
+                        
+                        self.makeCustomerListWith(jsonArr)
+                        self.tableView.reloadData()
+                        self.tableView.mj_footer.endRefreshing()
+                    }
                 }
                 else {
                     //已经没有数据
@@ -113,15 +114,32 @@ class ScheduleVC: UIViewController {
         for data in dataArr.reverse() {
             
             let customer = Customer()
-            customer.id = data["customer_id"].int!
-            customer.guid = data["guid"].string!
-            customer.name = data["fullname"].string!
-            customer.avatarUrlString = data["avator_url"].string!
+            if let id = data["customer_id"].int {
+                customer.id = id
+            }
+            if let guid = data["guid"].string {
+                customer.guid = guid
+            }
+            if let name = data["fullname"].string {
+                customer.name = name
+            }
             
-            customer.projectTotal = data["project_total"].int!
-            customer.scheduleTime = data["adate"].string!
-            customer.scheduleStatus = data["status"].string!
-            customer.scheduleStartTime = data["start_time"].string!
+            if let avatarUrlString = data["avator_url"].string {
+                customer.avatarUrlString = avatarUrlString
+            }
+            
+            if let projectTotal = data["project_total"].int {
+                customer.projectTotal = projectTotal
+            }
+            if let scheduleTime = data["adate"].string {
+                 customer.scheduleTime = scheduleTime
+            }
+            if let scheduleStatus = data["status"].string {
+                customer.scheduleStatus = scheduleStatus
+            }
+            if let scheduleStartTime = data["start_time"].string {
+                customer.scheduleStartTime = scheduleStartTime
+            }
             //按照日期分组
             if customer.scheduleTime != lastDate {
                 //add new arr
@@ -130,9 +148,7 @@ class ScheduleVC: UIViewController {
                 days.append(lastDate)
             }
             
-            
             customers.append(customer)
-            
         }
         
         
@@ -282,10 +298,5 @@ extension ScheduleVC:UITableViewDelegate,UITableViewDataSource {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
 
     }
-    
-    
-    
-    
-    
-    
+
 }

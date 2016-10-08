@@ -55,20 +55,24 @@ class ProjectPlanningVC: UIViewController {
                     
                     self.projectPlannedId = idArr
 
-                    let peojectJson = json!["project"]["list"].array!
-                    self.projects = self.getListOfProjectWith(peojectJson)
-                    self.bottomView.listOfProject = self.projects
-                    self.bottomView.tableView.reloadData()
+                    if let peojectJson = json!["project"]["list"].array {
+                        self.projects = self.getListOfProjectWith(peojectJson)
+                        self.bottomView.listOfProject = self.projects
+                        self.bottomView.tableView.reloadData()
+                    }
+                    
                 }
                 
                 if let idArr = json!["product"]["selected"].arrayObject as? [Int] {
                     
                     self.productionPlannedId = idArr
-   
-                    let productJson = json!["product"]["list"].array!
-                    self.prods = self.getListOfProdWith(productJson)
-                    self.bottomView.listOfProd = self.prods
-                    self.bottomView.tableView.reloadData()
+                    if let productJson = json!["product"]["list"].array {
+                        
+                        self.prods = self.getListOfProdWith(productJson)
+                        self.bottomView.listOfProd = self.prods
+                        self.bottomView.tableView.reloadData()
+                    }
+                    
                 }
             }
             else {
@@ -85,8 +89,12 @@ class ProjectPlanningVC: UIViewController {
         for p in json {
             
             let pro = Project()
-            pro.name = p["fullname"].string!
-            pro.id   = p["item_id"].int!
+            if let name = p["fullname"].string {
+                pro.name = name
+            }
+            if let id   = p["item_id"].int {
+                pro.id = id
+            }
             
             if let cardList = p["card_list"].array {
                 
@@ -96,16 +104,22 @@ class ProjectPlanningVC: UIViewController {
                     
                     let goodCard = GoodCard()
                     
-                    goodCard.cardName      = card["fullname"].string!
+                    if let cardName      = card["fullname"].string {
+                        goodCard.cardName = cardName
+                    }
                     if let times = card["times"].int {
                         goodCard.cardTimesLeft = times
                     }
                     
-                    goodCard.cardType      = card["card_class"].string!
-                    goodCard.cardNo        = card["card_num"].string!
-                    goodCard.cardPrice     = card["price"].string!
-                    
-                    
+                    if let cardType = card["card_class"].string {
+                        goodCard.cardType = cardType
+                    }
+                    if let cardNo = card["card_num"].string {
+                        goodCard.cardNo = cardNo
+                    }
+                    if let cardPrice = card["price"].string {
+                        goodCard.cardPrice = cardPrice
+                    }
                     pro.cardList.append(goodCard)
                 }
                 
@@ -144,8 +158,12 @@ class ProjectPlanningVC: UIViewController {
         for p in json {
             
             let pro = Production()
-            pro.name = p["fullname"].string!
-            pro.id   = p["item_id"].int!
+            if let name = p["fullname"].string {
+                pro.name = name
+            }
+            if let id = p["item_id"].int {
+                 pro.id = id
+            }
             
             if let cardList = p["card_list"].array {
                 
@@ -155,15 +173,22 @@ class ProjectPlanningVC: UIViewController {
                     
                     let goodCard = GoodCard()
                     
-                    goodCard.cardName      = card["fullname"].string!
+                    if let cardName      = card["fullname"].string {
+                        goodCard.cardName = cardName
+                    }
                     if let times = card["times"].int {
                         goodCard.cardTimesLeft = times
                     }
                     
-                    goodCard.cardType      = card["card_class"].string!
-                    goodCard.cardNo        = card["card_num"].string!
-                    goodCard.cardPrice     = card["price"].string!
-                    
+                    if let cardType = card["card_class"].string {
+                        goodCard.cardType = cardType
+                    }
+                    if let cardNo = card["card_num"].string {
+                        goodCard.cardNo = cardNo
+                    }
+                    if let cardPrice = card["price"].string {
+                        goodCard.cardPrice = cardPrice
+                    }
                     
                     pro.cardList.append(goodCard)
                 }
@@ -190,8 +215,6 @@ class ProjectPlanningVC: UIViewController {
                
             }
         }
-        
-        
         return listOfProd
     }
     

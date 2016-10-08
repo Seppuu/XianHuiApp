@@ -44,17 +44,20 @@ class DailyFormVC: RadarChartVC {
         NetworkManager.sharedManager.getDailyReportDataWith(noticeId) { (success, json, error) in
             
             if success == true {
-                self.formList = self.makeFormDataWith(json!)
+                if let formList = self.makeFormDataWith(json!) {
+                    self.formList = formList
+                    self.numbers = self.setNumbers()
+                    self.names = ["现金","实操","产品","客流","客单价","人均项目数","项目均价"]
+                    
+                    self.form = self.formToday
+                    
+                    self.jsonData = json!
+                    
+                    self.setChartData()
+                    self.tableView.reloadData()
+                }
                 
-                self.numbers = self.setNumbers()
-                self.names = ["现金","实操","产品","客流","客单价","人均项目数","项目均价"]
                 
-                self.form = self.formToday
-                
-                self.jsonData = json!
-                
-                self.setChartData()
-                self.tableView.reloadData()
                 
             }
             else {
@@ -134,53 +137,82 @@ class DailyFormVC: RadarChartVC {
                 
                 for unit in cashList {
                     let p = FormDetailList()
-                    p.name = unit["fullname"].string!
-                    p.amount = unit["amount"].string!
+                    if let name = unit["fullname"].string{
+                        p.name = name
+                    }
+                    
+                    if let amount = unit["amount"].string {
+                        p.amount = amount
+                    }
                     form.cashList.list.append(p)
                 }
             }
             
             //项目
-            form.projectList.amount = dailyData["project_amount"].int!
+            if let amount = dailyData["project_amount"].int {
+                form.projectList.amount = amount
+            }
             
-            form.project = dailyData["project_amount"].int!
+            if let project = dailyData["project_amount"].int {
+                form.project = project
+            }
             
             if let projectList = dailyData["project_list"].array {
                 
                 for unit in projectList {
                     let p = FormDetailList()
-                    p.name = unit["fullname"].string!
-                    p.amount = unit["amount"].string!
+                    if let name = unit["fullname"].string {
+                        p.name = name
+                    }
+                    if let amount = unit["amount"].string{
+                        p.amount = amount
+                    }
                     form.projectList.list.append(p)
                 }
             }
             
             //产品
-            form.productList.amount = dailyData["product_amount"].int!
+            if let amount = dailyData["product_amount"].int{
+                form.productList.amount = amount
+            }
             
-            form.product = dailyData["product_amount"].int!
+            if let product = dailyData["product_amount"].int{
+                form.product = product
+            }
             
             if let productList = dailyData["product_list"].array {
                 
                 for unit in productList {
                     let p = FormDetailList()
-                    p.name = unit["fullname"].string!
-                    p.amount = unit["amount"].string!
+                    if let name = unit["fullname"].string{
+                        p.name = name
+                    }
+                    if let amount = unit["amount"].string {
+                        p.amount = amount
+                    }
                     form.productList.list.append(p)
                 }
             }
             
             //客流
-            form.customerList.amount = dailyData["customer_num"].int!
+            if let amount = dailyData["customer_num"].int{
+                form.customerList.amount = amount
+            }
             
-            form.customerCount = dailyData["customer_num"].int!
+            if let customerCount = dailyData["customer_num"].int{
+                form.customerCount = customerCount
+            }
             
             if let customerList = dailyData["customer_list"].array {
                 
                 for unit in customerList {
                     let p = FormDetailList()
-                    p.name = unit["fullname"].string!
-                    p.amount = unit["amount"].string!
+                    if let name = unit["fullname"].string{
+                        p.name = name
+                    }
+                    if let amount = unit["amount"].string{
+                        p.amount = amount
+                    }
                     form.customerList.list.append(p)
                 }
             }
@@ -192,38 +224,58 @@ class DailyFormVC: RadarChartVC {
                 
                 for unit in data {
                     let p = FormDetailList()
-                    p.name = unit["fullname"].string!
-                    p.amount = unit["amount"].string!
+                    if let name = unit["fullname"].string{
+                        p.name = name
+                    }
+                    
+                    if let amount = unit["amount"].string{
+                        p.amount = amount
+                    }
                     form.customerUnitPriceList.list.append(p)
                 }
                 
             }
             
             //员工项目数
-            form.employeeList.amount = dailyData["employee_project_num"].int!
+            if let amount = dailyData["employee_project_num"].int{
+                form.employeeList.amount = amount
+            }
             
-            form.employee = dailyData["employee_project_num"].int!
+            if let employee = dailyData["employee_project_num"].int{
+                form.employee = employee
+            }
             
             if let data = dailyData["employee_project_list"].array {
                 
                 for unit in data {
                     let p = FormDetailList()
-                    p.name = unit["fullname"].string!
-                    p.amount = unit["amount"].string!
+                    if let name = unit["fullname"].string{
+                        p.name = name
+                    }
+                    
+                    if let amount = unit["amount"].string{
+                        p.amount = amount
+                    }
                     form.employeeList.list.append(p)
                 }
                 
             }
             
             //项目均价
-            form.projectPriceList.amount = dailyData["project_avg_price"].int!
+            if let amount = dailyData["project_avg_price"].int{
+                form.projectPriceList.amount = amount
+            }
             
             if let data = dailyData["project_avg_list"].array {
                 
                 for unit in data {
                     let p = FormDetailList()
-                    p.name = unit["fullname"].string!
-                    p.amount = unit["amount"].string!
+                    if let name = unit["fullname"].string{
+                        p.name = name
+                    }
+                    if let amount = unit["amount"].string{
+                        p.amount = amount
+                    }
                     form.projectPriceList.list.append(p)
                 }
                 
@@ -236,28 +288,49 @@ class DailyFormVC: RadarChartVC {
         //五个维度,当月平均和累计
         let monthlyAvg = json["monthly_avg"]
         let today = formList[0]
-        today.monthlyAvgCash = monthlyAvg["cash"].int!
         
-        today.monthlyAvgProject = monthlyAvg["project"].int!
+        if let monthlyAvgCash = monthlyAvg["cash"].int{
+            today.monthlyAvgCash = monthlyAvgCash
+        }
         
-        today.monthlyAvgProduct = monthlyAvg["product"].int!
+        if let monthlyAvgProject = monthlyAvg["project"].int{
+            today.monthlyAvgProject = monthlyAvgProject
+        }
         
-        today.monthlyAvgCustomer = monthlyAvg["customer"].int!
+        if let monthlyAvgProduct = monthlyAvg["product"].int{
+            today.monthlyAvgProduct = monthlyAvgProduct
+        }
         
-        today.monthlyAvgEmployee = monthlyAvg["employee"].int!
+        if let monthlyAvgCustomer = monthlyAvg["customer"].int{
+            today.monthlyAvgCustomer = monthlyAvgCustomer
+        }
+        
+        if let monthlyAvgEmployee = monthlyAvg["employee"].int{
+            today.monthlyAvgEmployee = monthlyAvgEmployee
+        }
         
         
         let monthlyTotal = json["monthly_total"]
         
-        today.monthlyTotalCash = monthlyTotal["cash"].int!
+        if let monthlyTotalCash = monthlyTotal["cash"].int{
+            today.monthlyTotalCash = monthlyTotalCash
+        }
         
-        today.monthlyTotalProject = monthlyTotal["project"].int!
+        if let monthlyTotalProject = monthlyTotal["project"].int{
+            today.monthlyTotalProject = monthlyTotalProject
+        }
         
-        today.monthlyTotalProduct = monthlyTotal["product"].int!
+        if let monthlyTotalProduct = monthlyTotal["product"].int{
+            today.monthlyTotalProduct = monthlyTotalProduct
+        }
         
-        today.monthlyTotalCustomer = monthlyTotal["customer"].int!
+        if let monthlyTotalCustomer = monthlyTotal["customer"].int{
+            today.monthlyTotalCustomer = monthlyTotalCustomer
+        }
         
-        today.monthlyTotalEmployee = monthlyTotal["employee"].int!
+        if let monthlyTotalEmployee = monthlyTotal["employee"].int{
+            today.monthlyTotalEmployee = monthlyTotalEmployee
+        }
         
        return formList
     }
@@ -316,14 +389,23 @@ class DailyFormVC: RadarChartVC {
             
             //计算百分比
             for data in datas {
-               totalVal += Double(data["amount"].int!)
+                if let amount = data["amount"].int {
+                    totalVal += Double(amount)
+                }
+               
             }
             
             var chartDatas = [XHChartData]()
             for data in datas {
                 let c = XHChartData()
-                c.x = data["name"].string!
-                c.y = (Double(data["amount"].int!)/totalVal) * 100
+                if let name = data["name"].string {
+                    c.x = name
+                }
+                
+                if let amount = data["amount"].int {
+                    c.y = (Double(amount)/totalVal) * 100
+                }
+                
                 chartDatas.append(c)
             }
             

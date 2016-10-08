@@ -82,9 +82,15 @@ class GoodListVC: BaseViewController {
         for p in json {
             
             let pro = Project()
-            pro.id = p["item_id"].int!
-            pro.name = p["fullname"].string!
-            pro.saledate = p["saledate"].string!
+            if let id = p["item_id"].int {
+                pro.id = id
+            }
+            if let name = p["fullname"].string {
+                pro.name = name
+            }
+            if let saledate = p["saledate"].string {
+                pro.saledate = saledate
+            }
             
             list.append(pro)
             
@@ -101,9 +107,15 @@ class GoodListVC: BaseViewController {
         for p in json {
             
             let pro = Production()
-            pro.id = p["item_id"].int!
-            pro.name = p["fullname"].string!
-            pro.saledate = p["saledate"].string!
+            if let id = p["item_id"].int {
+                pro.id = id
+            }
+            if let name = p["fullname"].string {
+                pro.name = name
+            }
+            if let saledate = p["saledate"].string {
+                pro.saledate = saledate
+            }
             
             list.append(pro)
             
@@ -120,8 +132,12 @@ class GoodListVC: BaseViewController {
         for p in json {
             
             let pro = Project()
-            pro.name = p["fullname"].string!
-            pro.id   = p["item_id"].int!
+            if let name = p["fullname"].string {
+                pro.name = name
+            }
+            if let id   = p["item_id"].int {
+                pro.id = id
+            }
             
             if let cardList = p["card_list"].array {
                 
@@ -131,15 +147,23 @@ class GoodListVC: BaseViewController {
                     
                     let goodCard = GoodCard()
                     
-                    goodCard.cardName      = card["fullname"].string!
+                    if let cardName      = card["fullname"].string {
+                        goodCard.cardName = cardName
+                    }
+                    
                     if let times = card["times"].int {
                         goodCard.cardTimesLeft = times
                     }
                     
-                    goodCard.cardType      = card["card_class"].string!
-                    goodCard.cardNo        = card["card_num"].string!
-                    goodCard.cardPrice     = card["price"].string!
-                    
+                    if let cardType = card["card_class"].string {
+                        goodCard.cardType = cardType
+                    }
+                    if let cardNo = card["card_num"].string {
+                        goodCard.cardType = cardNo
+                    }
+                    if let cardPrice = card["price"].string {
+                        goodCard.cardPrice = cardPrice
+                    }
                     
                     pro.cardList.append(goodCard)
                 }
@@ -192,8 +216,12 @@ class GoodListVC: BaseViewController {
         for p in json {
             
             let pro = Production()
-            pro.name = p["fullname"].string!
-            pro.id   = p["item_id"].int!
+            if let name = p["fullname"].string {
+                pro.name = name
+            }
+            if let id   = p["item_id"].int {
+                pro.id = id
+            }
             
             if let cardList = p["card_list"].array {
                 
@@ -203,15 +231,23 @@ class GoodListVC: BaseViewController {
                     
                     let goodCard = GoodCard()
                     
-                    goodCard.cardName      = card["fullname"].string!
+                    if let cardName = card["fullname"].string {
+                        goodCard.cardName = cardName
+                    }
                     if let times = card["times"].int {
                         goodCard.cardTimesLeft = times
                     }
                     
-                    goodCard.cardType      = card["card_class"].string!
-                    goodCard.cardNo        = card["card_num"].string!
-                    goodCard.cardPrice     = card["price"].string!
+                    if let cardType = card["card_class"].string {
+                        goodCard.cardType = cardType
+                    }
+                    if let cardNo = card["card_num"].string {
+                        goodCard.cardType = cardNo
+                    }
                     
+                    if let cardPrice = card["price"].string {
+                        goodCard.cardPrice = cardPrice
+                    }
                     
                     pro.cardList.append(goodCard)
                 }
@@ -370,7 +406,7 @@ class GoodListVC: BaseViewController {
     }
     
     func toGoodRecordVC() {
-        //TOOD:去消费记录
+        //去消费记录
         let vc = CustomerConsumeListVC()
         vc.title = "消费记录"
         vc.customer = customer
