@@ -11,7 +11,7 @@ import Charts
 import SnapKit
 import SwiftString
 
-class XHBarChartView: OTPageView ,OTPageScrollViewDataSource,OTPageScrollViewDelegate {
+class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDelegate {
     
     var topLabel = UILabel()
     
@@ -25,7 +25,9 @@ class XHBarChartView: OTPageView ,OTPageScrollViewDataSource,OTPageScrollViewDel
     
     var grandTotalValue:Int = 0
     
-    var maxValue:Float = 100
+    var maxValue:Float {
+        return Float(Defaults.cashMaxValue.value!)
+    }
     
     var listOfNumber: [String] {
         //将Int转化为千位数逗号String

@@ -43,8 +43,6 @@ class PieChartViewController: BaseChartViewController {
     
     var listOfDateString = [String]()
     
-    var maxVaule:Float = 0.0
-    
     var topPageView:XHBarChartView!
     
     var bottomCollectionView:UICollectionView!
@@ -87,7 +85,6 @@ class PieChartViewController: BaseChartViewController {
         topPageView.listOfDateString = listOfDateString
         topPageView.currentMonthAvgVaule = currentMonthAvgVaule
         topPageView.grandTotalValue = grandTotalValue
-        topPageView.maxValue = maxVaule //柱形图最大值
         
         topPageView.clipsToBounds = true
         topPageView.setScrollView()

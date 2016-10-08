@@ -278,8 +278,6 @@ class DailyFormVC: RadarChartVC {
         //饼图模型 多个一组
         var chartDatasArray = [[XHChartData]]()
         
-        var maxValue:Float = 0.0
-        
         func getChartDataListArry(datas:[JSON]) -> [XHChartData] {
             var totalVal:Double = 0.0
             
@@ -317,8 +315,6 @@ class DailyFormVC: RadarChartVC {
                 nums.append(num)
             }
             
-            
-            maxValue = Float(Defaults.cashMaxValue.value!)
             currentMonthAvgVaule = formToday.monthlyAvgCash
             grandTotalValue = formToday.monthlyTotalCash
             
@@ -355,7 +351,7 @@ class DailyFormVC: RadarChartVC {
                 let num = form.project
                 nums.append(num)
             }
-            maxValue = Float(Defaults.projectMaxValue.value!)
+          
             currentMonthAvgVaule = formToday.monthlyAvgProject
             grandTotalValue = formToday.monthlyTotalProject
             
@@ -394,7 +390,6 @@ class DailyFormVC: RadarChartVC {
                 nums.append(num)
             }
             
-            maxValue = Float(Defaults.productMaxValue.value!)
             currentMonthAvgVaule = formToday.monthlyAvgProduct
             grandTotalValue = formToday.monthlyTotalProduct
             
@@ -433,7 +428,7 @@ class DailyFormVC: RadarChartVC {
                 nums.append(num)
             }
             
-            maxValue = Float(Defaults.customerMaxValue.value!)
+           
             currentMonthAvgVaule = formToday.monthlyAvgCustomer
             grandTotalValue = formToday.monthlyTotalCustomer
             
@@ -472,7 +467,7 @@ class DailyFormVC: RadarChartVC {
                 nums.append(num)
             }
             
-            maxValue = Float(Defaults.employeeMaxValue.value!)
+           
             currentMonthAvgVaule = formToday.monthlyAvgEmployee
             grandTotalValue = formToday.monthlyTotalEmployee
             
@@ -507,7 +502,7 @@ class DailyFormVC: RadarChartVC {
         vc.currentMonthAvgVaule = currentMonthAvgVaule
         vc.grandTotalValue = grandTotalValue
         
-        vc.maxVaule = maxValue
+       
         vc.pieType = pieType
         vc.listOfChartDataArray = chartDatasArray
         

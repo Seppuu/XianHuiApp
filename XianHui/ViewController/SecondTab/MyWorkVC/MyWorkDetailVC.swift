@@ -14,13 +14,16 @@ import MJRefresh
 class Order: NSObject {
     
     var customerName = ""
-    var number = ""
+    var goodNo = ""
     var goodName = ""
     var bedName = ""
     var employee = ""
     
     var startTime = ""
     var status = ""
+    
+    var numbers = ""
+    var isProd = false
     
 }
 
@@ -224,12 +227,27 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
             }
             
             if let number = data["project_code"].string {
-                o.number = number
+                o.goodNo = number
+            }
+            
+            if let number = data["flowno"].string {
+                o.goodNo = number
+                o.isProd = true
+            }
+            
+            if let numbers = data["qty"].string {
+                o.numbers = numbers
             }
             
             if let goodName = data["project_name"].string {
                 o.goodName = goodName
             }
+            
+            if let goodName = data["item_name"].string {
+                o.goodName = goodName
+                o.isProd = true
+            }
+            
             
             if let bedName = data["bed_name"].string {
                 o.bedName = bedName
@@ -286,13 +304,23 @@ extension MyWorkDetailVC:UITableViewDelegate,UITableViewDataSource {
         let order = self.listOfOrder[indexPath.row]
         
         cell?.firstLabel.text = "顾客:" + order.customerName
-        cell?.secondLabel.text = "编号:" + order.number
+        cell?.secondLabel.text = "编号:" + order.goodNo
         cell?.thirdLabel.text = "品名:" + order.goodName
-        cell?.forthlabel.text = "床位:" + order.bedName
+        
         cell?.fifthLabel.text = "技师:" + order.employee
         
+        if order.isProd == true {
+            cell?.forthlabel.text = "数量:" + order.numbers
+            cell?.secondRightLabel.text = ""
+        }
+        else {
+            cell?.forthlabel.text = "床位:" + order.bedName
+            cell?.secondRightLabel.text =  "开始时间:" + order.startTime
+        }
+        
+        
         cell?.rightLabel.text = order.status
-        cell?.secondRightLabel.text =  "开始时间:" + order.startTime
+        
         
         return cell!
     }
