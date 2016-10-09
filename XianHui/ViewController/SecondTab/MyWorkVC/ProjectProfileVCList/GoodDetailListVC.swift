@@ -81,7 +81,9 @@ class GoodDetailListVC: BaseTableViewController {
             
             let m5 = BaseTableViewModel()
             m5.name = "产品配料"
-            m5.desc = "暂无查询功能"
+            if let formula = json["formula"].string {
+                m5.desc = formula
+            }
             
             let list = BaseTableViewModelList()
             list.listName = ""

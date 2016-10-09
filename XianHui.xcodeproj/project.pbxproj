@@ -18,7 +18,6 @@
 		371430741D9B8D8D0006A314 /* MyWorkListHepler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371430731D9B8D8D0006A314 /* MyWorkListHepler.swift */; };
 		371430771D9B96C60006A314 /* MyWorkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371430751D9B96C60006A314 /* MyWorkCell.swift */; };
 		371430781D9B96C60006A314 /* MyWorkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 371430761D9B96C60006A314 /* MyWorkCell.xib */; };
-		3714307A1D9BAC4C0006A314 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 371430791D9BAC4C0006A314 /* Assets.xcassets */; };
 		3714307C1D9BC0350006A314 /* MyWorkDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3714307B1D9BC0350006A314 /* MyWorkDetailVC.swift */; };
 		37159E411D81082E00542B57 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37159E401D81082E00542B57 /* Form.swift */; };
 		372463B91D69F4180018CE37 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372463B81D69F4180018CE37 /* Customer.swift */; };
@@ -55,6 +54,7 @@
 		37367B881D6C141500479E39 /* chatSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37367B871D6C141500479E39 /* chatSectionView.xib */; };
 		376D6D411D59B37000F9A272 /* RealmUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376D6D401D59B37000F9A272 /* RealmUser.swift */; };
 		376D6D451D59C8E500F9A272 /* ChatExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376D6D441D59C8E500F9A272 /* ChatExample.swift */; };
+		377063BF1DAA3B6400F05CA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 377063BE1DAA3B6400F05CA3 /* Assets.xcassets */; };
 		3770DD841DA4FB2200786FB2 /* GoodDetailListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3770DD831DA4FB2200786FB2 /* GoodDetailListVC.swift */; };
 		3770DD861DA506A800786FB2 /* GoodProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3770DD851DA506A800786FB2 /* GoodProfileVC.swift */; };
 		3771EC941D7555F50064A060 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 3771EC931D7555F50064A060 /* .gitignore */; };
@@ -277,7 +277,6 @@
 		371430731D9B8D8D0006A314 /* MyWorkListHepler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyWorkListHepler.swift; sourceTree = "<group>"; };
 		371430751D9B96C60006A314 /* MyWorkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyWorkCell.swift; sourceTree = "<group>"; };
 		371430761D9B96C60006A314 /* MyWorkCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyWorkCell.xib; sourceTree = "<group>"; };
-		371430791D9BAC4C0006A314 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3714307B1D9BC0350006A314 /* MyWorkDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyWorkDetailVC.swift; sourceTree = "<group>"; };
 		37159E401D81082E00542B57 /* Form.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
 		372463B81D69F4180018CE37 /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
@@ -333,6 +332,7 @@
 		37367B871D6C141500479E39 /* chatSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = chatSectionView.xib; sourceTree = "<group>"; };
 		376D6D401D59B37000F9A272 /* RealmUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmUser.swift; sourceTree = "<group>"; };
 		376D6D441D59C8E500F9A272 /* ChatExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatExample.swift; sourceTree = "<group>"; };
+		377063BE1DAA3B6400F05CA3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3770DD831DA4FB2200786FB2 /* GoodDetailListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodDetailListVC.swift; sourceTree = "<group>"; };
 		3770DD851DA506A800786FB2 /* GoodProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodProfileVC.swift; sourceTree = "<group>"; };
 		3771EC931D7555F50064A060 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -1883,7 +1883,7 @@
 				37BAB72E1D3E0F51001E4680 /* XianHui-Bridging-Header.h */,
 				37EA568A1D3E0A7000D63498 /* AppDelegate.swift */,
 				37EA568E1D3E0A7000D63498 /* Main.storyboard */,
-				371430791D9BAC4C0006A314 /* Assets.xcassets */,
+				377063BE1DAA3B6400F05CA3 /* Assets.xcassets */,
 				37EA56931D3E0A7000D63498 /* LaunchScreen.storyboard */,
 				37EA56961D3E0A7000D63498 /* Info.plist */,
 				3729629B1D40AF6500A947B4 /* BKPasscodeView.strings */,
@@ -2017,6 +2017,7 @@
 				37BAB9761D3E1059001E4680 /* AddFriendMoreCell.xib in Resources */,
 				37BAB9D31D3E11B1001E4680 /* LICENSE in Resources */,
 				37F905321D69F9370078C06B /* CustomerCell.xib in Resources */,
+				377063BF1DAA3B6400F05CA3 /* Assets.xcassets in Resources */,
 				372480DF1D8151EF00B95C54 /* LCCKVCardView.xib in Resources */,
 				37BAB9961D3E1059001E4680 /* SegmentCell.xib in Resources */,
 				37BAB97C1D3E1059001E4680 /* ChannelCell.xib in Resources */,
@@ -2030,7 +2031,6 @@
 				3708C26A1DA551E600D8E534 /* OrderCell.xib in Resources */,
 				371430781D9B96C60006A314 /* MyWorkCell.xib in Resources */,
 				37BAB9981D3E1059001E4680 /* SingleTapCell.xib in Resources */,
-				3714307A1D9BAC4C0006A314 /* Assets.xcassets in Resources */,
 				37FF8EE71D9143B200676780 /* CustomizedChatKitOther.bundle in Resources */,
 				379C738B1D9CDCD000B41BA6 /* CheckBoxCell.xib in Resources */,
 				37BAB9821D3E1059001E4680 /* ConversationCell.xib in Resources */,
@@ -2354,7 +2354,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: tianyi Xu (LFY8N29LRK)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Maibu Network Technology Co., Ltd. (2F9H286LLV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: tianyi Xu (LFY8N29LRK)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -2377,7 +2377,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "03849d49-dcc0-4185-a8c1-e37e708fd8ae";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
@@ -2402,7 +2402,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: tianyi Xu (LFY8N29LRK)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Maibu Network Technology Co., Ltd. (2F9H286LLV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: tianyi Xu (LFY8N29LRK)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2418,7 +2418,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "03849d49-dcc0-4185-a8c1-e37e708fd8ae";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 2.3;
 				VALIDATE_PRODUCT = YES;
@@ -2431,8 +2431,9 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: tianyi Xu (LFY8N29LRK)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Maibu Network Technology Co., Ltd. (2F9H286LLV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2446,7 +2447,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mybook.XianHui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "03849d49-dcc0-4185-a8c1-e37e708fd8ae";
 				SWIFT_OBJC_BRIDGING_HEADER = "XianHui/XianHui-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
@@ -2459,8 +2460,9 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: tianyi Xu (LFY8N29LRK)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Maibu Network Technology Co., Ltd. (2F9H286LLV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2474,7 +2476,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mybook.XianHui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "03849d49-dcc0-4185-a8c1-e37e708fd8ae";
 				SWIFT_OBJC_BRIDGING_HEADER = "XianHui/XianHui-Bridging-Header.h";
 				SWIFT_VERSION = 2.3;
 			};

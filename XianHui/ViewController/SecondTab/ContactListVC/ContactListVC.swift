@@ -8,6 +8,7 @@
 
 import UIKit
 import ChatKit
+import MJRefresh
 
 let accountHasChangedNoti = "accountHasChangedNoti"
 
@@ -42,7 +43,33 @@ class ContactListVC: LCCKContactListViewController {
         setTopView()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ContactListVC.changeAllContacts), name: accountHasChangedNoti, object: nil)
+        
+        addRefresh()
     }
+    
+    func addRefresh() {
+        
+        self.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+            self.reSetUserIds()
+        })
+    }
+    
+    //TODO:refresh contact list data
+    func reSetUserIds() {
+        let hud = showHudWith(view, animated: true, mode: .Text, text: "更新联系人...")
+        User.getContactList { (success, json, error) in
+            self.tableView.mj_header.endRefreshing()
+            if success == true {
+                hud.hide(true)
+                self.changeAllContacts()
+            }
+            else {
+                hud.labelText = error
+                hud.hide(true, afterDelay: 2.0)
+            }
+        }
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -86,13 +113,17 @@ class ContactListVC: LCCKContactListViewController {
             
         }
     }
-
     
     func changeAllContacts() {
         
         let ids = ChatKitExample.getAllUserIds()
-        
-        self.userIds = NSSet(array: ids) as! Set<String>
+        do {
+            let contacts = try LCChatKit.sharedInstance().getProfilesForUserIds(ids)
+            self.contacts = NSSet(array: contacts) as! Set<LCCKContact>
+            self.userIds = NSSet(array: ids) as! Set<String>
+        } catch {
+            // deal with error
+        }
     }
     
 }
@@ -187,6 +218,10 @@ extension ContactListVC {
         else {
             return super.sectionIndexTitlesForTableView(tableView)
         }
+    }
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
     }
     
 }

@@ -73,15 +73,18 @@ func cleanDiskCacheFolder() {
 
 
 //HUD
-func showHudWith(view:UIView,animated:Bool,mode:MBProgressHUDMode,text:String) {
+func showHudWith(view:UIView,animated:Bool,mode:MBProgressHUDMode,text:String) -> MBProgressHUD {
     let hud = MBProgressHUD.showHUDAddedTo(view, animated: animated)
     hud.mode = mode
     hud.labelText = text
+    
+    return hud
 }
 
 
 func hideHudFrom(view:UIView) {
     MBProgressHUD.hideHUDForView(view, animated: true)
+    
 }
 
 

@@ -22,7 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        
         ChatKitExample.invokeThisMethodInDidFinishLaunching()
         
         if launchOptions != nil {
@@ -89,7 +88,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         else {
             
         }
-        
         
         ChatKitExample.invokeThisMethodAfterLoginSuccessWithClientId(clientId, success: {
             
@@ -182,10 +180,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //本地模拟系统推送弹窗点击事件处理
     func eBBannerViewDidTap(noti:NSNotification) {
         if let data  = noti.object as? [NSObject : AnyObject] {
-            
             pushToViewControllerWith(data)
-            
-            
         }
         else {
             

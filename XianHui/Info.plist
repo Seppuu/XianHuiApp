@@ -27,8 +27,16 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>cameraDesciption</string>
+	<key>NSContactsUsageDescription</key>
+	<string>contactsDesciption</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>microphoneDesciption</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>photoLibraryDesciption</string>
 	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
+	<string>LaunchViewController</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -41,14 +49,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-    <key>NSCameraUsageDescription</key>
-    <string>cameraDesciption</string>
-    <key>NSContactsUsageDescription</key>
-    <string>contactsDesciption</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>microphoneDesciption</string>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>photoLibraryDesciption</string>
-    
 </dict>
 </plist>

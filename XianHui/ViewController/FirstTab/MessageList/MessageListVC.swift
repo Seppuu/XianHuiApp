@@ -181,7 +181,6 @@ class MessageListVC: LCCKConversationListViewController {
                     
                     self.updateTopView()
                     
-                    
                 }
             }
         }

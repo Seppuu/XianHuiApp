@@ -76,9 +76,7 @@ class User:NSObject {
     
     class func loginWithCode(mobile:String,code:String,usertype:UserLoginType,completion:((user:User?,data:JSON?,error:String?)->())) {
         
-        
         NetworkManager.sharedManager.verifyPhoneCodeWith(mobile, usertype: usertype, code: code) { (success, data, error) in
-            
             
             if success {
                 
@@ -117,6 +115,7 @@ class User:NSObject {
                 }
                 
                 //获取联系人列表之后,完成登陆
+                
                 NetworkManager.sharedManager.getUserList { (success, json, error) in
                     
                     if success == true {
@@ -144,6 +143,24 @@ class User:NSObject {
         }
         
         
+    }
+    
+    
+    class func getContactList(completion:DDResultHandler) {
+        
+        NetworkManager.sharedManager.getUserList { (success, json, error) in
+            
+            if success == true {
+                if let listOfData = json?.array {
+                    self.saveUserListWith(listOfData)
+                    completion(success: true, json: nil, error: nil)
+                }
+            }
+            else {
+                //获取联系人失败.
+                completion(success: false, json: nil, error: error)
+            }
+        }
     }
     
 
@@ -254,8 +271,6 @@ class User:NSObject {
             if let avatarUrl = data["avator_url"].string {
                 rmUser.avatarUrl = avatarUrl
             }
-            
-            
             
             try! realm.write {
                 realm.add(rmUser)
