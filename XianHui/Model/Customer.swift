@@ -44,7 +44,7 @@ class Customer: NSObject {
     //上次消费时间
     var lastConsumeDate:String?
     //上次到店距今多久
-    var time = ""
+    var time = "0"
     //预约时间
     var scheduleTime = ""
     
@@ -80,7 +80,7 @@ class Employee: User {
     
     var place = ""
     var projectTotal = 0
-    var workTime = 0
+    var workTime = ""
     var status = ""
     
 }

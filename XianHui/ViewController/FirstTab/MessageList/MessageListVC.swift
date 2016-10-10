@@ -35,11 +35,12 @@ class MessageListVC: LCCKConversationListViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.tableView.layoutMargins = UIEdgeInsetsMake(0, 64, 0, 0)
+                
         setCustomerCell()
         setTableView()
         showRemindNoticeIfFirstLaunch()
+        
+        self.tableView.layoutMargins = UIEdgeInsetsMake(0, 64, 0, 0)
     }
     
     override func didReceiveMemoryWarning() {
@@ -65,8 +66,6 @@ class MessageListVC: LCCKConversationListViewController {
         topTableView.dataSource = self
         topTableView.layoutMargins = UIEdgeInsetsMake(0, 64, 0, 0)
         topView.addSubview(topTableView)
-        
-        
         
         self.tableView.tableHeaderView = topView
         
@@ -188,6 +187,8 @@ class MessageListVC: LCCKConversationListViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         getMyBookERPLoginStatus()
+        
+        
     }
     
     override func viewDidDisappear(animated: Bool) {

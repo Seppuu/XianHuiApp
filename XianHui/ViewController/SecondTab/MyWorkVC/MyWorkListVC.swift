@@ -170,11 +170,11 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
                 case 3:
                     c.scheduleStatus = "已离店"
                 case 4:
-                    c.scheduleStatus = "未计已约"
+                    c.scheduleStatus = "已预约"
                 case 5:
-                    c.scheduleStatus = "已计未约"
+                    c.scheduleStatus = "未预约"
                 case 6:
-                    c.scheduleStatus = "未计未约"
+                    c.scheduleStatus = "未预约"
                 default:
                     break;
                 }
@@ -202,7 +202,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
             
             work.firstTagImage = UIImage(named: "place")!
             work.secondTagImage = UIImage(named: "clock")!
-            work.thirdTagImage = UIImage(named: "calander")!
+            work.thirdTagImage = UIImage(named: "planIcon")!
             
             dataArray.append(work)
             
@@ -228,12 +228,17 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
                 employee.place = orgName
             }
             
-            if let project_hours = data["project_hours"].int {
-                employee.workTime = project_hours
+            if let project_hours = data["project_hours"].float {
+                
+                employee.workTime = String(project_hours)
             }
             
             if let userId = data["user_id"].int {
                 employee.id = userId
+            }
+            
+            if let projectTotal = data["project_qty"].int {
+                employee.projectTotal = projectTotal
             }
             
             if let status = data["status"].int {
@@ -258,8 +263,8 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
             work.nameLabelString = employee.displayName
             work.leftImageUrl = employee.avatarURL
             work.firstTagString = employee.place
-            work.secondTagString = String(employee.workTime)
-            work.thirdTagString = String(employee.projectTotal)
+            work.secondTagString = String(employee.projectTotal)
+            work.thirdTagString = employee.workTime
             work.id = employee.id
             work.rightLabelString = employee.status
             

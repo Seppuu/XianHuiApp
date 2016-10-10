@@ -22,7 +22,7 @@ class ChatKitExample: LCChatKitExample {
         
         super.exampleInit()
         LCChatKit.sharedInstance().useDevPushCerticate = false
-        //addCustomerCellIntoMessageList()
+        addCustomerCellIntoMessageList()
     }
     
     func addCustomerCellIntoMessageList() {
@@ -38,12 +38,12 @@ class ChatKitExample: LCChatKitExample {
 //        }
 //        
 //        
-//        LCChatKit.sharedInstance().conversationListService.configureCellBlock = {
-//            (cell,tableView,indexPath,conversation) in
-//            
-
-//            
-//        }
+        
+        LCChatKit.sharedInstance().conversationListService.configureCellBlock = {
+            (cell,tableView,indexPath,conversation) in
+            
+            cell.layoutMargins = UIEdgeInsetsMake(0, 64, 0, 0)
+        }
     }
     
     

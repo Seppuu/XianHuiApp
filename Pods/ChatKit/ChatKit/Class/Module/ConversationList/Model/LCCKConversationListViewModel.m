@@ -82,8 +82,9 @@
         return customCell;
     }
     LCCKConversationListCell *cell = [LCCKConversationListCell dequeueOrCreateCellByTableView:tableView];
-    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
-    [tableView setSeparatorColor:[[LCCKSettingService sharedInstance] defaultThemeColorForKey:@"TableView-SeparatorColor"]];
+    //xianhui
+//    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+//    [tableView setSeparatorColor:[[LCCKSettingService sharedInstance] defaultThemeColorForKey:@"TableView-SeparatorColor"]];
     __block NSString *displayName = nil;
     __block NSURL *avatarURL = nil;
     NSString *peerId = nil;
@@ -122,6 +123,7 @@
     if (configureCellBlock) {
         configureCellBlock(cell, tableView, indexPath, conversation);
     }
+    
     return cell;
 }
 
