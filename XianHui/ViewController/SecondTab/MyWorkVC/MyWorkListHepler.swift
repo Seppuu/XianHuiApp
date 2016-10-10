@@ -70,10 +70,10 @@ class MyWorkListHepler: NSObject, UITableViewDelegate, UITableViewDataSource {
         cell?.selectionStyle = .None
         
         let obj = dataArray[indexPath.row]
-//        
-//        if let url = NSURL(string:) {
-//            cell?.leftImageIView.kf_setImageWithURL(url)
-//        }
+        
+        if let url = NSURL(string:obj.leftImageUrl) {
+            cell?.leftImageIView.kf_setImageWithURL(url)
+        }
         
         cell?.leftImageIView.layer.cornerRadius = 25
         cell?.leftImageIView.layer.masksToBounds = true

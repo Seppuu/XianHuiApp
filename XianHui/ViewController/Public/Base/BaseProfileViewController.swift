@@ -94,7 +94,9 @@ class BaseProfileViewController: BaseTableViewController {
                 cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? CustomerLargeCell
             }
             cell!.selectionStyle = .None
-            cell!.avatarImageView.backgroundColor = UIColor.lightGrayColor()
+            if let url = NSURL(string:profileModel.avatarUrl)  {
+                cell!.avatarImageView.kf_setImageWithURL(url)
+            }
             cell!.nameLabel.text = profileModel.firstLabelString
             cell!.vipLabel.text = profileModel.secondLabelString
             cell!.numberLabel.text = profileModel.thirdLabelString

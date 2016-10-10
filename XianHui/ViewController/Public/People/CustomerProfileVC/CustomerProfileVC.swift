@@ -56,9 +56,17 @@ class CustomerProfileVC: UIViewController {
     func updateCustomerMsgWith(json:JSON) {
         
         self.customer.id = self.customerId
-        self.customer.certNo = json["basic"]["cert_no"].string!
-        self.customer.name = json["basic"]["fullname"].string!
-        self.customer.avatarUrlString = json["basic"]["avator_url"].string!
+        if let certNo = json["basic"]["cert_no"].string {
+            self.customer.certNo = certNo
+        }
+        if let fullName = json["basic"]["fullname"].string {
+           self.customer.name = fullName
+        }
+        
+        if let url = json["basic"]["avator_url"].string {
+           self.customer.avatarUrlString = url
+        }
+        
         
         if let customer_manager = json["customer_manager"].string {
             self.customer.customerManager = customer_manager
@@ -141,7 +149,10 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
             
             let cell = tableView.dequeueReusableCellWithIdentifier(topCellId, forIndexPath: indexPath) as! CustomerLargeCell
             
-            cell.avatarImageView.backgroundColor = UIColor.lightGrayColor()
+            if let url = NSURL(string: customer.avatarUrlString) {
+                cell.avatarImageView.kf_setImageWithURL(url)
+            }
+            
             cell.nameLabel.text = customer.name
             cell.vipLabel.text = customer.vipStar
             cell.numberLabel.text = customer.certNo

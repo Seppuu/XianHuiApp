@@ -21,7 +21,7 @@ class CustomerLargeCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        avatarImageView.layer.cornerRadius = avatarImageView.ddWidth/2
+        avatarImageView.layer.cornerRadius = 60/2
         avatarImageView.layer.masksToBounds = true
         
         
