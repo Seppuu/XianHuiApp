@@ -18,6 +18,7 @@ pod 'ZWIntroductionViewController'
 
 
 #Swift 2.3
+pod 'Ruler', '~> 0.8.0'
 pod 'RealmSwift', '~> 1.1.0'
 pod 'Proposer', '~> 0.9.1'
 pod 'SnapKit', '~> 0.22.0'

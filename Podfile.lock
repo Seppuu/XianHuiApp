@@ -64,6 +64,7 @@ PODS:
   - Realm/Headers (1.1.0)
   - RealmSwift (1.1.0):
     - Realm (= 1.1.0)
+  - Ruler (0.8.0)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
@@ -98,6 +99,7 @@ DEPENDENCIES:
   - Palau (~> 1.0)
   - Proposer (~> 0.9.1)
   - RealmSwift (~> 1.1.0)
+  - Ruler (~> 0.8.0)
   - SnapKit (~> 0.22.0)
   - SwiftDate (from `https://github.com/malcommac/SwiftDate`, branch `feature/swift_23`)
   - swiftScan
@@ -164,6 +166,7 @@ SPEC CHECKSUMS:
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
   Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
   RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
+  Ruler: 5e38ff92c4ce5a96af66eb8a3bc0f17c7a5c1cd9
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SnapKit: 0dd2fd157330f1ea11fd84da13e6be8a7a22bae0
   SwiftDate: fa487d9b7d8c3070ea2553486902494f4915465d
@@ -177,6 +180,6 @@ SPEC CHECKSUMS:
   ValueStepper: 499e970b2e8e60aa133f03c941de9dca4fe88ed3
   ZWIntroductionViewController: 0fa4d4c1c2008cbdaed7136a476cd8478141b770
 
-PODFILE CHECKSUM: e29772941cc39af9c18bb8b5f988e31fb17490d9
+PODFILE CHECKSUM: 62c351b590fb3c91c59b9f7ade8b5229f3587ba3
 
 COCOAPODS: 1.0.1

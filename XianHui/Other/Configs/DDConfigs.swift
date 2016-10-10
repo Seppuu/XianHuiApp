@@ -48,6 +48,8 @@ let getCompanyListUrl  = BaseUrl + "/rest/getagentlist"
 //设置当前端口(企业)
 let setCurrentCompanyUrl = BaseUrl + "/rest/setdefaultagent"
 
+//帮助中心
+let helperCenterUrl = BaseUrl + "/rest/help"
 
 //上传头像
 var updateAvatarURL:String {

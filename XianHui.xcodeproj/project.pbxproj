@@ -108,6 +108,7 @@
 		378B17761D6C4A7B00758C13 /* Production.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378B17751D6C4A7B00758C13 /* Production.swift */; };
 		378E07671D461EC000B67621 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378E07661D461EC000B67621 /* BalloonMarker.swift */; };
 		378E076A1D4757CC00B67621 /* XHBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378E07691D4757CC00B67621 /* XHBarChartView.swift */; };
+		378F56911DAB790800D584EF /* HelpCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F56901DAB790800D584EF /* HelpCenterViewController.swift */; };
 		379C737C1D9CA20300B41BA6 /* CustomerManagerSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C737B1D9CA20300B41BA6 /* CustomerManagerSelectVC.swift */; };
 		379C737E1D9CA53400B41BA6 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C737D1D9CA53400B41BA6 /* Manager.swift */; };
 		379C73811D9CAC3100B41BA6 /* CustomerCardListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C73801D9CAC3100B41BA6 /* CustomerCardListVC.swift */; };
@@ -387,6 +388,7 @@
 		378B17751D6C4A7B00758C13 /* Production.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Production.swift; sourceTree = "<group>"; };
 		378E07661D461EC000B67621 /* BalloonMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
 		378E07691D4757CC00B67621 /* XHBarChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHBarChartView.swift; sourceTree = "<group>"; };
+		378F56901DAB790800D584EF /* HelpCenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpCenterViewController.swift; sourceTree = "<group>"; };
 		379C737B1D9CA20300B41BA6 /* CustomerManagerSelectVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomerManagerSelectVC.swift; path = ../../../SecondTab/MyWorkVC/CustomerManagerSelectVC.swift; sourceTree = "<group>"; };
 		379C737D1D9CA53400B41BA6 /* Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		379C73801D9CAC3100B41BA6 /* CustomerCardListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerCardListVC.swift; sourceTree = "<group>"; };
@@ -916,6 +918,7 @@
 			isa = PBXGroup;
 			children = (
 				3776B8E21D93A83900A9C9DB /* Base */,
+				378F568F1DAB78F500D584EF /* Web */,
 				37D811D91DAB3DEE00A5B037 /* Guide */,
 				37A81FC31D9E2E97002720D3 /* Custom */,
 				3776B8E71D93A83900A9C9DB /* Chart */,
@@ -1200,6 +1203,14 @@
 				378E07691D4757CC00B67621 /* XHBarChartView.swift */,
 			);
 			path = XHBarChartView;
+			sourceTree = "<group>";
+		};
+		378F568F1DAB78F500D584EF /* Web */ = {
+			isa = PBXGroup;
+			children = (
+				378F56901DAB790800D584EF /* HelpCenterViewController.swift */,
+			);
+			path = Web;
 			sourceTree = "<group>";
 		};
 		379C737F1D9CAC1400B41BA6 /* Customer */ = {
@@ -2277,6 +2288,7 @@
 				37BAB9B01D3E1059001E4680 /* DDPlaypartRecordAlertView.swift in Sources */,
 				378E076A1D4757CC00B67621 /* XHBarChartView.swift in Sources */,
 				37BAB9E11D3E124E001E4680 /* DDIMConfig.swift in Sources */,
+				378F56911DAB790800D584EF /* HelpCenterViewController.swift in Sources */,
 				37BAB8C21D3E1040001E4680 /* NetworkManager.swift in Sources */,
 				3776B9211D93A83900A9C9DB /* CustomerConsumeListVC.swift in Sources */,
 				37B79B501D7D48E200340C17 /* CustomerLargeCell.swift in Sources */,

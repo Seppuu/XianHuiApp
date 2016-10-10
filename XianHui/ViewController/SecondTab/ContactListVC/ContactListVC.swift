@@ -89,7 +89,6 @@ class ContactListVC: LCCKContactListViewController {
         topTableView.scrollEnabled = false
         
         
-        
         let nib = UINib(nibName: cellId, bundle: nil)
         topTableView.registerNib(nib, forCellReuseIdentifier: cellId)
         

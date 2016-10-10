@@ -12,6 +12,8 @@ import UITextView_Placeholder
 import SwiftString
 import MBProgressHUD
 import SwiftyJSON
+import Ruler
+import IQKeyboardManagerSwift
 
 class LoginTopView: UIView {
     
@@ -57,16 +59,13 @@ class LoginViewController: UIViewController {
     
     var singleCellId = "SingleTapCell"
     
-   
-
     var hud = MBProgressHUD()
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setTableView()
+        
+        setSubView()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -74,134 +73,186 @@ class LoginViewController: UIViewController {
        
     }
     
-    func setTableView() {
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
-        tableView = UITableView(frame: view.bounds, style: .Plain)
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        view.addSubview(tableView)
-        
-        let nib = UINib(nibName: cellId, bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: cellId)
-        
-        let singleTapCellNib = UINib(nibName: singleCellId, bundle: nil)
-        tableView.registerNib(singleTapCellNib, forCellReuseIdentifier: singleCellId)
-        
-        setFooterView()
+        IQKeyboardManager.sharedManager().enable = true
     }
     
-    
-    func setFooterView() {
-        let label = UILabel(frame: CGRect(x: 15, y: 0, width: screenWidth, height: 20))
-        
-        label.font = UIFont.systemFontOfSize(12)
-        label.textColor = UIColor.lightGrayColor()
-        label.textAlignment = .Left
-        label.text = "提示:从MyBook激活后,初次登录的密码是手机号码!"
-        tableView.tableFooterView = label
-        
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        IQKeyboardManager.sharedManager().enable = false
         
     }
     
+    var logoImageView:UIImageView!
+    
+    var phoneTextField:UITextField!
+    var passWordTextField:UITextField!
+    
+    var tryButton:UIButton!
+    var loginButton:UIButton!
+    
+    var helpLabel:UILabel!
+    
+    func setSubView() {
+        
+        view.backgroundColor = UIColor.whiteColor()
+        
+        logoImageView = UIImageView()
+        view.addSubview(logoImageView)
+        
+        let width:CGFloat = Ruler.iPhoneHorizontal(126, 148, 164).value
+        
+        logoImageView.snp_makeConstraints { (make) in
+            make.centerX.equalTo(view)
+            make.top.equalTo(view).offset(70)
+            make.width.height.equalTo(width)
+        }
+        logoImageView.image = UIImage(named: "logoIcon")
+        logoImageView.contentMode = .ScaleAspectFit
+        
+        phoneTextField = UITextField()
+        view.addSubview(phoneTextField)
+        phoneTextField.delegate = self
+        phoneTextField.placeholder = "电话号码"
+        phoneTextField.keyboardType = .NumberPad
+        phoneTextField.backgroundColor = UIColor.init(hexString: "EDEDED")
+        phoneTextField.layer.cornerRadius = 5
+        phoneTextField.layer.masksToBounds = true
+        
+        phoneTextField.snp_makeConstraints { (make) in
+            make.top.equalTo(logoImageView.snp_bottom).offset(34)
+            make.left.equalTo(view).offset(15)
+            make.right.equalTo(view).offset(-15)
+            make.height.equalTo(40)
+        }
+        
+        passWordTextField = UITextField()
+        view.addSubview(passWordTextField)
+        passWordTextField.delegate = self
+        passWordTextField.placeholder = "密码"
+        passWordTextField.keyboardType = .NumbersAndPunctuation
+        passWordTextField.returnKeyType = .Go
+        passWordTextField.secureTextEntry = true
+        passWordTextField.backgroundColor = UIColor.init(hexString: "EDEDED")
+        passWordTextField.layer.cornerRadius = 5
+        passWordTextField.layer.masksToBounds = true
+        
+        passWordTextField.snp_makeConstraints { (make) in
+            make.top.equalTo(phoneTextField.snp_bottom).offset(15)
+            make.left.equalTo(view).offset(15)
+            make.right.equalTo(view).offset(-15)
+            make.height.equalTo(40)
+        }
+        
+        tryButton = UIButton()
+        view.addSubview(tryButton)
+        tryButton.setTitle("试用", forState: .Normal)
+        tryButton.setTitleColor(UIColor.init(hexString: "928181"), forState: .Normal)
+        tryButton.backgroundColor = UIColor.init(hexString: "E5DED1")
+        tryButton.addTarget(self, action: #selector(LoginViewController.loginWithTry), forControlEvents: .TouchUpInside)
+        tryButton.layer.cornerRadius = 5
+        tryButton.layer.masksToBounds = true
+        
+        loginButton = UIButton()
+        view.addSubview(loginButton)
+        loginButton.setTitle("登陆", forState: .Normal)
+        loginButton.setTitleColor(UIColor.init(hexString: "928181"), forState: .Normal)
+        loginButton.backgroundColor = UIColor.init(hexString: "D2B580")
+        loginButton.addTarget(self, action: #selector(LoginViewController.login), forControlEvents: .TouchUpInside)
+        
+        loginButton.layer.cornerRadius = 5
+        loginButton.layer.masksToBounds = true
+        
+        let buttonWidth = (screenWidth - 30 - 10) / 2
+        
+        tryButton.snp_makeConstraints { (make) in
+            make.top.equalTo(passWordTextField.snp_bottom).offset(30)
+            make.left.equalTo(view).offset(15)
+            make.width.equalTo(buttonWidth)
+            make.height.equalTo(40)
+        }
+        
+        loginButton.snp_makeConstraints { (make) in
+            make.top.equalTo(passWordTextField.snp_bottom).offset(30)
+            make.width.equalTo(buttonWidth)
+            make.right.equalTo(view).offset(-10)
+            make.height.equalTo(40)
+        }
+        
+        let tip = UILabel()
+        view.addSubview(tip)
+        
+        tip.font = UIFont.systemFontOfSize(12)
+        tip.textColor = UIColor.lightGrayColor()
+        tip.textAlignment = .Left
+        tip.text = "提示:从MyBook激活后,初次登录的密码是手机号码!"
+        
+        tip.snp_makeConstraints { (make) in
+            make.left.equalTo(view).offset(15)
+            make.right.equalTo(view).offset(-15)
+            make.height.equalTo(21)
+            make.top.equalTo(loginButton.snp_bottom).offset(15)
+        }
+        
+        
+        helpLabel = UILabel()
+        view.addSubview(helpLabel)
+        helpLabel.textAlignment = .Center
+        helpLabel.text = "需要帮助?"
+        helpLabel.font = UIFont.systemFontOfSize(14)
+        helpLabel.textColor = UIColor.ddBasicBlueColor()
+        helpLabel.userInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.showHelperAlert))
+        helpLabel.addGestureRecognizer(tap)
+        helpLabel.snp_makeConstraints { (make) in
+            make.centerX.equalTo(view)
+            make.bottom.equalTo(view).offset(-20)
+            make.width.equalTo(100)
+            make.height.equalTo(44)
+        }
+        
+        
+    }
+    
+    func showHelperAlert() {
+        
+        let title = "提示"
+        let message = "前往帮助中心获取帮助"
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .ActionSheet)
+        
+
+        let helperAction = UIAlertAction(title: "帮助中心", style: .Default) { (action) in
+            let vc = HelpCenterViewController()
+            let nav = UINavigationController(rootViewController: vc)
+            self.presentViewController(nav, animated: true, completion: nil)
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+        
+        alert.addAction(helperAction)
+        alert.addAction(cancelAction)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
     }
 }
 
-extension LoginViewController:UITableViewDelegate,UITableViewDataSource {
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
-    }
+extension LoginViewController:UITextFieldDelegate {
     
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.row == 0 {
-            return 150
-        }
-        else {
-            return 44
-        }
-    }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let cell = UITableViewCell()
-        cell.selectionStyle = .None
-        if indexPath.row == 0 {
-            
-            let view = LoginTopView()
-            cell.contentView.addSubview(view)
-            view.snp_makeConstraints(closure: { (make) in
-                make.left.top.right.bottom.equalTo(cell.contentView)
-            })
-            return cell
-        }
-        else if indexPath.row == 1 {
-            let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! UserNameCell
-            
-            cell.textField.placeholder = "手机号码"
-            cell.textField.keyboardType = .Default
-            cell.codeButton.alpha = 0.0
-            cell.codeButtonTapHandler = {
-                cell.codeButton.setTitle("验证码已发送", forState: .Normal)
-            }
-            cell.textField.resignFirstResponder()
-            return cell
-            
-        }
-        else if indexPath.row == 2 {
-            let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! UserNameCell
-            cell.textField.keyboardType = .Default
-            cell.textField.returnKeyType = .Go
-            cell.textField.secureTextEntry = true
-            cell.textFieldDidReturnHandler = {
-               
-                self.tryLogin()
-            }
-            
-            cell.textField.placeholder = "密码"
-            cell.codeButton.alpha = 0.0
-            return cell
-        }
-        else  {
-            let cell = tableView.dequeueReusableCellWithIdentifier(singleCellId, forIndexPath: indexPath) as! SingleTapCell
-            
-            cell.middleLabel.text = "忘记了密码?"
-            cell.middleLabel.textAlignment = .Right
-            cell.middleLabel.font = UIFont.systemFontOfSize(13)
-            cell.middleLabel.textColor = UIColor ( red: 0.4079, green: 0.6937, blue: 1.0, alpha: 1.0 )
-            
-            let codeButton = UIButton()
-            cell.addSubview(codeButton)
-            codeButton.snp_makeConstraints(closure: { (make) in
-                make.centerY.equalTo(cell.middleLabel)
-                make.left.equalTo(cell).offset(15)
-                make.width.equalTo(150)
-                make.height.equalTo(21)
-            })
-            
-            codeButton.setTitle("短信验证码登陆", forState: .Normal)
-            codeButton.contentHorizontalAlignment = .Left
-            codeButton.titleLabel?.font = UIFont.systemFontOfSize(13)
-            codeButton.setTitleColor(UIColor ( red: 0.4079, green: 0.6937, blue: 1.0, alpha: 1.0 ), forState: .Normal)
-            codeButton.addTarget(self, action: #selector(LoginViewController.openCodeLoginVC), forControlEvents: .TouchUpInside)
-            
-            
-            return cell
-        }
-        
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-    }
+}
+
+extension LoginViewController {
     
     func openCodeLoginVC() {
         
@@ -231,16 +282,24 @@ extension LoginViewController:UITableViewDelegate,UITableViewDataSource {
         hud = MBProgressHUD()
     }
     
+    func loginWithTry() {
+        
+        let hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        hud.mode = .Text
+        hud.labelText = "暂未开通"
+        
+        hud.hide(true, afterDelay: 2.0)
+        
+    }
+    
     //login
-    func tryLogin() {
+    func login() {
         
-        let indexPath0 = NSIndexPath(forRow: 1, inSection: 0)
-        let cell = tableView.cellForRowAtIndexPath(indexPath0) as! UserNameCell
-        let userName = cell.textField.text!
+
+        let userName = phoneTextField.text!
         
-        let indexPath1 = NSIndexPath(forRow: 2, inSection: 0)
-        let cell2 = tableView.cellForRowAtIndexPath(indexPath1) as! UserNameCell
-        let passWord = cell2.textField.text!
+
+        let passWord = passWordTextField.text!
         
         if userName == "" {
             
@@ -278,10 +337,27 @@ extension LoginViewController:UITableViewDelegate,UITableViewDataSource {
                 self.hideHud()
                 //TODO:错误分类
                 let textError = error!
-                self.showHudWith(textError)
+                self.showLoginErrorAlert(textError)
             }
         }
         
+    }
+    
+    func showLoginErrorAlert(error:String) {
+        
+        let alert = UIAlertController(title:"提示" , message: error, preferredStyle: .Alert)
+        
+        let cancel = UIAlertAction(title: "重试", style: .Cancel, handler: nil)
+        
+        let trySms = UIAlertAction(title: "短信登陆", style: .Default) { (alert) in
+            
+            self.openCodeLoginVC()
+        }
+        
+        alert.addAction(cancel)
+        alert.addAction(trySms)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     func showChangePassWordAlert() {

@@ -66,13 +66,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func showGuide() {
+        
+        self.window = UIWindow()
+        self.window!.frame = UIScreen.mainScreen().bounds
+        self.window?.makeKeyAndVisible()
+        self.window?.rootViewController = UIViewController()
         // data source
-        let backgroundImageNames = ["img_index_01bg","img_index_02bg", "img_index_03bg"]
+        let backgroundImageNames = ["guide01","guide02", "guide03","guide04"]
 
- 
         // Added Introduction View Controller
         let introductionView = self.customButtonIntroductionView(backgroundImageNames)
-
+        
         self.window?.addSubview(introductionView.view)
         
         introductionView.didSelectedEnter = {
@@ -85,7 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func customButtonIntroductionView(backImageNames:[String]) -> ZWIntroductionViewController {
         let enterButton = UIButton()
-        enterButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        enterButton.setTitleColor(UIColor.init(hexString:"1480E2"), forState: .Normal)
         enterButton.setTitle("开始", forState: .Normal)
         let vc = ZWIntroductionViewController(coverImageNames: backImageNames, backgroundImageNames: backImageNames, button: enterButton)
         return vc
