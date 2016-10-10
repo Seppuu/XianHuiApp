@@ -10,6 +10,7 @@ import UIKit
 import MBProgressHUD
 import EBForeNotification
 import SwiftyJSON
+import ZWIntroductionViewController
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -43,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         else {
             
-            showLoginVC()
+            showGuide()
         }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.eBBannerViewDidTap(_:)), name: EBBannerViewDidClick, object: nil)
@@ -62,6 +63,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = loginVC
         self.window?.backgroundColor = UIColor.whiteColor()
         self.window?.makeKeyAndVisible()
+    }
+    
+    func showGuide() {
+        // data source
+        let backgroundImageNames = ["img_index_01bg","img_index_02bg", "img_index_03bg"]
+
+ 
+        // Added Introduction View Controller
+        let introductionView = self.customButtonIntroductionView(backgroundImageNames)
+
+        self.window?.addSubview(introductionView.view)
+        
+        introductionView.didSelectedEnter = {
+            introductionView.view.removeFromSuperview()
+            
+            self.showLoginVC()
+        }
+        
+    }
+    
+    func customButtonIntroductionView(backImageNames:[String]) -> ZWIntroductionViewController {
+        let enterButton = UIButton()
+        enterButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        enterButton.setTitle("开始", forState: .Normal)
+        let vc = ZWIntroductionViewController(coverImageNames: backImageNames, backgroundImageNames: backImageNames, button: enterButton)
+        return vc
     }
     
     func ownSystemLoginSuccess(noti:NSNotification) {

@@ -229,7 +229,7 @@ extension AccountManagerVC: UITableViewDelegate,UITableViewDataSource {
                 //show intro
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 
-                appDelegate.showLoginVC()
+                appDelegate.showGuide()
                 
             }
             else {

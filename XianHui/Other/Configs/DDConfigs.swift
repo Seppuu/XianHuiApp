@@ -17,8 +17,8 @@ let screenHeight = UIScreen.mainScreen().bounds.size.height
 
 let DDTimeNeverReach = 12000
 
-let ProdBaseUrl = "http://sso.sosys.cn:8080/mybook"
-let DevBaseUrl = "http://sso.sosys.cn:8080/mybook"
+//let ProdBaseUrl = "http://sso.sosys.cn:8080/mybook"
+//let DevBaseUrl = "http://sso.sosys.cn:8080/mybook"
 let BaseUrl = "http://sso.sosys.cn:8080/mybook"
 let XHPublicKey = "1addfcf4296d60f0f8e0c81cea87a099"
 var DDBaseUrl:String {

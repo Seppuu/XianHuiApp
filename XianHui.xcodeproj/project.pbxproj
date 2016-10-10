@@ -54,7 +54,6 @@
 		37367B881D6C141500479E39 /* chatSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37367B871D6C141500479E39 /* chatSectionView.xib */; };
 		376D6D411D59B37000F9A272 /* RealmUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376D6D401D59B37000F9A272 /* RealmUser.swift */; };
 		376D6D451D59C8E500F9A272 /* ChatExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376D6D441D59C8E500F9A272 /* ChatExample.swift */; };
-		377063BF1DAA3B6400F05CA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 377063BE1DAA3B6400F05CA3 /* Assets.xcassets */; };
 		3770DD841DA4FB2200786FB2 /* GoodDetailListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3770DD831DA4FB2200786FB2 /* GoodDetailListVC.swift */; };
 		3770DD861DA506A800786FB2 /* GoodProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3770DD851DA506A800786FB2 /* GoodProfileVC.swift */; };
 		3771EC941D7555F50064A060 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 3771EC931D7555F50064A060 /* .gitignore */; };
@@ -245,6 +244,8 @@
 		37D46F821D6FD16E00A0BBCE /* GoodCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D46F801D6FD16E00A0BBCE /* GoodCell.xib */; };
 		37D46F851D6FD46B00A0BBCE /* GoodDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D46F841D6FD46B00A0BBCE /* GoodDetailView.swift */; };
 		37D46F871D6FD5D100A0BBCE /* GoodDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D46F861D6FD5D100A0BBCE /* GoodDetail.xib */; };
+		37D811DB1DAB3E0700A5B037 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D811DA1DAB3E0700A5B037 /* GuideViewController.swift */; };
+		37D811DD1DAB437E00A5B037 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37D811DC1DAB437E00A5B037 /* Assets.xcassets */; };
 		37DF88E51D8FD3D700B8DB73 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DF88E41D8FD3D700B8DB73 /* UserManager.swift */; };
 		37E78A9A1D41F198007425A3 /* OTPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E78A971D41F198007425A3 /* OTPageScrollView.m */; };
 		37E78A9B1D41F198007425A3 /* OTPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E78A991D41F198007425A3 /* OTPageView.m */; };
@@ -332,7 +333,6 @@
 		37367B871D6C141500479E39 /* chatSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = chatSectionView.xib; sourceTree = "<group>"; };
 		376D6D401D59B37000F9A272 /* RealmUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmUser.swift; sourceTree = "<group>"; };
 		376D6D441D59C8E500F9A272 /* ChatExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatExample.swift; sourceTree = "<group>"; };
-		377063BE1DAA3B6400F05CA3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3770DD831DA4FB2200786FB2 /* GoodDetailListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodDetailListVC.swift; sourceTree = "<group>"; };
 		3770DD851DA506A800786FB2 /* GoodProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodProfileVC.swift; sourceTree = "<group>"; };
 		3771EC931D7555F50064A060 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -546,6 +546,8 @@
 		37D46F801D6FD16E00A0BBCE /* GoodCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoodCell.xib; sourceTree = "<group>"; };
 		37D46F841D6FD46B00A0BBCE /* GoodDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodDetailView.swift; sourceTree = "<group>"; };
 		37D46F861D6FD5D100A0BBCE /* GoodDetail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoodDetail.xib; sourceTree = "<group>"; };
+		37D811DA1DAB3E0700A5B037 /* GuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
+		37D811DC1DAB437E00A5B037 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		37DF88E41D8FD3D700B8DB73 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		37E78A961D41F198007425A3 /* OTPageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPageScrollView.h; sourceTree = "<group>"; };
 		37E78A971D41F198007425A3 /* OTPageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPageScrollView.m; sourceTree = "<group>"; };
@@ -914,6 +916,7 @@
 			isa = PBXGroup;
 			children = (
 				3776B8E21D93A83900A9C9DB /* Base */,
+				37D811D91DAB3DEE00A5B037 /* Guide */,
 				37A81FC31D9E2E97002720D3 /* Custom */,
 				3776B8E71D93A83900A9C9DB /* Chart */,
 				3776B8F01D93A83900A9C9DB /* Chat */,
@@ -1831,6 +1834,14 @@
 			path = GoodDetailView;
 			sourceTree = "<group>";
 		};
+		37D811D91DAB3DEE00A5B037 /* Guide */ = {
+			isa = PBXGroup;
+			children = (
+				37D811DA1DAB3E0700A5B037 /* GuideViewController.swift */,
+			);
+			path = Guide;
+			sourceTree = "<group>";
+		};
 		37E78A951D41F198007425A3 /* OTPageView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1882,8 +1893,8 @@
 				37BAB9691D3E1059001E4680 /* ViewController */,
 				37BAB72E1D3E0F51001E4680 /* XianHui-Bridging-Header.h */,
 				37EA568A1D3E0A7000D63498 /* AppDelegate.swift */,
+				37D811DC1DAB437E00A5B037 /* Assets.xcassets */,
 				37EA568E1D3E0A7000D63498 /* Main.storyboard */,
-				377063BE1DAA3B6400F05CA3 /* Assets.xcassets */,
 				37EA56931D3E0A7000D63498 /* LaunchScreen.storyboard */,
 				37EA56961D3E0A7000D63498 /* Info.plist */,
 				3729629B1D40AF6500A947B4 /* BKPasscodeView.strings */,
@@ -2017,7 +2028,7 @@
 				37BAB9761D3E1059001E4680 /* AddFriendMoreCell.xib in Resources */,
 				37BAB9D31D3E11B1001E4680 /* LICENSE in Resources */,
 				37F905321D69F9370078C06B /* CustomerCell.xib in Resources */,
-				377063BF1DAA3B6400F05CA3 /* Assets.xcassets in Resources */,
+				37D811DD1DAB437E00A5B037 /* Assets.xcassets in Resources */,
 				372480DF1D8151EF00B95C54 /* LCCKVCardView.xib in Resources */,
 				37BAB9961D3E1059001E4680 /* SegmentCell.xib in Resources */,
 				37BAB97C1D3E1059001E4680 /* ChannelCell.xib in Resources */,
@@ -2173,6 +2184,7 @@
 				37BAB8ED1D3E1045001E4680 /* KCPinyinHelper.m in Sources */,
 				3776B8B71D93A4A700A9C9DB /* ContactListVC.swift in Sources */,
 				37D46F811D6FD16E00A0BBCE /* GoodCell.swift in Sources */,
+				37D811DB1DAB3E0700A5B037 /* GuideViewController.swift in Sources */,
 				37BAB97D1D3E1059001E4680 /* ChannelListCell.swift in Sources */,
 				37BAB99D1D3E1059001E4680 /* HistoryCell.swift in Sources */,
 				37BAB9A51D3E1059001E4680 /* SubscriptionTopCell.swift in Sources */,
