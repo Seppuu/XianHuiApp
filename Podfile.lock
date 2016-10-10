@@ -77,6 +77,7 @@ PODS:
   - UITableView+FDTemplateLayoutCell (1.5.beta)
   - UITextView+Placeholder (1.2.0)
   - ValueStepper (0.7)
+  - ZWIntroductionViewController (0.3.4)
 
 DEPENDENCIES:
   - Alamofire (~> 3.5.0)
@@ -106,6 +107,7 @@ DEPENDENCIES:
   - UAProgressView
   - UITextView+Placeholder (~> 1.2)
   - ValueStepper (from `https://github.com/BalestraPatrick/ValueStepper`, branch `swift-2.3`)
+  - ZWIntroductionViewController
 
 EXTERNAL SOURCES:
   CryptoSwift:
@@ -173,7 +175,8 @@ SPEC CHECKSUMS:
   UITableView+FDTemplateLayoutCell: 02b508ab1cb4cea16a8c17ac83d2cd1fd72124f9
   UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
   ValueStepper: 499e970b2e8e60aa133f03c941de9dca4fe88ed3
+  ZWIntroductionViewController: 0fa4d4c1c2008cbdaed7136a476cd8478141b770
 
-PODFILE CHECKSUM: cf7d3a1c83cc2e347b508ff872982d7190bfe2a3
+PODFILE CHECKSUM: e29772941cc39af9c18bb8b5f988e31fb17490d9
 
 COCOAPODS: 1.0.1
