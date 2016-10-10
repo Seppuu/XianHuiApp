@@ -132,10 +132,7 @@ class ChatKitExample: LCChatKitExample {
                 LCChatKitExample.exampleOpenConversationViewControllerWithConversaionId(conversation.conversationId, fromNavigationController: viewController.navigationController)
                 
                 //TODO:创建失败
-                
             })
-            
-            
         }
         
         let navigationViewController = UINavigationController(rootViewController: contactListViewController)

@@ -12,7 +12,6 @@ import ChatKit
 
 let NoticeComingNoti = "NoticeComingNoti"
 
-
 class XHMessageNoti: NSObject {
     
     var name = ""
@@ -37,15 +36,13 @@ class MessageListVC: LCCKConversationListViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
 //        self.tableView.delegate = tableViewModel
 //        self.tableView.dataSource = tableViewModel
-
         setCustomerCell()
         setTableView()
         showRemindNoticeIfFirstLaunch()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         

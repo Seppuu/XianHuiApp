@@ -33,7 +33,6 @@ PODS:
   - CTAssetsPickerController (3.3.1):
     - PureLayout (~> 3.0.0)
   - DACircularProgress (2.3.1)
-  - DLRadioButton (1.4.9)
   - DZNEmptyDataSet (1.8.1)
   - EAIntroView (2.9.0):
     - EARestrictedScrollView (~> 1.1.0)
@@ -86,7 +85,6 @@ DEPENDENCIES:
   - ChatKit
   - CryptoSwift (from `https://github.com/krzyzanowskim/CryptoSwift`, branch `swift2`)
   - CTAssetsPickerController (~> 3.3.0)
-  - DLRadioButton (~> 1.4)
   - DZNEmptyDataSet
   - EAIntroView (~> 2.9.0)
   - EBForeNotification
@@ -142,7 +140,6 @@ SPEC CHECKSUMS:
   CryptoSwift: c1ef79f901b86099a6fe8b3c7524cf9f3f3c8c40
   CTAssetsPickerController: b1d1d50ab87cf6b8b13531de5f4530482e7e53ed
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
-  DLRadioButton: 7bb8a6e3768b572469ace553391ab4d2af6f9c19
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   EAIntroView: 76f68cc56242f2e25359419e6ecc2344ee7e1756
   EARestrictedScrollView: b0c2a3f92fb2610bb44d71c5e4893777c89e45ef
@@ -177,6 +174,6 @@ SPEC CHECKSUMS:
   UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
   ValueStepper: 499e970b2e8e60aa133f03c941de9dca4fe88ed3
 
-PODFILE CHECKSUM: f89c58e93cb0e8d0f41fa0bd1eee5cf4f64ff979
+PODFILE CHECKSUM: cf7d3a1c83cc2e347b508ff872982d7190bfe2a3
 
 COCOAPODS: 1.0.1

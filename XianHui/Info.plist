@@ -35,8 +35,6 @@
 	<string>microphoneDesciption</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>photoLibraryDesciption</string>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchViewController</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
