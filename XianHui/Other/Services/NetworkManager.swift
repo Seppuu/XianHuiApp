@@ -172,7 +172,6 @@ class NetworkManager {
             "token":Defaults.userToken.value!
         ]
         
-        let newDict = generatePostDictWithBaseDictOr(dict)
         
         let urlString = updateAvatarURL
         
@@ -181,7 +180,7 @@ class NetworkManager {
         Alamofire.upload(.POST, urlString, multipartFormData: { (multipartFormData) in
             
             //json dict
-            for (key, value) in newDict {
+            for (key, value) in dict {
                 let str = String(value)
                 multipartFormData.appendBodyPart(data: str.dataUsingEncoding(NSUTF8StringEncoding)!, name: key)
             }

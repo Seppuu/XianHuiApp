@@ -36,8 +36,7 @@ class MessageListVC: LCCKConversationListViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.tableView.delegate = tableViewModel
-//        self.tableView.dataSource = tableViewModel
+        self.tableView.layoutMargins = UIEdgeInsetsMake(0, 64, 0, 0)
         setCustomerCell()
         setTableView()
         showRemindNoticeIfFirstLaunch()
@@ -64,8 +63,10 @@ class MessageListVC: LCCKConversationListViewController {
         topTableView = UITableView(frame: CGRectMake(0, 0, screenWidth, cellHeight * countFloat), style: .Plain)
         topTableView.delegate = self
         topTableView.dataSource = self
-        
+        topTableView.layoutMargins = UIEdgeInsetsMake(0, 64, 0, 0)
         topView.addSubview(topTableView)
+        
+        
         
         self.tableView.tableHeaderView = topView
         
@@ -260,6 +261,9 @@ extension MessageListVC {
         cell.avatarImageView.layer.cornerRadius = cell.avatarImageView.ddWidth/2
         cell.avatarImageView.layer.masksToBounds = true
         cell.timestampLabel.text = notice.time
+        
+        cell.layoutMargins = UIEdgeInsetsMake(0, 64, 0, 0)
+        
         
         return cell
     }

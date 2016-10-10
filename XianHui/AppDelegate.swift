@@ -106,24 +106,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func openLeanCloudIMWith(clientId:String,autoLogin:Bool) {
         
-        //LCCKUtil.showProgressText("open client ...", duration:10.0)
-        
-        //登陆成功前继续显示登陆画面
-//        if autoLogin == true {
-//            let storyboard = UIStoryboard(name: "LaunchScreen", bundle: nil)
-//            let launchVC = storyboard.instantiateViewControllerWithIdentifier("LaunchScreenVC")
-//            
-//            self.window?.rootViewController = launchVC
-//            self.window?.makeKeyAndVisible()
-//        }
-//        else {
-//            
-//        }
         
         ChatKitExample.invokeThisMethodAfterLoginSuccessWithClientId(clientId, success: {
-            
-            //LCCKUtil.hideProgress()
-            
+                        
             let tabBarControllerConfig = LCCKTabBarControllerConfig()
             
             self.window?.rootViewController = tabBarControllerConfig.tabBarController
@@ -137,7 +122,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
             }
             
-            //TODO:first launch
+            //first launch
             let launchedBefore = NSUserDefaults.standardUserDefaults().boolForKey("launchedBefore")
             if launchedBefore  {
                 print("Not first launch.")
@@ -148,8 +133,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             
             }, failed: { (error) in
-                
-                LCCKUtil.hideProgress()
                 
                 print(error.description)
         })

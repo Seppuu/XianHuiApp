@@ -24,7 +24,6 @@ class MyWorkObject:NSObject {
     
     var rightLabelString = ""
     
-    
     var id:Int!
 }
 

@@ -40,6 +40,7 @@ class ContactListVC: LCCKContactListViewController {
         
         super.viewDidLoad()
         
+        self.tableView.layoutMargins = UIEdgeInsetsMake(0, 64, 0, 0)
         setTopView()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ContactListVC.changeAllContacts), name: accountHasChangedNoti, object: nil)
@@ -87,7 +88,7 @@ class ContactListVC: LCCKContactListViewController {
         topTableView.delegate = self
         topTableView.dataSource = self
         topTableView.scrollEnabled = false
-        
+        topTableView.layoutMargins = UIEdgeInsetsMake(0, 64, 0, 0)
         
         let nib = UINib(nibName: cellId, bundle: nil)
         topTableView.registerNib(nib, forCellReuseIdentifier: cellId)
@@ -154,16 +155,19 @@ extension ContactListVC {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if (tableView == topTableView) {
             let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! ChannelCell
-            cell.accessoryType = .DisclosureIndicator
+            
             cell.nameLabel.text = topTitle[indexPath.item]
             
             cell.leftImageView.image = topIcon[indexPath.item]
             cell.leftImageView.contentMode = .Center
+            cell.layoutMargins = UIEdgeInsetsMake(0, 64, 0, 0)
             return cell
             
         }
         else {
-            return super.tableView(tableView, cellForRowAtIndexPath: indexPath)
+            let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
+            cell.layoutMargins = UIEdgeInsetsMake(0, 64, 0, 0)
+            return cell
         }
     }
     

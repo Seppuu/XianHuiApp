@@ -17,4 +17,10 @@ class MessageListModel: LCCKConversationListViewModel {
         return self.dataArray.count
     }
     
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        cell.layoutMargins = UIEdgeInsetsMake(0, 64, 0, 0)
+        return cell
+    }
+    
 }

@@ -41,6 +41,7 @@ class ChatKitExample: LCChatKitExample {
 //        LCChatKit.sharedInstance().conversationListService.configureCellBlock = {
 //            (cell,tableView,indexPath,conversation) in
 //            
+
 //            
 //        }
     }
@@ -148,14 +149,24 @@ class ChatKitExample: LCChatKitExample {
 
             (aError,granted,viewController,completionHandler) in
             
-            let isSingleSignOnOffline = (aError.code == 4111)
+            
             // - 用户允许重连请求，发起重连或强制登录
             if (granted == true) {
                 var force = false
                 var title = "正在重连聊天服务..."
-                if (isSingleSignOnOffline) {
-                    force = true
-                    title = "正在强制登录..."
+                
+                if aError == nil {
+                    
+                }
+                else {
+                    
+                    let isSingleSignOnOffline = (aError.code == 4111)
+                    
+                    if (isSingleSignOnOffline) {
+                        force = true
+                        title = "正在强制登录..."
+                    }
+
                 }
                 
                 //get current viewController

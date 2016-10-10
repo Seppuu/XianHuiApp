@@ -313,11 +313,12 @@ extension LoginViewController {
             return
         }
         
+        self.showHud()
+        
         User.loginWith(userName, passWord: passWord, usertype: UserLoginType.Employee) { (user, data, error) in
             
-            self.showHud()
+            
             if error == nil {
-                self.hideHud()
                 
                 //检车是否是默认密码,如果是,需要强制修改.否则无法登陆
                 if let no = data!["init_login_password"].int {
