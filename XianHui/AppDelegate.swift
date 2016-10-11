@@ -211,7 +211,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         else {
             //app 一直在前台
-            EBForeNotification.handleRemoteNotification(userInfo, soundID: 1312)
+            EBForeNotification.handleRemoteNotification(userInfo, soundID: 1312, isIos10: false)
             
         }
 
@@ -284,7 +284,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(center: UNUserNotificationCenter, willPresentNotification notification: UNNotification, withCompletionHandler completionHandler: (UNNotificationPresentationOptions) -> Void) {
         let userInfo = notification.request.content.userInfo
         
-        EBForeNotification.handleRemoteNotification(userInfo, soundID: 1312)
+        EBForeNotification.handleRemoteNotification(userInfo, soundID: 1312, isIos10: true)
         
         NSNotificationCenter.defaultCenter().postNotificationName(NoticeComingNoti, object: userInfo)
     }

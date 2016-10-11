@@ -258,7 +258,17 @@ extension MessageListVC {
         let notice = noticeList[indexPath.row]
         
         cell.nameLabel.text = notice.name
-        cell.avatarImageView.backgroundColor = UIColor ( red: 0.9671, green: 0.8294, blue: 0.7451, alpha: 0.8 )
+        
+        if notice.name == "助手" {
+            cell.avatarImageView.image = UIImage(named: "analyze")
+        }
+        else if notice.name == "提醒" {
+            cell.avatarImageView.image = UIImage(named: "bell")
+        }
+        else {
+            
+        }
+        
         cell.avatarImageView.layer.cornerRadius = cell.avatarImageView.ddWidth/2
         cell.avatarImageView.layer.masksToBounds = true
         cell.timestampLabel.text = notice.time
