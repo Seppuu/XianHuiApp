@@ -67,7 +67,6 @@ class CustomerProfileVC: UIViewController {
            self.customer.avatarUrlString = url
         }
         
-        
         if let customer_manager = json["customer_manager"].string {
             self.customer.customerManager = customer_manager
         }
@@ -166,6 +165,16 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier(typeCellId, forIndexPath: indexPath) as! typeCell
             cell.leftLabel.text = typeList[indexPath.row]
             if indexPath.row == 0 {
+                
+                let currentUser = User.currentUser()
+                if currentUser.reportType == 3 || currentUser.reportType == 4 {
+                    //当用户是店长或者拉板时,可以更换顾问
+                    cell.accessoryType = .DisclosureIndicator
+                }
+                else {
+                    cell.accessoryType = .None
+                }
+                
                 cell.typeLabel.text = customer.customerManager
                 
             }
@@ -189,7 +198,7 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
             }
             else {
                 cell.accessoryType = .DisclosureIndicator
-                cell.typeLabel.text = customer.scheduleTime == "" ? "暂无" : customer.scheduleTime
+                cell.typeLabel.text = customer.scheduleTime == "" ? "无新预约" : customer.scheduleTime
             }
             
             return cell
@@ -203,12 +212,22 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
         if indexPath.section == 1 {
             
             if indexPath.row == 0 {
-                let vc = CustomerManagerSelectVC()
-                vc.customer = customer
-                vc.setManagerHandler = {
-                    self.getCustomerDetail()
+                
+                let currentUser = User.currentUser()
+                if currentUser.reportType == 3 || currentUser.reportType == 4 {
+                    //当用户是店长或者拉板时,可以更换顾问
+                    let vc = CustomerManagerSelectVC()
+                    vc.customer = customer
+                    vc.setManagerHandler = {
+                        self.getCustomerDetail()
+                    }
+                    self.navigationController?.pushViewController(vc, animated: true)
                 }
-                self.navigationController?.pushViewController(vc, animated: true)
+                else {
+                    return
+                }
+                
+                
             }
             else if indexPath.row == 1 {
                 let vc = CustomerCardListVC()

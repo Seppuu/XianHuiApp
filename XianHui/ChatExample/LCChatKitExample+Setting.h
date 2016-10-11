@@ -24,5 +24,5 @@
 
 //强制重连
 - (void)lcck_setupForceReconect;
-
+- (void)lcck_setupOpenConversation;
 @end

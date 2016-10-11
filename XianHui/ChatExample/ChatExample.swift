@@ -9,6 +9,7 @@
 import Foundation
 import ChatKit
 import UIKit
+import SwiftyJSON
 
 class ChatKitExample: LCChatKitExample {
     
@@ -50,9 +51,9 @@ class ChatKitExample: LCChatKitExample {
     override func lcck_setFetchProfiles() {
         
         LCChatKit.sharedInstance().fetchProfilesBlock = {
-            (userIds,callback) in
+            (clientIds,callback) in
             
-            if userIds.count == 0 {
+            if clientIds.count == 0 {
                 let code = 0
                 let errorReasonText = "User ids is nil"
                 let errorInfo = [
@@ -72,13 +73,13 @@ class ChatKitExample: LCChatKitExample {
                 return
             }
             var users = [XHUser]()
-            userIds.forEach({ (userId) in
+            clientIds.forEach({ (id) in
                 
-                if let user = User.getUserBy(userId) {
+                if let user = User.getUserBy(id) {
                     users.append(user)
                 }
                 else {
-                    let user = XHUser(clientId: userId)
+                    let user = XHUser(clientId: id)
                     users.append(user)
                 }
                 
@@ -90,11 +91,7 @@ class ChatKitExample: LCChatKitExample {
             else {
                 
             }
-            
-            
         }
-
-        
     }
     
     //打开扫一扫
@@ -212,6 +209,55 @@ class ChatKitExample: LCChatKitExample {
     }
     
     
+    override func lcck_setupOpenConversation() {
+        
+        LCChatKit.sharedInstance().fetchConversationHandler = {
+            (conversation,aConversationController) in
+            
+            if conversation.createAt == nil {return}
+            
+            if (conversation.members.count > 2) {
+                super.lcck_setupOpenConversation()
+            }
+            else if conversation.members.count == 2 {
+                
+                aConversationController.configureBarButtonItemStyle(.SingleProfile, action: { (sender, event) in
+                    
+                    if let memebers = conversation.members as? [String] {
+                        let currentUserClientId = LCChatKit.sharedInstance().clientId
+                        var clientId = ""
+                        
+                        memebers.forEach({ (id) in
+                            if id != currentUserClientId {
+                                clientId = id
+                            }
+                        })
+                        
+                        if let user = User.getUserBy(clientId) {
+                            
+                            
+                            
+                           
+                        }
+                        
+                        
+                    }
+                    
+                    
+                    
+                })
+                
+                
+            }
+            else {
+                
+            }
+            
+        }
+        
+    }
+    
+   
 }
 
 

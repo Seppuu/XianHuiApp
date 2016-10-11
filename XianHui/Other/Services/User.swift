@@ -41,6 +41,7 @@ class User:NSObject {
                 sharedUser!.displayName = Defaults.userDisplayName.value!
                 sharedUser!.levelText = Defaults.userLevelText.value!
                 sharedUser!.avatarURL = Defaults.userAvatarURL.value!
+                sharedUser!.reportType = Defaults.userReportType.value!
                 return sharedUser!
                 
             }
@@ -68,7 +69,8 @@ class User:NSObject {
     
     var clientId = ""
     
-    
+    //报表类型（1技师2顾问3店长4老板）
+    var reportType = 0
     
     var userType = UserType.Default
 
@@ -97,6 +99,10 @@ class User:NSObject {
                 
                 if let clientId = data!["guid"].string {
                     Defaults.clientId.value = clientId
+                }
+                
+                if let user_report_type = data!["user_report_type"].int {
+                    Defaults.userReportType.value = user_report_type
                 }
                 
                 
@@ -185,10 +191,14 @@ class User:NSObject {
                     Defaults.userId.value = id
                 }
                 
-                
                 if let clientId = data!["guid"].string {
                     Defaults.clientId.value = clientId
                 }
+                
+                if let user_report_type = data!["user_report_type"].int {
+                    Defaults.userReportType.value = user_report_type
+                }
+                
                 
                 //账户名
                 if let  userName = data!["user_name"].string {
@@ -281,11 +291,11 @@ class User:NSObject {
         
     }
     
-    class func getUserBy(id:String) ->  XHUser? {
+    class func getUserBy(clientId:String) ->  XHUser? {
         
         let realm = try! Realm()
         
-        let rmUsersResult = realm.objects(RealmUser).filter("clientId = '\(id)' ")
+        let rmUsersResult = realm.objects(RealmUser).filter("clientId = '\(clientId)' ")
         
         if rmUsersResult.count > 0 {
             let rmUser = rmUsersResult[0]
@@ -298,7 +308,6 @@ class User:NSObject {
         else {
             return nil
         }
-        
         
     }
     
@@ -427,6 +436,7 @@ class User:NSObject {
         Defaults.userDisplayName.clear()
         Defaults.userAvatarURL.clear()
         Defaults.userLevelText.clear()
+        Defaults.userReportType.clear()
         
         User.sharedUser = nil
         
@@ -499,6 +509,15 @@ extension PalauDefaults {
     public static var userLevelText: PalauDefaultsEntry<String> {
         get {
             return value("userLevelText").whenNil(use: "普通用户")
+        }
+        set {
+            
+        }
+    }
+    
+    public static var userReportType: PalauDefaultsEntry<Int> {
+        get {
+            return value("userReportType").whenNil(use: 0)
         }
         set {
             
