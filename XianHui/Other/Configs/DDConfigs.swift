@@ -11,6 +11,22 @@ import CoreLocation
 
 let OwnSystemLoginSuccessNoti = "OwnSystemLoginSuccessNoti"
 
+var IOS10_OR_LATER:Bool {
+    return (UIDevice.currentDevice().systemVersion.toFloat() >= 10.0)
+}
+
+var IOS9_OR_LATER:Bool {
+    return (UIDevice.currentDevice().systemVersion.toFloat() >= 9.0)
+}
+
+var IOS8_OR_LATER:Bool {
+    return (UIDevice.currentDevice().systemVersion.toFloat() >= 8.0)
+}
+
+var IOS7_OR_LATER:Bool {
+    return (UIDevice.currentDevice().systemVersion.toFloat() >= 7.0)
+}
+
 
 let screenWidth = UIScreen.mainScreen().bounds.size.width
 let screenHeight = UIScreen.mainScreen().bounds.size.height

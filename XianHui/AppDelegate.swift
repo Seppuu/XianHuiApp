@@ -11,6 +11,10 @@ import MBProgressHUD
 import EBForeNotification
 import SwiftyJSON
 import ZWIntroductionViewController
+import ChatKit
+
+import UserNotifications
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,7 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        LCChatKit.sharedInstance().useDevPushCerticate = true
         ChatKitExample.invokeThisMethodInDidFinishLaunching()
+        //ios 10 兼容
+        replyPushNotificationAuthorization(application)
         
         if launchOptions != nil {
             if let notificationPayload = launchOptions![UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSObject: AnyObject] {
@@ -52,6 +59,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
 
+    }
+    
+    //ios 10 推送注册
+    func replyPushNotificationAuthorization(application:UIApplication) {
+        
+        if #available(iOS 10.0, *) {
+            let uncenter = UNUserNotificationCenter.currentNotificationCenter()
+            
+            uncenter.delegate = self
+            
+            uncenter.requestAuthorizationWithOptions([.Alert, .Sound , .Badge], completionHandler: { (granted, error) in
+                
+                
+            })
+            
+        } else {
+            // Fallback on earlier versions
+        }
+        
     }
     
     func showLoginVC() {
@@ -246,6 +272,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     }
 
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    /**
+     * Required for iOS 10+
+     * 在前台收到推送内容, 执行的方法
+     */
+    @available(iOS 10.0, *)
+    func userNotificationCenter(center: UNUserNotificationCenter, willPresentNotification notification: UNNotification, withCompletionHandler completionHandler: (UNNotificationPresentationOptions) -> Void) {
+        let userInfo = notification.request.content.userInfo
+        
+        EBForeNotification.handleRemoteNotification(userInfo, soundID: 1312)
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(NoticeComingNoti, object: userInfo)
+    }
+    
+    /**
+     * Required for iOS 10+
+     * 在后台和启动之前收到推送内容, 执行的方法
+     */
+    @available(iOS 10.0, *)
+    func userNotificationCenter(center: UNUserNotificationCenter, didReceiveNotificationResponse response: UNNotificationResponse, withCompletionHandler completionHandler: () -> Void) {
+        
+        let userInfo = response.notification.request.content.userInfo
+        
+        LCChatKit.sharedInstance().didReceiveRemoteNotification(userInfo)
+        
+        pushToViewControllerWith(userInfo)
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(NoticeComingNoti, object: userInfo)
+    }
+    
 }
 
 

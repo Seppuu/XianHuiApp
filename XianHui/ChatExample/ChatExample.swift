@@ -22,7 +22,7 @@ class ChatKitExample: LCChatKitExample {
     override func exampleInit() {
         
         super.exampleInit()
-        LCChatKit.sharedInstance().useDevPushCerticate = false
+        
         addCustomerCellIntoMessageList()
     }
     
