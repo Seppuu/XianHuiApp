@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        LCChatKit.sharedInstance().useDevPushCerticate = true
+        LCChatKit.sharedInstance().useDevPushCerticate = false
         ChatKitExample.invokeThisMethodInDidFinishLaunching()
         //ios 10 兼容
         replyPushNotificationAuthorization(application)
