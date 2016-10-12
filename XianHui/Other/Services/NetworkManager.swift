@@ -473,12 +473,14 @@ extension NetworkManager {
     
     
     //我的工作四种列表
-    func getMyWorkListWith(urlString:String,completion:DDResultHandler) {
+    func getMyWorkListWith(urlString:String,pageSize:Int,pageNumber:Int,completion:DDResultHandler) {
         
         let urlString = urlString
         
         let dict:JSONDictionary = [
-            "token":Defaults.userToken.value!
+            "token":Defaults.userToken.value!,
+            "pageSize":pageSize,
+            "pageNumber":pageNumber
         ]
         
         baseRequestWith(urlString, dict: dict, completion: completion)

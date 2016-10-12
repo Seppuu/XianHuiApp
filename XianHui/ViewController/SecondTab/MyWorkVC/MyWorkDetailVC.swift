@@ -180,6 +180,8 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
         return attrString
     }
     
+    
+    
     func getOrderList() {
         
         var urlString = ""

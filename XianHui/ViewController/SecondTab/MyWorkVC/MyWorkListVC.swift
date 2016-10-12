@@ -47,12 +47,9 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         tableView.dataSource = dataHelper
         
         // add MJRefresh
-        tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
-            
+        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: { 
             self.getDataFromServer()
-            
-        })
-        
+        })        
         
         dataHelper.cellSelectedHandler = {
             (index,objectId,objectName) in
@@ -69,7 +66,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         self.tableView.emptyDataSetSource = self
         self.tableView.emptyDataSetDelegate = self
         
-        tableView.mj_header.beginRefreshing()
+        tableView.mj_footer.beginRefreshing()
         
     }
     
@@ -82,6 +79,10 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         
         return attrString
     }
+    
+    var pageSize = 20
+    
+    var pageNumber = 1
     
     func getDataFromServer() {
         var urlString = ""
@@ -96,18 +97,28 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
             urlString = GetMyWorkProdUrl
         }
         
-        //showHudWith(view, animated: true, mode: .Indeterminate, text: "")
-        NetworkManager.sharedManager.getMyWorkListWith(urlString) { (success, json, error) in
-          //  hideHudFrom(self.view)
-            self.tableView.mj_header.endRefreshing()
+        
+        NetworkManager.sharedManager.getMyWorkListWith(urlString, pageSize: pageSize, pageNumber: pageNumber) { (success, json, error) in
+            
             if success == true {
                 if let rows = json!["rows"].array {
-                    self.jsons = rows
-                    self.getDataWith(rows)
+                    
+                    if rows.count == 0 {
+                        self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                    }
+                    else {
+                        self.tableView.mj_footer.endRefreshing()
+                        self.pageNumber += 1
+                        self.jsons = rows
+                        self.getDataWith(rows)
+                    }
                 }
             }
-            
+            else {
+                
+            }
         }
+
         
     }
     
@@ -128,7 +139,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
             dataArray = getProductionData(datas)
         }
         
-        dataHelper.dataArray = dataArray
+        dataHelper.dataArray += dataArray
         
         tableView.reloadData()
         
