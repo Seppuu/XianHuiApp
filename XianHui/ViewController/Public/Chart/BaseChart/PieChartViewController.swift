@@ -35,6 +35,8 @@ class PieChartViewController: BaseChartViewController {
     
     //顶部数组
     
+    var currentDayIndex = 0
+    
     var currentMonthAvgVaule = 0
     
     var grandTotalValue = 0
@@ -47,13 +49,11 @@ class PieChartViewController: BaseChartViewController {
     
     var bottomCollectionView:UICollectionView!
     
-    var listOfChartDataArray = [[XHChartData]]()
+    var listOfChartDataArray = [ChartList]()
     
     var animePieChart = false
     
     var pageControl:UIPageControl!
-    
-    //var pieTypelabel:UILabel!
 
     var tableView:UITableView!
     
@@ -128,7 +128,7 @@ class PieChartViewController: BaseChartViewController {
         pageControl.currentPage = 0
         pageControl.currentPageIndicatorTintColor = UIColor ( red: 0.8275, green: 0.7216, blue: 0.5529, alpha: 1.0 )
         pageControl.pageIndicatorTintColor = UIColor ( red: 0.949, green: 0.902, blue: 0.8196, alpha: 1.0 )
-        pageControl.numberOfPages = listOfChartDataArray.count
+        pageControl.numberOfPages = listOfChartDataArray[0].charts.count
         
 //        
 //        pieTypelabel = UILabel(frame: CGRect(x: 0, y:pageControl.frame.origin.y - 15 , width: screenWidth, height: 20))
@@ -179,13 +179,12 @@ extension PieChartViewController: ChartViewDelegate {
     
     func setDataCountWith(index:Int,pieView:PieChartView) {
         
-        
         var yVals1 = [BarChartDataEntry]()
         
-        
-        for i in 0..<listOfChartDataArray[index].count {
-            
-            let val  = listOfChartDataArray[index][i].y
+        //第几天的第几个类型的图表的数据集
+        for i in 0..<listOfChartDataArray[currentDayIndex].charts[index].model.count {
+            let model = listOfChartDataArray[currentDayIndex].charts[index].model[i]
+            let val  = model.y
             
             let chartDataEntry = BarChartDataEntry(value: val, xIndex: i)
             
@@ -196,7 +195,7 @@ extension PieChartViewController: ChartViewDelegate {
         
         //var xvs = [String?]()
         
-        for chartData in listOfChartDataArray[index] {
+        for chartData in listOfChartDataArray[currentDayIndex].charts[index].model {
             let str = chartData.x
             
             xVals.append(str)
@@ -292,6 +291,8 @@ extension PieChartViewController {
     func updatePieData(index:Int) {
         
         animePieChart = true
+        currentDayIndex = index
+        //TODO:更换数据
         
         bottomCollectionView.reloadData()
     }
@@ -306,7 +307,7 @@ extension PieChartViewController:UICollectionViewDelegateFlowLayout,UICollection
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return listOfChartDataArray.count
+        return listOfChartDataArray[currentDayIndex].charts.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {

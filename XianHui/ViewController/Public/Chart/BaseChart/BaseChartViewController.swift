@@ -13,10 +13,6 @@ import SnapKit
 class BaseChartViewController: BaseViewController {
 
     
-    var parentNavigationController : UINavigationController?
-    
-    var collectionView:UICollectionView!
-    
     var filterNameArray = ["日期","日期","日期","日期"]
     
     var parties = [
@@ -29,6 +25,10 @@ class BaseChartViewController: BaseViewController {
     
     var centerText = ""
     
+    var parentNavigationController : UINavigationController?
+    
+    var collectionView:UICollectionView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         

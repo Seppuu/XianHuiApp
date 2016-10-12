@@ -9,7 +9,6 @@
 import UIKit
 import Charts
 
-
 class RadarChartVC: BaseChartViewController {
 
     var chartView:RadarChartView!
@@ -18,11 +17,27 @@ class RadarChartVC: BaseChartViewController {
     
     let viewHeight = screenHeight - 64
     
-    var listOfType = ["现金","实操","产品","客流","员工"]
-    
     var topButtons = [UIButton]()
     
-    var cellId = "typeCell"
+    let typeCellId = "typeCell"
+    
+    var dataID:Int!
+    
+    var listOfType:[String] {
+        
+        var arr = [String]()
+        
+        form.pointArray.forEach { (model) in
+            arr.append(model.name)
+        }
+        
+        return arr
+        
+    }
+    
+    var cellHeight:CGFloat = 44
+    
+    var listArray = [BaseTableViewModelList]()
     
     var names = [String]()
     
@@ -112,10 +127,7 @@ class RadarChartVC: BaseChartViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.showsVerticalScrollIndicator = false
-        
-        let nib = UINib(nibName: cellId, bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: cellId)
+        //tableView.showsVerticalScrollIndicator = false
         
         tableView.backgroundColor = UIColor ( red: 1.0, green: 0.9882, blue: 0.9647, alpha: 1.0 )
         
@@ -128,13 +140,11 @@ class RadarChartVC: BaseChartViewController {
     
     
     func setChartData() {
-        
         //最大值
        // let mult:Double = form.totalScore
         
         //维度数量
         let count = form.viewCount
-        
         
         var yValsButton = [ChartDataEntry]() //button 位置
         
@@ -147,25 +157,23 @@ class RadarChartVC: BaseChartViewController {
         for i in 0..<count {
             
             //某天值 原值最大值是5 这里*20
-            let point = Double(form.pointArray[i] * 20)
+            let point = Double(form.pointArray[i].point * 20)
             let entry = ChartDataEntry(value:point, xIndex: i, data: i)
             yVals1.append(entry)
             
             //七日均值
-            let avgPoint = Double(form.avgPointArray[i] * 20 )
+            let avgPoint = Double(form.avgPointArray[i].point * 20)
             let entryAvarage = ChartDataEntry(value: avgPoint , xIndex: i, data: i)
             yVals2.append(entryAvarage)
 
-            
             let yMax = chartView.yAxis.axisMaxValue
             let entryEx = ChartDataEntry(value: yMax + 5 , xIndex: i, data: i)
             yValsButton.append(entryEx)
             
-            
             let entryBack = ChartDataEntry(value: yMax , xIndex: i, data: i)
             yVals0Back.append(entryBack)
             
-            
+
         }
         
         
@@ -176,7 +184,6 @@ class RadarChartVC: BaseChartViewController {
             let v = parties[i % parties.count]
             xVals.append(v)
         }
-        
         
         let set0 = RadarChartDataSet(yVals: yVals0Back, label: "")
         set0.setColor(UIColor ( red: 0.7855, green: 0.6676, blue: 0.4805, alpha: 1.0 ))
@@ -201,7 +208,6 @@ class RadarChartVC: BaseChartViewController {
         set2.fillAlpha = 0.7
         
         
-        
         let data = RadarChartData(xVals: xVals, dataSets: [set0,set2,set1])
         data.setValueTextColor(UIColor.clearColor())
         data.setDrawValues(false)
@@ -210,12 +216,12 @@ class RadarChartVC: BaseChartViewController {
         percentFormatter.positiveSuffix = ""
         percentFormatter.negativeSuffix = ""
         
-        
         data.setValueFormatter(percentFormatter)
         
         chartView.data = data
         
         addCustomLabelToChartView(yValsButton)
+        
     }
     
     func addCustomLabelToChartView(yVals:[ChartDataEntry]) {
@@ -287,6 +293,9 @@ class RadarChartVC: BaseChartViewController {
     
     func adjustLabelPosition(buttons:[UIButton]) {
         
+        if buttons.count == 0 {
+            return
+        }
         let button01 = buttons[1]
         let button04 = buttons[4]
         
@@ -334,33 +343,72 @@ class RadarChartVC: BaseChartViewController {
 extension RadarChartVC:UITableViewDelegate,UITableViewDataSource {
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return listArray.count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return names.count
+        return listArray[section].list.count
     }
     
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 44
+        return cellHeight
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return listArray[section].listName
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! typeCell
-        cell.backgroundColor = UIColor ( red: 1.0, green: 0.9882, blue: 0.9647, alpha: 1.0 )
-        cell.selectionStyle = .Default
-        cell.accessoryType = .DisclosureIndicator
-        cell.leftLabel.text = names[indexPath.row]
-        cell.typeLabel.text = numbers[indexPath.row]
-        return cell
+
+        let baseModel = listArray[indexPath.section].list[indexPath.row]
+        
+        let cellId = "typeCell"
+        
+        var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? typeCell
+        cell?.selectionStyle = .None
+        if cell == nil {
+            let nib = UINib(nibName: cellId, bundle: nil)
+            tableView.registerNib(nib, forCellReuseIdentifier: cellId)
+            cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? typeCell
+        }
+        
+        cell?.leftLabel.text = baseModel.name
+        cell?.typeLabel.text = baseModel.desc
+        cell?.typeLabel.textAlignment = .Right
+        
+        if baseModel.hasList == true {
+            cell?.accessoryType = .DisclosureIndicator
+        }
+        else {
+            cell?.accessoryType = .None
+        }
+        
+        return cell!
+        
     }
+    
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+
+        let baseModel = listArray[indexPath.section].list[indexPath.row]
         
+        if baseModel.hasList == true {
+            let vc = BaseTableViewController()
+            let listArr = BaseTableViewModelList()
+            listArr.listName = ""
+            listArr.list = baseModel.listData
+            vc.listArray = [listArr]
+            vc.title = baseModel.name
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        else {
+            return
+        }
     }
+
 }
 
 extension RadarChartVC:ChartViewDelegate {
