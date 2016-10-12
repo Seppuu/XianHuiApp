@@ -301,7 +301,7 @@ class User:NSObject {
             let rmUser = rmUsersResult[0]
             guard let url = NSURL(string: rmUser.avatarUrl) else { return nil  }
             
-            let user = XHUser(userId: rmUser.clientId, name: rmUser.userName, avatarURL:url, clientId: rmUser.clientId)
+            let user = XHUser(userId: rmUser.userId, name: rmUser.userName, avatarURL:url, clientId: rmUser.clientId)
             
             return user
         }

@@ -208,7 +208,7 @@ class ChatKitExample: LCChatKitExample {
         
     }
     
-    
+    //会话点击右上icon,进入详细资料.
     override func lcck_setupOpenConversation() {
         
         LCChatKit.sharedInstance().fetchConversationHandler = {
@@ -223,6 +223,7 @@ class ChatKitExample: LCChatKitExample {
                 
                 aConversationController.configureBarButtonItemStyle(.SingleProfile, action: { (sender, event) in
                     
+                   // let hud = showHudWith(aConversationController.view, animated: true, mode: .Indeterminate, text: "")
                     if let memebers = conversation.members as? [String] {
                         let currentUserClientId = LCChatKit.sharedInstance().clientId
                         var clientId = ""
@@ -235,7 +236,23 @@ class ChatKitExample: LCChatKitExample {
                         
                         if let user = User.getUserBy(clientId) {
                             
-                            
+                            if let id = user.userId.toInt() {
+                                NetworkManager.sharedManager.getEmployeeDetailWith(id, completion: { (success, json, error) in
+                                   // hud.hide(true)
+                                    if success == true {
+                                        let vc = EmployeeProfileVC()
+                                        vc.title = "详细资料"
+                                        vc.type = .employee
+                                        vc.profileJSON = json!
+                                        vc.profileDetailJSON = json!
+                                        
+                                        aConversationController.navigationController?.pushViewController(vc, animated: true)
+                                    }
+                                    
+                                    
+                                })
+     
+                            }
                             
                            
                         }

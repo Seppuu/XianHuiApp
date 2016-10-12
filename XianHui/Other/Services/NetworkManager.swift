@@ -485,6 +485,19 @@ extension NetworkManager {
         
     }
     
+    //获取同事明细
+    func getEmployeeDetailWith(id:Int,completion:DDResultHandler) {
+        
+        let urlString = GetEmployeeDetailUrl
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!,
+            "user_id":id
+        ]
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+    }
+    
     //我的工作四种列表点击cell.
     func getMyWorkScheduleListWith(urlString:String,idPramName:String,id:Int,completion:DDResultHandler) {
         

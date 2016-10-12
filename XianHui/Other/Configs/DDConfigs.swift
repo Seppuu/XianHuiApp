@@ -204,6 +204,11 @@ var GetMyWorkEmployeeUrl:String {
     return DDBaseUrl + "/rest/employee/gethelperworkerlist"
 }
 
+//获取同事明细
+var GetEmployeeDetailUrl:String {
+    return DDBaseUrl + "/rest/employee/gethelperworkerdetail"
+}
+
 //获取项目列表
 var GetMyWorkProjectUrl:String {
     return DDBaseUrl + "/rest/employee/gethelperprojectlist"
