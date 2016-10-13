@@ -21,7 +21,6 @@ class MaxValue: NSObject {
 }
 
 
-
 class FormSettingVC: UIViewController {
     
     var tableView: UITableView!
