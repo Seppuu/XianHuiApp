@@ -35,7 +35,7 @@ class MyWorkListHepler: NSObject, UITableViewDelegate, UITableViewDataSource {
     var cellHeight:CGFloat = 64
     var cellId = "MyWorkCell"
     
-    var cellSelectedHandler:((index:Int,objectId:Int,objectName:String)->())?
+    var cellSelectedHandler:((index:Int,objectId:Int,objectName:String,obj:MyWorkObject)->())?
 
     override init() {
         super.init()
@@ -102,7 +102,7 @@ class MyWorkListHepler: NSObject, UITableViewDelegate, UITableViewDataSource {
         
         
         let obj = self.dataArray[indexPath.row]
-        cellSelectedHandler?(index:indexPath.row,objectId:obj.id,objectName:obj.nameLabelString)
+        cellSelectedHandler?(index:indexPath.row,objectId:obj.id,objectName:obj.nameLabelString,obj:obj)
         
     }
     

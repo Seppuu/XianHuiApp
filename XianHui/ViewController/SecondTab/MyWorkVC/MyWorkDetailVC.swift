@@ -41,6 +41,8 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
     
     var profileJSON:JSON!
     
+    var noPlan = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -49,6 +51,8 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
         setTableView()
         
         getProfileDetailData()
+        
+        showPlanRemindIfNeed()
     }
 
     override func didReceiveMemoryWarning() {
@@ -146,8 +150,6 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
             
         }
         
-        
-        
     }
     
     func setTableView() {
@@ -217,7 +219,6 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
         
     }
     
-    
     func makeData(datas:[JSON]) {
         
         var list = [Order]()
@@ -275,6 +276,38 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
         
     }
     
+    func showPlanRemindIfNeed() {
+        
+        if self.type == .customer && noPlan == true {
+            //顾客列表进入,并且无计划,显示快捷按钮.去往计划设置.
+            let l = UILabel(frame: CGRect(x: 0, y: 64, width: screenWidth, height: 40))
+            view.addSubview(l)
+            l.text = "该顾客当前无销售计划,请点击设置"
+            l.textColor = UIColor.darkTextColor()
+            l.textAlignment = .Center
+            l.backgroundColor = UIColor.whiteColor()
+            l.font = UIFont.systemFontOfSize(14)
+            let tap = UITapGestureRecognizer(target: self, action: #selector(MyWorkDetailVC.showPlannSettingVC))
+            l.userInteractionEnabled = true
+            l.addGestureRecognizer(tap)
+        }
+        else {
+            
+        }
+        
+    }
+    
+    func showPlannSettingVC() {
+        
+        let vc = ProjectPlanningVC()
+        let customer = Customer()
+        customer.id = objectId
+        vc.customer = customer
+        self.navigationController?.pushViewController(vc, animated: true)
+
+        
+    }
+    
 }
 
 
@@ -291,6 +324,7 @@ extension MyWorkDetailVC:UITableViewDelegate,UITableViewDataSource {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 150
     }
+    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellId = "OrderCell"

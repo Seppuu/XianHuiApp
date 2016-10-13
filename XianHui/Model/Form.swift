@@ -70,7 +70,9 @@ class RadarModel: NSObject {
     
     var name = ""
     var point = 0
-
+    
+    var amount = 0
+    
     //下属饼图(一般有多个)
     var chartListArr = [ChartModel]()
 }

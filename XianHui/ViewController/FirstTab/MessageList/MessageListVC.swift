@@ -288,6 +288,7 @@ extension MessageListVC {
             if isFirstLaunch == true {
                 let vc = FirstLaunchRemindVC()
                 vc.title = "助手新手教学"
+                vc.isRemind = false
                 navigationController?.pushViewController(vc, animated: true)
                 
             }
@@ -304,6 +305,7 @@ extension MessageListVC {
             if isFirstLaunch == true {
                 let vc = FirstLaunchRemindVC()
                 vc.title = "提醒新手教学"
+                vc.isRemind = true
                 navigationController?.pushViewController(vc, animated: true)
                 
             }

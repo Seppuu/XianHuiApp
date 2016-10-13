@@ -117,8 +117,12 @@ class DailyFormVC: RadarChartVC {
                        radarModel.name = name
                     }
                     
+                    if let score = data["score"].int {
+                        radarModel.point = score
+                    }
+                    
                     if let amount = data["amount"].int {
-                        radarModel.point = amount
+                        radarModel.amount = amount
                     }
                     
                     array.append(radarModel)
@@ -355,9 +359,8 @@ class DailyFormVC: RadarChartVC {
         
         for form in self.formList {
             //下一个页面,上方的数字
-            let num = form.pointArray[index].point
+            let num = form.pointArray[index].amount
             nums.append(num)
-            
             //获取某种视角的7天的图表组的数据集合
             
             

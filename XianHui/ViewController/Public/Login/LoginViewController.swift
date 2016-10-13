@@ -115,7 +115,7 @@ class LoginViewController: UIViewController {
         phoneTextField = UITextField()
         view.addSubview(phoneTextField)
         phoneTextField.delegate = self
-        phoneTextField.placeholder = "电话号码"
+        phoneTextField.placeholder = "  电话号码"
         phoneTextField.keyboardType = .NumberPad
         phoneTextField.backgroundColor = UIColor.init(hexString: "EDEDED")
         phoneTextField.layer.cornerRadius = 5
@@ -131,7 +131,7 @@ class LoginViewController: UIViewController {
         passWordTextField = UITextField()
         view.addSubview(passWordTextField)
         passWordTextField.delegate = self
-        passWordTextField.placeholder = "密码"
+        passWordTextField.placeholder = "  密码"
         passWordTextField.keyboardType = .NumbersAndPunctuation
         passWordTextField.returnKeyType = .Go
         passWordTextField.secureTextEntry = true
@@ -146,14 +146,14 @@ class LoginViewController: UIViewController {
             make.height.equalTo(40)
         }
         
-        tryButton = UIButton()
-        view.addSubview(tryButton)
-        tryButton.setTitle("试用", forState: .Normal)
-        tryButton.setTitleColor(UIColor.init(hexString: "928181"), forState: .Normal)
-        tryButton.backgroundColor = UIColor.init(hexString: "E5DED1")
-        tryButton.addTarget(self, action: #selector(LoginViewController.loginWithTry), forControlEvents: .TouchUpInside)
-        tryButton.layer.cornerRadius = 5
-        tryButton.layer.masksToBounds = true
+//        tryButton = UIButton()
+//        view.addSubview(tryButton)
+//        tryButton.setTitle("试用", forState: .Normal)
+//        tryButton.setTitleColor(UIColor.init(hexString: "928181"), forState: .Normal)
+//        tryButton.backgroundColor = UIColor.init(hexString: "E5DED1")
+//        tryButton.addTarget(self, action: #selector(LoginViewController.loginWithTry), forControlEvents: .TouchUpInside)
+//        tryButton.layer.cornerRadius = 5
+//        tryButton.layer.masksToBounds = true
         
         loginButton = UIButton()
         view.addSubview(loginButton)
@@ -167,16 +167,17 @@ class LoginViewController: UIViewController {
         
         let buttonWidth = (screenWidth - 30 - 10) / 2
         
-        tryButton.snp_makeConstraints { (make) in
-            make.top.equalTo(passWordTextField.snp_bottom).offset(30)
-            make.left.equalTo(view).offset(15)
-            make.width.equalTo(buttonWidth)
-            make.height.equalTo(40)
-        }
+//        tryButton.snp_makeConstraints { (make) in
+//            make.top.equalTo(passWordTextField.snp_bottom).offset(30)
+//            make.left.equalTo(view).offset(15)
+//            make.width.equalTo(buttonWidth)
+//            make.height.equalTo(40)
+//        }
         
         loginButton.snp_makeConstraints { (make) in
             make.top.equalTo(passWordTextField.snp_bottom).offset(30)
             make.width.equalTo(buttonWidth)
+            make.left.equalTo(view).offset(10)
             make.right.equalTo(view).offset(-10)
             make.height.equalTo(40)
         }
@@ -187,7 +188,7 @@ class LoginViewController: UIViewController {
         tip.font = UIFont.systemFontOfSize(12)
         tip.textColor = UIColor.lightGrayColor()
         tip.textAlignment = .Left
-        tip.text = "提示:从MyBook激活后,初次登录的密码是手机号码!"
+        tip.text = "提示:从MyBook激活后,使用短信中的临时密码登陆!"
         
         tip.snp_makeConstraints { (make) in
             make.left.equalTo(view).offset(15)
@@ -201,6 +202,7 @@ class LoginViewController: UIViewController {
         view.addSubview(helpLabel)
         helpLabel.textAlignment = .Center
         helpLabel.text = "需要帮助?"
+        helpLabel.alpha = 0.0
         helpLabel.font = UIFont.systemFontOfSize(14)
         helpLabel.textColor = UIColor.ddBasicBlueColor()
         helpLabel.userInteractionEnabled = true
@@ -223,7 +225,6 @@ class LoginViewController: UIViewController {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .ActionSheet)
         
-
         let helperAction = UIAlertAction(title: "帮助中心", style: .Default) { (action) in
             let vc = HelpCenterViewController()
             let nav = UINavigationController(rootViewController: vc)
@@ -402,11 +403,11 @@ extension LoginViewController {
         }
         else {
             //update password
-            let indexPath0 = NSIndexPath(forRow: 1, inSection: 0)
-            let cell = tableView.cellForRowAtIndexPath(indexPath0) as! UserNameCell
-            let userName = cell.textField.text!
+            
+            let userName = phoneTextField.text
+            if userName == nil {return}
             showHud()
-            NetworkManager.sharedManager.updatePassWordWith(userName, usertype: .Employee, passWord: password, completion: { (success, json, error) in
+            NetworkManager.sharedManager.updatePassWordWith(userName!, usertype: .Employee, passWord: password, completion: { (success, json, error) in
                 
                 if success == true {
                     self.hideHud()

@@ -261,18 +261,6 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+  
     
 }

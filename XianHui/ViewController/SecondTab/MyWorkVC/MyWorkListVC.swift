@@ -52,12 +52,20 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         })        
         
         dataHelper.cellSelectedHandler = {
-            (index,objectId,objectName) in
+            (index,objectId,objectName,obj) in
             let vc = MyWorkDetailVC()
             vc.title = objectName
             vc.objectId = objectId
             vc.objectName = objectName
             vc.type = self.type
+            
+            if obj.thirdTagString == "0项" {
+                vc.noPlan = true
+            }
+            else {
+                vc.noPlan = false
+            }
+            
             vc.profileJSON = self.jsons[index]
             self.parentNavigationController?.pushViewController(vc, animated: true)
             
