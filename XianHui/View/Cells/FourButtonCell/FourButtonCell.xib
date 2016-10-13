@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="FourButtonCell" customModule="XianHui" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <frame key="frameInset" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AnC-lu-Il7">
+                        <color key="backgroundColor" red="0.54710539955364812" green="0.62914160700936972" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="FirstButtonTap:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="2hH-Qt-VlR"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mKE-Fj-Hqo">
+                        <color key="backgroundColor" red="0.88200345988435913" green="0.65659517307643023" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="secondButtonTap:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="4mg-8L-SD5"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2T-iF-gsn">
+                        <color key="backgroundColor" red="1" green="0.77495112250576215" blue="0.66510361057684797" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="thirdButtonTap:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="T3p-Er-tyx"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJi-7a-c9o">
+                        <color key="backgroundColor" red="1" green="0.89853549363102236" blue="0.30020238248848352" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="forthButtonTap:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="r8Q-2A-rik"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="mKE-Fj-Hqo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="0lN-BF-qDL"/>
+                    <constraint firstAttribute="bottom" secondItem="AnC-lu-Il7" secondAttribute="bottom" id="669-io-YQf"/>
+                    <constraint firstItem="AnC-lu-Il7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="722-Lk-7md"/>
+                    <constraint firstItem="Q2T-iF-gsn" firstAttribute="height" secondItem="AnC-lu-Il7" secondAttribute="height" id="AaM-47-KMP"/>
+                    <constraint firstItem="Q2T-iF-gsn" firstAttribute="width" secondItem="AnC-lu-Il7" secondAttribute="width" id="CXh-eW-csR"/>
+                    <constraint firstItem="AnC-lu-Il7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="F0o-BR-b5N"/>
+                    <constraint firstItem="mKE-Fj-Hqo" firstAttribute="width" secondItem="AnC-lu-Il7" secondAttribute="width" id="I2Z-IP-gwY"/>
+                    <constraint firstAttribute="trailing" secondItem="dJi-7a-c9o" secondAttribute="trailing" id="QVc-HY-tQn"/>
+                    <constraint firstAttribute="bottom" secondItem="mKE-Fj-Hqo" secondAttribute="bottom" id="STe-S9-wun"/>
+                    <constraint firstItem="dJi-7a-c9o" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="YJ2-OB-SaE"/>
+                    <constraint firstItem="dJi-7a-c9o" firstAttribute="leading" secondItem="Q2T-iF-gsn" secondAttribute="trailing" id="fqW-fi-ZTj"/>
+                    <constraint firstItem="dJi-7a-c9o" firstAttribute="width" secondItem="AnC-lu-Il7" secondAttribute="width" id="iaj-Me-bRU"/>
+                    <constraint firstItem="mKE-Fj-Hqo" firstAttribute="height" secondItem="AnC-lu-Il7" secondAttribute="height" id="rU6-le-Qyc"/>
+                    <constraint firstAttribute="bottom" secondItem="Q2T-iF-gsn" secondAttribute="bottom" id="scn-7K-32R"/>
+                    <constraint firstItem="dJi-7a-c9o" firstAttribute="height" secondItem="AnC-lu-Il7" secondAttribute="height" id="vXy-bc-wRB"/>
+                    <constraint firstItem="mKE-Fj-Hqo" firstAttribute="leading" secondItem="AnC-lu-Il7" secondAttribute="trailing" id="wV6-wv-LtO"/>
+                    <constraint firstItem="Q2T-iF-gsn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="xpH-gu-RYU"/>
+                    <constraint firstAttribute="bottom" secondItem="dJi-7a-c9o" secondAttribute="bottom" id="zgT-Gy-shV"/>
+                    <constraint firstItem="Q2T-iF-gsn" firstAttribute="leading" secondItem="mKE-Fj-Hqo" secondAttribute="trailing" id="zn4-2Z-4IT"/>
+                </constraints>
+            </tableViewCellContentView>
+            <inset key="separatorInset" minX="320" minY="0.0" maxX="0.0" maxY="0.0"/>
+            <connections>
+                <outlet property="FirstButton" destination="AnC-lu-Il7" id="gN5-Cb-ofk"/>
+                <outlet property="forthButton" destination="dJi-7a-c9o" id="T1i-jE-80G"/>
+                <outlet property="secondButton" destination="mKE-Fj-Hqo" id="ulp-wr-QC4"/>
+                <outlet property="thirdButton" destination="Q2T-iF-gsn" id="qAN-P2-Wej"/>
+            </connections>
+            <point key="canvasLocation" x="35" y="169"/>
+        </tableViewCell>
+    </objects>
+</document>

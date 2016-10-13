@@ -20,11 +20,11 @@ class MaxValue: NSObject {
     
 }
 
+
+
 class FormSettingVC: UIViewController {
     
     var tableView: UITableView!
-    
-    var cellId = "typeCell"
     
     var listOfMaxVal = [MaxValue]()
     
@@ -54,7 +54,9 @@ class FormSettingVC: UIViewController {
     }
     
     var maxValKey = ["cash_amount","project_amount","product_amount","customer_total","employee_amount"]
-    var maxKeyName = ["现金","项目","产品","客流","员工"]
+    var maxKeyName = ["现金","实操","产品","客流","工时"]
+    
+    var topButtonName = ["A档","B档","C档","自定义"]
     
     func makeMaxValueListWith(json:JSON) -> [MaxValue] {
         var list = [MaxValue]()
@@ -81,10 +83,7 @@ class FormSettingVC: UIViewController {
         tableView = UITableView(frame: view.bounds, style: .Grouped)
         tableView.delegate   = self
         tableView.dataSource = self
-        
-        let nib = UINib(nibName: cellId, bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: cellId)
-        
+
         view.addSubview(tableView)
         
     }
@@ -103,6 +102,9 @@ class FormSettingVC: UIViewController {
     }
     
     func confirmTap() {
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+        return
         
         //TODO:check if all set done
         for maxVal in listOfMaxVal {
@@ -148,57 +150,70 @@ class FormSettingVC: UIViewController {
 
 extension FormSettingVC:UITableViewDelegate,UITableViewDataSource {
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            
-            return "日报表峰值"
-        }
-        else {
-            return nil
-        }
-    }
-    
+
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listOfMaxVal.count
+        if section == 0 {
+            return 1
+        }
+        else {
+            return 5
+        }
+        
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        
         return 44
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! typeCell
-        
-        cell.accessoryType = .DisclosureIndicator
-        
-        let maxVal = listOfMaxVal[indexPath.row]
-        
-        cell.leftLabel.text = maxVal.name
-        
-        if maxVal.value == 0 {
-            cell.typeLabel.text = "请设置"
+        if indexPath.section == 0 {
+            let cellId = "FourButtonCell"
+            var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? FourButtonCell
+            if cell == nil {
+                let nib = UINib(nibName: cellId, bundle: nil)
+                tableView.registerNib(nib, forCellReuseIdentifier: cellId)
+                cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? FourButtonCell
+            }
+            
+            for i in 0..<topButtonName.count {
+                cell!.buttons[i].setTitle(topButtonName[i], forState: .Normal)
+            }
+            cell?.buttons.forEach({ (button) in
+                button.setTitleColor(UIColor.darkTextColor(), forState: .Normal)
+            })
+            
+            cell?.buttonTapHandler = {
+                (index) in
+                
+            }
+            
+            return cell!
         }
         else {
-            cell.typeLabel.text = String(maxVal.value)
+            let cellId = "SliderCell"
+            var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? SliderCell
+            if cell == nil {
+                let nib = UINib(nibName: cellId, bundle: nil)
+                tableView.registerNib(nib, forCellReuseIdentifier: cellId)
+                cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? SliderCell
+            }
+            cell?.selectionStyle = .None
+            cell?.leftLabel.text = maxKeyName[indexPath.row]
+            
+            
+            return cell!
         }
-        
-        return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let vc = MaxValueSettingVC()
-        vc.title = "最大值"
-        vc.maxValue = listOfMaxVal[indexPath.row]
-        
-        self.navigationController?.pushViewController(vc, animated: true)
-        
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+
         
     }
 }

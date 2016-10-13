@@ -55,10 +55,6 @@ class LoginViewController: UIViewController {
     
     var tableView:UITableView!
     
-    var cellId = "UserNameCell"
-    
-    var singleCellId = "SingleTapCell"
-    
     var hud = MBProgressHUD()
     
     override func viewDidLoad() {
