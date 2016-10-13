@@ -324,6 +324,7 @@ extension LoginViewController {
                 //检车是否是默认密码,如果是,需要强制修改.否则无法登陆
                 if let no = data!["init_login_password"].int {
                     if no == 1 {
+                        self.hideHud()
                         self.showChangePassWordAlert()
                     }
                     else {
@@ -412,9 +413,7 @@ extension LoginViewController {
                 if success == true {
                     self.hideHud()
                     self.showHudWith("修改成功,请再次登录")
-                    let indexPath1 = NSIndexPath(forRow: 2, inSection: 0)
-                    let cell2 = self.tableView.cellForRowAtIndexPath(indexPath1) as! UserNameCell
-                    cell2.textField.text = ""
+                    self.passWordTextField.text = ""
                 }
                 else {
                     self.hideHud()
