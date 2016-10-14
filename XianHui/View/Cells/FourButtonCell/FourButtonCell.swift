@@ -27,7 +27,9 @@ class FourButtonCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         buttons = [FirstButton,secondButton,thirdButton,forthButton]
-        
+        buttons.forEach { (button) in
+            button.backgroundColor = UIColor.clearColor()
+        }
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
