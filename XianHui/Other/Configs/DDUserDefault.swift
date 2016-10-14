@@ -81,7 +81,10 @@ extension PalauDefaults {
         }
     }
     
-    public static var cashMaxValue: PalauDefaultsEntry<Int> {
+    //日报表最大值
+    
+    //现金
+    public static var cashMaxValue: PalauDefaultsEntry<Float> {
         get {
             return value("cashMaxValue").whenNil(use:15000)
         }
@@ -90,7 +93,7 @@ extension PalauDefaults {
         }
     }
     
-    public static var projectMaxValue: PalauDefaultsEntry<Int> {
+    public static var projectMaxValue: PalauDefaultsEntry<Float> {
         get {
             return value("projectMaxValue").whenNil(use:7000)
         }
@@ -99,7 +102,7 @@ extension PalauDefaults {
         }
     }
     
-    public static var productMaxValue: PalauDefaultsEntry<Int> {
+    public static var productMaxValue: PalauDefaultsEntry<Float> {
         get {
             return value("productMaxValue").whenNil(use:5000)
         }
@@ -108,18 +111,20 @@ extension PalauDefaults {
         }
     }
     
-    public static var customerMaxValue: PalauDefaultsEntry<Int> {
+    //周转率
+    public static var roomTurnoverMaxValue: PalauDefaultsEntry<Float> {
         get {
-            return value("customerMaxValue").whenNil(use:20)
+            return value("roomTurnoverMaxValue").whenNil(use:20)
         }
         set {
             
         }
     }
     
-    public static var employeeMaxValue: PalauDefaultsEntry<Int> {
+    //工时
+    public static var employeeHoursMaxValue: PalauDefaultsEntry<Float> {
         get {
-            return value("employeeMaxValue").whenNil(use:500)
+            return value("employeeHoursMaxValue").whenNil(use:500)
         }
         set {
             

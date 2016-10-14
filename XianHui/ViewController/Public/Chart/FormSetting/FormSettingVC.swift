@@ -14,11 +14,21 @@ class MaxValue: NSObject {
     
     var name = ""
     
-    var value = 0
+    var unit = ""
     
-    var list = [String:String]()
+    var min:Float = 1
+    
+    var max:Float = 10
+    
+    var step:Float = 1
+    
+    var value:Float = 0
+    
+    //A B C 档位
+    var remmandValues = [Float]()
     
 }
+
 
 
 class FormSettingVC: UIViewController {
@@ -28,6 +38,8 @@ class FormSettingVC: UIViewController {
     var listOfMaxVal = [MaxValue]()
     
     var saveCompletion:(()->())?
+    
+    var isCustomMode = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,28 +64,60 @@ class FormSettingVC: UIViewController {
         }
     }
     
-    var maxValKey = ["cash_amount","project_amount","product_amount","customer_total","employee_amount"]
-    var maxKeyName = ["现金","实操","产品","客流","工时"]
+    var maxValKey = ["cash_amount","project_amount","product_amount","room_turnover","employee_hours"]
     
     var topButtonName = ["A档","B档","C档","自定义"]
     
     func makeMaxValueListWith(json:JSON) -> [MaxValue] {
         var list = [MaxValue]()
+        
         for i in 0..<maxValKey.count {
-            let someMaxVal = MaxValue()
             
-            someMaxVal.name = maxKeyName[i]
-            let key = maxValKey[i]
+            let maxModel = MaxValue()
+            let jsonName = maxValKey[i]
             
-            if let defaultVal = json[key]["value"].int {
-                someMaxVal.value = defaultVal
+            let data = json[jsonName]
+            
+            if let name = data["name"].string {
+                maxModel.name = name
             }
-            if let list = json[key]["list"].dictionaryObject as? [String:String] {
-                someMaxVal.list = list
+            
+            if let unit = data["unit"].string {
+                maxModel.unit = unit
             }
-            list.append(someMaxVal)
+            
+            if let min = data["min"].float{
+                maxModel.min = min
+            }
+            
+            if let max = data["max"].float{
+                maxModel.max = max
+            }
+            
+            if let value = data["value"].float {
+                maxModel.value = value
+            }
+            
+            if let step = data["step"].float {
+                maxModel.step = step
+            }
+            
+            let defaultData = data["default"]
+            
+            if let a = defaultData["A"].float {
+                maxModel.remmandValues.append(a)
+            }
+            
+            if let b = defaultData["B"].float {
+                maxModel.remmandValues.append(b)
+            }
+            
+            if let c = defaultData["C"].float {
+                maxModel.remmandValues.append(c)
+            }
+            list.append(maxModel)
         }
-
+        
         return list
     }
     
@@ -104,17 +148,8 @@ class FormSettingVC: UIViewController {
         
         self.dismissViewControllerAnimated(true, completion: nil)
         return
-        
-        //TODO:check if all set done
-        for maxVal in listOfMaxVal {
-            if maxVal.value == 0 {
-                
-                DDAlert.alert(title: "提示", message: "请设置所有的项目", dismissTitle: "好的", inViewController: self, withDismissAction: nil)
-                
-                return
-            }
-        }
-        
+
+
         //Save to back
         let cashMax = listOfMaxVal[0].value
         let projectmax = listOfMaxVal[1].value
@@ -134,14 +169,33 @@ class FormSettingVC: UIViewController {
                 Defaults.cashMaxValue.value = cashMax
                 Defaults.projectMaxValue.value = projectmax
                 Defaults.productMaxValue.value = prodMax
-                Defaults.customerMaxValue.value = customerMax
-                Defaults.employeeMaxValue.value = employeemax
+                Defaults.roomTurnoverMaxValue.value = customerMax
+                Defaults.employeeHoursMaxValue.value = employeemax
                 
                 self.saveCompletion?()
                 
             }
         }
         
+        
+    }
+    
+    
+    func buttonTap(index:Int) {
+        
+        if index == 4 {
+            //自定义
+            isCustomMode = true
+        }
+        else {
+            //A B C 档位
+            isCustomMode = false
+            listOfMaxVal.forEach({ (maxModel) in
+                maxModel.value = maxModel.remmandValues[index]
+            })
+        }
+        
+        self.tableView.reloadData()
         
     }
     
@@ -159,7 +213,7 @@ extension FormSettingVC:UITableViewDelegate,UITableViewDataSource {
             return 1
         }
         else {
-            return 5
+            return listOfMaxVal.count
         }
         
     }
@@ -189,7 +243,7 @@ extension FormSettingVC:UITableViewDelegate,UITableViewDataSource {
             
             cell?.buttonTapHandler = {
                 (index) in
-                
+                self.buttonTap(index)
             }
             
             return cell!
@@ -203,8 +257,17 @@ extension FormSettingVC:UITableViewDelegate,UITableViewDataSource {
                 cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? SliderCell
             }
             cell?.selectionStyle = .None
-            cell?.leftLabel.text = maxKeyName[indexPath.row]
             
+            let maxModel = listOfMaxVal[indexPath.row]
+            
+            cell?.leftLabel.text = maxModel.name
+            cell?.slider.minimumValue = Float(maxModel.min)
+            cell?.slider.maximumValue = Float(maxModel.max)
+            cell?.step = Float(maxModel.step)
+            cell?.unit = maxModel.unit
+            cell?.rightLabel.text = String(maxModel.value) + maxModel.unit
+            
+            cell?.slider.value = Float(maxModel.value)
             
             return cell!
         }
@@ -212,7 +275,7 @@ extension FormSettingVC:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-
+        
         
     }
 }

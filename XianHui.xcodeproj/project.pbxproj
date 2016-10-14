@@ -82,7 +82,6 @@
 		3776B9111D93A83900A9C9DB /* PieChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8EB1D93A83900A9C9DB /* PieChartViewController.swift */; };
 		3776B9121D93A83900A9C9DB /* RadarChartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8EC1D93A83900A9C9DB /* RadarChartVC.swift */; };
 		3776B9131D93A83900A9C9DB /* FormSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8EE1D93A83900A9C9DB /* FormSettingVC.swift */; };
-		3776B9141D93A83900A9C9DB /* MaxValueSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8EF1D93A83900A9C9DB /* MaxValueSettingVC.swift */; };
 		3776B9151D93A83900A9C9DB /* CodeLoginVerifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8F21D93A83900A9C9DB /* CodeLoginVerifyVC.swift */; };
 		3776B9161D93A83900A9C9DB /* CodeLoginVerifyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3776B8F31D93A83900A9C9DB /* CodeLoginVerifyVC.xib */; };
 		3776B9171D93A83900A9C9DB /* LoginByPhoneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8F41D93A83900A9C9DB /* LoginByPhoneVC.swift */; };
@@ -366,7 +365,6 @@
 		3776B8EB1D93A83900A9C9DB /* PieChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartViewController.swift; sourceTree = "<group>"; };
 		3776B8EC1D93A83900A9C9DB /* RadarChartVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadarChartVC.swift; sourceTree = "<group>"; };
 		3776B8EE1D93A83900A9C9DB /* FormSettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSettingVC.swift; sourceTree = "<group>"; };
-		3776B8EF1D93A83900A9C9DB /* MaxValueSettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaxValueSettingVC.swift; sourceTree = "<group>"; };
 		3776B8F21D93A83900A9C9DB /* CodeLoginVerifyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeLoginVerifyVC.swift; sourceTree = "<group>"; };
 		3776B8F31D93A83900A9C9DB /* CodeLoginVerifyVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CodeLoginVerifyVC.xib; sourceTree = "<group>"; };
 		3776B8F41D93A83900A9C9DB /* LoginByPhoneVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginByPhoneVC.swift; sourceTree = "<group>"; };
@@ -1050,7 +1048,6 @@
 			isa = PBXGroup;
 			children = (
 				3776B8EE1D93A83900A9C9DB /* FormSettingVC.swift */,
-				3776B8EF1D93A83900A9C9DB /* MaxValueSettingVC.swift */,
 			);
 			path = FormSetting;
 			sourceTree = "<group>";
@@ -2239,7 +2236,6 @@
 				37BAB9A51D3E1059001E4680 /* SubscriptionTopCell.swift in Sources */,
 				37BAB99F1D3E1059001E4680 /* SheetCell.swift in Sources */,
 				3770DD861DA506A800786FB2 /* GoodProfileVC.swift in Sources */,
-				3776B9141D93A83900A9C9DB /* MaxValueSettingVC.swift in Sources */,
 				3776B9131D93A83900A9C9DB /* FormSettingVC.swift in Sources */,
 				372480E41D8151EF00B95C54 /* LCCKLoginDataSource.m in Sources */,
 				372480E31D8151EF00B95C54 /* DEMODataSource.m in Sources */,

@@ -41,9 +41,16 @@ class SliderCell: UITableViewCell {
     }
     
     
+    var step: Float = 1
+    
+    var unit = ""
+    
     @IBAction func sliderMoved(sender: UISlider) {
         
-        rightLabel.text = String(sender.value)
+        let roundedValue = round(sender.value / step) * step
+        sender.value = roundedValue
+        
+        rightLabel.text = String(sender.value) + unit
         
     }
     
