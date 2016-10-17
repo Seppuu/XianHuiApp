@@ -48,6 +48,8 @@ class XHSideFilterView: UIView {
     
     var filterSelected:((models:[XHSideFilterDataModel])->())?
     
+    var confirmHandler:(()->())?
+    
     var selectedModels = [XHSideFilterDataModel]()
     
     override init(frame: CGRect) {
@@ -137,11 +139,14 @@ class XHSideFilterView: UIView {
     }
     
     func reSetButtonTap() {
+        self.selectedModels.removeAll()
         
+        filterSelected?(models:selectedModels)
     }
     
     func confirmTap() {
         
+        confirmHandler?()
     }
     
     

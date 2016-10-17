@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 #if __has_include(<ChatKit/LCChatKit.h>)
-    #import <ChatKit/LCChatKit.h>
+#import <ChatKit/LCChatKit.h>
 #else
-    #import "LCChatKit.h"
+#import "LCChatKit.h"
 #endif
 
 @class LCCKContact;
@@ -42,11 +42,7 @@ typedef BOOL (^LCCKDeleteContactCallback)(UIViewController *viewController, NSSt
 @property (nonatomic, copy) NSSet<LCCKContact *> *contacts;
 @property (nonatomic, copy) NSSet<NSString *> *userIds;
 
-//xianhui
 @property (nonatomic, strong) UISearchDisplayController *searchController;
-
-
-- (void)reSetSearchBar;
 
 - (void)setDeleteContactCallback:(LCCKDeleteContactCallback)deleteContactCallback;
 - (LCCKDeleteContactCallback)deleteContactCallback;
@@ -66,8 +62,8 @@ typedef BOOL (^LCCKDeleteContactCallback)(UIViewController *viewController, NSSt
                            mode:(LCCKContactListMode)contactListMode;
 
 - (instancetype)initWithUserIds:(NSSet<NSString *> *)userIds
-                 excludedUserIds:(NSSet * __nullable)excludedUserIds
-                            mode:(LCCKContactListMode)contactListMode;
+                excludedUserIds:(NSSet * __nullable)excludedUserIds
+                           mode:(LCCKContactListMode)contactListMode;
 /*!
  * @param 你可以使用 contacts 和 userIds 两个参数来进行联系人列表初始化，区别是前者可以为空，后者不可以为空。如果同时传了两个参数，那么前者优先级大于后者。如果只传了后者，ChatKit 会自行进行网络请求获取到对应的 contacts。
  * @param excludedUserIds 是黑名单，不希望出现在联系人列表里的用户id，最常见的是将自己的id放在这里。

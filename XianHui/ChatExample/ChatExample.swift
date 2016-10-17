@@ -14,7 +14,7 @@ import SwiftyJSON
 class ChatKitExample: LCChatKitExample {
     
     class func getAllUserIds() -> [String] {
-        
+
         return allUserIds
     }
     

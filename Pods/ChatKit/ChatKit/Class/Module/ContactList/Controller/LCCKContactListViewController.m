@@ -37,8 +37,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-//xianhui
-//@property (nonatomic, strong) UISearchDisplayController *searchController;
+
 #pragma clang diagnostic pop
 @property (nonatomic, copy) NSArray *searchContacts;
 @property (nonatomic, copy) NSDictionary *searchSections;
@@ -186,7 +185,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
         searchBar.delegate = self;
         searchBar.placeholder = @"搜索";
         _searchBar = searchBar;
-//        self.tableView.tableHeaderView = _searchBar;
+        self.tableView.tableHeaderView = _searchBar;
     }
     return _searchBar;
 }
@@ -207,8 +206,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"联系人";
-    //xianhui
-    //self.tableView.tableHeaderView = self.searchBar;
+    self.tableView.tableHeaderView = self.searchBar;
     self.tableView.tableFooterView = [[UIView alloc] init];
     NSBundle *bundle = [NSBundle bundleForClass:[LCChatKit class]];
     [self setupSearchBarControllerWithSearchBar:self.searchBar bundle:bundle];
@@ -228,7 +226,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
                                                                                         action:@selector(doneBarButtonItemPressed:)];
         self.navigationItem.rightBarButtonItem = doneButtonItem;
     }
-
+    
     !self.viewDidLoadBlock ?: self.viewDidLoadBlock(self);
 }
 
@@ -264,7 +262,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-//    [self _reloadData];
+    //    [self _reloadData];
     if (!_contacts || _contacts.count == 0) {
         [self forceReloadByUserId];
     }
@@ -276,7 +274,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
     if (self.mode == LCCKContactListModeMultipleSelection) {
         //  Return an array of selectedContacts
         [self selectedContactsCallback](self, [self.selectedContacts copy]);
-
+        
         return;
     }
     !self.viewWillDisappearBlock ?: self.viewWillDisappearBlock(self, animated);
@@ -323,7 +321,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    LCCKContactCell *cell = [tableView dequeueReusableCellWithIdentifier:LCCKContactListViewControllerIdentifier forIndexPath:indexPath];
+    LCCKContactCell *cell = [tableView dequeueReusableCellWithIdentifier:LCCKContactListViewControllerIdentifier];
     id contact = [self contactAtIndexPath:indexPath tableView:tableView];
     NSURL *avatarURL = nil;
     NSString *name = nil;
@@ -398,7 +396,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    LCCKContactCell *cell = [tableView dequeueReusableCellWithIdentifier:LCCKContactListViewControllerIdentifier forIndexPath:indexPath];
+    LCCKContactCell *cell = [tableView dequeueReusableCellWithIdentifier:LCCKContactListViewControllerIdentifier];
     NSString *clientId = [self currentClientIdAtIndexPath:indexPath tableView:tableView];
     if (self.mode == LCCKContactListModeSingleSelection) {
         if (clientId == self.selectedContact) {
@@ -472,14 +470,14 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
         return;
     }
     //TODO:
-//    NSDictionary *userInfo = [notification object];
-//    NSSet *dataSource = userInfo[LCCKNotificationContactListDataSourceUpdatedUserInfoDataSourceKey];
-//    NSString *dataSourceType = userInfo[LCCKNotificationContactListDataSourceUpdatedUserInfoDataSourceTypeKey];
-//    if ([dataSourceType isEqualToString:LCCKNotificationContactListDataSourceContactObjType]) {
-//        self.contacts = dataSource;
-//    } else {
-//        
-//    }
+    //    NSDictionary *userInfo = [notification object];
+    //    NSSet *dataSource = userInfo[LCCKNotificationContactListDataSourceUpdatedUserInfoDataSourceKey];
+    //    NSString *dataSourceType = userInfo[LCCKNotificationContactListDataSourceUpdatedUserInfoDataSourceTypeKey];
+    //    if ([dataSourceType isEqualToString:LCCKNotificationContactListDataSourceContactObjType]) {
+    //        self.contacts = dataSource;
+    //    } else {
+    //
+    //    }
 }
 
 - (void)forceReloadByContacts {
@@ -524,7 +522,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
         [allMutableSet removeObject:obj];
     }];
     if (_contacts.count == allMutableSet.count) {
-         NSMutableSet<NSString *> *array = [NSMutableSet setWithSet:_userIds];
+        NSMutableSet<NSString *> *array = [NSMutableSet setWithSet:_userIds];
         [array removeObject:clientId];
         self.userIds = [array copy];
     } else {
@@ -600,7 +598,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
             contact = (LCCKContact *)contactOrUserName;
             userName = contact.name ?: contact.clientId;
         }
-
+        
         NSString *indexKey = [self indexTitleForName:userName];
         NSMutableArray *names = originSections[indexKey];
         if (!names) {
@@ -614,8 +612,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 
 - (NSDictionary *)searchSections {
     if (!_searchSections) {
-        NSSet *set = [[NSSet alloc] init];
-        [set setByAddingObjectsFromArray:self.searchContacts];
+        NSSet *set = [NSSet setWithArray:self.searchContacts];
         _searchSections = [self sortedSectionForUserNames:[self contactsFromContactsOrUserIds:set userIds:self.searchUserIds]];
     }
     return _searchSections;
@@ -708,18 +705,6 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
     }
 }
 
-//xianhui searchbar dismiss , reset searchbar frame
-- (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller {
-    
-    self.searchController.searchBar.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 44);
-    
-    //[self reSetSearchBar];
-}
-
-- (void) reSetSearchBar {
-    
-}
-
 #pragma mark - UISearchDisplayDelegate
 
 // return YES to reload table. called when search string/option changes. convenience methods on top UISearchBar delegate methods
@@ -749,8 +734,8 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
         return;
     }
     NSMutableSet *searchResults = [self.visiableContacts mutableCopy];
-
-
+    
+    
     NSMutableArray *andMatchPredicates = [NSMutableArray array];
     NSMutableArray *searchItemsPredicate = [NSMutableArray array];
     

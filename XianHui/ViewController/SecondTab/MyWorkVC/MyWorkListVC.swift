@@ -49,6 +49,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 44))
         button.setTitle("筛选", forState: .Normal)
+        button.titleLabel?.font = UIFont.systemFontOfSize(14)
         button.setTitleColor(UIColor.darkTextColor(), forState: .Normal)
         button.addTarget(self, action: #selector(MyWorkListVC.filterButtonTap), forControlEvents: .TouchUpInside)
         
@@ -106,10 +107,14 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         self.blackOverlay.addTarget(self, action: #selector(MyWorkListVC.blackOverlayTap), forControlEvents: .TouchUpInside)
         
         filterView = XHSideFilterView(frame: CGRect(x: 40, y: 0, width: screenWidth - 40, height: screenHeight))
-        filterView.alpha = 0.0
+        filterView.frame.origin.x = screenWidth
         
         inView.addSubview(filterView)
         
+        
+        filterView.confirmHandler = {
+            self.blackOverlayTap()
+        }
         
         filterView.filterSelected = {
             (models) in
@@ -145,6 +150,34 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         
     }
     
+    func filterButtonTap() {
+        
+        UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseIn, animations: {
+            self.filterView.frame.origin.x = 40
+            self.blackOverlay.alpha = 1.0
+            }, completion: nil)
+        
+    }
+    
+    func blackOverlayTap() {
+        UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: {
+            self.filterView.frame.origin.x = screenWidth
+            self.blackOverlay.alpha = 0.0
+            }, completion: nil)
+        
+    }
+    
+    func clearDataBeforeFilterSuccess() {
+        
+        self.dataHelper.dataArray =  [MyWorkObject]()
+        self.pageNumber = 1
+        self.jsons = [JSON]()
+        self.tableView.reloadData()
+        
+        
+        
+    }
+    
     func getFilterData(params:JSONDictionary) {
         
         var urlString = ""
@@ -169,7 +202,9 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
                 if let datas = json?.array {
                     self.filterView.dataArray = self.makeFilterTableViewWith(datas)
                     self.filterView.collectionView.reloadData()
-                    self.getDataFromServer(params)
+                    self.clearDataBeforeFilterSuccess()
+                    self.filterParams = params
+                    self.getDataFromServer(self.filterParams)
                 }
                 
             }
@@ -219,16 +254,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         return arr
     }
     
-    func filterButtonTap() {
-        
-        filterView.alpha = 1.0
-        self.blackOverlay.alpha = 1.0
-    }
     
-    func blackOverlayTap() {
-        filterView.alpha = 0.0
-        self.blackOverlay.alpha = 0
-    }
 
     
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
