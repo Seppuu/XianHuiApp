@@ -105,6 +105,7 @@ public class CAPSPageMenu: UIViewController, UIScrollViewDelegate, UIGestureReco
     
     var selectionIndicatorView : UIView = UIView()
     
+   
     var currentPageIndex : Int = 0
     var lastPageIndex : Int = 0
     

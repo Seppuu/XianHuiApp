@@ -146,6 +146,28 @@ var SetCustomerAdviserUrl:String {
 
 ///我的工作 -- 计划
 
+//获取顾客筛选选项
+var getMyCustomerListFilterDataUrl:String {
+    return DDBaseUrl + "/rest/employee/gethelpercustomerlistsearchinfo"
+}
+
+//获取同事筛选选项
+var getMyColleaguesListFilterDataUrl:String {
+    return DDBaseUrl + "/rest/employee/gethelperworkerlistsearchinfo"
+}
+
+
+//获取项目筛选选项
+var getMyProjectListFilterDataUrl:String {
+    return DDBaseUrl + "/rest/employee/gethelperprojectlistsearchinfo"
+}
+
+//获取产品筛选选项
+var getMyProdListFilterDataUrl:String {
+    return DDBaseUrl + "/rest/employee/gethelperproductlistsearchinfo"
+}
+
+
 //获取计划顾客列表
 var GetCustomerPlanListUrl:String {
     return DDBaseUrl + "/rest/employee/getplantable"

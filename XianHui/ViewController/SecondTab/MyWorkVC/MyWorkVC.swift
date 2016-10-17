@@ -88,6 +88,7 @@ class MyWorkVC: BaseViewController,CAPSPageMenuDelegate {
         
         pageMenu!.moveToPage(pageIndex)
         
+        
         self.view.addSubview(pageMenu!.view)
         
     }

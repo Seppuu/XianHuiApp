@@ -440,9 +440,6 @@ extension NetworkManager {
         
     }
     
-    
-
-    
     //计划顾客列表
     func getCustomerPlanListWith(completion:DDResultHandler) {
         
@@ -471,17 +468,33 @@ extension NetworkManager {
         baseRequestWith(urlString, dict: dict, completion: completion)
     }
     
+    //获取顾客,同事,项目,产品的过滤条件以及数据
+    func getMyWorkListFilterDataWith(params:JSONDictionary,urlString:String,completion:DDResultHandler) {
+        let urlString = urlString
+        
+        var dict:JSONDictionary = [
+            "token":Defaults.userToken.value!
+            
+        ]
+        
+        dict += params
+        
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+    }
     
     //我的工作四种列表
-    func getMyWorkListWith(urlString:String,pageSize:Int,pageNumber:Int,completion:DDResultHandler) {
+    func getMyWorkListWith(params:JSONDictionary,urlString:String,pageSize:Int,pageNumber:Int,completion:DDResultHandler) {
         
         let urlString = urlString
         
-        let dict:JSONDictionary = [
+        var dict:JSONDictionary = [
             "token":Defaults.userToken.value!,
             "pageSize":pageSize,
             "pageNumber":pageNumber
         ]
+        
+        dict += params
         
         baseRequestWith(urlString, dict: dict, completion: completion)
         
@@ -740,6 +753,7 @@ extension NetworkManager {
     //REQUEST
     //基本请求,返回 status dataInfo errorMsg
     private func baseRequestWith(urlString:String,dict:JSONDictionary,completion:DDResultHandler) {
+        
         
         Alamofire.request(.POST, urlString, parameters: dict)
             .responseJSON { (response) in

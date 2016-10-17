@@ -60,9 +60,6 @@ class DailyFormVC: RadarChartVC {
                     
                     self.tableView.reloadData()
                 }
-                
-                
-                
             }
             else {
                 
@@ -136,7 +133,7 @@ class DailyFormVC: RadarChartVC {
         
         guard let daysData = json["weekly_daily"].array else {return nil}
         //今天的数据是数组第一个.
-        for dailyData in daysData {
+        for dailyData in daysData.reverse() {
             
             let form = Form()
             

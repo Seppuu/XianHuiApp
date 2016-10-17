@@ -25,6 +25,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     
     var jsons = [JSON]()
     
+    var filterParams = JSONDictionary()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,9 +47,16 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         tableView.delegate = dataHelper
         tableView.dataSource = dataHelper
         
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 44))
+        button.setTitle("筛选", forState: .Normal)
+        button.setTitleColor(UIColor.darkTextColor(), forState: .Normal)
+        button.addTarget(self, action: #selector(MyWorkListVC.filterButtonTap), forControlEvents: .TouchUpInside)
+        
+        tableView.tableHeaderView = button
+        
         // add MJRefresh
         tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: { 
-            self.getDataFromServer()
+            self.getDataFromServer(self.filterParams)
         })        
         
         dataHelper.cellSelectedHandler = {
@@ -76,8 +84,152 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         
         tableView.mj_footer.beginRefreshing()
         
+        setFilterView()
+        getFilterData(JSONDictionary())
     }
     
+    var filterView:XHSideFilterView!
+
+    var blackOverlay = UIControl()
+    
+    func setFilterView() {
+        
+        let inView = UIApplication.sharedApplication().keyWindow!
+        self.blackOverlay.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        self.blackOverlay.frame = CGRect(x: 0, y: 0, width: inView.bounds.width, height: inView.bounds.height)
+        
+        self.blackOverlay.backgroundColor = UIColor(white: 0.0, alpha: 0.6)
+        self.blackOverlay.alpha = 0
+        
+        inView.addSubview(self.blackOverlay)
+        
+        self.blackOverlay.addTarget(self, action: #selector(MyWorkListVC.blackOverlayTap), forControlEvents: .TouchUpInside)
+        
+        filterView = XHSideFilterView(frame: CGRect(x: 40, y: 0, width: screenWidth - 40, height: screenHeight))
+        filterView.alpha = 0.0
+        
+        inView.addSubview(filterView)
+        
+        
+        filterView.filterSelected = {
+            (models) in
+            var dict = JSONDictionary()
+            for model in models {
+                let name = model.paramName
+                let id = model.id
+                
+                var isSameParam = false
+                
+                for (key,value) in dict {
+                    
+                    if key == name {
+                        //参数类型相同
+                        isSameParam = true
+                        let stringValue = value as! String
+                        dict[key] = stringValue + "," + id
+                    }
+                    
+                }
+                
+                //无相同参数类型,新增一个.
+                if isSameParam == false {
+                    dict += [
+                       name:id
+                    ]
+                }
+            }
+            
+            self.getFilterData(dict)
+            
+        }
+        
+    }
+    
+    func getFilterData(params:JSONDictionary) {
+        
+        var urlString = ""
+        switch self.type {
+        case .customer:
+            urlString = getMyCustomerListFilterDataUrl
+        case .employee:
+            urlString = getMyColleaguesListFilterDataUrl
+        case .project:
+            urlString = getMyProjectListFilterDataUrl
+        case .prod:
+            urlString = getMyProdListFilterDataUrl
+        }
+        
+        
+        showHudWith(filterView, animated: true, mode: .Indeterminate, text: "")
+        
+        NetworkManager.sharedManager.getMyWorkListFilterDataWith(params,urlString:urlString) { (success, json, error) in
+            hideHudFrom(self.filterView)
+            if success == true {
+                
+                if let datas = json?.array {
+                    self.filterView.dataArray = self.makeFilterTableViewWith(datas)
+                    self.filterView.collectionView.reloadData()
+                    self.getDataFromServer(params)
+                }
+                
+            }
+            else {
+                
+            }
+        }
+        
+    }
+    
+    func makeFilterTableViewWith(datas:[JSON])  -> [XHSideFilterDataList] {
+        var arr = [XHSideFilterDataList]()
+        for data in datas {
+            
+            let list = XHSideFilterDataList()
+            if let sectionName = data["name"].string {
+                list.name = sectionName
+            }
+            
+            if let sectionDatas = data["list"].array {
+                
+                for sectionData in sectionDatas {
+                    let model = XHSideFilterDataModel()
+                    
+                    if let paramName = data["param"].string{
+                        model.paramName = paramName
+                    }
+                    
+                    if let name = sectionData["text"].string{
+                        model.name = name
+                    }
+                    
+                    if let idString = sectionData["value"].string {
+                        model.id = idString
+                    }
+                    if let selected = sectionData["selected"].bool {
+                        model.selected = selected
+                    }
+                    
+                    list.list.append(model)
+                }
+            }
+            
+            arr.append(list)
+
+        }
+        return arr
+    }
+    
+    func filterButtonTap() {
+        
+        filterView.alpha = 1.0
+        self.blackOverlay.alpha = 1.0
+    }
+    
+    func blackOverlayTap() {
+        filterView.alpha = 0.0
+        self.blackOverlay.alpha = 0
+    }
+
     
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         
@@ -92,7 +244,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     
     var pageNumber = 1
     
-    func getDataFromServer() {
+    func getDataFromServer(params:JSONDictionary) {
         var urlString = ""
         switch self.type {
         case .customer:
@@ -106,7 +258,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         }
         
         
-        NetworkManager.sharedManager.getMyWorkListWith(urlString, pageSize: pageSize, pageNumber: pageNumber) { (success, json, error) in
+        NetworkManager.sharedManager.getMyWorkListWith(params,urlString:urlString, pageSize: pageSize, pageNumber: pageNumber) { (success, json, error) in
             
             if success == true {
                 if let rows = json!["rows"].array {
@@ -117,7 +269,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
                     else {
                         self.tableView.mj_footer.endRefreshing()
                         self.pageNumber += 1
-                        self.jsons = rows
+                        self.jsons += rows
                         self.getDataWith(rows)
                     }
                 }
@@ -129,8 +281,6 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
 
         
     }
-    
-    
     
     func getDataWith(datas:[JSON]) {
         
