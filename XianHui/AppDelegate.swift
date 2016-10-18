@@ -156,6 +156,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             else {
                 print("First launch, setting NSUserDefault.")
+                self.setDailyReportMax()
                 NSUserDefaults.standardUserDefaults().setBool(true, forKey: "launchedBefore")
             }
             
@@ -163,6 +164,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 print(error.description)
         })
+    }
+    
+    func setDailyReportMax() {
+        
+        
+        func makeMaxValueListWith(json:JSON) {
+            var list = [MaxValue]()
+            
+            var maxValKey = ["cash_amount","project_amount","product_amount","room_turnover","employee_hours"]
+            
+            for i in 0..<maxValKey.count {
+                
+                let maxModel = MaxValue()
+                let jsonName = maxValKey[i]
+                
+                let data = json[jsonName]
+                
+                if let value = data["value"].float {
+                    maxModel.value = value
+                }
+                
+                list.append(maxModel)
+            }
+            
+            
+            let cashMax = list[0].value
+            let projectmax = list[1].value
+            let prodMax = list[2].value
+            let customerMax = list[3].value
+            let employeemax = list[4].value
+            
+            Defaults.cashMaxValue.value = cashMax * 1000
+            Defaults.projectMaxValue.value = projectmax * 1000
+            Defaults.productMaxValue.value = prodMax * 1000
+            Defaults.roomTurnoverMaxValue.value = customerMax
+            Defaults.employeeHoursMaxValue.value = employeemax
+            
+        }
+
+        
+        NetworkManager.sharedManager.getDailyReportMaxVaule { (success, json, error) in
+            if success == true {
+                makeMaxValueListWith(json!)
+                
+            }
+        }
+        
     }
     
     func applicationDidBecomeActive(application: UIApplication) {

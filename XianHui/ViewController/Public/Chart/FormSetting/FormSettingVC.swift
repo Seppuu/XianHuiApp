@@ -151,7 +151,7 @@ class FormSettingVC: UIViewController {
         //Save to back
         let path10 = NSIndexPath(forItem: 0, inSection: 1)
         let path11 = NSIndexPath(forItem: 1, inSection: 1)
-        let path12 = NSIndexPath(forItem: 1, inSection: 1)
+        let path12 = NSIndexPath(forItem: 2, inSection: 1)
         
         var cashMax = listOfMaxVal[0].value
         var projectmax = listOfMaxVal[1].value
