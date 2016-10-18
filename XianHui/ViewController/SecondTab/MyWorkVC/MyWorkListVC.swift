@@ -343,7 +343,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
                 c.place = orgName
             }
             if let days = data["days"].string {
-                c.time  = days + "天"
+                c.time  = days
             }
             
             if let avatarUrl = data["avator_url"].string {
@@ -488,6 +488,10 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
                 p.place = orgName
             }
             
+            if let avator_url = data["avator_url"].string {
+                p.avatarUrl = avator_url
+            }
+            
             if let scheduleNum = data["schedule_num"].int {
                 p.scheduleNum = scheduleNum
             }
@@ -539,6 +543,14 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
                 prod.name = itemName
             }
             
+            if let orgName = data["org_name"].string {
+                prod.place = orgName
+            }
+            
+            if let avator_url = data["avator_url"].string {
+                prod.avatarUrl = avator_url
+            }
+            
             if let stockNum = data["stock_qty"].string {
                     prod.stockNum = stockNum
             }
@@ -554,8 +566,8 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         for p in list {
             let work = MyWorkObject()
             work.nameLabelString = p.name
-            work.leftImageUrl = ""
-            work.firstTagString = "缺失"
+            work.leftImageUrl = p.avatarUrl
+            work.firstTagString = p.place
             work.secondTagString = p.saleNum
             work.thirdTagString = p.stockNum
             work.id            = p.id
@@ -570,7 +582,4 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         return dataArray
 
     }
-
-  
-    
 }

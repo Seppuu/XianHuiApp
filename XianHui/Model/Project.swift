@@ -68,10 +68,10 @@ class Good: NSObject {
     var selected = false
     
     //库存
-    var stockNum = ""
+    var stockNum = "0"
     
     //当日销售数量
-    var saleNum = ""
+    var saleNum = "0"
     
     //持续时间
     var time = ""
