@@ -75,15 +75,39 @@ class GoodDetailListVC: BaseTableViewController {
             
             let m4 = BaseTableViewModel()
             m4.name = "操作类型"
-            if let op_type = json["op_type"].string {
-                m4.desc = op_type
+            if let op_type = json["op_type"].bool {
+                if op_type == true {
+                    m4.desc = ""
+                }
+                else {
+                    m4.desc = ""
+                }
+                
             }
             
             let m5 = BaseTableViewModel()
             m5.name = "产品配料"
-            if let formula = json["formula"].string {
-                m5.desc = formula
+            
+            if let formulas = json["formula"].array {
+                m5.desc = String(formulas.count) + "种"
+                
+                if formulas.count > 0 {
+                    m5.hasList = true
+                    
+                    for formula in formulas{
+                        
+                        let nextModel = BaseTableViewModel()
+                        if let fullName = formula["fullname"].string {
+                            nextModel.name = fullName
+                        }
+                        
+                        
+                        m5.listData.append(nextModel)
+                    }
+                    
+                }
             }
+
             
             let list = BaseTableViewModelList()
             list.listName = ""
@@ -107,14 +131,14 @@ class GoodDetailListVC: BaseTableViewController {
             
             let m2 = BaseTableViewModel()
             m2.name = "消耗单位"
-            if  let use_unit  = json["use_unit"].string {
-                m2.desc = use_unit
+            if  let use_spec  = json["use_spec"].string {
+                m2.desc = use_spec
             }
             
             let m3 = BaseTableViewModel()
             m3.name = "规格"
-            if let spec_use  = json["use_spec"].string {
-                m3.desc = spec_use
+            if let use_unit  = json["use_unit"].string {
+                m3.desc = use_unit
             }
             
             let list = BaseTableViewModelList()
@@ -136,14 +160,14 @@ class GoodDetailListVC: BaseTableViewController {
             
             let m0 = BaseTableViewModel()
             m0.name = "报表系数"
-            if let project_type = json["project_type"].string {
-                m0.desc = project_type
+            if let report_ratio = json["report_ratio"].string {
+                m0.desc = report_ratio
             }
             
             let m1 = BaseTableViewModel()
             m1.name = "手工费计算方式"
-            if let project_class = json["project_class"].string {
-                m1.desc = project_class
+            if let manual_type = json["manual_type"].string {
+                m1.desc = manual_type
             }
             
             let m2 = BaseTableViewModel()

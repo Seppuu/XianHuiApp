@@ -50,8 +50,6 @@ class NoticeListVC: UIViewController {
         
         view.backgroundColor = UIColor.whiteColor()
 
-        getHelperList()
-        
         setTableView()
     }
 
@@ -59,6 +57,7 @@ class NoticeListVC: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    var firstLoad = true
     
     func getHelperList() {
         
@@ -72,6 +71,11 @@ class NoticeListVC: UIViewController {
                     self.tableView.reloadData()
                     
                     self.tableView.mj_header.endRefreshing()
+                    
+                    if self.firstLoad == true {
+                        self.firstLoad = false
+                        self.scrollTableViewBottom()
+                    }
                 }
             }
             else {
@@ -150,6 +154,11 @@ class NoticeListVC: UIViewController {
     }
     
 
+    func scrollTableViewBottom() {
+        guard listOfNotice.count > 0 else {return}
+        let indexPath = NSIndexPath(forItem: listOfNotice.count - 1, inSection: 0)
+        tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: false)
+    }
 }
 
 extension NoticeListVC:UITableViewDelegate,UITableViewDataSource {

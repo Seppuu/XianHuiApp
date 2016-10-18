@@ -92,9 +92,12 @@ class MyWorkManager {
     private func converProjectInfo(data:JSON) -> ProfileModel {
         let model = ProfileModel()
         
-        model.avatarUrl = ""
         if let fullName = data["fullname"].string {
             model.firstLabelString = fullName
+        }
+        
+        if let avatarUrl = data["avator_url"].string {
+            model.avatarUrl = avatarUrl
         }
         
         if let brandName = data["brand_name"].string {
@@ -111,9 +114,12 @@ class MyWorkManager {
     private func converProdInfo(data:JSON) -> ProfileModel {
         let model = ProfileModel()
         
-        model.avatarUrl = ""
         if let fullName = data["fullname"].string {
             model.firstLabelString = fullName
+        }
+        
+        if let avatarUrl = data["avator_url"].string {
+            model.avatarUrl = avatarUrl
         }
         
         if let brandName = data["brand_name"].string {

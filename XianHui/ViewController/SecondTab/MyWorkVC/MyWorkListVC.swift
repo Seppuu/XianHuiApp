@@ -196,7 +196,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         showHudWith(filterView, animated: true, mode: .Indeterminate, text: "")
         
         NetworkManager.sharedManager.getMyWorkListFilterDataWith(params,urlString:urlString) { (success, json, error) in
-            hideHudFrom(self.filterView)
+            
             if success == true {
                 
                 if let datas = json?.array {
@@ -285,7 +285,8 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         
         
         NetworkManager.sharedManager.getMyWorkListWith(params,urlString:urlString, pageSize: pageSize, pageNumber: pageNumber) { (success, json, error) in
-            
+            hideHudFrom(self.view)
+            hideHudFrom(self.filterView)
             if success == true {
                 if let rows = json!["rows"].array {
                     

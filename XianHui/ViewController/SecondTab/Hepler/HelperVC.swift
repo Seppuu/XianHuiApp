@@ -21,7 +21,6 @@ class HelperVC: BaseViewController {
         super.viewDidLoad()
         
         setTableView()
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,7 +37,6 @@ class HelperVC: BaseViewController {
     var firstLoad = true
     
     func getHelperList() {
-        
         
         NetworkManager.sharedManager.getHelperListWith(pageSize, pageNumber: pageNumber) { (success, json, error) in
             
@@ -57,12 +55,10 @@ class HelperVC: BaseViewController {
                         self.scrollTableViewBottom()
                     }
                 }
-                
             }
             else {
                 
             }
-            
         }
     }
     

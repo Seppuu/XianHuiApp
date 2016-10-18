@@ -214,7 +214,6 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
         }
     }
     
-    
 }
 
 extension UserCentreVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -224,7 +223,7 @@ extension UserCentreVC: UIImagePickerControllerDelegate, UINavigationControllerD
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         
         //选择照片
-        let choosePhotoAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("Choose Photo", comment: ""), style: .Default) { action -> Void in
+        let choosePhotoAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("图库", comment: ""), style: .Default) { action -> Void in
             
             let openCameraRoll: ProposerAction = { [weak self] in
                 
@@ -246,7 +245,7 @@ extension UserCentreVC: UIImagePickerControllerDelegate, UINavigationControllerD
         alertController.addAction(choosePhotoAction)
         
         //拍照
-        let takePhotoAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("Take Photo", comment: ""), style: .Default) { action -> Void in
+        let takePhotoAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("相机", comment: ""), style: .Default) { action -> Void in
             
             let openCamera: ProposerAction = { [weak self] in
                 
@@ -267,7 +266,7 @@ extension UserCentreVC: UIImagePickerControllerDelegate, UINavigationControllerD
         }
         alertController.addAction(takePhotoAction)
         
-        let cancelAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel) { action -> Void in
+        let cancelAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("取消", comment: ""), style: .Cancel) { action -> Void in
             self.dismissViewControllerAnimated(true, completion: nil)
         }
         alertController.addAction(cancelAction)

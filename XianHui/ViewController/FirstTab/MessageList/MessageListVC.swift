@@ -9,6 +9,33 @@
 import UIKit
 import MJRefresh
 import ChatKit
+import Palau
+
+
+extension PalauDefaults {
+    
+    //0 是新手提示 1是跳转界面
+    //助手
+    public static var MessageListHelperLastTime: PalauDefaultsEntry<String> {
+        get {
+            return value("MessageListHelperLastTime").whenNil(use:"")
+        }
+        set {
+            
+        }
+    }
+    
+    //提醒
+    public static var MessageListRemiandLastTime: PalauDefaultsEntry<String> {
+        get {
+            return value("MessageListRemiandLastTime").whenNil(use:"")
+        }
+        set {
+            
+        }
+    }
+    
+}
 
 let NoticeComingNoti = "NoticeComingNoti"
 
@@ -18,7 +45,23 @@ class XHMessageNoti: NSObject {
     
     var time = ""
     
+    var timeString:String {
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    
+        if let date = dateFormatter.dateFromString(time) {
+            
+            return date.lcck_shortTimeAgoSinceNow()
+            
+        }
+        else {
+            return "新手教学"
+        }
+    }
+    
     var isCommonNotice = false
+    
 }
 
 class MessageListVC: LCCKConversationListViewController {
@@ -31,6 +74,8 @@ class MessageListVC: LCCKConversationListViewController {
     
     var noticeList = [XHMessageNoti]()
     
+    let cellHeight:CGFloat = 64.0
+    
     var tableViewModel = MessageListModel()
     
     override func viewDidLoad() {
@@ -38,9 +83,9 @@ class MessageListVC: LCCKConversationListViewController {
                 
         setCustomerCell()
         setTableView()
-        showRemindNoticeIfFirstLaunch()
+        showRemindNotice()
         
-        self.tableView.layoutMargins = UIEdgeInsetsMake(0, 64, 0, 0)
+        self.tableView.layoutMargins = UIEdgeInsetsMake(0, 0, 0, 0)
     }
     
     override func didReceiveMemoryWarning() {
@@ -56,7 +101,7 @@ class MessageListVC: LCCKConversationListViewController {
     
     func setTableView() {
         
-        let cellHeight = LCCKConversationListCellDefaultHeight
+        
         let countFloat = CGFloat(noticeList.count)
         topView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: cellHeight * countFloat))
         topView.backgroundColor = UIColor ( red: 0.5, green: 0.5, blue: 0.5, alpha: 0.29 )
@@ -64,7 +109,8 @@ class MessageListVC: LCCKConversationListViewController {
         topTableView = UITableView(frame: CGRectMake(0, 0, screenWidth, cellHeight * countFloat), style: .Plain)
         topTableView.delegate = self
         topTableView.dataSource = self
-        topTableView.layoutMargins = UIEdgeInsetsMake(0, 64, 0, 0)
+        topTableView.scrollEnabled = false
+        topTableView.layoutMargins = UIEdgeInsetsMake(0, 0, 0, 0)
         topView.addSubview(topTableView)
         
         self.tableView.tableHeaderView = topView
@@ -73,8 +119,8 @@ class MessageListVC: LCCKConversationListViewController {
         
     }
     
-    //展示提示,教学等cell.如果是第一次打开app
-    func showRemindNoticeIfFirstLaunch() {
+    //展示助手,提醒.
+    func showRemindNotice() {
         
         if isFirstLaunch == true {
             
@@ -82,27 +128,64 @@ class MessageListVC: LCCKConversationListViewController {
             hepler.name = "助手"
             hepler.time = "新手提示"
             hepler.isCommonNotice = false
+            
             self.noticeList.append(hepler)
             
             let remind = XHMessageNoti()
             remind.name = "提醒"
             remind.time = "新手提示"
+            
             remind.isCommonNotice = true
             self.noticeList.append(remind)
-            
-            self.updateTopView()
             
         }
         else {
             
+            if Defaults.MessageListHelperLastTime.value! != "" {
+                let hepler = XHMessageNoti()
+                hepler.name = "助手"
+                hepler.time = Defaults.MessageListHelperLastTime.value!
+                hepler.isCommonNotice = false
+               
+                self.noticeList.append(hepler)
+            }
+            else {
+                let hepler = XHMessageNoti()
+                hepler.name = "助手"
+                hepler.time = "新手提示"
+                hepler.isCommonNotice = false
+               
+                self.noticeList.append(hepler)
+            }
+            
+            if Defaults.MessageListRemiandLastTime.value! != "" {
+                let remind = XHMessageNoti()
+                remind.name = "提醒"
+                remind.time = Defaults.MessageListRemiandLastTime.value!
+                
+                remind.isCommonNotice = true
+                self.noticeList.append(remind)
+            }
+            else {
+                let remind = XHMessageNoti()
+                remind.name = "提醒"
+                remind.time = "新手提示"
+                
+                remind.isCommonNotice = true
+                self.noticeList.append(remind)
+            }
+            
+   
         }
+        
+        self.updateTopView()
         
     }
     
     func updateTopView() {
         
         var frame = topView.frame
-        frame.size.height = LCCKConversationListCellDefaultHeight * CGFloat(noticeList.count)
+        frame.size.height = cellHeight * CGFloat(noticeList.count)
         
         topView.frame = frame
         
@@ -129,7 +212,12 @@ class MessageListVC: LCCKConversationListViewController {
                             if $0.isCommonNotice == false {
                                 hasReportOrPlan = true
                                 //update old one
-                                $0.time = "新时间"
+                                if let time = userInfo["notice_time"] as? String {
+                                    $0.time = time
+                                    
+                                    Defaults.MessageListHelperLastTime.value = time
+                                }
+                                
                             }
                             
                             }
@@ -140,6 +228,12 @@ class MessageListVC: LCCKConversationListViewController {
                                 hepler.name = "助手"
                                 hepler.time = "时间"
                                 hepler.isCommonNotice = false
+                                
+                                if let time = userInfo["notice_time"] as? String {
+                                    hepler.time = time
+                                    
+                                    Defaults.MessageListHelperLastTime.value = time
+                                }
                                 self.noticeList.append(hepler)
                             }
                             else {
@@ -154,7 +248,11 @@ class MessageListVC: LCCKConversationListViewController {
                             if $0.isCommonNotice == true {
                                 hasCommonNotice = true
                                 //update old one
-                                $0.time = "新时间"
+                                if let time = userInfo["notice_time"] as? String {
+                                    $0.time = time
+                                    
+                                    Defaults.MessageListRemiandLastTime.value = time
+                                }
                             }
                             
                         }
@@ -163,7 +261,12 @@ class MessageListVC: LCCKConversationListViewController {
                             //add new one
                             let remind = XHMessageNoti()
                             remind.name = "提醒"
-                            remind.time = "时间"
+                            
+                            if let time = userInfo["notice_time"] as? String {
+                                remind.time = time
+                                
+                                Defaults.MessageListHelperLastTime.value = time
+                            }
                             remind.isCommonNotice = true
                             self.noticeList.append(remind)
                         }
@@ -217,7 +320,7 @@ class MessageListVC: LCCKConversationListViewController {
         let isConnnect = LCCKSessionService.sharedInstance().connect
         
         if isConnnect == true {
-            let cellHeight = LCCKConversationListCellDefaultHeight
+            
             topTableView.frame.size.height = cellHeight * CGFloat(noticeList.count)
             topView.frame.size.height = cellHeight * CGFloat(noticeList.count)
             topTableView.tableHeaderView = nil
@@ -272,9 +375,9 @@ extension MessageListVC {
         
         cell.avatarImageView.layer.cornerRadius = cell.avatarImageView.ddWidth/2
         cell.avatarImageView.layer.masksToBounds = true
-        cell.timestampLabel.text = notice.time
+        cell.timestampLabel.text = notice.timeString
         
-        cell.layoutMargins = UIEdgeInsetsMake(0, 64, 0, 0)
+       // cell.layoutMargins = UIEdgeInsetsMake(0, 0, 0, 0)
         
         
         return cell
@@ -286,7 +389,7 @@ extension MessageListVC {
         
         if notice.name == "助手" {
             
-            if isFirstLaunch == true {
+            if notice.time == "新手提示" {
                 let vc = FirstLaunchRemindVC()
                 vc.title = "助手新手教学"
                 vc.isRemind = false
@@ -299,11 +402,10 @@ extension MessageListVC {
                 navigationController?.pushViewController(vc, animated: true)
             }
             
-            
         }
         else {
             
-            if isFirstLaunch == true {
+            if notice.time == "新手提示" {
                 let vc = FirstLaunchRemindVC()
                 vc.title = "提醒新手教学"
                 vc.isRemind = true

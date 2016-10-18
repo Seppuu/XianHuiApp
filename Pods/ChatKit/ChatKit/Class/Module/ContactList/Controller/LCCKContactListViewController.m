@@ -493,7 +493,8 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
      */
     LCCKHUDActionBlock theHUDActionBlock = [LCCKUIService sharedInstance].HUDActionBlock;
     if (theHUDActionBlock) {
-        theHUDActionBlock(self, nil, @"获取联系人信息...", LCCKMessageHUDActionTypeShow);
+        //xianhui
+        //theHUDActionBlock(self, nil, @"获取联系人信息...", LCCKMessageHUDActionTypeShow);
     }
     [[LCChatKit sharedInstance] getProfilesInBackgroundForUserIds:[NSArray arrayWithArray:[_userIds allObjects]] callback:^(NSArray<id<LCCKUserDelegate>> *users, NSError *error) {
         if (theHUDActionBlock) {
