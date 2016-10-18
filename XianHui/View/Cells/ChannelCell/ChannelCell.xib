@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,16 +11,16 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="320" height="63"/>
+                <frame key="frameInset" width="320" height="63.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JHG-QI-6Jg">
                         <constraints>
-                            <constraint firstAttribute="width" constant="50" id="NV6-Ij-Tg8"/>
-                            <constraint firstAttribute="height" constant="50" id="TRi-C7-qnf"/>
+                            <constraint firstAttribute="width" constant="40" id="NV6-Ij-Tg8"/>
+                            <constraint firstAttribute="height" constant="40" id="TRi-C7-qnf"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="专辑01" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZx-5u-MX5">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="专辑01" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZx-5u-MX5">
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -32,9 +31,10 @@
                     <constraint firstAttribute="trailing" secondItem="eZx-5u-MX5" secondAttribute="trailing" constant="8" id="liE-Pl-6Ex"/>
                     <constraint firstItem="JHG-QI-6Jg" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="wKq-Mo-bSv"/>
                     <constraint firstItem="JHG-QI-6Jg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="wvy-Py-aDy"/>
-                    <constraint firstItem="eZx-5u-MX5" firstAttribute="leading" secondItem="JHG-QI-6Jg" secondAttribute="trailing" constant="8" id="yF4-AQ-av7"/>
+                    <constraint firstItem="eZx-5u-MX5" firstAttribute="leading" secondItem="JHG-QI-6Jg" secondAttribute="trailing" constant="11" id="yF4-AQ-av7"/>
                 </constraints>
             </tableViewCellContentView>
+            <inset key="separatorInset" minX="64" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="leftImageView" destination="JHG-QI-6Jg" id="y7e-gA-Vwe"/>
                 <outlet property="nameLabel" destination="eZx-5u-MX5" id="OVm-Yx-GEH"/>

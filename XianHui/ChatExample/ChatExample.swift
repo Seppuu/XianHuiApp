@@ -42,8 +42,11 @@ class ChatKitExample: LCChatKitExample {
         
         LCChatKit.sharedInstance().conversationListService.configureCellBlock = {
             (cell,tableView,indexPath,conversation) in
+            if let acutalcell  = cell as? LCCKConversationListCell {
+                acutalcell.layoutMargins = UIEdgeInsetsMake(0, 64, 0, 0)
+               
+            }
             
-            cell.layoutMargins = UIEdgeInsetsMake(0, 64, 0, 0)
         }
     }
     

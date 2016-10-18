@@ -118,6 +118,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         enterButton.setTitleColor(UIColor.init(hexString:"1480E2"), forState: .Normal)
         enterButton.setTitle("开始", forState: .Normal)
         let vc = ZWIntroductionViewController(coverImageNames: backImageNames, backgroundImageNames: backImageNames, button: enterButton)
+        
         return vc
     }
     

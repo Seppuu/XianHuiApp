@@ -17,7 +17,7 @@
 
 #import "UIImageView+LCCKExtension.h"
 
-static CGFloat LCCKImageSize = 45;
+static CGFloat LCCKImageSize = 40;
 static CGFloat LCCKVerticalSpacing = 8;
 static CGFloat LCCKHorizontalSpacing = 10;
 static CGFloat LCCKTimestampeLabelWidth = 100;

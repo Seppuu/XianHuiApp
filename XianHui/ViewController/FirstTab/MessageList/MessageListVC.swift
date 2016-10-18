@@ -248,7 +248,8 @@ extension MessageListVC {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return LCCKConversationListCellDefaultHeight
+        //return LCCKConversationListCellDefaultHeight
+        return 64
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

@@ -134,17 +134,17 @@
 - (void)customizeTabBarAppearance:(CYLTabBarController *)tabBarController {
     // Customize UITabBar height
     // 自定义 TabBar 高度
-    tabBarController.tabBarHeight = 40.f;
+    tabBarController.tabBarHeight = 49.f;
     
     // set the text color for unselected state
     // 普通状态下的文字属性
     NSMutableDictionary *normalAttrs = [NSMutableDictionary dictionary];
-    normalAttrs[NSForegroundColorAttributeName] = [UIColor grayColor];
+    normalAttrs[NSForegroundColorAttributeName] = [UIColor colorWithRed:187.0/255 green:198.0/255 blue:210.0/255 alpha:1.0];
     
     // set the text color for selected state
     // 选中状态下的文字属性
     NSMutableDictionary *selectedAttrs = [NSMutableDictionary dictionary];
-    selectedAttrs[NSForegroundColorAttributeName] = [UIColor blackColor];
+    selectedAttrs[NSForegroundColorAttributeName] = [UIColor colorWithRed:211.0/255 green:184.0/255 blue:141.0/255 alpha:1.0];
     
     // set the text Attributes
     // 设置文字属性
