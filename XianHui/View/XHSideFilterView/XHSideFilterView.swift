@@ -388,8 +388,8 @@ extension XHSideFilterView:UICollectionViewDelegate,UICollectionViewDelegateFlow
         let model = dataArray[indexPath.section].list[indexPath.row]
         
         if model.disabled == true {
-            let hud = showHudWith(self, animated: true, mode: .Text, text: "条件不存在")
-            hud.hide(true, afterDelay: 1.5)
+//            let hud = showHudWith(self, animated: true, mode: .Text, text: "条件不存在")
+//            hud.hide(true, afterDelay: 1.5)
             return
         }
         else {
