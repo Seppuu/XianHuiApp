@@ -41,7 +41,7 @@ typedef UITableViewCell* (^LCCKCellForRowBlock)(UITableView *tableView, NSIndexP
  *  配置 Cell 的 Block，当默认的 Cell 或自定义的 Cell 需要配置时，该 block 将被调用
  */
 typedef void (^LCCKConfigureCellBlock) (UITableViewCell *cell, UITableView *tableView, NSIndexPath *indexPath, AVIMConversation *conversation);
-@property (nonatomic, copy) LCCKConfigureCellBlock configureCellBlock;
+@property (nonatomic, copy, readonly) LCCKConfigureCellBlock configureCellBlock;
 -(void)setConfigureCellBlock:(LCCKConfigureCellBlock)configureCellBlock;
 
 @end
