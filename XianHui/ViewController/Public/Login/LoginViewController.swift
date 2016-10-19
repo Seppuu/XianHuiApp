@@ -316,11 +316,11 @@ extension LoginViewController {
             
             
             if error == nil {
-                
+                self.hideHud()
                 //检车是否是默认密码,如果是,需要强制修改.否则无法登陆
                 if let no = data!["init_login_password"].int {
                     if no == 1 {
-                        self.hideHud()
+                        
                         self.showChangePassWordAlert()
                     }
                     else {

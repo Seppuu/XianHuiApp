@@ -15,7 +15,7 @@ class XHSideFilterDataModel: NSObject {
     
     var paramName = ""
     var selected = false
-    
+    var disabled = false
 }
 
 class XHSideFilterDataList: NSObject {
@@ -52,6 +52,14 @@ class XHSideFilterView: UIView {
     
     var selectedModels = [XHSideFilterDataModel]()
     
+    var statusLabel = UILabel()
+    
+    var statusString = "" {
+        didSet {
+            statusLabel.text = statusString
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -72,8 +80,10 @@ class XHSideFilterView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .Vertical
         var frame = self.bounds
+        //frame.origin.x = 10
         frame.origin.y = 22
         frame.size.height -= (44 + 22 + 22)
+        //frame.size.width  -= 20
         collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -129,6 +139,18 @@ class XHSideFilterView: UIView {
             make.height.equalTo(0.5)
         }
         
+        addSubview(statusLabel)
+        statusLabel.snp_makeConstraints { (make) in
+            make.left.right.equalTo(self)
+            make.bottom.equalTo(line.snp_top)
+            make.height.equalTo(21)
+        }
+        
+        statusLabel.text = statusString
+        statusLabel.textAlignment = .Center
+        statusLabel.textColor = UIColor.darkTextColor()
+        statusLabel.font = UIFont.systemFontOfSize(12)
+        statusLabel.backgroundColor = UIColor.whiteColor()
         
     }
     
@@ -200,10 +222,17 @@ extension XHSideFilterView:UICollectionViewDelegate,UICollectionViewDelegateFlow
         
         //let threePiecesWidth = floor(self.ddWidth / 3.0 - ((10.0 / 3) * 2))
         
-        let threePiecesWidth = floor((self.ddWidth - 4*10) / 3)
+        let threePiecesWidth = floor(((self.ddWidth) - 4*10) / 3)
         
         return CGSizeMake(threePiecesWidth, 28)
     }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        
+        return UIEdgeInsetsMake(0, 10, 0, 10)
+        
+    }
+    
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 10.0
@@ -229,7 +258,7 @@ extension XHSideFilterView:UICollectionViewDelegate,UICollectionViewDelegateFlow
             view.removeFromSuperview()
         }
         
-        let lblHeader = UILabel(frame: CGRectMake(15, 10, 100, 30))
+        let lblHeader = UILabel(frame: CGRectMake(10, 10, 100, 30))
         
         lblHeader.backgroundColor = UIColor.whiteColor()
         lblHeader.textColor = UIColor.darkTextColor()
@@ -242,7 +271,7 @@ extension XHSideFilterView:UICollectionViewDelegate,UICollectionViewDelegateFlow
         let count = dataArray[indexPath.section].list.count
         if count > 6 {
             
-            let rightButton = AllFilterButton(frame: CGRectMake(self.ddWidth - 40, 10, 40, 30))
+            let rightButton = AllFilterButton(frame: CGRectMake(self.ddWidth - 40 - 10, 10, 40, 30))
             rightButton.indexPath = indexPath
             rightButton.titleLabel?.font = UIFont.systemFontOfSize(14)
             rightButton.setTitleColor(UIColor.darkTextColor(), forState: .Normal)
@@ -270,9 +299,6 @@ extension XHSideFilterView:UICollectionViewDelegate,UICollectionViewDelegateFlow
         else {
             
         }
-    
-        
-       
         
         return headerView
         
@@ -313,13 +339,13 @@ extension XHSideFilterView:UICollectionViewDelegate,UICollectionViewDelegateFlow
         
 
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellID, forIndexPath: indexPath) as! FilterCell
-        cell.backgroundColor = UIColor.init(hexString: "F1F2F6")
+        
         cell.layer.cornerRadius = 4
         cell.layer.masksToBounds = true
         
         cell.subviews.forEach { (view) in
             
-            if view.tag == 10 {
+            if view.tag == 10 || view.tag == 20 {
                 view.removeFromSuperview()
             }
         }
@@ -339,15 +365,40 @@ extension XHSideFilterView:UICollectionViewDelegate,UICollectionViewDelegateFlow
             selectImgaeView.alpha = 0.0
         }
         
+        let borderView = UIView(frame: cell.bounds)
+        borderView.tag = 20
+        borderView.backgroundColor = UIColor.clearColor()
+        cell.addSubview(borderView)
+        cell.insertSubview(borderView, atIndex: 0)
+        
+        if model.disabled == true {
+            borderView.backgroundColor = UIColor.whiteColor()
+            borderView.addDashedBorder(UIColor.init(hexString: "CACEDD"), lineWidth: 2.0)
+        }
+        else {
+            borderView.backgroundColor = UIColor.init(hexString: "F1F2F6")
+            
+        }
+        
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         //TODO:once selected one .reload all data ,check if multiple select enable
         let model = dataArray[indexPath.section].list[indexPath.row]
-        model.selected = !model.selected
         
-        updateFilterModels()
+        if model.disabled == true {
+            let hud = showHudWith(self, animated: true, mode: .Text, text: "条件不存在")
+            hud.hide(true, afterDelay: 1.5)
+            return
+        }
+        else {
+            model.selected = !model.selected
+            
+            updateFilterModels()
+        }
+        
+        
     }
     
 }

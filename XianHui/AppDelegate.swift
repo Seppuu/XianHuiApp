@@ -133,8 +133,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func openLeanCloudIMWith(clientId:String,autoLogin:Bool) {
         
+        if let currentVC = self.window?.visibleViewController{
+            showHudWith(currentVC.view, animated: true, mode: .Indeterminate, text: "")
+        }
+        
         
         ChatKitExample.invokeThisMethodAfterLoginSuccessWithClientId(clientId, success: {
+            
+            if let currentVC = self.window?.visibleViewController{
+                hideHudFrom(currentVC.view)
+            }
                         
             let tabBarControllerConfig = LCCKTabBarControllerConfig()
             

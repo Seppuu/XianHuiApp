@@ -174,8 +174,6 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         self.jsons = [JSON]()
         self.tableView.reloadData()
         
-        
-        
     }
     
     func getFilterData(params:JSONDictionary) {
@@ -240,8 +238,13 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
                     if let idString = sectionData["value"].string {
                         model.id = idString
                     }
+                    
                     if let selected = sectionData["selected"].bool {
                         model.selected = selected
+                    }
+                    
+                    if let disabled = sectionData["disabled"].bool {
+                        model.disabled = disabled
                     }
                     
                     list.list.append(model)
@@ -270,6 +273,27 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     
     var pageNumber = 1
     
+    var totalUnit:String {
+        
+        switch type {
+        case .customer:
+            return "人"
+        case .employee:
+            return "人"
+        case .project:
+            return "种"
+        case .prod:
+            return "种"
+        }
+    }
+    
+    var total = 0 {
+        didSet {
+            
+            self.filterView.statusString = "筛选结果:" + String(total) + totalUnit
+        }
+    }
+    
     func getDataFromServer(params:JSONDictionary) {
         var urlString = ""
         switch self.type {
@@ -290,11 +314,16 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
             if success == true {
                 if let rows = json!["rows"].array {
                     
+                    if let total = json!["total"].int {
+                        self.total = total
+                    }
+                    
                     if rows.count == 0 {
                         self.tableView.mj_footer.endRefreshingWithNoMoreData()
                     }
                     else {
                         self.tableView.mj_footer.endRefreshing()
+                        
                         self.pageNumber += 1
                         self.jsons += rows
                         self.getDataWith(rows)
