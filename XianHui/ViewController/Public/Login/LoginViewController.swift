@@ -111,7 +111,10 @@ class LoginViewController: UIViewController {
         phoneTextField = UITextField()
         view.addSubview(phoneTextField)
         phoneTextField.delegate = self
-        phoneTextField.placeholder = "  电话号码"
+        let paddingView1 = UIView(frame: CGRectMake(0, 0, 15, 20))
+        phoneTextField.leftView = paddingView1;
+        phoneTextField.leftViewMode = .Always
+        phoneTextField.placeholder = "电话号码"
         phoneTextField.keyboardType = .NumberPad
         phoneTextField.backgroundColor = UIColor.init(hexString: "EDEDED")
         phoneTextField.layer.cornerRadius = 5
@@ -127,7 +130,10 @@ class LoginViewController: UIViewController {
         passWordTextField = UITextField()
         view.addSubview(passWordTextField)
         passWordTextField.delegate = self
-        passWordTextField.placeholder = "  密码"
+        let paddingView = UIView(frame: CGRectMake(0, 0, 15, 20))
+        passWordTextField.leftView = paddingView;
+        passWordTextField.leftViewMode = .Always
+        passWordTextField.placeholder = "密码"
         passWordTextField.keyboardType = .NumbersAndPunctuation
         passWordTextField.returnKeyType = .Go
         passWordTextField.secureTextEntry = true
