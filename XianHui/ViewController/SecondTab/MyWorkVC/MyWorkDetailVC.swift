@@ -27,6 +27,8 @@ class Order: NSObject {
     
 }
 
+let CustomerPlannHasAddNoti = "CustomerPlannHasAddNoti"
+
 class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
     var type:MyWorkType = .customer
@@ -48,6 +50,7 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
 
         view.backgroundColor = UIColor.whiteColor()
         setNavBarItem()
+        addNoti()
         setTableView()
         
         getProfileDetailData()
@@ -58,6 +61,12 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
        
+    }
+    
+    func addNoti() {
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MyWorkDetailVC.hidePlanRemindIfNeed), name: CustomerPlannHasAddNoti, object: nil)
+        
     }
     
     func setNavBarItem() {
@@ -276,25 +285,31 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
         
     }
     
+    var statusLabel = UILabel()
+    
     func showPlanRemindIfNeed() {
         
         if self.type == .customer && noPlan == true {
             //顾客列表进入,并且无计划,显示快捷按钮.去往计划设置.
-            let l = UILabel(frame: CGRect(x: 0, y: 64, width: screenWidth, height: 40))
-            view.addSubview(l)
-            l.text = "该顾客当前无销售计划,请点击设置"
-            l.textColor = UIColor.darkTextColor()
-            l.textAlignment = .Center
-            l.backgroundColor = UIColor.whiteColor()
-            l.font = UIFont.systemFontOfSize(14)
+            statusLabel.frame =  CGRect(x: 0, y: 64, width: screenWidth, height: 40)
+            view.addSubview(statusLabel)
+            statusLabel.text = "该顾客当前无销售计划,请点击设置"
+            statusLabel.textColor = UIColor.darkTextColor()
+            statusLabel.textAlignment = .Center
+            statusLabel.backgroundColor = UIColor.whiteColor()
+            statusLabel.font = UIFont.systemFontOfSize(14)
             let tap = UITapGestureRecognizer(target: self, action: #selector(MyWorkDetailVC.showPlannSettingVC))
-            l.userInteractionEnabled = true
-            l.addGestureRecognizer(tap)
+            statusLabel.userInteractionEnabled = true
+            statusLabel.addGestureRecognizer(tap)
         }
         else {
             
         }
         
+    }
+    
+    func hidePlanRemindIfNeed() {
+        statusLabel.removeFromSuperview()
     }
     
     func showPlannSettingVC() {

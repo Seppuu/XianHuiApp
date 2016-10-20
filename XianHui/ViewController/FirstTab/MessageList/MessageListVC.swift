@@ -39,6 +39,8 @@ extension PalauDefaults {
 
 let NoticeComingNoti = "NoticeComingNoti"
 
+let MyBookHasLoginNoti = "NoticeComingNoti"
+
 class XHMessageNoti: NSObject {
     
     var name = ""
@@ -116,6 +118,11 @@ class MessageListVC: LCCKConversationListViewController {
         self.tableView.tableHeaderView = topView
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MessageListVC.addNewNoticeType(_:)), name:NoticeComingNoti , object: nil)
+
+    }
+    
+    func addMyBookLoginStatusCell() {
+        
         
     }
     

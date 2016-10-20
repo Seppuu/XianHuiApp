@@ -270,7 +270,7 @@ class ProjectPlanningVC: UIViewController {
                 self.bottomView.listOfProject = projectsSelected
                 self.bottomView.listOfProd = prodsSelected
                 self.bottomView.tableView.reloadData()
-                
+                NSNotificationCenter.defaultCenter().postNotificationName(CustomerPlannHasAddNoti, object: nil)
                 self.saveGoodListCompletion?()
             }
             else {
