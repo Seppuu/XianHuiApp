@@ -56,6 +56,10 @@ class MyWorkListHepler: NSObject, UITableViewDelegate, UITableViewDataSource {
         return cellHeight
     }
     
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.1
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? MyWorkCell

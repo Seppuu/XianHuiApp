@@ -760,16 +760,19 @@ extension NetworkManager {
                 switch response.result {
                 case .Success:
                     let json = JSON(response.result.value!)
-                    if json["status"].string! == "ok" {
-                        let dataInfo = json["data"]
-                        completion(success: true,json:dataInfo,error: nil)
-                        
+                    if let status = json["status"].string {
+                        if status == "ok" {
+                            let dataInfo = json["data"]
+                            completion(success: true,json:dataInfo,error: nil)
+                            
+                        }
+                        else {
+                            let msg = self.getErrorMsgFrom(json)
+                            let dataInfo = json["data"]
+                            completion(success: false, json: dataInfo, error: msg)
+                        }
                     }
-                    else {
-                        let msg = self.getErrorMsgFrom(json)
-                        let dataInfo = json["data"]
-                        completion(success: false, json: dataInfo, error: msg)
-                    }
+                    
                 case .Failure(let error):
                     completion(success: false, json: nil, error: error.description)
                     

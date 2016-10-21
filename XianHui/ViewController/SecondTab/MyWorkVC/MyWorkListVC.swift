@@ -25,6 +25,8 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     
     var jsons = [JSON]()
     
+    var searchController =  UISearchController()
+    
     var filterParams = JSONDictionary()
     
     override func viewDidLoad() {
@@ -33,13 +35,79 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         view.backgroundColor = UIColor.whiteColor()
         
         setTableView()
+        setSearchBar()
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
 
     }
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        reSetNavBarItem()
+    }
+    
+    
+    let searchButton = UIButton()
+    var searchItem   = UIBarButtonItem()
+    var filterItem   = UIBarButtonItem()
+    let searchBar    = UISearchBar()
+    
+    func setSearchBar() {
+        searchButton.setTitle("搜索", forState: .Normal)
+        searchButton.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        searchButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        searchButton.titleLabel?.font = UIFont.systemFontOfSize(14)
+        searchButton.addTarget(self, action: #selector(MyWorkListVC.searchButtonTapped), forControlEvents: .TouchUpInside)
+        
+        self.searchItem = UIBarButtonItem(customView: searchButton)
+        
+        
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        button.setTitle("筛选", forState: .Normal)
+        button.titleLabel?.font = UIFont.systemFontOfSize(14)
+        button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        button.addTarget(self, action: #selector(MyWorkListVC.filterButtonTap), forControlEvents: .TouchUpInside)
+        filterItem = UIBarButtonItem(customView: button)
+        
+        self.parentVC!.navigationItem.rightBarButtonItems = [filterItem,searchItem]
+        
+        searchBar.showsCancelButton = true
+        searchBar.searchBarStyle = UISearchBarStyle.Minimal
+        searchBar.delegate = self
+        
+    }
+    
+    func reSetNavBarItem() {
+        
+        self.parentVC!.navigationItem.rightBarButtonItems = [filterItem,searchItem]
+    }
+    
+    func searchButtonTapped() {
+        
+        UIView.animateWithDuration(0.15, animations: {
+            
+            self.searchButton.alpha = 0.0
+            
+            }) { (finished) in
+                
+                self.parentVC!.navigationItem.rightBarButtonItems = nil
+                self.parentVC!.navigationItem.titleView = self.searchBar
+                self.searchBar.alpha = 0.0
+                
+                UIView.animateWithDuration(0.15, animations: {
+                    self.searchBar.alpha = 1.0
+                    }, completion: { (finish) in
+                        
+                        self.searchBar.becomeFirstResponder()
+                })
+                
+        }
 
+    }
 
     func setTableView() {
         tableView = UITableView(frame: CGRectMake(0.0,0.0, self.view.frame.width, self.view.frame.height - 64 - 40), style: .Grouped)
@@ -47,13 +115,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         tableView.delegate = dataHelper
         tableView.dataSource = dataHelper
         
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 44))
-        button.setTitle("筛选", forState: .Normal)
-        button.titleLabel?.font = UIFont.systemFontOfSize(14)
-        button.setTitleColor(UIColor.darkTextColor(), forState: .Normal)
-        button.addTarget(self, action: #selector(MyWorkListVC.filterButtonTap), forControlEvents: .TouchUpInside)
         
-        tableView.tableHeaderView = button
         
         // add MJRefresh
         tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: { 
@@ -68,11 +130,11 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
             vc.objectName = objectName
             vc.type = self.type
             
-            if obj.thirdTagString == "0项" {
-                vc.noPlan = true
+            if let plannedNum = obj.thirdTagString.toInt() {
+                vc.plannedNum = plannedNum
             }
             else {
-                vc.noPlan = false
+                
             }
             
             vc.profileJSON = self.jsons[index]
@@ -307,7 +369,6 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
             urlString = GetMyWorkProdUrl
         }
         
-        
         NetworkManager.sharedManager.getMyWorkListWith(params,urlString:urlString, pageSize: pageSize, pageNumber: pageNumber) { (success, json, error) in
             hideHudFrom(self.view)
             hideHudFrom(self.filterView)
@@ -420,7 +481,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
             work.leftImageUrl = c.avatarUrlString
             work.firstTagString = c.place
             work.secondTagString = c.time
-            work.thirdTagString = String(c.projectTotal) + "项"
+            work.thirdTagString = String(c.projectTotal)
             work.id = c.id
             
             work.rightLabelString = c.scheduleStatus
@@ -612,4 +673,39 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         return dataArray
 
     }
+}
+
+extension MyWorkListVC:UISearchResultsUpdating ,UISearchBarDelegate{
+    
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        
+        tableView.reloadData()
+    }
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        
+        
+    }
+    
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        
+        UIView.animateWithDuration(0.15, animations: {
+            
+            self.searchBar.alpha = 0.0
+            
+            }) { (finish) in
+                
+                self.parentVC!.navigationItem.titleView = nil
+                self.parentVC!.navigationItem.rightBarButtonItems = [self.filterItem,self.searchItem]
+                self.searchButton.alpha = 0.0
+                
+                UIView.animateWithDuration(0.15, animations: {
+                    self.searchButton.alpha = 1.0
+                    }, completion: nil)
+        }
+        
+    }
+    
+    
 }

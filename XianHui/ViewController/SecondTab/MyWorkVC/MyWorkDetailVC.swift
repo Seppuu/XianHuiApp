@@ -43,7 +43,7 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
     
     var profileJSON:JSON!
     
-    var noPlan = false
+    var plannedNum = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +65,7 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
     
     func addNoti() {
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MyWorkDetailVC.hidePlanRemindIfNeed), name: CustomerPlannHasAddNoti, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MyWorkDetailVC.hidePlanRemindIfNeed(_:)), name: CustomerPlannHasAddNoti, object: nil)
         
     }
     
@@ -289,11 +289,11 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
     
     func showPlanRemindIfNeed() {
         
-        if self.type == .customer && noPlan == true {
-            //顾客列表进入,并且无计划,显示快捷按钮.去往计划设置.
+        if self.type == .customer {
+            
             statusLabel.frame =  CGRect(x: 0, y: 64, width: screenWidth, height: 40)
             view.addSubview(statusLabel)
-            statusLabel.text = "该顾客当前无销售计划,请点击设置"
+            
             statusLabel.textColor = UIColor.darkTextColor()
             statusLabel.textAlignment = .Center
             statusLabel.backgroundColor = UIColor.whiteColor()
@@ -301,6 +301,16 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
             let tap = UITapGestureRecognizer(target: self, action: #selector(MyWorkDetailVC.showPlannSettingVC))
             statusLabel.userInteractionEnabled = true
             statusLabel.addGestureRecognizer(tap)
+            
+            if plannedNum == 0 {
+                //顾客列表进入,并且无计划,显示快捷按钮.去往计划设置.
+                statusLabel.text = "该顾客当前无销售计划,请点击设置"
+            }
+            else {
+                //顾客列表进入,并且无计划,显示快捷按钮.去往计划设置.
+                statusLabel.text = "该顾客已有\(plannedNum)项计划,点击查看"
+            }
+            
         }
         else {
             
@@ -308,8 +318,22 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
         
     }
     
-    func hidePlanRemindIfNeed() {
-        statusLabel.removeFromSuperview()
+    func hidePlanRemindIfNeed(noti:NSNotification) {
+        if let num = noti.object as? Int {
+            plannedNum = num
+            if num == 0 {
+                //顾客列表进入,并且无计划,显示快捷按钮.去往计划设置.
+                statusLabel.text = "该顾客当前无销售计划,请点击设置"
+            }
+            else {
+                //顾客列表进入,并且无计划,显示快捷按钮.去往计划设置.
+                statusLabel.text = "该顾客已有\(plannedNum)项计划,点击查看"
+            }
+        }
+        else {
+            
+        }
+        
     }
     
     func showPlannSettingVC() {
