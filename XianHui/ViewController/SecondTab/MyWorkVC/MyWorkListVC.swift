@@ -33,7 +33,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         super.viewDidLoad()
 
         view.backgroundColor = UIColor.whiteColor()
-        
+        addNoti()
         setTableView()
         setSearchBar()
         
@@ -44,6 +44,31 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
 
     }
     
+    func addNoti() {
+        //客户计划更新.
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MyWorkListVC.refreshData), name: CustomerPlannHasAddNoti, object: nil)
+    }
+    
+    func refreshData() {
+        needRefresh = true
+        
+        if needRefresh == true {
+            clearDataBeforeFilterSuccess()
+            tableView.mj_footer.beginRefreshing()
+            needRefresh = false
+        }
+        else {
+            
+        }
+    }
+    
+    var needRefresh = false
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+    }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)

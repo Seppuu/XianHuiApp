@@ -311,6 +311,11 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
                 statusLabel.text = "该顾客已有\(plannedNum)项计划,点击查看"
             }
             
+            var frame = view.bounds
+            frame.origin.y += 40
+            
+            tableView.frame = frame
+            
         }
         else {
             
