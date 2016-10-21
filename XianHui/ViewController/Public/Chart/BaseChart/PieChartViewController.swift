@@ -70,6 +70,9 @@ class PieChartViewController: BaseChartViewController {
     //TODO:需要后端自动化 饼图类型
     var pieType = [String]()
     
+    
+    var maxType:MaxValueType = .cashMax
+    
     let viewHeight = ( screenHeight - 64)
     
     override func viewDidLoad() {
@@ -85,6 +88,7 @@ class PieChartViewController: BaseChartViewController {
         topPageView.listOfDateString = listOfDateString
         topPageView.currentMonthAvgVaule = currentMonthAvgVaule
         topPageView.grandTotalValue = grandTotalValue
+        topPageView.maxType = maxType
         
         topPageView.clipsToBounds = true
         topPageView.setScrollView()

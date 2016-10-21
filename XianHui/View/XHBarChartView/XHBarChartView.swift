@@ -11,6 +11,16 @@ import Charts
 import SnapKit
 import SwiftString
 
+
+enum MaxValueType:String {
+    
+    case cashMax = "cashMax"
+    case projectMax = "projectMax"
+    case productMax = "productMax"
+    case roomTurnoverMax = "roomTurnoverMax"
+    case employeeHoursMax = "employeeHoursMax"
+}
+
 class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDelegate {
     
     var topLabel = UILabel()
@@ -25,9 +35,24 @@ class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDele
     
     var grandTotalValue:Int = 0
     
+    //TODO:change max value by type
     var maxValue:Float {
-        return Float(Defaults.cashMaxValue.value!)
+        
+        switch maxType {
+        case .cashMax:
+            return Defaults.cashMaxValue.value!
+        case .projectMax:
+            return Defaults.projectMaxValue.value!
+        case .productMax:
+            return Defaults.productMaxValue.value!
+        case .roomTurnoverMax:
+            return Defaults.roomTurnoverMaxValue.value!
+        case .employeeHoursMax:
+            return Defaults.employeeHoursMaxValue.value!
+        }
     }
+    
+    var maxType:MaxValueType = .cashMax
     
     var listOfNumber: [String] {
         //将Int转化为千位数逗号String
@@ -142,7 +167,7 @@ class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDele
         
         if val == 0 {
             //如果数值是0.加一点.防止UI界面消失
-            val = 1
+            val = 0.01
         }
         
         view.value = val / maxValue

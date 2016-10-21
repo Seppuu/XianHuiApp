@@ -224,12 +224,12 @@ extension XHSideFilterView:UICollectionViewDelegate,UICollectionViewDelegateFlow
         
         let threePiecesWidth = floor(((self.ddWidth) - 4*10) / 3)
         
-        return CGSizeMake(threePiecesWidth, 28)
+        return CGSizeMake(threePiecesWidth, 35)
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         
-        return UIEdgeInsetsMake(0, 10, 0, 10)
+        return UIEdgeInsetsMake(15, 10, 0, 10)
         
     }
     
@@ -238,8 +238,9 @@ extension XHSideFilterView:UICollectionViewDelegate,UICollectionViewDelegateFlow
         return 10.0
     }
     
+    //上下间距
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 10.0
+        return 15.0
     }
     
     // 设置Header的尺寸

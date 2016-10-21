@@ -373,6 +373,28 @@ class DailyFormVC: RadarChartVC {
             chartListArr.append(chartList)
         }
         
+        var maxType:MaxValueType = .cashMax
+        
+        switch index {
+        case 0:
+            maxType = .cashMax
+            
+        case 1:
+            maxType = .projectMax
+            
+        case 2:
+            maxType = .productMax
+            
+        case 3:
+            maxType = .roomTurnoverMax
+            
+        case 4:
+            maxType = .employeeHoursMax
+
+        default:break;
+        }
+        
+        
         currentMonthAvgVaule = formToday.monthlyAvgCash
         grandTotalValue = formToday.monthlyTotalCash
         
@@ -384,7 +406,7 @@ class DailyFormVC: RadarChartVC {
         vc.currentDayIndex = 6 //默认显示第7天
         vc.currentMonthAvgVaule = currentMonthAvgVaule
         vc.grandTotalValue = grandTotalValue
-        
+        vc.maxType = maxType
        
         vc.pieType = pieType
         vc.listOfChartDataArray  = chartListArr.reverse()

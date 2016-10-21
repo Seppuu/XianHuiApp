@@ -63,8 +63,6 @@ class VoiceRecordSampleCell: UIView {
         }
         
         
-        
-        
         shapeView.layer.cornerRadius = width/2
         shapeView.layer.masksToBounds = true
         

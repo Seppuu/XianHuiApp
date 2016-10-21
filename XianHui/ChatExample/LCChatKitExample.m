@@ -65,14 +65,14 @@
     [[LCChatKit sharedInstance] closeWithCallback:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             [self lcck_clearLocalClientInfo];
-            [LCCKUtil showNotificationWithTitle:@"退出成功"
-                                       subtitle:nil
-                                           type:LCCKMessageNotificationTypeSuccess];
+//            [LCCKUtil showNotificationWithTitle:@"退出成功"
+//                                       subtitle:nil
+//                                           type:LCCKMessageNotificationTypeSuccess];
             !success ?: success();
         } else {
-            [LCCKUtil showNotificationWithTitle:@"退出失败"
-                                       subtitle:nil
-                                           type:LCCKMessageNotificationTypeError];
+//            [LCCKUtil showNotificationWithTitle:@"退出失败"
+//                                       subtitle:nil
+//                                           type:LCCKMessageNotificationTypeError];
             !failed ?: failed(error);
         }
     }];
