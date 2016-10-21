@@ -233,7 +233,6 @@ extension XHSideFilterView:UICollectionViewDelegate,UICollectionViewDelegateFlow
         
     }
     
-    
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 10.0
     }
