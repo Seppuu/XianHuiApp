@@ -79,11 +79,13 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     let searchButton = UIButton()
     var searchItem   = UIBarButtonItem()
     var filterItem   = UIBarButtonItem()
+    var negativeSpacer = UIBarButtonItem()
     let searchBar    = UISearchBar()
     
     func setSearchBar() {
-        searchButton.setTitle("搜索", forState: .Normal)
-        searchButton.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        //searchButton.setTitle("搜索", forState: .Normal)
+        searchButton.setImage(UIImage(named: "searchIcon"), forState: .Normal)
+        searchButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         searchButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         searchButton.titleLabel?.font = UIFont.systemFontOfSize(14)
         searchButton.addTarget(self, action: #selector(MyWorkListVC.searchButtonTapped), forControlEvents: .TouchUpInside)
@@ -91,14 +93,18 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         self.searchItem = UIBarButtonItem(customView: searchButton)
         
         
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        button.setTitle("筛选", forState: .Normal)
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        //button.setTitle("筛选", forState: .Normal)
+        button.setImage(UIImage(named: "filterIcon"), forState: .Normal)
         button.titleLabel?.font = UIFont.systemFontOfSize(14)
         button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         button.addTarget(self, action: #selector(MyWorkListVC.filterButtonTap), forControlEvents: .TouchUpInside)
         filterItem = UIBarButtonItem(customView: button)
         
-        self.parentVC!.navigationItem.rightBarButtonItems = [filterItem,searchItem]
+        negativeSpacer = UIBarButtonItem(barButtonSystemItem: .FixedSpace, target: nil, action: nil)
+        negativeSpacer.width = -10
+        
+        self.parentVC!.navigationItem.rightBarButtonItems = [negativeSpacer,filterItem,searchItem]
         
         searchBar.showsCancelButton = true
         searchBar.searchBarStyle = UISearchBarStyle.Minimal
@@ -127,7 +133,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
                     self.searchBar.alpha = 1.0
                     }, completion: { (finish) in
                         
-                        self.searchBar.becomeFirstResponder()
+                        //self.searchBar.becomeFirstResponder()
                 })
                 
         }
@@ -722,7 +728,7 @@ extension MyWorkListVC:UISearchResultsUpdating ,UISearchBarDelegate{
             }) { (finish) in
                 
                 self.parentVC!.navigationItem.titleView = nil
-                self.parentVC!.navigationItem.rightBarButtonItems = [self.filterItem,self.searchItem]
+                self.parentVC!.navigationItem.rightBarButtonItems = [self.negativeSpacer,self.filterItem,self.searchItem]
                 self.searchButton.alpha = 0.0
                 
                 UIView.animateWithDuration(0.15, animations: {
