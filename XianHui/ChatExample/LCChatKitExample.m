@@ -100,9 +100,9 @@
              [self saveLocalClientInfo:clientId];
              !success ?: success();
          } else {
-             [LCCKUtil showNotificationWithTitle:@"登陆失败"
-                                        subtitle:nil
-                                            type:LCCKMessageNotificationTypeError];
+//             [LCCKUtil showNotificationWithTitle:@"登陆失败"
+//                                        subtitle:nil
+//                                            type:LCCKMessageNotificationTypeError];
              !failed ?: failed(error);
          }
      }];
