@@ -114,7 +114,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     
     func reSetNavBarItem() {
         
-        self.parentVC!.navigationItem.rightBarButtonItems = [filterItem,searchItem]
+        self.parentVC!.navigationItem.rightBarButtonItems = [negativeSpacer,filterItem,searchItem]
     }
     
     func searchButtonTapped() {
