@@ -494,7 +494,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
      */
     LCCKHUDActionBlock theHUDActionBlock = [LCCKUIService sharedInstance].HUDActionBlock;
     if (theHUDActionBlock) {
-        //theHUDActionBlock(self, nil, @"获取联系人信息...", LCCKMessageHUDActionTypeShow);
+        theHUDActionBlock(self, nil, @"获取联系人信息...", LCCKMessageHUDActionTypeShow);
     }
     [[LCChatKit sharedInstance] getProfilesInBackgroundForUserIds:[NSArray arrayWithArray:[_userIds allObjects]] callback:^(NSArray<id<LCCKUserDelegate>> *users, NSError *error) {
         if (theHUDActionBlock) {
@@ -613,8 +613,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 
 - (NSDictionary *)searchSections {
     if (!_searchSections) {
-        NSSet *set = [[NSSet alloc] init];
-        [set setByAddingObjectsFromArray:self.searchContacts];
+        NSSet *set = [NSSet setWithArray:self.searchContacts];
         _searchSections = [self sortedSectionForUserNames:[self contactsFromContactsOrUserIds:set userIds:self.searchUserIds]];
     }
     return _searchSections;

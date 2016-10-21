@@ -190,7 +190,7 @@ class ChatKitExample: LCChatKitExample {
             //show intro
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             
-            appDelegate.showLoginVC()
+            appDelegate.showGuide()
 
             // - 显示返回信息
             let  code = 0

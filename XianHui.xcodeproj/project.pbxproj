@@ -244,6 +244,14 @@
 		37BAB9E11D3E124E001E4680 /* DDIMConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BAB9DD1D3E124E001E4680 /* DDIMConfig.swift */; };
 		37BAB9E21D3E124E001E4680 /* DDUserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BAB9DE1D3E124E001E4680 /* DDUserDefault.swift */; };
 		37C0C3B61D66BD77002B8772 /* XHUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C0C3B51D66BD77002B8772 /* XHUser.swift */; };
+		37C1F3861DB9C6820029D776 /* ZWIntroductionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C1F3851DB9C6820029D776 /* ZWIntroductionViewController.m */; };
+		37C1F3951DB9C9410029D776 /* EBBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C1F38A1DB9C9410029D776 /* EBBannerView.m */; };
+		37C1F3961DB9C9410029D776 /* EBBannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37C1F38B1DB9C9410029D776 /* EBBannerView.xib */; };
+		37C1F3971DB9C9410029D776 /* EBForeNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C1F38C1DB9C9410029D776 /* EBForeNotification.m */; };
+		37C1F3981DB9C9410029D776 /* EBMute.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 37C1F38D1DB9C9410029D776 /* EBMute.mp3 */; };
+		37C1F3991DB9C9410029D776 /* EBMuteDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C1F38F1DB9C9410029D776 /* EBMuteDetector.m */; };
+		37C1F39A1DB9C9410029D776 /* UIImage+ColorAtPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C1F3911DB9C9410029D776 /* UIImage+ColorAtPoint.m */; };
+		37C1F39B1DB9C9410029D776 /* UILabel+ContentSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C1F3931DB9C9410029D776 /* UILabel+ContentSize.m */; };
 		37C710DB1D825D3F000FE4DE /* FTPopOverMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C710DA1D825D3F000FE4DE /* FTPopOverMenu.m */; };
 		37D46F811D6FD16E00A0BBCE /* GoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D46F7F1D6FD16E00A0BBCE /* GoodCell.swift */; };
 		37D46F821D6FD16E00A0BBCE /* GoodCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D46F801D6FD16E00A0BBCE /* GoodCell.xib */; };
@@ -550,6 +558,20 @@
 		37BAB9DD1D3E124E001E4680 /* DDIMConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDIMConfig.swift; sourceTree = "<group>"; };
 		37BAB9DE1D3E124E001E4680 /* DDUserDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDUserDefault.swift; sourceTree = "<group>"; };
 		37C0C3B51D66BD77002B8772 /* XHUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHUser.swift; sourceTree = "<group>"; };
+		37C1F3841DB9C6820029D776 /* ZWIntroductionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWIntroductionViewController.h; sourceTree = "<group>"; };
+		37C1F3851DB9C6820029D776 /* ZWIntroductionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWIntroductionViewController.m; sourceTree = "<group>"; };
+		37C1F3891DB9C9410029D776 /* EBBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EBBannerView.h; sourceTree = "<group>"; };
+		37C1F38A1DB9C9410029D776 /* EBBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EBBannerView.m; sourceTree = "<group>"; };
+		37C1F38B1DB9C9410029D776 /* EBBannerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EBBannerView.xib; sourceTree = "<group>"; };
+		37C1F38C1DB9C9410029D776 /* EBForeNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EBForeNotification.m; sourceTree = "<group>"; };
+		37C1F38D1DB9C9410029D776 /* EBMute.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = EBMute.mp3; sourceTree = "<group>"; };
+		37C1F38E1DB9C9410029D776 /* EBMuteDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EBMuteDetector.h; sourceTree = "<group>"; };
+		37C1F38F1DB9C9410029D776 /* EBMuteDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EBMuteDetector.m; sourceTree = "<group>"; };
+		37C1F3901DB9C9410029D776 /* UIImage+ColorAtPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ColorAtPoint.h"; sourceTree = "<group>"; };
+		37C1F3911DB9C9410029D776 /* UIImage+ColorAtPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ColorAtPoint.m"; sourceTree = "<group>"; };
+		37C1F3921DB9C9410029D776 /* UILabel+ContentSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+ContentSize.h"; sourceTree = "<group>"; };
+		37C1F3931DB9C9410029D776 /* UILabel+ContentSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+ContentSize.m"; sourceTree = "<group>"; };
+		37C1F3941DB9C9410029D776 /* EBForeNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EBForeNotification.h; sourceTree = "<group>"; };
 		37C710D91D825D3F000FE4DE /* FTPopOverMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPopOverMenu.h; sourceTree = "<group>"; };
 		37C710DA1D825D3F000FE4DE /* FTPopOverMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPopOverMenu.m; sourceTree = "<group>"; };
 		37D46F7F1D6FD16E00A0BBCE /* GoodCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodCell.swift; sourceTree = "<group>"; };
@@ -1376,6 +1398,8 @@
 		37BAB8C41D3E1045001E4680 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				37C1F3871DB9C9410029D776 /* EBForeNotification */,
+				37C1F3831DB9C6820029D776 /* ZWIntroductionViewController */,
 				37C710D91D825D3F000FE4DE /* FTPopOverMenu.h */,
 				37C710DA1D825D3F000FE4DE /* FTPopOverMenu.m */,
 				37A76FDC1D6D8CBA00572B1D /* ANStepperView */,
@@ -1862,6 +1886,42 @@
 			path = Class;
 			sourceTree = "<group>";
 		};
+		37C1F3831DB9C6820029D776 /* ZWIntroductionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				37C1F3841DB9C6820029D776 /* ZWIntroductionViewController.h */,
+				37C1F3851DB9C6820029D776 /* ZWIntroductionViewController.m */,
+			);
+			path = ZWIntroductionViewController;
+			sourceTree = "<group>";
+		};
+		37C1F3871DB9C9410029D776 /* EBForeNotification */ = {
+			isa = PBXGroup;
+			children = (
+				37C1F3881DB9C9410029D776 /* Classes */,
+				37C1F3941DB9C9410029D776 /* EBForeNotification.h */,
+			);
+			path = EBForeNotification;
+			sourceTree = "<group>";
+		};
+		37C1F3881DB9C9410029D776 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				37C1F3891DB9C9410029D776 /* EBBannerView.h */,
+				37C1F38A1DB9C9410029D776 /* EBBannerView.m */,
+				37C1F38B1DB9C9410029D776 /* EBBannerView.xib */,
+				37C1F38C1DB9C9410029D776 /* EBForeNotification.m */,
+				37C1F38D1DB9C9410029D776 /* EBMute.mp3 */,
+				37C1F38E1DB9C9410029D776 /* EBMuteDetector.h */,
+				37C1F38F1DB9C9410029D776 /* EBMuteDetector.m */,
+				37C1F3901DB9C9410029D776 /* UIImage+ColorAtPoint.h */,
+				37C1F3911DB9C9410029D776 /* UIImage+ColorAtPoint.m */,
+				37C1F3921DB9C9410029D776 /* UILabel+ContentSize.h */,
+				37C1F3931DB9C9410029D776 /* UILabel+ContentSize.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 		37D46F7E1D6FD15E00A0BBCE /* GoodCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -2097,6 +2157,7 @@
 				3708C26A1DA551E600D8E534 /* OrderCell.xib in Resources */,
 				371430781D9B96C60006A314 /* MyWorkCell.xib in Resources */,
 				37BAB9981D3E1059001E4680 /* SingleTapCell.xib in Resources */,
+				37C1F3981DB9C9410029D776 /* EBMute.mp3 in Resources */,
 				37FF8EE71D9143B200676780 /* CustomizedChatKitOther.bundle in Resources */,
 				379C738B1D9CDCD000B41BA6 /* CheckBoxCell.xib in Resources */,
 				37BAB9821D3E1059001E4680 /* ConversationCell.xib in Resources */,
@@ -2113,6 +2174,7 @@
 				37D46F871D6FD5D100A0BBCE /* GoodDetail.xib in Resources */,
 				37367B831D6BFED900479E39 /* chatTableViewCell.xib in Resources */,
 				37B79B511D7D48E200340C17 /* CustomerLargeCell.xib in Resources */,
+				37C1F3961DB9C9410029D776 /* EBBannerView.xib in Resources */,
 				37F70E151D8E369400C55AC8 /* GoodDetailContainer.xib in Resources */,
 				370AAEA71D49F1B3000C64D1 /* UserNameCell.xib in Resources */,
 				37BAB9A81D3E1059001E4680 /* SubscriptionTopView.xib in Resources */,
@@ -2210,6 +2272,7 @@
 				37A2466E1DAF69B4002ADC5C /* SliderCell.swift in Sources */,
 				311DC2DB1D9A09E1006EC8AB /* NSDate+DD.swift in Sources */,
 				37A76FD31D6D314600572B1D /* ProdDateSetTableView.swift in Sources */,
+				37C1F3861DB9C6820029D776 /* ZWIntroductionViewController.m in Sources */,
 				3776B8D11D93A62E00A9C9DB /* MessageListVC.swift in Sources */,
 				37BAB9891D3E1059001E4680 /* CoverAddCell.swift in Sources */,
 				3776B8AE1D937FAC00A9C9DB /* CKSessionService.swift in Sources */,
@@ -2278,6 +2341,7 @@
 				3776B9331D93AC5B00A9C9DB /* ScheduleVC.swift in Sources */,
 				37BAB8BD1D3E1025001E4680 /* PhoneNumbers.swift in Sources */,
 				37BAB8A81D3E101C001E4680 /* Dictionary+DD.swift in Sources */,
+				37C1F3991DB9C9410029D776 /* EBMuteDetector.m in Sources */,
 				372480E01D8151EF00B95C54 /* LCCKLoginViewController.m in Sources */,
 				37BAB8B31D3E101C001E4680 /* UIViewController+DD.swift in Sources */,
 				3776B91D1D93A83900A9C9DB /* FirstLaunchRemindVC.swift in Sources */,
@@ -2297,6 +2361,7 @@
 				3776B8D41D93A62E00A9C9DB /* ScanResultController.swift in Sources */,
 				37BAB8BE1D3E1025001E4680 /* PhotoManager.swift in Sources */,
 				37BAB9D81D3E11B1001E4680 /* AMPopTip+Exit.m in Sources */,
+				37C1F3971DB9C9410029D776 /* EBForeNotification.m in Sources */,
 				372480EE1D8151EF00B95C54 /* NSObject+LCCKHUD.m in Sources */,
 				37BAB9D91D3E11B1001E4680 /* AMPopTip.m in Sources */,
 				37BAB9B61D3E1059001E4680 /* NavigationTitleLabel.swift in Sources */,
@@ -2316,6 +2381,7 @@
 				37BAB8EB1D3E1045001E4680 /* MLPAutoCompleteTextField.m in Sources */,
 				37B791501D51D4230032C164 /* UITableView+DD.swift in Sources */,
 				371430741D9B8D8D0006A314 /* MyWorkListHepler.swift in Sources */,
+				37C1F39B1DB9C9410029D776 /* UILabel+ContentSize.m in Sources */,
 				37367B771D6AE6DB00479E39 /* ChattingTableView.swift in Sources */,
 				3776B9281D93A84800A9C9DB /* PasswordSettingVC.swift in Sources */,
 				37BAB97F1D3E1059001E4680 /* ContactsCell.swift in Sources */,
@@ -2333,11 +2399,13 @@
 				379C737E1D9CA53400B41BA6 /* Manager.swift in Sources */,
 				37BAB9B01D3E1059001E4680 /* DDPlaypartRecordAlertView.swift in Sources */,
 				378E076A1D4757CC00B67621 /* XHBarChartView.swift in Sources */,
+				37C1F3951DB9C9410029D776 /* EBBannerView.m in Sources */,
 				37BAB9E11D3E124E001E4680 /* DDIMConfig.swift in Sources */,
 				378F56911DAB790800D584EF /* HelpCenterViewController.swift in Sources */,
 				37BAB8C21D3E1040001E4680 /* NetworkManager.swift in Sources */,
 				3776B9211D93A83900A9C9DB /* CustomerConsumeListVC.swift in Sources */,
 				37B79B501D7D48E200340C17 /* CustomerLargeCell.swift in Sources */,
+				37C1F39A1DB9C9410029D776 /* UIImage+ColorAtPoint.m in Sources */,
 				37BAB9A91D3E1059001E4680 /* UserAvatarCell.swift in Sources */,
 				37BAB9A71D3E1059001E4680 /* SubscriptionTopView.swift in Sources */,
 				37BAB9B81D3E1059001E4680 /* RAReorderableLayout.swift in Sources */,

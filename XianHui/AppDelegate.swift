@@ -8,9 +8,8 @@
 
 import UIKit
 import MBProgressHUD
-import EBForeNotification
+
 import SwiftyJSON
-import ZWIntroductionViewController
 import ChatKit
 
 import UserNotifications
@@ -80,15 +79,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
-    func showLoginVC() {
+    func showLoginVC(vc:UIViewController) {
+        
+        
         
         let loginVC = LoginViewController()
-
+        //let nav = UINavigationController(rootViewController: loginVC)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.ownSystemLoginSuccess(_:)), name: OwnSystemLoginSuccessNoti, object: nil)
-        
-        self.window?.rootViewController = loginVC
-        self.window?.backgroundColor = UIColor.whiteColor()
-        self.window?.makeKeyAndVisible()
+        vc.navigationController?.navigationBarHidden = false
+        vc.navigationController?.pushViewController(loginVC, animated: true)
     }
     
     func showGuide() {
@@ -96,28 +95,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow()
         self.window!.frame = UIScreen.mainScreen().bounds
         self.window?.makeKeyAndVisible()
-        self.window?.rootViewController = UIViewController()
+        
+        let vc = UIViewController()
+        
+        self.window?.rootViewController = vc
         // data source
         let backgroundImageNames = ["guide01","guide02", "guide03","guide04"]
 
         // Added Introduction View Controller
-        let introductionView = self.customButtonIntroductionView(backgroundImageNames)
+        let introductionVC = self.customButtonIntroductionView(backgroundImageNames)
+        let nav = UINavigationController(rootViewController: introductionVC)
+        nav.navigationBarHidden = true
+        self.window?.rootViewController = nav
         
-        self.window?.addSubview(introductionView.view)
-        
-        introductionView.didSelectedEnter = {
-            introductionView.view.removeFromSuperview()
+        introductionVC.didSelectedEnter = {
+            //introductionVC.view.removeFromSuperview()
             
-            self.showLoginVC()
+            self.showLoginVC(introductionVC)
+
         }
         
     }
     
     func customButtonIntroductionView(backImageNames:[String]) -> ZWIntroductionViewController {
-        let enterButton = UIButton()
-        enterButton.setTitleColor(UIColor.init(hexString:"1480E2"), forState: .Normal)
-        enterButton.setTitle("开始", forState: .Normal)
-        let vc = ZWIntroductionViewController(coverImageNames: backImageNames, backgroundImageNames: backImageNames, button: enterButton)
+        
+        
+        let vc = ZWIntroductionViewController(coverImageNames: backImageNames, backgroundImageNames: backImageNames, button: nil)
         
         return vc
     }

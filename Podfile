@@ -11,9 +11,8 @@ pod 'MWPhotoBrowser'
 pod 'UITextView+Placeholder', '~> 1.2'
 pod 'BKPasscodeView'
 pod 'UAProgressView'
-pod 'EBForeNotification'
 pod 'EAIntroView', '~> 2.9.0'
-pod 'ZWIntroductionViewController'
+
 
 
 

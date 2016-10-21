@@ -131,7 +131,13 @@
 
 - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
     LCCKConversationEditActionsBlock conversationEditActionBlock = [[LCCKConversationListService sharedInstance] conversationEditActionBlock];
-    AVIMConversation *conversation = [self.dataArray objectAtIndex:indexPath.row];
+    AVIMConversation *conversation = nil;
+    if ((NSUInteger)indexPath.row < self.dataArray.count) {
+        conversation = [self.dataArray objectAtIndex:indexPath.row];
+    }
+    else {
+        return nil;
+    }
     NSArray *editActions = [NSArray array];
     if (conversationEditActionBlock) {
         editActions = conversationEditActionBlock(indexPath, [self defaultRightButtons], conversation, self.conversationListViewController);
@@ -194,9 +200,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    AVIMConversation *conversation = [self.dataArray objectAtIndex:indexPath.row];
     LCCKHeightForRowBlock heightForRowBlock = [[LCCKConversationListService sharedInstance] heightForRowBlock];
     if (heightForRowBlock) {
+        AVIMConversation *conversation = [self.dataArray objectAtIndex:indexPath.row];
         return heightForRowBlock(tableView, indexPath, conversation);
     }
     return LCCKConversationListCellDefaultHeight;

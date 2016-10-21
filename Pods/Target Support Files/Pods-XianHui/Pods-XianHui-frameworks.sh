@@ -97,7 +97,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/DZNEmptyDataSet/DZNEmptyDataSet.framework"
   install_framework "$BUILT_PRODUCTS_DIR/EAIntroView/EAIntroView.framework"
   install_framework "$BUILT_PRODUCTS_DIR/EARestrictedScrollView/EARestrictedScrollView.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/EBForeNotification/EBForeNotification.framework"
   install_framework "$BUILT_PRODUCTS_DIR/FDStackView/FDStackView.framework"
   install_framework "$BUILT_PRODUCTS_DIR/FMDB/FMDB.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ICSPullToRefresh/ICSPullToRefresh.framework"
@@ -126,7 +125,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/UITableView+FDTemplateLayoutCell/UITableView_FDTemplateLayoutCell.framework"
   install_framework "$BUILT_PRODUCTS_DIR/UITextView+Placeholder/UITextView_Placeholder.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ValueStepper/ValueStepper.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/ZWIntroductionViewController/ZWIntroductionViewController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/pop/pop.framework"
   install_framework "$BUILT_PRODUCTS_DIR/swiftScan/swiftScan.framework"
 fi
@@ -144,7 +142,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/DZNEmptyDataSet/DZNEmptyDataSet.framework"
   install_framework "$BUILT_PRODUCTS_DIR/EAIntroView/EAIntroView.framework"
   install_framework "$BUILT_PRODUCTS_DIR/EARestrictedScrollView/EARestrictedScrollView.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/EBForeNotification/EBForeNotification.framework"
   install_framework "$BUILT_PRODUCTS_DIR/FDStackView/FDStackView.framework"
   install_framework "$BUILT_PRODUCTS_DIR/FMDB/FMDB.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ICSPullToRefresh/ICSPullToRefresh.framework"
@@ -173,7 +170,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/UITableView+FDTemplateLayoutCell/UITableView_FDTemplateLayoutCell.framework"
   install_framework "$BUILT_PRODUCTS_DIR/UITextView+Placeholder/UITextView_Placeholder.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ValueStepper/ValueStepper.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/ZWIntroductionViewController/ZWIntroductionViewController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/pop/pop.framework"
   install_framework "$BUILT_PRODUCTS_DIR/swiftScan/swiftScan.framework"
 fi

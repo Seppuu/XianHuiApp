@@ -60,6 +60,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "登陆"
+        //setNavBarItem()
         setSubView()
         
     }
@@ -79,6 +81,24 @@ class LoginViewController: UIViewController {
         super.viewDidDisappear(animated)
         IQKeyboardManager.sharedManager().enable = false
         
+    }
+    
+//    func setNavBarItem() {
+//        
+//        let leftItem = UIBarButtonItem(title: "返回", style: .Bordered, target: self, action: #selector(LoginViewController.backToInroVC))
+//        
+//        self.navigationItem.leftBarButtonItem = leftItem
+//    }
+//    
+//    func backToInroVC() {
+//        
+//        
+//        self.dismissViewControllerAnimated(true, completion: nil)
+//    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBarHidden = true
     }
     
     var logoImageView:UIImageView!
