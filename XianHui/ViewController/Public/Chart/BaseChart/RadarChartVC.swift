@@ -8,10 +8,13 @@
 
 import UIKit
 import Charts
+import SnapKit
 
 class RadarChartVC: BaseChartViewController {
 
     var chartView:RadarChartView!
+    
+    var topDayLabel = UILabel()
     
     var tableView:UITableView!
     
@@ -119,6 +122,18 @@ class RadarChartVC: BaseChartViewController {
         
         updateChartData()
         
+        
+        chartView.addSubview(topDayLabel)
+        topDayLabel.text = ""
+        topDayLabel.textColor = UIColor ( red: 0.3779, green: 0.3171, blue: 0.3185, alpha: 1.0 )
+        topDayLabel.font = UIFont.systemFontOfSize(14)
+        topDayLabel.textAlignment = .Left
+        topDayLabel.snp_makeConstraints { (make) in
+            make.left.equalTo(chartView).offset(15)
+            make.width.equalTo(200)
+            make.top.equalTo(chartView).offset(15)
+        }
+        
     }
     
     func setBottomTableView() {
@@ -145,6 +160,8 @@ class RadarChartVC: BaseChartViewController {
         
         //维度数量
         let count = form.viewCount
+        
+        self.topDayLabel.text = form.date
         
         var yValsButton = [ChartDataEntry]() //button 位置
         

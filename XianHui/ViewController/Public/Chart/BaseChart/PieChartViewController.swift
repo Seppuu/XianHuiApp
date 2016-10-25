@@ -41,7 +41,7 @@ class PieChartViewController: BaseChartViewController {
     
     var grandTotalValue = 0
     
-    var numbers = [Int]()
+    var numbers = [Float]()
     
     var listOfDateString = [String]()
     
@@ -230,7 +230,7 @@ extension PieChartViewController: ChartViewDelegate {
         pFormatter.multiplier = 1.0
         pFormatter.percentSymbol = " %"
         data.setValueFormatter(pFormatter)
-        data.setValueFont(UIFont(name: "HelveticaNeue-Light", size: 11.0))
+        data.setValueFont(UIFont(name: "HelveticaNeue-Light", size: 14.0))
         data.setValueTextColor(UIColor ( red: 0.3078, green: 0.3078, blue: 0.3078, alpha: 1.0 ))
         
         pieView.data = data

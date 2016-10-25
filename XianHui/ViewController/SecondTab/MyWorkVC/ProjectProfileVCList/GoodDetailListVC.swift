@@ -166,7 +166,7 @@ class GoodDetailListVC: BaseTableViewController {
             
             let m2 = BaseTableViewModel()
             m2.name = "手工费"
-            if let retail_price = json["retail_price"].string {
+            if let retail_price = json["manual_fee"].string {
                 m2.desc = retail_price
             }
             

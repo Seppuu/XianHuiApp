@@ -70,7 +70,7 @@ class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDele
 
     }
     
-    var listOfNumber2 = [Int]()
+    var listOfNumber2 = [Float]()
     
     var listOfDateString = [String]()
     
@@ -97,7 +97,7 @@ class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDele
         dateLabel.snp_makeConstraints { (make) in
             make.width.equalTo(screenWidth)
             make.centerX.equalTo(self)
-            make.bottom.equalTo(self)
+            make.bottom.equalTo(self).offset(-10)
         }
         
         dateLabel.text = listOfDateString.last
@@ -163,7 +163,7 @@ class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDele
         
         let view = VoiceRecordSampleCell(frame: CGRect(x: 0, y: 0, width: 25, height: ddHeight * 0.5))
         let item = Int(index)
-        var val = Float(listOfNumber2[item])
+        var val = listOfNumber2[item]
         
         if val == 0 {
             //如果数值是0.加一点.防止UI界面消失

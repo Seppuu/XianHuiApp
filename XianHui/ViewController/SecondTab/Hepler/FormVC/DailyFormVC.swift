@@ -118,8 +118,13 @@ class DailyFormVC: RadarChartVC {
                         radarModel.point = score
                     }
                     
-                    if let amount = data["amount"].int {
+                    if let amount = data["amount"].float {
                         radarModel.amount = amount
+                        if radarModel.name == "工时" {
+                           print(amount)
+                            print(radarModel.name)
+                        }
+                        
                     }
                     
                     array.append(radarModel)
@@ -331,7 +336,7 @@ class DailyFormVC: RadarChartVC {
         let index = button.tag
         let vc = PieViewController()
         
-        var nums = [Int]()
+        var nums = [Float]()
         
         var dateArray = [String]()
         
