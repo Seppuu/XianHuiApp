@@ -29,6 +29,8 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     
     var filterParams = JSONDictionary()
     
+    var searchResult = [MyWorkObject]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -401,6 +403,11 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
                 list.name = sectionName
             }
             
+            //筛选结果总计.
+            if let filterResult = data["filterResult"].int {
+                self.total = filterResult
+            }
+            
             if let sectionDatas = data["list"].array {
                 
                 for sectionData in sectionDatas {
@@ -491,10 +498,6 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
             hideHudFrom(self.filterView)
             if success == true {
                 if let rows = json!["rows"].array {
-                    
-                    if let total = json!["total"].int {
-                        self.total = total
-                    }
                     
                     if rows.count == 0 {
                         self.tableView.mj_footer.endRefreshingWithNoMoreData()
@@ -799,8 +802,60 @@ extension MyWorkListVC:UISearchResultsUpdating ,UISearchBarDelegate{
         tableView.reloadData()
     }
     
+    
+    func updateFilteredContentFor(tagName:String) {
+        
+//        
+//        if tagName == "" {
+//            searchResult = [MyWorkObject]()
+//            dataHelper.dataArray = searchResult
+//            return
+//        }
+//        
+//        // 移除之前的查询结果
+//        searchResult.removeAll()
+//        
+//        // 遍历模型数据
+//        let objs = dataHelper.dataArray
+//        for obj in objs {
+//            let searchOtion = NSCaseInsensitiveSearch
+//            
+//            
+//            
+//            
+//        }
+//        
+//        
+//        for (YANTag *tag in self.tags) {
+//            NSUInteger searchOptions = NSCaseInsensitiveSearch | NSDiacriticInsensitiveSearch;
+//            NSRange productNameRange = NSMakeRange(0, tag.theme_name.length);
+//            NSRange foundRange = [tag.theme_name rangeOfString:tagName options:searchOptions range:productNameRange];
+//            if (foundRange.length > 0) {
+//                [self.searchResult addObject:tag];
+//            }
+//        }
+        
+    }
+    
+    
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         
+        if let searchText = searchController.searchBar.text {
+            
+            print(searchText)
+            
+            self.updateFilteredContentFor(searchText)
+        }
+        
+        
+//        if (self.searchController.searchResultsController) {
+//            // 设置显示搜索结果的tableView
+//            UINavigationController *nav = (UINavigationController *)self.searchController.searchResultsController;
+//            YANSearchTableController *searchTable = (YANSearchTableController *)nav.topViewController;
+//            searchTable.tags = self.searchResult;
+//            [searchTable.tags insertObject:searchText atIndex:0];
+//            [searchTable.tableView reloadData];
+//        }
         
     }
     
