@@ -181,7 +181,7 @@ class User:NSObject {
                 if let no = data!["init_login_password"].int {
                     if no == 1 {
                         
-                        NSNotificationCenter.defaultCenter().postNotificationName(XHAppNewUserFirstLoginNoti, object: nil)
+                    NSNotificationCenter.defaultCenter().postNotificationName(XHAppNewUserFirstLoginNoti, object: nil)
                         return
                     }
                     else {

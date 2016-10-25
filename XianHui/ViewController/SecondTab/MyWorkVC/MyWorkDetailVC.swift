@@ -49,13 +49,13 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
         super.viewDidLoad()
 
         view.backgroundColor = UIColor.whiteColor()
-        setNavBarItem()
+        //setNavBarItem()
         addNoti()
         setTableView()
         
-        getProfileDetailData()
+        //getProfileDetailData()
         
-        showPlanRemindIfNeed()
+        //showPlanRemindIfNeed()
     }
 
     override func didReceiveMemoryWarning() {

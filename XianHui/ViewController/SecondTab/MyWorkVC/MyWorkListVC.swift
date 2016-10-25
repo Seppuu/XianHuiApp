@@ -153,23 +153,30 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
             self.getDataFromServer(self.filterParams)
         })        
         
+//        dataHelper.cellSelectedHandler = {
+//            (index,objectId,objectName,obj) in
+//            let vc = MyWorkDetailVC()
+//            vc.title = objectName
+//            vc.objectId = objectId
+//            vc.objectName = objectName
+//            vc.type = self.type
+//            
+//            if let plannedNum = obj.thirdTagString.toInt() {
+//                vc.plannedNum = plannedNum
+//            }
+//            else {
+//                
+//            }
+//            
+//            vc.profileJSON = self.jsons[index]
+//            self.parentNavigationController?.pushViewController(vc, animated: true)
+//            
+//        }
+        
         dataHelper.cellSelectedHandler = {
             (index,objectId,objectName,obj) in
-            let vc = MyWorkDetailVC()
-            vc.title = objectName
-            vc.objectId = objectId
-            vc.objectName = objectName
-            vc.type = self.type
             
-            if let plannedNum = obj.thirdTagString.toInt() {
-                vc.plannedNum = plannedNum
-            }
-            else {
-                
-            }
-            
-            vc.profileJSON = self.jsons[index]
-            self.parentNavigationController?.pushViewController(vc, animated: true)
+            self.toProfileVC(objectId,index:index,objName:objectName)
             
         }
         
@@ -181,6 +188,82 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         setFilterView()
         getFilterData(JSONDictionary())
     }
+    
+    func toProfileVC(objectId:Int,index:Int,objName:String) {
+        
+        if self.type == .customer {
+            let vc = CustomerProfileVC()
+            vc.title = "详细资料"
+            vc.customerId = objectId
+            
+            self.parentNavigationController?.pushViewController(vc, animated: true)
+        }
+        else if self.type == .employee {
+            
+            
+            let vc = EmployeeProfileVC()
+            vc.title = "详细资料"
+            vc.type = self.type
+            vc.profileJSON = self.jsons[index]
+            vc.profileDetailJSON = self.jsons[index]
+            
+            vc.objectId = objectId
+            vc.objectName = objName
+            
+            self.parentNavigationController?.pushViewController(vc, animated: true)
+            
+            
+        }
+        else if self.type == .project {
+            let hud = showHudWith(view, animated: true, mode: .Indeterminate, text: "")
+            
+            NetworkManager.sharedManager.getProjectProfileWith(objectId, completion: { (success, json, error) in
+                hud.hide(true)
+                if success == true {
+                    let vc = GoodProfileVC()
+                    vc.title = "详细资料"
+                    vc.type = self.type
+                    vc.profileJSON = json
+                    vc.profileDetailJSON = json
+                    vc.isProject = true
+                    vc.objectId = objectId
+                    vc.objectName = objName
+                    self.parentNavigationController?.pushViewController(vc, animated: true)
+                }
+                else {
+                    
+                }
+            })
+            
+            
+        }
+        else if self.type == .prod {
+            let hud = showHudWith(view, animated: true, mode: .Indeterminate, text: "")
+            NetworkManager.sharedManager.getProdProfileWith(objectId, completion: { (success, json, error) in
+                hud.hide(true)
+                if success == true {
+                    let vc = GoodProfileVC()
+                    vc.title = "详细资料"
+                    vc.type = self.type
+                    vc.profileJSON = json
+                    vc.profileDetailJSON = json
+                    vc.isProject = false
+                    vc.objectId = objectId
+                    vc.objectName = objName
+                    self.parentNavigationController?.pushViewController(vc, animated: true)
+                }
+                else {
+                    
+                }
+                
+            })
+        }
+        else {
+            
+        }
+        
+    }
+
     
     var filterView:XHSideFilterView!
 
@@ -206,7 +289,10 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         
         
         filterView.confirmHandler = {
+            (models) in
             self.blackOverlayTap()
+            self.clearDataBeforeFilterSuccess()
+            self.getDataFromServer(self.filterParams)
         }
         
         filterView.filterSelected = {
@@ -284,18 +370,18 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         }
         
         
-        showHudWith(filterView, animated: true, mode: .Indeterminate, text: "")
+        let hud = showHudWith(filterView, animated: true, mode: .Indeterminate, text: "")
         
         NetworkManager.sharedManager.getMyWorkListFilterDataWith(params,urlString:urlString) { (success, json, error) in
-            
+            hud.hide(true)
             if success == true {
                 
                 if let datas = json?.array {
                     self.filterView.dataArray = self.makeFilterTableViewWith(datas)
                     self.filterView.collectionView.reloadData()
-                    self.clearDataBeforeFilterSuccess()
+                    
                     self.filterParams = params
-                    self.getDataFromServer(self.filterParams)
+                    
                 }
                 
             }

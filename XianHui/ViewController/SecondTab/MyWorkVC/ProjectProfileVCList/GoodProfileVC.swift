@@ -12,14 +12,37 @@ class GoodProfileVC: BaseProfileViewController {
 
     var isProject = false
     
+    var objectId:Int!
+    var objectName = ""
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        setNavBarItem()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        
+    }
+    
+    func setNavBarItem() {
+        
+        let rightBarItem = UIBarButtonItem(title: "订单", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(EmployeeProfileVC.settingTap))
+        navigationItem.rightBarButtonItem = rightBarItem
+        
+    }
+    
+    func settingTap() {
+        
+        let vc = MyWorkDetailVC()
+        vc.title = objectName
+        vc.objectId = objectId
+        vc.objectName = objectName
+        vc.type = self.type
+        
+        self.navigationController?.pushViewController(vc, animated: true)
         
     }
     
@@ -74,11 +97,34 @@ class GoodProfileVC: BaseProfileViewController {
 class EmployeeProfileVC: BaseProfileViewController {
     
     
+    var objectId:Int!
+    var objectName = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setNavBarItem()
+    }
+    
+    func setNavBarItem() {
+        
+        let rightBarItem = UIBarButtonItem(title: "订单", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(EmployeeProfileVC.settingTap))
+        navigationItem.rightBarButtonItem = rightBarItem
         
     }
+    
+    func settingTap() {
+        
+        let vc = MyWorkDetailVC()
+        vc.title = objectName
+        vc.objectId = objectId
+        vc.objectName = objectName
+        vc.type = self.type
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

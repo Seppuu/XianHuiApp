@@ -22,17 +22,37 @@ class CustomerProfileVC: UIViewController {
     
     var customerId:Int!
 
-    let typeList = ["客服经理","他的卡包","消费记录","项目计划","预约信息"]
+    let typeList = ["客服经理","他的卡包","消费记录","项目计划","预约信息","订单信息"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.whiteColor()
         getCustomerDetail()
         setTableView()
+        setNavBarItem()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        
+    }
+    
+    func setNavBarItem() {
+        
+        let rightBarItem = UIBarButtonItem(title: "订单", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(EmployeeProfileVC.settingTap))
+        navigationItem.rightBarButtonItem = rightBarItem
+        
+    }
+    
+    func settingTap() {
+        
+        let vc = MyWorkDetailVC()
+        vc.title = "订单信息"
+        vc.objectId = customer.id
+        vc.objectName = customer.name
+        vc.type = .customer
+        
+        self.navigationController?.pushViewController(vc, animated: true)
         
     }
     
@@ -76,7 +96,7 @@ class CustomerProfileVC: UIViewController {
         }
         
         if let card_total = json["card_total"].int {
-            self.customer.cardTotal  = card_total
+            self.customer.cardTotal = card_total
         }
         
         if let certNo = json["basic"]["cert_no"].string {
@@ -116,7 +136,7 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
             return 1
         }
         else {
-            return 5
+            return 6
         }
     }
     
@@ -196,9 +216,13 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
                 }
                 
             }
-            else {
+            else if indexPath.row == 4 {
                 cell.accessoryType = .DisclosureIndicator
                 cell.typeLabel.text = customer.scheduleTime == "" ? "无新预约" : customer.scheduleTime
+            }
+            else {
+                cell.accessoryType = .DisclosureIndicator
+                cell.typeLabel.text = "服务状态"
             }
             
             return cell
@@ -253,6 +277,25 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
                 vc.customer = customer
                 vc.allPlan = true
                 vc.title = "预约信息"
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+            }
+            else {
+                //订单信息
+                let vc = MyWorkDetailVC()
+                vc.title = "订单信息"
+                vc.objectId = customer.id
+                vc.objectName = customer.name
+                vc.type = .customer
+    
+//                if let plannedNum = obj.thirdTagString.toInt() {
+//                    vc.plannedNum = plannedNum
+//                }
+//                else {
+//    
+//                }
+//                
+//                vc.profileJSON = self.jsons[index]
                 self.navigationController?.pushViewController(vc, animated: true)
                 
             }
