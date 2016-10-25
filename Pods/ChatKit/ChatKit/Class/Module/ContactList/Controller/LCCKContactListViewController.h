@@ -2,7 +2,7 @@
 //  LCCKContactListViewController.h
 //  LeanCloudChatKit-iOS
 //
-//  v0.7.15 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/2/22.
+//  v0.7.20 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/2/22.
 //  Copyright © 2016年 LeanCloud. All rights reserved.
 //
 
@@ -41,7 +41,7 @@ typedef BOOL (^LCCKDeleteContactCallback)(UIViewController *viewController, NSSt
 @property (nonatomic, assign, readonly) LCCKContactListMode mode;
 @property (nonatomic, copy) NSSet<LCCKContact *> *contacts;
 @property (nonatomic, copy) NSSet<NSString *> *userIds;
-
+    
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 @property (nonatomic, strong) UISearchDisplayController *searchController;
 

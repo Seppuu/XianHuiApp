@@ -62,7 +62,10 @@ class LoginViewController: UIViewController {
         
         title = "登陆"
         //setNavBarItem()
+        setNoti()
         setSubView()
+        
+        
         
     }
 
@@ -83,19 +86,6 @@ class LoginViewController: UIViewController {
         
     }
     
-//    func setNavBarItem() {
-//        
-//        let leftItem = UIBarButtonItem(title: "返回", style: .Bordered, target: self, action: #selector(LoginViewController.backToInroVC))
-//        
-//        self.navigationItem.leftBarButtonItem = leftItem
-//    }
-//    
-//    func backToInroVC() {
-//        
-//        
-//        self.dismissViewControllerAnimated(true, completion: nil)
-//    }
-    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.navigationBarHidden = true
@@ -110,6 +100,11 @@ class LoginViewController: UIViewController {
     var loginButton:UIButton!
     
     var helpLabel:UILabel!
+    
+    func setNoti() {
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginViewController.showChangePassWordAlert), name: XHAppNewUserFirstLoginNoti, object: nil)
+    }
     
     func setSubView() {
         
@@ -286,24 +281,6 @@ extension LoginViewController {
         
     }
     
-    func showHudWith(text:String) {
-        
-        hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
-        hud.mode = .Text
-        hud.labelText = text
-        hud.hide(true, afterDelay: 2.0)
-    }
-    
-    func showHud() {
-        
-        hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
-        hud.mode = .Indeterminate
-    }
-    
-    func hideHud() {
-        hud.hide(true)
-        hud = MBProgressHUD()
-    }
     
     func loginWithTry() {
         
@@ -326,40 +303,30 @@ extension LoginViewController {
         
         if userName == "" {
             
-            showHudWith("请输入手机号")
+            let hud = showHudWith(view, animated: true, mode: .Text, text: "请输入手机号")
+            hud.hide(true, afterDelay: 1.5)
             return
         }
         
         if passWord == "" {
             
-            showHudWith("请输入密码")
+            let hud = showHudWith(view, animated: true, mode: .Text, text: "请输入密码")
+            hud.hide(true, afterDelay: 1.5)
             return
         }
         
-        self.showHud()
+        let hud = showHudWith(view, animated: true, mode: .Indeterminate, text: "")
         
         User.loginWith(userName, passWord: passWord, usertype: UserLoginType.Employee) { (user, data, error) in
             
-            
+            hud.hide(true)
             if error == nil {
-                self.hideHud()
-                //检车是否是默认密码,如果是,需要强制修改.否则无法登陆
-                if let no = data!["init_login_password"].int {
-                    if no == 1 {
-                        
-                        self.showChangePassWordAlert()
-                    }
-                    else {
-                        let clientId = String(user!.clientId)
-                        NSNotificationCenter.defaultCenter().postNotificationName(OwnSystemLoginSuccessNoti, object: clientId)
-                    }
-                }
-                else {
-                    
-                }
+                
+                
+                let clientId = String(user!.clientId)
+                NSNotificationCenter.defaultCenter().postNotificationName(OwnSystemLoginSuccessNoti, object: clientId)
             }
             else {
-                self.hideHud()
                 //TODO:错误分类
                 let textError = error!
                 self.showLoginErrorAlert(textError)
@@ -394,6 +361,7 @@ extension LoginViewController {
         
         alert.addTextFieldWithConfigurationHandler { (textField) in
             
+            textField.secureTextEntry = true
             textField.placeholder = "新密码"
         }
         
@@ -419,7 +387,8 @@ extension LoginViewController {
         
         if password == "" {
             //show hud password is ""
-             showHudWith("请输入新的密码")
+            let hud = showHudWith(view, animated: true, mode: .Text, text: "请输入新的密码")
+            hud.hide(true, afterDelay: 1.5)
             
             //show alert anagin
             self.showChangePassWordAlert()
@@ -429,17 +398,19 @@ extension LoginViewController {
             
             let userName = phoneTextField.text
             if userName == nil {return}
-            showHud()
+            let hud = showHudWith(view, animated: true, mode: .Indeterminate, text: "")
             NetworkManager.sharedManager.updatePassWordWith(userName!, usertype: .Employee, passWord: password, completion: { (success, json, error) in
                 
                 if success == true {
-                    self.hideHud()
-                    self.showHudWith("修改成功,请再次登录")
-                    self.passWordTextField.text = ""
+                    hud.labelText = "修改成功!"
+                    hud.hide(true, afterDelay: 1.0)
+                    
+                    self.passWordTextField.text = password
+                    self.login()
                 }
                 else {
-                    self.hideHud()
-                    self.showHudWith(error!)
+                    hud.labelText = error!
+                    hud.hide(true, afterDelay: 1.0)
                 }
                 
             })

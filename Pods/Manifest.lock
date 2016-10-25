@@ -16,7 +16,7 @@ PODS:
   - Charts (2.3.0):
     - Charts/Core (= 2.3.0)
   - Charts/Core (2.3.0)
-  - ChatKit (0.7.18):
+  - ChatKit (0.7.20):
     - AVOSCloud (~> 3.5.1)
     - AVOSCloudIM (~> 3.5.1)
     - DACircularProgress (~> 2.3.1)
@@ -136,7 +136,7 @@ SPEC CHECKSUMS:
   AVOSCloudIM: a8a89cbdc9387079f6da7bd4f371c523086a7635
   BKPasscodeView: 947e3542c126a9fa41c46318759d928919636e96
   Charts: 55d7fd9af175b500208601bea872f0fc72c1d19e
-  ChatKit: 2ad4522fd4de9fc47ef6e252b1dc7550a2788b3b
+  ChatKit: 06dd06b1d1d1538085a802080a4e6e8749c2c92d
   CryptoSwift: c1ef79f901b86099a6fe8b3c7524cf9f3f3c8c40
   CTAssetsPickerController: b1d1d50ab87cf6b8b13531de5f4530482e7e53ed
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71

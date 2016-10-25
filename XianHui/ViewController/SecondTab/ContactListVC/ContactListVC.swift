@@ -122,12 +122,6 @@ extension ContactListVC {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        if indexPath.section == 0 {
-//            return 64.0
-//        }
-//        else {
-//            return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
-//        }
 
         return 64
     }

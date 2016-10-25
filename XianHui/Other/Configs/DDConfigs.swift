@@ -11,6 +11,8 @@ import CoreLocation
 
 let OwnSystemLoginSuccessNoti = "OwnSystemLoginSuccessNoti"
 
+let XHAppNewUserFirstLoginNoti = "XHAppNewUserFirstLoginNoti"
+
 var IOS10_OR_LATER:Bool {
     return (UIDevice.currentDevice().systemVersion.toFloat() >= 10.0)
 }

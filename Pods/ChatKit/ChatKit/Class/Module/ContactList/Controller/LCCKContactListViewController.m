@@ -2,7 +2,7 @@
 //  LCCKContactListViewController.m
 //  LeanCloudChatKit-iOS
 //
-//  v0.7.15 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/2/22.
+//  v0.7.20 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/2/22.
 //  Copyright © 2016年 LeanCloud. All rights reserved.
 //
 
@@ -320,7 +320,6 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    //xianhui
     LCCKContactCell *cell = [tableView dequeueReusableCellWithIdentifier:LCCKContactListViewControllerIdentifier];
     id contact = [self contactAtIndexPath:indexPath tableView:tableView];
     NSURL *avatarURL = nil;
@@ -396,7 +395,6 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //xianhui
     LCCKContactCell *cell = [tableView dequeueReusableCellWithIdentifier:LCCKContactListViewControllerIdentifier];
     NSString *clientId = [self currentClientIdAtIndexPath:indexPath tableView:tableView];
     if (self.mode == LCCKContactListModeSingleSelection) {

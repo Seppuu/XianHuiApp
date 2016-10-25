@@ -177,6 +177,22 @@ class User:NSObject {
             
             if success {
                 
+                //检车是否是默认密码,如果是,需要强制修改.否则无法登陆
+                if let no = data!["init_login_password"].int {
+                    if no == 1 {
+                        
+                        NSNotificationCenter.defaultCenter().postNotificationName(XHAppNewUserFirstLoginNoti, object: nil)
+                        return
+                    }
+                    else {
+                       
+                       
+                    }
+                }
+                else {
+                    return
+                }
+                
                 //获取其他接口的前缀地址  拼接 代理ID
                 if let apiUrl = data!["api_url"].string {
                     
