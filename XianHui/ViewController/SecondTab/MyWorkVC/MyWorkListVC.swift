@@ -11,6 +11,7 @@ import SwiftyJSON
 import DZNEmptyDataSet
 import MJRefresh
 
+
 class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
 
     var tableView:UITableView!
@@ -29,7 +30,15 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     
     var filterParams = JSONDictionary()
     
-    var searchResult = [MyWorkObject]()
+    var originalDatas = [MyWorkObject]() {
+        didSet {
+            dataHelper.dataArray = originalDatas
+        }
+    }
+    
+    var searchResults = [MyWorkObject]()
+    
+    var searchedObjId = [Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +47,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         addNoti()
         setTableView()
         setSearchBar()
-        
+        //setSearch()
     }
 
     override func didReceiveMemoryWarning() {
@@ -66,12 +75,6 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     
     var needRefresh = false
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        
-    }
-    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         reSetNavBarItem()
@@ -82,7 +85,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     var searchItem   = UIBarButtonItem()
     var filterItem   = UIBarButtonItem()
     var negativeSpacer = UIBarButtonItem()
-    let searchBar    = UISearchBar()
+    var searchBar    = UISearchBar()
     
     func setSearchBar() {
         //searchButton.setTitle("搜索", forState: .Normal)
@@ -109,9 +112,47 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         self.parentVC!.navigationItem.rightBarButtonItems = [negativeSpacer,filterItem,searchItem]
         
         searchBar.showsCancelButton = true
-        searchBar.searchBarStyle = UISearchBarStyle.Minimal
+        searchBar.searchBarStyle = .Minimal
         searchBar.delegate = self
+        searchBar.tintColor = UIColor.whiteColor()
         
+        
+        if let textFieldInsideSearchBar = searchBar.valueForKey("searchField") as? UITextField {
+            
+            textFieldInsideSearchBar.textColor = UIColor.whiteColor()
+        }
+        
+        searchBar.setImage(UIImage(named: "Search Icon"), forSearchBarIcon: UISearchBarIcon.Search, state: UIControlState.Normal)
+
+        searchBar.setImage(UIImage(named: "Clear"), forSearchBarIcon: .Clear, state: UIControlState.Normal)
+        
+    }
+    
+    func setSearch() {
+        
+        //move tableView into superVC
+        tableView.removeFromSuperview()
+        dataHelper.dataArray = searchResults
+        tableView.reloadData()
+        tableView.frame = CGRectMake(0.0, 64, self.parentVC!.view.frame.width, self.parentVC!.view.frame.height - 64)
+        self.parentVC?.view.addSubview(tableView)
+        
+        tableView.mj_footer.removeFromSuperview()
+        
+        
+    }
+    
+    func reSetTableView() {
+        
+        tableView.removeFromSuperview()
+        dataHelper.dataArray = originalDatas
+        tableView.reloadData()
+        tableView.frame = CGRectMake(0.0,0.0, self.view.frame.width, self.view.frame.height)
+        view.addSubview(tableView)
+        
+        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
+            self.getDataFromServer(self.filterParams)
+        })
     }
     
     func reSetNavBarItem() {
@@ -127,15 +168,18 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
             
             }) { (finished) in
                 
+                self.setSearch()
+                
                 self.parentVC!.navigationItem.rightBarButtonItems = nil
                 self.parentVC!.navigationItem.titleView = self.searchBar
                 self.searchBar.alpha = 0.0
                 
+                
                 UIView.animateWithDuration(0.15, animations: {
                     self.searchBar.alpha = 1.0
                     }, completion: { (finish) in
+                        self.searchBar.becomeFirstResponder()
                         
-                        //self.searchBar.becomeFirstResponder()
                 })
                 
         }
@@ -143,7 +187,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     }
 
     func setTableView() {
-        tableView = UITableView(frame: CGRectMake(0.0,0.0, self.view.frame.width, self.view.frame.height - 64 - 40), style: .Grouped)
+        tableView = UITableView(frame: CGRectMake(0.0,0.0, self.view.frame.width, self.view.frame.height), style: .Grouped)
         view.addSubview(tableView)
         tableView.delegate = dataHelper
         tableView.dataSource = dataHelper
@@ -350,7 +394,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     
     func clearDataBeforeFilterSuccess() {
         
-        self.dataHelper.dataArray =  [MyWorkObject]()
+        self.originalDatas =  [MyWorkObject]()
         self.pageNumber = 1
         self.jsons = [JSON]()
         self.tableView.reloadData()
@@ -534,7 +578,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
             dataArray = getProductionData(datas)
         }
         
-        dataHelper.dataArray += dataArray
+        self.originalDatas += dataArray
         
         tableView.reloadData()
         
@@ -793,9 +837,19 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         return dataArray
 
     }
+    
 }
 
-extension MyWorkListVC:UISearchResultsUpdating ,UISearchBarDelegate{
+extension MyWorkListVC:UISearchBarDelegate{
+    
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        if let searchText = searchBar.text {
+            updateFilteredContentFor(searchText)
+        }
+        
+    }
+    
     
     func filterContentForSearchText(searchText: String, scope: String = "All") {
         
@@ -803,71 +857,64 @@ extension MyWorkListVC:UISearchResultsUpdating ,UISearchBarDelegate{
     }
     
     
-    func updateFilteredContentFor(tagName:String) {
+    func updateFilteredContentFor(searchString:String) {
         
-//        
-//        if tagName == "" {
-//            searchResult = [MyWorkObject]()
-//            dataHelper.dataArray = searchResult
-//            return
-//        }
-//        
-//        // 移除之前的查询结果
-//        searchResult.removeAll()
-//        
-//        // 遍历模型数据
-//        let objs = dataHelper.dataArray
-//        for obj in objs {
-//            let searchOtion = NSCaseInsensitiveSearch
-//            
-//            
-//            
-//            
-//        }
-//        
-//        
-//        for (YANTag *tag in self.tags) {
-//            NSUInteger searchOptions = NSCaseInsensitiveSearch | NSDiacriticInsensitiveSearch;
-//            NSRange productNameRange = NSMakeRange(0, tag.theme_name.length);
-//            NSRange foundRange = [tag.theme_name rangeOfString:tagName options:searchOptions range:productNameRange];
-//            if (foundRange.length > 0) {
-//                [self.searchResult addObject:tag];
-//            }
-//        }
+        let searchDatas = originalDatas
+        // 移除之前的查询结果
         
-    }
-    
-    
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        // 遍历模型数据
         
-        if let searchText = searchController.searchBar.text {
+        //  for (NSString *searchString in searchItems) {
+        // each searchString creates an OR predicate for: name, id
+        //
+        // example if searchItems contains "iphone 599 2007":
+        //      name CONTAINS[c] "lanmaq"
+        //      id CONTAINS[c] "1568689942"
+
+        var searchResults = searchDatas
+        
+        
+        var andMatchPredicates = [NSCompoundPredicate]()
+        var searchItemsPredicate = [NSComparisonPredicate]()
+        
+        // use NSExpression represent expressions in predicates.
+        // NSPredicate is made up of smaller, atomic parts: two NSExpressions (a left-hand value and a right-hand value)
+        
+        // name field matching
+        let leftExpression = NSExpression.init(forKeyPath: "nameLabelString")
+        
+        let rightExpression = NSExpression.init(forConstantValue: searchString)
+        
+        let finalPredicate = NSComparisonPredicate(leftExpression: leftExpression, rightExpression: rightExpression, modifier: .DirectPredicateModifier, type: .ContainsPredicateOperatorType, options: .CaseInsensitivePredicateOption)
+        
+        searchItemsPredicate.append(finalPredicate)
+        
+        // at this OR predicate to our master AND predicate
+        let orMatchPredicates = NSCompoundPredicate(orPredicateWithSubpredicates: searchItemsPredicate)
+        
+        andMatchPredicates.append(orMatchPredicates)
+        
+        // match up the fields of the Product object
+        let finalCompoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: andMatchPredicates)
+        
+        if let filterResult = (searchResults as NSArray).filteredArrayUsingPredicate(finalCompoundPredicate) as? [MyWorkObject] {
             
-            print(searchText)
-            
-            self.updateFilteredContentFor(searchText)
+            dataHelper.dataArray = filterResult
+            self.tableView.reloadData()
         }
-        
-        
-//        if (self.searchController.searchResultsController) {
-//            // 设置显示搜索结果的tableView
-//            UINavigationController *nav = (UINavigationController *)self.searchController.searchResultsController;
-//            YANSearchTableController *searchTable = (YANSearchTableController *)nav.topViewController;
-//            searchTable.tags = self.searchResult;
-//            [searchTable.tags insertObject:searchText atIndex:0];
-//            [searchTable.tableView reloadData];
-//        }
-        
-    }
+       
     
+    }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        
         
         UIView.animateWithDuration(0.15, animations: {
             
             self.searchBar.alpha = 0.0
             
             }) { (finish) in
-                
+                self.reSetTableView()
                 self.parentVC!.navigationItem.titleView = nil
                 self.parentVC!.navigationItem.rightBarButtonItems = [self.negativeSpacer,self.filterItem,self.searchItem]
                 self.searchButton.alpha = 0.0

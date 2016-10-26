@@ -15,11 +15,12 @@ class MyWorkVC: BaseViewController,CAPSPageMenuDelegate {
     var pageMenu : CAPSPageMenu?
     
     var pageIndex = 0
-    
+     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.whiteColor()
         setSubView()
+       
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,16 +93,7 @@ class MyWorkVC: BaseViewController,CAPSPageMenuDelegate {
         self.view.addSubview(pageMenu!.view)
         
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
+
+
