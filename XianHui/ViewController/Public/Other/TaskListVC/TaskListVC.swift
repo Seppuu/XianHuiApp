@@ -42,13 +42,13 @@ class TaskListVC: BaseViewController {
     
     func setTableView() {
         
-        tableView = UITableView(frame: CGRectMake(0, 0, screenWidth, screenHeight), style: .Plain)
+        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight), style: .plain)
         
         tableView.delegate = self
         tableView.dataSource = self
         
         let nib = UINib(nibName: cellId, bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: cellId)
+        tableView.register(nib, forCellReuseIdentifier: cellId)
         
         view.addSubview(tableView)
         
@@ -59,9 +59,9 @@ class TaskListVC: BaseViewController {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.setContentOffset(CGPointMake(0,44), animated: false)
+        tableView.setContentOffset(CGPoint(x: 0,y: 44), animated: false)
     }
     
     func setSearchView() {
@@ -83,7 +83,7 @@ class TaskListVC: BaseViewController {
         //解决 搜索框点击之后,view 下移.
         definesPresentationContext = true
         
-        self.edgesForExtendedLayout = .None
+        self.edgesForExtendedLayout = UIRectEdge()
         
         
     }
@@ -91,7 +91,7 @@ class TaskListVC: BaseViewController {
     
     func setNavBar() {
         
-        let rightBar = UIBarButtonItem(title: "新建", style: .Plain, target: self, action: #selector(TaskListVC.createNewTask))
+        let rightBar = UIBarButtonItem(title: "新建", style: .plain, target: self, action: #selector(TaskListVC.createNewTask))
         
         navigationItem.rightBarButtonItem = rightBar
         
@@ -99,14 +99,14 @@ class TaskListVC: BaseViewController {
 
     func createNewTask() {
         
-        performSegueWithIdentifier("toCreateVC", sender: nil)
+        performSegue(withIdentifier: "toCreateVC", sender: nil)
     }
     
     
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
      }
  
@@ -115,56 +115,56 @@ class TaskListVC: BaseViewController {
 
 extension TaskListVC:UITableViewDelegate,UITableViewDataSource {
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listOfTask.count
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 76
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! ConversationCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ConversationCell
         
-        cell.avatarImageView.backgroundColor = UIColor.redColor()
-        cell.nameLabel.text = listOfTask[indexPath.item]
-        cell.chatLabel.text = listOfDetail[indexPath.item]
+        cell.avatarImageView.backgroundColor = UIColor.red
+        cell.nameLabel.text = listOfTask[(indexPath as NSIndexPath).item]
+        cell.chatLabel.text = listOfDetail[(indexPath as NSIndexPath).item]
         
-        if indexPath.row == 0 {
-            cell.chatLabel.textColor = UIColor.grayColor()
+        if (indexPath as NSIndexPath).row == 0 {
+            cell.chatLabel.textColor = UIColor.gray
         }
         else {
             cell.chatLabel.textColor = UIColor ( red: 0.0, green: 0.5586, blue: 1.0, alpha: 1.0 )
         }
         
-        cell.timeAgoLabel.text = listOftime[indexPath.item]
+        cell.timeAgoLabel.text = listOftime[(indexPath as NSIndexPath).item]
         
         return cell
         
     }
     
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
     }
     
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         
         let yOffSet = scrollView.contentOffset.y
         
         //顶部搜索框在某些位置自动上拉或者下拉.
         if yOffSet >= -64  && yOffSet < -64 + 22 {
-            scrollView.setContentOffset(CGPointMake(0, -64), animated: true)
+            scrollView.setContentOffset(CGPoint(x: 0, y: -64), animated: true)
         }
         else if yOffSet >= -64 + 22 && yOffSet < -20 {
-            scrollView.setContentOffset(CGPointMake(0, -20), animated: true)
+            scrollView.setContentOffset(CGPoint(x: 0, y: -20), animated: true)
         }
         else {
             
@@ -176,9 +176,9 @@ extension TaskListVC:UITableViewDelegate,UITableViewDataSource {
 
 extension TaskListVC:UISearchResultsUpdating {
     
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {
         // No need to update anything if we're being dismissed.
-        if !searchController.active {
+        if !searchController.isActive {
             return
         }
         

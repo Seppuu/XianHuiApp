@@ -27,7 +27,7 @@ class ProjectPlanningVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "项目计划"
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
         getGoodList()
         setTableView()
     }
@@ -82,7 +82,7 @@ class ProjectPlanningVC: UIViewController {
         
     }
     
-    func getListOfProjectWith(json:[JSON]) -> [Project] {
+    func getListOfProjectWith(_ json:[JSON]) -> [Project] {
         
         var listOfPro = [Project]()
         
@@ -151,7 +151,7 @@ class ProjectPlanningVC: UIViewController {
         return listOfPro
     }
     
-    func getListOfProdWith(json:[JSON]) -> [Production] {
+    func getListOfProdWith(_ json:[JSON]) -> [Production] {
         
         var listOfProd = [Production]()
         
@@ -230,7 +230,7 @@ class ProjectPlanningVC: UIViewController {
             vc.prodsPreSelected    = self.bottomView.listOfProd
             let nav = UINavigationController(rootViewController: vc)
             
-            self.presentViewController(nav, animated: true, completion: nil)
+            self.present(nav, animated: true, completion: nil)
             
             vc.confirmTapHandler = {
                 (projectsSelected,prodsSelected) in
@@ -255,23 +255,23 @@ class ProjectPlanningVC: UIViewController {
     }
     
     
-    func saveGoodListSelectedInBack(goodIdList:String,projectsSelected:[Project],prodsSelected:[Production]) {
+    func saveGoodListSelectedInBack(_ goodIdList:String,projectsSelected:[Project],prodsSelected:[Production]) {
         
-        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        hud.mode = .Text
-        hud.labelText = "保存中..."
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        hud?.mode = .text
+        hud?.labelText = "保存中..."
         
         NetworkManager.sharedManager.saveGoodPlanWith(customer.id, ids: goodIdList) { (success, json, error) in
             
             if success == true {
-                hud.labelText = "保存成功!"
-                hud.hide(true)
+                hud!.labelText = "保存成功!"
+                hud!.hide(true)
                 
                 self.bottomView.listOfProject = projectsSelected
                 self.bottomView.listOfProd = prodsSelected
                 self.bottomView.tableView.reloadData()
                 let plannedNum = projectsSelected.count + prodsSelected.count
-                NSNotificationCenter.defaultCenter().postNotificationName(CustomerPlannHasAddNoti, object: plannedNum)
+                NotificationCenter.default.post(name: CustomerPlannHasAddNoti, object: plannedNum)
                 self.saveGoodListCompletion?()
             }
             else {

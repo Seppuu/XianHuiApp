@@ -20,7 +20,7 @@ class FourButtonCell: UITableViewCell {
     @IBOutlet weak var forthButton: UIButton!
     
     
-    var buttonTapHandler:((index:Int)->())?
+    var buttonTapHandler:((_ index:Int)->())?
     
     var buttons = [UIButton]()
 
@@ -28,31 +28,31 @@ class FourButtonCell: UITableViewCell {
         super.awakeFromNib()
         buttons = [FirstButton,secondButton,thirdButton,forthButton]
         buttons.forEach { (button) in
-            button.backgroundColor = UIColor.clearColor()
+            button.backgroundColor = UIColor.clear
         }
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         
     }
     
     
-    @IBAction func FirstButtonTap(sender: UIButton) {
-        buttonTapHandler?(index:0)
+    @IBAction func FirstButtonTap(_ sender: UIButton) {
+        buttonTapHandler?(0)
     }
     
-    @IBAction func secondButtonTap(sender: UIButton) {
-        buttonTapHandler?(index:1)
+    @IBAction func secondButtonTap(_ sender: UIButton) {
+        buttonTapHandler?(1)
     }
     
-    @IBAction func thirdButtonTap(sender: UIButton) {
-        buttonTapHandler?(index:2)
+    @IBAction func thirdButtonTap(_ sender: UIButton) {
+        buttonTapHandler?(2)
     }
     
-    @IBAction func forthButtonTap(sender: UIButton) {
-        buttonTapHandler?(index:3)
+    @IBAction func forthButtonTap(_ sender: UIButton) {
+        buttonTapHandler?(3)
     }
     
   

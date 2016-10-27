@@ -10,11 +10,11 @@ import UIKit
 
 class DDPopSheetView: UIView {
 
-    private let DDTag = 887
+    fileprivate let DDTag = 887
     
     var containerView = UIView()
     
-    var showDuration:NSTimeInterval = 0.3
+    var showDuration:TimeInterval = 0.3
     
     var dimView:UIView!
     
@@ -28,18 +28,18 @@ class DDPopSheetView: UIView {
     }
     
     init() {
-        let frame = UIScreen.mainScreen().bounds
+        let frame = UIScreen.main.bounds
         super.init(frame: frame)
         
-        if let window = UIApplication.sharedApplication().keyWindow {
+        if let window = UIApplication.shared.keyWindow {
             // if window.viewWithTag(DDTag) == nil {
             //   self.tag = DDTag
             window.addSubview(self)
             // }
         }
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear
         
-        containerView.backgroundColor = UIColor.whiteColor()
+        containerView.backgroundColor = UIColor.white
         containerView.clipsToBounds = true
         
         dimView = UIView(frame: frame)
@@ -48,7 +48,7 @@ class DDPopSheetView: UIView {
         addSubview(dimView)
         
         let tapGesture = UITapGestureRecognizer(target: self, action:#selector(DDPopSheetView.dismiss))
-        dimView.userInteractionEnabled = true
+        dimView.isUserInteractionEnabled = true
         dimView.addGestureRecognizer(tapGesture)
     }
     
@@ -59,7 +59,7 @@ class DDPopSheetView: UIView {
     func dismiss() {
         
     
-        UIView.animateWithDuration(showDuration, delay: 0.0, options: .CurveEaseIn, animations: {
+        UIView.animate(withDuration: showDuration, delay: 0.0, options: .curveEaseIn, animations: {
             self.dimView.alpha = 0.0
             self.containerView.frame.origin.y = self.bounds.height
             
@@ -84,7 +84,7 @@ class DDPopSheetView: UIView {
         initContainer()
         let containrtY = containerView.frame.origin.y
         containerView.frame.origin.y = self.bounds.height
-        UIView.animateWithDuration(0.4, delay: 0.0, options: .CurveEaseOut, animations: { 
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseOut, animations: { 
             self.dimView.alpha = 1.0
             self.containerView.frame.origin.y = containrtY
             
@@ -135,7 +135,7 @@ class DDPopSheetView: UIView {
     
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         // Drawing code
     }
     

@@ -9,7 +9,6 @@
 import UIKit
 import SnapKit
 import UITextView_Placeholder
-import SwiftString
 import MBProgressHUD
 import SwiftyJSON
 import Ruler
@@ -25,7 +24,7 @@ class LoginTopView: UIView {
         
         imageView = UIImageView()
         imageView.image = UIImage(named: "logoIcon")
-        imageView.contentMode = .ScaleAspectFit
+        imageView.contentMode = .scaleAspectFit
         addSubview(imageView)
         imageView.snp_makeConstraints { (make) in
             make.top.equalTo(self).offset(22 + 10)
@@ -41,10 +40,10 @@ class LoginTopView: UIView {
             make.width.equalTo(self)
             make.height.equalTo(21)
         }
-        topLabel.textAlignment = .Center
+        topLabel.textAlignment = .center
         topLabel.text = "闲惠-商家版"
-        topLabel.textColor = UIColor.lightGrayColor()
-        topLabel.font = UIFont.systemFontOfSize(15)
+        topLabel.textColor = UIColor.lightGray
+        topLabel.font = UIFont.systemFont(ofSize: 15)
         
     }
 }
@@ -74,21 +73,21 @@ class LoginViewController: UIViewController {
        
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         IQKeyboardManager.sharedManager().enable = true
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         IQKeyboardManager.sharedManager().enable = false
         
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.navigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     var logoImageView:UIImageView!
@@ -103,40 +102,40 @@ class LoginViewController: UIViewController {
     
     func setNoti() {
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginViewController.showChangePassWordAlert), name: XHAppNewUserFirstLoginNoti, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.showChangePassWordAlert), name: XHAppNewUserFirstLoginNoti, object: nil)
     }
     
     func setSubView() {
         
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
         
         logoImageView = UIImageView()
         view.addSubview(logoImageView)
         
         let width:CGFloat = Ruler.iPhoneHorizontal(126, 148, 164).value
         
-        logoImageView.snp_makeConstraints { (make) in
+        logoImageView.snp.makeConstraints { (make) in
             make.centerX.equalTo(view)
             make.top.equalTo(view).offset(70)
             make.width.height.equalTo(width)
         }
         logoImageView.image = UIImage(named: "logoIcon")
-        logoImageView.contentMode = .ScaleAspectFit
+        logoImageView.contentMode = .scaleAspectFit
         
         phoneTextField = UITextField()
         view.addSubview(phoneTextField)
         phoneTextField.delegate = self
-        let paddingView1 = UIView(frame: CGRectMake(0, 0, 15, 20))
+        let paddingView1 = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 20))
         phoneTextField.leftView = paddingView1;
-        phoneTextField.leftViewMode = .Always
+        phoneTextField.leftViewMode = .always
         phoneTextField.placeholder = "电话号码"
-        phoneTextField.keyboardType = .NumberPad
+        phoneTextField.keyboardType = .numberPad
         phoneTextField.backgroundColor = UIColor.init(hexString: "EDEDED")
         phoneTextField.layer.cornerRadius = 5
         phoneTextField.layer.masksToBounds = true
         
-        phoneTextField.snp_makeConstraints { (make) in
-            make.top.equalTo(logoImageView.snp_bottom).offset(34)
+        phoneTextField.snp.makeConstraints { (make) in
+            make.top.equalTo(logoImageView.snp.bottom).offset(34)
             make.left.equalTo(view).offset(15)
             make.right.equalTo(view).offset(-15)
             make.height.equalTo(40)
@@ -145,19 +144,19 @@ class LoginViewController: UIViewController {
         passWordTextField = UITextField()
         view.addSubview(passWordTextField)
         passWordTextField.delegate = self
-        let paddingView = UIView(frame: CGRectMake(0, 0, 15, 20))
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 20))
         passWordTextField.leftView = paddingView;
-        passWordTextField.leftViewMode = .Always
+        passWordTextField.leftViewMode = .always
         passWordTextField.placeholder = "密码"
-        passWordTextField.keyboardType = .NumbersAndPunctuation
-        passWordTextField.returnKeyType = .Go
-        passWordTextField.secureTextEntry = true
+        passWordTextField.keyboardType = .numbersAndPunctuation
+        passWordTextField.returnKeyType = .go
+        passWordTextField.isSecureTextEntry = true
         passWordTextField.backgroundColor = UIColor.init(hexString: "EDEDED")
         passWordTextField.layer.cornerRadius = 5
         passWordTextField.layer.masksToBounds = true
         
-        passWordTextField.snp_makeConstraints { (make) in
-            make.top.equalTo(phoneTextField.snp_bottom).offset(15)
+        passWordTextField.snp.makeConstraints { (make) in
+            make.top.equalTo(phoneTextField.snp.bottom).offset(15)
             make.left.equalTo(view).offset(15)
             make.right.equalTo(view).offset(-15)
             make.height.equalTo(40)
@@ -174,10 +173,10 @@ class LoginViewController: UIViewController {
         
         loginButton = UIButton()
         view.addSubview(loginButton)
-        loginButton.setTitle("登陆", forState: .Normal)
-        loginButton.setTitleColor(UIColor.init(hexString: "928181"), forState: .Normal)
+        loginButton.setTitle("登陆", for: UIControlState())
+        loginButton.setTitleColor(UIColor.init(hexString: "928181"), for: UIControlState())
         loginButton.backgroundColor = UIColor.init(hexString: "D2B580")
-        loginButton.addTarget(self, action: #selector(LoginViewController.login), forControlEvents: .TouchUpInside)
+        loginButton.addTarget(self, action: #selector(LoginViewController.login), for: .touchUpInside)
         
         loginButton.layer.cornerRadius = 5
         loginButton.layer.masksToBounds = true
@@ -191,8 +190,8 @@ class LoginViewController: UIViewController {
 //            make.height.equalTo(40)
 //        }
         
-        loginButton.snp_makeConstraints { (make) in
-            make.top.equalTo(passWordTextField.snp_bottom).offset(30)
+        loginButton.snp.makeConstraints { (make) in
+            make.top.equalTo(passWordTextField.snp.bottom).offset(30)
             make.width.equalTo(buttonWidth)
             make.left.equalTo(view).offset(10)
             make.right.equalTo(view).offset(-10)
@@ -202,30 +201,30 @@ class LoginViewController: UIViewController {
         let tip = UILabel()
         view.addSubview(tip)
         
-        tip.font = UIFont.systemFontOfSize(12)
-        tip.textColor = UIColor.lightGrayColor()
-        tip.textAlignment = .Left
+        tip.font = UIFont.systemFont(ofSize: 12)
+        tip.textColor = UIColor.lightGray
+        tip.textAlignment = .left
         tip.text = "提示:从MyBook激活后,使用短信中的临时密码登陆!"
         
-        tip.snp_makeConstraints { (make) in
+        tip.snp.makeConstraints { (make) in
             make.left.equalTo(view).offset(15)
             make.right.equalTo(view).offset(-15)
             make.height.equalTo(21)
-            make.top.equalTo(loginButton.snp_bottom).offset(15)
+            make.top.equalTo(loginButton.snp.bottom).offset(15)
         }
         
         
         helpLabel = UILabel()
         view.addSubview(helpLabel)
-        helpLabel.textAlignment = .Center
+        helpLabel.textAlignment = .center
         helpLabel.text = "需要帮助?"
         helpLabel.alpha = 0.0
-        helpLabel.font = UIFont.systemFontOfSize(14)
+        helpLabel.font = UIFont.systemFont(ofSize: 14)
         helpLabel.textColor = UIColor.ddBasicBlueColor()
-        helpLabel.userInteractionEnabled = true
+        helpLabel.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.showHelperAlert))
         helpLabel.addGestureRecognizer(tap)
-        helpLabel.snp_makeConstraints { (make) in
+        helpLabel.snp.makeConstraints { (make) in
             make.centerX.equalTo(view)
             make.bottom.equalTo(view).offset(-20)
             make.width.equalTo(100)
@@ -240,25 +239,25 @@ class LoginViewController: UIViewController {
         let title = "提示"
         let message = "前往帮助中心获取帮助"
         
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .ActionSheet)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
         
-        let helperAction = UIAlertAction(title: "帮助中心", style: .Default) { (action) in
+        let helperAction = UIAlertAction(title: "帮助中心", style: .default) { (action) in
             let vc = HelpCenterViewController()
             let nav = UINavigationController(rootViewController: vc)
-            self.presentViewController(nav, animated: true, completion: nil)
+            self.present(nav, animated: true, completion: nil)
             
         }
         
-        let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         
         alert.addAction(helperAction)
         alert.addAction(cancelAction)
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
     }
@@ -277,18 +276,18 @@ extension LoginViewController {
         let vc = LoginByPhoneVC()
         let nav = UINavigationController(rootViewController: vc)
         
-        self.presentViewController(nav, animated: true, completion: nil)
+        self.present(nav, animated: true, completion: nil)
         
     }
     
     
     func loginWithTry() {
         
-        let hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
-        hud.mode = .Text
-        hud.labelText = "暂未开通"
+        let hud = MBProgressHUD.showAdded(to: view, animated: true)
+        hud?.mode = .text
+        hud?.labelText = "暂未开通"
         
-        hud.hide(true, afterDelay: 2.0)
+        hud?.hide(true, afterDelay: 2.0)
         
     }
     
@@ -303,19 +302,19 @@ extension LoginViewController {
         
         if userName == "" {
             
-            let hud = showHudWith(view, animated: true, mode: .Text, text: "请输入手机号")
+            let hud = showHudWith(view, animated: true, mode: .text, text: "请输入手机号")
             hud.hide(true, afterDelay: 1.5)
             return
         }
         
         if passWord == "" {
             
-            let hud = showHudWith(view, animated: true, mode: .Text, text: "请输入密码")
+            let hud = showHudWith(view, animated: true, mode: .text, text: "请输入密码")
             hud.hide(true, afterDelay: 1.5)
             return
         }
         
-        let hud = showHudWith(view, animated: true, mode: .Indeterminate, text: "")
+        let hud = showHudWith(view, animated: true, mode: .indeterminate, text: "")
         
         User.loginWith(userName, passWord: passWord, usertype: UserLoginType.Employee) { (user, data, error) in
             
@@ -324,7 +323,7 @@ extension LoginViewController {
                 
                 
                 let clientId = String(user!.clientId)
-                NSNotificationCenter.defaultCenter().postNotificationName(OwnSystemLoginSuccessNoti, object: clientId)
+                NotificationCenter.default.post(name:OwnSystemLoginSuccessNoti, object: clientId)
             }
             else {
                 //TODO:错误分类
@@ -335,13 +334,13 @@ extension LoginViewController {
         
     }
     
-    func showLoginErrorAlert(error:String) {
+    func showLoginErrorAlert(_ error:String) {
         
-        let alert = UIAlertController(title:"提示" , message: error, preferredStyle: .Alert)
+        let alert = UIAlertController(title:"提示" , message: error, preferredStyle: .alert)
         
-        let cancel = UIAlertAction(title: "重试", style: .Cancel, handler: nil)
+        let cancel = UIAlertAction(title: "重试", style: .cancel, handler: nil)
         
-        let trySms = UIAlertAction(title: "短信登陆", style: .Default) { (alert) in
+        let trySms = UIAlertAction(title: "短信登陆", style: .default) { (alert) in
             
             self.openCodeLoginVC()
         }
@@ -349,7 +348,7 @@ extension LoginViewController {
         alert.addAction(cancel)
         alert.addAction(trySms)
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     
     func showChangePassWordAlert() {
@@ -357,17 +356,17 @@ extension LoginViewController {
         let title = "提示"
         let message = "初次登录请更换默认密码"
         
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
-        alert.addTextFieldWithConfigurationHandler { (textField) in
+        alert.addTextField { (textField) in
             
-            textField.secureTextEntry = true
+            textField.isSecureTextEntry = true
             textField.placeholder = "新密码"
         }
         
         let passWordTextField = alert.textFields?.first!
         
-        let submitButton = UIAlertAction(title: "确认", style: .Default) { (action) in
+        let submitButton = UIAlertAction(title: "确认", style: .default) { (action) in
             
             let password = passWordTextField?.text
             
@@ -377,7 +376,7 @@ extension LoginViewController {
         
         alert.addAction(submitButton)
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
         
     }
     
@@ -387,7 +386,7 @@ extension LoginViewController {
         
         if password == "" {
             //show hud password is ""
-            let hud = showHudWith(view, animated: true, mode: .Text, text: "请输入新的密码")
+            let hud = showHudWith(view, animated: true, mode: .text, text: "请输入新的密码")
             hud.hide(true, afterDelay: 1.5)
             
             //show alert anagin
@@ -398,7 +397,7 @@ extension LoginViewController {
             
             let userName = phoneTextField.text
             if userName == nil {return}
-            let hud = showHudWith(view, animated: true, mode: .Indeterminate, text: "")
+            let hud = showHudWith(view, animated: true, mode: .indeterminate, text: "")
             NetworkManager.sharedManager.updatePassWordWith(userName!, usertype: .Employee, passWord: password, completion: { (success, json, error) in
                 
                 if success == true {

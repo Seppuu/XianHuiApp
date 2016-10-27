@@ -11,7 +11,7 @@ import UIKit
 class SegueViewController: UIViewController {
 
     
-    override func performSegueWithIdentifier(identifier: String, sender: AnyObject?) {
+    override func performSegue(withIdentifier identifier: String, sender: Any?) {
         
         if let navigationController = navigationController {
             guard navigationController.topViewController == self else {
@@ -19,7 +19,7 @@ class SegueViewController: UIViewController {
             }
         }
         
-        super.performSegueWithIdentifier(identifier, sender: sender)
+        super.performSegue(withIdentifier: identifier, sender: sender)
     }
 
 }

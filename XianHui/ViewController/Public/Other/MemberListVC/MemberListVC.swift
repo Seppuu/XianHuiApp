@@ -18,7 +18,7 @@ class MemberListVC: UIViewController {
     
     var cellId = "typeCell"
     
-    var memberSelectedHandler:((members:[User])->())?
+    var memberSelectedHandler:((_ members:[User])->())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +43,7 @@ class MemberListVC: UIViewController {
         let currentUser = User.currentUser()
         
         allUser.forEach { (user) in
-            if user.id  == currentUser.id {
+            if user.id  == currentUser?.id {
                 allUser.removeObject(user)
             }
             
@@ -54,18 +54,18 @@ class MemberListVC: UIViewController {
     
     func setTableView() {
         
-        tableView = UITableView(frame: view.bounds, style: .Grouped)
+        tableView = UITableView(frame: view.bounds, style: .grouped)
         tableView.delegate   = self
         tableView.dataSource = self
         
         let nib = UINib(nibName: cellId, bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: cellId)
+        tableView.register(nib, forCellReuseIdentifier: cellId)
         
         view.addSubview(tableView)
         
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
     }
@@ -74,58 +74,58 @@ class MemberListVC: UIViewController {
 
 extension MemberListVC:UITableViewDelegate,UITableViewDataSource {
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return members.count
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! typeCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! typeCell
         
         cell.typeLabel.alpha = 0.0
         cell.leftLabel.alpha = 0.0
         
-        cell.selectionStyle = .Default
+        cell.selectionStyle = .default
         
-        let id = members[indexPath.row].id
+        let id = members[(indexPath as NSIndexPath).row].id
         
         listOfMemberSelected.forEach { (user) in
             if id == user.id {
-                cell.accessoryType = .Checkmark
+                cell.accessoryType = .checkmark
                 
             }
         }
         
-        cell.textLabel!.text = members[indexPath.row].displayName
+        cell.textLabel!.text = members[(indexPath as NSIndexPath).row].displayName
         
         return cell
     }
     
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard let cell = tableView.cellForRowAtIndexPath(indexPath) else {return}
+        guard let cell = tableView.cellForRow(at: indexPath) else {return}
         
-        if cell.accessoryType == .None {
-            cell.accessoryType = .Checkmark
+        if cell.accessoryType == .none {
+            cell.accessoryType = .checkmark
             
-            let member = members[indexPath.row]
+            let member = members[(indexPath as NSIndexPath).row]
             
             listOfMemberSelected.append(member)
             
         }
         else {
-            cell.accessoryType = .None
+            cell.accessoryType = .none
             
-            let member = members[indexPath.row]
+            let member = members[(indexPath as NSIndexPath).row]
             
             listOfMemberSelected.forEach({ (user) in
                 
@@ -137,7 +137,7 @@ extension MemberListVC:UITableViewDelegate,UITableViewDataSource {
             
         }
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
         //try to save member id
         saveMemberSelected()
@@ -147,7 +147,7 @@ extension MemberListVC:UITableViewDelegate,UITableViewDataSource {
     func saveMemberSelected() {
         
         
-        memberSelectedHandler?(members:listOfMemberSelected)
+        memberSelectedHandler?(listOfMemberSelected)
         
     }
     

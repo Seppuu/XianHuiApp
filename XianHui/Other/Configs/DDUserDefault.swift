@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Palau
 
 
 typealias Defaults = PalauDefaults

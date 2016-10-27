@@ -18,7 +18,7 @@ class FirstLaunchRemindVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
         
         
         view.addSubview(remindLabel)
@@ -36,9 +36,9 @@ class FirstLaunchRemindVC: UIViewController {
         }
         
         
-        remindLabel.font = UIFont.systemFontOfSize(14)
+        remindLabel.font = UIFont.systemFont(ofSize: 14)
         remindLabel.text = text
-        remindLabel.textAlignment = .Center
+        remindLabel.textAlignment = .center
         
     }
 

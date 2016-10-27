@@ -25,7 +25,7 @@ class ProjectPlannedVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
         getListData()
         setTableView()
     }
@@ -77,7 +77,7 @@ class ProjectPlannedVC: UIViewController {
     func showSomeMessageAndButtons() {
         
         let topContainer = UIView()
-        topContainer.backgroundColor = UIColor.clearColor()
+        topContainer.backgroundColor = UIColor.clear
         view.addSubview(topContainer)
         topContainer.snp_makeConstraints { (make) in
             make.left.right.equalTo(view)
@@ -89,8 +89,8 @@ class ProjectPlannedVC: UIViewController {
         let topLabel = UILabel()
         topLabel.text = "该顾客已经结单."
         topLabel.textColor = UIColor ( red: 0.0, green: 0.0, blue: 0.0, alpha: 0.25 )
-        topLabel.font = UIFont.systemFontOfSize(14)
-        topLabel.textAlignment = .Center
+        topLabel.font = UIFont.systemFont(ofSize: 14)
+        topLabel.textAlignment = .center
         topContainer.addSubview(topLabel)
         
         topLabel.snp_makeConstraints { (make) in
@@ -102,12 +102,12 @@ class ProjectPlannedVC: UIViewController {
         
         
         let topButton = UIButton()
-        topButton.setTitle("添加新计划", forState: .Normal)
-        topButton.setTitleColor(UIColor ( red: 0.5, green: 0.4201, blue: 0.3681, alpha: 1.0 ), forState: .Normal)
-        topButton.addTarget(self, action: #selector(ProjectPlannedVC.addNewPlan), forControlEvents: .TouchUpInside)
+        topButton.setTitle("添加新计划", for: UIControlState())
+        topButton.setTitleColor(UIColor ( red: 0.5, green: 0.4201, blue: 0.3681, alpha: 1.0 ), for: UIControlState())
+        topButton.addTarget(self, action: #selector(ProjectPlannedVC.addNewPlan), for: .touchUpInside)
         topButton.layer.cornerRadius = 5.0
         topButton.layer.borderWidth = 1.0
-        topButton.layer.borderColor = UIColor ( red: 0.5, green: 0.4201, blue: 0.3681, alpha: 1.0 ).CGColor
+        topButton.layer.borderColor = UIColor ( red: 0.5, green: 0.4201, blue: 0.3681, alpha: 1.0 ).cgColor
         topContainer.addSubview(topButton)
         
         topButton.snp_makeConstraints { (make) in
@@ -119,12 +119,12 @@ class ProjectPlannedVC: UIViewController {
         }
         
         let secondButton = UIButton()
-        secondButton.setTitle("查看消费记录", forState: .Normal)
-        secondButton.setTitleColor(UIColor ( red: 0.5, green: 0.4201, blue: 0.3681, alpha: 1.0 ), forState: .Normal)
-        secondButton.addTarget(self, action: #selector(ProjectPlannedVC.pushToConsumeListView), forControlEvents: .TouchUpInside)
+        secondButton.setTitle("查看消费记录", for: UIControlState())
+        secondButton.setTitleColor(UIColor ( red: 0.5, green: 0.4201, blue: 0.3681, alpha: 1.0 ), for: UIControlState())
+        secondButton.addTarget(self, action: #selector(ProjectPlannedVC.pushToConsumeListView), for: .touchUpInside)
         secondButton.layer.cornerRadius = 5.0
         secondButton.layer.borderWidth = 1.0
-        secondButton.layer.borderColor = UIColor ( red: 0.5, green: 0.4201, blue: 0.3681, alpha: 1.0 ).CGColor
+        secondButton.layer.borderColor = UIColor ( red: 0.5, green: 0.4201, blue: 0.3681, alpha: 1.0 ).cgColor
         topContainer.addSubview(secondButton)
         
         secondButton.snp_makeConstraints { (make) in
@@ -155,12 +155,12 @@ class ProjectPlannedVC: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func getListOfProjectPlannedWith(json:[JSON]) -> [[Project]] {
+    func getListOfProjectPlannedWith(_ json:[JSON]) -> [[Project]] {
         
         var allProject = [Project]()
     
         //先改数组排序
-        for data in json.reverse() {
+        for data in json.reversed() {
             
             let p = Project()
             if let name = data["fullname"].string {
@@ -207,7 +207,7 @@ class ProjectPlannedVC: UIViewController {
                     list.append($0)
                 }
             })
-            listArray.append(list.reverse())
+            listArray.append(list.reversed())
         }
         
         return listArray

@@ -13,12 +13,12 @@ extension UITableView {
     
     
     
-    func scrollToBottom(animated: Bool) {
+    func scrollToBottom(_ animated: Bool) {
         var y: CGFloat = 0.0
         
         if self.contentSize.height > bounds.size.height {
             y = self.contentSize.height - bounds.size.height
         }
-        self.setContentOffset(CGPointMake(0, y), animated: animated)
+        self.setContentOffset(CGPoint(x: 0, y: y), animated: animated)
     }
 }

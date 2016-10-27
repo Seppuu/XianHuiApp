@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Palau
 import SwiftyJSON
 import RealmSwift
 import ChatKit
@@ -25,7 +24,7 @@ enum UserType:String {
 
 class User:NSObject {
     
-    private static var sharedUser : User?
+    fileprivate static var sharedUser : User?
     
     class func currentUser() -> User! {
         // change class to final to prevent override
@@ -76,7 +75,7 @@ class User:NSObject {
 
     var passWord = ""
     
-    class func loginWithCode(mobile:String,code:String,usertype:UserLoginType,completion:((user:User?,data:JSON?,error:String?)->())) {
+    class func loginWithCode(_ mobile:String,code:String,usertype:UserLoginType,completion:@escaping ((_ user:User?,_ data:JSON?,_ error:String?)->())) {
         
         NetworkManager.sharedManager.verifyPhoneCodeWith(mobile, usertype: usertype, code: code) { (success, data, error) in
             
@@ -128,13 +127,13 @@ class User:NSObject {
                         if let listOfData = json?.array {
                             
                             self.saveUserListWith(listOfData)
-                            completion(user: User.currentUser(),data: data, error: nil)
+                            completion(User.currentUser(),data, nil)
                             
                         }
                     }
                     else {
                         //TODO:获取联系人失败.
-                        completion(user: nil, data: json, error: error)
+                        completion(nil, json, error)
                     }
                 }
                 
@@ -142,7 +141,7 @@ class User:NSObject {
             }
             else {
                 
-                completion(user: nil, data: data, error: error)
+                completion(nil, data, error)
                 
             }
             
@@ -152,26 +151,26 @@ class User:NSObject {
     }
     
     
-    class func getContactList(completion:DDResultHandler) {
+    class func getContactList(_ completion:@escaping DDResultHandler) {
         
         NetworkManager.sharedManager.getUserList { (success, json, error) in
             
             if success == true {
                 if let listOfData = json?.array {
                     self.saveUserListWith(listOfData)
-                    completion(success: true, json: nil, error: nil)
+                    completion(true, nil, nil)
                 }
             }
             else {
                 //获取联系人失败.
-                completion(success: false, json: nil, error: error)
+                completion(false, nil, error)
             }
         }
     }
     
 
     //Action
-    class func loginWith(mobile:String,passWord:String,usertype:UserLoginType ,completion:((user:User?,data:JSON?,error:String?)->())) {
+    class func loginWith(_ mobile:String,passWord:String,usertype:UserLoginType ,completion:@escaping ((_ user:User?,_ data:JSON?,_ error:String?)->())) {
         
         NetworkManager.sharedManager.loginWith(mobile, passWord: passWord,usertype: usertype) { (success, data, error) in
             
@@ -181,7 +180,7 @@ class User:NSObject {
                 if let no = data!["init_login_password"].int {
                     if no == 1 {
                         
-                    NSNotificationCenter.defaultCenter().postNotificationName(XHAppNewUserFirstLoginNoti, object: nil)
+                    NotificationCenter.default.post(name: XHAppNewUserFirstLoginNoti, object: nil)
                         return
                     }
                     else {
@@ -241,13 +240,13 @@ class User:NSObject {
                         if let listOfData = json?.array {
                             
                             self.saveUserListWith(listOfData)
-                            completion(user: User.currentUser(),data: data, error: nil)
+                            completion(User.currentUser(),data, nil)
                             
                         }
                     }
                     else {
                         //TODO:获取联系人失败.
-                        completion(user: nil, data: json, error: error)
+                        completion(nil, json, error)
                     }
                 }
                 
@@ -255,7 +254,7 @@ class User:NSObject {
             }
             else {
                 
-                completion(user: nil, data: data, error: error)
+                completion(nil, data, error)
             
         }
         
@@ -268,7 +267,7 @@ class User:NSObject {
         
     }
     
-    class func saveUserListWith(listOfData:[JSON]) {
+    class func saveUserListWith(_ listOfData:[JSON]) {
         
         let realm = try! Realm()
         
@@ -307,15 +306,15 @@ class User:NSObject {
         
     }
     
-    class func getUserBy(clientId:String) ->  XHUser? {
+    class func getUserBy(_ clientId:String) ->  XHUser? {
         
         let realm = try! Realm()
         
-        let rmUsersResult = realm.objects(RealmUser).filter("clientId = '\(clientId)' ")
+        let rmUsersResult = realm.objects(RealmUser.self).filter("clientId = '\(clientId)' ")
         
         if rmUsersResult.count > 0 {
             let rmUser = rmUsersResult[0]
-            guard let url = NSURL(string: rmUser.avatarUrl) else { return nil  }
+            guard let url = URL(string: rmUser.avatarUrl) else { return nil  }
             
             let user = XHUser(userId: rmUser.userId, name: rmUser.userName, avatarURL:url, clientId: rmUser.clientId)
             
@@ -333,7 +332,7 @@ class User:NSObject {
         
         let realm = try! Realm()
         
-        let rmUsersResult = realm.objects(RealmUser)
+        let rmUsersResult = realm.objects(RealmUser.self)
         
         if rmUsersResult.count > 0 {
             
@@ -353,7 +352,7 @@ class User:NSObject {
         
         let realm = try! Realm()
         
-        let rmUsersResult = realm.objects(RealmUser)
+        let rmUsersResult = realm.objects(RealmUser.self)
         
         if rmUsersResult.count > 0 {
             
@@ -373,7 +372,7 @@ class User:NSObject {
         
     }
     
-    func saveUserInfoInBack(with firstName:String,lastName:String,avatar:NSData?,completion:DDResultHandler) {
+    func saveUserInfoInBack(with firstName:String,lastName:String,avatar:Data?,completion:@escaping DDResultHandler) {
         
         //TODO:
         NetworkManager.sharedManager.updateUserInfo(with: firstName, lastName: lastName, avatarData: avatar) { (success, json,error) in
@@ -381,52 +380,52 @@ class User:NSObject {
             if success {
                 let user = User.currentUser()
                 
-                user.avatarURL = json!["avator"].string!
+                user?.avatarURL = json!["avator"].string!
                 
-                completion(success: true,json: nil,error: nil)
+                completion(true,nil,nil)
             }
             else {
-                completion(success: false,json: nil,error: nil)
+                completion(false,nil,nil)
             }
             
         }
         
     }
     
-    class func saveAvatarWith(image:UIImage,completion:((success:Bool)->())) {
+    class func saveAvatarWith(_ image:UIImage,completion:@escaping ((_ success:Bool)->())) {
         
         NetworkManager.sharedManager.updateUserAvatarWith(image) { (success, avatarUrlString, error) in
             
             if success == true {
                 
                 let user = User.currentUser()
-                user.avatarURL = (avatarUrlString?.string)!
+                user?.avatarURL = (avatarUrlString?.string)!
                 
-                Defaults.userAvatarURL.value = user.avatarURL
+                Defaults.userAvatarURL.value = user?.avatarURL
                 
-                completion(success: true)
+                completion(true)
             }
             else {
-                completion(success: false)
+                completion(false)
             }
             
         }
         
     }
     
-    class func logOut(completion:DDResultHandler ,failed:LCCKErrorBlock) {
+    class func logOut(_ completion:@escaping DDResultHandler ,failed:@escaping LCCKErrorBlock) {
         
         //先退出IM
-        ChatKitExample.invokeThisMethodBeforeLogoutSuccess({
+        ChatKitExample.invokeThisMethod(beforeLogoutSuccess: {
             //log out xianhui server
             let user = User.currentUser()
-            user.logOut(completion)
+            user?.logOut(completion)
             }, failed: failed)
         
     }
     
     
-    func logOut(completion:DDResultHandler) {
+    func logOut(_ completion:@escaping DDResultHandler) {
         
         NetworkManager.sharedManager.userLogOut { [weak self](success,json,error) in
             
@@ -434,17 +433,17 @@ class User:NSObject {
                 self?.clearUserDefaults()
                 //clean files
                 cleanRealmAndCaches()
-                completion(success: true,json:nil,error: nil)
+                completion(true,nil,nil)
             }
             else {
-                completion(success: false,json:nil,error: error)
+                completion(false,nil,error)
             }
             
         }
         
     }
     
-    private func clearUserDefaults() {
+    fileprivate func clearUserDefaults() {
         
         Defaults.userId.clear()
         Defaults.clientId.clear()

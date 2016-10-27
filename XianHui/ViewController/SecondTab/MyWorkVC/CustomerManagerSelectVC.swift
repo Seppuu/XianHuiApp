@@ -39,7 +39,7 @@ class CustomerManagerSelectVC: UIViewController {
     
     
     func setTableView() {
-        tableView = UITableView(frame: view.bounds, style: .Grouped)
+        tableView = UITableView(frame: view.bounds, style: .grouped)
         view.addSubview(tableView)
         
         tableView.delegate = self
@@ -59,7 +59,7 @@ class CustomerManagerSelectVC: UIViewController {
         }
     }
     
-    func makeDataModel(data:JSON) {
+    func makeDataModel(_ data:JSON) {
         
         if let updateTime = data["update_time"].string {
             self.updateTime = updateTime
@@ -88,11 +88,11 @@ class CustomerManagerSelectVC: UIViewController {
 extension CustomerManagerSelectVC:UITableViewDelegate,UITableViewDataSource {
     
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 1
         }
@@ -101,34 +101,34 @@ extension CustomerManagerSelectVC:UITableViewDelegate,UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? typeCell
+        var cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? typeCell
         if cell == nil {
             let nib = UINib(nibName: cellId, bundle: nil)
-            tableView.registerNib(nib, forCellReuseIdentifier: cellId)
-            cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? typeCell
+            tableView.register(nib, forCellReuseIdentifier: cellId)
+            cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? typeCell
         }
         
-        if indexPath.section == 0 {
+        if (indexPath as NSIndexPath).section == 0 {
             
             cell!.leftLabel.text = "变更日期"
             cell!.typeLabel.text = updateTime
         }
         else {
             
-            let manager = listOfEmployee[indexPath.row]
+            let manager = listOfEmployee[(indexPath as NSIndexPath).row]
             cell?.leftLabel.text = manager.displayName
             cell!.typeLabel.text = ""
             if manager.selected == true  {
-                cell!.accessoryType = .Checkmark
+                cell!.accessoryType = .checkmark
             }
             else {
-                cell!.accessoryType = .None
+                cell!.accessoryType = .none
             }
         }
         
@@ -136,20 +136,20 @@ extension CustomerManagerSelectVC:UITableViewDelegate,UITableViewDataSource {
     }
     
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 0 {
+        if (indexPath as NSIndexPath).section == 0 {
             return
         }
         
-        let manger = listOfEmployee[indexPath.row]
-        let hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
-        hud.mode = .Indeterminate
+        let manger = listOfEmployee[(indexPath as NSIndexPath).row]
+        let hud = MBProgressHUD.showAdded(to: view, animated: true)
+        hud?.mode = .indeterminate
         
         NetworkManager.sharedManager.setCustomerAdviserWith(customer.id, advisderId: manger.id) { (success, json, error) in
             
             if success == true {
-                hud.hide(true, afterDelay: 0.5)
+                hud?.hide(true, afterDelay: 0.5)
                 
                 self.getListOfManager()
                 

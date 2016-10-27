@@ -25,9 +25,9 @@ class BaseWebViewController: BaseViewController ,WKNavigationDelegate {
         
         title = webTitle
         
-        let url = NSURL(string: self.urlString)!
-        let request = NSURLRequest(URL: url)
-        webView.loadRequest(request)
+        let url = URL(string: self.urlString)!
+        let request = URLRequest(url: url)
+        webView.load(request)
     }
 
     override func didReceiveMemoryWarning() {

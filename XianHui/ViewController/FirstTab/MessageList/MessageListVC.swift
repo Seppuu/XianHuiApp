@@ -9,7 +9,7 @@
 import UIKit
 import MJRefresh
 import ChatKit
-import Palau
+
 
 
 extension PalauDefaults {
@@ -49,12 +49,12 @@ class XHMessageNoti: NSObject {
     
     var timeString:String {
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
     
-        if let date = dateFormatter.dateFromString(time) {
+        if let date = dateFormatter.date(from: time) {
             
-            return date.lcck_shortTimeAgoSinceNow()
+            return (date as NSDate).lcck_shortTimeAgoSinceNow()
             
         }
         else {
@@ -108,16 +108,16 @@ class MessageListVC: LCCKConversationListViewController {
         topView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: cellHeight * countFloat))
         topView.backgroundColor = UIColor ( red: 0.5, green: 0.5, blue: 0.5, alpha: 0.29 )
         
-        topTableView = UITableView(frame: CGRectMake(0, 0, screenWidth, cellHeight * countFloat), style: .Plain)
+        topTableView = UITableView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: cellHeight * countFloat), style: .plain)
         topTableView.delegate = self
         topTableView.dataSource = self
-        topTableView.scrollEnabled = false
+        topTableView.isScrollEnabled = false
         topTableView.layoutMargins = UIEdgeInsetsMake(0, 0, 0, 0)
         topView.addSubview(topTableView)
         
         self.tableView.tableHeaderView = topView
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MessageListVC.addNewNoticeType(_:)), name:NoticeComingNoti , object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MessageListVC.addNewNoticeType(_:)), name:NSNotification.Name(rawValue: NoticeComingNoti) , object: nil)
 
     }
     
@@ -204,9 +204,9 @@ class MessageListVC: LCCKConversationListViewController {
     }
 
     
-    func addNewNoticeType(noti:NSNotification) {
+    func addNewNoticeType(_ noti:Notification) {
         
-        if let data  = noti.object as? [NSObject : AnyObject] {
+        if let data  = noti.object as? [AnyHashable: Any] {
             
             if let userInfo = data as? [String : AnyObject] {
                 
@@ -294,14 +294,14 @@ class MessageListVC: LCCKConversationListViewController {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getMyBookERPLoginStatus()
         
         
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 
     }
@@ -349,50 +349,50 @@ class MessageListVC: LCCKConversationListViewController {
 
 extension MessageListVC {
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return noticeList.count
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //return LCCKConversationListCellDefaultHeight
         return 64
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = MessageListCell.dequeueOrCreateCellByTableView(tableView)
-        cell.selectionStyle = .None
-        let notice = noticeList[indexPath.row]
+        let cell = MessageListCell.dequeueOrCreateCell(by: tableView)
+        cell?.selectionStyle = .none
+        let notice = noticeList[(indexPath as NSIndexPath).row]
         
-        cell.nameLabel.text = notice.name
+        cell?.nameLabel.text = notice.name
         
         if notice.name == "助手" {
-            cell.avatarImageView.image = UIImage(named: "analyze")
+            cell?.avatarImageView.image = UIImage(named: "analyze")
         }
         else if notice.name == "提醒" {
-            cell.avatarImageView.image = UIImage(named: "bell")
+            cell?.avatarImageView.image = UIImage(named: "bell")
         }
         else {
             
         }
         
-        cell.avatarImageView.layer.cornerRadius = cell.avatarImageView.ddWidth/2
-        cell.avatarImageView.layer.masksToBounds = true
-        cell.timestampLabel.text = notice.timeString
+        cell?.avatarImageView.layer.cornerRadius = (cell?.avatarImageView.ddWidth)!/2
+        cell?.avatarImageView.layer.masksToBounds = true
+        cell?.timestampLabel.text = notice.timeString
         
        // cell.layoutMargins = UIEdgeInsetsMake(0, 0, 0, 0)
         
         
-        return cell
+        return cell!
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let notice = noticeList[indexPath.row]
+        let notice = noticeList[(indexPath as NSIndexPath).row]
         
         if notice.name == "助手" {
             
@@ -431,21 +431,21 @@ extension MessageListVC {
     }
     
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 
-    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-        return UITableViewCellEditingStyle.Delete
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return UITableViewCellEditingStyle.delete
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
-        if editingStyle == .Delete {
+        if editingStyle == .delete {
             
-            noticeList.removeAtIndex(indexPath.row)
+            noticeList.remove(at: (indexPath as NSIndexPath).row)
             
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            tableView.deleteRows(at: [indexPath], with: .fade)
             
             self.updateTopView()
         }
@@ -455,7 +455,7 @@ extension MessageListVC {
         
     }
     
-    override func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
+    override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "删除"
     }
     

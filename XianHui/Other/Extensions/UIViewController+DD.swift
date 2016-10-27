@@ -20,6 +20,6 @@ extension UIViewController {
     
     
     var appDelegate:AppDelegate {
-        return UIApplication.sharedApplication().delegate as! AppDelegate
+        return UIApplication.shared.delegate as! AppDelegate
     }
 }

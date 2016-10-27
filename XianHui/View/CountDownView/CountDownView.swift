@@ -17,13 +17,13 @@ class CountDownView: UIView {
     
     class func instanceFromNib() -> CountDownView {
         
-        return UINib(nibName: "CountDown", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! CountDownView
+        return UINib(nibName: "CountDown", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! CountDownView
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear
         self.layer.cornerRadius = 8
         self.layer.masksToBounds = true
     }
@@ -31,29 +31,29 @@ class CountDownView: UIView {
     var countNumber = 3 {
         didSet {
             
-            UIView.animateWithDuration(0.3) { 
+            UIView.animate(withDuration: 0.3, animations: { 
                 self.countLabel.text = String(self.countNumber)
-            }
+            }) 
         }
     }
     
-    var timer = NSTimer()
+    var timer = Timer()
     
-    @objc private func beginCount() {
+    @objc fileprivate func beginCount() {
         
-        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(CountDownView.count), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(CountDownView.count), userInfo: nil, repeats: true)
     }
     
     
-    func show(time:Int) {
+    func show(_ time:Int) {
         countNumber = time
-        self.transform = CGAffineTransformMakeScale(3.5, 3.5)
-        UIView.animateWithDuration(0.7, delay: 0,
+        self.transform = CGAffineTransform(scaleX: 3.5, y: 3.5)
+        UIView.animate(withDuration: 0.7, delay: 0,
                                    usingSpringWithDamping: 0.7,
                                    initialSpringVelocity: 3,
-                                   options: .CurveEaseInOut,
+                                   options: UIViewAnimationOptions(),
                                    animations: {
-                                    self.transform = CGAffineTransformMakeScale(1.0, 1.0)
+                                    self.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
                                     self.alpha = 1.0
         }){ (success) in
            self.beginCount()
@@ -61,21 +61,21 @@ class CountDownView: UIView {
     }
     
     
-    @objc private func count() {
+    @objc fileprivate func count() {
         
         if countNumber == 0 {
             timer.invalidate()
-            self.transform = CGAffineTransformIdentity
+            self.transform = CGAffineTransform.identity
             
-            UIView.animateWithDuration(0.7, delay: 0,
+            UIView.animate(withDuration: 0.7, delay: 0,
                                        usingSpringWithDamping: 0.7,
                                        initialSpringVelocity: 3,
-                                       options: .CurveEaseInOut,
+                                       options: UIViewAnimationOptions(),
                                        animations: {
-                                        self.transform = CGAffineTransformMakeScale(3.5, 3.5)
+                                        self.transform = CGAffineTransform(scaleX: 3.5, y: 3.5)
                                         self.alpha = 0.0
             }){ (success) in
-                self.transform = CGAffineTransformMakeScale(1.0, 1.0)
+                self.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
             }
 
             countDownComplete?()

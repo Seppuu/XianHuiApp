@@ -1,10 +1,12 @@
-**Version 2.3.0**, synced to [MPAndroidChart #1b9b3da](https://github.com/PhilJay/MPAndroidChart/commit/1b9b3da)
+**Version 3.0**, synced to [MPAndroidChart #810c99c](https://github.com/PhilJay/MPAndroidChart/commit/810c99c)
 
 ![alt tag](https://raw.github.com/danielgindi/Charts/master/Assets/feature_graphic.png)
-  ![Supported Platforms](https://img.shields.io/cocoapods/p/Charts.svg) [![Releases](https://img.shields.io/github/release/danielgindi/Charts.svg)](https://github.com/danielgindi/Charts/releases) [![Latest pod release](https://img.shields.io/cocoapods/v/Charts.svg)](http://cocoapods.org/pods/charts) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Build Status](https://travis-ci.org/danielgindi/Charts.svg?branch=master)](https://travis-ci.org/danielgindi/Charts) 
+  ![Supported Platforms](https://img.shields.io/cocoapods/p/Charts.svg) [![Releases](https://img.shields.io/github/release/danielgindi/Charts.svg)](https://github.com/danielgindi/Charts/releases) [![Latest pod release](https://img.shields.io/cocoapods/v/Charts.svg)](http://cocoapods.org/pods/charts) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Build Status](https://travis-ci.org/danielgindi/Charts.svg?branch=master)](https://travis-ci.org/danielgindi/Charts) [![codecov](https://codecov.io/gh/danielgindi/Charts/branch/master/graph/badge.svg)](https://codecov.io/gh/danielgindi/Charts)
 [![Join the chat at https://gitter.im/danielgindi/Charts](https://badges.gitter.im/danielgindi/Charts.svg)](https://gitter.im/danielgindi/Charts?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-* Xcode 8.0 / Swift 2.3
+### Just a heads up: Charts 3.0 has some breaking changes. Please read [the release/migration notes](https://github.com/danielgindi/Charts/releases/tag/v3.0.0). 
+
+* Xcode 8.0 / Swift 3.0 (For Swift 2.3 support please use [Charts 2.3.0](https://github.com/danielgindi/Charts/tree/v2.3.0))
 * iOS >= 8.0 (Use as an **Embedded** Framework)
 * tvOS >= 9.0
 * macOS >= 10.11
@@ -22,7 +24,7 @@ I've chosen to write it in `Swift` as it can be highly optimized by the compiler
 * Make sure you are running a supported version of Xcode.
   * Usually it is specified here a few lines above.
   * In most cases it will be the latest Xcode version.
-* Make sure that your project supports Swift 2.3
+* Make sure that your project supports Swift 3.0
 * Run `carthage checkout` in the project folder, to fetch dependencies (i.e Realm).
   * Realm is not required for using Charts - it is just a feature. But as the demo demonstrates Realm - you have to have it when running the demo.
   * If you don't have Carthage - you can get it [here](https://github.com/Carthage/Carthage/releases).
@@ -73,8 +75,8 @@ pod 'Charts/Realm'
 Charts now include Carthage prebuilt binaries.
 
 ```carthage
-github "danielgindi/Charts" == 2.3.0
-github "danielgindi/Charts" ~> 2.3.0
+github "danielgindi/Charts" == 2.2.5
+github "danielgindi/Charts" ~> 2.2.5
 ```
 
 In order to build the binaries for a new release, use `carthage build --no-skip-current && carthage archive Charts && carthage archive ChartsRealm`.

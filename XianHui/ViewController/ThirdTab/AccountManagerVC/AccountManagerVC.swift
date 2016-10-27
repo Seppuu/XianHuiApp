@@ -24,7 +24,7 @@ class AccountManagerVC: UIViewController {
     
     var listOfAgent = [Agent]()
     
-    private let logOutCellId = "SingleTapCell"
+    fileprivate let logOutCellId = "SingleTapCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,18 +41,18 @@ class AccountManagerVC: UIViewController {
     
     func setTableView() {
         
-        tableView = UITableView(frame: view.bounds, style: .Grouped)
+        tableView = UITableView(frame: view.bounds, style: .grouped)
         view.addSubview(tableView)
         
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.registerNib(UINib(nibName: logOutCellId, bundle: nil), forCellReuseIdentifier: logOutCellId)
+        tableView.register(UINib(nibName: logOutCellId, bundle: nil), forCellReuseIdentifier: logOutCellId)
     }
     
     func getAgentList() {
         
-        showHudWith(view, animated: true, mode: .Indeterminate, text: "")
+        let hud = showHudWith(view, animated: true, mode: .indeterminate, text: "")
         NetworkManager.sharedManager.getCompanyListWith(User.currentUser().userName, usertype: .Employee) { (success, json, error) in
             hideHudFrom(self.view)
             if success == true {
@@ -67,7 +67,7 @@ class AccountManagerVC: UIViewController {
     }
     
     //切换企业
-    func makeAgentListWith(data:JSON) -> [Agent] {
+    func makeAgentListWith(_ data:JSON) -> [Agent] {
         
         var list = [Agent]()
         
@@ -107,11 +107,11 @@ class AccountManagerVC: UIViewController {
 
 extension AccountManagerVC: UITableViewDelegate,UITableViewDataSource {
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return listOfAgent.count
         }
@@ -121,11 +121,11 @@ extension AccountManagerVC: UITableViewDelegate,UITableViewDataSource {
         
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             return "账号切换"
         }
@@ -134,30 +134,30 @@ extension AccountManagerVC: UITableViewDelegate,UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == 0 {
+        if (indexPath as NSIndexPath).section == 0 {
             let cellId = "cellId"
             
-            let cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
-            let agent = listOfAgent[indexPath.row]
+            let cell = UITableViewCell(style: .default, reuseIdentifier: cellId)
+            let agent = listOfAgent[(indexPath as NSIndexPath).row]
             cell.textLabel?.text = agent.name
             
             if agent.isCurrentUse == true {
-                cell.accessoryType = .Checkmark
+                cell.accessoryType = .checkmark
             }
             else {
-                cell.accessoryType = .None
+                cell.accessoryType = .none
             }
             
             return cell
         }
         else {
             //退出
-            let cell = tableView.dequeueReusableCellWithIdentifier(logOutCellId, forIndexPath: indexPath) as! SingleTapCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: logOutCellId, for: indexPath) as! SingleTapCell
             
             cell.middleLabel.text = "退出"
-            cell.middleLabel.textColor = UIColor.redColor()
+            cell.middleLabel.textColor = UIColor.red
             
             return cell
         }
@@ -165,10 +165,10 @@ extension AccountManagerVC: UITableViewDelegate,UITableViewDataSource {
         
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 0 {
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            let agent = listOfAgent[indexPath.row]
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (indexPath as NSIndexPath).section == 0 {
+            tableView.deselectRow(at: indexPath, animated: true)
+            let agent = listOfAgent[(indexPath as NSIndexPath).row]
             let agentId = agent.id.toInt()!
             changeCompanyWith(agentId)
         }
@@ -180,9 +180,9 @@ extension AccountManagerVC: UITableViewDelegate,UITableViewDataSource {
     
     
     
-    func changeCompanyWith(agentId:Int) {
+    func changeCompanyWith(_ agentId:Int) {
         
-        showHudWith(self.view, animated: true, mode: .Indeterminate, text: "")
+        let hud = showHudWith(self.view, animated: true, mode: .indeterminate, text: "")
         NetworkManager.sharedManager.setCurrentCompanyWith(User.currentUser().userName, usertype: .Employee, agentId: agentId) { (success, json, error) in
             
             if success == true {
@@ -190,11 +190,11 @@ extension AccountManagerVC: UITableViewDelegate,UITableViewDataSource {
                 self.changeAccount()
             }
             else {
-                let hud = MBProgressHUD.showHUDAddedTo((self.view)!, animated: true)
-                hud.mode = .Text
-                hud.labelText = error
+                let hud = MBProgressHUD.showAdded(to: (self.view)!, animated: true)
+                hud?.mode = .text
+                hud?.labelText = error
                 
-                hud.hide(true, afterDelay: 1.5)
+                hud?.hide(true, afterDelay: 1.5)
             }
             
         }
@@ -203,11 +203,11 @@ extension AccountManagerVC: UITableViewDelegate,UITableViewDataSource {
     
     func showAlertView() {
         
-        let alert = UIAlertController(title: "提示", message: "退出应用", preferredStyle: .Alert)
+        let alert = UIAlertController(title: "提示", message: "退出应用", preferredStyle: .alert)
         
-        let cancelAction = UIAlertAction(title: "取消", style: .Default, handler: nil)
+        let cancelAction = UIAlertAction(title: "取消", style: .default, handler: nil)
         
-        let confirmAction = UIAlertAction(title: "确认", style: .Destructive) { (action) in
+        let confirmAction = UIAlertAction(title: "确认", style: .destructive) { (action) in
             self.logOut()
         }
         
@@ -216,7 +216,7 @@ extension AccountManagerVC: UITableViewDelegate,UITableViewDataSource {
         alert.addAction(confirmAction)
         
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
         
     }
     
@@ -227,26 +227,29 @@ extension AccountManagerVC: UITableViewDelegate,UITableViewDataSource {
             
             if success {
                 //show intro
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 
                 appDelegate.showGuide()
                 
             }
             else {
-                let hud = MBProgressHUD.showHUDAddedTo((self.view)!, animated: true)
-                hud.mode = .Text
-                hud.labelText = error
+                if let hud = MBProgressHUD.showAdded(to: (self.view)!, animated: true) {
+                    hud.mode = .text
+                    hud.labelText = error
+                    
+                    hud.hide(true, afterDelay: 1.5)
+                }
                 
-                hud.hide(true, afterDelay: 1.5)
             }
             
         }) { (error) in
             //TODO:leanCloud IM 退出失败
-            let hud = MBProgressHUD.showHUDAddedTo((self.view)!, animated: true)
-            hud.mode = .Text
-            hud.labelText = error.description
-            
-            hud.hide(true, afterDelay: 1.5)
+            if let hud = MBProgressHUD.showAdded(to: (self.view)!, animated: true) {
+                hud.mode = .text
+                hud.labelText = error.debugDescription
+                
+                hud.hide(true, afterDelay: 1.5)
+            }
         }
         
         
@@ -268,20 +271,22 @@ extension AccountManagerVC: UITableViewDelegate,UITableViewDataSource {
                 self.loginAgain()
             }
             else {
-                let hud = MBProgressHUD.showHUDAddedTo((self.view)!, animated: true)
-                hud.mode = .Text
-                hud.labelText = error
-                
-                hud.hide(true, afterDelay: 1.5)
+                if let hud = MBProgressHUD.showAdded(to: (self.view)!, animated: true) {
+                    hud.mode = .text
+                    hud.labelText = error
+                    
+                    hud.hide(true, afterDelay: 1.5)
+                }
             }
             
         }) { (error) in
             //TODO:leanCloud IM 退出失败
-            let hud = MBProgressHUD.showHUDAddedTo((self.view)!, animated: true)
-            hud.mode = .Text
-            hud.labelText = error.description
-            
-            hud.hide(true, afterDelay: 1.5)
+            if let hud = MBProgressHUD.showAdded(to: (self.view)!, animated: true) {
+                hud.mode = .text
+                hud.labelText = error.debugDescription
+                
+                hud.hide(true, afterDelay: 1.5)
+            }
         }
     }
     
@@ -294,31 +299,35 @@ extension AccountManagerVC: UITableViewDelegate,UITableViewDataSource {
             
             if error == nil {
                 
-                let clientId = String(user!.clientId)
-                self.connectWithLeanCloudIMWith(clientId)
+                if let clientId = String(user!.clientId) {
+                    self.connectWithLeanCloudIMWith(clientId)    
+                }
+                
             }
             else {
                 hideHudFrom(self.view)
                 //TODO:错误分类
                 let textError = error!
-                showHudWith(self.view, animated: true, mode: .Text, text: textError)
+                let hud = showHudWith(self.view, animated: true, mode: .text, text: textError)
+                hud.hide(true, afterDelay: 1.5)
             }
         }
 
         
     }
     
-    func connectWithLeanCloudIMWith(clientId:String) {
+    func connectWithLeanCloudIMWith(_ clientId:String) {
         
-        ChatKitExample.invokeThisMethodAfterLoginSuccessWithClientId(clientId, success: {
+        ChatKitExample.invokeThisMethodAfterLoginSuccess(withClientId: clientId, success: {
             
             hideHudFrom(self.view)
-            NSNotificationCenter.defaultCenter().postNotificationName(accountHasChangedNoti, object: nil)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: accountHasChangedNoti), object: nil)
             self.getAgentList()
             }, failed: { (error) in
                 hideHudFrom(self.view)
                 
-                showHudWith(self.view, animated: true, mode: .Text, text: error.description)
+                let hud = showHudWith(self.view, animated: true, mode: .text, text: error.debugDescription)
+                hud.hide(true, afterDelay: 1.5)
         })
     }
     

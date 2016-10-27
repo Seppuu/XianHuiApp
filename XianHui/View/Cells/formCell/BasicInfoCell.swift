@@ -19,23 +19,23 @@ class BasicInfoCell: UITableViewCell ,UITextFieldDelegate{
     override func awakeFromNib() {
         super.awakeFromNib()
         rightTextField.delegate = self
-        self.selectionStyle = .None
+        self.selectionStyle = .none
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         
         if textField.text != "" {
             hasTitle = true
         }
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }

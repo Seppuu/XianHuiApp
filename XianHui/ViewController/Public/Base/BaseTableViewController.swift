@@ -28,10 +28,10 @@ class BaseTableViewModelList:NSObject {
     var list = [BaseTableViewModel]()
 }
 
-typealias CellForRowHandler = ((UITableView,NSIndexPath) -> (UITableViewCell))
+typealias CellForRowHandler = ((UITableView,IndexPath) -> (UITableViewCell))
 
 
-typealias CellSelectedRowHandler = ((UITableView,NSIndexPath) -> ())
+typealias CellSelectedRowHandler = ((UITableView,IndexPath) -> ())
 
 class BaseTableViewController: UIViewController,DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
@@ -58,7 +58,7 @@ class BaseTableViewController: UIViewController,DZNEmptyDataSetSource, DZNEmptyD
     
     
     func setTableView() {
-        tableView = UITableView(frame: view.bounds, style: .Grouped)
+        tableView = UITableView(frame: view.bounds, style: .grouped)
         view.addSubview(tableView)
         
         tableView.delegate = self
@@ -71,7 +71,7 @@ class BaseTableViewController: UIViewController,DZNEmptyDataSetSource, DZNEmptyD
     }
     
     
-    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         
         let text = "暂无数据"
         
@@ -85,47 +85,47 @@ class BaseTableViewController: UIViewController,DZNEmptyDataSetSource, DZNEmptyD
 
 extension BaseTableViewController:UITableViewDelegate,UITableViewDataSource {
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return listArray.count
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listArray[section].list.count
     }
     
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return cellHeight
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return listArray[section].listName
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
 
-        let baseModel = listArray[indexPath.section].list[indexPath.row]
+        let baseModel = listArray[(indexPath as NSIndexPath).section].list[(indexPath as NSIndexPath).row]
         
         let cellId = "typeCell"
         
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? typeCell
-        cell?.selectionStyle = .None
+        var cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? typeCell
+        cell?.selectionStyle = .none
         if cell == nil {
             let nib = UINib(nibName: cellId, bundle: nil)
-            tableView.registerNib(nib, forCellReuseIdentifier: cellId)
-            cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? typeCell
+            tableView.register(nib, forCellReuseIdentifier: cellId)
+            cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? typeCell
         }
         
         cell?.leftLabel.text = baseModel.name
         cell?.typeLabel.text = baseModel.desc
-        cell?.typeLabel.textAlignment = .Right
+        cell?.typeLabel.textAlignment = .right
         
         if baseModel.hasList == true {
-            cell?.accessoryType = .DisclosureIndicator
+            cell?.accessoryType = .disclosureIndicator
         }
         else {
-            cell?.accessoryType = .None
+            cell?.accessoryType = .none
         }
         
         return cell!
@@ -133,10 +133,10 @@ extension BaseTableViewController:UITableViewDelegate,UITableViewDataSource {
     }
     
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
 
-        let baseModel = listArray[indexPath.section].list[indexPath.row]
+        let baseModel = listArray[(indexPath as NSIndexPath).section].list[(indexPath as NSIndexPath).row]
         
         if baseModel.hasList == true {
             let vc = BaseTableViewController()

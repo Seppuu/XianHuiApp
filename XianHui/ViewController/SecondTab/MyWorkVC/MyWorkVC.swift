@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import PageMenu
 import SnapKit
 
 class MyWorkVC: BaseViewController,CAPSPageMenuDelegate {
@@ -18,7 +17,7 @@ class MyWorkVC: BaseViewController,CAPSPageMenuDelegate {
      
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
         setSubView()
        
     }
@@ -28,20 +27,20 @@ class MyWorkVC: BaseViewController,CAPSPageMenuDelegate {
     }
     
     let pageMenuParameters: [CAPSPageMenuOption] = [
-        .MenuItemSeparatorWidth(0.0),
-        .ScrollMenuBackgroundColor(UIColor.whiteColor()),
-        .ViewBackgroundColor(UIColor(red: 254.9/255.0, green: 251.4/255.0, blue: 243.7/255.0, alpha: 1.0)),
-        .BottomMenuHairlineColor(UIColor(red: 20.0/255.0, green: 20.0/255.0, blue: 20.0/255.0, alpha: 0.1)),
-        .SelectionIndicatorColor(UIColor(red: 96.4/255.0, green: 80.8/255.0, blue: 81.2/255.0, alpha: 1.0)),
-        .MenuMargin(20.0),
-        .MenuHeight(40.0),
-        .SelectedMenuItemLabelColor(UIColor(red: 96.4/255.0, green: 80.8/255.0, blue: 81.2/255.0, alpha: 1.0)),
-        .UnselectedMenuItemLabelColor(UIColor(red: 116.7/255.0, green: 96.1/255.0, blue: 97.2/255.0, alpha: 1.0)),
-        .MenuItemFont(UIFont(name: "HelveticaNeue-Medium", size: 14.0)!),
-        .UseMenuLikeSegmentedControl(true),
-        .MenuItemSeparatorRoundEdges(false),
-        .SelectionIndicatorHeight(2.0),
-        .MenuItemSeparatorPercentageHeight(0.1)
+        .menuItemSeparatorWidth(0.0),
+        .scrollMenuBackgroundColor(UIColor.white),
+        .viewBackgroundColor(UIColor(red: 254.9/255.0, green: 251.4/255.0, blue: 243.7/255.0, alpha: 1.0)),
+        .bottomMenuHairlineColor(UIColor(red: 20.0/255.0, green: 20.0/255.0, blue: 20.0/255.0, alpha: 0.1)),
+        .selectionIndicatorColor(UIColor(red: 96.4/255.0, green: 80.8/255.0, blue: 81.2/255.0, alpha: 1.0)),
+        .menuMargin(20.0),
+        .menuHeight(40.0),
+        .selectedMenuItemLabelColor(UIColor(red: 96.4/255.0, green: 80.8/255.0, blue: 81.2/255.0, alpha: 1.0)),
+        .unselectedMenuItemLabelColor(UIColor(red: 116.7/255.0, green: 96.1/255.0, blue: 97.2/255.0, alpha: 1.0)),
+        .menuItemFont(UIFont(name: "HelveticaNeue-Medium", size: 14.0)!),
+        .useMenuLikeSegmentedControl(true),
+        .menuItemSeparatorRoundEdges(false),
+        .selectionIndicatorHeight(2.0),
+        .menuItemSeparatorPercentageHeight(0.1)
     ]
     
     func setSubView() {
@@ -81,11 +80,11 @@ class MyWorkVC: BaseViewController,CAPSPageMenuDelegate {
         
         
         // Initialize scroll menu
-        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRectMake(0.0, 64, self.view.frame.width, self.view.frame.height - 64), pageMenuOptions: pageMenuParameters)
+        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0.0, y: 64, width: self.view.frame.width, height: self.view.frame.height - 64), pageMenuOptions: pageMenuParameters)
         
         // Optional delegate
         pageMenu!.delegate = self
-        pageMenu!.controllerScrollView.scrollEnabled = true
+        pageMenu!.controllerScrollView.isScrollEnabled = true
         
         pageMenu!.moveToPage(pageIndex)
         

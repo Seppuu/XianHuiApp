@@ -42,7 +42,7 @@ class CustomerConsumeListVC: UIViewController {
        
     }
     
-    func getListWith(id:Int,pageSize:Int,pageNumber:Int) {
+    func getListWith(_ id:Int,pageSize:Int,pageNumber:Int) {
         
         NetworkManager.sharedManager.getCustomerConsumeListWith(id, pageSize: pageSize, pageNumber: pageNumber) { (success, json, error) in
             
@@ -73,7 +73,7 @@ class CustomerConsumeListVC: UIViewController {
         }
     }
     
-    func makeGoodListWith(json:[JSON]) -> [[Good]] {
+    func makeGoodListWith(_ json:[JSON]) -> [[Good]] {
         
         var list = [Good]()
         
@@ -129,14 +129,14 @@ class CustomerConsumeListVC: UIViewController {
     
     func setTableView() {
         
-        tableView = UITableView(frame: view.bounds, style:.Plain)
+        tableView = UITableView(frame: view.bounds, style:.plain)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
         view.addSubview(tableView)
         
         let nib  = UINib(nibName: cellId, bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: cellId)
+        tableView.register(nib, forCellReuseIdentifier: cellId)
         
         tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: { 
             
@@ -152,28 +152,28 @@ class CustomerConsumeListVC: UIViewController {
 
 extension CustomerConsumeListVC:UITableViewDelegate,UITableViewDataSource {
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return dateList.count
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return goodListArray[section].count
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return dateList[section]
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! typeCell
-        cell.selectionStyle = .None
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! typeCell
+        cell.selectionStyle = .none
         
-        let good = goodListArray[indexPath.section][indexPath.row]
+        let good = goodListArray[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
         
         cell.leftLabel.text = good.name
         cell.typeLabel.text = good.amount + "元"

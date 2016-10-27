@@ -21,7 +21,7 @@ class ScanResultController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
         //self.edgesForExtendedLayout = UIRectEdge.None
         
         view.addSubview(topLabel)
@@ -31,8 +31,8 @@ class ScanResultController: UIViewController {
             make.height.equalTo(21)
         }
         topLabel.text = "点击确认登陆Mybook系统."
-        topLabel.textColor = UIColor.lightGrayColor()
-        topLabel.textAlignment = .Center
+        topLabel.textColor = UIColor.lightGray
+        topLabel.textAlignment = .center
         
         let confirmButton = UIButton()
         view.addSubview(confirmButton)
@@ -43,12 +43,12 @@ class ScanResultController: UIViewController {
             make.right.equalTo(view).offset(-20)
             make.height.equalTo(44)
         }
-        confirmButton.setTitle("确认登陆", forState: .Normal)
-        confirmButton.titleLabel?.font = UIFont.systemFontOfSize(17)
+        confirmButton.setTitle("确认登陆", for: UIControlState())
+        confirmButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         confirmButton.layer.cornerRadius = 5.0
-        confirmButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        confirmButton.setTitleColor(UIColor.white, for: UIControlState())
         confirmButton.backgroundColor = UIColor ( red: 1.0, green: 0.6947, blue: 0.6038, alpha: 1.0 )
-        confirmButton.addTarget(self, action: #selector(ScanResultController.confirmTap), forControlEvents: .TouchUpInside)
+        confirmButton.addTarget(self, action: #selector(ScanResultController.confirmTap), for: .touchUpInside)
         
     }
     
@@ -85,7 +85,7 @@ class ScanResultController: UIViewController {
     
     func backToTopViewController() {
         
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        self.navigationController?.popToRootViewController(animated: true)
         
     }
     

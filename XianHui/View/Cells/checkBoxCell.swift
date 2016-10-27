@@ -34,17 +34,17 @@ class CheckBoxCell: UITableViewCell {
         
         
         
-        rightButton.addTarget(self, action: #selector(CheckBoxCell.rightButtonTap), forControlEvents: .TouchUpInside)
+        rightButton.addTarget(self, action: #selector(CheckBoxCell.rightButtonTap), for: .touchUpInside)
         
         rightButton.layer.cornerRadius = 8
         rightButton.layer.masksToBounds = true
         
-        rightButton.layer.borderColor = UIColor ( red: 0.0, green: 0.4868, blue: 0.9191, alpha: 1.0 ).CGColor
+        rightButton.layer.borderColor = UIColor ( red: 0.0, green: 0.4868, blue: 0.9191, alpha: 1.0 ).cgColor
         rightButton.layer.borderWidth = 1.0
         
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         

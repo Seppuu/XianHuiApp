@@ -37,12 +37,12 @@ class MyWorkCell: UITableViewCell {
         
         for imageView in imageViews {
             
-            imageView.contentMode = .ScaleAspectFit
+            imageView?.contentMode = .scaleAspectFit
         }
         
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         

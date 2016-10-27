@@ -27,21 +27,21 @@ class StaffPicksCardCell: UICollectionViewCell {
         super.awakeFromNib()
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(StaffPicksCardCell.menuTap))
-        menuLabel.userInteractionEnabled = true
+        menuLabel.isUserInteractionEnabled = true
         menuLabel.addGestureRecognizer(tap)
         
         self.layer.cornerRadius = 5
         //self.layer.masksToBounds = false
         
         self.layer.shadowRadius = 5
-        self.layer.shadowColor = UIColor ( red: 0.5622, green: 0.5622, blue: 0.5622, alpha: 1.0 ).CGColor
-        self.layer.shadowOffset = CGSizeMake(1, 2)
+        self.layer.shadowColor = UIColor ( red: 0.5622, green: 0.5622, blue: 0.5622, alpha: 1.0 ).cgColor
+        self.layer.shadowOffset = CGSize(width: 1, height: 2)
         self.layer.shadowOpacity = 1.0
         
         
     }
     
-    @objc private func menuTap() {
+    @objc fileprivate func menuTap() {
         menuTapHandler?()
     }
 

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SwiftString
+
 import Proposer
 import Kingfisher
 import MBProgressHUD
@@ -24,23 +24,23 @@ class UserCentreVC: BaseViewController {
     
     var userTableView: UITableView!
     
-    private let AddUserAvatarCell = "UserAvatarCell"
+    fileprivate let AddUserAvatarCell = "UserAvatarCell"
     
-    private let UserAvatarEditCellId = "UserAvatarEditCell"
+    fileprivate let UserAvatarEditCellId = "UserAvatarEditCell"
     
-    private let logOutCellId = "SingleTapCell"
+    fileprivate let logOutCellId = "SingleTapCell"
     
-    private var editUserInfo = false
+    fileprivate var editUserInfo = false
     
-    private var uploadingAvatar = false
+    fileprivate var uploadingAvatar = false
     
     var section1 = [String]()
 
     var agentId:Int?
     
-    private var imageUploading = UIImage()
+    fileprivate var imageUploading = UIImage()
     
-    private lazy var imagePicker: UIImagePickerController = {
+    fileprivate lazy var imagePicker: UIImagePickerController = {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
@@ -56,20 +56,20 @@ class UserCentreVC: BaseViewController {
         
         
         setTableView()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UserCentreVC.changeAllContacts), name: accountHasChangedNoti, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(UserCentreVC.changeAllContacts), name: NSNotification.Name(rawValue: accountHasChangedNoti), object: nil)
     }
     
     func setTableView() {
         
-        userTableView = UITableView(frame: view.bounds, style: .Grouped)
+        userTableView = UITableView(frame: view.bounds, style: .grouped)
         view.addSubview(userTableView)
         
         userTableView.delegate = self
         userTableView.dataSource = self
         
-        userTableView.registerNib(UINib(nibName: AddUserAvatarCell, bundle: nil), forCellReuseIdentifier: AddUserAvatarCell)
-        userTableView.registerNib(UINib(nibName: UserAvatarEditCellId, bundle: nil), forCellReuseIdentifier: UserAvatarEditCellId)
-        userTableView.registerNib(UINib(nibName: logOutCellId, bundle: nil), forCellReuseIdentifier: logOutCellId)
+        userTableView.register(UINib(nibName: AddUserAvatarCell, bundle: nil), forCellReuseIdentifier: AddUserAvatarCell)
+        userTableView.register(UINib(nibName: UserAvatarEditCellId, bundle: nil), forCellReuseIdentifier: UserAvatarEditCellId)
+        userTableView.register(UINib(nibName: logOutCellId, bundle: nil), forCellReuseIdentifier: logOutCellId)
     }
     
     
@@ -86,12 +86,12 @@ class UserCentreVC: BaseViewController {
 
 extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         
         return 2
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if section == 0 {
             return 1
@@ -101,9 +101,9 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.section == 0 {
+        if (indexPath as NSIndexPath).section == 0 {
             return 98
         }
         else {
@@ -111,22 +111,22 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
-            return CGFloat.min
+            return CGFloat.leastNormalMagnitude
         }
         return tableView.sectionHeaderHeight
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == 0 {
+        if (indexPath as NSIndexPath).section == 0 {
             //用户信息,编辑,展示切换
             //let user = User.currentUser()
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(AddUserAvatarCell) as! UserAvatarCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: AddUserAvatarCell) as! UserAvatarCell
             let user = User.currentUser()
-            cell.nameLabel.text = user.displayName
+            cell.nameLabel.text = user?.displayName
             cell.levelTextLabel.text = ""
             
             if uploadingAvatar {
@@ -143,8 +143,10 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
                 cell.dimView.alpha = 0.0
                 cell.hudView.alpha = 0.0
                 cell.hudView.stopAnimating()
-                let url = NSURL(string: user.avatarURL)!
-                cell.avatarView.kf_setImageWithURL(url)
+                if let url = URL(string: (user?.avatarURL)!) {
+                   cell.avatarView.kf.setImage(with: url)
+                }
+                
                 
             }
             
@@ -172,19 +174,19 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
         }
         else {
             let cellID = "cellIDs1"
-            let cell = UITableViewCell(style: .Default, reuseIdentifier: cellID)
+            let cell = UITableViewCell(style: .default, reuseIdentifier: cellID)
             let user = User.currentUser()
-            if user.userType == .Boss {
+            if user?.userType == .Boss {
                 //隐私与安全
-                cell.textLabel?.text = section1[indexPath.row]
-                cell.selectionStyle = .None
+                cell.textLabel?.text = section1[(indexPath as NSIndexPath).row]
+                cell.selectionStyle = .none
                 return cell
                 
             }
             else {
                 //切换企业端口.
-                cell.textLabel?.text = section1[indexPath.row]
-                cell.selectionStyle = .None
+                cell.textLabel?.text = section1[(indexPath as NSIndexPath).row]
+                cell.selectionStyle = .none
                 return cell
             }
             
@@ -194,12 +196,12 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
     }
     
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 1 {
+        if (indexPath as NSIndexPath).section == 1 {
             
             let user = User.currentUser()
-            if user.userType == .Boss {
+            if user?.userType == .Boss {
                 let vc = MineVC()
                 vc.title = "隐私与安全"
                 navigationController?.pushViewController(vc, animated: true)
@@ -220,58 +222,58 @@ extension UserCentreVC: UIImagePickerControllerDelegate, UINavigationControllerD
     
     func avatarTap() {
         
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         //选择照片
-        let choosePhotoAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("图库", comment: ""), style: .Default) { action -> Void in
+        let choosePhotoAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("图库", comment: ""), style: .default) { action -> Void in
             
             let openCameraRoll: ProposerAction = { [weak self] in
                 
-                guard UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) else {
+                guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else {
                     self?.alertCanNotAccessCameraRoll()
                     return
                 }
                 
                 if let strongSelf = self {
-                    strongSelf.imagePicker.sourceType = .PhotoLibrary
-                    strongSelf.presentViewController(strongSelf.imagePicker, animated: true, completion: nil)
+                    strongSelf.imagePicker.sourceType = .photoLibrary
+                    strongSelf.present(strongSelf.imagePicker, animated: true, completion: nil)
                 }
             }
             
-            proposeToAccess(.Photos, agreed: openCameraRoll, rejected: {
+            proposeToAccess(.photos, agreed: openCameraRoll, rejected: {
                 self.alertCanNotAccessCameraRoll()
             })
         }
         alertController.addAction(choosePhotoAction)
         
         //拍照
-        let takePhotoAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("相机", comment: ""), style: .Default) { action -> Void in
+        let takePhotoAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("相机", comment: ""), style: .default) { action -> Void in
             
             let openCamera: ProposerAction = { [weak self] in
                 
-                guard UIImagePickerController.isSourceTypeAvailable(.Camera) else {
+                guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
                     self?.alertCanNotOpenCamera()
                     return
                 }
                 
                 if let strongSelf = self {
-                    strongSelf.imagePicker.sourceType = .Camera
-                    strongSelf.presentViewController(strongSelf.imagePicker, animated: true, completion: nil)
+                    strongSelf.imagePicker.sourceType = .camera
+                    strongSelf.present(strongSelf.imagePicker, animated: true, completion: nil)
                 }
             }
             
-            proposeToAccess(.Camera, agreed: openCamera, rejected: {
+            proposeToAccess(.camera, agreed: openCamera, rejected: {
                 self.alertCanNotOpenCamera()
             })
         }
         alertController.addAction(takePhotoAction)
         
-        let cancelAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("取消", comment: ""), style: .Cancel) { action -> Void in
-            self.dismissViewControllerAnimated(true, completion: nil)
+        let cancelAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("取消", comment: ""), style: .cancel) { action -> Void in
+            self.dismiss(animated: true, completion: nil)
         }
         alertController.addAction(cancelAction)
         
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
         
         // touch to create (if need) for faster appear
         delay(0.2) { [weak self] in
@@ -280,10 +282,10 @@ extension UserCentreVC: UIImagePickerControllerDelegate, UINavigationControllerD
     }
     
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [AnyHashable: Any]!) {
         
         defer {
-            dismissViewControllerAnimated(true, completion: nil)
+            dismiss(animated: true, completion: nil)
         }
         
         //save image to local and back
@@ -296,7 +298,7 @@ extension UserCentreVC: UIImagePickerControllerDelegate, UINavigationControllerD
             if success == true {
                 self.uploadingAvatar = false
                 self.userTableView.reloadData()
-                NSNotificationCenter.defaultCenter().postNotificationName(UserAvatarUpdatedNoti, object: nil)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: UserAvatarUpdatedNoti), object: nil)
             }
             else {
                 

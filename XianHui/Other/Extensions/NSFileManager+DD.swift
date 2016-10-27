@@ -17,25 +17,25 @@ enum FileExtension:String {
     case plist = "plist"
 }
 
-extension NSFileManager {
+extension FileManager {
     
     /**
     返回Documents URL目录
      */
-    class func ddDocsURL() -> NSURL {
-        return try! NSFileManager.defaultManager().URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
+    class func ddDocsURL() -> URL {
+        return try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
     }
     
     /**
      返回DingDong URL目录
      */
-    class func ddDingDongDocsURL() -> NSURL? {
-        let fileManager = NSFileManager.defaultManager()
+    class func ddDingDongDocsURL() -> URL? {
+        let fileManager = FileManager.default
         
-        let dingDongDocsURL = ddDocsURL().URLByAppendingPathComponent("DingDong", isDirectory: true)
+        let dingDongDocsURL = ddDocsURL().appendingPathComponent("DingDong", isDirectory: true)
         
         do {
-            try fileManager.createDirectoryAtURL(dingDongDocsURL!, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectory(at: dingDongDocsURL, withIntermediateDirectories: true, attributes: nil)
             return dingDongDocsURL
         } catch _ {
             
@@ -47,13 +47,13 @@ extension NSFileManager {
     /**
      返回DingDong - School URL目录
      */
-    class func ddSchoolDocsURL() -> NSURL? {
-        let fileManager = NSFileManager.defaultManager()
+    class func ddSchoolDocsURL() -> URL? {
+        let fileManager = FileManager.default
         
-        let schoolDocsURL = ddDingDongDocsURL()!.URLByAppendingPathComponent("School", isDirectory: true)
+        let schoolDocsURL = ddDingDongDocsURL()!.appendingPathComponent("School", isDirectory: true)
         
         do {
-            try fileManager.createDirectoryAtURL(schoolDocsURL!, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectory(at: schoolDocsURL, withIntermediateDirectories: true, attributes: nil)
             return schoolDocsURL
         } catch _ {
             
@@ -66,13 +66,13 @@ extension NSFileManager {
     /**
      返回DingDong - School - MakeLesson URL目录
      */
-    class func ddMakeLessonDocsURL() -> NSURL? {
-        let fileManager = NSFileManager.defaultManager()
+    class func ddMakeLessonDocsURL() -> URL? {
+        let fileManager = FileManager.default
         
-        let makeLessonDocsURL = ddSchoolDocsURL()!.URLByAppendingPathComponent("MakeLesson", isDirectory: true)
+        let makeLessonDocsURL = ddSchoolDocsURL()!.appendingPathComponent("MakeLesson", isDirectory: true)
         
         do {
-            try fileManager.createDirectoryAtURL(makeLessonDocsURL!, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectory(at: makeLessonDocsURL, withIntermediateDirectories: true, attributes: nil)
             return makeLessonDocsURL
         } catch _ {
             
@@ -84,13 +84,13 @@ extension NSFileManager {
     /**
      返回DingDong - School - MakeLesson - Records URL目录
      */
-    class func ddRecordsDocsURL() -> NSURL? {
-        let fileManager = NSFileManager.defaultManager()
+    class func ddRecordsDocsURL() -> URL? {
+        let fileManager = FileManager.default
         
-        let recordsDocsURL = ddMakeLessonDocsURL()!.URLByAppendingPathComponent("Records", isDirectory: true)
+        let recordsDocsURL = ddMakeLessonDocsURL()!.appendingPathComponent("Records", isDirectory: true)
         
         do {
-            try fileManager.createDirectoryAtURL(recordsDocsURL!, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectory(at: recordsDocsURL, withIntermediateDirectories: true, attributes: nil)
             return recordsDocsURL
         } catch _ {
             
@@ -102,13 +102,13 @@ extension NSFileManager {
     /**
      返回DingDong - School - MakeLesson - Photos URL目录
      */
-    class func ddPhotosDocsURL() -> NSURL? {
-        let fileManager = NSFileManager.defaultManager()
+    class func ddPhotosDocsURL() -> URL? {
+        let fileManager = FileManager.default
         
-        let photosDocsURL = ddMakeLessonDocsURL()!.URLByAppendingPathComponent("Photos", isDirectory: true)
+        let photosDocsURL = ddMakeLessonDocsURL()!.appendingPathComponent("Photos", isDirectory: true)
         
         do {
-            try fileManager.createDirectoryAtURL(photosDocsURL!, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectory(at: photosDocsURL, withIntermediateDirectories: true, attributes: nil)
             return photosDocsURL
         } catch _ {
             
@@ -122,14 +122,14 @@ extension NSFileManager {
     /**
     返回DingDong - School - MakeLesson - Transfer URL目录
     */
-    class func ddTransferDocsURL() -> NSURL? {
+    class func ddTransferDocsURL() -> URL? {
         
-        let fileManager = NSFileManager.defaultManager()
+        let fileManager = FileManager.default
         
-        let transferDocsURL = ddMakeLessonDocsURL()!.URLByAppendingPathComponent("Transfer", isDirectory: true)
+        let transferDocsURL = ddMakeLessonDocsURL()!.appendingPathComponent("Transfer", isDirectory: true)
         
         do {
-            try fileManager.createDirectoryAtURL(transferDocsURL!, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectory(at: transferDocsURL, withIntermediateDirectories: true, attributes: nil)
             return transferDocsURL
         } catch _ {
             
@@ -143,13 +143,13 @@ extension NSFileManager {
     /**
     返回DingDong - School - MakeLesson - SamplesArry URL目录
     */
-    class func ddSamplesDocsURl() -> NSURL? {
-        let fileManager = NSFileManager.defaultManager()
+    class func ddSamplesDocsURl() -> URL? {
+        let fileManager = FileManager.default
         
-        let samplesArry = ddMakeLessonDocsURL()!.URLByAppendingPathComponent("SamplesArry", isDirectory: true)
+        let samplesArry = ddMakeLessonDocsURL()!.appendingPathComponent("SamplesArry", isDirectory: true)
         
         do {
-            try fileManager.createDirectoryAtURL(samplesArry!, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectory(at: samplesArry, withIntermediateDirectories: true, attributes: nil)
             return samplesArry
         } catch _ {
             
@@ -162,10 +162,10 @@ extension NSFileManager {
     
     
     
-    class func ddRecordURLWithNameInTransfer(name:String) -> NSURL? {
+    class func ddRecordURLWithNameInTransfer(_ name:String) -> URL? {
         
         if let transferFileURL = ddTransferDocsURL() {
-            return transferFileURL.URLByAppendingPathComponent("\(name).\(FileExtension.M4A.rawValue)")
+            return transferFileURL.appendingPathComponent("\(name).\(FileExtension.M4A.rawValue)")
         }
         
         return nil
@@ -173,14 +173,14 @@ extension NSFileManager {
     
     
     // MARK: Lesson
-    class func ddLessonFileURL(uuidName:String) -> NSURL? {
+    class func ddLessonFileURL(_ uuidName:String) -> URL? {
         
-        let fileManager = NSFileManager.defaultManager()
+        let fileManager = FileManager.default
         
-        let lessonFileURL = ddRecordsDocsURL()!.URLByAppendingPathComponent(uuidName, isDirectory: true)
+        let lessonFileURL = ddRecordsDocsURL()!.appendingPathComponent(uuidName, isDirectory: true)
         
         do {
-            try fileManager.createDirectoryAtURL(lessonFileURL!, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectory(at: lessonFileURL, withIntermediateDirectories: true, attributes: nil)
             return lessonFileURL
         }catch _ {
             
@@ -189,20 +189,20 @@ extension NSFileManager {
         return nil
     }
     
-    class func ddPlistFileURlWithName(name:String) -> NSURL? {
+    class func ddPlistFileURlWithName(_ name:String) -> URL? {
         
         if let samplesFileURL = ddSamplesDocsURl()  {
             
-              return samplesFileURL.URLByAppendingPathComponent("\(name).\(FileExtension.plist.rawValue)")
+              return samplesFileURL.appendingPathComponent("\(name).\(FileExtension.plist.rawValue)")
         }
         
         return nil
     }
         
 
-    class func ddRecordURLWithName(lessonURL:NSURL,name:String) -> NSURL? {
+    class func ddRecordURLWithName(_ lessonURL:URL,name:String) -> URL? {
 
-        return lessonURL.URLByAppendingPathComponent("\(name).\(FileExtension.M4A.rawValue)")
+        return lessonURL.appendingPathComponent("\(name).\(FileExtension.M4A.rawValue)")
  
     }
     
@@ -210,13 +210,13 @@ extension NSFileManager {
     /**
      返回DingDong - School - MyAlbums URL目录
      */
-    class func ddMyAlbumsDocsURL() -> NSURL? {
-        let fileManager = NSFileManager.defaultManager()
+    class func ddMyAlbumsDocsURL() -> URL? {
+        let fileManager = FileManager.default
         
-        let myAlbumsDocsURL = ddSchoolDocsURL()!.URLByAppendingPathComponent("MyAlbums", isDirectory: true)
+        let myAlbumsDocsURL = ddSchoolDocsURL()!.appendingPathComponent("MyAlbums", isDirectory: true)
         
         do {
-            try fileManager.createDirectoryAtURL(myAlbumsDocsURL!, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectory(at: myAlbumsDocsURL, withIntermediateDirectories: true, attributes: nil)
             return myAlbumsDocsURL
         } catch _ {
             
@@ -228,14 +228,14 @@ extension NSFileManager {
     /**
      返回DingDong - School - MyAlbums - AlbumIndex URL目录
      */
-    class func ddAlbumFileURL(index:Int) -> NSURL? {
+    class func ddAlbumFileURL(_ index:Int) -> URL? {
         
-        let fileManager = NSFileManager.defaultManager()
+        let fileManager = FileManager.default
         
-        let albumIndexFileURL = ddMyAlbumsDocsURL()!.URLByAppendingPathComponent("Album\(index)", isDirectory: true)
+        let albumIndexFileURL = ddMyAlbumsDocsURL()!.appendingPathComponent("Album\(index)", isDirectory: true)
         
         do {
-            try fileManager.createDirectoryAtURL(albumIndexFileURL!, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectory(at: albumIndexFileURL, withIntermediateDirectories: true, attributes: nil)
             return albumIndexFileURL
         }catch _ {
             
@@ -248,14 +248,14 @@ extension NSFileManager {
     /**
      返回DingDong - School - MyAlbums - AlbumIndex - Audios URL目录
      */
-    class func ddAlbumIndexAudiosFileURL(index:Int) -> NSURL? {
+    class func ddAlbumIndexAudiosFileURL(_ index:Int) -> URL? {
         
-        let fileManager = NSFileManager.defaultManager()
+        let fileManager = FileManager.default
         
-        let albumAudiosFileURL = ddAlbumFileURL(index)!.URLByAppendingPathComponent("Audios", isDirectory: true)
+        let albumAudiosFileURL = ddAlbumFileURL(index)!.appendingPathComponent("Audios", isDirectory: true)
         
         do {
-            try fileManager.createDirectoryAtURL(albumAudiosFileURL!, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectory(at: albumAudiosFileURL, withIntermediateDirectories: true, attributes: nil)
             return albumAudiosFileURL
         }catch _ {
             
@@ -267,14 +267,14 @@ extension NSFileManager {
     /**
      返回DingDong - School - MyAlbums - AlbumIndex - Images URL目录
      */
-    class func ddAlbumIndexImagesFileURL(index:Int) -> NSURL? {
+    class func ddAlbumIndexImagesFileURL(_ index:Int) -> URL? {
         
-        let fileManager = NSFileManager.defaultManager()
+        let fileManager = FileManager.default
         
-        let albumImagesFileURL = ddAlbumFileURL(index)!.URLByAppendingPathComponent("Images", isDirectory: true)
+        let albumImagesFileURL = ddAlbumFileURL(index)!.appendingPathComponent("Images", isDirectory: true)
         
         do {
-            try fileManager.createDirectoryAtURL(albumImagesFileURL!, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectory(at: albumImagesFileURL, withIntermediateDirectories: true, attributes: nil)
             return albumImagesFileURL
         }catch _ {
             
@@ -288,10 +288,10 @@ extension NSFileManager {
     /**
      返回 专辑Album - Audios - 具体存储audio的名字以及路径
      */
-    class func ddAlbumAudioURLWithName(AlbumIndex:Int,name:String) -> NSURL? {
+    class func ddAlbumAudioURLWithName(_ AlbumIndex:Int,name:String) -> URL? {
         
         if let audioFileURL = ddAlbumIndexAudiosFileURL(AlbumIndex) {
-            return audioFileURL.URLByAppendingPathComponent("\(name).\(FileExtension.M4A.rawValue)")
+            return audioFileURL.appendingPathComponent("\(name).\(FileExtension.M4A.rawValue)")
         }
         
         return nil
@@ -300,10 +300,10 @@ extension NSFileManager {
     /**
      返回 专辑Album - Images - 具体存储images的名字以及路径
      */
-    class func ddAlbumImagesURLWithName(AlbumIndex:Int,name:String) -> NSURL? {
+    class func ddAlbumImagesURLWithName(_ AlbumIndex:Int,name:String) -> URL? {
         
         if let imagesFileURL = ddAlbumIndexImagesFileURL(AlbumIndex) {
-            return imagesFileURL.URLByAppendingPathComponent("\(name).\(FileExtension.JPG.rawValue)")
+            return imagesFileURL.appendingPathComponent("\(name).\(FileExtension.JPG.rawValue)")
         }
         
         return nil
@@ -315,12 +315,12 @@ extension NSFileManager {
     删除Document下的文件
     */
     class func cleanDocs() {
-        let fileManager = NSFileManager.defaultManager()
+        let fileManager = FileManager.default
         
-        if let fileURLs = (try? fileManager.contentsOfDirectoryAtURL(ddDocsURL(), includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions())) {
+        if let fileURLs = (try? fileManager.contentsOfDirectory(at: ddDocsURL(), includingPropertiesForKeys: nil, options: FileManager.DirectoryEnumerationOptions())) {
             for fileURL in fileURLs {
                 do {
-                    try fileManager.removeItemAtURL(fileURL)
+                    try fileManager.removeItem(at: fileURL)
                 } catch _ {
                     
                 }
@@ -332,13 +332,13 @@ extension NSFileManager {
      
      - parameter docsDirectoryURL: 参数是子目录
      */
-    class func cleanDocsDirectoryAtURL(docsDirectoryURL:NSURL) {
-        let fileManager = NSFileManager.defaultManager()
+    class func cleanDocsDirectoryAtURL(_ docsDirectoryURL:URL) {
+        let fileManager = FileManager.default
         
-        if let fileURLs = (try? fileManager.contentsOfDirectoryAtURL(docsDirectoryURL, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions())) {
+        if let fileURLs = (try? fileManager.contentsOfDirectory(at: docsDirectoryURL, includingPropertiesForKeys: nil, options: FileManager.DirectoryEnumerationOptions())) {
             for fileURL in fileURLs {
                 do {
-                    try fileManager.removeItemAtURL(fileURL)
+                    try fileManager.removeItem(at: fileURL)
                 } catch _{
                     
                 }
@@ -354,7 +354,7 @@ extension NSFileManager {
         }
     }
     
-    class func cleanRecordFilesWithURL(url:NSURL) {
+    class func cleanRecordFilesWithURL(_ url:URL) {
         
             cleanDocsDirectoryAtURL(url)
     
@@ -375,10 +375,10 @@ extension NSFileManager {
     
     
     //MARK:Count Record Of Lesson
-    class func recordCountInLessonIndex(lessonFileURL:NSURL) -> Int {
-        let fileManager = NSFileManager.defaultManager()
+    class func recordCountInLessonIndex(_ lessonFileURL:URL) -> Int {
+        let fileManager = FileManager.default
         
-        if let urls = (try? fileManager.contentsOfDirectoryAtURL(lessonFileURL, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions())) {
+        if let urls = (try? fileManager.contentsOfDirectory(at: lessonFileURL, includingPropertiesForKeys: nil, options: FileManager.DirectoryEnumerationOptions())) {
             return urls.count
         }
         

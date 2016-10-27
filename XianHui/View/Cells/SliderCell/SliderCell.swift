@@ -34,7 +34,7 @@ class SliderCell: UITableViewCell {
         
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         
@@ -45,7 +45,7 @@ class SliderCell: UITableViewCell {
     
     var unit = ""
     
-    @IBAction func sliderMoved(sender: UISlider) {
+    @IBAction func sliderMoved(_ sender: UISlider) {
         
         let roundedValue = round(sender.value / step) * step
         sender.value = roundedValue

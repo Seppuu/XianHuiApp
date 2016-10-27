@@ -8,7 +8,7 @@
 
 import UIKit
 import SwiftDate
-import SwiftString
+
 
 //口服类产品
 class Production: Good {
@@ -30,22 +30,22 @@ class Production: Good {
     var endDay   = ""
     
     
-    var startTime: NSDate {
+    var startTime: Date {
         
-        return startDay.toDate("yyyy年MM月dd日") != nil ? startDay.toDate("yyyy年MM月dd日")! : NSDate()
+        return startDay.toDate("yyyy年MM月dd日") != nil ? startDay.toDate("yyyy年MM月dd日")! : Date()
     }
     
-    var endTime: NSDate {
+    var endTime: Date {
         
         let date = startTime
         
         let timeInterval = (total / oneTimeUse) * frequency * (60*60*24)
-        let endDate = NSDate(timeInterval: timeInterval, sinceDate: date)
+        let endDate = Date(timeInterval: timeInterval, since: date)
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy年MM月dd日"
         
-        endDay =  dateFormatter.stringFromDate(endDate)
+        endDay =  dateFormatter.string(from: endDate)
         
         return endDate
         
@@ -62,12 +62,12 @@ class Production: Good {
     //从今日起剩余的天数
     var remainedDay:String {
 
-        if startTime > NSDate() {
+        if startTime > Date() {
             return "未开始"
         }
         else {
             
-            let day = NSDate().differenceInDaysWithDate(endTime)
+            let day = Date().differenceInDaysWithDate(endTime)
             
             return String(day)
         }
@@ -92,17 +92,17 @@ class Production: Good {
 }
 
 
-extension NSDate {
+extension Date {
     
     //计算日期差
-    func differenceInDaysWithDate(date: NSDate) -> Int {
-        let calendar: NSCalendar = NSCalendar.currentCalendar()
+    func differenceInDaysWithDate(_ date: Date) -> Int {
+        let calendar: Calendar = Calendar.current
         
-        let date1 = calendar.startOfDayForDate(self)
-        let date2 = calendar.startOfDayForDate(date)
+        let date1 = calendar.startOfDay(for: self)
+        let date2 = calendar.startOfDay(for: date)
         
-        let components = calendar.components(.Day, fromDate: date1, toDate: date2, options: [])
-        return components.day
+        let components = (calendar as NSCalendar).components(.day, from: date1, to: date2, options: [])
+        return components.day!
     }
     
 }

@@ -9,7 +9,7 @@
 import UIKit
 import Charts
 import SnapKit
-import SwiftString
+
 
 
 enum MaxValueType:String {
@@ -59,11 +59,11 @@ class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDele
         var numsString = [String]()
         
         for num in listOfNumber2 {
-            let fmt = NSNumberFormatter()
-            fmt.numberStyle = .DecimalStyle
-            let numString = fmt.stringFromNumber(num)!
+            let fmt = NumberFormatter()
+            fmt.numberStyle = .decimal
+            let numString = fmt.string(from: NSNumber(value: num))
             
-            numsString.append(numString)
+            numsString.append(numString!)
         }
         
         return numsString
@@ -74,13 +74,13 @@ class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDele
     
     var listOfDateString = [String]()
     
-    var currentPageChangedHandler:((index:Int)->())?
+    var currentPageChangedHandler:((_ index:Int)->())?
     
     override func layoutSubviews() {
         
         topLabel.textColor = UIColor ( red: 0.5216, green: 0.3765, blue: 0.2863, alpha: 1.0 )
         topLabel.text = listOfNumber.last
-        topLabel.textAlignment = .Center
+        topLabel.textAlignment = .center
         addSubview(topLabel)
         topLabel.snp_makeConstraints { (make) in
             make.width.equalTo(screenWidth)
@@ -92,7 +92,7 @@ class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDele
         
         dateLabel.textColor = UIColor ( red: 0.5216, green: 0.3765, blue: 0.2863, alpha: 1.0 )
         dateLabel.text = listOfNumber.last
-        dateLabel.textAlignment = .Center
+        dateLabel.textAlignment = .center
         addSubview(dateLabel)
         dateLabel.snp_makeConstraints { (make) in
             make.width.equalTo(screenWidth)
@@ -104,12 +104,12 @@ class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDele
         
         
         rightLabel01.textColor = UIColor ( red: 0.5216, green: 0.3765, blue: 0.2863, alpha: 1.0 )
-        rightLabel01.font = UIFont.systemFontOfSize(12)
+        rightLabel01.font = UIFont.systemFont(ofSize: 12)
         
         let str01 = String(currentMonthAvgVaule)
         
         rightLabel01.text = "当月平均:" + str01
-        rightLabel01.textAlignment = .Left
+        rightLabel01.textAlignment = .left
         addSubview(rightLabel01)
         rightLabel01.snp_makeConstraints { (make) in
             make.left.equalTo(self).offset(15)
@@ -120,10 +120,10 @@ class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDele
         
         
         rightLabel02.textColor = UIColor ( red: 0.5216, green: 0.3765, blue: 0.2863, alpha: 1.0 )
-        rightLabel02.font = UIFont.systemFontOfSize(12)
+        rightLabel02.font = UIFont.systemFont(ofSize: 12)
         let str02 = String(currentMonthAvgVaule)
         rightLabel02.text = "当月累计:" + str02
-        rightLabel02.textAlignment = .Left
+        rightLabel02.textAlignment = .left
         addSubview(rightLabel02)
         rightLabel02.snp_makeConstraints { (make) in
             make.left.equalTo(self).offset(15)
@@ -139,7 +139,7 @@ class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDele
     func setScrollView() {
         
         
-        pageScrollView.frame = CGRectMake((screenWidth - 50)/2 , ddHeight * 0.25, 50, ddHeight * 0.5)
+        pageScrollView.frame = CGRect(x: (screenWidth - 50)/2 , y: ddHeight * 0.25, width: 50, height: ddHeight * 0.5)
         pageScrollView.delegate = self
         pageScrollView.dataSource = self
         pageScrollView.padding = 25;
@@ -149,17 +149,17 @@ class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDele
     
     func moveToLastPage() {
         
-        self.pageScrollView.moveToPageAt(listOfNumber.count - 1, animeted: false)
-        guard let cell = self.pageScrollView.viewForRowAtIndex(listOfNumber.count - 1) as? VoiceRecordSampleCell else {return}
+        self.pageScrollView.moveToPage(at: listOfNumber.count - 1, animeted: false)
+        guard let cell = self.pageScrollView.viewForRow(at: listOfNumber.count - 1) as? VoiceRecordSampleCell else {return}
         cell.color = UIColor ( red: 0.5216, green: 0.3765, blue: 0.2863, alpha: 1.0 )
     }
 
-    func numberOfPageInPageScrollView(pageScrollView: OTPageScrollView!) -> Int {
+    func numberOfPage(in pageScrollView: OTPageScrollView!) -> Int {
         
         return listOfNumber.count
     }
     
-    func pageScrollView(pageScrollView: OTPageScrollView!, viewForRowAtIndex index: Int32) -> UIView! {
+    func pageScrollView(_ pageScrollView: OTPageScrollView!, viewForRowAt index: Int32) -> UIView! {
         
         let view = VoiceRecordSampleCell(frame: CGRect(x: 0, y: 0, width: 25, height: ddHeight * 0.5))
         let item = Int(index)
@@ -178,42 +178,42 @@ class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDele
         
     }
     
-    func sizeCellForPageScrollView(pageScrollView: OTPageScrollView!) -> CGSize {
+    func sizeCell(for pageScrollView: OTPageScrollView!) -> CGSize {
         
-        return CGSizeMake(25, ddHeight * 0.5)
+        return CGSize(width: 25, height: ddHeight * 0.5)
     }
     
-    func pageScrollView(pageScrollView: OTPageScrollView!, didTapPageAtIndex index: Int) {
+    func pageScrollView(_ pageScrollView: OTPageScrollView!, didTapPageAt index: Int) {
         
-        currentPageChangedHandler?(index: index)
-        
-    }
-    
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        currentPageChangedHandler?(index)
         
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         updateColor(scrollView)
     }
     
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
         let index = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
-        currentPageChangedHandler?(index: index)
+        currentPageChangedHandler?(index)
         
     }
     
-    func updateColor(scrollView:UIScrollView) {
+    func updateColor(_ scrollView:UIScrollView) {
         
         for index in 0..<listOfNumber.count {
-            let cell = self.pageScrollView.viewForRowAtIndex(index) as! VoiceRecordSampleCell
+            let cell = self.pageScrollView.viewForRow(at: index) as! VoiceRecordSampleCell
             cell.color = UIColor ( red: 0.8275, green: 0.7216, blue: 0.5529, alpha: 1.0 )
         }
         
         let index = scrollView.contentOffset.x / scrollView.frame.size.width
-        guard let cell = self.pageScrollView.viewForRowAtIndex(Int(index)) as? VoiceRecordSampleCell else {return}
+        guard let cell = self.pageScrollView.viewForRow(at: Int(index)) as? VoiceRecordSampleCell else {return}
         cell.color = UIColor ( red: 0.5216, green: 0.3765, blue: 0.2863, alpha: 1.0 )
         
         topLabel.text = listOfNumber[Int(index)]
@@ -221,14 +221,14 @@ class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDele
         dateLabel.text = listOfDateString[Int(index)]
     }
     
-    func updateProgress(scrollView: UIScrollView) {
+    func updateProgress(_ scrollView: UIScrollView) {
         
         let currentCenterX = currentCenter(scrollView).x
         let bounds = self.pageScrollView.bounds
         
         for view in allTopCell() {
             
-            let progress = (view.center.x - currentCenterX) / CGRectGetWidth(bounds) * CGFloat(1)
+            let progress = (view.center.x - currentCenterX) / bounds.width * CGFloat(1)
             updateView(view, withProgress: progress)
         }
         
@@ -240,7 +240,7 @@ class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDele
         
         for i in 0..<listOfNumber.count {
             
-            let cell = self.pageScrollView.viewForRowAtIndex(i) as! VoiceRecordSampleCell
+            let cell = self.pageScrollView.viewForRow(at: i) as! VoiceRecordSampleCell
             cells.append(cell)
             
         }
@@ -249,15 +249,15 @@ class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDele
     }
     
     
-    private func updateView(view: UIView, withProgress progress: CGFloat) {
+    fileprivate func updateView(_ view: UIView, withProgress progress: CGFloat) {
         
         let size:CGFloat = 25
         
-        var transform = CGAffineTransformIdentity
+        var transform = CGAffineTransform.identity
         // scale
         let scale = (1.4 - 0.3 * (fabs(progress)))
         
-        transform = CGAffineTransformScale(transform, scale, scale)
+        transform = transform.scaledBy(x: scale, y: scale)
         
         // translate
         var translate = size / 4 * progress
@@ -267,17 +267,17 @@ class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDele
         else if progress < -1 {
             translate = -size / 4
         }
-        transform = CGAffineTransformTranslate(transform, translate, 0)
+        transform = transform.translatedBy(x: translate, y: 0)
         
         view.transform = transform
         
     }
     
-    private func currentCenter(scrollView: UIScrollView) -> CGPoint {
+    fileprivate func currentCenter(_ scrollView: UIScrollView) -> CGPoint {
         let bounds = self.pageScrollView.bounds
-        let x = scrollView.contentOffset.x + CGRectGetWidth(bounds) / 2.0
+        let x = scrollView.contentOffset.x + bounds.width / 2.0
         let y = scrollView.contentOffset.y
-        return CGPointMake(x, y)
+        return CGPoint(x: x, y: y)
     }
 
 

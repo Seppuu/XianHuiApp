@@ -15,25 +15,25 @@ class pickerCell: UITableViewCell {
     
     var defaultRow = 0
     
-    var dateChangeHandler:((date:NSDate)->())?
+    var dateChangeHandler:((_ date:Date)->())?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
-        self.selectionStyle = .None
+        self.selectionStyle = .none
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
     
-    @IBAction func dateValueChanged(sender: UIDatePicker) {
+    @IBAction func dateValueChanged(_ sender: UIDatePicker) {
         
-        dateChangeHandler?(date:sender.date)
+        dateChangeHandler?(sender.date)
     }
     
 }

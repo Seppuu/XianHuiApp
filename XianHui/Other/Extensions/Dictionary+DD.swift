@@ -9,7 +9,7 @@
 import Foundation
 
 
-func += <K,V> (inout left: Dictionary<K,V>, right: Dictionary<K,V>?) {
+func += <K,V> (left: inout Dictionary<K,V>, right: Dictionary<K,V>?) {
     guard let right = right else { return }
     right.forEach { key, value in
         left.updateValue(value, forKey: key)

@@ -20,13 +20,13 @@ class SubscriptionTopView: UIView,UICollectionViewDelegate,UICollectionViewDeleg
     
     var namesOfForm = [String]()
     
-    var authorCellTapHandler:((authorID:String,authorName:String)->())?
+    var authorCellTapHandler:((_ authorID:String,_ authorName:String)->())?
     
-    var cellTapHandler:((index:Int)->())?
+    var cellTapHandler:((_ index:Int)->())?
     
     class func instanceFromNib() -> SubscriptionTopView {
         
-        return UINib(nibName: "SubscriptionTopView", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! SubscriptionTopView
+        return UINib(nibName: "SubscriptionTopView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! SubscriptionTopView
     }
     
     override func didMoveToWindow() {
@@ -43,7 +43,7 @@ class SubscriptionTopView: UIView,UICollectionViewDelegate,UICollectionViewDeleg
         collectionView.backgroundColor = UIColor.ddViewBackGroundColor()
     
         let nib = UINib(nibName: cellID, bundle: nil)
-        collectionView.registerNib(nib, forCellWithReuseIdentifier: cellID)
+        collectionView.register(nib, forCellWithReuseIdentifier: cellID)
         
         collectionView.reloadData()
         
@@ -51,47 +51,47 @@ class SubscriptionTopView: UIView,UICollectionViewDelegate,UICollectionViewDeleg
 
     // MARK: UICollectionView Methods.
     
-    func numberOfItemsInSection(section: Int) -> Int {
+    func numberOfItemsInSection(_ section: Int) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSizeMake(70, 70)
+        return CGSize(width: 70, height: 70)
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         
         return 0.0
         
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
         return 0.0
     }
     
     
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return namesOfForm.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellID, forIndexPath: indexPath) as! SubscriptionDetailCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! SubscriptionDetailCell
         
         cell.avatarView.backgroundColor = UIColor.init(hexString: "#6CC3EC")
         
-        cell.typeLabel.font = UIFont.systemFontOfSize(12)
-        cell.typeLabel.text = namesOfForm[indexPath.row]
+        cell.typeLabel.font = UIFont.systemFont(ofSize: 12)
+        cell.typeLabel.text = namesOfForm[(indexPath as NSIndexPath).row]
 
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        cellTapHandler?(index:indexPath.row)
+        cellTapHandler?((indexPath as NSIndexPath).row)
     }
 
 

@@ -9,29 +9,29 @@
 import UIKit
 import CoreLocation
 
-let OwnSystemLoginSuccessNoti = "OwnSystemLoginSuccessNoti"
+let OwnSystemLoginSuccessNoti = NSNotification.Name("OwnSystemLoginSuccessNoti")
 
-let XHAppNewUserFirstLoginNoti = "XHAppNewUserFirstLoginNoti"
+let XHAppNewUserFirstLoginNoti = NSNotification.Name("XHAppNewUserFirstLoginNoti")
 
 var IOS10_OR_LATER:Bool {
-    return (UIDevice.currentDevice().systemVersion.toFloat() >= 10.0)
+    return (UIDevice.current.systemVersion.toFloat()! >= Float(10.0))
 }
 
 var IOS9_OR_LATER:Bool {
-    return (UIDevice.currentDevice().systemVersion.toFloat() >= 9.0)
+    return (UIDevice.current.systemVersion.toFloat()! >= Float(9.0))
 }
 
 var IOS8_OR_LATER:Bool {
-    return (UIDevice.currentDevice().systemVersion.toFloat() >= 8.0)
+    return (UIDevice.current.systemVersion.toFloat()! >= Float(8.0))
 }
 
 var IOS7_OR_LATER:Bool {
-    return (UIDevice.currentDevice().systemVersion.toFloat() >= 7.0)
+    return (UIDevice.current.systemVersion.toFloat()! >= Float(7.0))
 }
 
 
-let screenWidth = UIScreen.mainScreen().bounds.size.width
-let screenHeight = UIScreen.mainScreen().bounds.size.height
+let screenWidth = UIScreen.main.bounds.size.width
+let screenHeight = UIScreen.main.bounds.size.height
 
 let DDTimeNeverReach = 12000
 

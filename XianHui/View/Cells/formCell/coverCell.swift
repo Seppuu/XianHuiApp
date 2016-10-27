@@ -32,16 +32,16 @@ class coverCell: UITableViewCell {
         
         coverImageView.layer.cornerRadius = coverImageView.ddWidth/2
         coverImageView.layer.masksToBounds = true
-        coverImageView.backgroundColor = UIColor.whiteColor()
-        coverImageView.layer.borderColor = UIColor ( red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0 ).CGColor
+        coverImageView.backgroundColor = UIColor.white
+        coverImageView.layer.borderColor = UIColor ( red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0 ).cgColor
         coverImageView.layer.borderWidth = 1.0
         
         
-        self.selectionStyle = .None
+        self.selectionStyle = .none
         
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

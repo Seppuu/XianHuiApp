@@ -34,10 +34,10 @@ class GoodListVC: BaseViewController {
     
     var customer:Customer!
     
-    var confirmTapHandler:((projectSelected:[Project],prodsSelected:[Production])->())?
+    var confirmTapHandler:((_ projectSelected:[Project],_ prodsSelected:[Production])->())?
     
     override func viewDidLoad() {
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
         
         setNavBarItem()
         
@@ -75,7 +75,7 @@ class GoodListVC: BaseViewController {
         
     }
     
-    func getLastBoughtProjectWith(json:[JSON]) -> [Project] {
+    func getLastBoughtProjectWith(_ json:[JSON]) -> [Project] {
         
         var list = [Project]()
         
@@ -100,7 +100,7 @@ class GoodListVC: BaseViewController {
     }
     
     
-    func getLastBoughtProductionWith(json:[JSON]) -> [Production] {
+    func getLastBoughtProductionWith(_ json:[JSON]) -> [Production] {
         
         var list = [Production]()
         
@@ -125,7 +125,7 @@ class GoodListVC: BaseViewController {
     }
     
 
-    func getListOfProjectWith(json:[JSON]) -> [Project] {
+    func getListOfProjectWith(_ json:[JSON]) -> [Project] {
         
         var listOfPro = [Project]()
         
@@ -185,10 +185,10 @@ class GoodListVC: BaseViewController {
         listOfPro.forEach{
             
             if $0.hasCardList == true {
-                let index = listOfPro.indexOf($0)!
-                let item = listOfPro.removeAtIndex(index)
+                let index = listOfPro.index(of: $0)!
+                let item = listOfPro.remove(at: index)
                 
-                listOfPro.insert(item, atIndex: 0)
+                listOfPro.insert(item, at: 0)
             }
             
         }
@@ -197,10 +197,10 @@ class GoodListVC: BaseViewController {
         listOfPro.forEach{
             
             if $0.selected == true {
-                let index = listOfPro.indexOf($0)!
-                let item = listOfPro.removeAtIndex(index)
+                let index = listOfPro.index(of: $0)!
+                let item = listOfPro.remove(at: index)
                 
-                listOfPro.insert(item, atIndex: 0)
+                listOfPro.insert(item, at: 0)
             }
             
         }
@@ -209,7 +209,7 @@ class GoodListVC: BaseViewController {
         return listOfPro
     }
     
-    func getListOfProdWith(json:[JSON]) -> [Production] {
+    func getListOfProdWith(_ json:[JSON]) -> [Production] {
 
         var listOfProd = [Production]()
         
@@ -269,10 +269,10 @@ class GoodListVC: BaseViewController {
         listOfProd.forEach{
             
             if $0.hasCardList == true {
-                let index = listOfProd.indexOf($0)!
-                let item = listOfProd.removeAtIndex(index)
+                let index = listOfProd.index(of: $0)!
+                let item = listOfProd.remove(at: index)
                 
-                listOfProd.insert(item, atIndex: 0)
+                listOfProd.insert(item, at: 0)
             }
             
         }
@@ -281,10 +281,10 @@ class GoodListVC: BaseViewController {
         listOfProd.forEach{
             
             if $0.selected == true {
-                let index = listOfProd.indexOf($0)!
-                let item = listOfProd.removeAtIndex(index)
+                let index = listOfProd.index(of: $0)!
+                let item = listOfProd.remove(at: index)
                 
-                listOfProd.insert(item, atIndex: 0)
+                listOfProd.insert(item, at: 0)
             }
             
         }
@@ -296,17 +296,17 @@ class GoodListVC: BaseViewController {
     
     func setTableView() {
         
-        tableView = UITableView(frame: view.bounds, style: .Grouped)
+        tableView = UITableView(frame: view.bounds, style: .grouped)
         tableView.delegate = self
         tableView.dataSource = self
         
         view.addSubview(tableView)
         
         let nib = UINib(nibName: typeCellId, bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: typeCellId)
+        tableView.register(nib, forCellReuseIdentifier: typeCellId)
         
         let nib2 = UINib(nibName: cellId, bundle: nil)
-        tableView.registerNib(nib2, forCellReuseIdentifier: cellId)
+        tableView.register(nib2, forCellReuseIdentifier: cellId)
         
     }
     
@@ -314,18 +314,18 @@ class GoodListVC: BaseViewController {
     
     func setNavBarItem() {
         
-        let rightBar = UIBarButtonItem(title: "确定", style: .Done, target: self, action: #selector(GoodListVC.confirmTap))
+        let rightBar = UIBarButtonItem(title: "确定", style: .done, target: self, action: #selector(GoodListVC.confirmTap))
         
         navigationItem.rightBarButtonItem = rightBar
         
-        let leftBar = UIBarButtonItem(title: "撤销", style: .Done, target: self, action: #selector(GoodListVC.cancelTap))
+        let leftBar = UIBarButtonItem(title: "撤销", style: .done, target: self, action: #selector(GoodListVC.cancelTap))
         
         navigationItem.leftBarButtonItem = leftBar
         
         segment = UISegmentedControl(items: ["项目","产品"])
         segment.frame = CGRect(x: 0, y: 0, width: 120, height: 30)
         segment.selectedSegmentIndex = 0
-        segment.addTarget(self, action: #selector(GoodListVC.segmentVauleChanged(_:)), forControlEvents: .ValueChanged)
+        segment.addTarget(self, action: #selector(GoodListVC.segmentVauleChanged(_:)), for: .valueChanged)
         
         navigationItem.titleView = segment
         
@@ -351,31 +351,31 @@ class GoodListVC: BaseViewController {
             }
         })
         
-        segment.setTitle("项目(\(projectSelectCount))", forSegmentAtIndex: 0)
-        segment.setTitle("产品(\(productionSelectCount))", forSegmentAtIndex: 1)
+        segment.setTitle("项目(\(projectSelectCount))", forSegmentAt: 0)
+        segment.setTitle("产品(\(productionSelectCount))", forSegmentAt: 1)
     }
     
-    func segmentVauleChanged(sender:UISegmentedControl) {
+    func segmentVauleChanged(_ sender:UISegmentedControl) {
         
         tableView.reloadData()
     }
     
     func confirmTap() {
          passData()
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     func cancelTap() {
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
 //        let path = NSIndexPath(forRow: 0, inSection: 1)
@@ -402,7 +402,7 @@ class GoodListVC: BaseViewController {
             
         }
         
-        self.confirmTapHandler?(projectSelected:proSelected,prodsSelected:prodsSelected)
+        self.confirmTapHandler?(proSelected,prodsSelected)
     }
     
     func toGoodRecordVC() {
@@ -419,23 +419,23 @@ class GoodListVC: BaseViewController {
     
     var projectTapped:Project?
     
-    func showDetailViewWithInTableView(row:Int,good:Project) {
+    func showDetailViewWithInTableView(_ row:Int,good:Project) {
         
         projectTapped = good
         
-        let path = NSIndexPath(forItem: row + 1, inSection: 1)
+        let path = IndexPath(item: row + 1, section: 1)
         showDetail = true
         detailCellRow = row + 1
-        tableView.insertRowsAtIndexPaths([path], withRowAnimation: .Fade)
+        tableView.insertRows(at: [path], with: .fade)
         
     }
     
-    func hideDetailViewWithInTableView(row:Int,good:Project) {
+    func hideDetailViewWithInTableView(_ row:Int,good:Project) {
         projectTapped = nil
-        let path = NSIndexPath(forItem: detailCellRow, inSection: 1)
+        let path = IndexPath(item: detailCellRow, section: 1)
         showDetail = false
         
-        tableView.deleteRowsAtIndexPaths([path], withRowAnimation: .Fade)
+        tableView.deleteRows(at: [path], with: .fade)
         
         if detailCellRow == row + 1 {
             detailCellRow = nil
@@ -454,13 +454,13 @@ class GoodListVC: BaseViewController {
 extension GoodListVC:UITableViewDelegate,UITableViewDataSource {
     
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         
        return 2
         
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if section == 0 {
             return segment.selectedSegmentIndex == 0 ? projectsBought.count : prodsBought.count
@@ -476,9 +476,9 @@ extension GoodListVC:UITableViewDelegate,UITableViewDataSource {
         
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if showDetail == true && indexPath.row == detailCellRow {
+        if showDetail == true && (indexPath as NSIndexPath).row == detailCellRow {
             
             if segment.selectedSegmentIndex == 0 {
                 //项目
@@ -500,7 +500,7 @@ extension GoodListVC:UITableViewDelegate,UITableViewDataSource {
         
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         if section == 0 {
             if segment.selectedSegmentIndex == 0 {
@@ -515,7 +515,7 @@ extension GoodListVC:UITableViewDelegate,UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         if section == 0 {
             
@@ -523,10 +523,10 @@ extension GoodListVC:UITableViewDelegate,UITableViewDataSource {
             let label = UILabel(frame: CGRect(x: 15, y: 0, width:200, height: 21))
             label.center.y = container.center.y
             label.text = "更多的消费记录"
-            label.userInteractionEnabled = true
-            label.textAlignment = .Left
+            label.isUserInteractionEnabled = true
+            label.textAlignment = .left
             label.textColor = UIColor ( red: 0.0, green: 0.5415, blue: 0.9962, alpha: 1.0 )
-            label.font = UIFont.systemFontOfSize(14)
+            label.font = UIFont.systemFont(ofSize: 14)
             label.backgroundColor = UIColor.ddViewBackGroundColor()
             
             let tap = UITapGestureRecognizer(target: self, action: #selector(GoodListVC.toGoodRecordVC))
@@ -548,7 +548,7 @@ extension GoodListVC:UITableViewDelegate,UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if section == 1 {
             if (segment.selectedSegmentIndex == 0) {
@@ -563,18 +563,18 @@ extension GoodListVC:UITableViewDelegate,UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == 0 {
+        if (indexPath as NSIndexPath).section == 0 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(typeCellId, forIndexPath: indexPath) as! typeCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: typeCellId, for: indexPath) as! typeCell
             if segment.selectedSegmentIndex == 0 {
-                let good = projectsBought[indexPath.row]
+                let good = projectsBought[(indexPath as NSIndexPath).row]
                 cell.leftLabel.text = good.name
                 cell.typeLabel.text = good.time
             }
             else {
-                let good = prodsBought[indexPath.row]
+                let good = prodsBought[(indexPath as NSIndexPath).row]
                 cell.leftLabel.text = good.name
                 cell.typeLabel.text = good.time
             }
@@ -583,11 +583,11 @@ extension GoodListVC:UITableViewDelegate,UITableViewDataSource {
         }
         else {
             
-            if showDetail == true && detailCellRow == indexPath.row {
+            if showDetail == true && detailCellRow == (indexPath as NSIndexPath).row {
                 
                 //show detail cell
                 let cellID = "cell"
-                let cell = UITableViewCell(style: .Default, reuseIdentifier: cellID)
+                let cell = UITableViewCell(style: .default, reuseIdentifier: cellID)
                 
                 let detaileView = GoodDetailView.instanceFromNib()
                 detaileView.frame = cell.bounds
@@ -611,24 +611,24 @@ extension GoodListVC:UITableViewDelegate,UITableViewDataSource {
             else {
                 
                 let cellID = "CheckBoxCell"
-                var cell = tableView.dequeueReusableCellWithIdentifier(cellID) as? CheckBoxCell
+                var cell = tableView.dequeueReusableCell(withIdentifier: cellID) as? CheckBoxCell
                 
                 if cell == nil {
                     let nib = UINib(nibName: cellID, bundle: nil)
-                    tableView.registerNib(nib, forCellReuseIdentifier: cellID)
-                    cell = tableView.dequeueReusableCellWithIdentifier(cellID) as? CheckBoxCell
+                    tableView.register(nib, forCellReuseIdentifier: cellID)
+                    cell = tableView.dequeueReusableCell(withIdentifier: cellID) as? CheckBoxCell
                 }
                 
                 
                 cell?.rightButtonTapHandler = {
                     
                 }
-                cell!.selectionStyle = .None
+                cell!.selectionStyle = .none
                 var good:Good!
                 if segment.selectedSegmentIndex == 0 {
-                    good = projects[indexPath.row]
+                    good = projects[(indexPath as NSIndexPath).row]
                     
-                    let project = projects[indexPath.row]
+                    let project = projects[(indexPath as NSIndexPath).row]
                     
                     if project.hasCardList == true {
                         cell!.nameLabel.textColor = UIColor ( red: 0.0, green: 0.4868, blue: 0.9191, alpha: 1.0 )
@@ -639,10 +639,10 @@ extension GoodListVC:UITableViewDelegate,UITableViewDataSource {
                             times += card.cardTimesLeft
                         }
                         let title = String(times) + "次"
-                        cell!.rightButton.setTitle(title, forState: .Normal)
+                        cell!.rightButton.setTitle(title, for: UIControlState())
                     }
                     else {
-                        cell!.nameLabel.textColor = UIColor.darkTextColor()
+                        cell!.nameLabel.textColor = UIColor.darkText
                         cell!.rightButton.alpha = 0.0
                     }
                     
@@ -651,9 +651,9 @@ extension GoodListVC:UITableViewDelegate,UITableViewDataSource {
                 else {
                     
                     
-                    good = prods[indexPath.row]
+                    good = prods[(indexPath as NSIndexPath).row]
                     
-                    let prod = prods[indexPath.row]
+                    let prod = prods[(indexPath as NSIndexPath).row]
                     
                     if prod.hasCardList == true {
                         cell!.nameLabel.textColor = UIColor ( red: 0.0, green: 0.4868, blue: 0.9191, alpha: 1.0 )
@@ -664,10 +664,10 @@ extension GoodListVC:UITableViewDelegate,UITableViewDataSource {
                             times += card.cardTimesLeft
                         }
                         let title = String(times) + "次"
-                        cell!.rightButton.setTitle(title, forState: .Normal)
+                        cell!.rightButton.setTitle(title, for: UIControlState())
                     }
                     else {
-                        cell!.nameLabel.textColor = UIColor.darkTextColor()
+                        cell!.nameLabel.textColor = UIColor.darkText
                         cell!.rightButton.alpha = 0.0
                     }
                 }
@@ -684,16 +684,16 @@ extension GoodListVC:UITableViewDelegate,UITableViewDataSource {
 
                 
                 if good.type == .project {
-                    let project = projects[indexPath.row]
+                    let project = projects[(indexPath as NSIndexPath).row]
                     cell!.rightButtonTapHandler = {
                         
                         if project.hasCardList == false {return}
                         
                         if self.showDetail == false {
-                            self.showDetailViewWithInTableView(indexPath.row, good: project)
+                            self.showDetailViewWithInTableView((indexPath as NSIndexPath).row, good: project)
                         }
                         else {
-                            self.hideDetailViewWithInTableView(indexPath.row, good: project)
+                            self.hideDetailViewWithInTableView((indexPath as NSIndexPath).row, good: project)
                         }
                         
                     }
@@ -710,19 +710,19 @@ extension GoodListVC:UITableViewDelegate,UITableViewDataSource {
         
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
-        if indexPath.section == 1 {
+        if (indexPath as NSIndexPath).section == 1 {
             var good:Good!
             if segment.selectedSegmentIndex == 0 {
-                good = projects[indexPath.row]
+                good = projects[(indexPath as NSIndexPath).row]
             }
             else {
-                good = prods[indexPath.row]
+                good = prods[(indexPath as NSIndexPath).row]
             }
             
-            guard let cell = tableView.cellForRowAtIndexPath(indexPath) as? CheckBoxCell else {return}
+            guard let cell = tableView.cellForRow(at: indexPath) as? CheckBoxCell else {return}
             
             if good.selected == false {
                 

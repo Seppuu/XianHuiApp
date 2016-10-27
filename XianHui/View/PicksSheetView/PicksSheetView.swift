@@ -12,9 +12,9 @@ class PicksSheetView: UIView,UITableViewDelegate,UITableViewDataSource {
     
     var tableView:UITableView!
     
-    private let sheetCellId = "SheetCell"
+    fileprivate let sheetCellId = "SheetCell"
     
-    private let titles = ["分享","取消"]
+    fileprivate let titles = ["分享","取消"]
     
     var deleteRecordHandler:(()->())?
     
@@ -39,12 +39,12 @@ class PicksSheetView: UIView,UITableViewDelegate,UITableViewDataSource {
     
     func setTableView() {
         
-        tableView = UITableView(frame:self.bounds, style: .Plain)
+        tableView = UITableView(frame:self.bounds, style: .plain)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.scrollEnabled = false
+        tableView.isScrollEnabled = false
         
-        tableView.registerNib(UINib(nibName: sheetCellId, bundle: nil), forCellReuseIdentifier: sheetCellId)
+        tableView.register(UINib(nibName: sheetCellId, bundle: nil), forCellReuseIdentifier: sheetCellId)
         addSubview(tableView)
         
         tableView.reloadData()
@@ -52,35 +52,35 @@ class PicksSheetView: UIView,UITableViewDelegate,UITableViewDataSource {
     
     
     //MARK: TableView
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return titles.count
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(sheetCellId) as! SheetCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: sheetCellId) as! SheetCell
         
-        cell.iconImageView.backgroundColor = UIColor.brownColor()
-        cell.titleLabel.text = titles[indexPath.row]
+        cell.iconImageView.backgroundColor = UIColor.brown
+        cell.titleLabel.text = titles[(indexPath as NSIndexPath).row]
         
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.row == 0 {
+        if (indexPath as NSIndexPath).row == 0 {
             shareTapHandler?()
            
         }
-        else if indexPath.row == 1 {
+        else if (indexPath as NSIndexPath).row == 1 {
             cancelHandler?()
         }
     }

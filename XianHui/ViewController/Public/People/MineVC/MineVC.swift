@@ -18,7 +18,7 @@ class MineVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
         setTableView()
         
     }
@@ -30,7 +30,7 @@ class MineVC: BaseViewController {
     
     func setTableView() {
         
-        tableView = UITableView(frame: CGRectMake(0, 0, screenWidth, screenWidth), style: .Plain)
+        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenWidth), style: .plain)
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
@@ -52,31 +52,31 @@ class MineVC: BaseViewController {
 
 extension MineVC:UITableViewDelegate,UITableViewDataSource {
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return titles.count
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell()
-        cell.accessoryType = .DisclosureIndicator
-        cell.textLabel?.text = titles[indexPath.item]
+        cell.accessoryType = .disclosureIndicator
+        cell.textLabel?.text = titles[(indexPath as NSIndexPath).item]
         
         return cell
         
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.row == 0{
+        if (indexPath as NSIndexPath).row == 0{
             let vc = PasswordSettingVC()
             
             navigationController?.pushViewController(vc, animated: true)
@@ -85,7 +85,7 @@ extension MineVC:UITableViewDelegate,UITableViewDataSource {
             
         }
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     

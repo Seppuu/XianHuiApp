@@ -40,7 +40,7 @@ class CustomerCardDetailVC: BaseTableViewController {
         
     }
     
-    func makeData(datas:[JSON]) {
+    func makeData(_ datas:[JSON]) {
         
         let section0 = BaseTableViewModelList()
         

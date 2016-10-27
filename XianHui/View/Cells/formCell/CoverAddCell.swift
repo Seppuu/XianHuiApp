@@ -19,7 +19,7 @@ class CoverAddCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.selectionStyle = .None
+        self.selectionStyle = .none
         
         coverImageView.layer.cornerRadius = coverImageView.ddWidth/2
         coverImageView.layer.masksToBounds = true
@@ -28,7 +28,7 @@ class CoverAddCell: UITableViewCell {
         
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
     }

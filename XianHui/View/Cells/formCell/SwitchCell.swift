@@ -15,23 +15,23 @@ class SwitchCell: UITableViewCell {
     
     @IBOutlet weak var switchButton: UISwitch!
     
-    var switchTapHandler:((on:Bool)->())?
+    var switchTapHandler:((_ on:Bool)->())?
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.selectionStyle = .None
+        self.selectionStyle = .none
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
     
-    @IBAction func switchTap(sender: UISwitch) {
+    @IBAction func switchTap(_ sender: UISwitch) {
         
-        switchTapHandler?(on: sender.on)
+        switchTapHandler?(sender.isOn)
         
     }
     

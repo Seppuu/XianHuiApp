@@ -27,18 +27,18 @@ class WorkCell: UITableViewCell {
         super.awakeFromNib()
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(WorkCell.menuTap))
-        menuLabel.userInteractionEnabled = true
+        menuLabel.isUserInteractionEnabled = true
         menuLabel.addGestureRecognizer(tap)
         
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
-    @objc private func menuTap() {
+    @objc fileprivate func menuTap() {
         menuTapHandler?()
     }
     

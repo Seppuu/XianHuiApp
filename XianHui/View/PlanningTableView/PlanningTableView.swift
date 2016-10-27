@@ -23,9 +23,9 @@ class PlanningTableView: UIView ,UITableViewDelegate,UITableViewDataSource{
     
     override func didMoveToSuperview() {
         
-        backgroundColor = UIColor.whiteColor()
+        backgroundColor = UIColor.white
         
-        tableView = UITableView(frame: bounds, style: .Grouped)
+        tableView = UITableView(frame: bounds, style: .grouped)
         addSubview(tableView)
         
         tableView.delegate = self
@@ -35,11 +35,11 @@ class PlanningTableView: UIView ,UITableViewDelegate,UITableViewDataSource{
     }
     
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if section == 0 {
             return 1
@@ -52,11 +52,11 @@ class PlanningTableView: UIView ,UITableViewDelegate,UITableViewDataSource{
         }
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         if section == 0 {
             return 44
@@ -68,7 +68,7 @@ class PlanningTableView: UIView ,UITableViewDelegate,UITableViewDataSource{
         
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
            return sectionTitle
         }
@@ -80,32 +80,32 @@ class PlanningTableView: UIView ,UITableViewDelegate,UITableViewDataSource{
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellId = "cell"
-        let cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
+        let cell = UITableViewCell(style: .default, reuseIdentifier: cellId)
         
-        if indexPath.section == 0 {
+        if (indexPath as NSIndexPath).section == 0 {
             
             cell.textLabel?.text = "增加项目"
             
             let frame = CGRect(x:screenWidth - 20 - 22, y: 11, width: 22, height: 22)
             let addImageView = UIImageView(frame: frame)
-            addImageView.contentMode = .Center
+            addImageView.contentMode = .center
             addImageView.image = UIImage(named: "addButton")
             
             cell.contentView.addSubview(addImageView)
             
         }
-        else if indexPath.section == 1 {
+        else if (indexPath as NSIndexPath).section == 1 {
             
-            let project = listOfProject[indexPath.row]
+            let project = listOfProject[(indexPath as NSIndexPath).row]
             
             cell.textLabel?.text = project.name
             
         }
         else {
             
-            let prod = listOfProd[indexPath.row]
+            let prod = listOfProd[(indexPath as NSIndexPath).row]
             
             cell.textLabel?.text = prod.name
             
@@ -114,15 +114,15 @@ class PlanningTableView: UIView ,UITableViewDelegate,UITableViewDataSource{
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 0 {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (indexPath as NSIndexPath).section == 0 {
             addRowTapHandler?()
         }
         else {
             
         }
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     

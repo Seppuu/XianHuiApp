@@ -18,7 +18,7 @@ class SubscriptionTopCell: UICollectionViewCell {
     
     var arrowTapHandler:(()->())?
     
-    var authorTapHandler:((authorID:String,authorName:String)->())?
+    var authorTapHandler:((_ authorID:String,_ authorName:String)->())?
     
     var subView: SubscriptionTopView!
     
@@ -29,25 +29,25 @@ class SubscriptionTopCell: UICollectionViewCell {
         
         subView.authorCellTapHandler = { (authorID,authorName) in
             
-            self.authorTapHandler?(authorID:authorID,authorName:authorName)
+            self.authorTapHandler?(authorID,authorName)
         }
         
         leftView.addSubview(subView)
         
         
-        arrowImageView.backgroundColor = UIColor.whiteColor()
+        arrowImageView.backgroundColor = UIColor.white
         let tap = UITapGestureRecognizer(target: self, action: #selector(SubscriptionTopCell.arrowTap))
-        arrowImageView.userInteractionEnabled = true
+        arrowImageView.isUserInteractionEnabled = true
         arrowImageView.addGestureRecognizer(tap)
     }
     
-    func loadDataWith(list:[JSON]) {
+    func loadDataWith(_ list:[JSON]) {
         
         subView.collectionView.reloadData()
     }
     
     
-    @objc private func arrowTap() {
+    @objc fileprivate func arrowTap() {
         
         arrowTapHandler?()
         

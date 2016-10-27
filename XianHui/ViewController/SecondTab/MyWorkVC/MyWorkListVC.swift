@@ -43,7 +43,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
         addNoti()
         setTableView()
         setSearchBar()
@@ -57,7 +57,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     
     func addNoti() {
         //客户计划更新.
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MyWorkListVC.refreshData), name: CustomerPlannHasAddNoti, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MyWorkListVC.refreshData), name:CustomerPlannHasAddNoti, object: nil)
     }
     
     func refreshData() {
@@ -75,7 +75,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     
     var needRefresh = false
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         reSetNavBarItem()
     }
@@ -89,42 +89,42 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     
     func setSearchBar() {
         //searchButton.setTitle("搜索", forState: .Normal)
-        searchButton.setImage(UIImage(named: "searchIcon"), forState: .Normal)
+        searchButton.setImage(UIImage(named: "searchIcon"), for: UIControlState())
         searchButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        searchButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        searchButton.titleLabel?.font = UIFont.systemFontOfSize(14)
-        searchButton.addTarget(self, action: #selector(MyWorkListVC.searchButtonTapped), forControlEvents: .TouchUpInside)
+        searchButton.setTitleColor(UIColor.white, for: UIControlState())
+        searchButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        searchButton.addTarget(self, action: #selector(MyWorkListVC.searchButtonTapped), for: .touchUpInside)
         
         self.searchItem = UIBarButtonItem(customView: searchButton)
         
         
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         //button.setTitle("筛选", forState: .Normal)
-        button.setImage(UIImage(named: "filterIcon"), forState: .Normal)
-        button.titleLabel?.font = UIFont.systemFontOfSize(14)
-        button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        button.addTarget(self, action: #selector(MyWorkListVC.filterButtonTap), forControlEvents: .TouchUpInside)
+        button.setImage(UIImage(named: "filterIcon"), for: UIControlState())
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        button.setTitleColor(UIColor.white, for: UIControlState())
+        button.addTarget(self, action: #selector(MyWorkListVC.filterButtonTap), for: .touchUpInside)
         filterItem = UIBarButtonItem(customView: button)
         
-        negativeSpacer = UIBarButtonItem(barButtonSystemItem: .FixedSpace, target: nil, action: nil)
+        negativeSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         negativeSpacer.width = -10
         
         self.parentVC!.navigationItem.rightBarButtonItems = [negativeSpacer,filterItem,searchItem]
         
         searchBar.showsCancelButton = true
-        searchBar.searchBarStyle = .Minimal
+        searchBar.searchBarStyle = .minimal
         searchBar.delegate = self
-        searchBar.tintColor = UIColor.whiteColor()
+        searchBar.tintColor = UIColor.white
         
         
-        if let textFieldInsideSearchBar = searchBar.valueForKey("searchField") as? UITextField {
+        if let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField {
             
-            textFieldInsideSearchBar.textColor = UIColor.whiteColor()
+            textFieldInsideSearchBar.textColor = UIColor.white
         }
         
-        searchBar.setImage(UIImage(named: "Search Icon"), forSearchBarIcon: UISearchBarIcon.Search, state: UIControlState.Normal)
+        searchBar.setImage(UIImage(named: "Search Icon"), for: UISearchBarIcon.search, state: UIControlState())
 
-        searchBar.setImage(UIImage(named: "Clear"), forSearchBarIcon: .Clear, state: UIControlState.Normal)
+        searchBar.setImage(UIImage(named: "Clear"), for: .clear, state: UIControlState())
         
     }
     
@@ -134,7 +134,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         tableView.removeFromSuperview()
         dataHelper.dataArray = searchResults
         tableView.reloadData()
-        tableView.frame = CGRectMake(0.0, 64, self.parentVC!.view.frame.width, self.parentVC!.view.frame.height - 64)
+        tableView.frame = CGRect(x: 0.0, y: 64, width: self.parentVC!.view.frame.width, height: self.parentVC!.view.frame.height - 64)
         self.parentVC?.view.addSubview(tableView)
         
         tableView.mj_footer.removeFromSuperview()
@@ -147,7 +147,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         tableView.removeFromSuperview()
         dataHelper.dataArray = originalDatas
         tableView.reloadData()
-        tableView.frame = CGRectMake(0.0,0.0, self.view.frame.width, self.view.frame.height)
+        tableView.frame = CGRect(x: 0.0,y: 0.0, width: self.view.frame.width, height: self.view.frame.height)
         view.addSubview(tableView)
         
         tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
@@ -162,11 +162,11 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     
     func searchButtonTapped() {
         
-        UIView.animateWithDuration(0.15, animations: {
+        UIView.animate(withDuration: 0.15, animations: {
             
             self.searchButton.alpha = 0.0
             
-            }) { (finished) in
+            }, completion: { (finished) in
                 
                 self.setSearch()
                 
@@ -175,50 +175,28 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
                 self.searchBar.alpha = 0.0
                 
                 
-                UIView.animateWithDuration(0.15, animations: {
+                UIView.animate(withDuration: 0.15, animations: {
                     self.searchBar.alpha = 1.0
                     }, completion: { (finish) in
                         self.searchBar.becomeFirstResponder()
                         
                 })
                 
-        }
+        }) 
 
     }
 
     func setTableView() {
-        tableView = UITableView(frame: CGRectMake(0.0,0.0, self.view.frame.width, self.view.frame.height), style: .Grouped)
+        tableView = UITableView(frame: CGRect(x: 0.0,y: 0.0, width: self.view.frame.width, height: self.view.frame.height), style: .grouped)
         view.addSubview(tableView)
         tableView.delegate = dataHelper
         tableView.dataSource = dataHelper
-        
-        
         
         // add MJRefresh
         tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: { 
             self.getDataFromServer(self.filterParams)
         })        
-        
-//        dataHelper.cellSelectedHandler = {
-//            (index,objectId,objectName,obj) in
-//            let vc = MyWorkDetailVC()
-//            vc.title = objectName
-//            vc.objectId = objectId
-//            vc.objectName = objectName
-//            vc.type = self.type
-//            
-//            if let plannedNum = obj.thirdTagString.toInt() {
-//                vc.plannedNum = plannedNum
-//            }
-//            else {
-//                
-//            }
-//            
-//            vc.profileJSON = self.jsons[index]
-//            self.parentNavigationController?.pushViewController(vc, animated: true)
-//            
-//        }
-        
+
         dataHelper.cellSelectedHandler = {
             (index,objectId,objectName,obj) in
             
@@ -235,7 +213,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         getFilterData(JSONDictionary())
     }
     
-    func toProfileVC(objectId:Int,index:Int,objName:String) {
+    func toProfileVC(_ objectId:Int,index:Int,objName:String) {
         
         if self.type == .customer {
             let vc = CustomerProfileVC()
@@ -261,7 +239,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
             
         }
         else if self.type == .project {
-            let hud = showHudWith(view, animated: true, mode: .Indeterminate, text: "")
+            let hud = showHudWith(view, animated: true, mode: .indeterminate, text: "")
             
             NetworkManager.sharedManager.getProjectProfileWith(objectId, completion: { (success, json, error) in
                 hud.hide(true)
@@ -284,7 +262,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
             
         }
         else if self.type == .prod {
-            let hud = showHudWith(view, animated: true, mode: .Indeterminate, text: "")
+            let hud = showHudWith(view, animated: true, mode: .indeterminate, text: "")
             NetworkManager.sharedManager.getProdProfileWith(objectId, completion: { (success, json, error) in
                 hud.hide(true)
                 if success == true {
@@ -317,8 +295,8 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     
     func setFilterView() {
         
-        let inView = UIApplication.sharedApplication().keyWindow!
-        self.blackOverlay.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        let inView = UIApplication.shared.keyWindow!
+        self.blackOverlay.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.blackOverlay.frame = CGRect(x: 0, y: 0, width: inView.bounds.width, height: inView.bounds.height)
         
         self.blackOverlay.backgroundColor = UIColor(white: 0.0, alpha: 0.6)
@@ -326,7 +304,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         
         inView.addSubview(self.blackOverlay)
         
-        self.blackOverlay.addTarget(self, action: #selector(MyWorkListVC.blackOverlayTap), forControlEvents: .TouchUpInside)
+        self.blackOverlay.addTarget(self, action: #selector(MyWorkListVC.blackOverlayTap), for: .touchUpInside)
         
         filterView = XHSideFilterView(frame: CGRect(x: 40, y: 0, width: screenWidth - 40, height: screenHeight))
         filterView.frame.origin.x = screenWidth
@@ -377,7 +355,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     
     func filterButtonTap() {
         
-        UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseIn, animations: {
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseIn, animations: {
             self.filterView.frame.origin.x = 40
             self.blackOverlay.alpha = 1.0
             }, completion: nil)
@@ -385,7 +363,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     }
     
     func blackOverlayTap() {
-        UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: {
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
             self.filterView.frame.origin.x = screenWidth
             self.blackOverlay.alpha = 0.0
             }, completion: nil)
@@ -401,7 +379,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         
     }
     
-    func getFilterData(params:JSONDictionary) {
+    func getFilterData(_ params:JSONDictionary) {
         
         var urlString = ""
         switch self.type {
@@ -416,7 +394,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         }
         
         
-        let hud = showHudWith(filterView, animated: true, mode: .Indeterminate, text: "")
+        let hud = showHudWith(filterView, animated: true, mode: .indeterminate, text: "")
         
         NetworkManager.sharedManager.getMyWorkListFilterDataWith(params,urlString:urlString) { (success, json, error) in
             hud.hide(true)
@@ -438,7 +416,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         
     }
     
-    func makeFilterTableViewWith(datas:[JSON])  -> [XHSideFilterDataList] {
+    func makeFilterTableViewWith(_ datas:[JSON])  -> [XHSideFilterDataList] {
         var arr = [XHSideFilterDataList]()
         for data in datas {
             
@@ -490,7 +468,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     
 
     
-    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         
         let text = "暂无数据"
         
@@ -524,7 +502,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         }
     }
     
-    func getDataFromServer(params:JSONDictionary) {
+    func getDataFromServer(_ params:JSONDictionary) {
         var urlString = ""
         switch self.type {
         case .customer:
@@ -563,7 +541,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         
     }
     
-    func getDataWith(datas:[JSON]) {
+    func getDataWith(_ datas:[JSON]) {
         
         var dataArray = [MyWorkObject]()
         
@@ -585,7 +563,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         
     }
     
-    func getCustomerDataWith(datas:[JSON]) -> [MyWorkObject] {
+    func getCustomerDataWith(_ datas:[JSON]) -> [MyWorkObject] {
         
         var list = [Customer]()
         
@@ -661,7 +639,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         return dataArray
     }
     
-    func getEmployeeData(datas:[JSON]) -> [MyWorkObject] {
+    func getEmployeeData(_ datas:[JSON]) -> [MyWorkObject] {
         var list = [Employee]()
         
         for data in datas {
@@ -730,7 +708,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
 
     }
     
-    func getProjectData(datas:[JSON])  -> [MyWorkObject] {
+    func getProjectData(_ datas:[JSON])  -> [MyWorkObject] {
         var list = [Project]()
         
         for data in datas {
@@ -785,7 +763,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
 
     }
     
-    func getProductionData(datas:[JSON])  -> [MyWorkObject] {
+    func getProductionData(_ datas:[JSON])  -> [MyWorkObject] {
         
         var list = [Production]()
         
@@ -840,10 +818,11 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     
 }
 
+//搜索
 extension MyWorkListVC:UISearchBarDelegate{
     
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if let searchText = searchBar.text {
             updateFilteredContentFor(searchText)
         }
@@ -851,13 +830,13 @@ extension MyWorkListVC:UISearchBarDelegate{
     }
     
     
-    func filterContentForSearchText(searchText: String, scope: String = "All") {
+    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         
         tableView.reloadData()
     }
     
     
-    func updateFilteredContentFor(searchString:String) {
+    func updateFilteredContentFor(_ searchString:String) {
         
         let searchDatas = originalDatas
         // 移除之前的查询结果
@@ -871,7 +850,7 @@ extension MyWorkListVC:UISearchBarDelegate{
         //      name CONTAINS[c] "lanmaq"
         //      id CONTAINS[c] "1568689942"
 
-        var searchResults = searchDatas
+        let searchResults = searchDatas
         
         
         var andMatchPredicates = [NSCompoundPredicate]()
@@ -885,7 +864,7 @@ extension MyWorkListVC:UISearchBarDelegate{
         
         let rightExpression = NSExpression.init(forConstantValue: searchString)
         
-        let finalPredicate = NSComparisonPredicate(leftExpression: leftExpression, rightExpression: rightExpression, modifier: .DirectPredicateModifier, type: .ContainsPredicateOperatorType, options: .CaseInsensitivePredicateOption)
+        let finalPredicate = NSComparisonPredicate(leftExpression: leftExpression, rightExpression: rightExpression, modifier: .direct, type: .contains, options: .caseInsensitive)
         
         searchItemsPredicate.append(finalPredicate)
         
@@ -897,7 +876,7 @@ extension MyWorkListVC:UISearchBarDelegate{
         // match up the fields of the Product object
         let finalCompoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: andMatchPredicates)
         
-        if let filterResult = (searchResults as NSArray).filteredArrayUsingPredicate(finalCompoundPredicate) as? [MyWorkObject] {
+        if let filterResult = (searchResults as NSArray).filtered(using: finalCompoundPredicate) as? [MyWorkObject] {
             
             dataHelper.dataArray = filterResult
             self.tableView.reloadData()
@@ -906,23 +885,23 @@ extension MyWorkListVC:UISearchBarDelegate{
     
     }
     
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         
         
-        UIView.animateWithDuration(0.15, animations: {
+        UIView.animate(withDuration: 0.15, animations: {
             
             self.searchBar.alpha = 0.0
             
-            }) { (finish) in
+            }, completion: { (finish) in
                 self.reSetTableView()
                 self.parentVC!.navigationItem.titleView = nil
                 self.parentVC!.navigationItem.rightBarButtonItems = [self.negativeSpacer,self.filterItem,self.searchItem]
                 self.searchButton.alpha = 0.0
                 
-                UIView.animateWithDuration(0.15, animations: {
+                UIView.animate(withDuration: 0.15, animations: {
                     self.searchButton.alpha = 1.0
                     }, completion: nil)
-        }
+        }) 
         
     }
     

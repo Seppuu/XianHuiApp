@@ -37,9 +37,9 @@ extension UIView {
     }
     
     //增加边框虚线
-    func addDashedBorder(strokeColor: UIColor, lineWidth: CGFloat) {
+    func addDashedBorder(_ strokeColor: UIColor, lineWidth: CGFloat) {
         self.layoutIfNeeded()
-        let strokeColor = strokeColor.CGColor
+        let strokeColor = strokeColor.cgColor
         
         let shapeLayer:CAShapeLayer = CAShapeLayer()
         let frameSize = self.frame.size
@@ -47,13 +47,13 @@ extension UIView {
         
         shapeLayer.bounds = shapeRect
         shapeLayer.position = CGPoint(x: frameSize.width/2, y: frameSize.height/2)
-        shapeLayer.fillColor = UIColor.clearColor().CGColor
+        shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.strokeColor = strokeColor
         shapeLayer.lineWidth = lineWidth
         shapeLayer.lineJoin = kCALineJoinRound
         
         shapeLayer.lineDashPattern = [5,5] // adjust to your liking
-        shapeLayer.path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: shapeRect.width, height: shapeRect.height), cornerRadius: self.layer.cornerRadius).CGPath
+        shapeLayer.path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: shapeRect.width, height: shapeRect.height), cornerRadius: self.layer.cornerRadius).cgPath
 
         self.layer.addSublayer(shapeLayer)
     }

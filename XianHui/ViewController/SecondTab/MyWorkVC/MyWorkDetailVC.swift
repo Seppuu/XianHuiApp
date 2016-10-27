@@ -27,7 +27,7 @@ class Order: NSObject {
     
 }
 
-let CustomerPlannHasAddNoti = "CustomerPlannHasAddNoti"
+let CustomerPlannHasAddNoti =  Notification.Name(rawValue: "CustomerPlannHasAddNoti")
 
 class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
@@ -48,7 +48,7 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
         //setNavBarItem()
         addNoti()
         setTableView()
@@ -65,13 +65,13 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
     
     func addNoti() {
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MyWorkDetailVC.hidePlanRemindIfNeed(_:)), name: CustomerPlannHasAddNoti, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MyWorkDetailVC.hidePlanRemindIfNeed(_:)), name: CustomerPlannHasAddNoti, object: nil)
         
     }
     
     func setNavBarItem() {
         
-        let rightBarItem = UIBarButtonItem(title: "资料", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(MyWorkDetailVC.settingTap(_:)))
+        let rightBarItem = UIBarButtonItem(title: "资料", style: UIBarButtonItemStyle.plain, target: self, action: #selector(MyWorkDetailVC.settingTap(_:)))
         navigationItem.rightBarButtonItem = rightBarItem
         
     }
@@ -95,7 +95,7 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
         
     }
     
-    func settingTap(sender:UIBarButtonItem) {
+    func settingTap(_ sender:UIBarButtonItem) {
         
         if self.type == .customer {
             let vc = CustomerProfileVC()
@@ -162,7 +162,7 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
     }
     
     func setTableView() {
-        tableView = UITableView(frame: view.bounds, style: .Grouped)
+        tableView = UITableView(frame: view.bounds, style: .grouped)
         view.addSubview(tableView)
         
         tableView.delegate = self
@@ -182,7 +182,7 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
         
     }
     
-    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         
         let text = "暂无数据"
         
@@ -228,7 +228,7 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
         
     }
     
-    func makeData(datas:[JSON]) {
+    func makeData(_ datas:[JSON]) {
         
         var list = [Order]()
         
@@ -294,12 +294,12 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
             statusLabel.frame =  CGRect(x: 0, y: 64, width: screenWidth, height: 40)
             view.addSubview(statusLabel)
             
-            statusLabel.textColor = UIColor.darkTextColor()
-            statusLabel.textAlignment = .Center
-            statusLabel.backgroundColor = UIColor.whiteColor()
-            statusLabel.font = UIFont.systemFontOfSize(14)
+            statusLabel.textColor = UIColor.darkText
+            statusLabel.textAlignment = .center
+            statusLabel.backgroundColor = UIColor.white
+            statusLabel.font = UIFont.systemFont(ofSize: 14)
             let tap = UITapGestureRecognizer(target: self, action: #selector(MyWorkDetailVC.showPlannSettingVC))
-            statusLabel.userInteractionEnabled = true
+            statusLabel.isUserInteractionEnabled = true
             statusLabel.addGestureRecognizer(tap)
             
             if plannedNum == 0 {
@@ -323,7 +323,7 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
         
     }
     
-    func hidePlanRemindIfNeed(noti:NSNotification) {
+    func hidePlanRemindIfNeed(_ noti:Notification) {
         if let num = noti.object as? Int {
             plannedNum = num
             if num == 0 {
@@ -357,31 +357,31 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
 
 extension MyWorkDetailVC:UITableViewDelegate,UITableViewDataSource {
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
          return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listOfOrder.count
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
     }
     
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellId = "OrderCell"
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? OrderCell
+        var cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? OrderCell
         if cell == nil {
             let nib = UINib(nibName: cellId, bundle: nil)
-            tableView.registerNib(nib, forCellReuseIdentifier: cellId)
-            cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? OrderCell
+            tableView.register(nib, forCellReuseIdentifier: cellId)
+            cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? OrderCell
         }
         
-        cell?.selectionStyle = .None
+        cell?.selectionStyle = .none
         
-        let order = self.listOfOrder[indexPath.row]
+        let order = self.listOfOrder[(indexPath as NSIndexPath).row]
         
         cell?.firstLabel.text = "顾客:" + order.customerName
         cell?.secondLabel.text = "编号:" + order.goodNo

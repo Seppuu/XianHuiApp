@@ -15,14 +15,14 @@ class PhotoManager: NSObject {
     static var sharedManager = PhotoManager()
     
     //解析PHAsset到UIImage.
-    func getAssetThumbnail(asset: PHAsset,completion:(image:UIImage)->()){
-        let manager = PHImageManager.defaultManager()
+    func getAssetThumbnail(_ asset: PHAsset,completion:@escaping (_ image:UIImage)->()){
+        let manager = PHImageManager.default()
         let option = PHImageRequestOptions()
         var thumbnail = UIImage()
-        option.synchronous = true
-        option.resizeMode  = .Fast
+        option.isSynchronous = true
+        option.resizeMode  = .fast
         
-        manager.requestImageForAsset(asset, targetSize: CGSizeMake(1920,1080), contentMode: .AspectFit, options: option, resultHandler: {(result, info)->Void in
+        manager.requestImage(for: asset, targetSize: CGSize(width: 1920,height: 1080), contentMode: .aspectFit, options: option, resultHandler: {(result, info)->Void in
             
             let jepgData2 = UIImageJPEGRepresentation(result!, 0.1)
             
@@ -32,7 +32,7 @@ class PhotoManager: NSObject {
             
             thumbnail = image
             
-            completion(image: thumbnail)
+            completion(thumbnail)
         })
     }
 

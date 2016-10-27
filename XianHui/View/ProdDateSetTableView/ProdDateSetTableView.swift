@@ -28,51 +28,51 @@ class ProdDateSetTableView: UIView , UITableViewDelegate,UITableViewDataSource {
     var showBeginTimePicker  = false
     var showEndTimePicker    = false
     
-    var beginDate = NSDate() {
+    var beginDate = Date() {
         didSet {
             delayEndDate()
         }
     }
     
-    var endDate = NSDate()
+    var endDate = Date()
     
     func delayEndDate() {
         let timeInterval:Double = 1*60*60*24 //一天
-        endDate = NSDate(timeInterval: timeInterval, sinceDate: beginDate)
+        endDate = Date(timeInterval: timeInterval, since: beginDate)
     }
     
     override func didMoveToSuperview() {
         
-        backgroundColor = UIColor.whiteColor()
+        backgroundColor = UIColor.white
         
-        tableView = UITableView(frame: bounds, style: .Grouped)
+        tableView = UITableView(frame: bounds, style: .grouped)
         addSubview(tableView)
         
         tableView.delegate = self
         tableView.dataSource = self
         
         let nib = UINib(nibName: timeSelectCellId, bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: timeSelectCellId)
+        tableView.register(nib, forCellReuseIdentifier: timeSelectCellId)
         
         let nib2 = UINib(nibName: datePickerCellId, bundle: nil)
-        tableView.registerNib(nib2, forCellReuseIdentifier: datePickerCellId)
+        tableView.register(nib2, forCellReuseIdentifier: datePickerCellId)
         
         
         let nib3 = UINib(nibName: ReMarkCellId, bundle: nil)
-        tableView.registerNib(nib3, forCellReuseIdentifier: ReMarkCellId)
+        tableView.register(nib3, forCellReuseIdentifier: ReMarkCellId)
         
         
         
         let nib4 = UINib(nibName: StepperCellId, bundle: nil)
-        tableView.registerNib(nib4, forCellReuseIdentifier: StepperCellId)
+        tableView.register(nib4, forCellReuseIdentifier: StepperCellId)
     }
     
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 2
         }
@@ -92,14 +92,14 @@ class ProdDateSetTableView: UIView , UITableViewDelegate,UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.section == 0 {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (indexPath as NSIndexPath).section == 0 {
             return 44
         }
-        else if indexPath.section == 1 {
+        else if (indexPath as NSIndexPath).section == 1 {
             //时间选择
             if showBeginTimePicker == true {
-                if indexPath.row == 0 || indexPath.row == 2 {
+                if (indexPath as NSIndexPath).row == 0 || (indexPath as NSIndexPath).row == 2 {
                     return 44
                 }
                 else {
@@ -117,24 +117,24 @@ class ProdDateSetTableView: UIView , UITableViewDelegate,UITableViewDataSource {
         
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         return 30
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == 0 {
+        if (indexPath as NSIndexPath).section == 0 {
             
             
-            if indexPath.row == 0 {
-                let cell = tableView.dequeueReusableCellWithIdentifier(timeSelectCellId, forIndexPath: indexPath) as! typeCell
+            if (indexPath as NSIndexPath).row == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: timeSelectCellId, for: indexPath) as! typeCell
                 cell.leftLabel.text = "数量"
                 cell.typeLabel.text = String(production.total) + production.unit
                 return cell
             }
             else {
-                let cell = tableView.dequeueReusableCellWithIdentifier(StepperCellId, forIndexPath: indexPath) as! StepperCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: StepperCellId, for: indexPath) as! StepperCell
                 cell.nameLabel.text = "每日用量/(\(production.unit))"
                 
                 cell.stepperView.minimumValue = 0.0
@@ -142,17 +142,17 @@ class ProdDateSetTableView: UIView , UITableViewDelegate,UITableViewDataSource {
                 cell.stepperView.stepValue = 1.0
                 cell.stepperView.value = self.production.oneTimeUse
                 cell.stepperView.autorepeat = true
-                cell.stepperView.addTarget(self, action: #selector(ProdDateSetTableView.stepValueChanged(_:)), forControlEvents: .ValueChanged)
-                cell.selectionStyle = .None
+                cell.stepperView.addTarget(self, action: #selector(ProdDateSetTableView.stepValueChanged(_:)), for: .valueChanged)
+                cell.selectionStyle = .none
                 return cell
             }
             
             
         }
-        else if indexPath.section == 1 {
-            func returnTextCellWith(text:String,date:NSDate) -> typeCell {
+        else if (indexPath as NSIndexPath).section == 1 {
+            func returnTextCellWith(_ text:String,date:Date) -> typeCell {
                 
-                let textCell = tableView.dequeueReusableCellWithIdentifier(timeSelectCellId, forIndexPath: indexPath) as! typeCell
+                let textCell = tableView.dequeueReusableCell(withIdentifier: timeSelectCellId, for: indexPath) as! typeCell
                 textCell.leftLabel.text = text
                 
                 if date == beginDate {
@@ -162,17 +162,17 @@ class ProdDateSetTableView: UIView , UITableViewDelegate,UITableViewDataSource {
                 return textCell
             }
             
-            func returnDatePickerCell(isBegin:Bool) -> pickerCell {
+            func returnDatePickerCell(_ isBegin:Bool) -> pickerCell {
                 
-                let timePickerCell = tableView.dequeueReusableCellWithIdentifier(datePickerCellId, forIndexPath: indexPath) as! pickerCell
+                let timePickerCell = tableView.dequeueReusableCell(withIdentifier: datePickerCellId, for: indexPath) as! pickerCell
                 
-                timePickerCell.datePickerView.datePickerMode = .Date
+                timePickerCell.datePickerView.datePickerMode = .date
                 
                 //Value change
                 timePickerCell.dateChangeHandler = { [weak self](date) in
                     
                     guard let strongSelf = self else {return}
-                    strongSelf.dateChangeHandler(date)
+                    strongSelf.dateChangeHandler(date as Date)
                     
                 }
                 
@@ -180,15 +180,15 @@ class ProdDateSetTableView: UIView , UITableViewDelegate,UITableViewDataSource {
             }
             
             if showBeginTimePicker == true {
-                if indexPath.row == 0 {
+                if (indexPath as NSIndexPath).row == 0 {
                     
                     return returnTextCellWith("开始日期", date: beginDate)
                 }
-                else if indexPath.row == 1{
+                else if (indexPath as NSIndexPath).row == 1{
                     return returnDatePickerCell(true)
                 }
                 else {
-                    let cell = tableView.dequeueReusableCellWithIdentifier(timeSelectCellId, forIndexPath: indexPath) as! typeCell
+                    let cell = tableView.dequeueReusableCell(withIdentifier: timeSelectCellId, for: indexPath) as! typeCell
                     
                     cell.leftLabel.text = "预定结束日期"
                     
@@ -198,12 +198,12 @@ class ProdDateSetTableView: UIView , UITableViewDelegate,UITableViewDataSource {
                 }
             }
             else {
-                if indexPath.row == 0 {
+                if (indexPath as NSIndexPath).row == 0 {
                     
                     return returnTextCellWith("开始日期", date: beginDate)
                 }
                 else {
-                    let cell = tableView.dequeueReusableCellWithIdentifier(timeSelectCellId, forIndexPath: indexPath) as! typeCell
+                    let cell = tableView.dequeueReusableCell(withIdentifier: timeSelectCellId, for: indexPath) as! typeCell
                     
                     cell.leftLabel.text = "预定结束日期"
                     
@@ -215,63 +215,63 @@ class ProdDateSetTableView: UIView , UITableViewDelegate,UITableViewDataSource {
 
         }
         else {
-            let cell = tableView.dequeueReusableCellWithIdentifier(ReMarkCellId, forIndexPath: indexPath) as! ReMarkCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: ReMarkCellId, for: indexPath) as! ReMarkCell
             cell.textView.placeholder = "您的特别备注"
             
             return cell
         }
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 1 {
+        if (indexPath as NSIndexPath).section == 1 {
             //时间section点击
             sectionOfTimeTapWith(tableView, indexPath: indexPath)
             
         }
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     //
-    func stepValueChanged(sender: ValueStepper) {
+    func stepValueChanged(_ sender: ValueStepper) {
         
         self.production.oneTimeUse = sender.value
         self.production.endTime
         if showBeginTimePicker == true {
-            let path = NSIndexPath(forItem: 2, inSection: 1)
-            self.tableView.reloadRowsAtIndexPaths([path], withRowAnimation: .Fade)
+            let path = IndexPath(item: 2, section: 1)
+            self.tableView.reloadRows(at: [path], with: .fade)
         }
         else {
-            let path = NSIndexPath(forItem: 1, inSection: 1)
-            self.tableView.reloadRowsAtIndexPaths([path], withRowAnimation: .Fade)
+            let path = IndexPath(item: 1, section: 1)
+            self.tableView.reloadRows(at: [path], with: .fade)
         }
         
 
     }
     
     //MARK: 时间选择功能点如下.
-    private func setMinimumDateWith(picker:UIDatePicker,date:NSDate) {
+    fileprivate func setMinimumDateWith(_ picker:UIDatePicker,date:Date) {
         
         picker.minimumDate = date
         
     }
     
-    private func convertDateToTextWith(date:NSDate) -> String {
-        let dateFormatter = NSDateFormatter()
+    fileprivate func convertDateToTextWith(_ date:Date) -> String {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy年MM月dd日"
         
-        return dateFormatter.stringFromDate(date)
+        return dateFormatter.string(from: date)
     }
     
-    private func convertDateToTextWithOutDay(date:NSDate) -> String {
-        let dateFormatter = NSDateFormatter()
+    fileprivate func convertDateToTextWithOutDay(_ date:Date) -> String {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy年MM月dd日"
         
-        return dateFormatter.stringFromDate(date)
+        return dateFormatter.string(from: date)
     }
     
-    private func dateChangeHandler(date:NSDate) {
+    fileprivate func dateChangeHandler(_ date:Date) {
         
         if showBeginTimePicker == true {
             beginDate = date //此时endDate也会改变
@@ -282,11 +282,11 @@ class ProdDateSetTableView: UIView , UITableViewDelegate,UITableViewDataSource {
             
         }
         
-        let path = NSIndexPath(forItem: 2, inSection: 1)
-        self.tableView.reloadRowsAtIndexPaths([path], withRowAnimation: .Fade)
+        let path = IndexPath(item: 2, section: 1)
+        self.tableView.reloadRows(at: [path], with: .fade)
     }
     
-    private func updateBeginTimeCellWith(date:NSDate) {
+    fileprivate func updateBeginTimeCellWith(_ date:Date) {
         
         let time = convertDateToTextWith(date)
         changeBeginDateCellText(time)
@@ -297,28 +297,28 @@ class ProdDateSetTableView: UIView , UITableViewDelegate,UITableViewDataSource {
     }
 
     
-    private func changeBeginDateCellText(time:String) {
+    fileprivate func changeBeginDateCellText(_ time:String) {
         
         //beigin time cell is 0 1 always
-        let indexPath = NSIndexPath(forRow: 0, inSection: 1)
-        guard let cell = tableView.cellForRowAtIndexPath(indexPath) as? typeCell else {return}
+        let indexPath = IndexPath(row: 0, section: 1)
+        guard let cell = tableView.cellForRow(at: indexPath) as? typeCell else {return}
         cell.typeLabel.text = time
         
     }
 
     
-    private func sectionOfTimeTapWith(tableView:UITableView,indexPath:NSIndexPath) {
+    fileprivate func sectionOfTimeTapWith(_ tableView:UITableView,indexPath:IndexPath) {
         
-        if indexPath.row == 0 {
+        if (indexPath as NSIndexPath).row == 0 {
             //起始时间
             showBeginTimePicker = !showBeginTimePicker
-            let indexpath = NSIndexPath(forRow: 1, inSection: 1)
+            let indexpath = IndexPath(row: 1, section: 1)
             if showBeginTimePicker == true {
                 
-                tableView.insertRowsAtIndexPaths([indexpath], withRowAnimation: .Fade)
+                tableView.insertRows(at: [indexpath], with: .fade)
             }
             else {
-                tableView.deleteRowsAtIndexPaths([indexpath], withRowAnimation: .Fade)
+                tableView.deleteRows(at: [indexpath], with: .fade)
             }
             
         }

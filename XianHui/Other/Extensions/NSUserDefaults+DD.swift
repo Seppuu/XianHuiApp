@@ -9,17 +9,17 @@
 import Foundation
 
 
-let isFirstLaunch = NSUserDefaults.isFirstLaunch()
+let isFirstLaunch = UserDefaults.isFirstLaunch()
 //Put the following in NSUserDefaults+isFirstLaunch.swift
 
-extension NSUserDefaults {
+extension UserDefaults {
     // check for is first launch - only true on first invocation after app install, false on all further invocations
     static func isFirstLaunch() -> Bool {
         let firstLaunchFlag = "FirstLaunchFlag"
-        let isFirstLaunch = NSUserDefaults.standardUserDefaults().stringForKey(firstLaunchFlag) == nil
+        let isFirstLaunch = UserDefaults.standard.string(forKey: firstLaunchFlag) == nil
         if (isFirstLaunch) {
-            NSUserDefaults.standardUserDefaults().setObject("false", forKey: firstLaunchFlag)
-            NSUserDefaults.standardUserDefaults().synchronize()
+            UserDefaults.standard.set("false", forKey: firstLaunchFlag)
+            UserDefaults.standard.synchronize()
         }
         return isFirstLaunch
     }

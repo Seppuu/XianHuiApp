@@ -12,24 +12,24 @@ class SegmentCell: UITableViewCell {
 
     @IBOutlet weak var permissionSegment: UISegmentedControl!
     
-    var segmentChangeHandler:((selectedIndex:Int)->())?
+    var segmentChangeHandler:((_ selectedIndex:Int)->())?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.selectionStyle = .None
+        self.selectionStyle = .none
        
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
     
-    @IBAction func segmentTap(sender: UISegmentedControl) {
+    @IBAction func segmentTap(_ sender: UISegmentedControl) {
         
-        segmentChangeHandler?(selectedIndex:sender.selectedSegmentIndex)
+        segmentChangeHandler?(sender.selectedSegmentIndex)
         
     }
     

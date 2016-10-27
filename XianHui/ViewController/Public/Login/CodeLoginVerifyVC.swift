@@ -26,10 +26,10 @@ class CodeLoginVerifyVC: UIViewController {
     
     @IBOutlet weak var callCountLabel: UILabel!
     
-    private var callMeInSeconds = 60 //60s
+    fileprivate var callMeInSeconds = 60 //60s
     
-    private lazy var callMeTimer: NSTimer = {
-        let timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(CodeLoginVerifyVC.tryCallMe(_:)), userInfo: nil, repeats: true)
+    fileprivate lazy var callMeTimer: Timer = {
+        let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(CodeLoginVerifyVC.tryCallMe(_:)), userInfo: nil, repeats: true)
         return timer
     }()
     
@@ -41,9 +41,9 @@ class CodeLoginVerifyVC: UIViewController {
         title = "验证码"
         phoneLabel.text = mobile
         codeTextField.placeholder = " "
-        codeTextField.backgroundColor = UIColor.whiteColor()
+        codeTextField.backgroundColor = UIColor.white
         codeTextField.delegate = self
-        codeTextField.addTarget(self, action: #selector(CodeLoginVerifyVC.textFieldDidChange(_:)), forControlEvents: .EditingChanged)
+        codeTextField.addTarget(self, action: #selector(CodeLoginVerifyVC.textFieldDidChange(_:)), for: .editingChanged)
         
         phoneComingLabel.alpha = 0.0
         PhoneCallLabel.alpha = 1.0
@@ -61,13 +61,13 @@ class CodeLoginVerifyVC: UIViewController {
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         callMeTimer.fire()
         codeTextField.becomeFirstResponder()
     }
     
-    func textFieldDidChange(textField:UITextField) {
+    func textFieldDidChange(_ textField:UITextField) {
         
         //检测code长度,如果达到设定长度,自动检测,登录.
         if textField.text?.characters.count == 6 {
@@ -77,7 +77,7 @@ class CodeLoginVerifyVC: UIViewController {
         }
     }
     
-    func tryCallMe(timer:NSTimer){
+    func tryCallMe(_ timer:Timer){
         
         if callMeInSeconds > 1 {
             
@@ -129,18 +129,18 @@ class CodeLoginVerifyVC: UIViewController {
     
     var hud = MBProgressHUD()
     
-    func showHudWith(text:String) {
+    func showHudWith(_ text:String) {
         
-        hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
-        hud.mode = .Text
+        hud = MBProgressHUD.showAdded(to: view, animated: true)
+        hud.mode = .text
         hud.labelText = text
         hud.hide(true, afterDelay: 2.0)
     }
     
     func showHud() {
         
-        hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
-        hud.mode = .Indeterminate
+        hud = MBProgressHUD.showAdded(to: view, animated: true)
+        hud.mode = .indeterminate
     }
     
     func hideHud() {
@@ -149,7 +149,7 @@ class CodeLoginVerifyVC: UIViewController {
     }
 
     
-    private func tryLogin(smsCode:String) {
+    fileprivate func tryLogin(_ smsCode:String) {
         
         codeTextField.resignFirstResponder()
         
@@ -167,7 +167,7 @@ class CodeLoginVerifyVC: UIViewController {
                     }
                     else {
                         let clientId = String(user!.clientId)
-                        NSNotificationCenter.defaultCenter().postNotificationName(OwnSystemLoginSuccessNoti, object: clientId)
+                        NotificationCenter.default.post(name: OwnSystemLoginSuccessNoti, object: clientId)
                     }
                 }
                 else {
@@ -204,7 +204,7 @@ class CodeLoginVerifyVC: UIViewController {
     }
     
     
-    func makeAgentListWith(data:JSON) {
+    func makeAgentListWith(_ data:JSON) {
         
         var list = [Agent]()
         
@@ -232,7 +232,7 @@ class CodeLoginVerifyVC: UIViewController {
         
     }
     
-    func showAgentListAlertViewWith(agentList:[Agent]) {
+    func showAgentListAlertViewWith(_ agentList:[Agent]) {
         
 //        let alert = UIAlertController(title: "选择门店", message: "您的账号目前属于多个门店", preferredStyle: .ActionSheet)
 //        
@@ -255,7 +255,7 @@ class CodeLoginVerifyVC: UIViewController {
     
     
     
-    func filterError(error: NSError?) -> Bool{
+    func filterError(_ error: NSError?) -> Bool{
         if error != nil {
             print(error)
             return false
@@ -270,16 +270,16 @@ class CodeLoginVerifyVC: UIViewController {
         let title = "提示"
         let message = "初次登录请更换默认密码"
         
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
-        alert.addTextFieldWithConfigurationHandler { (textField) in
+        alert.addTextField { (textField) in
             
             textField.placeholder = "新密码"
         }
         
         let passWordTextField = alert.textFields?.first!
         
-        let submitButton = UIAlertAction(title: "确认", style: .Default) { (action) in
+        let submitButton = UIAlertAction(title: "确认", style: .default) { (action) in
             
             let password = passWordTextField?.text
             
@@ -289,7 +289,7 @@ class CodeLoginVerifyVC: UIViewController {
         
         alert.addAction(submitButton)
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
         
     }
     
@@ -307,7 +307,7 @@ class CodeLoginVerifyVC: UIViewController {
             //update password
             let userName = mobile
             showHud()
-            NetworkManager.sharedManager.updatePassWordWith(userName, usertype: .Employee, passWord: password, completion: { (success, json, error) in
+            NetworkManager.sharedManager.updatePassWordWith(userName!, usertype: .Employee, passWord: password, completion: { (success, json, error) in
                 
                 if success == true {
                     self.hideHud()

@@ -12,22 +12,22 @@ class formCell: UITableViewCell,UITextFieldDelegate {
     
     @IBOutlet weak var leftTextField: UITextField!
     
-    var endEditHandler:((textField: UITextField)->())?
+    var endEditHandler:((_ textField: UITextField)->())?
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.selectionStyle = .None
+        self.selectionStyle = .none
     }
     
     
-    @IBAction func textFieldEndEdit(sender: UITextField) {
+    @IBAction func textFieldEndEdit(_ sender: UITextField) {
         
-        endEditHandler?(textField:sender)
+        endEditHandler?(sender)
     }
     
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

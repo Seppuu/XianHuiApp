@@ -17,7 +17,7 @@ class UserNameCell: UITableViewCell,UITextFieldDelegate {
         setSubviews()
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         
@@ -29,20 +29,20 @@ class UserNameCell: UITableViewCell,UITextFieldDelegate {
     
     var codeButtonTapHandler:(()->())?
     
-    var textFieldDidTapHandler:((text:String)->())?
+    var textFieldDidTapHandler:((_ text:String)->())?
     
     var textFieldDidReturnHandler:(()->())?
     
     func setSubviews() {
         
         textField = UITextField()
-        textField.font = UIFont.systemFontOfSize(14)
+        textField.font = UIFont.systemFont(ofSize: 14)
         addSubview(textField)
         textField.snp_makeConstraints { (make) in
             make.top.right.bottom.equalTo(self)
             make.left.equalTo(self).offset(15)
         }
-        textField.addTarget(self, action: #selector(UserNameCell.textFieldDidChange(_:)), forControlEvents: .EditingChanged)
+        textField.addTarget(self, action: #selector(UserNameCell.textFieldDidChange(_:)), for: .editingChanged)
         
         textField.delegate = self
         
@@ -53,29 +53,29 @@ class UserNameCell: UITableViewCell,UITextFieldDelegate {
             make.width.equalTo(120)
         }
         
-        codeButton.setTitle("发送验证码", forState: .Normal)
-        codeButton.titleLabel?.font = UIFont.systemFontOfSize(14)
+        codeButton.setTitle("发送验证码", for: UIControlState())
+        codeButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         codeButton.backgroundColor = UIColor ( red: 0.2937, green: 0.6186, blue: 1.0, alpha: 1.0 )
-        codeButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        codeButton.setTitleColor(UIColor.white, for: UIControlState())
         
-        codeButton.addTarget(self, action: #selector(UserNameCell.codeButtonTap(_:)), forControlEvents: .TouchUpInside)
+        codeButton.addTarget(self, action: #selector(UserNameCell.codeButtonTap(_:)), for: .touchUpInside)
     }
     
     
-    func codeButtonTap(sender:UIButton) {
+    func codeButtonTap(_ sender:UIButton) {
         
         codeButtonTapHandler?()
     }
     
     
     
-    func textFieldDidChange(textField: UITextField) {
+    func textFieldDidChange(_ textField: UITextField) {
         
-        textFieldDidTapHandler?(text:textField.text!)
+        textFieldDidTapHandler?(textField.text!)
     }
     
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         textFieldDidReturnHandler?()
         

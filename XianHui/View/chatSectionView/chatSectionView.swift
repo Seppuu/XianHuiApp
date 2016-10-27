@@ -26,7 +26,7 @@ class chatSectionView: UIView {
     
     class func instanceFromNib() -> chatSectionView {
         
-        return UINib(nibName: "chatSectionView", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! chatSectionView
+        return UINib(nibName: "chatSectionView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! chatSectionView
     }
     
     override func didMoveToSuperview() {

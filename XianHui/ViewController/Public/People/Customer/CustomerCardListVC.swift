@@ -42,7 +42,7 @@ class CustomerCardListVC: BaseTableViewController {
     }
 
     
-    func makeData(datas:[JSON]) {
+    func makeData(_ datas:[JSON]) {
         
         let section0 = BaseTableViewModelList()
         let section1 = BaseTableViewModelList()
@@ -106,9 +106,9 @@ class CustomerCardListVC: BaseTableViewController {
     }
     
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let model = self.listArray[indexPath.section].list[indexPath.row]
+        let model = self.listArray[(indexPath as NSIndexPath).section].list[(indexPath as NSIndexPath).row]
         
         let vc = CustomerCardDetailVC()
         vc.cardNum = model.num

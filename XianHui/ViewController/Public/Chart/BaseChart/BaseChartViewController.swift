@@ -45,20 +45,20 @@ class BaseChartViewController: BaseViewController {
         //override this
     }
     
-    func setupPieChartView(chartView:PieChartView) {
+    func setupPieChartView(_ chartView:PieChartView) {
         
         chartView.usePercentValuesEnabled = false
         chartView.drawSlicesUnderHoleEnabled = false
         chartView.holeRadiusPercent = 0.4
         chartView.transparentCircleRadiusPercent = 0.4
-        chartView.descriptionText = ""
+        chartView.chartDescription?.text = ""
         chartView.setExtraOffsets(left: 10, top: 10, right: 10, bottom: 10)
         chartView.drawCenterTextEnabled = true
         
         
-        let paragraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
-        paragraphStyle.lineBreakMode = .ByTruncatingTail
-        paragraphStyle.alignment = .Center
+        let paragraphStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
+        paragraphStyle.lineBreakMode = .byTruncatingTail
+        paragraphStyle.alignment = .center
         
 //        let part2 = "MyBook"
 //        let centerText = NSMutableAttributedString(string: "Charts by " + part2)
@@ -87,9 +87,9 @@ class BaseChartViewController: BaseViewController {
         
         
         let l = chartView.legend
-        l.verticalAlignment = .Top
-        l.orientation = .Vertical
-        l.font = UIFont.systemFontOfSize(10)
+        l.verticalAlignment = .top
+        l.orientation = .vertical
+        l.font = UIFont.systemFont(ofSize: 10)
         l.formSize = 14
         l.xEntrySpace = 7.0
         l.yEntrySpace = 0.0
@@ -97,9 +97,9 @@ class BaseChartViewController: BaseViewController {
     }
     
     
-    func setupRadarChartView(radarChartView:RadarChartView) {
+    func setupRadarChartView(_ radarChartView:RadarChartView) {
         
-        radarChartView.noDataTextDescription = ""
+        radarChartView.noDataText = ""
     }
 }
 

@@ -17,13 +17,13 @@ class ChannelCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        leftImageView.contentMode = .ScaleAspectFill
+        leftImageView.contentMode = .scaleAspectFill
         leftImageView.layer.cornerRadius = 8
         leftImageView.layer.masksToBounds = true
         leftImageView.clipsToBounds = true
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

@@ -62,7 +62,7 @@ class HelperVC: BaseViewController {
         }
     }
     
-    func makeNoticeListWith(jsons:[JSON]){
+    func makeNoticeListWith(_ jsons:[JSON]){
         
         if jsons.count == 0 {
             
@@ -92,9 +92,9 @@ class HelperVC: BaseViewController {
             if let createTime = json["create_time"].string {
                 if let date = createTime.toDate("yyyy-MM-dd HH:mm:ss") {
                     
-                    let dateFormatter = NSDateFormatter()
+                    let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "yyyy-MM-dd"
-                    no.createTime = dateFormatter.stringFromDate(date)
+                    no.createTime = dateFormatter.string(from: date)
                     
                 }
                 
@@ -125,18 +125,18 @@ class HelperVC: BaseViewController {
                 }
             }
             
-            listOfNotice.insert(no, atIndex: 0)
+            listOfNotice.insert(no, at: 0)
         }
     }
     
     func setTableView() {
-        tableView = UITableView(frame: view.bounds, style: .Grouped)
+        tableView = UITableView(frame: view.bounds, style: .grouped)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.separatorStyle = .None
+        tableView.separatorStyle = .none
         
         let nib = UINib(nibName: cellId, bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: cellId)
+        tableView.register(nib, forCellReuseIdentifier: cellId)
         
         view.addSubview(tableView)
         
@@ -150,35 +150,35 @@ class HelperVC: BaseViewController {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
     func scrollTableViewBottom() {
         guard listOfNotice.count > 0 else {return}
-        let indexPath = NSIndexPath(forItem: listOfNotice.count - 1, inSection: 0)
-        tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: false)
+        let indexPath = IndexPath(item: listOfNotice.count - 1, section: 0)
+        tableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
     }
 }
 
 extension HelperVC:UITableViewDelegate,UITableViewDataSource {
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listOfNotice.count
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return  170
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! HeplerCell
-        cell.selectionStyle = .None
-        let no = listOfNotice[indexPath.row]
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! HeplerCell
+        cell.selectionStyle = .none
+        let no = listOfNotice[(indexPath as NSIndexPath).row]
         
         cell.pushTimeLabel.text = no.createTime
         cell.nameLabel.text     = no.title
@@ -198,10 +198,10 @@ extension HelperVC:UITableViewDelegate,UITableViewDataSource {
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
-        let no = listOfNotice[indexPath.row]
+        let no = listOfNotice[(indexPath as NSIndexPath).row]
         
         switch no.type {
         case .daily_report:
@@ -230,7 +230,7 @@ extension HelperVC:UITableViewDelegate,UITableViewDataSource {
             
         }
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }

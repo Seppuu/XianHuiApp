@@ -9,12 +9,12 @@
 import Foundation
 import UIKit
 
-extension NSDate {
+extension Date {
     
-    class func currentDateString() -> String {
-        let formatter = NSDateFormatter()
+    static func currentDateString() -> String {
+        let formatter = DateFormatter()
         formatter.dateFormat = "YYYYMMdd"
-        let date = formatter.stringFromDate(NSDate())
+        let date = formatter.string(from: Date())
         return date
     }
     

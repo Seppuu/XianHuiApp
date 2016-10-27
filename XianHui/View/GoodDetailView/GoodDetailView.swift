@@ -26,7 +26,7 @@ class GoodDetailView: UIView {
     
     class func instanceFromNib() -> GoodDetailView {
         
-        return UINib(nibName: "GoodDetail", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! GoodDetailView
+        return UINib(nibName: "GoodDetail", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! GoodDetailView
     }
     
     override func didMoveToSuperview() {
@@ -37,7 +37,7 @@ class GoodDetailView: UIView {
         
         detailTableView.delegate = self
         detailTableView.dataSource = self
-        detailTableView.scrollEnabled = false
+        detailTableView.isScrollEnabled = false
         detailTableView.tableFooterView = UIView()
         
         
@@ -60,28 +60,28 @@ class GoodDetailView: UIView {
 
 extension GoodDetailView: UITableViewDelegate,UITableViewDataSource {
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cardList.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell()
-        cell.selectionStyle = .None
+        cell.selectionStyle = .none
         
         let detailView = GoodDetailContainerView.instanceFromNib()
         detailView.frame = cell.bounds
         cell.addSubview(detailView)
         
-        let card = cardList[indexPath.row]
+        let card = cardList[(indexPath as NSIndexPath).row]
         
         detailView.firstLabel.text = card.cardName
         detailView.secondLabel.text = card.cardType

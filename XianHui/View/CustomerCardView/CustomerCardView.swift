@@ -39,7 +39,7 @@ class CustomerCardView: UIView {
     
     class func instanceFromNib() -> CustomerCardView {
         
-        return UINib(nibName: "CustomerCard", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! CustomerCardView
+        return UINib(nibName: "CustomerCard", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! CustomerCardView
     }
     
     override func awakeFromNib() {
@@ -48,9 +48,9 @@ class CustomerCardView: UIView {
         let imageViewArray = [avatarImageView,phoneButton,chatButton,otherButton]
         
         for imageView in imageViewArray {
-            imageView.layer.cornerRadius = imageView.ddWidth/2
-            imageView.layer.masksToBounds = true
-            imageView.contentMode = .ScaleAspectFit
+            imageView?.layer.cornerRadius = (imageView?.ddWidth)!/2
+            imageView?.layer.masksToBounds = true
+            imageView?.contentMode = .scaleAspectFit
         }
         
         //add line
@@ -69,7 +69,7 @@ class CustomerCardView: UIView {
         
         //add backImageView tap
         let tap = UITapGestureRecognizer(target: self, action: #selector(CustomerCardView.backImageViewTap))
-        backImageView.userInteractionEnabled = true
+        backImageView.isUserInteractionEnabled = true
         backImageView.addGestureRecognizer(tap)
         
     }

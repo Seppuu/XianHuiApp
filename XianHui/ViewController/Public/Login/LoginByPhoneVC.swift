@@ -21,28 +21,28 @@ class LoginByPhoneVC: UIViewController {
         setNavBarItem()
         
         phoneNumberTextField.placeholder = "手机号"
-        phoneNumberTextField.backgroundColor = UIColor.whiteColor()
+        phoneNumberTextField.backgroundColor = UIColor.white
         phoneNumberTextField.delegate = self
-        phoneNumberTextField.addTarget(self, action: #selector(LoginByPhoneVC.textFieldDidChange(_:)), forControlEvents: .EditingChanged)
+        phoneNumberTextField.addTarget(self, action: #selector(LoginByPhoneVC.textFieldDidChange(_:)), for: .editingChanged)
         
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(LoginByPhoneVC.tryShowLoginVerifyMobile))
         codeView.addGestureRecognizer(tap)
-        codeView.userInteractionEnabled = true
+        codeView.isUserInteractionEnabled = true
         
         enAbleCodeVerifyView(false)
     }
     
-    func enAbleCodeVerifyView(bool:Bool){
+    func enAbleCodeVerifyView(_ bool:Bool){
         let codeLabell = codeView.viewWithTag(11) as! UILabel
         let codeArrow  = codeView.viewWithTag(12) as! UIImageView
         if bool {
             codeLabell.textColor = UIColor ( red: 0.0, green: 0.4627, blue: 1.0, alpha: 1.0 )
-            codeArrow.image? = (codeArrow.image?.imageWithRenderingMode(.AlwaysTemplate))!
+            codeArrow.image? = (codeArrow.image?.withRenderingMode(.alwaysTemplate))!
             codeArrow.tintColor = UIColor ( red: 0.0, green: 0.4627, blue: 1.0, alpha: 1.0 )
         }else {
             codeLabell.textColor = UIColor ( red: 0.747, green: 0.747, blue: 0.747, alpha: 1.0 )
-            codeArrow.image? = (codeArrow.image?.imageWithRenderingMode(.AlwaysTemplate))!
+            codeArrow.image? = (codeArrow.image?.withRenderingMode(.alwaysTemplate))!
             codeArrow.tintColor = UIColor ( red: 0.747, green: 0.747, blue: 0.747, alpha: 1.0 )
         }
     }
@@ -52,7 +52,7 @@ class LoginByPhoneVC: UIViewController {
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         phoneNumberTextField.becomeFirstResponder()
@@ -61,16 +61,16 @@ class LoginByPhoneVC: UIViewController {
     
     func setNavBarItem() {
         
-        let rightBar = UIBarButtonItem(title: "返回", style: .Done, target: self, action: #selector(LoginByPhoneVC.back))
+        let rightBar = UIBarButtonItem(title: "返回", style: .done, target: self, action: #selector(LoginByPhoneVC.back))
         
         navigationItem.leftBarButtonItem = rightBar
     }
     
     func back() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
-    func textFieldDidChange(textField: UITextField) {
+    func textFieldDidChange(_ textField: UITextField) {
         
         guard let mobile = phoneNumberTextField.text else {
             return
@@ -142,16 +142,16 @@ class LoginByPhoneVC: UIViewController {
 
 extension LoginByPhoneVC: UITextFieldDelegate {
     
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
         return true
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         guard let mobile = phoneNumberTextField.text else {
             return true

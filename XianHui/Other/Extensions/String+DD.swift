@@ -13,34 +13,34 @@ import CryptoSwift
 extension String {
     
     
-    mutating func removeCharsFromEnd(count:Int) -> String {
+    mutating func removeCharsFromEnd(_ count:Int) -> String {
         
         for _ in 0..<count {
             
-            self.removeAtIndex(self.endIndex.predecessor())
+            self.remove(at: self.characters.index(before: self.endIndex))
             
         }
         
         return self
     }
     
-    func textSizeWithFont(font: UIFont, constrainedToSize size:CGSize) -> CGSize {
+    func textSizeWithFont(_ font: UIFont, constrainedToSize size:CGSize) -> CGSize {
         
         var textSize:CGSize!
         
-        if CGSizeEqualToSize(size, CGSizeZero) {
+        if size.equalTo(CGSize.zero) {
             
-            let attributes = NSDictionary(object: font, forKey: NSFontAttributeName)
+            let attributes = NSDictionary(object: font, forKey: NSFontAttributeName as NSCopying)
             
-            textSize = self.sizeWithAttributes(attributes as! [String : AnyObject] as [String : AnyObject])
+            textSize = self.size(attributes: attributes as! [String : AnyObject] as [String : AnyObject])
             
         } else {
             
-            let option = NSStringDrawingOptions.UsesLineFragmentOrigin
+            let option = NSStringDrawingOptions.usesLineFragmentOrigin
             
-            let attributes = NSDictionary(object: font, forKey: NSFontAttributeName)
+            let attributes = NSDictionary(object: font, forKey: NSFontAttributeName as NSCopying)
             
-            let stringRect = self.boundingRectWithSize(size, options: option, attributes: attributes as! [String : AnyObject] as [String : AnyObject], context: nil)
+            let stringRect = self.boundingRect(with: size, options: option, attributes: attributes as! [String : AnyObject] as [String : AnyObject], context: nil)
             
             textSize = stringRect.size
             
@@ -49,27 +49,6 @@ extension String {
         return textSize
         
     }
-    
-    
-    /**
-     Encode a String to Base64
-     
-     :returns:
-     */
-    func toBase64()->String{
-        
-        let data = self.dataUsingEncoding(NSUTF8StringEncoding)
-        
-        return data!.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
-        
-    }
-    
-    func fromBase64() -> String{
-        
-        let data = NSData(base64EncodedString: self, options: NSDataBase64DecodingOptions(rawValue: 0))
-        return String(data: data!, encoding: NSUTF8StringEncoding)!
-    }
-    
     
     var md5: String! {
         
@@ -87,8 +66,8 @@ extension String {
     //下标取子字符串
     subscript (r: Range<Int>) -> String {
         get {
-            let startIndex = self.startIndex.advancedBy(r.startIndex)
-            let endIndex = self.startIndex.advancedBy(r.endIndex)
+            let startIndex = self.characters.index(self.startIndex, offsetBy: r.lowerBound)
+            let endIndex = self.characters.index(self.startIndex, offsetBy: r.upperBound)
             
             return self[Range(startIndex..<endIndex)]
         }
@@ -97,7 +76,7 @@ extension String {
     func isPhoneNumber() -> Bool {
         
         var isPhone = false
-        let threeNum = self[0...2]
+        let threeNum = self.substring(0, length: 3)
         PhoneNumbers.phones.forEach { (numbers) in
             
             for i in 0..<numbers.count {
@@ -115,8 +94,8 @@ extension String {
         return isPhone
     }
 
-    func stringByAppendingPathComponent(path: String) -> String {
-        return (self as NSString).stringByAppendingPathComponent(path)
+    func stringByAppendingPathComponent(_ path: String) -> String {
+        return (self as NSString).appendingPathComponent(path)
     }
     
 }

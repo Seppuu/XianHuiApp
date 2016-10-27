@@ -34,7 +34,7 @@ class UserAvatarCell: UITableViewCell {
     
     var isUpLoading = false
     
-    var avatarTapHandler:((cell:UserAvatarCell)->())?
+    var avatarTapHandler:((_ cell:UserAvatarCell)->())?
     
     var cancelEdit = false {
         didSet {
@@ -48,18 +48,18 @@ class UserAvatarCell: UITableViewCell {
     
     var cancelTapHandler:(()->())?
     
-    var confirmTapHandler:((firstName:String,secondName:String)->())?
+    var confirmTapHandler:((_ firstName:String,_ secondName:String)->())?
     
     var nameNoneHandler:(()->())?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         avatarView.layer.cornerRadius = avatarView.ddWidth/2
-        avatarView.contentMode = .ScaleAspectFill
+        avatarView.contentMode = .scaleAspectFill
         avatarView.layer.masksToBounds = true
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(UserAvatarCell.avatarTap))
-        cameraImageView.userInteractionEnabled = true
+        cameraImageView.isUserInteractionEnabled = true
         cameraImageView.addGestureRecognizer(tap)
         
         dimView.layer.cornerRadius = dimView.ddWidth/2
@@ -74,30 +74,30 @@ class UserAvatarCell: UITableViewCell {
         
         cameraImageView.alpha = 0.0
         
-        self.selectionStyle = .None
+        self.selectionStyle = .none
         
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
-    @objc private func avatarTap() {
+    @objc fileprivate func avatarTap() {
         
-        avatarTapHandler?(cell: self)
+        avatarTapHandler?(self)
     }
     
     
-    func changeState(edit:Bool) {
+    func changeState(_ edit:Bool) {
         
         if edit {
-            avatarView.userInteractionEnabled = true
-            UIView.animateWithDuration(0.2, animations: {
+            avatarView.isUserInteractionEnabled = true
+            UIView.animate(withDuration: 0.2, animations: {
 //                self.nameLabel.alpha = 0.0
 //                self.levelTextLabel.alpha = 0.0
-                self.editButton.setTitle("完成", forState: .Normal)
+                self.editButton.setTitle("完成", for: UIControlState())
                 
                 self.cancelButton.alpha = 1.0
                 
@@ -106,7 +106,7 @@ class UserAvatarCell: UITableViewCell {
                 
                 }, completion: { (success) in
                     
-                   UIView.animateWithDuration(0.2, animations: { 
+                   UIView.animate(withDuration: 0.2, animations: { 
                     
 //                    self.firstNameField.alpha = 1.0
 //                    self.secondNameField.alpha = 1.0
@@ -120,8 +120,8 @@ class UserAvatarCell: UITableViewCell {
         }
         else {
             
-            avatarView.userInteractionEnabled = false
-            UIView.animateWithDuration(0.2, animations: {
+            avatarView.isUserInteractionEnabled = false
+            UIView.animate(withDuration: 0.2, animations: {
 //                self.firstNameField.alpha = 0.0
 //                self.secondNameField.alpha = 0.0
                 
@@ -142,18 +142,18 @@ class UserAvatarCell: UITableViewCell {
                         
                         let first = self.firstNameField.text
                         let second = self.secondNameField.text
-                        self.confirmTapHandler?(firstName:first!,secondName:second!)
+                        self.confirmTapHandler?(first!,second!)
                     }
                     else {
                         
                     }
                     
                     
-                    UIView.animateWithDuration(0.2, animations: {
+                    UIView.animate(withDuration: 0.2, animations: {
                         
                         self.nameLabel.alpha = 1.0
                         self.levelTextLabel.alpha = 1.0
-                        self.editButton.setTitle("编辑", forState: .Normal)
+                        self.editButton.setTitle("编辑", for: UIControlState())
                         
                     })
             })
@@ -161,7 +161,7 @@ class UserAvatarCell: UITableViewCell {
     }
     
     
-    @IBAction func editTap(sender: UIButton) {
+    @IBAction func editTap(_ sender: UIButton) {
         
         isEditting = !isEditting
         cancelEdit = false
@@ -180,7 +180,7 @@ class UserAvatarCell: UITableViewCell {
     }
     
     
-    @IBAction func cancelTap(sender: UIButton) {
+    @IBAction func cancelTap(_ sender: UIButton) {
         
         isEditting = false
         cancelEdit = true
@@ -190,7 +190,7 @@ class UserAvatarCell: UITableViewCell {
     }
     
     
-    private func checkFiled() -> Bool {
+    fileprivate func checkFiled() -> Bool {
         
         if firstNameField.text == "" || secondNameField.text == "" {
             

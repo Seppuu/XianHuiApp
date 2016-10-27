@@ -33,17 +33,17 @@ class progressCell: UITableViewCell {
         addSubview(uaProgressView)
         
         progressLabel.frame = CGRect(x: 0, y: 0, width: uaProgressView.ddWidth, height: 8)
-        progressLabel.textAlignment = .Center
+        progressLabel.textAlignment = .center
         progressLabel.textColor = UIColor ( red: 0.0, green: 0.4471, blue: 0.9961, alpha: 1.0 )
-        progressLabel.font = UIFont.systemFontOfSize(10)
+        progressLabel.font = UIFont.systemFont(ofSize: 10)
         
         uaProgressView.centralView = progressLabel
         uaProgressView.fillOnTouch = false
         
         
         tipLabel.frame = CGRect(x: screenWidth - 40 - 20, y: (ddHeight - 26)/2,  width: 40, height: 21)
-        tipLabel.font = UIFont.systemFontOfSize(12)
-        tipLabel.textColor = UIColor.lightGrayColor()
+        tipLabel.font = UIFont.systemFont(ofSize: 12)
+        tipLabel.textColor = UIColor.lightGray
         tipLabel.text = "去设置"
         addSubview(tipLabel)
         tipLabel.alpha = 0.0
@@ -51,7 +51,7 @@ class progressCell: UITableViewCell {
         
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         

@@ -26,7 +26,7 @@ class CustomerProfileVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
         getCustomerDetail()
         setTableView()
         setNavBarItem()
@@ -39,7 +39,7 @@ class CustomerProfileVC: UIViewController {
     
     func setNavBarItem() {
         
-        let rightBarItem = UIBarButtonItem(title: "订单", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(EmployeeProfileVC.settingTap))
+        let rightBarItem = UIBarButtonItem(title: "订单", style: UIBarButtonItemStyle.plain, target: self, action: #selector(EmployeeProfileVC.settingTap))
         navigationItem.rightBarButtonItem = rightBarItem
         
     }
@@ -73,7 +73,7 @@ class CustomerProfileVC: UIViewController {
         }
     }
     
-    func updateCustomerMsgWith(json:JSON) {
+    func updateCustomerMsgWith(_ json:JSON) {
         
         self.customer.id = self.customerId
         if let certNo = json["basic"]["cert_no"].string {
@@ -109,28 +109,28 @@ class CustomerProfileVC: UIViewController {
     }
     
     func setTableView() {
-        tableView = UITableView(frame: view.bounds, style: .Grouped)
+        tableView = UITableView(frame: view.bounds, style: .grouped)
         view.addSubview(tableView)
         
         tableView.delegate = self
         tableView.dataSource = self
         
         let nib0 = UINib(nibName: topCellId, bundle: nil)
-        tableView.registerNib(nib0, forCellReuseIdentifier: topCellId)
+        tableView.register(nib0, forCellReuseIdentifier: topCellId)
         
         let nib1 = UINib(nibName: typeCellId, bundle: nil)
-        tableView.registerNib(nib1, forCellReuseIdentifier: typeCellId)
+        tableView.register(nib1, forCellReuseIdentifier: typeCellId)
     }
 }
 
 extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
     
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if section == 0 {
             return 1
@@ -140,8 +140,8 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.section == 0 {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (indexPath as NSIndexPath).section == 0 {
             return 80
         }
         else {
@@ -149,7 +149,7 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return 0.001
         }
@@ -158,18 +158,18 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.001
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == 0 {
+        if (indexPath as NSIndexPath).section == 0 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(topCellId, forIndexPath: indexPath) as! CustomerLargeCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: topCellId, for: indexPath) as! CustomerLargeCell
             
-            if let url = NSURL(string: customer.avatarUrlString) {
-                cell.avatarImageView.kf_setImageWithURL(url)
+            if let url = URL(string: customer.avatarUrlString) {
+                cell.avatarImageView.kf.setImage(with: url)
             }
             
             cell.nameLabel.text = customer.name
@@ -182,32 +182,32 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
         }
         else {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(typeCellId, forIndexPath: indexPath) as! typeCell
-            cell.leftLabel.text = typeList[indexPath.row]
-            if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: typeCellId, for: indexPath) as! typeCell
+            cell.leftLabel.text = typeList[(indexPath as NSIndexPath).row]
+            if (indexPath as NSIndexPath).row == 0 {
                 
                 let currentUser = User.currentUser()
-                if currentUser.reportType == 3 || currentUser.reportType == 4 {
+                if currentUser?.reportType == 3 || currentUser?.reportType == 4 {
                     //当用户是店长或者拉板时,可以更换顾问
-                    cell.accessoryType = .DisclosureIndicator
+                    cell.accessoryType = .disclosureIndicator
                 }
                 else {
-                    cell.accessoryType = .None
+                    cell.accessoryType = .none
                 }
                 
                 cell.typeLabel.text = customer.customerManager
                 
             }
-            else if indexPath.row == 1 {
-                cell.accessoryType = .DisclosureIndicator
+            else if (indexPath as NSIndexPath).row == 1 {
+                cell.accessoryType = .disclosureIndicator
                 cell.typeLabel.text = "共\(customer.cardTotal)张"
             }
-            else if indexPath.row == 2 {
-                cell.accessoryType = .DisclosureIndicator
+            else if (indexPath as NSIndexPath).row == 2 {
+                cell.accessoryType = .disclosureIndicator
                 cell.typeLabel.text = customer.lastConsumeDate == nil ? "暂无" : customer.lastConsumeDate
             }
-            else if indexPath.row == 3 {
-                cell.accessoryType = .DisclosureIndicator
+            else if (indexPath as NSIndexPath).row == 3 {
+                cell.accessoryType = .disclosureIndicator
                 if customer.planned == "1" {
                     cell.typeLabel.text = "已计划"
                 }
@@ -216,12 +216,12 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
                 }
                 
             }
-            else if indexPath.row == 4 {
-                cell.accessoryType = .DisclosureIndicator
+            else if (indexPath as NSIndexPath).row == 4 {
+                cell.accessoryType = .disclosureIndicator
                 cell.typeLabel.text = customer.scheduleTime == "" ? "无新预约" : customer.scheduleTime
             }
             else {
-                cell.accessoryType = .DisclosureIndicator
+                cell.accessoryType = .disclosureIndicator
                 cell.typeLabel.text = "服务状态"
             }
             
@@ -231,14 +231,14 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
         
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 1 {
+        if (indexPath as NSIndexPath).section == 1 {
             
-            if indexPath.row == 0 {
+            if (indexPath as NSIndexPath).row == 0 {
                 
                 let currentUser = User.currentUser()
-                if currentUser.reportType == 3 || currentUser.reportType == 4 {
+                if currentUser?.reportType == 3 || currentUser?.reportType == 4 {
                     //当用户是店长或者拉板时,可以更换顾问
                     let vc = CustomerManagerSelectVC()
                     vc.customer = customer
@@ -253,26 +253,26 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
                 
                 
             }
-            else if indexPath.row == 1 {
+            else if (indexPath as NSIndexPath).row == 1 {
                 let vc = CustomerCardListVC()
                 vc.customer = customer
                 self.navigationController?.pushViewController(vc, animated: true)
             }
-            else if indexPath.row == 3 {
+            else if (indexPath as NSIndexPath).row == 3 {
                 
                 let vc = ProjectPlanningVC()
                 vc.customer = customer
                 self.navigationController?.pushViewController(vc, animated: true)
                 
             }
-            else if indexPath.row == 2 {
+            else if (indexPath as NSIndexPath).row == 2 {
                 let vc = CustomerConsumeListVC()
                 vc.title = "消费记录"
                 vc.customer = customer
                 self.navigationController?.pushViewController(vc, animated: true)
                 
             }
-            else if indexPath.row == 4 {
+            else if (indexPath as NSIndexPath).row == 4 {
                 let vc = ProjectPlannedVC()
                 vc.customer = customer
                 vc.allPlan = true
@@ -301,7 +301,7 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
             }
         }
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
   

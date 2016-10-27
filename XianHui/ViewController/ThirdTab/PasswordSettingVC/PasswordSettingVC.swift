@@ -21,7 +21,7 @@ class PasswordSettingVC: BaseViewController ,BKPasscodeViewControllerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
         setTableView()
         
     }
@@ -33,13 +33,13 @@ class PasswordSettingVC: BaseViewController ,BKPasscodeViewControllerDelegate{
     
     func setTableView() {
         
-        tableView = UITableView(frame: CGRectMake(0, 0, screenWidth, screenWidth), style: .Plain)
+        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenWidth), style: .plain)
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
         
         let nib = UINib(nibName: SwitchCellId, bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: SwitchCellId)
+        tableView.register(nib, forCellReuseIdentifier: SwitchCellId)
     }
     
     /*
@@ -56,27 +56,27 @@ class PasswordSettingVC: BaseViewController ,BKPasscodeViewControllerDelegate{
 
 extension PasswordSettingVC:UITableViewDelegate,UITableViewDataSource {
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return titles.count
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
         
-        if indexPath.row == 3 {
-            let cell = tableView.dequeueReusableCellWithIdentifier(SwitchCellId, forIndexPath: indexPath) as! SwitchCell
-            cell.leftLabel.text = titles[indexPath.item]
+        if (indexPath as NSIndexPath).row == 3 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: SwitchCellId, for: indexPath) as! SwitchCell
+            cell.leftLabel.text = titles[(indexPath as NSIndexPath).item]
             let useTouchID = Defaults.useTouchID.value!
-            cell.switchButton.on = useTouchID ? true : false
+            cell.switchButton.isOn = useTouchID ? true : false
             cell.switchTapHandler = { (on) in
                 
                 Defaults.useTouchID.value = on
@@ -88,23 +88,23 @@ extension PasswordSettingVC:UITableViewDelegate,UITableViewDataSource {
         else {
             
             let cell = UITableViewCell()
-            cell.accessoryType = .DisclosureIndicator
-            cell.textLabel?.text = titles[indexPath.item]
+            cell.accessoryType = .disclosureIndicator
+            cell.textLabel?.text = titles[(indexPath as NSIndexPath).item]
             
             return cell
         }
         
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.row == 0{
+        if (indexPath as NSIndexPath).row == 0{
             self.presentPasscodeViewControllerWithType(BKPasscodeViewControllerNewPasscodeType)
         }
-        else if indexPath.row == 1 {
+        else if (indexPath as NSIndexPath).row == 1 {
             self.presentPasscodeViewControllerWithType(BKPasscodeViewControllerChangePasscodeType)
         }
-        else if indexPath.row == 2 {
+        else if (indexPath as NSIndexPath).row == 2 {
             self.presentPasscodeViewControllerWithType(BKPasscodeViewControllerCheckPasscodeType)
         }
         else {
@@ -112,11 +112,11 @@ extension PasswordSettingVC:UITableViewDelegate,UITableViewDataSource {
             return
         }
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     
-    func presentPasscodeViewControllerWithType(type:BKPasscodeViewControllerType) {
+    func presentPasscodeViewControllerWithType(_ type:BKPasscodeViewControllerType) {
         
         let vc = BKPasscodeViewController()
         vc.delegate = self
@@ -127,7 +127,7 @@ extension PasswordSettingVC:UITableViewDelegate,UITableViewDataSource {
         vc.touchIDManager = BKTouchIDManager(keychainServiceName: "XianHuiKeychain")
         vc.touchIDManager.promptText = "通过Home键验证已有手机指纹"
         
-        vc.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(PasswordSettingVC.passcodeViewCloseButtonPressed(_:)))
+        vc.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(PasswordSettingVC.passcodeViewCloseButtonPressed(_:)))
         let nav = UINavigationController(rootViewController: vc)
         
         
@@ -135,19 +135,19 @@ extension PasswordSettingVC:UITableViewDelegate,UITableViewDataSource {
         if (Defaults.useTouchID.value! == true && vc.type == BKPasscodeViewControllerCheckPasscodeType) {
             
             // To prevent duplicated selection before showing Touch ID user interface.
-            self.tableView.userInteractionEnabled = false
+            self.tableView.isUserInteractionEnabled = false
             
             // Show Touch ID user interface
             vc.startTouchIDAuthenticationIfPossible({ (prompted) in
                 
-                self.tableView.userInteractionEnabled = true
+                self.tableView.isUserInteractionEnabled = true
                 
                 if prompted == true {
                     guard let selectedPath = self.tableView.indexPathForSelectedRow else {return}
-                    self.tableView.deselectRowAtIndexPath(selectedPath, animated: true)
+                    self.tableView.deselectRow(at: selectedPath, animated: true)
                 }
                 else {
-                    self.presentViewController(nav, animated: true, completion: nil)
+                    self.present(nav, animated: true, completion: nil)
                 }
                 
                 
@@ -155,7 +155,7 @@ extension PasswordSettingVC:UITableViewDelegate,UITableViewDataSource {
             
         } else {
             
-            self.presentViewController(nav, animated: true, completion: nil)
+            self.present(nav, animated: true, completion: nil)
         }
         
         
@@ -163,14 +163,14 @@ extension PasswordSettingVC:UITableViewDelegate,UITableViewDataSource {
     
     
     
-    func passcodeViewCloseButtonPressed(sender:UIBarButtonItem) {
+    func passcodeViewCloseButtonPressed(_ sender:UIBarButtonItem) {
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     
     //Delegate
-    func passcodeViewController(aViewController: BKPasscodeViewController!, didFinishWithPasscode aPasscode: String!) {
+    func passcodeViewController(_ aViewController: BKPasscodeViewController!, didFinishWithPasscode aPasscode: String!) {
         
         if aViewController.type == BKPasscodeViewControllerNewPasscodeType {
             
@@ -180,13 +180,13 @@ extension PasswordSettingVC:UITableViewDelegate,UITableViewDataSource {
             Defaults.localPassword.value = aPasscode
         }
         
-        aViewController.dismissViewControllerAnimated(true, completion: nil)
+        aViewController.dismiss(animated: true, completion: nil)
     }
     
     
     
     
-    func passcodeViewController(aViewController: BKPasscodeViewController!, authenticatePasscode aPasscode: String!, resultHandler aResultHandler: ((Bool) -> Void)!) {
+    func passcodeViewController(_ aViewController: BKPasscodeViewController!, authenticatePasscode aPasscode: String!, resultHandler aResultHandler: ((Bool) -> Void)!) {
         
         if aPasscode == Defaults.localPassword.value! {
             aResultHandler(true)

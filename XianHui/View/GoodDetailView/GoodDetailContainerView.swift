@@ -25,7 +25,7 @@ class GoodDetailContainerView: UIView {
     
     class func instanceFromNib() -> GoodDetailContainerView {
         
-        return UINib(nibName: "GoodDetailContainer", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! GoodDetailContainerView
+        return UINib(nibName: "GoodDetailContainer", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! GoodDetailContainerView
     }
     
     override func didMoveToSuperview() {

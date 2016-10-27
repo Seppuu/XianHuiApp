@@ -18,21 +18,21 @@ let kDDFilterViewWidth      :CGFloat = (320.0 - kDDFilterViewWidthMargin*2)
 
  protocol DDFilterViewDelegate  {
     
-    func filterViewWillShow(filterView:DDFilterView)
-    func filterViewWillDismiss(filterView:DDFilterView)
-    func filterViewDidShow(filterView:DDFilterView)
-    func filterViewDidDismiss(filterView:DDFilterView)
+    func filterViewWillShow(_ filterView:DDFilterView)
+    func filterViewWillDismiss(_ filterView:DDFilterView)
+    func filterViewDidShow(_ filterView:DDFilterView)
+    func filterViewDidDismiss(_ filterView:DDFilterView)
     
-    func filterView(filterView:DDFilterView,buttonPressedWithTitle title:String,index:Int)
+    func filterView(_ filterView:DDFilterView,buttonPressedWithTitle title:String,index:Int)
     
-    func filterViewCancelled(filterView:DDFilterView)
+    func filterViewCancelled(_ filterView:DDFilterView)
 }
 
 class DDFilterView: UIView {
 
     enum DDFilterViewTransitionStyle : Int {
-        case DDFilterViewTransitionStyleTop    = 0
-        case DDFilterViewTransitionStyleCenter = 1
+        case ddFilterViewTransitionStyleTop    = 0
+        case ddFilterViewTransitionStyleCenter = 1
     }
     
     var showing = false
@@ -67,13 +67,13 @@ class DDFilterView: UIView {
     
     var indicatorStyle:UIScrollViewIndicatorStyle?
     
-    typealias willShowHandler    = (filterView:DDFilterView) -> Void
-    typealias willDismissHandler = (filterView:DDFilterView) -> Void
-    typealias didShowHandler     = (filterView:DDFilterView) -> Void
-    typealias didDismissHandler  = (filterView:DDFilterView) -> Void
+    typealias willShowHandler    = (_ filterView:DDFilterView) -> Void
+    typealias willDismissHandler = (_ filterView:DDFilterView) -> Void
+    typealias didShowHandler     = (_ filterView:DDFilterView) -> Void
+    typealias didDismissHandler  = (_ filterView:DDFilterView) -> Void
     
-    typealias actionHandler = (filterView:DDFilterView,title:String,index:Int) -> Void
-    typealias cancelHandler = (filterView:DDFilterView) -> Void
+    typealias actionHandler = (_ filterView:DDFilterView,_ title:String,_ index:Int) -> Void
+    typealias cancelHandler = (_ filterView:DDFilterView) -> Void
     
     var delegate:DDFilterViewDelegate?
     

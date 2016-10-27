@@ -21,23 +21,23 @@ class bottomSubmitView: UIView {
         addSubview(leftButton)
         addSubview(rightButton)
         
-        leftButton.snp_makeConstraints { (make) in
+        leftButton.snp.makeConstraints { (make) in
             make.left.top.bottom.equalTo(self)
             make.width.equalTo(self.ddWidth/2)
         }
         
-        leftButton.setTitle("不同意", forState: .Normal)
-        leftButton.addTarget(self, action: #selector(bottomSubmitView.leftTap), forControlEvents: .TouchUpInside)
-        leftButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        leftButton.setTitle("不同意", for: UIControlState())
+        leftButton.addTarget(self, action: #selector(bottomSubmitView.leftTap), for: .touchUpInside)
+        leftButton.setTitleColor(UIColor.white, for: UIControlState())
         leftButton.backgroundColor = UIColor ( red: 0.747, green: 0.747, blue: 0.747, alpha: 1.0 )
         
-        rightButton.snp_makeConstraints { (make) in
+        rightButton.snp.makeConstraints { (make) in
             make.right.top.bottom.equalTo(self)
             make.width.equalTo(self.ddWidth/2)
         }
-        rightButton.setTitle("同意", forState: .Normal)
-        rightButton.addTarget(self, action: #selector(bottomSubmitView.rightTap), forControlEvents: .TouchUpInside)
-        rightButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        rightButton.setTitle("同意", for: UIControlState())
+        rightButton.addTarget(self, action: #selector(bottomSubmitView.rightTap), for: .touchUpInside)
+        rightButton.setTitleColor(UIColor.white, for: UIControlState())
         rightButton.backgroundColor = UIColor ( red: 0.9647, green: 0.259, blue: 0.2673, alpha: 1.0 )
     }
     
@@ -69,7 +69,7 @@ class ApproveVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
         setSubViews()
     }
     
@@ -107,26 +107,26 @@ class ApproveVC: BaseViewController {
     }
     
     func setTableView() {
-        let frame = CGRectMake(0, 200,screenWidth, screenHeight - 200)
-        bottomTableView = UITableView(frame: frame, style: .Plain)
+        let frame = CGRect(x: 0, y: 200,width: screenWidth, height: screenHeight - 200)
+        bottomTableView = UITableView(frame: frame, style: .plain)
         bottomTableView.delegate = self
         bottomTableView.dataSource = self
         bottomTableView.bounces = false
-        bottomTableView.separatorStyle = .None
+        bottomTableView.separatorStyle = .none
         
         let nib = UINib(nibName: cellId, bundle: nil)
-        bottomTableView.registerNib(nib, forCellReuseIdentifier: cellId)
+        bottomTableView.register(nib, forCellReuseIdentifier: cellId)
         
         view.addSubview(bottomTableView)
         
     }
     
-    var lastContentOffset:CGPoint = CGPointZero
+    var lastContentOffset:CGPoint = CGPoint.zero
     
     var dismissed = false
     
     //下方确认按钮的动画.
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         let currentOffset = scrollView.contentOffset
         if (currentOffset.y > self.lastContentOffset.y)
@@ -135,8 +135,8 @@ class ApproveVC: BaseViewController {
             print("down")
             // Downward
             if dismissed == true {return}
-            UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseOut, animations: { 
-                self.bottomConstraint?.updateOffset(self.bottomView.ddHeight)
+            UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: { 
+                self.bottomConstraint?.update(offset: self.bottomView.ddHeight)
                 self.bottomView.layoutIfNeeded()
                 }, completion: { (success) in
                     self.dismissed = true
@@ -148,8 +148,8 @@ class ApproveVC: BaseViewController {
             print("up")
             // Upward
             if dismissed == false {return}
-            UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseOut, animations: {
-                self.bottomConstraint?.updateOffset(0.0)
+            UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
+                self.bottomConstraint?.update(offset: 0.0)
                 self.bottomView.layoutIfNeeded()
             }, completion: { (success) in
             self.dismissed = false
@@ -162,39 +162,39 @@ class ApproveVC: BaseViewController {
 }
 extension ApproveVC:UITableViewDelegate,UITableViewDataSource {
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return listOfSection.count
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return listOfSection[section]
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 22
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let l = UILabel(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 22))
         l.backgroundColor = UIColor ( red: 0.8797, green: 0.8755, blue: 0.884, alpha: 1.0 )
-        l.textAlignment = .Center
+        l.textAlignment = .center
         l.text = listOfSection[section]
         
         return l
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! typeCell
-        cell.selectionStyle = .None
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! typeCell
+        cell.selectionStyle = .none
         
         
         cell.leftLabel.text = "天地藏浴"

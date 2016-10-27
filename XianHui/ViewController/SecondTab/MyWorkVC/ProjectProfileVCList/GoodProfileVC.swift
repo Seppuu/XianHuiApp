@@ -29,7 +29,7 @@ class GoodProfileVC: BaseProfileViewController {
     
     func setNavBarItem() {
         
-        let rightBarItem = UIBarButtonItem(title: "订单", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(EmployeeProfileVC.settingTap))
+        let rightBarItem = UIBarButtonItem(title: "订单", style: UIBarButtonItemStyle.plain, target: self, action: #selector(EmployeeProfileVC.settingTap))
         navigationItem.rightBarButtonItem = rightBarItem
         
     }
@@ -48,11 +48,11 @@ class GoodProfileVC: BaseProfileViewController {
     
 
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 1 {
+        if (indexPath as NSIndexPath).section == 1 {
             
-            if indexPath.row == 0 {
+            if (indexPath as NSIndexPath).row == 0 {
                 let vc = GoodDetailListVC()
                 vc.goodProfileType = .first
                 vc.json = self.profileDetailJSON
@@ -60,7 +60,7 @@ class GoodProfileVC: BaseProfileViewController {
                 self.navigationController?.pushViewController(vc, animated: true)
                 
             }
-            else if indexPath.row == 1 {
+            else if (indexPath as NSIndexPath).row == 1 {
                 let vc = GoodDetailListVC()
                 vc.goodProfileType = .second
                 vc.json = self.profileDetailJSON
@@ -78,8 +78,8 @@ class GoodProfileVC: BaseProfileViewController {
             
             
         }
-        else if indexPath.section == 2 {
-            let baseModel = listArray[indexPath.section - 1].list[indexPath.row]
+        else if (indexPath as NSIndexPath).section == 2 {
+            let baseModel = listArray[(indexPath as NSIndexPath).section - 1].list[(indexPath as NSIndexPath).row]
             let vc = BaseTableViewController()
             let listArr = BaseTableViewModelList()
             listArr.listName = ""
@@ -108,7 +108,7 @@ class EmployeeProfileVC: BaseProfileViewController {
     
     func setNavBarItem() {
         
-        let rightBarItem = UIBarButtonItem(title: "订单", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(EmployeeProfileVC.settingTap))
+        let rightBarItem = UIBarButtonItem(title: "订单", style: UIBarButtonItemStyle.plain, target: self, action: #selector(EmployeeProfileVC.settingTap))
         navigationItem.rightBarButtonItem = rightBarItem
         
     }
@@ -133,7 +133,7 @@ class EmployeeProfileVC: BaseProfileViewController {
     
     
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
 
     }

@@ -56,18 +56,18 @@ class ChatKitExample: LCChatKitExample {
         LCChatKit.sharedInstance().fetchProfilesBlock = {
             (clientIds,callback) in
             
-            if clientIds.count == 0 {
+            if clientIds?.count == 0 {
                 let code = 0
                 let errorReasonText = "User ids is nil"
                 let errorInfo = [
                     "code" :code,
                     NSLocalizedDescriptionKey:errorReasonText,
                     
-                    ]
+                    ] as [String : Any]
                 
-                let error = NSError(domain: "LCChatKit", code: code, userInfo: errorInfo as [NSObject : AnyObject])
+                let error = NSError(domain: "LCChatKit", code: code, userInfo: errorInfo as [AnyHashable: Any])
                 if callback != nil {
-                    callback(nil,error)
+                    callback!(nil,error)
                 }
                 else {
                     
@@ -76,20 +76,20 @@ class ChatKitExample: LCChatKitExample {
                 return
             }
             var users = [XHUser]()
-            clientIds.forEach({ (id) in
+            clientIds?.forEach({ (id) in
                 
                 if let user = User.getUserBy(id) {
                     users.append(user)
                 }
                 else {
                     let user = XHUser(clientId: id)
-                    users.append(user)
+                    users.append(user!)
                 }
                 
             })
             
             if callback != nil {
-                callback(users,nil)
+                callback!(users,nil)
             }
             else {
                 
@@ -98,7 +98,7 @@ class ChatKitExample: LCChatKitExample {
     }
     
     //打开扫一扫
-    class func openQRCodeVCForm(viewController:UIViewController) {
+    class func openQRCodeVCForm(_ viewController:UIViewController) {
         
         let vc = QQScanViewController()
         vc.title = "扫一扫"
@@ -107,7 +107,7 @@ class ChatKitExample: LCChatKitExample {
     }
     
     //群聊
-    override class func exampleCreateGroupConversationFromViewController(viewController: UIViewController!) {
+    override class func exampleCreateGroupConversation(from viewController: UIViewController!) {
         
         let allPersonIds = allUserIds
         let users = try! LCChatKit.sharedInstance().getCachedProfilesIfExists(allPersonIds, shouldSameCount: true) as! [LCCKContact]
@@ -117,7 +117,7 @@ class ChatKitExample: LCChatKitExample {
         let allPersonIdsSet = NSSet(array: allUserIds) as! Set<String>
         
         let currentClientID = LCChatKit.sharedInstance().clientId
-        let contactListViewController = LCCKContactListViewController(contacts: usersNssetArray , userIds: allPersonIdsSet, excludedUserIds:[currentClientID], mode: LCCKContactListModeMultipleSelection)
+        let contactListViewController = LCCKContactListViewController(contacts: usersNssetArray , userIds: allPersonIdsSet, excludedUserIds:[currentClientID!], mode: LCCKContactListModeMultipleSelection)
 
         contactListViewController.title = "创建群聊"
         
@@ -127,10 +127,10 @@ class ChatKitExample: LCChatKitExample {
             }
             
             //创建群聊 可以考虑加提示
-            LCChatKit.sharedInstance().createConversationWithMembers(peerIds, type:LCCKConversationType.Group , unique: true, callback: { (conversation, error) in
+            LCChatKit.sharedInstance().createConversation(withMembers: peerIds, type:LCCKConversationType.group , unique: true, callback: { (conversation, error) in
                 
                 //创建成功
-                LCChatKitExample.exampleOpenConversationViewControllerWithConversaionId(conversation.conversationId, fromNavigationController: viewController.navigationController)
+                LCChatKitExample.exampleOpenConversationViewController(withConversaionId: conversation!.conversationId, from: viewController.navigationController)
                 
                 //TODO:创建失败
             })
@@ -138,7 +138,7 @@ class ChatKitExample: LCChatKitExample {
         
         let navigationViewController = UINavigationController(rootViewController: contactListViewController)
         
-        viewController.presentViewController(navigationViewController, animated: true, completion: nil)
+        viewController.present(navigationViewController, animated: true, completion: nil)
         
     }
     
@@ -160,7 +160,7 @@ class ChatKitExample: LCChatKitExample {
                 }
                 else {
                     
-                    let isSingleSignOnOffline = (aError.code == 4111)
+                    let isSingleSignOnOffline = (aError?._code == 4111)
                     
                     if (isSingleSignOnOffline) {
                         force = true
@@ -170,14 +170,14 @@ class ChatKitExample: LCChatKitExample {
                 }
                 
                 //get current viewController
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 let vc = appDelegate.window?.visibleViewController!
-                NSObject.lcck_showMessage(title, toView: vc!.view)
+                NSObject.lcck_showMessage(title, to: vc!.view)
                 let clientId = LCChatKit.sharedInstance().clientId
-                LCChatKit.sharedInstance().openWithClientId(clientId, force: force, callback: { (succeeded, error) in
+                LCChatKit.sharedInstance().open(withClientId: clientId, force: force, callback: { (succeeded, error) in
                     
-                    NSObject.lcck_hideHUDForView(vc!.view)
-                    completionHandler(succeeded, error)
+                    NSObject.lcck_hideHUD(for: vc!.view)
+                    completionHandler!(succeeded, error)
                 })
                 
                 return
@@ -188,14 +188,14 @@ class ChatKitExample: LCChatKitExample {
             LCChatKitExample.lcck_clearLocalClientInfo()
             
             //show intro
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
             appDelegate.showGuide()
 
             // - 显示返回信息
             let  code = 0
             let errorReasonText = "not granted"
-            let errorInfo:[NSObject:AnyObject] = [
+            let errorInfo:[AnyHashable: Any] = [
                 "code" : code,
                 NSLocalizedDescriptionKey : errorReasonText
             ]
@@ -205,7 +205,7 @@ class ChatKitExample: LCChatKitExample {
             let classString = NSStringFromClass(klass)
             let error = NSError(domain: classString, code: code, userInfo: errorInfo)
             
-            completionHandler(false, error)
+            completionHandler!(false, error)
  
         }
         
@@ -217,17 +217,17 @@ class ChatKitExample: LCChatKitExample {
         LCChatKit.sharedInstance().fetchConversationHandler = {
             (conversation,aConversationController) in
             
-            if conversation.createAt == nil {return}
+            if conversation?.createAt == nil {return}
             
-            if (conversation.members.count > 2) {
+            if ((conversation?.members!.count)! > 2) {
                 super.lcck_setupOpenConversation()
             }
-            else if conversation.members.count == 2 {
+            else if conversation?.members!.count == 2 {
                 
-                aConversationController.configureBarButtonItemStyle(.SingleProfile, action: { (sender, event) in
+                aConversationController?.configureBarButtonItemStyle(.singleProfile, action: { (sender, event) in
                     
                    // let hud = showHudWith(aConversationController.view, animated: true, mode: .Indeterminate, text: "")
-                    if let memebers = conversation.members as? [String] {
+                    if let memebers = conversation?.members as? [String] {
                         let currentUserClientId = LCChatKit.sharedInstance().clientId
                         var clientId = ""
                         
@@ -249,21 +249,14 @@ class ChatKitExample: LCChatKitExample {
                                         vc.profileJSON = json!
                                         vc.profileDetailJSON = json!
                                         
-                                        aConversationController.navigationController?.pushViewController(vc, animated: true)
+                                        aConversationController?.navigationController?.pushViewController(vc, animated: true)
                                     }
                                     
-                                    
                                 })
-     
                             }
-                            
-                           
                         }
                         
-                        
                     }
-                    
-                    
                     
                 })
                 

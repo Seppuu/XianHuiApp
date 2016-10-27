@@ -9,7 +9,6 @@
 import UIKit
 import Charts
 import SnapKit
-import SwiftString
 
 class PieCell: UICollectionViewCell {
     
@@ -107,10 +106,10 @@ class PieChartViewController: BaseChartViewController {
         
         
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .Horizontal
+        layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
-        layout.itemSize = CGSizeMake(screenWidth, viewHeight * 0.5)
+        layout.itemSize = CGSize(width: screenWidth, height: viewHeight * 0.5)
         
         
         bottomCollectionView = UICollectionView(frame: CGRect(x: 0, y: topPageView.ddHeight + 64, width: screenWidth, height: viewHeight * 0.5), collectionViewLayout: layout)
@@ -119,8 +118,8 @@ class PieChartViewController: BaseChartViewController {
         bottomCollectionView.dataSource = self
         bottomCollectionView.bounces = false
         bottomCollectionView.showsHorizontalScrollIndicator = false
-        bottomCollectionView.pagingEnabled = true
-        bottomCollectionView.registerClass(PieCell.self, forCellWithReuseIdentifier:pieCellID )
+        bottomCollectionView.isPagingEnabled = true
+        bottomCollectionView.register(PieCell.self, forCellWithReuseIdentifier:pieCellID )
         
         view.addSubview(bottomCollectionView)
         
@@ -143,22 +142,23 @@ class PieChartViewController: BaseChartViewController {
 //        view.addSubview(pieTypelabel)
         
         //tableViewSet
-        tableView = UITableView(frame: CGRectZero, style: .Plain)
+        tableView = UITableView(frame: CGRect.zero, style: .plain)
         view.addSubview(tableView)
         
         let nib = UINib(nibName: cellID, bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: cellID)
+        tableView.register(nib, forCellReuseIdentifier: cellID)
         
-        tableView.snp_makeConstraints { (make) in
+        tableView.snp.makeConstraints{ (make) in
             make.left.right.equalTo(view)
             self.tableViewTopConstraint = make.top.equalTo(view).offset(64).constraint
             make.height.equalTo((screenHeight * 2)/5)
         }
         
+        
         tableView.delegate = self
         tableView.dataSource = self
         
-        self.tableViewTopConstraint?.updateOffset(-screenWidth)
+        self.tableViewTopConstraint?.update(offset: -screenWidth)
     }
     
     override func didReceiveMemoryWarning() {
@@ -167,7 +167,7 @@ class PieChartViewController: BaseChartViewController {
     }
     
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         
@@ -176,12 +176,12 @@ class PieChartViewController: BaseChartViewController {
 
 extension PieChartViewController: ChartViewDelegate {
     
-    func updatePieChartData(index:Int,pieView:PieChartView) {
+    func updatePieChartData(_ index:Int,pieView:PieChartView) {
         
         setDataCountWith(index, pieView: pieView)
     }
     
-    func setDataCountWith(index:Int,pieView:PieChartView) {
+    func setDataCountWith(_ index:Int,pieView:PieChartView) {
         
         var yVals1 = [BarChartDataEntry]()
         
@@ -190,7 +190,9 @@ extension PieChartViewController: ChartViewDelegate {
             let model = listOfChartDataArray[currentDayIndex].charts[index].model[i]
             let val  = model.y
             
-            let chartDataEntry = BarChartDataEntry(value: val, xIndex: i)
+            //let chartDataEntry = BarChartDataEntry(value: val, xIndex: i)
+            
+            let chartDataEntry = BarChartDataEntry(x: Double(i), y: val)
             
             yVals1.append(chartDataEntry)
         }
@@ -207,7 +209,7 @@ extension PieChartViewController: ChartViewDelegate {
         }
 
         
-        let dataSet = PieChartDataSet(yVals: yVals1, label: "分布结果")
+        let dataSet = PieChartDataSet(values: yVals1, label: "分布结果")
         dataSet.sliceSpace = 2.0
         
         var colors = [UIColor]()
@@ -222,14 +224,16 @@ extension PieChartViewController: ChartViewDelegate {
 
         dataSet.colors = colors
         
-        let data = PieChartData(xVals: xVals, dataSet: dataSet)
+        let data = PieChartData(dataSets: [dataSet])
+        //(xVals: xVals, dataSet: dataSet)
         
-        let pFormatter = NSNumberFormatter()
-        pFormatter.numberStyle = .PercentStyle
+        let pFormatter = NumberFormatter()
+        pFormatter.numberStyle = .percent
         pFormatter.maximumFractionDigits = 1
         pFormatter.multiplier = 1.0
         pFormatter.percentSymbol = " %"
-        data.setValueFormatter(pFormatter)
+        let iVFormatter = DefaultValueFormatter(formatter: pFormatter)
+        data.setValueFormatter(iVFormatter)
         data.setValueFont(UIFont(name: "HelveticaNeue-Light", size: 14.0))
         data.setValueTextColor(UIColor ( red: 0.3078, green: 0.3078, blue: 0.3078, alpha: 1.0 ))
         
@@ -238,27 +242,27 @@ extension PieChartViewController: ChartViewDelegate {
         
     }
     
-    func moveSelectdSliceToVertical(pieView:PieChartView , index:Int) {
+    func moveSelectdSliceToVertical(_ pieView:PieChartView , index:Int) {
         
         let selcetPartDrawAngle = pieView.drawAngles[index]
         let selcetPartAbsoluteAngle = pieView.absoluteAngles[index]
         
         let toAngle = (270 - (selcetPartAbsoluteAngle - selcetPartDrawAngle/2))
         
-        pieView.spin(duration: 0.5, fromAngle:pieView.rotationAngle, toAngle: toAngle, easingOption: .EaseInOutSine)
+        pieView.spin(duration: 0.5, fromAngle:pieView.rotationAngle, toAngle: toAngle, easingOption: .easeInOutSine)
     }
     
     //MARK:ChartViewDelegate
-    func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: Highlight) {
         
-        let index = entry.xIndex
+        let index = entry.x
         guard let pieChartView = chartView as? PieChartView else {return}
         
-        moveSelectdSliceToVertical(pieChartView, index: index)
+        moveSelectdSliceToVertical(pieChartView, index: Int(index))
     }
     
     
-    func chartValueNothingSelected(chartView: ChartViewBase) {
+    func chartValueNothingSelected(_ chartView: ChartViewBase) {
         
         
     }
@@ -267,24 +271,24 @@ extension PieChartViewController: ChartViewDelegate {
 
 extension PieChartViewController {
     
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         self.animePieChart = false
     }
     
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
         let pageWidth = bottomCollectionView.ddWidth
         let currentpage = Int( bottomCollectionView.contentOffset.x / pageWidth )
         pageControl.currentPage = currentpage
         
         //get cell with index
-        let path = NSIndexPath(forItem: currentpage, inSection: 0)
-        let cell = bottomCollectionView.cellForItemAtIndexPath(path) as! PieCell
+        let path = IndexPath(item: currentpage, section: 0)
+        let cell = bottomCollectionView.cellForItem(at: path) as! PieCell
         let pieChartView = cell.viewWithTag(10) as! PieChartView
         pieChartView.centerText = pieType[currentpage]
         
@@ -292,7 +296,7 @@ extension PieChartViewController {
     
     
     
-    func updatePieData(index:Int) {
+    func updatePieData(_ index:Int) {
         
         animePieChart = true
         currentDayIndex = index
@@ -306,17 +310,17 @@ extension PieChartViewController {
 
 extension PieChartViewController:UICollectionViewDelegateFlowLayout,UICollectionViewDelegate,UICollectionViewDataSource {
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return listOfChartDataArray[currentDayIndex].charts.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(pieCellID, forIndexPath: indexPath) as! PieCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: pieCellID, for: indexPath) as! PieCell
         
         let pieChartView = PieChartView(frame: cell.contentView.bounds)
         pieChartView.tag = 10
@@ -330,7 +334,7 @@ extension PieChartViewController:UICollectionViewDelegateFlowLayout,UICollection
         setupPieChartView(pieChartView)
         if animePieChart == true {
             
-            pieChartView.animate(xAxisDuration: 1.0, easingOption: .EaseOutBack)
+            pieChartView.animate(xAxisDuration: 1.0, easingOption: .easeOutBack)
             
         }
         else {
@@ -341,7 +345,7 @@ extension PieChartViewController:UICollectionViewDelegateFlowLayout,UICollection
     }
     
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         
     }
@@ -349,35 +353,35 @@ extension PieChartViewController:UICollectionViewDelegateFlowLayout,UICollection
 
 extension PieChartViewController:UITableViewDelegate,UITableViewDataSource {
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataOfPieChart.count
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! CertificateCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! CertificateCell
         
-        cell.accessoryType = .DisclosureIndicator
-        cell.leftLabel.text = dataOfPieChart[indexPath.row]
+        cell.accessoryType = .disclosureIndicator
+        cell.leftLabel.text = dataOfPieChart[(indexPath as NSIndexPath).row]
         
         cell.rightLabel.text = "熟练"
         
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let vc = BaseViewController()
         vc.view.backgroundColor = UIColor.ddViewBackGroundColor()
-        vc.title = dataOfPieChart[indexPath.row]
+        vc.title = dataOfPieChart[(indexPath as NSIndexPath).row]
         self.parentNavigationController?.pushViewController(vc, animated: true)
     }
     

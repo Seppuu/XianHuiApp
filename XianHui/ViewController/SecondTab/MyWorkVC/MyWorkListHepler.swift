@@ -35,7 +35,7 @@ class MyWorkListHepler: NSObject, UITableViewDelegate, UITableViewDataSource {
     var cellHeight:CGFloat = 64
     var cellId = "MyWorkCell"
     
-    var cellSelectedHandler:((index:Int,objectId:Int,objectName:String,obj:MyWorkObject)->())?
+    var cellSelectedHandler:((_ index:Int,_ objectId:Int,_ objectName:String,_ obj:MyWorkObject)->())?
 
     override init() {
         super.init()
@@ -44,45 +44,45 @@ class MyWorkListHepler: NSObject, UITableViewDelegate, UITableViewDataSource {
     
    
     //tableView
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataArray.count
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return cellHeight
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.1
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? MyWorkCell
+        var cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? MyWorkCell
         if cell == nil {
             let nib = UINib(nibName: cellId, bundle: nil)
             
-            tableView.registerNib(nib, forCellReuseIdentifier: cellId)
+            tableView.register(nib, forCellReuseIdentifier: cellId)
             
-            cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? MyWorkCell
+            cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? MyWorkCell
         }
         
-        cell?.selectionStyle = .None
+        cell?.selectionStyle = .none
         
-        let obj = dataArray[indexPath.row]
+        let obj = dataArray[(indexPath as NSIndexPath).row]
         
-        if let url = NSURL(string:obj.leftImageUrl) {
-            cell?.leftImageIView.kf_setImageWithURL(url)
+        if let url = URL(string:obj.leftImageUrl) {
+            cell?.leftImageIView.kf.setImage(with: url)
         }
         
         cell?.leftImageIView.layer.cornerRadius = 25
         cell?.leftImageIView.layer.masksToBounds = true
         
-        cell?.leftImageIView.backgroundColor = UIColor.lightGrayColor()
+        cell?.leftImageIView.backgroundColor = UIColor.lightGray
         
         cell?.nameLabel.text = obj.nameLabelString
         
@@ -102,11 +102,11 @@ class MyWorkListHepler: NSObject, UITableViewDelegate, UITableViewDataSource {
     }
     
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
-        let obj = self.dataArray[indexPath.row]
-        cellSelectedHandler?(index:indexPath.row,objectId:obj.id,objectName:obj.nameLabelString,obj:obj)
+        let obj = self.dataArray[(indexPath as NSIndexPath).row]
+        cellSelectedHandler?((indexPath as NSIndexPath).row,obj.id,obj.nameLabelString,obj)
         
     }
     

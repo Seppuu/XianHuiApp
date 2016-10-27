@@ -14,6 +14,19 @@
 		370AAEA61D49F1B3000C64D1 /* UserNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AAEA41D49F1B3000C64D1 /* UserNameCell.swift */; };
 		370AAEA71D49F1B3000C64D1 /* UserNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 370AAEA51D49F1B3000C64D1 /* UserNameCell.xib */; };
 		370C4E7A1D9E346400312E9C /* MyWorkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370C4E791D9E346400312E9C /* MyWorkManager.swift */; };
+		371041E21DC09B9B00BE20F9 /* CAPSPageMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371041E11DC09B9B00BE20F9 /* CAPSPageMenu.swift */; };
+		371041EA1DC09C0E00BE20F9 /* PalauCustomDefaultable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371041E41DC09C0E00BE20F9 /* PalauCustomDefaultable.swift */; };
+		371041EB1DC09C0E00BE20F9 /* PalauDefaultable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371041E51DC09C0E00BE20F9 /* PalauDefaultable.swift */; };
+		371041EC1DC09C0E00BE20F9 /* PalauDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371041E61DC09C0E00BE20F9 /* PalauDefaults.swift */; };
+		371041ED1DC09C0E00BE20F9 /* PalauDefaultsArrayEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371041E71DC09C0E00BE20F9 /* PalauDefaultsArrayEntry.swift */; };
+		371041EE1DC09C0E00BE20F9 /* PalauDefaultsEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371041E81DC09C0E00BE20F9 /* PalauDefaultsEntry.swift */; };
+		371041EF1DC09C0E00BE20F9 /* PalauEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371041E91DC09C0E00BE20F9 /* PalauEntry.swift */; };
+		371041F21DC09C6F00BE20F9 /* LTInfiniteScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371041F11DC09C6F00BE20F9 /* LTInfiniteScrollView.swift */; };
+		371041F81DC09CF700BE20F9 /* ICSInfiniteScrolling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371041F41DC09CF700BE20F9 /* ICSInfiniteScrolling.swift */; };
+		371041F91DC09CF700BE20F9 /* ICSPullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371041F61DC09CF700BE20F9 /* ICSPullToRefresh.swift */; };
+		371041FA1DC09CF700BE20F9 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 371041F71DC09CF700BE20F9 /* Info.plist */; };
+		371041FE1DC0A64400BE20F9 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371041FC1DC0A64400BE20F9 /* StringExtensions.swift */; };
+		371041FF1DC0A64400BE20F9 /* StringHTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371041FD1DC0A64400BE20F9 /* StringHTML.swift */; };
 		371430721D9B8D2D0006A314 /* MyWorkListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371430711D9B8D2D0006A314 /* MyWorkListVC.swift */; };
 		371430741D9B8D8D0006A314 /* MyWorkListHepler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371430731D9B8D8D0006A314 /* MyWorkListHepler.swift */; };
 		371430771D9B96C60006A314 /* MyWorkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371430751D9B96C60006A314 /* MyWorkCell.swift */; };
@@ -115,6 +128,11 @@
 		379C73831D9CAC5100B41BA6 /* CustomerCardDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C73821D9CAC5100B41BA6 /* CustomerCardDetailVC.swift */; };
 		379C738A1D9CDCD000B41BA6 /* CheckBoxCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C73881D9CDCD000B41BA6 /* CheckBoxCell.swift */; };
 		379C738B1D9CDCD000B41BA6 /* CheckBoxCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 379C73891D9CDCD000B41BA6 /* CheckBoxCell.xib */; };
+		37A00DAF1DC1A06700E00CA7 /* VoiceRecordSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A00DAC1DC1A06700E00CA7 /* VoiceRecordSampleView.swift */; };
+		37A00DB01DC1A06700E00CA7 /* Waver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A00DAD1DC1A06700E00CA7 /* Waver.swift */; };
+		37A00DB11DC1A06700E00CA7 /* YepWaverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A00DAE1DC1A06700E00CA7 /* YepWaverView.swift */; };
+		37A00DB71DC1E74500E00CA7 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37A00DB41DC1E74500E00CA7 /* Info.plist */; };
+		37A00DB81DC1E74500E00CA7 /* RAReorderableLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A00DB61DC1E74500E00CA7 /* RAReorderableLayout.swift */; };
 		37A2466A1DAF69A3002ADC5C /* FourButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A246681DAF69A3002ADC5C /* FourButtonCell.swift */; };
 		37A2466B1DAF69A3002ADC5C /* FourButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37A246691DAF69A3002ADC5C /* FourButtonCell.xib */; };
 		37A2466E1DAF69B4002ADC5C /* SliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A2466C1DAF69B4002ADC5C /* SliderCell.swift */; };
@@ -229,7 +247,6 @@
 		37BAB9B41D3E1059001E4680 /* FilterCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BAB9591D3E1059001E4680 /* FilterCollectionView.swift */; };
 		37BAB9B61D3E1059001E4680 /* NavigationTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BAB95D1D3E1059001E4680 /* NavigationTitleLabel.swift */; };
 		37BAB9B71D3E1059001E4680 /* PicksSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BAB95F1D3E1059001E4680 /* PicksSheetView.swift */; };
-		37BAB9B81D3E1059001E4680 /* RAReorderableLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BAB9611D3E1059001E4680 /* RAReorderableLayout.swift */; };
 		37BAB9B91D3E1059001E4680 /* BorderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BAB9651D3E1059001E4680 /* BorderTextField.swift */; };
 		37BAB9BA1D3E1059001E4680 /* ActivityIndicatorTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BAB9681D3E1059001E4680 /* ActivityIndicatorTitleView.swift */; };
 		37BAB9D31D3E11B1001E4680 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 37BAB9C51D3E11B1001E4680 /* LICENSE */; };
@@ -262,10 +279,6 @@
 		37DF88E51D8FD3D700B8DB73 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DF88E41D8FD3D700B8DB73 /* UserManager.swift */; };
 		37E78A9A1D41F198007425A3 /* OTPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E78A971D41F198007425A3 /* OTPageScrollView.m */; };
 		37E78A9B1D41F198007425A3 /* OTPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E78A991D41F198007425A3 /* OTPageView.m */; };
-		37E78AA41D4204DE007425A3 /* SampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E78AA01D4204DE007425A3 /* SampleView.swift */; };
-		37E78AA51D4204DE007425A3 /* VoiceRecordSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E78AA11D4204DE007425A3 /* VoiceRecordSampleView.swift */; };
-		37E78AA61D4204DE007425A3 /* Waver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E78AA21D4204DE007425A3 /* Waver.swift */; };
-		37E78AA71D4204DE007425A3 /* YepWaverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E78AA31D4204DE007425A3 /* YepWaverView.swift */; };
 		37EA568B1D3E0A7000D63498 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EA568A1D3E0A7000D63498 /* AppDelegate.swift */; };
 		37EA56901D3E0A7000D63498 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37EA568E1D3E0A7000D63498 /* Main.storyboard */; };
 		37EA56951D3E0A7000D63498 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37EA56931D3E0A7000D63498 /* LaunchScreen.storyboard */; };
@@ -287,6 +300,20 @@
 		370AAEA41D49F1B3000C64D1 /* UserNameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNameCell.swift; sourceTree = "<group>"; };
 		370AAEA51D49F1B3000C64D1 /* UserNameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserNameCell.xib; sourceTree = "<group>"; };
 		370C4E791D9E346400312E9C /* MyWorkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyWorkManager.swift; sourceTree = "<group>"; };
+		371041E11DC09B9B00BE20F9 /* CAPSPageMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAPSPageMenu.swift; sourceTree = "<group>"; };
+		371041E41DC09C0E00BE20F9 /* PalauCustomDefaultable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PalauCustomDefaultable.swift; sourceTree = "<group>"; };
+		371041E51DC09C0E00BE20F9 /* PalauDefaultable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PalauDefaultable.swift; sourceTree = "<group>"; };
+		371041E61DC09C0E00BE20F9 /* PalauDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PalauDefaults.swift; sourceTree = "<group>"; };
+		371041E71DC09C0E00BE20F9 /* PalauDefaultsArrayEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PalauDefaultsArrayEntry.swift; sourceTree = "<group>"; };
+		371041E81DC09C0E00BE20F9 /* PalauDefaultsEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PalauDefaultsEntry.swift; sourceTree = "<group>"; };
+		371041E91DC09C0E00BE20F9 /* PalauEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PalauEntry.swift; sourceTree = "<group>"; };
+		371041F11DC09C6F00BE20F9 /* LTInfiniteScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTInfiniteScrollView.swift; sourceTree = "<group>"; };
+		371041F41DC09CF700BE20F9 /* ICSInfiniteScrolling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ICSInfiniteScrolling.swift; sourceTree = "<group>"; };
+		371041F51DC09CF700BE20F9 /* ICSPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICSPullToRefresh.h; sourceTree = "<group>"; };
+		371041F61DC09CF700BE20F9 /* ICSPullToRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ICSPullToRefresh.swift; sourceTree = "<group>"; };
+		371041F71DC09CF700BE20F9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		371041FC1DC0A64400BE20F9 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		371041FD1DC0A64400BE20F9 /* StringHTML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHTML.swift; sourceTree = "<group>"; };
 		371430711D9B8D2D0006A314 /* MyWorkListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyWorkListVC.swift; sourceTree = "<group>"; };
 		371430731D9B8D8D0006A314 /* MyWorkListHepler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyWorkListHepler.swift; sourceTree = "<group>"; };
 		371430751D9B96C60006A314 /* MyWorkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyWorkCell.swift; sourceTree = "<group>"; };
@@ -407,6 +434,12 @@
 		379C73821D9CAC5100B41BA6 /* CustomerCardDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerCardDetailVC.swift; sourceTree = "<group>"; };
 		379C73881D9CDCD000B41BA6 /* CheckBoxCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBoxCell.swift; sourceTree = "<group>"; };
 		379C73891D9CDCD000B41BA6 /* CheckBoxCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckBoxCell.xib; sourceTree = "<group>"; };
+		37A00DAC1DC1A06700E00CA7 /* VoiceRecordSampleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceRecordSampleView.swift; sourceTree = "<group>"; };
+		37A00DAD1DC1A06700E00CA7 /* Waver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Waver.swift; sourceTree = "<group>"; };
+		37A00DAE1DC1A06700E00CA7 /* YepWaverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YepWaverView.swift; sourceTree = "<group>"; };
+		37A00DB41DC1E74500E00CA7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		37A00DB51DC1E74500E00CA7 /* RAReorderableLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAReorderableLayout.h; sourceTree = "<group>"; };
+		37A00DB61DC1E74500E00CA7 /* RAReorderableLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAReorderableLayout.swift; sourceTree = "<group>"; };
 		37A246681DAF69A3002ADC5C /* FourButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FourButtonCell.swift; sourceTree = "<group>"; };
 		37A246691DAF69A3002ADC5C /* FourButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FourButtonCell.xib; sourceTree = "<group>"; };
 		37A2466C1DAF69B4002ADC5C /* SliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderCell.swift; sourceTree = "<group>"; };
@@ -537,7 +570,6 @@
 		37BAB9591D3E1059001E4680 /* FilterCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCollectionView.swift; sourceTree = "<group>"; };
 		37BAB95D1D3E1059001E4680 /* NavigationTitleLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationTitleLabel.swift; sourceTree = "<group>"; };
 		37BAB95F1D3E1059001E4680 /* PicksSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PicksSheetView.swift; sourceTree = "<group>"; };
-		37BAB9611D3E1059001E4680 /* RAReorderableLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAReorderableLayout.swift; sourceTree = "<group>"; };
 		37BAB9651D3E1059001E4680 /* BorderTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderTextField.swift; sourceTree = "<group>"; };
 		37BAB9681D3E1059001E4680 /* ActivityIndicatorTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorTitleView.swift; sourceTree = "<group>"; };
 		37BAB9C51D3E11B1001E4680 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -585,10 +617,6 @@
 		37E78A971D41F198007425A3 /* OTPageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPageScrollView.m; sourceTree = "<group>"; };
 		37E78A981D41F198007425A3 /* OTPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPageView.h; sourceTree = "<group>"; };
 		37E78A991D41F198007425A3 /* OTPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPageView.m; sourceTree = "<group>"; };
-		37E78AA01D4204DE007425A3 /* SampleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleView.swift; sourceTree = "<group>"; };
-		37E78AA11D4204DE007425A3 /* VoiceRecordSampleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceRecordSampleView.swift; sourceTree = "<group>"; };
-		37E78AA21D4204DE007425A3 /* Waver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Waver.swift; sourceTree = "<group>"; };
-		37E78AA31D4204DE007425A3 /* YepWaverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YepWaverView.swift; sourceTree = "<group>"; };
 		37E9253E1DACAACF0015C64D /* XianHui.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XianHui.entitlements; sourceTree = "<group>"; };
 		37EA56871D3E0A7000D63498 /* XianHui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XianHui.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EA568A1D3E0A7000D63498 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -659,6 +687,47 @@
 				3776B8AD1D937FAC00A9C9DB /* CKSessionService.swift */,
 			);
 			path = ChatExample;
+			sourceTree = "<group>";
+		};
+		371041E31DC09C0E00BE20F9 /* Palau */ = {
+			isa = PBXGroup;
+			children = (
+				371041E41DC09C0E00BE20F9 /* PalauCustomDefaultable.swift */,
+				371041E51DC09C0E00BE20F9 /* PalauDefaultable.swift */,
+				371041E61DC09C0E00BE20F9 /* PalauDefaults.swift */,
+				371041E71DC09C0E00BE20F9 /* PalauDefaultsArrayEntry.swift */,
+				371041E81DC09C0E00BE20F9 /* PalauDefaultsEntry.swift */,
+				371041E91DC09C0E00BE20F9 /* PalauEntry.swift */,
+			);
+			path = Palau;
+			sourceTree = "<group>";
+		};
+		371041F01DC09C6F00BE20F9 /* LTInfiniteScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				371041F11DC09C6F00BE20F9 /* LTInfiniteScrollView.swift */,
+			);
+			path = LTInfiniteScrollView;
+			sourceTree = "<group>";
+		};
+		371041F31DC09CF700BE20F9 /* ICSPullToRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				371041F41DC09CF700BE20F9 /* ICSInfiniteScrolling.swift */,
+				371041F51DC09CF700BE20F9 /* ICSPullToRefresh.h */,
+				371041F61DC09CF700BE20F9 /* ICSPullToRefresh.swift */,
+				371041F71DC09CF700BE20F9 /* Info.plist */,
+			);
+			path = ICSPullToRefresh;
+			sourceTree = "<group>";
+		};
+		371041FB1DC0A64400BE20F9 /* SwiftString */ = {
+			isa = PBXGroup;
+			children = (
+				371041FC1DC0A64400BE20F9 /* StringExtensions.swift */,
+				371041FD1DC0A64400BE20F9 /* StringHTML.swift */,
+			);
+			path = SwiftString;
 			sourceTree = "<group>";
 		};
 		3724809C1D8151EF00B95C54 /* Model */ = {
@@ -1261,6 +1330,26 @@
 			path = Customer;
 			sourceTree = "<group>";
 		};
+		37A00DAB1DC1A06700E00CA7 /* AudioWaves */ = {
+			isa = PBXGroup;
+			children = (
+				37A00DAC1DC1A06700E00CA7 /* VoiceRecordSampleView.swift */,
+				37A00DAD1DC1A06700E00CA7 /* Waver.swift */,
+				37A00DAE1DC1A06700E00CA7 /* YepWaverView.swift */,
+			);
+			path = AudioWaves;
+			sourceTree = "<group>";
+		};
+		37A00DB31DC1E74500E00CA7 /* RAReorderableLayout */ = {
+			isa = PBXGroup;
+			children = (
+				37A00DB41DC1E74500E00CA7 /* Info.plist */,
+				37A00DB51DC1E74500E00CA7 /* RAReorderableLayout.h */,
+				37A00DB61DC1E74500E00CA7 /* RAReorderableLayout.swift */,
+			);
+			path = RAReorderableLayout;
+			sourceTree = "<group>";
+		};
 		37A246661DAF6977002ADC5C /* FourButtonCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1398,6 +1487,12 @@
 		37BAB8C41D3E1045001E4680 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				37A00DB31DC1E74500E00CA7 /* RAReorderableLayout */,
+				371041FB1DC0A64400BE20F9 /* SwiftString */,
+				371041F31DC09CF700BE20F9 /* ICSPullToRefresh */,
+				371041F01DC09C6F00BE20F9 /* LTInfiniteScrollView */,
+				371041E31DC09C0E00BE20F9 /* Palau */,
+				371041E11DC09B9B00BE20F9 /* CAPSPageMenu.swift */,
 				37C1F3871DB9C9410029D776 /* EBForeNotification */,
 				37C1F3831DB9C6820029D776 /* ZWIntroductionViewController */,
 				37C710D91D825D3F000FE4DE /* FTPopOverMenu.h */,
@@ -1469,6 +1564,7 @@
 		37BAB8F21D3E1059001E4680 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				37A00DAB1DC1A06700E00CA7 /* AudioWaves */,
 				3771DD121DB0B10300636BCB /* XHSideFilterView */,
 				37D46F831D6FD45100A0BBCE /* GoodDetailView */,
 				37A76FD11D6D313400572B1D /* ProdDateSetTableView */,
@@ -1478,7 +1574,6 @@
 				37367B721D6AE66F00479E39 /* PlanningTableView */,
 				37367B6D1D6AD95700479E39 /* CustomerCardView */,
 				378E07681D47579700B67621 /* XHBarChartView */,
-				37E78A9F1D4204DE007425A3 /* AudioWaves */,
 				37BAB8F61D3E1059001E4680 /* CellMenuSheet */,
 				37BAB8F81D3E1059001E4680 /* Cells */,
 				37BAB9421D3E1059001E4680 /* ChartsView */,
@@ -1491,7 +1586,6 @@
 				37BAB9591D3E1059001E4680 /* FilterCollectionView.swift */,
 				37BAB95C1D3E1059001E4680 /* Labels */,
 				37BAB95E1D3E1059001E4680 /* PicksSheetView */,
-				37BAB9601D3E1059001E4680 /* RAReorderableLayout */,
 				37BAB9641D3E1059001E4680 /* TextFields */,
 				37BAB9671D3E1059001E4680 /* TitleViews */,
 			);
@@ -1785,14 +1879,6 @@
 			path = PicksSheetView;
 			sourceTree = "<group>";
 		};
-		37BAB9601D3E1059001E4680 /* RAReorderableLayout */ = {
-			isa = PBXGroup;
-			children = (
-				37BAB9611D3E1059001E4680 /* RAReorderableLayout.swift */,
-			);
-			path = RAReorderableLayout;
-			sourceTree = "<group>";
-		};
 		37BAB9641D3E1059001E4680 /* TextFields */ = {
 			isa = PBXGroup;
 			children = (
@@ -1961,17 +2047,6 @@
 			path = OTPageView;
 			sourceTree = "<group>";
 		};
-		37E78A9F1D4204DE007425A3 /* AudioWaves */ = {
-			isa = PBXGroup;
-			children = (
-				37E78AA01D4204DE007425A3 /* SampleView.swift */,
-				37E78AA11D4204DE007425A3 /* VoiceRecordSampleView.swift */,
-				37E78AA21D4204DE007425A3 /* Waver.swift */,
-				37E78AA31D4204DE007425A3 /* YepWaverView.swift */,
-			);
-			path = AudioWaves;
-			sourceTree = "<group>";
-		};
 		37EA567E1D3E0A7000D63498 = {
 			isa = PBXGroup;
 			children = (
@@ -2124,6 +2199,7 @@
 				372962991D40AF6500A947B4 /* BKPasscodeView.strings in Resources */,
 				3776B91B1D93A83900A9C9DB /* CreateTask.storyboard in Resources */,
 				37BAB98C1D3E1059001E4680 /* coverCell.xib in Resources */,
+				371041FA1DC09CF700BE20F9 /* Info.plist in Resources */,
 				3776B8D21D93A62E00A9C9DB /* CodeScan.bundle in Resources */,
 				372480DB1D8151EF00B95C54 /* calling_card_bg@2x.png in Resources */,
 				37BAB9881D3E1059001E4680 /* CertificateCell.xib in Resources */,
@@ -2137,6 +2213,7 @@
 				37BAB98E1D3E1059001E4680 /* FirstViewCell.xib in Resources */,
 				37BAB9A01D3E1059001E4680 /* SheetCell.xib in Resources */,
 				37BAB97E1D3E1059001E4680 /* ChannelListCell.xib in Resources */,
+				37A00DB71DC1E74500E00CA7 /* Info.plist in Resources */,
 				37BAB98A1D3E1059001E4680 /* CoverAddCell.xib in Resources */,
 				37B7914E1D51CA780032C164 /* HeplerCell.xib in Resources */,
 				37BAB9A21D3E1059001E4680 /* StaffPicksCardCell.xib in Resources */,
@@ -2214,7 +2291,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		4E0C9CDB0412F1CF74A9B433 /* [CP] Copy Pods Resources */ = {
@@ -2264,7 +2341,6 @@
 				37BAB9931D3E1059001E4680 /* ProfileCell.swift in Sources */,
 				3776B9291D93A84800A9C9DB /* UserCentreVC.swift in Sources */,
 				3776B9121D93A83900A9C9DB /* RadarChartVC.swift in Sources */,
-				37E78AA51D4204DE007425A3 /* VoiceRecordSampleView.swift in Sources */,
 				37E78A9B1D41F198007425A3 /* OTPageView.m in Sources */,
 				37BAB8A91D3E101C001E4680 /* NSFileManager+DD.swift in Sources */,
 				3776B8E11D93A81D00A9C9DB /* ProjectPlanningVC.swift in Sources */,
@@ -2288,18 +2364,19 @@
 				37BAB8AF1D3E101C001E4680 /* UIImage+DD.swift in Sources */,
 				372480DC1D8151EF00B95C54 /* LCCKInputViewPluginVCard.m in Sources */,
 				37BAB8EC1D3E1045001E4680 /* NSString+Levenshtein.m in Sources */,
-				37E78AA41D4204DE007425A3 /* SampleView.swift in Sources */,
 				37BAB9A11D3E1059001E4680 /* StaffPicksCardCell.swift in Sources */,
 				37E78A9A1D41F198007425A3 /* OTPageScrollView.m in Sources */,
 				37BAB9E01D3E124E001E4680 /* DDHelper.swift in Sources */,
 				37367B6F1D6AD96B00479E39 /* CustomerCardView.swift in Sources */,
 				37BAB9971D3E1059001E4680 /* SingleTapCell.swift in Sources */,
 				37BAB9AB1D3E1059001E4680 /* WorkCell.swift in Sources */,
+				371041FF1DC0A64400BE20F9 /* StringHTML.swift in Sources */,
 				37BAB8E71D3E1045001E4680 /* CYLTabBar.m in Sources */,
 				37C710DB1D825D3F000FE4DE /* FTPopOverMenu.m in Sources */,
 				3724809B1D8151CD00B95C54 /* LCCKTabBarControllerConfig.m in Sources */,
 				3776B8DE1D93A81D00A9C9DB /* ProdDateSetVC.swift in Sources */,
 				37BAB8B01D3E101C001E4680 /* UINavigationBar+DD.swift in Sources */,
+				371041E21DC09B9B00BE20F9 /* CAPSPageMenu.swift in Sources */,
 				371430771D9B96C60006A314 /* MyWorkCell.swift in Sources */,
 				378B17731D6C360800758C13 /* progressCell.swift in Sources */,
 				37BAB8ED1D3E1045001E4680 /* KCPinyinHelper.m in Sources */,
@@ -2325,10 +2402,14 @@
 				3776B90F1D93A83900A9C9DB /* BaseChartViewController.swift in Sources */,
 				3776B8BD1D93A4D700A9C9DB /* MyWorkVC.swift in Sources */,
 				372480DD1D8151EF00B95C54 /* LCCKVCardMessageCell.m in Sources */,
+				371041EE1DC09C0E00BE20F9 /* PalauDefaultsEntry.swift in Sources */,
 				37A81FC21D9E0DE1002720D3 /* BaseTableViewController.swift in Sources */,
+				371041F91DC09CF700BE20F9 /* ICSPullToRefresh.swift in Sources */,
 				37FF8EE01D90D58900676780 /* NSUserDefaults+DD.swift in Sources */,
 				372480D81D8151EF00B95C54 /* LCCKUser.m in Sources */,
 				37D46F851D6FD46B00A0BBCE /* GoodDetailView.swift in Sources */,
+				37A00DAF1DC1A06700E00CA7 /* VoiceRecordSampleView.swift in Sources */,
+				371041F21DC09C6F00BE20F9 /* LTInfiniteScrollView.swift in Sources */,
 				3776B90D1D93A83900A9C9DB /* NavigationController.swift in Sources */,
 				378B17761D6C4A7B00758C13 /* Production.swift in Sources */,
 				37BAB9D41D3E11B1001E4680 /* README.md in Sources */,
@@ -2336,6 +2417,7 @@
 				3776B9171D93A83900A9C9DB /* LoginByPhoneVC.swift in Sources */,
 				3776B8E01D93A81D00A9C9DB /* ProjectPlannedVC.swift in Sources */,
 				37BAB8B11D3E101C001E4680 /* UINavigationItem+DD.swift in Sources */,
+				371041ED1DC09C0E00BE20F9 /* PalauDefaultsArrayEntry.swift in Sources */,
 				37BAB8E91D3E1045001E4680 /* UIViewController+CYLTabBarControllerExtention.m in Sources */,
 				3724809A1D8151CD00B95C54 /* LCChatKitExample+Setting.m in Sources */,
 				3776B9331D93AC5B00A9C9DB /* ScheduleVC.swift in Sources */,
@@ -2346,7 +2428,6 @@
 				37BAB8B31D3E101C001E4680 /* UIViewController+DD.swift in Sources */,
 				3776B91D1D93A83900A9C9DB /* FirstLaunchRemindVC.swift in Sources */,
 				37C0C3B61D66BD77002B8772 /* XHUser.swift in Sources */,
-				37E78AA71D4204DE007425A3 /* YepWaverView.swift in Sources */,
 				3776B8CF1D93A62E00A9C9DB /* MessageListCell.swift in Sources */,
 				379C73831D9CAC5100B41BA6 /* CustomerCardDetailVC.swift in Sources */,
 				3776B8DF1D93A81D00A9C9DB /* GoodListVC.swift in Sources */,
@@ -2358,6 +2439,7 @@
 				37367B741D6AE68F00479E39 /* PlanningTableView.swift in Sources */,
 				3776B8D01D93A62E00A9C9DB /* MessageListModel.swift in Sources */,
 				370AAEA61D49F1B3000C64D1 /* UserNameCell.swift in Sources */,
+				371041EC1DC09C0E00BE20F9 /* PalauDefaults.swift in Sources */,
 				3776B8D41D93A62E00A9C9DB /* ScanResultController.swift in Sources */,
 				37BAB8BE1D3E1025001E4680 /* PhotoManager.swift in Sources */,
 				37BAB9D81D3E11B1001E4680 /* AMPopTip+Exit.m in Sources */,
@@ -2366,9 +2448,9 @@
 				37BAB9D91D3E11B1001E4680 /* AMPopTip.m in Sources */,
 				37BAB9B61D3E1059001E4680 /* NavigationTitleLabel.swift in Sources */,
 				37F905311D69F9370078C06B /* CustomerCell.swift in Sources */,
+				37A00DB81DC1E74500E00CA7 /* RAReorderableLayout.swift in Sources */,
 				37367B7C1D6AE7FD00479E39 /* Project.swift in Sources */,
 				376D6D411D59B37000F9A272 /* RealmUser.swift in Sources */,
-				37E78AA61D4204DE007425A3 /* Waver.swift in Sources */,
 				37BAB9BA1D3E1059001E4680 /* ActivityIndicatorTitleView.swift in Sources */,
 				37BAB9AE1D3E1059001E4680 /* CountDownView.swift in Sources */,
 				37BAB9D61D3E11B1001E4680 /* AMPopTip+Draw.m in Sources */,
@@ -2378,6 +2460,7 @@
 				37BAB8E61D3E1045001E4680 /* CYLPlusButton.m in Sources */,
 				37BAB9B91D3E1059001E4680 /* BorderTextField.swift in Sources */,
 				37159E411D81082E00542B57 /* Form.swift in Sources */,
+				371041EF1DC09C0E00BE20F9 /* PalauEntry.swift in Sources */,
 				37BAB8EB1D3E1045001E4680 /* MLPAutoCompleteTextField.m in Sources */,
 				37B791501D51D4230032C164 /* UITableView+DD.swift in Sources */,
 				371430741D9B8D8D0006A314 /* MyWorkListHepler.swift in Sources */,
@@ -2388,6 +2471,7 @@
 				37BAB9DF1D3E124E001E4680 /* DDConfigs.swift in Sources */,
 				3776B91C1D93A83900A9C9DB /* CreateTaskVC.swift in Sources */,
 				37F70E131D8E367100C55AC8 /* GoodDetailContainerView.swift in Sources */,
+				37A00DB01DC1A06700E00CA7 /* Waver.swift in Sources */,
 				37BAB8A71D3E101C001E4680 /* Array+DD.swift in Sources */,
 				371430721D9B8D2D0006A314 /* MyWorkListVC.swift in Sources */,
 				37BAB8AA1D3E101C001E4680 /* NSTimeZone+DD.swift in Sources */,
@@ -2403,13 +2487,15 @@
 				37BAB9E11D3E124E001E4680 /* DDIMConfig.swift in Sources */,
 				378F56911DAB790800D584EF /* HelpCenterViewController.swift in Sources */,
 				37BAB8C21D3E1040001E4680 /* NetworkManager.swift in Sources */,
+				371041EB1DC09C0E00BE20F9 /* PalauDefaultable.swift in Sources */,
 				3776B9211D93A83900A9C9DB /* CustomerConsumeListVC.swift in Sources */,
 				37B79B501D7D48E200340C17 /* CustomerLargeCell.swift in Sources */,
 				37C1F39A1DB9C9410029D776 /* UIImage+ColorAtPoint.m in Sources */,
 				37BAB9A91D3E1059001E4680 /* UserAvatarCell.swift in Sources */,
 				37BAB9A71D3E1059001E4680 /* SubscriptionTopView.swift in Sources */,
-				37BAB9B81D3E1059001E4680 /* RAReorderableLayout.swift in Sources */,
+				37A00DB11DC1A06700E00CA7 /* YepWaverView.swift in Sources */,
 				3708C2691DA551E600D8E534 /* OrderCell.swift in Sources */,
+				371041EA1DC09C0E00BE20F9 /* PalauCustomDefaultable.swift in Sources */,
 				3776B9231D93A83900A9C9DB /* MineVC.swift in Sources */,
 				37BAB9B11D3E1059001E4680 /* DDPopSheetView.swift in Sources */,
 				37BAB9A31D3E1059001E4680 /* SubscriptionDetailCell.swift in Sources */,
@@ -2421,6 +2507,7 @@
 				37BAB8E81D3E1045001E4680 /* CYLTabBarController.m in Sources */,
 				37BAB9B71D3E1059001E4680 /* PicksSheetView.swift in Sources */,
 				37BAB9D71D3E11B1001E4680 /* AMPopTip+Entrance.m in Sources */,
+				371041F81DC09CF700BE20F9 /* ICSInfiniteScrolling.swift in Sources */,
 				37BAB9771D3E1059001E4680 /* AddFriendSearchCell.swift in Sources */,
 				372463B91D69F4180018CE37 /* Customer.swift in Sources */,
 				376D6D451D59C8E500F9A272 /* ChatExample.swift in Sources */,
@@ -2437,6 +2524,7 @@
 				3776B9101D93A83900A9C9DB /* LineChartViewController.swift in Sources */,
 				3776B91A1D93A83900A9C9DB /* ApproveVC.swift in Sources */,
 				37BAB8EE1D3E1045001E4680 /* Popover.swift in Sources */,
+				371041FE1DC0A64400BE20F9 /* StringExtensions.swift in Sources */,
 				372480E51D8151EF00B95C54 /* LCCKMapViewController.m in Sources */,
 				37A76FDF1D6D8CBA00572B1D /* ANStepperView.m in Sources */,
 				370C4E7A1D9E346400312E9C /* MyWorkManager.swift in Sources */,
@@ -2593,7 +2681,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "XianHui/XianHui-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -2625,7 +2713,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "XianHui/XianHui-Bridging-Header.h";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

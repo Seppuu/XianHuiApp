@@ -24,29 +24,29 @@ class TrackingTableView: UIView, UITableViewDelegate,UITableViewDataSource {
     
     var cellId = "progressCell"
     
-    var prodCellTapHandler:((prod:Production)->())?
+    var prodCellTapHandler:((_ prod:Production)->())?
     
     override func didMoveToSuperview() {
         
-        backgroundColor = UIColor.whiteColor()
+        backgroundColor = UIColor.white
         
-        tableView = UITableView(frame: bounds, style: .Grouped)
+        tableView = UITableView(frame: bounds, style: .grouped)
         addSubview(tableView)
         
         tableView.delegate = self
         tableView.dataSource = self
         
         let nib = UINib(nibName: cellId, bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: cellId)
+        tableView.register(nib, forCellReuseIdentifier: cellId)
         
     }
     
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if section == 0 {
            return listOfProject.count
@@ -58,16 +58,16 @@ class TrackingTableView: UIView, UITableViewDelegate,UITableViewDataSource {
         
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         return 30
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             return section0Title
         }
@@ -76,12 +76,12 @@ class TrackingTableView: UIView, UITableViewDelegate,UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! progressCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! progressCell
         
-        if indexPath.section == 0 {
-            let project = listOfProject[indexPath.row]
+        if (indexPath as NSIndexPath).section == 0 {
+            let project = listOfProject[(indexPath as NSIndexPath).row]
             
             cell.nameLabel.text = project.name
             
@@ -89,7 +89,7 @@ class TrackingTableView: UIView, UITableViewDelegate,UITableViewDataSource {
             cell.progressLabel.text = project.remainingTimeString
         }
         else {
-            let prod = listOfProduction[indexPath.row]
+            let prod = listOfProduction[(indexPath as NSIndexPath).row]
             
             cell.nameLabel.text = prod.name
             
@@ -112,32 +112,32 @@ class TrackingTableView: UIView, UITableViewDelegate,UITableViewDataSource {
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
-        if indexPath.section == 1 {
+        if (indexPath as NSIndexPath).section == 1 {
             
-            let prod = listOfProduction[indexPath.row]
+            let prod = listOfProduction[(indexPath as NSIndexPath).row]
             
             let vc = ProdDateSetVC()
             vc.prod = prod
             
             let nav = UINavigationController(rootViewController: vc)
             
-            self.parentVC.presentViewController(nav, animated: true, completion: nil)
+            self.parentVC.present(nav, animated: true, completion: nil)
             
             
             vc.confirmTapHandler = {
                 (prod) in
                 
-                self.listOfProduction[indexPath.row] = prod
+                self.listOfProduction[(indexPath as NSIndexPath).row] = prod
                 
                 self.tableView.reloadData()
                 
             }
         }
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 

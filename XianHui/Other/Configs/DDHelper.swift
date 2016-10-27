@@ -10,13 +10,9 @@ import Foundation
 import RealmSwift
 import MBProgressHUD
 
-func delay(delay:Double, closure:()->()) {
-    dispatch_after(
-        dispatch_time(
-            DISPATCH_TIME_NOW,
-            Int64(delay * Double(NSEC_PER_SEC))
-        ),
-        dispatch_get_main_queue(), closure)
+func delay(_ delay:Double, closure:@escaping ()->()) {
+    DispatchQueue.main.asyncAfter(
+        deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
 }
 
 func cleanRealmAndCaches() {
@@ -38,13 +34,13 @@ func cleanRealmAndCaches() {
 
 func isAppAlreadyLaunchedOnce()->Bool{
     
-    let defaults = NSUserDefaults.standardUserDefaults()
+    let defaults = UserDefaults.standard
     
-    if let isAppAlreadyLaunchedOnce = defaults.stringForKey("isAppAlreadyLaunchedOnce"){
+    if let isAppAlreadyLaunchedOnce = defaults.string(forKey: "isAppAlreadyLaunchedOnce"){
         print("App already launched : \(isAppAlreadyLaunchedOnce)")
         return true
     }else{
-        defaults.setBool(true, forKey: "isAppAlreadyLaunchedOnce")
+        defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
         print("App launched first time")
         return false
     }
@@ -53,16 +49,16 @@ func isAppAlreadyLaunchedOnce()->Bool{
 
 func cleanDiskCacheFolder() {
     
-    let folderPath = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
-    let fileMgr = NSFileManager.defaultManager()
+    let folderPath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
+    let fileMgr = FileManager.default
     
-    guard let fileArray = try? fileMgr.contentsOfDirectoryAtPath(folderPath) else {
+    guard let fileArray = try? fileMgr.contentsOfDirectory(atPath: folderPath) else {
         return
     }
     
     for filename in fileArray  {
         do {
-            try fileMgr.removeItemAtPath(folderPath.stringByAppendingPathComponent(filename))
+            try fileMgr.removeItem(atPath: folderPath.stringByAppendingPathComponent(filename))
         } catch {
             print(" clean error ")
         }
@@ -73,17 +69,17 @@ func cleanDiskCacheFolder() {
 
 
 //HUD
-func showHudWith(view:UIView,animated:Bool,mode:MBProgressHUDMode,text:String) -> MBProgressHUD {
-    let hud = MBProgressHUD.showHUDAddedTo(view, animated: animated)
-    hud.mode = mode
-    hud.labelText = text
+func showHudWith(_ view:UIView,animated:Bool,mode:MBProgressHUDMode,text:String) -> MBProgressHUD {
+    let hud = MBProgressHUD.showAdded(to: view, animated: animated)
+    hud?.mode = mode
+    hud?.labelText = text
     
-    return hud
+    return hud!
 }
 
 
-func hideHudFrom(view:UIView) {
-    MBProgressHUD.hideHUDForView(view, animated: true)
+func hideHudFrom(_ view:UIView) {
+    MBProgressHUD.hide(for: view, animated: true)
     
 }
 

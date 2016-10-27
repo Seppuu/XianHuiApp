@@ -53,11 +53,11 @@ class BaseProfileViewController: BaseTableViewController {
     }
     
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return self.listArray.count + 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 1
         }
@@ -66,7 +66,7 @@ class BaseProfileViewController: BaseTableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             return nil
         }
@@ -75,8 +75,8 @@ class BaseProfileViewController: BaseTableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.section == 0 {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (indexPath as NSIndexPath).section == 0 {
             return 80
         }
         else {
@@ -84,18 +84,18 @@ class BaseProfileViewController: BaseTableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if (indexPath as NSIndexPath).section == 0 {
             let cellId = "CustomerLargeCell"
-            var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? CustomerLargeCell
+            var cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? CustomerLargeCell
             if cell == nil {
                 let nib = UINib(nibName: cellId, bundle: nil)
-                tableView.registerNib(nib, forCellReuseIdentifier: cellId)
-                cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? CustomerLargeCell
+                tableView.register(nib, forCellReuseIdentifier: cellId)
+                cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? CustomerLargeCell
             }
-            cell!.selectionStyle = .None
-            if let url = NSURL(string:profileModel.avatarUrl)  {
-                cell!.avatarImageView.kf_setImageWithURL(url)
+            cell!.selectionStyle = .none
+            if let url = URL(string:profileModel.avatarUrl)  {
+                cell!.avatarImageView.kf.setImage(with: url)
             }
             cell!.nameLabel.text = profileModel.firstLabelString
             cell!.vipLabel.text = profileModel.secondLabelString
@@ -105,8 +105,8 @@ class BaseProfileViewController: BaseTableViewController {
             return cell!
         }
         else {
-            let currentPath = NSIndexPath(forItem: indexPath.item, inSection: indexPath.section - 1)
-            return super.tableView(tableView, cellForRowAtIndexPath: currentPath)
+            let currentPath = IndexPath(item: (indexPath as NSIndexPath).item, section: (indexPath as NSIndexPath).section - 1)
+            return super.tableView(tableView, cellForRowAt: currentPath)
         }
     }
     

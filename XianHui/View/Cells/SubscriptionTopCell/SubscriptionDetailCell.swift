@@ -19,7 +19,7 @@ class SubscriptionDetailCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        avatarView.contentMode = .ScaleAspectFill
+        avatarView.contentMode = .scaleAspectFill
         avatarView.clipsToBounds = true
         avatarView.backgroundColor = UIColor ( red: 0.9312, green: 0.9344, blue: 0.9368, alpha: 1.0 )
         avatarView.layer.cornerRadius = avatarView.ddWidth/2

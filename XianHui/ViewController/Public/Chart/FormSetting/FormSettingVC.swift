@@ -70,7 +70,7 @@ class FormSettingVC: UIViewController {
     
     var topButtonName = ["A档","B档","C档","自定义"]
     
-    func makeMaxValueListWith(json:JSON) -> [MaxValue] {
+    func makeMaxValueListWith(_ json:JSON) -> [MaxValue] {
         var list = [MaxValue]()
         
         for i in 0..<maxValKey.count {
@@ -125,7 +125,7 @@ class FormSettingVC: UIViewController {
     
     func setTableView() {
         
-        tableView = UITableView(frame: view.bounds, style: .Grouped)
+        tableView = UITableView(frame: view.bounds, style: .grouped)
         tableView.delegate   = self
         tableView.dataSource = self
 
@@ -133,14 +133,14 @@ class FormSettingVC: UIViewController {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
 
     func setNavBarItem() {
         
-        let rightBar = UIBarButtonItem(title: "确定", style: .Done, target: self, action: #selector(FormSettingVC.confirmTap))
+        let rightBar = UIBarButtonItem(title: "确定", style: .done, target: self, action: #selector(FormSettingVC.confirmTap))
         
         self.navigationItem.rightBarButtonItem = rightBar
         
@@ -149,48 +149,48 @@ class FormSettingVC: UIViewController {
     func confirmTap() {
         
         //Save to back
-        let path10 = NSIndexPath(forItem: 0, inSection: 1)
-        let path11 = NSIndexPath(forItem: 1, inSection: 1)
-        let path12 = NSIndexPath(forItem: 2, inSection: 1)
+        let path10 = IndexPath(item: 0, section: 1)
+        let path11 = IndexPath(item: 1, section: 1)
+        let path12 = IndexPath(item: 2, section: 1)
         
         var cashMax = listOfMaxVal[0].value
         var projectmax = listOfMaxVal[1].value
         var prodMax = listOfMaxVal[2].value
         
-        if let cashMaxCell = tableView.cellForRowAtIndexPath(path10) as? SliderCell {
+        if let cashMaxCell = tableView.cellForRow(at: path10) as? SliderCell {
              cashMax = cashMaxCell.slider.value
         }
         
-        if let projectmaxCell = tableView.cellForRowAtIndexPath(path11) as? SliderCell {
+        if let projectmaxCell = tableView.cellForRow(at: path11) as? SliderCell {
              projectmax = projectmaxCell.slider.value
         }
         
-        if let prodMaxCell = tableView.cellForRowAtIndexPath(path12) as? SliderCell {
+        if let prodMaxCell = tableView.cellForRow(at: path12) as? SliderCell {
              prodMax = prodMaxCell.slider.value
         }
         
-        let path20 = NSIndexPath(forItem: 0, inSection: 2)
-        let path21 = NSIndexPath(forItem: 1, inSection: 2)
+        let path20 = IndexPath(item: 0, section: 2)
+        let path21 = IndexPath(item: 1, section: 2)
         
         var customerMax = listOfMaxVal[3].value
         var employeemax = listOfMaxVal[4].value
         
-        if let customerMaxCell = tableView.cellForRowAtIndexPath(path20) as? SliderCell {
+        if let customerMaxCell = tableView.cellForRow(at: path20) as? SliderCell {
             customerMax = customerMaxCell.slider.value
         }
         
-        if let employeemaxCell = tableView.cellForRowAtIndexPath(path21) as? SliderCell {
+        if let employeemaxCell = tableView.cellForRow(at: path21) as? SliderCell {
             employeemax = employeemaxCell.slider.value
         }
         
-        let hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
-        hud.mode = .Indeterminate
+        let hud = MBProgressHUD.showAdded(to: view, animated: true)
+        hud?.mode = .indeterminate
         
         NetworkManager.sharedManager.saveDailyReportMaxVaule(cashMax, projectmax: projectmax, prodMax: prodMax, roomTurnoverMax: customerMax, employeeHoursmax: employeemax) { (success, json, error) in
             
             if success == true {
-                hud.hide(true)
-                self.dismissViewControllerAnimated(true, completion: nil)
+                hud?.hide(true)
+                self.dismiss(animated: true, completion: nil)
                 //save local seeting
                 Defaults.cashMaxValue.value = cashMax * 1000
                 Defaults.projectMaxValue.value = projectmax * 1000
@@ -204,7 +204,7 @@ class FormSettingVC: UIViewController {
         }
     }
     
-    func buttonTap(index:Int) {
+    func buttonTap(_ index:Int) {
         
         if index == 3 {
             //自定义
@@ -217,8 +217,8 @@ class FormSettingVC: UIViewController {
                 maxModel.value = maxModel.remmandValues[index]
             })
         }
-        let set = NSIndexSet(index: 1)
-        self.tableView.reloadSections(set, withRowAnimation: .None)
+        let set = IndexSet(integer: 1)
+        self.tableView.reloadSections(set, with: .none)
         
     }
     
@@ -227,11 +227,11 @@ class FormSettingVC: UIViewController {
 extension FormSettingVC:UITableViewDelegate,UITableViewDataSource {
     
 
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 1
         }
@@ -254,12 +254,12 @@ extension FormSettingVC:UITableViewDelegate,UITableViewDataSource {
         
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         return 44
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             return remmandText
         }
@@ -271,22 +271,22 @@ extension FormSettingVC:UITableViewDelegate,UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == 0 {
+        if (indexPath as NSIndexPath).section == 0 {
             let cellId = "FourButtonCell"
-            var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? FourButtonCell
+            var cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? FourButtonCell
             if cell == nil {
                 let nib = UINib(nibName: cellId, bundle: nil)
-                tableView.registerNib(nib, forCellReuseIdentifier: cellId)
-                cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? FourButtonCell
+                tableView.register(nib, forCellReuseIdentifier: cellId)
+                cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? FourButtonCell
             }
             
             for i in 0..<topButtonName.count {
-                cell!.buttons[i].setTitle(topButtonName[i], forState: .Normal)
+                cell!.buttons[i].setTitle(topButtonName[i], for: UIControlState())
             }
             cell?.buttons.forEach({ (button) in
-                button.setTitleColor(UIColor.darkTextColor(), forState: .Normal)
+                button.setTitleColor(UIColor.darkText, for: UIControlState())
             })
             
             cell?.buttonTapHandler = {
@@ -296,17 +296,17 @@ extension FormSettingVC:UITableViewDelegate,UITableViewDataSource {
             
             return cell!
         }
-        else if indexPath.section == 1 {
+        else if (indexPath as NSIndexPath).section == 1 {
             let cellId = "SliderCell"
-            var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? SliderCell
+            var cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? SliderCell
             if cell == nil {
                 let nib = UINib(nibName: cellId, bundle: nil)
-                tableView.registerNib(nib, forCellReuseIdentifier: cellId)
-                cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? SliderCell
+                tableView.register(nib, forCellReuseIdentifier: cellId)
+                cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? SliderCell
             }
-            cell?.selectionStyle = .None
+            cell?.selectionStyle = .none
             
-            let maxModel = listOfMaxVal[indexPath.row]
+            let maxModel = listOfMaxVal[(indexPath as NSIndexPath).row]
             
             cell?.leftLabel.text = maxModel.name
             cell?.slider.minimumValue = Float(maxModel.min)
@@ -318,10 +318,10 @@ extension FormSettingVC:UITableViewDelegate,UITableViewDataSource {
             cell?.slider.value = Float(maxModel.value)
             
             if isCustomMode == true {
-                cell?.slider.enabled = true
+                cell?.slider.isEnabled = true
             }
             else  {
-                cell?.slider.enabled = false
+                cell?.slider.isEnabled = false
             }
             
             return cell!
@@ -329,15 +329,15 @@ extension FormSettingVC:UITableViewDelegate,UITableViewDataSource {
         else {
             
             let cellId = "SliderCell"
-            var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? SliderCell
+            var cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? SliderCell
             if cell == nil {
                 let nib = UINib(nibName: cellId, bundle: nil)
-                tableView.registerNib(nib, forCellReuseIdentifier: cellId)
-                cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? SliderCell
+                tableView.register(nib, forCellReuseIdentifier: cellId)
+                cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? SliderCell
             }
-            cell?.selectionStyle = .None
+            cell?.selectionStyle = .none
             
-            let maxModel = listOfMaxVal[indexPath.row + 3]
+            let maxModel = listOfMaxVal[(indexPath as NSIndexPath).row + 3]
             
             cell?.leftLabel.text = maxModel.name
             cell?.slider.minimumValue = Float(maxModel.min)

@@ -22,9 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var app:UIApplication?
     
-    var remoteNotiData:[NSObject: AnyObject]?
+    var remoteNotiData:[AnyHashable: Any]?
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         LCChatKit.sharedInstance().useDevPushCerticate = false
         ChatKitExample.invokeThisMethodInDidFinishLaunching()
@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         replyPushNotificationAuthorization(application)
         
         if launchOptions != nil {
-            if let notificationPayload = launchOptions![UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSObject: AnyObject] {
+            if let notificationPayload = launchOptions![UIApplicationLaunchOptionsKey.remoteNotification] as? [AnyHashable: Any] {
                 app = application
                 remoteNotiData = notificationPayload
             }
@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             showGuide()
         }
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.eBBannerViewDidTap(_:)), name: EBBannerViewDidClick, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.eBBannerViewDidTap(_:)), name: NSNotification.Name(rawValue: EBBannerViewDidClick), object: nil)
         
         
         return true
@@ -61,14 +61,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     //ios 10 推送注册
-    func replyPushNotificationAuthorization(application:UIApplication) {
+    func replyPushNotificationAuthorization(_ application:UIApplication) {
         
         if #available(iOS 10.0, *) {
-            let uncenter = UNUserNotificationCenter.currentNotificationCenter()
+            let uncenter = UNUserNotificationCenter.current()
             
             uncenter.delegate = self
             
-            uncenter.requestAuthorizationWithOptions([.Alert, .Sound , .Badge], completionHandler: { (granted, error) in
+            uncenter.requestAuthorization(options: [.alert, .sound , .badge], completionHandler: { (granted, error) in
                 
                 
             })
@@ -79,21 +79,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
-    func showLoginVC(vc:UIViewController) {
+    func showLoginVC(_ vc:UIViewController) {
         
         
         
         let loginVC = LoginViewController()
         //let nav = UINavigationController(rootViewController: loginVC)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.ownSystemLoginSuccess(_:)), name: OwnSystemLoginSuccessNoti, object: nil)
-        vc.navigationController?.navigationBarHidden = false
+        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.ownSystemLoginSuccess(_:)), name: OwnSystemLoginSuccessNoti, object: nil)
+        vc.navigationController?.isNavigationBarHidden = false
         vc.navigationController?.pushViewController(loginVC, animated: true)
     }
     
     func showGuide() {
         
         self.window = UIWindow()
-        self.window!.frame = UIScreen.mainScreen().bounds
+        self.window!.frame = UIScreen.main.bounds
         self.window?.makeKeyAndVisible()
         
         let vc = UIViewController()
@@ -105,7 +105,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Added Introduction View Controller
         let introductionVC = self.customButtonIntroductionView(backgroundImageNames)
         let nav = UINavigationController(rootViewController: introductionVC)
-        nav.navigationBarHidden = true
+        nav.isNavigationBarHidden = true
         self.window?.rootViewController = nav
         
         introductionVC.didSelectedEnter = {
@@ -117,15 +117,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
-    func customButtonIntroductionView(backImageNames:[String]) -> ZWIntroductionViewController {
+    func customButtonIntroductionView(_ backImageNames:[String]) -> ZWIntroductionViewController {
         
         
         let vc = ZWIntroductionViewController(coverImageNames: backImageNames, backgroundImageNames: backImageNames, button: nil)
         
-        return vc
+        return vc!
     }
     
-    func ownSystemLoginSuccess(noti:NSNotification) {
+    func ownSystemLoginSuccess(_ noti:Notification) {
         
         if let clientId = noti.object as? String {
             
@@ -134,14 +134,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
-    func openLeanCloudIMWith(clientId:String,autoLogin:Bool) {
+    func openLeanCloudIMWith(_ clientId:String,autoLogin:Bool) {
         
         if let currentVC = self.window?.visibleViewController{
-            showHudWith(currentVC.view, animated: true, mode: .Indeterminate, text: "")
+            let _ = showHudWith(currentVC.view, animated: true, mode: .indeterminate, text: "")
         }
         
-        
-        ChatKitExample.invokeThisMethodAfterLoginSuccessWithClientId(clientId, success: {
+        ChatKitExample.invokeThisMethodAfterLoginSuccess(withClientId: clientId, success: {
             
             if let currentVC = self.window?.visibleViewController{
                 hideHudFrom(currentVC.view)
@@ -161,26 +160,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             
             //first launch
-            let launchedBefore = NSUserDefaults.standardUserDefaults().boolForKey("launchedBefore")
+            let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
             if launchedBefore  {
                 print("Not first launch.")
             }
             else {
                 print("First launch, setting NSUserDefault.")
                 self.setDailyReportMax()
-                NSUserDefaults.standardUserDefaults().setBool(true, forKey: "launchedBefore")
+                UserDefaults.standard.set(true, forKey: "launchedBefore")
             }
             
             }, failed: { (error) in
                 
-                print(error.description)
+                print(error.debugDescription)
         })
     }
     
     func setDailyReportMax() {
         
         
-        func makeMaxValueListWith(json:JSON) {
+        func makeMaxValueListWith(_ json:JSON) {
             var list = [MaxValue]()
             
             var maxValKey = ["cash_amount","project_amount","product_amount","room_turnover","employee_hours"]
@@ -224,31 +223,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         
     }
     
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        ChatKitExample.invokeThisMethodInDidRegisterForRemoteNotificationsWithDeviceToken(deviceToken)
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        ChatKitExample.invokeThisMethodInDidRegisterForRemoteNotifications(withDeviceToken: deviceToken)
     }
     
-    func applicationWillResignActive(application: UIApplication) {
-         ChatKitExample.invokeThisMethodInApplicationWillResignActive(application)
+    func applicationWillResignActive(_ application: UIApplication) {
+         ChatKitExample.invokeThisMethod(inApplicationWillResignActive: application)
     }
 
-    func applicationWillTerminate(application: UIApplication) {
-       ChatKitExample.invokeThisMethodInApplicationWillTerminate(application)
+    func applicationWillTerminate(_ application: UIApplication) {
+       ChatKitExample.invokeThisMethod(inApplicationWillTerminate: application)
     }
     
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        ChatKitExample.invokeThisMethodInApplication(application, didReceiveRemoteNotification: userInfo)
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+        ChatKitExample.invokeThisMethod(in: application, didReceiveRemoteNotification: userInfo)
     }
 
     
     var appComeFromBack = false
     
     //这个方法只会在app,从后台进入前台是触发,第一次启动不会触发.
-    func applicationWillEnterForeground(application: UIApplication) {
+    func applicationWillEnterForeground(_ application: UIApplication) {
         
         appComeFromBack = true
     }
@@ -256,12 +255,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var appHasLoginSuccess = false
     
     //通知到达的时候,应用已经打开.
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
         //如果此时app没有完全登陆成功.return.
         guard appHasLoginSuccess == true else {return}
         
-        NSNotificationCenter.defaultCenter().postNotificationName(NoticeComingNoti, object: userInfo)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: NoticeComingNoti), object: userInfo)
         
         if appComeFromBack == true {
             
@@ -278,8 +277,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     //本地模拟系统推送弹窗点击事件处理
-    func eBBannerViewDidTap(noti:NSNotification) {
-        if let data  = noti.object as? [NSObject : AnyObject] {
+    func eBBannerViewDidTap(_ noti:Notification) {
+        if let data  = noti.object as? [AnyHashable: Any] {
             pushToViewControllerWith(data)
         }
         else {
@@ -287,7 +286,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func pushToViewControllerWith(data:[NSObject : AnyObject]) {
+    func pushToViewControllerWith(_ data:[AnyHashable: Any]) {
         
         
         if let userInfo = data as? [String : AnyObject] {
@@ -355,12 +354,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
      * 在前台收到推送内容, 执行的方法
      */
     @available(iOS 10.0, *)
-    func userNotificationCenter(center: UNUserNotificationCenter, willPresentNotification notification: UNNotification, withCompletionHandler completionHandler: (UNNotificationPresentationOptions) -> Void) {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let userInfo = notification.request.content.userInfo
         
         EBForeNotification.handleRemoteNotification(userInfo, soundID: 1312, isIos10: true)
         
-        NSNotificationCenter.defaultCenter().postNotificationName(NoticeComingNoti, object: userInfo)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: NoticeComingNoti), object: userInfo)
     }
     
     /**
@@ -368,7 +367,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
      * 在后台和启动之前收到推送内容, 执行的方法
      */
     @available(iOS 10.0, *)
-    func userNotificationCenter(center: UNUserNotificationCenter, didReceiveNotificationResponse response: UNNotificationResponse, withCompletionHandler completionHandler: () -> Void) {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         
         let userInfo = response.notification.request.content.userInfo
         
@@ -376,7 +375,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         pushToViewControllerWith(userInfo)
         
-        NSNotificationCenter.defaultCenter().postNotificationName(NoticeComingNoti, object: userInfo)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: NoticeComingNoti), object: userInfo)
     }
     
 }
@@ -388,7 +387,7 @@ public extension UIWindow {
         return UIWindow.getVisibleViewControllerFrom(self.rootViewController)
     }
     
-    public static func getVisibleViewControllerFrom(vc: UIViewController?) -> UIViewController? {
+    public static func getVisibleViewControllerFrom(_ vc: UIViewController?) -> UIViewController? {
         if let nc = vc as? UINavigationController {
             return UIWindow.getVisibleViewControllerFrom(nc.visibleViewController)
         } else if let tc = vc as? UITabBarController {

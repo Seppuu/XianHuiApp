@@ -74,7 +74,7 @@ class VoiceRecordSampleCell: UIView {
         shapeView.backgroundColor = color
     }
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
 
 //        let context = UIGraphicsGetCurrentContext()
 //

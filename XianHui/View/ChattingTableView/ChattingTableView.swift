@@ -25,44 +25,44 @@ class ChattingTableView: UIView ,UITableViewDelegate,UITableViewDataSource{
     
     override func didMoveToSuperview() {
         
-        backgroundColor = UIColor.whiteColor()
+        backgroundColor = UIColor.white
         
-        tableView = UITableView(frame: bounds, style: .Grouped)
+        tableView = UITableView(frame: bounds, style: .grouped)
         addSubview(tableView)
         
         tableView.delegate = self
         tableView.dataSource = self
         
         let nib = UINib(nibName: cellId, bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: cellId)
+        tableView.register(nib, forCellReuseIdentifier: cellId)
         
     }
     
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return days.count
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return listOfProject[section].count
     
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         return 30
     }
     
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.001
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let view = chatSectionView.instanceFromNib()
         view.backgroundColor = UIColor.ddViewBackGroundColor()
@@ -93,11 +93,11 @@ class ChattingTableView: UIView ,UITableViewDelegate,UITableViewDataSource{
         return view
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! chatTableViewCell
-        cell.selectionStyle = .None
-        let project = listOfProject[indexPath.section][indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! chatTableViewCell
+        cell.selectionStyle = .none
+        let project = listOfProject[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
         
         cell.nameLabel.text = project.name
         cell.timeLabel.text = project.time
@@ -115,10 +115,10 @@ class ChattingTableView: UIView ,UITableViewDelegate,UITableViewDataSource{
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 

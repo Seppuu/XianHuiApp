@@ -30,7 +30,7 @@ class LineChartViewController: BaseChartViewController {
         lineChartView = LineChartView(frame: CGRect(x: 0, y: 64, width: view.bounds.size.width - 20, height: 200))
         lineChartView.noDataText = ""
         lineChartView.center.x = view.center.x
-        lineChartView.leftAxis.axisMinValue = 0.0
+        lineChartView.leftAxis.axisMinimum = 0.0
         lineChartView.leftAxis.drawGridLinesEnabled = false
         lineChartView.xAxis.drawGridLinesEnabled = false
         
@@ -46,31 +46,30 @@ class LineChartViewController: BaseChartViewController {
         
         let xAxis = lineChartView.xAxis
         
-        xAxis.labelPosition = .Bottom
+        xAxis.labelPosition = .bottom
         
         lineChartView.rightAxis.enabled = false
         
+        lineChartView.setYAxisMinWidth(.left, width: 30)
         
-        lineChartView.setYAxisMinWidth(.Left, width: 30)
-        
-        lineChartView.leftAxis.axisMaxValue = 32
-        lineChartView.leftAxis.axisMinValue = 0
+        lineChartView.leftAxis.axisMaximum = 32
+        lineChartView.leftAxis.axisMinimum = 0
         lineChartView.leftAxis.labelCount = 4
         
         view.addSubview(lineChartView)
         
         switchButton = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
-        switchButton.setTitle("更换数据源", forState: .Normal)
-        switchButton.backgroundColor = UIColor.redColor()
+        switchButton.setTitle("更换数据源", for: UIControlState())
+        switchButton.backgroundColor = UIColor.red
         switchButton.center = view.center
         view.addSubview(switchButton)
-        switchButton.addTarget(self, action: #selector(LineChartViewController.changeChartData), forControlEvents: .TouchUpInside)
+        switchButton.addTarget(self, action: #selector(LineChartViewController.changeChartData), for: .touchUpInside)
         
         animateButton = UIButton(frame: CGRect(x: 0, y: 360, width: 50, height: 30))
-        animateButton.setTitle("move", forState: .Normal)
-        animateButton.backgroundColor = UIColor.redColor()
+        animateButton.setTitle("move", for: UIControlState())
+        animateButton.backgroundColor = UIColor.red
         view.addSubview(animateButton)
-        animateButton.addTarget(self, action: #selector(LineChartViewController.moveCharts), forControlEvents: .TouchUpInside)
+        animateButton.addTarget(self, action: #selector(LineChartViewController.moveCharts), for: .touchUpInside)
         
         firstData()
     }
@@ -79,12 +78,12 @@ class LineChartViewController: BaseChartViewController {
     
     var data2:[Double] = [12,3,6,1,30]
     
-    func makeNewDataSetWith(phase:Double) -> [Double] {
+    func makeNewDataSetWith(_ phase:Double) -> [Double] {
         
         var data3 = [Double]()
         
         for i in data2 {
-            let index = data2.indexOf(i)!
+            let index = data2.index(of: i)!
             let number = (data2[index] - data1[index]) * phase + data1[index]
             data3.append(number)
             
@@ -105,7 +104,7 @@ class LineChartViewController: BaseChartViewController {
     }
     
     var progress: Double = 0
-    var timer = NSTimer()
+    var timer = Timer()
     
     func updateProgress() {
         
@@ -127,7 +126,7 @@ class LineChartViewController: BaseChartViewController {
     func moveCharts() {
         
         
-        timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(LineChartViewController.updateProgress), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(LineChartViewController.updateProgress), userInfo: nil, repeats: true)
         
         timer.fire()
     }
@@ -155,16 +154,16 @@ class LineChartViewController: BaseChartViewController {
             
             let val  = nums[i]
             
-            let chartDataEntry = ChartDataEntry(value: val, xIndex: i)
+            let chartDataEntry = ChartDataEntry(x: val, y: Double(i))
             
             yVals.append(chartDataEntry)
             
         }
         
-        let set1 = LineChartDataSet(yVals: yVals, label: labelText)
-        set1.axisDependency = .Left
-        set1.fillColor = UIColor.orangeColor()
-        set1.highlightColor = UIColor.lightGrayColor()
+        let set1 = LineChartDataSet(values: yVals, label: labelText)
+        set1.axisDependency = .left
+        set1.fillColor = UIColor.orange
+        set1.highlightColor = UIColor.lightGray
         
         set1.lineWidth = 2.0
         set1.circleRadius = 3.0
@@ -173,7 +172,7 @@ class LineChartViewController: BaseChartViewController {
         
         let dataSets = [set1]
         
-        let data = LineChartData(xVals: xVals, dataSets: dataSets)
+        let data = LineChartData(dataSets: dataSets)
         
         lineChartView.data = data
         
@@ -203,16 +202,16 @@ class LineChartViewController: BaseChartViewController {
             
             let val  = nums[i]
             
-            let chartDataEntry = ChartDataEntry(value: val, xIndex: i)
+            let chartDataEntry = ChartDataEntry(x: val, y: Double(i))
             
             yVals.append(chartDataEntry)
             
         }
         
-        let set1 = LineChartDataSet(yVals: yVals, label: labelText)
-        set1.axisDependency = .Left
-        set1.fillColor = UIColor.orangeColor()
-        set1.highlightColor = UIColor.lightGrayColor()
+        let set1 = LineChartDataSet(values: yVals, label: labelText)
+        set1.axisDependency = .left
+        set1.fillColor = UIColor.orange
+        set1.highlightColor = UIColor.lightGray
         
         set1.lineWidth    = 2.0
         set1.circleRadius = 3.0
@@ -221,7 +220,7 @@ class LineChartViewController: BaseChartViewController {
         
         let dataSets = [set1]
         
-        let data = LineChartData(xVals: xVals, dataSets: dataSets)
+        let data = LineChartData(dataSets:dataSets)
         
         lineChartView.data = data
         

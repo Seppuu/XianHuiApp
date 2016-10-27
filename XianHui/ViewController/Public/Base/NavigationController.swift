@@ -13,10 +13,10 @@ class NavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationBar.translucent = true
+        self.navigationBar.isTranslucent = true
         self.navigationBar.barTintColor = UIColor.navBarColor()
-        self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        self.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        self.navigationBar.tintColor = UIColor.white
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,12 +24,12 @@ class NavigationController: UINavigationController {
         
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+    override var preferredStatusBarStyle : UIStatusBarStyle {
         
-        return UIStatusBarStyle.LightContent
+        return UIStatusBarStyle.lightContent
     }
     
-    override func pushViewController(viewController: UIViewController, animated: Bool) {
+    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         
         if (self.viewControllers.count > 0) {
             viewController.hidesBottomBarWhenPushed = true

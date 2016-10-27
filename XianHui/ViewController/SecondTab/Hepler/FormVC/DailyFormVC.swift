@@ -38,7 +38,7 @@ class DailyFormVC: RadarChartVC {
     
     var formList = [Form]()
     
-    func getDailyReportDataWith(noticeId:Int) {
+    func getDailyReportDataWith(_ noticeId:Int) {
         
         NetworkManager.sharedManager.getDailyReportDataWith(noticeId) { (success, json, error) in
             
@@ -70,7 +70,7 @@ class DailyFormVC: RadarChartVC {
     }
     
     
-    func getChartDataList(datas:[JSON]) -> [XHChartData] {
+    func getChartDataList(_ datas:[JSON]) -> [XHChartData] {
         var totalVal:Double = 0.0
         
         //计算百分比
@@ -98,9 +98,9 @@ class DailyFormVC: RadarChartVC {
         return chartDatas
     }
     
-    func makeFormDataWith(json:JSON) -> [Form]? {
+    func makeFormDataWith(_ json:JSON) -> [Form]? {
         
-        func makeRadarData(data:JSON) -> [RadarModel] {
+        func makeRadarData(_ data:JSON) -> [RadarModel] {
             
             var array = [RadarModel]()
             if let vaules = data["value"].array {
@@ -138,7 +138,7 @@ class DailyFormVC: RadarChartVC {
         
         guard let daysData = json["weekly_daily"].array else {return nil}
         //今天的数据是数组第一个.
-        for dailyData in daysData.reverse() {
+        for dailyData in daysData.reversed() {
             
             let form = Form()
             
@@ -330,7 +330,7 @@ class DailyFormVC: RadarChartVC {
        return formList
     }
 
-    override func angleTypeTap(sender: UIButton) {
+    override func angleTypeTap(_ sender: UIButton) {
         
         let button = sender
         let index = button.tag
@@ -406,15 +406,15 @@ class DailyFormVC: RadarChartVC {
         
         vc.parentNavigationController = self.navigationController
         
-        vc.numbers = nums.reverse()
-        vc.listOfDateString = dateArray.reverse()
+        vc.numbers = nums.reversed()
+        vc.listOfDateString = dateArray.reversed()
         vc.currentDayIndex = 6 //默认显示第7天
         vc.currentMonthAvgVaule = currentMonthAvgVaule
         vc.grandTotalValue = grandTotalValue
         vc.maxType = maxType
        
         vc.pieType = pieType
-        vc.listOfChartDataArray  = chartListArr.reverse()
+        vc.listOfChartDataArray  = chartListArr.reversed()
         
         vc.title = title
         
@@ -452,13 +452,13 @@ class  PieViewController: PieChartViewController {
     
     func setBarItem() {
         
-        rightBarItem = UIBarButtonItem(title: "设置", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FormVC.settingTap(_:)))
+        rightBarItem = UIBarButtonItem(title: "设置", style: UIBarButtonItemStyle.plain, target: self, action: #selector(FormVC.settingTap(_:)))
         navigationItem.rightBarButtonItem = rightBarItem
         
     }
     
     
-    func settingTap(sender:UIBarButtonItem) {
+    func settingTap(_ sender:UIBarButtonItem) {
         
         let vc = FormSettingVC()
         
@@ -472,7 +472,7 @@ class  PieViewController: PieChartViewController {
         
         let nav = UINavigationController(rootViewController: vc)
         
-        self.presentViewController(nav, animated: true, completion: nil)
+        self.present(nav, animated: true, completion: nil)
     }
     
 }

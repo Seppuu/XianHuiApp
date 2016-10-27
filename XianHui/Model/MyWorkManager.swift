@@ -23,13 +23,13 @@ class MyWorkManager {
     
     
     //获取基本信息
-    func getBasicInfo(type:MyWorkType,data:JSON) -> ProfileModel {
+    func getBasicInfo(_ type:MyWorkType,data:JSON) -> ProfileModel {
         //不需要请求了,数据在之前页面的接口中
         return converBasicInfoBy(type, data:data)
         
     }
     
-    private func converBasicInfoBy(type:MyWorkType,data:JSON) -> ProfileModel {
+    fileprivate func converBasicInfoBy(_ type:MyWorkType,data:JSON) -> ProfileModel {
     
         switch type {
         case .customer: return converCustomerInfo(data)
@@ -41,7 +41,7 @@ class MyWorkManager {
         
     }
     
-    private func converCustomerInfo(data:JSON) -> ProfileModel {
+    fileprivate func converCustomerInfo(_ data:JSON) -> ProfileModel {
         let model = ProfileModel()
         
         if let avatarUrl = data["avator_url"].string {
@@ -67,7 +67,7 @@ class MyWorkManager {
         return model
     }
     
-    private func converEmployeeInfo(data:JSON) -> ProfileModel {
+    fileprivate func converEmployeeInfo(_ data:JSON) -> ProfileModel {
         let model = ProfileModel()
         if let avatarUrl = data["avator_url"].string {
             model.avatarUrl = avatarUrl
@@ -89,7 +89,7 @@ class MyWorkManager {
         return model
     }
     
-    private func converProjectInfo(data:JSON) -> ProfileModel {
+    fileprivate func converProjectInfo(_ data:JSON) -> ProfileModel {
         let model = ProfileModel()
         
         if let fullName = data["fullname"].string {
@@ -111,7 +111,7 @@ class MyWorkManager {
         return model
     }
     
-    private func converProdInfo(data:JSON) -> ProfileModel {
+    fileprivate func converProdInfo(_ data:JSON) -> ProfileModel {
         let model = ProfileModel()
         
         if let fullName = data["fullname"].string {
@@ -135,7 +135,7 @@ class MyWorkManager {
     
     
     //获取客户列表信息
-    func getBasicTableViewData(type:MyWorkType,data:JSON) -> [BaseTableViewModelList] {
+    func getBasicTableViewData(_ type:MyWorkType,data:JSON) -> [BaseTableViewModelList] {
         //var listOfArr = [BaseTableViewModelList]()
         switch type {
             
@@ -148,7 +148,7 @@ class MyWorkManager {
         
     }
     
-    private func getCustomerSettingDataWith(data:JSON)  -> [BaseTableViewModelList] {
+    fileprivate func getCustomerSettingDataWith(_ data:JSON)  -> [BaseTableViewModelList] {
         
         var listOfArr = [BaseTableViewModelList]()
         
@@ -204,7 +204,7 @@ class MyWorkManager {
         return listOfArr
     }
     
-    private func getEmployeeSettingData(data:JSON)  -> [BaseTableViewModelList] {
+    fileprivate func getEmployeeSettingData(_ data:JSON)  -> [BaseTableViewModelList] {
         var listOfArr = [BaseTableViewModelList]()
         
         var titlesArr = [
@@ -254,7 +254,7 @@ class MyWorkManager {
         return listOfArr
     }
     
-    private func getProjectSettingData(data:JSON)  -> [BaseTableViewModelList] {
+    fileprivate func getProjectSettingData(_ data:JSON)  -> [BaseTableViewModelList] {
         var listOfArr = [BaseTableViewModelList]()
         
         var titlesArr = [
@@ -338,7 +338,7 @@ class MyWorkManager {
         return listOfArr
     }
     
-    private func getProdSettingData(data:JSON)  -> [BaseTableViewModelList] {
+    fileprivate func getProdSettingData(_ data:JSON)  -> [BaseTableViewModelList] {
         var listOfArr = [BaseTableViewModelList]()
         
         var titlesArr = [

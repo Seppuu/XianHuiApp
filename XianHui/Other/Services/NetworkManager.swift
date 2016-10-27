@@ -31,9 +31,9 @@ enum PhoneCodeType:String {
 
 
 ///网络请求基本回调
-typealias DDResultHandler = (success:Bool,json:JSON?,error:String?) -> Void
+typealias DDResultHandler = (_ success:Bool,_ json:JSON?,_ error:String?) -> Void
 
-public typealias JSONDictionary = [String: AnyObject]
+public typealias JSONDictionary = [String: Any]
 
 
 class NetworkManager {
@@ -48,14 +48,14 @@ class NetworkManager {
     //MARK:用户
     
     //login
-    func loginWith(mobile:String,passWord:String,usertype:UserLoginType,completion:DDResultHandler) {
+    func loginWith(_ mobile:String,passWord:String,usertype:UserLoginType,completion:@escaping DDResultHandler) {
         
         var dict:JSONDictionary!
         
         dict = [
                 "mobile":mobile,
                 "password":passWord,
-                "type"    :usertype.rawValue
+                "type":usertype.rawValue
             ]
         
         let urlString = loginWithPhoneURL
@@ -64,7 +64,7 @@ class NetworkManager {
     }
     
     //登出
-    func userLogOut(completion:DDResultHandler) {
+    func userLogOut(_ completion:@escaping DDResultHandler) {
         
         //let newDict = generatePostDictWithBaseDictOr(nil)
         
@@ -79,7 +79,7 @@ class NetworkManager {
     
     
     //获取手机验证码
-    func getPhoneCodeWith(mobile:String,usertype:UserLoginType,codeType:PhoneCodeType,completion:DDResultHandler) {
+    func getPhoneCodeWith(_ mobile:String,usertype:UserLoginType,codeType:PhoneCodeType,completion:@escaping DDResultHandler) {
         
         let dict:JSONDictionary = [
             "mobile":mobile,
@@ -96,7 +96,7 @@ class NetworkManager {
     
     
     //验证手机验证码
-    func verifyPhoneCodeWith(mobile:String,usertype:UserLoginType,code:String,completion:DDResultHandler) {
+    func verifyPhoneCodeWith(_ mobile:String,usertype:UserLoginType,code:String,completion:@escaping DDResultHandler) {
         
         let dict:JSONDictionary = [
             "mobile":mobile,
@@ -111,10 +111,10 @@ class NetworkManager {
     }
     
     //更新密码
-    func updatePassWordWith(userName:String,usertype:UserLoginType,passWord:String,completion:DDResultHandler) {
+    func updatePassWordWith(_ userName:String,usertype:UserLoginType,passWord:String,completion:@escaping DDResultHandler) {
         
         
-        let sign = (userName + "-" + usertype.rawValue + "-" + passWord + "-" + NSDate.currentDateString() + "-" + XHPublicKey).md5()
+        let sign = (userName + "-" + usertype.rawValue + "-" + passWord + "-" + Date.currentDateString() + "-" + XHPublicKey).md5()
         
         let dict:JSONDictionary = [
             "username":userName,
@@ -131,9 +131,9 @@ class NetworkManager {
     
     
     //获取企业列表
-    func getCompanyListWith(userName:String,usertype:UserLoginType,completion:DDResultHandler) {
+    func getCompanyListWith(_ userName:String,usertype:UserLoginType,completion:@escaping DDResultHandler) {
 
-        let sign = (userName + "-" + usertype.rawValue + "-" + NSDate.currentDateString() + "-" + XHPublicKey).md5()
+        let sign = (userName + "-" + usertype.rawValue + "-" + Date.currentDateString() + "-" + XHPublicKey).md5()
         
         let dict:JSONDictionary = [
             "username":userName,
@@ -148,9 +148,9 @@ class NetworkManager {
     }
     
     //设置当前企业
-    func setCurrentCompanyWith(userName:String,usertype:UserLoginType,agentId:Int,completion:DDResultHandler) {
+    func setCurrentCompanyWith(_ userName:String,usertype:UserLoginType,agentId:Int,completion:@escaping DDResultHandler) {
         
-        let sign = (userName + "-" + usertype.rawValue + "-" + String(agentId) + "-" + NSDate.currentDateString() + "-" + XHPublicKey).md5()
+        let sign = (userName + "-" + usertype.rawValue + "-" + String(agentId) + "-" + Date.currentDateString() + "-" + XHPublicKey).md5()
         
         let dict:JSONDictionary = [
             "username":userName,
@@ -166,7 +166,7 @@ class NetworkManager {
         
     }
     
-    func updateUserAvatarWith(avatar:UIImage,completion:DDResultHandler) {
+    func updateUserAvatarWith(_ avatar:UIImage,completion:@escaping DDResultHandler) {
         
         let dict = [
             "token":Defaults.userToken.value!
@@ -177,55 +177,60 @@ class NetworkManager {
         
         let zipData = UIImageJPEGRepresentation(avatar, 0.1)
         
-        Alamofire.upload(.POST, urlString, multipartFormData: { (multipartFormData) in
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
             
             //json dict
             for (key, value) in dict {
                 let str = String(value)
-                multipartFormData.appendBodyPart(data: str.dataUsingEncoding(NSUTF8StringEncoding)!, name: key)
+                multipartFormData.append(str!.data(using: String.Encoding.utf8)!, withName: key)
+              
             }
             
             //add iamge data if need
             if zipData != nil {
-                multipartFormData.appendBodyPart(data: zipData!, name: "avator", fileName: "avator.jpg", mimeType: "image/jpg")
+                multipartFormData.append(zipData!, withName: "avator", fileName: "avator.jpg", mimeType: "image/jpg")
+                
+                
             }
             
-            
-        }) { (encodingResult) in
-            
-            switch encodingResult {
-            case .Success(let upload, _, _ ):
+            }, to: urlString) { (encodingResult) in
                 
-                upload.responseJSON(completionHandler: { (response) in
+                switch encodingResult {
+                case .success(let upload, _, _ ):
                     
-                    let json = JSON(response.result.value!)
+                    upload.responseJSON(completionHandler: { (response) in
+                        
+                        let json = JSON(response.result.value!)
+                        
+                        if json["status"].string == "ok" {
+                            let avatarUrlString = json["data"]
+                            completion(true, avatarUrlString,nil)
+                        }
+                        else {
+                            let msg = self.getErrorMsgFrom(json)
+                            completion(false, nil,msg)
+                        }
+                        
+                    })
                     
-                    if json["status"].string == "ok" {
-                        let avatarUrlString = json["data"]
-                        completion(success: true, json: avatarUrlString,error: nil)
-                    }
-                    else {
-                        let msg = self.getErrorMsgFrom(json)
-                        completion(success: false, json: nil,error: msg)
-                    }
                     
-                })
+                case .failure(let encodingError):
+                    print("Failure")
+                    print(encodingError)
+                    completion(false, nil,"请求失败")
+                }
+
                 
-                
-            case .Failure(let encodingError):
-                print("Failure")
-                print(encodingError)
-                completion(success: false, json: nil,error:"请求失败")
-            }
-            
         }
+        
+        
         
     }
     
     //完善用户信息
-    func updateUserInfo(with firstName:String,lastName:String,avatarData:NSData?,completion:DDResultHandler) {
+    func updateUserInfo(with firstName:String,lastName:String,avatarData:Data?,completion:@escaping DDResultHandler) {
         
-        let dict = [
+        let dict:JSONDictionary = [
             "first_name":firstName,
             "last_name" :lastName
         ]
@@ -234,24 +239,29 @@ class NetworkManager {
         
         let urlString = updateUserInfoURL
         
-        Alamofire.upload(.POST, urlString, multipartFormData: { (multipartFormData) in
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
             
             //json dict
             for (key, value) in newDict {
-                let str = String(value)
-                multipartFormData.appendBodyPart(data: str.dataUsingEncoding(NSUTF8StringEncoding)!, name: key)
+                if let str = value as? String {
+                    multipartFormData.append(str.data(using: String.Encoding.utf8)!, withName: key)
+                }
+                
+                
             }
             
             //add iamge data if need
             if avatarData != nil {
-               multipartFormData.appendBodyPart(data: avatarData!, name: "avator", fileName: "avator.jpg", mimeType: "image/jpg")
+                multipartFormData.append(avatarData!, withName: "avator", fileName: "avator.jpg", mimeType: "image/jpg")
+                
+                
             }
             
             
-        }) { (encodingResult) in
+        }, to: urlString) { (encodingResult) in
             
             switch encodingResult {
-            case .Success(let upload, _, _ ):
+            case .success(let upload, _, _ ):
                 
                 upload.responseJSON(completionHandler: { (response) in
                     
@@ -259,23 +269,24 @@ class NetworkManager {
                     
                     if json["status"].int == 1 {
                         let dataInfo = json["dataInfo"]
-                        completion(success: true, json: dataInfo,error: nil)
+                        completion(true, dataInfo,nil)
                     }
                     else {
                         let msg = self.getErrorMsgFrom(json)
-                        completion(success: false, json: nil,error: msg)
+                        completion(false, nil,msg)
                     }
                     
                 })
                 
                 
-            case .Failure(let encodingError):
+            case .failure(let encodingError):
                 print("Failure")
                 print(encodingError)
-                completion(success: false, json: nil,error:"请求失败")
+                completion(false, nil,"请求失败")
             }
-            
         }
+
+
         
     }
     
@@ -287,7 +298,7 @@ class NetworkManager {
 extension NetworkManager {
 
     //二维码登陆ERP
-    func logInERPWith(qrCode:String,completion:DDResultHandler) {
+    func logInERPWith(_ qrCode:String,completion:@escaping DDResultHandler) {
         
         let dict:JSONDictionary = [
             "token":Defaults.userToken.value!,
@@ -300,7 +311,7 @@ extension NetworkManager {
     }
     
     //二维码退出ERP
-    func logOutERPWith(qrCode:String,completion:DDResultHandler) {
+    func logOutERPWith(_ qrCode:String,completion:@escaping DDResultHandler) {
         
         let dict:JSONDictionary = [
             "token":Defaults.userToken.value!,
@@ -313,7 +324,7 @@ extension NetworkManager {
     }
     
     //获取二维码登陆ERP状态.
-    func getERPLogInStatus(completion:DDResultHandler) {
+    func getERPLogInStatus(_ completion:@escaping DDResultHandler) {
         
         let dict:JSONDictionary = [
             "token":Defaults.userToken.value!
@@ -329,7 +340,7 @@ extension NetworkManager {
 //MARK:用户关系管理
 extension NetworkManager {
     
-    func getUserList(completion:DDResultHandler) {
+    func getUserList(_ completion:@escaping DDResultHandler) {
         
         let dict:JSONDictionary = [
             "token":Defaults.userToken.value!
@@ -345,7 +356,7 @@ extension NetworkManager {
 extension NetworkManager {
     
     //获取日报表数据
-    func getDailyReportDataWith(noticeId:Int,completion:DDResultHandler) {
+    func getDailyReportDataWith(_ noticeId:Int,completion:@escaping DDResultHandler) {
         
         var dict:JSONDictionary!
         
@@ -362,7 +373,7 @@ extension NetworkManager {
     
     
     //获取报表峰值
-    func getDailyReportMaxVaule(completion:DDResultHandler) {
+    func getDailyReportMaxVaule(_ completion:@escaping DDResultHandler) {
         
         let dict:JSONDictionary = [
             "token":Defaults.userToken.value!
@@ -374,7 +385,7 @@ extension NetworkManager {
     }
     
     //保存报表峰值
-    func saveDailyReportMaxVaule(cashMax:Float,projectmax:Float,prodMax:Float,roomTurnoverMax:Float,employeeHoursmax:Float,completion:DDResultHandler) {
+    func saveDailyReportMaxVaule(_ cashMax:Float,projectmax:Float,prodMax:Float,roomTurnoverMax:Float,employeeHoursmax:Float,completion:@escaping DDResultHandler) {
         let dict:JSONDictionary = [
             "token":Defaults.userToken.value!,
             "cash_amount":cashMax,
@@ -395,7 +406,7 @@ extension NetworkManager {
 extension NetworkManager {
     
     //获取助手列表
-    func getHelperListWith(pageSize:Int,pageNumber:Int,completion:DDResultHandler) {
+    func getHelperListWith(_ pageSize:Int,pageNumber:Int,completion:@escaping DDResultHandler) {
         
         let urlString = GetHelperListUrl
         
@@ -411,7 +422,7 @@ extension NetworkManager {
     
     
     //获取提醒,通知列表
-    func getNoticeListWith(pageSize:Int,pageNumber:Int,completion:DDResultHandler) {
+    func getNoticeListWith(_ pageSize:Int,pageNumber:Int,completion:@escaping DDResultHandler) {
         
         let urlString = GetNoticeListUrl
         
@@ -427,7 +438,7 @@ extension NetworkManager {
     
     
     //获取提醒,通知明细,同时也是设置notice 已读的接口.调用成功即已读
-    func getNoticeDetailWith(notice_id:Int,completion:DDResultHandler) {
+    func getNoticeDetailWith(_ notice_id:Int,completion:@escaping DDResultHandler) {
         
         let urlString = GetNoticeDetailUrl
         
@@ -441,7 +452,7 @@ extension NetworkManager {
     }
     
     //计划顾客列表
-    func getCustomerPlanListWith(completion:DDResultHandler) {
+    func getCustomerPlanListWith(_ completion:@escaping DDResultHandler) {
         
         let urlString = GetCustomerPlanListUrl
         
@@ -454,7 +465,7 @@ extension NetworkManager {
     }
     
     //预约顾客列表
-    func getCustomerScheduleListWith(startDate:String,days:Int,completion:DDResultHandler) {
+    func getCustomerScheduleListWith(_ startDate:String,days:Int,completion:@escaping DDResultHandler) {
         
         let urlString = getCustomerScheduleListUrl
         
@@ -469,7 +480,7 @@ extension NetworkManager {
     }
     
     //获取顾客,同事,项目,产品的过滤条件以及数据
-    func getMyWorkListFilterDataWith(params:JSONDictionary,urlString:String,completion:DDResultHandler) {
+    func getMyWorkListFilterDataWith(_ params:JSONDictionary,urlString:String,completion:@escaping DDResultHandler) {
         let urlString = urlString
         
         var dict:JSONDictionary = [
@@ -484,7 +495,7 @@ extension NetworkManager {
     }
     
     //我的工作四种列表
-    func getMyWorkListWith(params:JSONDictionary,urlString:String,pageSize:Int,pageNumber:Int,completion:DDResultHandler) {
+    func getMyWorkListWith(_ params:JSONDictionary,urlString:String,pageSize:Int,pageNumber:Int,completion:@escaping DDResultHandler) {
         
         let urlString = urlString
         
@@ -501,7 +512,7 @@ extension NetworkManager {
     }
     
     //获取同事明细
-    func getEmployeeDetailWith(id:Int,completion:DDResultHandler) {
+    func getEmployeeDetailWith(_ id:Int,completion:@escaping DDResultHandler) {
         
         let urlString = GetEmployeeDetailUrl
         
@@ -514,7 +525,7 @@ extension NetworkManager {
     }
     
     //我的工作四种列表点击cell.
-    func getMyWorkScheduleListWith(urlString:String,idPramName:String,id:Int,completion:DDResultHandler) {
+    func getMyWorkScheduleListWith(_ urlString:String,idPramName:String,id:Int,completion:@escaping DDResultHandler) {
         
         let urlString = urlString
         
@@ -527,7 +538,7 @@ extension NetworkManager {
         
     }
     
-    func getProjectProfileWith(id:Int,completion:DDResultHandler) {
+    func getProjectProfileWith(_ id:Int,completion:@escaping DDResultHandler) {
         
         let urlString = getMyWorkProjectProfileUrl
         
@@ -539,7 +550,7 @@ extension NetworkManager {
         baseRequestWith(urlString, dict: dict, completion: completion)
     }
     
-    func getProdProfileWith(id:Int,completion:DDResultHandler) {
+    func getProdProfileWith(_ id:Int,completion:@escaping DDResultHandler) {
         
         let urlString = getMyWorkProdProfileUrl
         
@@ -551,7 +562,7 @@ extension NetworkManager {
         baseRequestWith(urlString, dict: dict, completion: completion)
     }
     
-    func getCustomerDetailWith(id:Int,completion:DDResultHandler) {
+    func getCustomerDetailWith(_ id:Int,completion:@escaping DDResultHandler) {
         
         let urlString = GetCustomerDetailUrl
         
@@ -564,7 +575,7 @@ extension NetworkManager {
     }
     
     //详细的消费记录
-    func getCustomerConsumeListWith(id:Int,pageSize:Int,pageNumber:Int,completion:DDResultHandler) {
+    func getCustomerConsumeListWith(_ id:Int,pageSize:Int,pageNumber:Int,completion:@escaping DDResultHandler) {
         
         let urlString = GetCustomerConsumeUrl
         
@@ -580,7 +591,7 @@ extension NetworkManager {
     }
     
     //详细的预约记录
-    func getCustomerSchedulesUrlWith(id:Int,date:String,completion:DDResultHandler) {
+    func getCustomerSchedulesUrlWith(_ id:Int,date:String,completion:@escaping DDResultHandler) {
         
         let urlString = GetCustomerSchedulesUrl
         
@@ -595,7 +606,7 @@ extension NetworkManager {
     
     
     //获取项目,产品计划
-    func getGoodPlanListWith(id:Int,completion:DDResultHandler) {
+    func getGoodPlanListWith(_ id:Int,completion:@escaping DDResultHandler) {
         
         let urlString = GetGoodPlanListUrl
         
@@ -609,7 +620,7 @@ extension NetworkManager {
     }
     
     //保存项目,产品计划
-    func saveGoodPlanWith(id:Int,ids:String,completion:DDResultHandler) {
+    func saveGoodPlanWith(_ id:Int,ids:String,completion:@escaping DDResultHandler) {
         
         let urlString = SaveGoodPlanUrl
         
@@ -624,7 +635,7 @@ extension NetworkManager {
     }
     
     //获取顾客卡包列表
-    func getCustomerCardListWith(customerId:Int,completion:DDResultHandler) {
+    func getCustomerCardListWith(_ customerId:Int,completion:@escaping DDResultHandler) {
         
         let urlString = GetCustomerCardListUrl
         
@@ -637,7 +648,7 @@ extension NetworkManager {
     }
     
     //获取顾客卡包明细
-    func getCustomerCardDetailWith(cardNum:String,completion:DDResultHandler) {
+    func getCustomerCardDetailWith(_ cardNum:String,completion:@escaping DDResultHandler) {
         
         let urlString = GetCustomerCardDetailUrl
         
@@ -650,7 +661,7 @@ extension NetworkManager {
     }
     
     //获取顾客顾问列表
-    func getCustomerAdviserWith(customerId:Int,completion:DDResultHandler) {
+    func getCustomerAdviserWith(_ customerId:Int,completion:@escaping DDResultHandler) {
         let urlString = GetcustomerAdviserlistUrl
         
         let dict:JSONDictionary = [
@@ -662,7 +673,7 @@ extension NetworkManager {
     }
     
     //设置顾客顾问
-    func setCustomerAdviserWith(customerId:Int,advisderId:Int,completion:DDResultHandler) {
+    func setCustomerAdviserWith(_ customerId:Int,advisderId:Int,completion:@escaping DDResultHandler) {
         let urlString = SetCustomerAdviserUrl
         
         let dict:JSONDictionary = [
@@ -679,7 +690,7 @@ extension NetworkManager {
 extension NetworkManager {
     
     //发送反馈
-    func submitFeedback(with content:String, completion:DDResultHandler) {
+    func submitFeedback(with content:String, completion:@escaping DDResultHandler) {
         
         let urlString = submitFeedBackURL
         let jsonDict:JSONDictionary = [
@@ -695,11 +706,11 @@ extension NetworkManager {
 //MAKR:基本请求方法
 extension NetworkManager {
     
-    private func addSignTo( dict:JSONDictionary) -> JSONDictionary {
+    fileprivate func addSignTo( _ dict:JSONDictionary) -> JSONDictionary {
         
         let keys = dict.keys
         
-        let sortedKeys = keys.sort { (value1, value2) -> Bool in
+        let sortedKeys = keys.sorted { (value1, value2) -> Bool in
             return value1 < value2
         }
         
@@ -718,7 +729,7 @@ extension NetworkManager {
         return newDict
     }
     
-    private func getErrorMsgFrom(json:JSON) -> String {
+    fileprivate func getErrorMsgFrom(_ json:JSON) -> String {
         var msg = ""
         msg = json["message"].string!
         
@@ -726,7 +737,7 @@ extension NetworkManager {
     }
     
     //生成post参数.
-    private func generatePostDictWithBaseDictOr(dict:JSONDictionary?) -> JSONDictionary {
+    fileprivate func generatePostDictWithBaseDictOr(_ dict:JSONDictionary?) -> JSONDictionary {
         
         var d = JSONDictionary()
         
@@ -752,32 +763,34 @@ extension NetworkManager {
     }
     //REQUEST
     //基本请求,返回 status dataInfo errorMsg
-    private func baseRequestWith(urlString:String,dict:JSONDictionary,completion:DDResultHandler) {
+    fileprivate func baseRequestWith(_ urlString:String,dict:JSONDictionary,completion:@escaping DDResultHandler) {
         
+        let parameters:Parameters = dict
         
-        Alamofire.request(.POST, urlString, parameters: dict)
-            .responseJSON { (response) in
+        Alamofire.request(urlString, method: .post, parameters: parameters)
+            .responseJSON { response in
                 switch response.result {
-                case .Success:
+                case .success:
                     let json = JSON(response.result.value!)
                     if let status = json["status"].string {
                         if status == "ok" {
                             let dataInfo = json["data"]
-                            completion(success: true,json:dataInfo,error: nil)
+                            completion(true,dataInfo,nil)
                             
                         }
                         else {
                             let msg = self.getErrorMsgFrom(json)
                             let dataInfo = json["data"]
-                            completion(success: false, json: dataInfo, error: msg)
+                            completion(false, dataInfo, msg)
                         }
                     }
                     
-                case .Failure(let error):
-                    completion(success: false, json: nil, error: error.description)
+                case .failure(let error):
+                    completion(false, nil, error.localizedDescription)
                     
                 }
         }
+
     }
     
     

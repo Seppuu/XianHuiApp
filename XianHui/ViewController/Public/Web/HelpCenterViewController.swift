@@ -19,12 +19,12 @@ class HelpCenterViewController: UIViewController,WKNavigationDelegate,WKUIDelega
         webView = WKWebView(frame: view.bounds)
         view.addSubview(webView)
         webView.navigationDelegate = self
-        webView.UIDelegate = self
+        webView.uiDelegate = self
         
-        if let url = NSURL(string: helperCenterUrl) {
-            let request = NSMutableURLRequest(URL: url)
+        if let url = URL(string: helperCenterUrl) {
+            let request = NSMutableURLRequest(url: url)
             
-            webView.loadRequest(request)
+            webView.load(request as URLRequest)
         }
         
         setNavBar()
@@ -32,7 +32,7 @@ class HelpCenterViewController: UIViewController,WKNavigationDelegate,WKUIDelega
     
     func setNavBar() {
         
-        let rightItem = UIBarButtonItem(title: "返回", style: .Done, target: self, action: #selector(HelpCenterViewController.close))
+        let rightItem = UIBarButtonItem(title: "返回", style: .done, target: self, action: #selector(HelpCenterViewController.close))
         self.navigationItem.rightBarButtonItem = rightItem
     }
 
@@ -42,10 +42,10 @@ class HelpCenterViewController: UIViewController,WKNavigationDelegate,WKUIDelega
     }
     
     func close() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
-    func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         
         title = webView.title
     }

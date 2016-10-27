@@ -48,7 +48,7 @@ class Customer: NSObject {
     //预约时间
     var scheduleTime = ""
     
-    var scheduleDate:NSDate? {
+    var scheduleDate:Date? {
         return scheduleTime.toDate("yyyy-mm-dd")
     }
     

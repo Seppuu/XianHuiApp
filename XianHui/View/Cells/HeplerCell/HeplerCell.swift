@@ -31,14 +31,14 @@ class HeplerCell: UITableViewCell {
         containerView.backgroundColor = UIColor ( red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0 )
         
         pushTimeLabel.backgroundColor = UIColor ( red: 0.747, green: 0.747, blue: 0.747, alpha: 1.0 )
-        pushTimeLabel.textColor = UIColor.whiteColor()
+        pushTimeLabel.textColor = UIColor.white
         
-        backgroundColor = UIColor.clearColor()
+        backgroundColor = UIColor.clear
         
-        layoutMargins = UIEdgeInsetsZero
+        layoutMargins = UIEdgeInsets.zero
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         

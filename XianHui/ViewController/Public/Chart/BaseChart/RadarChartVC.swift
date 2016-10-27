@@ -69,18 +69,18 @@ class RadarChartVC: BaseChartViewController {
         view.addSubview(chartView)
         
         chartView.delegate = self
-        chartView.descriptionText = ""
+        chartView.chartDescription?.text = ""
         chartView.webLineWidth = 0.0
         chartView.innerWebLineWidth = 0.0
         chartView.highlightPerTapEnabled = false
         //蛛网竖线
-        chartView.webColor = UIColor.clearColor()
+        chartView.webColor = UIColor.clear
         
         
         chartView.yAxis.enabled = false
         chartView.xAxis.enabled = false
-        chartView.yAxis.labelTextColor = UIColor.clearColor()
-        chartView.xAxis.labelTextColor = UIColor.clearColor()
+        chartView.yAxis.labelTextColor = UIColor.clear
+        chartView.xAxis.labelTextColor = UIColor.clear
 
         chartView.setExtraOffsets(left: 0, top: 50, right: 0, bottom: 20)
         chartView.rotationEnabled = false
@@ -88,9 +88,9 @@ class RadarChartVC: BaseChartViewController {
         
         
         let inset = UIEdgeInsetsMake(0, 0, 5, 0)
-        let color = UIColor.whiteColor()
-        let font = UIFont.systemFontOfSize(12.0)
-        let marker = BalloonMarker(color:color , font: font, insets: inset)
+        let color = UIColor.white
+        let font = UIFont.systemFont(ofSize: 12.0)
+        let marker = BalloonMarker(color:color , font: font,textColor:UIColor.darkText, insets: inset)
 
         chartView.marker = marker
         
@@ -105,20 +105,33 @@ class RadarChartVC: BaseChartViewController {
         yAxis.drawGridLinesEnabled = false
         yAxis.drawAxisLineEnabled = false
         yAxis.setLabelCount(1, force: true)
-        yAxis.axisMinValue = 0.0
-        yAxis.axisMaxValue = 100.0
+        yAxis.axisMinimum = 0.0
+        yAxis.axisMaximum = 100.0
         
         let l = chartView.legend
         l.drawInside = true
-        l.orientation = .Vertical
-        l.horizontalAlignment = .Right
-        l.verticalAlignment = .Top
-        l.direction = .RightToLeft
+        l.orientation = .vertical
+        l.horizontalAlignment = .right
+        l.verticalAlignment = .top
+        l.direction = .rightToLeft
         l.font = UIFont(name: "HelveticaNeue-Light", size: 10.0)!
         l.xEntrySpace = 7.0
         l.yEntrySpace = 5.0
         l.yOffset = 0.0
-        l.setCustom(colors: [UIColor ( red: 0.8275, green: 0.7216, blue: 0.5529, alpha: 1.0 ),UIColor ( red: 0.4438, green: 0.3027, blue: 0.2227, alpha: 1.0 ) ,UIColor.clearColor() ], labels: ["七日均值","今日",""])
+        //l.setCustom(colors: [UIColor ( red: 0.8275, green: 0.7216, blue: 0.5529, alpha: 1.0 ),UIColor ( red: 0.4438, green: 0.3027, blue: 0.2227, alpha: 1.0 ) ,UIColor.clear ], labels: ["七日均值","今日",""])
+        let le0 = LegendEntry()
+        le0.formColor = UIColor ( red: 0.8275, green: 0.7216, blue: 0.5529, alpha: 1.0 )
+        le0.label = "七日均值"
+        
+        let le1 = LegendEntry()
+        le1.formColor = UIColor ( red: 0.4438, green: 0.3027, blue: 0.2227, alpha: 1.0 )
+        le1.label = "今日"
+        
+        let le2 = LegendEntry()
+        le2.formColor = UIColor.clear
+        le2.label = ""
+        
+        l.setCustom(entries: [le0,le1,le2])
         
         updateChartData()
         
@@ -126,9 +139,9 @@ class RadarChartVC: BaseChartViewController {
         chartView.addSubview(topDayLabel)
         topDayLabel.text = ""
         topDayLabel.textColor = UIColor ( red: 0.3779, green: 0.3171, blue: 0.3185, alpha: 1.0 )
-        topDayLabel.font = UIFont.systemFontOfSize(14)
-        topDayLabel.textAlignment = .Left
-        topDayLabel.snp_makeConstraints { (make) in
+        topDayLabel.font = UIFont.systemFont(ofSize: 14)
+        topDayLabel.textAlignment = .left
+        topDayLabel.snp.makeConstraints { (make) in
             make.left.equalTo(chartView).offset(15)
             make.width.equalTo(200)
             make.top.equalTo(chartView).offset(15)
@@ -138,7 +151,7 @@ class RadarChartVC: BaseChartViewController {
     
     func setBottomTableView() {
         
-        tableView = UITableView(frame:CGRect(x: 0, y: chartView.frame.size.height + chartView.frame.origin.y, width: screenWidth, height: viewHeight * 0.5) , style:.Plain )
+        tableView = UITableView(frame:CGRect(x: 0, y: chartView.frame.size.height + chartView.frame.origin.y, width: screenWidth, height: viewHeight * 0.5) , style:.plain )
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
@@ -163,31 +176,34 @@ class RadarChartVC: BaseChartViewController {
         
         self.topDayLabel.text = form.date
         
-        var yValsButton = [ChartDataEntry]() //button 位置
+        var yValsButton = [RadarChartDataEntry]() //button 位置
         
-        var yVals0Back = [ChartDataEntry]() //这一层作为背景
+        var yVals0Back = [RadarChartDataEntry]() //这一层作为背景
         
-        var yVals1 = [ChartDataEntry]() //基本数据
+        var yVals1 = [RadarChartDataEntry]() //基本数据
         
-        var yVals2 = [ChartDataEntry]() //七日平均值
+        var yVals2 = [RadarChartDataEntry]() //七日平均值
         
         for i in 0..<count {
             
             //某天值 原值最大值是5 这里*20
             let point = Double(form.pointArray[i].point * 20)
-            let entry = ChartDataEntry(value:point, xIndex: i, data: i)
+            let entry = RadarChartDataEntry(value: point)
+                //ChartDataEntry(x:point, y: Double(i))
             yVals1.append(entry)
             
             //七日均值
             let avgPoint = Double(form.avgPointArray[i].point * 20)
-            let entryAvarage = ChartDataEntry(value: avgPoint , xIndex: i, data: i)
+            let entryAvarage = RadarChartDataEntry(value: avgPoint)
             yVals2.append(entryAvarage)
 
-            let yMax = chartView.yAxis.axisMaxValue
-            let entryEx = ChartDataEntry(value: yMax + 5 , xIndex: i, data: i)
+            //button位置
+            let yMax = chartView.yAxis.axisMaximum
+            let entryEx = RadarChartDataEntry(value: yMax)
             yValsButton.append(entryEx)
             
-            let entryBack = ChartDataEntry(value: yMax , xIndex: i, data: i)
+            //背景颜色
+            let entryBack = RadarChartDataEntry(value: yMax)
             yVals0Back.append(entryBack)
             
 
@@ -202,14 +218,14 @@ class RadarChartVC: BaseChartViewController {
             xVals.append(v)
         }
         
-        let set0 = RadarChartDataSet(yVals: yVals0Back, label: "")
+        let set0 = RadarChartDataSet(values: yVals0Back, label: "")
         set0.setColor(UIColor ( red: 0.7855, green: 0.6676, blue: 0.4805, alpha: 1.0 ))
         set0.fillColor = UIColor ( red: 0.7855, green: 0.6676, blue: 0.4805, alpha: 1.0 )
         set0.drawFilledEnabled = true
         set0.lineWidth = 0.0
         set0.fillAlpha = 0.3
         
-        let set1 = RadarChartDataSet(yVals: yVals1, label: "今日")
+        let set1 = RadarChartDataSet(values: yVals1, label: "今日")
         set1.setColor(UIColor ( red: 0.4438, green: 0.3027, blue: 0.2227, alpha: 1.0 ))
         set1.fillColor = UIColor ( red: 0.4438, green: 0.3027, blue: 0.2227, alpha: 1.0 )
         set1.drawFilledEnabled = true
@@ -217,7 +233,7 @@ class RadarChartVC: BaseChartViewController {
         set1.fillAlpha = 0.7
         
         
-        let set2 = RadarChartDataSet(yVals: yVals2, label: "七日均值")
+        let set2 = RadarChartDataSet(values: yVals2, label: "七日均值")
         set2.setColor(UIColor ( red: 0.7855, green: 0.6676, blue: 0.4805, alpha: 1.0 ))
         set2.fillColor = UIColor ( red: 0.7855, green: 0.6676, blue: 0.4805, alpha: 1.0 )
         set2.drawFilledEnabled = true
@@ -225,15 +241,16 @@ class RadarChartVC: BaseChartViewController {
         set2.fillAlpha = 0.7
         
         
-        let data = RadarChartData(xVals: xVals, dataSets: [set0,set2,set1])
-        data.setValueTextColor(UIColor.clearColor())
+        let data = RadarChartData(dataSets: [set0,set2,set1])
+        data.setValueTextColor(UIColor.clear)
         data.setDrawValues(false)
         
-        let percentFormatter = NSNumberFormatter()
+        let percentFormatter = NumberFormatter()
         percentFormatter.positiveSuffix = ""
         percentFormatter.negativeSuffix = ""
         
-        data.setValueFormatter(percentFormatter)
+        let vFormatter = DefaultValueFormatter(formatter: percentFormatter)
+        data.setValueFormatter(vFormatter)
         
         chartView.data = data
         
@@ -241,35 +258,36 @@ class RadarChartVC: BaseChartViewController {
         
     }
     
-    func addCustomLabelToChartView(yVals:[ChartDataEntry]) {
+    func addCustomLabelToChartView(_ yVals:[RadarChartDataEntry]) {
         
         var buttons = [UIButton]()
         
-        for yVal in yVals {
+        for var yVal in yVals {
             
-            if yVal.xIndex == 0{
-                yVal.value += 20
+            if yVal.x == 0{
+                yVal.y += 20
             }
-            else if yVal.xIndex == 4 {
-                yVal.value += 45
+            else if yVal.x == 4 {
+                yVal.y += 45
             }
             
-            let p = chartView.getMarkerPosition(entry: yVal, highlight: ChartHighlight())
-            
+            //let p = chartView.getMarkerPosition(entry: yVal, highlight: Highlight())
+            let highLight = Highlight(x: yVal.x, y: yVal.y, dataSetIndex: Int(yVal.x))
+            let p = chartView.getMarkerPosition(highlight:highLight)
             
             let button = UIButton(frame: CGRect(x: p.x, y: p.y, width: 40, height: 20))
             //button.setTitleColor(UIColor ( red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0 ), forState: .Highlighted)
             //button.setTitleColor(UIColor.whiteColor(), forState: .Selected)
-            button.setTitleColor(UIColor ( red: 0.3779, green: 0.3171, blue: 0.3185, alpha: 1.0 ), forState: .Normal)
-            button.setTitle(listOfType[yVal.xIndex], forState: .Normal)
-            button.titleLabel?.font = UIFont.systemFontOfSize(13)
+            button.setTitleColor(UIColor ( red: 0.3779, green: 0.3171, blue: 0.3185, alpha: 1.0 ), for: .normal)
+            button.setTitle(listOfType[Int(yVal.x)], for: .normal)
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 13)
 //            button.layer.cornerRadius = 4.0
 //            button.layer.masksToBounds = true
 //            button.layer.borderWidth = 0.8
 //            button.layer.borderColor = UIColor ( red: 0.3779, green: 0.3171, blue: 0.3185, alpha: 1.0 ).CGColor
-            button.tag = yVal.xIndex
+            button.tag = Int(yVal.x)
             
-            button.addTarget(self, action:  #selector(RadarChartVC.angleTypeTap(_:)), forControlEvents: .TouchUpInside)
+            button.addTarget(self, action:  #selector(RadarChartVC.angleTypeTap(_:)), for: .touchUpInside)
             
 //            button.addTarget(self, action:  #selector(RadarChartVC.angleTypeTouchDown(_:)), forControlEvents: .TouchDown)
 //            
@@ -308,7 +326,7 @@ class RadarChartVC: BaseChartViewController {
         topButtons = buttons
     }
     
-    func adjustLabelPosition(buttons:[UIButton]) {
+    func adjustLabelPosition(_ buttons:[UIButton]) {
         
         if buttons.count == 0 {
             return
@@ -324,34 +342,34 @@ class RadarChartVC: BaseChartViewController {
 
     }
     
-    func makeButtonHightlighted(buttons:[UIButton],selected button:UIButton) {
+    func makeButtonHightlighted(_ buttons:[UIButton],selected button:UIButton) {
         
         buttons.forEach {
             
-            $0.selected = false
-            $0.backgroundColor = UIColor.clearColor()
+            $0.isSelected = false
+            $0.backgroundColor = UIColor.clear
             
         }
         
-        button.selected = true
+        button.isSelected = true
         button.backgroundColor = UIColor ( red: 0.3779, green: 0.3171, blue: 0.3185, alpha: 1.0 )
         
     }
     
-    func angleTypeTap(sender:UIButton) {
+    func angleTypeTap(_ sender:UIButton) {
         
 
     }
     
-    func angleTypeTouchDown(sender:UIButton) {
+    func angleTypeTouchDown(_ sender:UIButton) {
         
         sender.backgroundColor = UIColor ( red: 0.3779, green: 0.3171, blue: 0.3185, alpha: 1.0 )
         
     }
     
-    func angleTypeTouchCancel(sender:UIButton) {
+    func angleTypeTouchCancel(_ sender:UIButton) {
         
-        sender.backgroundColor = UIColor.clearColor()
+        sender.backgroundColor = UIColor.clear
     }
     
 
@@ -359,47 +377,47 @@ class RadarChartVC: BaseChartViewController {
 
 extension RadarChartVC:UITableViewDelegate,UITableViewDataSource {
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return listArray.count
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listArray[section].list.count
     }
     
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return cellHeight
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return listArray[section].listName
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
 
-        let baseModel = listArray[indexPath.section].list[indexPath.row]
+        let baseModel = listArray[(indexPath as NSIndexPath).section].list[(indexPath as NSIndexPath).row]
         
         let cellId = "typeCell"
         
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? typeCell
-        cell?.selectionStyle = .None
+        var cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? typeCell
+        cell?.selectionStyle = .none
         if cell == nil {
             let nib = UINib(nibName: cellId, bundle: nil)
-            tableView.registerNib(nib, forCellReuseIdentifier: cellId)
-            cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? typeCell
+            tableView.register(nib, forCellReuseIdentifier: cellId)
+            cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? typeCell
         }
         
         cell?.leftLabel.text = baseModel.name
         cell?.typeLabel.text = baseModel.desc
-        cell?.typeLabel.textAlignment = .Right
+        cell?.typeLabel.textAlignment = .right
         
         if baseModel.hasList == true {
-            cell?.accessoryType = .DisclosureIndicator
+            cell?.accessoryType = .disclosureIndicator
         }
         else {
-            cell?.accessoryType = .None
+            cell?.accessoryType = .none
         }
         
         return cell!
@@ -407,10 +425,10 @@ extension RadarChartVC:UITableViewDelegate,UITableViewDataSource {
     }
     
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
 
-        let baseModel = listArray[indexPath.section].list[indexPath.row]
+        let baseModel = listArray[(indexPath as NSIndexPath).section].list[(indexPath as NSIndexPath).row]
         
         if baseModel.hasList == true {
             let vc = BaseTableViewController()
@@ -430,11 +448,11 @@ extension RadarChartVC:UITableViewDelegate,UITableViewDataSource {
 
 extension RadarChartVC:ChartViewDelegate {
     
-    func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: Highlight) {
         
     }
     
-    func chartValueNothingSelected(chartView: ChartViewBase) {
+    func chartValueNothingSelected(_ chartView: ChartViewBase) {
         
     }
     

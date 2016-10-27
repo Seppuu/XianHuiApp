@@ -27,7 +27,7 @@ class ScheduleVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
         
         setTableView()
         
@@ -41,7 +41,7 @@ class ScheduleVC: UIViewController {
     func setTableView() {
         
         //64是navbar+status 高度 40是"pageMenu"高度
-        tableView = UITableView(frame: CGRectMake(0.0,0.0, self.view.frame.width, self.view.frame.height - 64 - 40), style: .Grouped)
+        tableView = UITableView(frame: CGRect(x: 0.0,y: 0.0, width: self.view.frame.width, height: self.view.frame.height - 64 - 40), style: .grouped)
         view.addSubview(tableView)
         
         tableView.delegate = self
@@ -50,7 +50,7 @@ class ScheduleVC: UIViewController {
         tableView.tableFooterView = UIView()
         
         let nib = UINib(nibName: cellId, bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: cellId)
+        tableView.register(nib, forCellReuseIdentifier: cellId)
 
         topRefresh()
         tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(ScheduleVC.bottomRefresh))
@@ -59,16 +59,16 @@ class ScheduleVC: UIViewController {
     
     var currentDate:String {
         
-        let currentDate = NSDate()
-        let formatter = NSDateFormatter()
+        let currentDate = Date()
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
-        let dayString = formatter.stringFromDate(currentDate)
+        let dayString = formatter.string(from: currentDate)
         
         return dayString
     }
     var nextDate = ""
     
-    func getCustomListWith(date:String) {
+    func getCustomListWith(_ date:String) {
         
         NetworkManager.sharedManager.getCustomerScheduleListWith(date, days: 3) { (success, json, error) in
             if success == true {
@@ -104,14 +104,14 @@ class ScheduleVC: UIViewController {
     
     var days = [String]()
     
-    func makeCustomerListWith(dataArr:[JSON]) {
+    func makeCustomerListWith(_ dataArr:[JSON]) {
         
         var customers = [Customer]()
         
         var lastDate = ""
         
         //做一下倒序排列.原来的顺序是反的
-        for data in dataArr.reverse() {
+        for data in dataArr.reversed() {
             
             let customer = Customer()
             if let id = data["customer_id"].int {
@@ -166,7 +166,7 @@ class ScheduleVC: UIViewController {
             })
             
             if list.count > 0 {
-                self.listOfCustommerArr.append(list.reverse())
+                self.listOfCustommerArr.append(list.reversed())
             }
             else {
                 //上一页的日期,不需要,添加.
@@ -188,13 +188,13 @@ class ScheduleVC: UIViewController {
         getCustomListWith(nextDate)
     }
     
-    func avatarTap(sender:UITapGestureRecognizer) {
+    func avatarTap(_ sender:UITapGestureRecognizer) {
         
-        let point = sender.locationInView(tableView)
+        let point = sender.location(in: tableView)
         
-        let cellIndex = tableView.indexPathForRowAtPoint(point)!
+        let cellIndex = tableView.indexPathForRow(at: point)!
         
-        let customer = listOfCustommerArr[cellIndex.section][cellIndex.row]
+        let customer = listOfCustommerArr[(cellIndex as NSIndexPath).section][(cellIndex as NSIndexPath).row]
         
         let vc = CustomerProfileVC()
         vc.title = "详细资料"
@@ -208,29 +208,29 @@ class ScheduleVC: UIViewController {
 extension ScheduleVC:UITableViewDelegate,UITableViewDataSource {
     
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return days.count
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listOfCustommerArr[section].count
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let view = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 30))
         view.backgroundColor = UIColor.ddViewBackGroundColor()
         let dayLabel = UILabel(frame: CGRect(x: 15, y: 5, width: 150, height: 20))
-        dayLabel.font = UIFont.systemFontOfSize(12)
-        dayLabel.textColor = UIColor.darkGrayColor()
-        dayLabel.textAlignment = .Left
+        dayLabel.font = UIFont.systemFont(ofSize: 12)
+        dayLabel.textColor = UIColor.darkGray
+        dayLabel.textAlignment = .left
         dayLabel.text = days[section]
         view.addSubview(dayLabel)
         
         let rightLabel = UILabel(frame: CGRect(x: screenWidth - 15 - 150, y: 5, width: 150, height: 20))
-        rightLabel.font = UIFont.systemFontOfSize(12)
-        rightLabel.textColor = UIColor.darkGrayColor()
-        rightLabel.textAlignment = .Right
+        rightLabel.font = UIFont.systemFont(ofSize: 12)
+        rightLabel.textColor = UIColor.darkGray
+        rightLabel.textAlignment = .right
         
         
         let customers = listOfCustommerArr[section]
@@ -244,23 +244,23 @@ extension ScheduleVC:UITableViewDelegate,UITableViewDataSource {
         return view
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         return 30
     }
     
     //当header 高度不起作用时,需要同时设置footer的高度.
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.1
     }
     
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 64
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! CustomerCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CustomerCell
         
         
         cell.avatarView.backgroundColor = UIColor ( red: 0.8849, green: 0.8849, blue: 0.8849, alpha: 1.0 )
@@ -269,12 +269,12 @@ extension ScheduleVC:UITableViewDelegate,UITableViewDataSource {
         cell.happyLevel.textColor = UIColor ( red: 0.4377, green: 0.4377, blue: 0.4377, alpha: 1.0 )
         
         
-        cell.avatarView.userInteractionEnabled = true
+        cell.avatarView.isUserInteractionEnabled = true
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(ScheduleVC.avatarTap(_:)))
         cell.avatarView.addGestureRecognizer(tap)
         
-        let customer = listOfCustommerArr[indexPath.section][indexPath.row]
+        let customer = listOfCustommerArr[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
         
         cell.nameLabel.text = customer.name
         cell.happyLevel.text =  customer.scheduleStatus
@@ -286,16 +286,16 @@ extension ScheduleVC:UITableViewDelegate,UITableViewDataSource {
         
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let customer = listOfCustommerArr[indexPath.section][indexPath.row]
+        let customer = listOfCustommerArr[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
 
         let vc = ProjectPlannedVC()
         vc.title = "预约信息"
         vc.customer = customer
         self.parentNavigationController?.pushViewController(vc, animated: true)
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
 
     }
 

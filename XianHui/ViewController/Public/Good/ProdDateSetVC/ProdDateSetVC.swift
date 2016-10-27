@@ -15,11 +15,11 @@ class ProdDateSetVC: UIViewController {
     
     var prod:Production!
 
-    var confirmTapHandler:((prod:Production)->())?
+    var confirmTapHandler:((_ prod:Production)->())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
         
         title = "提醒设置"
         
@@ -35,7 +35,7 @@ class ProdDateSetVC: UIViewController {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         IQKeyboardManager.sharedManager().enable = true
@@ -44,7 +44,7 @@ class ProdDateSetVC: UIViewController {
     
     func setNavBarItem() {
         
-        let rightBar = UIBarButtonItem(title: "确定", style: .Done, target: self, action: #selector(ProdDateSetVC.confirmTap))
+        let rightBar = UIBarButtonItem(title: "确定", style: .done, target: self, action: #selector(ProdDateSetVC.confirmTap))
         
         navigationItem.rightBarButtonItem = rightBar
         
@@ -52,10 +52,10 @@ class ProdDateSetVC: UIViewController {
     
     func confirmTap() {
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         IQKeyboardManager.sharedManager().enable = false
         passData()
@@ -63,7 +63,7 @@ class ProdDateSetVC: UIViewController {
     
     func passData() {
         
-        self.confirmTapHandler?(prod:prod)
+        self.confirmTapHandler?(prod)
     }
 
 }
