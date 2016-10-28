@@ -81,7 +81,7 @@ class ApproveVC: BaseViewController {
     func setSubViews() {
         
         view.addSubview(topView)
-        topView.snp_makeConstraints { (make) in
+        topView.snp.makeConstraints { (make) in
             make.left.top.right.equalTo(view)
             make.height.equalTo(200)
         }
@@ -91,7 +91,7 @@ class ApproveVC: BaseViewController {
         setTableView()
         
         view.addSubview(bottomView)
-        bottomView.snp_makeConstraints { (make) in
+        bottomView.snp.makeConstraints { (make) in
             make.left.right.equalTo(view)
             bottomConstraint  = make.bottom.equalTo(view).constraint
             make.height.equalTo(44)

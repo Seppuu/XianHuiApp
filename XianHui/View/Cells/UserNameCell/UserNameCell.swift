@@ -38,7 +38,7 @@ class UserNameCell: UITableViewCell,UITextFieldDelegate {
         textField = UITextField()
         textField.font = UIFont.systemFont(ofSize: 14)
         addSubview(textField)
-        textField.snp_makeConstraints { (make) in
+        textField.snp.makeConstraints { (make) in
             make.top.right.bottom.equalTo(self)
             make.left.equalTo(self).offset(15)
         }
@@ -48,7 +48,7 @@ class UserNameCell: UITableViewCell,UITextFieldDelegate {
         
         codeButton = UIButton()
         addSubview(codeButton)
-        codeButton.snp_makeConstraints { (make) in
+        codeButton.snp.makeConstraints { (make) in
             make.right.top.bottom.equalTo(self)
             make.width.equalTo(120)
         }

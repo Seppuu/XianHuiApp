@@ -79,7 +79,7 @@ class ProjectPlannedVC: UIViewController {
         let topContainer = UIView()
         topContainer.backgroundColor = UIColor.clear
         view.addSubview(topContainer)
-        topContainer.snp_makeConstraints { (make) in
+        topContainer.snp.makeConstraints { (make) in
             make.left.right.equalTo(view)
             make.height.equalTo((view.ddHeight) / 2)
             make.centerY.equalTo(view).offset(32)
@@ -93,7 +93,7 @@ class ProjectPlannedVC: UIViewController {
         topLabel.textAlignment = .center
         topContainer.addSubview(topLabel)
         
-        topLabel.snp_makeConstraints { (make) in
+        topLabel.snp.makeConstraints { (make) in
             make.top.equalTo(topContainer)
             make.centerX.equalTo(topContainer)
             make.left.right.equalTo(topContainer)
@@ -110,9 +110,9 @@ class ProjectPlannedVC: UIViewController {
         topButton.layer.borderColor = UIColor ( red: 0.5, green: 0.4201, blue: 0.3681, alpha: 1.0 ).cgColor
         topContainer.addSubview(topButton)
         
-        topButton.snp_makeConstraints { (make) in
+        topButton.snp.makeConstraints { (make) in
             make.centerX.equalTo(topContainer)
-            make.top.equalTo(topLabel.snp_bottom).offset(50)
+            make.top.equalTo(topLabel.snp.bottom).offset(50)
             make.left.equalTo(topContainer).offset(50)
             make.right.equalTo(topContainer).offset(-50)
             make.height.equalTo(44)
@@ -127,9 +127,9 @@ class ProjectPlannedVC: UIViewController {
         secondButton.layer.borderColor = UIColor ( red: 0.5, green: 0.4201, blue: 0.3681, alpha: 1.0 ).cgColor
         topContainer.addSubview(secondButton)
         
-        secondButton.snp_makeConstraints { (make) in
+        secondButton.snp.makeConstraints { (make) in
             make.centerX.equalTo(topContainer)
-            make.top.equalTo(topButton.snp_bottom).offset(20)
+            make.top.equalTo(topButton.snp.bottom).offset(20)
             make.left.equalTo(topContainer).offset(50)
             make.right.equalTo(topContainer).offset(-50)
             make.height.equalTo(44)

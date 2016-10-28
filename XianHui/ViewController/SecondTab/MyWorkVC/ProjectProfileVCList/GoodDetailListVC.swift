@@ -238,7 +238,7 @@ class GoodDetailListVC: BaseTableViewController {
                     if type.string == "卡扣" { showAnother = true }
                 })
                 
-                m1.desc.removeCharsFromEnd(1)
+                _ = m1.desc.removeCharsFromEnd(1)
             }
             
             if showAnother == false {

@@ -82,10 +82,10 @@ class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDele
         topLabel.text = listOfNumber.last
         topLabel.textAlignment = .center
         addSubview(topLabel)
-        topLabel.snp_makeConstraints { (make) in
+        topLabel.snp.makeConstraints { (make) in
             make.width.equalTo(screenWidth)
             make.centerX.equalTo(self)
-            make.bottom.equalTo(self.pageScrollView.snp_top)
+            make.bottom.equalTo(self.pageScrollView.snp.top)
         }
         
         topLabel.text = listOfNumber.last
@@ -94,7 +94,7 @@ class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDele
         dateLabel.text = listOfNumber.last
         dateLabel.textAlignment = .center
         addSubview(dateLabel)
-        dateLabel.snp_makeConstraints { (make) in
+        dateLabel.snp.makeConstraints { (make) in
             make.width.equalTo(screenWidth)
             make.centerX.equalTo(self)
             make.bottom.equalTo(self).offset(-10)
@@ -111,7 +111,7 @@ class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDele
         rightLabel01.text = "当月平均:" + str01
         rightLabel01.textAlignment = .left
         addSubview(rightLabel01)
-        rightLabel01.snp_makeConstraints { (make) in
+        rightLabel01.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(15)
             make.top.equalTo(self).offset(10)
             make.width.equalTo(self)
@@ -125,9 +125,9 @@ class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDele
         rightLabel02.text = "当月累计:" + str02
         rightLabel02.textAlignment = .left
         addSubview(rightLabel02)
-        rightLabel02.snp_makeConstraints { (make) in
+        rightLabel02.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(15)
-            make.top.equalTo(rightLabel01.snp_bottom).offset(10)
+            make.top.equalTo(rightLabel01.snp.bottom).offset(10)
             make.width.equalTo(self)
             make.height.equalTo(21)
         }

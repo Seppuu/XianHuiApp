@@ -257,7 +257,7 @@ class CodeLoginVerifyVC: UIViewController {
     
     func filterError(_ error: NSError?) -> Bool{
         if error != nil {
-            print(error)
+            //print(error)
             return false
         } else {
             return true

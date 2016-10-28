@@ -107,7 +107,7 @@ class XHSideFilterView: UIView {
         
         reSetButton = UIButton()
         addSubview(reSetButton)
-        reSetButton.snp_makeConstraints { (make) in
+        reSetButton.snp.makeConstraints { (make) in
             make.left.bottom.equalTo(self)
             make.width.equalTo(ddWidth/2)
             make.height.equalTo(44)
@@ -120,7 +120,7 @@ class XHSideFilterView: UIView {
         
         confirmButton = UIButton()
         addSubview(confirmButton)
-        confirmButton.snp_makeConstraints { (make) in
+        confirmButton.snp.makeConstraints { (make) in
             make.right.bottom.equalTo(self)
             make.width.equalTo(ddWidth/2)
             make.height.equalTo(44)
@@ -133,16 +133,16 @@ class XHSideFilterView: UIView {
         let line = UIView()
         addSubview(line)
         line.backgroundColor = UIColor.darkGray
-        line.snp_makeConstraints { (make) in
+        line.snp.makeConstraints { (make) in
             make.left.right.equalTo(self)
             make.bottom.equalTo(self).offset(-44)
             make.height.equalTo(0.5)
         }
         
         addSubview(statusLabel)
-        statusLabel.snp_makeConstraints { (make) in
+        statusLabel.snp.makeConstraints { (make) in
             make.left.right.equalTo(self)
-            make.bottom.equalTo(line.snp_top)
+            make.bottom.equalTo(line.snp.top)
             make.height.equalTo(21)
         }
         

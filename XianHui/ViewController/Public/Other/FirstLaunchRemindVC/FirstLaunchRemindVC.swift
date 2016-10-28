@@ -22,7 +22,7 @@ class FirstLaunchRemindVC: UIViewController {
         
         
         view.addSubview(remindLabel)
-        remindLabel.snp_makeConstraints { (make) in
+        remindLabel.snp.makeConstraints { (make) in
             make.center.equalTo(view)
             make.width.equalTo(view)
             make.height.equalTo(200)

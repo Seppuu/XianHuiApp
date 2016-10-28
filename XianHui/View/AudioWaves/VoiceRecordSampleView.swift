@@ -56,7 +56,7 @@ class VoiceRecordSampleCell: UIView {
 
         self.addSubview(shapeView)
     
-        shapeView.snp_makeConstraints { (make) in
+        shapeView.snp.makeConstraints { (make) in
             make.left.bottom.right.equalTo(self)
             make.width.equalTo(self)
             make.height.equalTo(valueHeight)

@@ -261,7 +261,7 @@ class RadarChartVC: BaseChartViewController {
     func addCustomLabelToChartView(_ yVals:[RadarChartDataEntry]) {
         
         var buttons = [UIButton]()
-        
+        //TODO:button dismissed
         for var yVal in yVals {
             
             if yVal.x == 0{

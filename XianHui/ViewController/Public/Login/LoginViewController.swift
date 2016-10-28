@@ -26,7 +26,7 @@ class LoginTopView: UIView {
         imageView.image = UIImage(named: "logoIcon")
         imageView.contentMode = .scaleAspectFit
         addSubview(imageView)
-        imageView.snp_makeConstraints { (make) in
+        imageView.snp.makeConstraints { (make) in
             make.top.equalTo(self).offset(22 + 10)
             make.centerX.equalTo(self)
             make.width.height.equalTo(80)
@@ -34,8 +34,8 @@ class LoginTopView: UIView {
         
         topLabel = UILabel()
         addSubview(topLabel)
-        topLabel.snp_makeConstraints { (make) in
-            make.top.equalTo(imageView.snp_bottom).offset(8)
+        topLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(imageView.snp.bottom).offset(8)
             make.centerX.equalTo(self)
             make.width.equalTo(self)
             make.height.equalTo(21)

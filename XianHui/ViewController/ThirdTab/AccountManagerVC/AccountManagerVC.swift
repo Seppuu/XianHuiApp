@@ -52,7 +52,7 @@ class AccountManagerVC: UIViewController {
     
     func getAgentList() {
         
-        let hud = showHudWith(view, animated: true, mode: .indeterminate, text: "")
+        let _ = showHudWith(view, animated: true, mode: .indeterminate, text: "")
         NetworkManager.sharedManager.getCompanyListWith(User.currentUser().userName, usertype: .Employee) { (success, json, error) in
             hideHudFrom(self.view)
             if success == true {
@@ -182,7 +182,7 @@ extension AccountManagerVC: UITableViewDelegate,UITableViewDataSource {
     
     func changeCompanyWith(_ agentId:Int) {
         
-        let hud = showHudWith(self.view, animated: true, mode: .indeterminate, text: "")
+        _ = showHudWith(self.view, animated: true, mode: .indeterminate, text: "")
         NetworkManager.sharedManager.setCurrentCompanyWith(User.currentUser().userName, usertype: .Employee, agentId: agentId) { (success, json, error) in
             
             if success == true {

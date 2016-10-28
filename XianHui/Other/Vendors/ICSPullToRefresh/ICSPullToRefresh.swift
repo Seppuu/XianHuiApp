@@ -182,7 +182,7 @@ open class PullToRefreshView: UIView {
             } else if contentOffset!.y < scrollOffsetThreshold && scrollView!.isDragging && state == .stopped {
                 state = .triggered
             } else if contentOffset!.y >= scrollOffsetThreshold && state != .stopped {
-                state == .stopped
+                state = .stopped
             }
         }
     }

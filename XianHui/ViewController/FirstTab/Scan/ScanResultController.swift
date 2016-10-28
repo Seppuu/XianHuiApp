@@ -25,7 +25,7 @@ class ScanResultController: UIViewController {
         //self.edgesForExtendedLayout = UIRectEdge.None
         
         view.addSubview(topLabel)
-        topLabel.snp_makeConstraints { (make) in
+        topLabel.snp.makeConstraints { (make) in
             make.center.equalTo(view)
             make.width.equalTo(view)
             make.height.equalTo(21)
@@ -37,8 +37,8 @@ class ScanResultController: UIViewController {
         let confirmButton = UIButton()
         view.addSubview(confirmButton)
         
-        confirmButton.snp_makeConstraints { (make) in
-            make.top.equalTo(topLabel.snp_bottom).offset(10)
+        confirmButton.snp.makeConstraints { (make) in
+            make.top.equalTo(topLabel.snp.bottom).offset(10)
             make.left.equalTo(view).offset(20)
             make.right.equalTo(view).offset(-20)
             make.height.equalTo(44)
@@ -85,7 +85,7 @@ class ScanResultController: UIViewController {
     
     func backToTopViewController() {
         
-        self.navigationController?.popToRootViewController(animated: true)
+       _ =  self.navigationController?.popToRootViewController(animated: true)
         
     }
     
