@@ -448,7 +448,6 @@ extension NetworkManager {
         ]
         
         baseRequestWith(urlString, dict: dict, completion: completion)
-        
     }
     
     //计划顾客列表
