@@ -349,7 +349,7 @@ class DailyFormVC: RadarChartVC {
         
         //饼图类型 这里先写死
         var pieType = [String]()
-        s
+        
         //饼图模型 多个一组
         var chartListArr = [ChartList]()
         

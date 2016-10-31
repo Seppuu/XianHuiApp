@@ -28,6 +28,8 @@ class Notice: NSObject {
     
     var text = ""
     
+    var orgName = ""
+    
     var createTime = ""
     
     var hasRead = false

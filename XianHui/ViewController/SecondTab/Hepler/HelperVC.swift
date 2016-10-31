@@ -82,6 +82,11 @@ class HelperVC: BaseViewController {
             if let body = json["body"].string {
                 no.text = body
             }
+            
+            if let orgName = json["org_name"].string {
+                no.orgName = orgName
+            }
+            
             if let subject = json["subject"].string {
                 no.title = subject
             }
@@ -181,7 +186,7 @@ extension HelperVC:UITableViewDelegate,UITableViewDataSource {
         let no = listOfNotice[(indexPath as NSIndexPath).row]
         
         cell.pushTimeLabel.text = no.createTime
-        cell.nameLabel.text     = no.title
+        cell.nameLabel.text     = no.title + "(" + no.orgName + ")"
         cell.dayTimeLabel.text  = no.day
         cell.descLabel.text     = no.text
         
