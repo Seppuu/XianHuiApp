@@ -25,6 +25,9 @@ class OrderCell: UITableViewCell {
     
     @IBOutlet weak var fifthLabel: UILabel!
     
+    @IBOutlet weak var sixthLabel: UILabel!
+    
+    
     
     
     @IBOutlet weak var secondRightLabel: UILabel!

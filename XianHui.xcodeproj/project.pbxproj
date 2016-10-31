@@ -55,6 +55,7 @@
 		372480ED1D8151EF00B95C54 /* LCCKContactManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 372480D31D8151EF00B95C54 /* LCCKContactManager.m */; };
 		372480EE1D8151EF00B95C54 /* NSObject+LCCKHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 372480D71D8151EF00B95C54 /* NSObject+LCCKHUD.m */; };
 		372962991D40AF6500A947B4 /* BKPasscodeView.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3729629B1D40AF6500A947B4 /* BKPasscodeView.strings */; };
+		3730EC571DC717E80071E715 /* TKRadarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730EC561DC717E80071E715 /* TKRadarChart.swift */; };
 		37367B6F1D6AD96B00479E39 /* CustomerCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37367B6E1D6AD96B00479E39 /* CustomerCardView.swift */; };
 		37367B711D6ADA2100479E39 /* CustomerCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37367B701D6ADA2100479E39 /* CustomerCard.xib */; };
 		37367B741D6AE68F00479E39 /* PlanningTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37367B731D6AE68F00479E39 /* PlanningTableView.swift */; };
@@ -361,6 +362,7 @@
 		372480D61D8151EF00B95C54 /* NSObject+LCCKHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+LCCKHUD.h"; sourceTree = "<group>"; };
 		372480D71D8151EF00B95C54 /* NSObject+LCCKHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+LCCKHUD.m"; sourceTree = "<group>"; };
 		3729629A1D40AF6500A947B4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BKPasscodeView.strings"; sourceTree = "<group>"; };
+		3730EC561DC717E80071E715 /* TKRadarChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKRadarChart.swift; sourceTree = "<group>"; };
 		37367B6E1D6AD96B00479E39 /* CustomerCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerCardView.swift; sourceTree = "<group>"; };
 		37367B701D6ADA2100479E39 /* CustomerCard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomerCard.xib; sourceTree = "<group>"; };
 		37367B731D6AE68F00479E39 /* PlanningTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanningTableView.swift; sourceTree = "<group>"; };
@@ -1487,6 +1489,7 @@
 		37BAB8C41D3E1045001E4680 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				3730EC561DC717E80071E715 /* TKRadarChart.swift */,
 				37A00DB31DC1E74500E00CA7 /* RAReorderableLayout */,
 				371041FB1DC0A64400BE20F9 /* SwiftString */,
 				371041F31DC09CF700BE20F9 /* ICSPullToRefresh */,
@@ -2449,6 +2452,7 @@
 				37BAB9B61D3E1059001E4680 /* NavigationTitleLabel.swift in Sources */,
 				37F905311D69F9370078C06B /* CustomerCell.swift in Sources */,
 				37A00DB81DC1E74500E00CA7 /* RAReorderableLayout.swift in Sources */,
+				3730EC571DC717E80071E715 /* TKRadarChart.swift in Sources */,
 				37367B7C1D6AE7FD00479E39 /* Project.swift in Sources */,
 				376D6D411D59B37000F9A272 /* RealmUser.swift in Sources */,
 				37BAB9BA1D3E1059001E4680 /* ActivityIndicatorTitleView.swift in Sources */,

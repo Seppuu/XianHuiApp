@@ -50,7 +50,7 @@ class DailyFormVC: RadarChartVC {
                     
                     self.jsonData = json!
                     
-                    self.setChartData()
+                    self.chartView.reloadData()
                     
                     //下方列表数据源
                     let listArry = BaseTableViewModelList()
@@ -330,11 +330,14 @@ class DailyFormVC: RadarChartVC {
        return formList
     }
 
-    override func angleTypeTap(_ sender: UIButton) {
+    override func angleTypeTap(_ index: Int) {
         
-        let button = sender
-        let index = button.tag
         let vc = PieViewController()
+        
+        vc.maxValueUpdateHandler = {
+            
+            self.getDailyReportDataWith(self.noticeId)
+        }
         
         var nums = [Float]()
         
@@ -346,7 +349,7 @@ class DailyFormVC: RadarChartVC {
         
         //饼图类型 这里先写死
         var pieType = [String]()
-        
+        s
         //饼图模型 多个一组
         var chartListArr = [ChartList]()
         
@@ -437,6 +440,8 @@ class  PieViewController: PieChartViewController {
     
     var data:JSON!
     
+    var maxValueUpdateHandler:(()->())?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -466,6 +471,7 @@ class  PieViewController: PieChartViewController {
             
             //设置完之后,重新刷新UI.
             self.topPageView.pageScrollView.reloadData()
+            self.maxValueUpdateHandler?()
         }
         
         vc.title = "设置"

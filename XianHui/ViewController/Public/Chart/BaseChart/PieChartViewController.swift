@@ -183,29 +183,15 @@ extension PieChartViewController: ChartViewDelegate {
     
     func setDataCountWith(_ index:Int,pieView:PieChartView) {
         
-        var yVals1 = [BarChartDataEntry]()
+        var yVals1 = [PieChartDataEntry]()
         
         //第几天的第几个类型的图表的数据集
         for i in 0..<listOfChartDataArray[currentDayIndex].charts[index].model.count {
             let model = listOfChartDataArray[currentDayIndex].charts[index].model[i]
-            let val  = model.y
-            
-            //let chartDataEntry = BarChartDataEntry(value: val, xIndex: i)
-            
-            let chartDataEntry = BarChartDataEntry(x: Double(i), y: val)
+           
+            let chartDataEntry = PieChartDataEntry(value: model.y, label: model.x)
             
             yVals1.append(chartDataEntry)
-        }
-       
-        var xVals = [String?]()
-        
-        //var xvs = [String?]()
-        
-        for chartData in listOfChartDataArray[currentDayIndex].charts[index].model {
-            let str = chartData.x
-            
-            xVals.append(str)
-          
         }
 
         
@@ -298,7 +284,7 @@ extension PieChartViewController {
     
     func updatePieData(_ index:Int) {
         
-        animePieChart = true
+        animePieChart = false
         currentDayIndex = index
         //TODO:更换数据
         

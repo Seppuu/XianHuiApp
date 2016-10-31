@@ -14,6 +14,7 @@ import MJRefresh
 class Order: NSObject {
     
     var customerName = ""
+    var orgName = ""//门店
     var goodNo = ""
     var goodName = ""
     var bedName = ""
@@ -242,6 +243,12 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
                 o.goodNo = number
             }
             
+            if let org_name = data["org_name"].string {
+                o.orgName = org_name
+            }
+            
+            
+            
             if let number = data["flowno"].string {
                 o.goodNo = number
                 o.isProd = true
@@ -354,7 +361,6 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
     
 }
 
-
 extension MyWorkDetailVC:UITableViewDelegate,UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -366,10 +372,9 @@ extension MyWorkDetailVC:UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        return 170
     }
-    
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellId = "OrderCell"
         var cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? OrderCell
@@ -384,17 +389,17 @@ extension MyWorkDetailVC:UITableViewDelegate,UITableViewDataSource {
         let order = self.listOfOrder[(indexPath as NSIndexPath).row]
         
         cell?.firstLabel.text = "顾客:" + order.customerName
-        cell?.secondLabel.text = "编号:" + order.goodNo
-        cell?.thirdLabel.text = "品名:" + order.goodName
-        
-        cell?.fifthLabel.text = "技师:" + order.employee
+        cell?.secondLabel.text = "门店:" + order.orgName
+        cell?.thirdLabel.text = "编号:" + order.goodNo
+        cell?.forthlabel.text = "品名:" + order.goodName
+        cell?.sixthLabel.text = "技师:" + order.employee
         
         if order.isProd == true {
-            cell?.forthlabel.text = "数量:" + order.numbers
+            cell?.fifthLabel.text = "数量:" + order.numbers
             cell?.secondRightLabel.text = ""
         }
         else {
-            cell?.forthlabel.text = "床位:" + order.bedName
+            cell?.fifthLabel.text = "床位:" + order.bedName
             cell?.secondRightLabel.text =  "开始时间:" + order.startTime
         }
         
