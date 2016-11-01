@@ -9,6 +9,7 @@
 import UIKit
 import MJRefresh
 import SwiftyJSON
+import ChatKit
 
 enum NoticeType:String {
     case daily_report = "daily_report"
@@ -57,6 +58,13 @@ class NoticeListVC: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        LCChatKit.sharedInstance().conversationService.updateConversationAsRead()
+        
     }
     
     var firstLoad = true

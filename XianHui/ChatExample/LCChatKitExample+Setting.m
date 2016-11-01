@@ -111,7 +111,7 @@ static NSString *const LCCKAPPKEY = @"eXUtSMYSxVCJhE4IHOiGWabv";
 }
 
 /**
- *  设置联系人列表页面中，对cell的操作回调
+ *  设置会话列表页面中，对cell的操作回调
  */
 - (void)lcck_setupConversationsCellOperation { 
     //选中某个对话后的回调,设置事件响应函数

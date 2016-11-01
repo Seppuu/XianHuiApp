@@ -92,12 +92,13 @@ class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDele
         
         dateLabel.textColor = UIColor ( red: 0.5216, green: 0.3765, blue: 0.2863, alpha: 1.0 )
         dateLabel.text = listOfNumber.last
-        dateLabel.textAlignment = .center
+        dateLabel.textAlignment = .left
         addSubview(dateLabel)
         dateLabel.snp.makeConstraints { (make) in
-            make.width.equalTo(screenWidth)
-            make.centerX.equalTo(self)
-            make.bottom.equalTo(self).offset(-10)
+            make.left.equalTo(self).offset(15)
+            make.top.equalTo(self).offset(10)
+            make.width.equalTo(200)
+            make.height.equalTo(21)
         }
         
         dateLabel.text = listOfDateString.last
@@ -112,7 +113,7 @@ class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDele
         rightLabel01.textAlignment = .left
         addSubview(rightLabel01)
         rightLabel01.snp.makeConstraints { (make) in
-            make.left.equalTo(self).offset(15)
+            make.right.equalTo(self).offset(-15)
             make.top.equalTo(self).offset(10)
             make.width.equalTo(self)
             make.height.equalTo(21)
@@ -126,7 +127,7 @@ class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDele
         rightLabel02.textAlignment = .left
         addSubview(rightLabel02)
         rightLabel02.snp.makeConstraints { (make) in
-            make.left.equalTo(self).offset(15)
+            make.right.equalTo(self).offset(-15)
             make.top.equalTo(rightLabel01.snp.bottom).offset(10)
             make.width.equalTo(self)
             make.height.equalTo(21)

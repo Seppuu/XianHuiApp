@@ -23,7 +23,7 @@ class ChatKitExample: LCChatKitExample {
         
         super.exampleInit()
         
-        //addCustomerCellIntoMessageList()
+        addCustomerCellIntoMessageList()
     }
     
     func addCustomerCellIntoMessageList() {
@@ -37,17 +37,81 @@ class ChatKitExample: LCChatKitExample {
 //            
 //            return cell
 //        }
-//        
+//
 //        
         
-//        LCChatKit.sharedInstance().conversationListService.configureCellBlock = {
-//            (cell,tableView,indexPath,conversation) in
-//            if let acutalcell  = cell as? LCCKConversationListCell {
-//                acutalcell.layoutMargins = UIEdgeInsetsMake(0, 64, 0, 0)
-//               
-//            }
-//            
-//        }
+        LCChatKit.sharedInstance().conversationListService.configureCellBlock = {
+            (cell,tableView,indexPath,conversation) in
+            let messageCell = cell as? LCCKConversationListCell
+            if let conv = conversation {
+                if let lastMessage = conv.lcck_lastMessage {
+                    
+                    if let attr = lastMessage.attributes {
+                        
+                        if let noticeId = attr["notice_id"] as? String {
+                            messageCell?.messageTextLabel.text = lastMessage.text
+                            
+                            //因为ChatKit中将系统消息按群聊处理了,所以这了对文本做些处理
+                            
+                            let mutableText = LCCKLastMessageTypeManager.attributedString(with: lastMessage, conversation: conv, userName: "") as? NSMutableAttributedString
+                            let range = NSMakeRange(0, 1)
+                            mutableText?.deleteCharacters(in: range)
+                            //TODO:警告处理
+                            if let text = mutableText as? NSAttributedString {
+                                messageCell?.messageTextLabel.attributedText = text
+                            }
+                            
+                            
+                        }
+                    }
+                    
+                    
+                }
+                
+                
+            }
+        }
+    }
+    
+    override func lcck_setupConversationsCellOperation() {
+        super.lcck_setupConversationsCellOperation()
+        //选中某个对话后的回调,设置事件响应函数
+        LCChatKit.sharedInstance().didSelectConversationsListCellBlock = {
+            (indexPath,conversation,controller) in
+            conversation?.markAsReadInBackground()
+            
+            if let conv = conversation {
+                if let lastMessage = conv.lcck_lastMessage {
+
+                    if let attr = lastMessage.attributes {
+
+                        if let noticeType = attr["notice_type"] as? String {
+                            if noticeType == "daily_report" || noticeType == "project_plan" {
+                                let vc = HelperVC()
+                                vc.title = "助手"
+                                LCChatKitExample.lcck_push(to: vc)
+                            }
+                            else {
+                                let vc = NoticeListVC()
+                                vc.title = "提醒"
+                                LCChatKitExample.lcck_push(to: vc)
+                            }
+                            
+                            LCChatKit.sharedInstance().conversationService.currentConversation = conversation
+                        }
+                    }
+                    else {
+                        
+                    }
+                    
+                    
+                }
+            
+        }
+            
+        }
+   
+
     }
     
     

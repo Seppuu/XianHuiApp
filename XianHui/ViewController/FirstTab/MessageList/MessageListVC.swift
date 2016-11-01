@@ -82,22 +82,15 @@ class MessageListVC: LCCKConversationListViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-        setCustomerCell()
-        setTableView()
-        showRemindNotice()
+        
+        //setTableView()
+        //showRemindNotice()
         
         self.tableView.layoutMargins = UIEdgeInsetsMake(0, 0, 0, 0)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        
-    }
-    
-    func setCustomerCell() {
-        
-        LCChatKit.sharedInstance()
         
     }
     
@@ -390,70 +383,7 @@ extension MessageListVC {
         return cell!
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let notice = noticeList[(indexPath as NSIndexPath).row]
-        
-        if notice.name == "助手" {
-            
-            if notice.time == "新手提示" {
-                let vc = FirstLaunchRemindVC()
-                vc.title = "助手新手教学"
-                vc.isRemind = false
-                navigationController?.pushViewController(vc, animated: true)
-                
-            }
-            else {
-                let vc = HelperVC()
-                vc.title = "助手"
-                navigationController?.pushViewController(vc, animated: true)
-            }
-            
-        }
-        else {
-            
-            if notice.time == "新手提示" {
-                let vc = FirstLaunchRemindVC()
-                vc.title = "提醒新手教学"
-                vc.isRemind = true
-                navigationController?.pushViewController(vc, animated: true)
-                
-            }
-            else {
-                let vc = NoticeListVC()
-                vc.title = "提醒"
-                navigationController?.pushViewController(vc, animated: true)
-            }
-            
-            
-        }
-        
-    }
-    
-    
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
 
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        return UITableViewCellEditingStyle.delete
-    }
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        
-        if editingStyle == .delete {
-            
-            noticeList.remove(at: (indexPath as NSIndexPath).row)
-            
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            
-            self.updateTopView()
-        }
-        else {
-            
-        }
-        
-    }
     
     override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "删除"

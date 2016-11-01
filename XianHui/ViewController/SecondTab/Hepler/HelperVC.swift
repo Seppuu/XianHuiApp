@@ -9,6 +9,7 @@
 import UIKit
 import MJRefresh
 import SwiftyJSON
+import ChatKit
 
 
 class HelperVC: BaseViewController {
@@ -25,6 +26,13 @@ class HelperVC: BaseViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        LCChatKit.sharedInstance().conversationService.updateConversationAsRead()
         
     }
     
