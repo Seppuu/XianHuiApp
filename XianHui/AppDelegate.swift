@@ -260,7 +260,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //如果此时app没有完全登陆成功.return.
         guard appHasLoginSuccess == true else {return}
         
-        NotificationCenter.default.post(name: Notification.Name(rawValue: NoticeComingNoti), object: userInfo)
+        //NotificationCenter.default.post(name: Notification.Name(rawValue: NoticeComingNoti), object: userInfo)
         
         if appComeFromBack == true {
             
@@ -359,7 +359,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         EBForeNotification.handleRemoteNotification(userInfo, soundID: 1312, isIos10: true)
         
-        NotificationCenter.default.post(name: Notification.Name(rawValue: NoticeComingNoti), object: userInfo)
+       // NotificationCenter.default.post(name: Notification.Name(rawValue: NoticeComingNoti), object: userInfo)
     }
     
     /**
@@ -375,7 +375,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         pushToViewControllerWith(userInfo)
         
-        NotificationCenter.default.post(name: Notification.Name(rawValue: NoticeComingNoti), object: userInfo)
+       // NotificationCenter.default.post(name: Notification.Name(rawValue: NoticeComingNoti), object: userInfo)
     }
     
 }

@@ -61,6 +61,13 @@ class ChatKitExample: LCChatKitExample {
                                 messageCell?.messageTextLabel.attributedText = text
                             }
                             
+                            if let avatarUrl = attr["avator"] as? String {
+                                if let url = URL(string: avatarUrl) {
+                                    messageCell?.avatarImageView.kf.setImage(with: url)
+                                }
+                                
+                            }
+                            
                             
                         }
                     }
@@ -74,11 +81,11 @@ class ChatKitExample: LCChatKitExample {
     }
     
     override func lcck_setupConversationsCellOperation() {
-        super.lcck_setupConversationsCellOperation()
+        
         //选中某个对话后的回调,设置事件响应函数
         LCChatKit.sharedInstance().didSelectConversationsListCellBlock = {
             (indexPath,conversation,controller) in
-            conversation?.markAsReadInBackground()
+            //conversation?.markAsReadInBackground()
             
             if let conv = conversation {
                 if let lastMessage = conv.lcck_lastMessage {
@@ -96,8 +103,9 @@ class ChatKitExample: LCChatKitExample {
                                 vc.title = "提醒"
                                 LCChatKitExample.lcck_push(to: vc)
                             }
-                            
+                            //设置当前对话,为了消除未读标记.chatKit默认点击系统消息进入会话界面.
                             LCChatKit.sharedInstance().conversationService.currentConversation = conversation
+                            return
                         }
                     }
                     else {
@@ -109,8 +117,16 @@ class ChatKitExample: LCChatKitExample {
             
         }
             
+            //非系统消息,选中某个对话后的回调,设置事件响应函数
+            ChatKitExample.exampleOpenConversationViewController(withConversaionId: conversation?.conversationId, from: controller?.navigationController)
+            
         }
-   
+        
+        //删除某个对话后的回调 (一般不需要做处理)
+        LCChatKit.sharedInstance().didDeleteConversationsListCellBlock = {
+            (indexPath,conversation,controller) in
+            //TODO:
+        }
 
     }
     
