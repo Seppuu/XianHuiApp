@@ -486,17 +486,22 @@ class  PieViewController: PieChartViewController {
     
     func setBarItem() {
         
-        rightBarItem = UIBarButtonItem(title: "设置", style: UIBarButtonItemStyle.plain, target: self, action: #selector(FormVC.settingTap(_:)))
-        navigationItem.rightBarButtonItem = rightBarItem
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 21))
+        button.setTitle("设置", for: .normal)
         
-        guard let view = rightBarItem.value(forKey: "view") as? UIView else {return}
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        button.setTitleColor(UIColor.white, for: UIControlState())
+        button.addTarget(self, action: #selector(FormVC.settingTap(_:)), for: .touchUpInside)
+        rightBarItem = UIBarButtonItem(customView: button)
         
-        dot = UIView(frame: CGRect(x: view.center.x + 5 , y: 20 + 10, width: dotWidth, height: dotWidth))
+        dot = UIView(frame: CGRect(x: 40 - dotWidth , y: 0, width: dotWidth, height: dotWidth))
         dot.layer.cornerRadius = dotWidth/2
         dot.layer.masksToBounds = true
         dot.backgroundColor = UIColor.red
         dot.alpha = 0.0
-        self.navigationController?.view.addSubview(dot)
+        button.addSubview(dot)
+        navigationItem.rightBarButtonItem = rightBarItem
+        
         
     }
     
