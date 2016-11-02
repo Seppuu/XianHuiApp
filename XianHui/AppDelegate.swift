@@ -236,7 +236,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-       ChatKitExample.invokeThisMethod(inApplicationWillTerminate: application)
+         ChatKitExample.invokeThisMethod(inApplicationWillTerminate: application)
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {

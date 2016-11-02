@@ -12,5 +12,4 @@ import UIKit
 class XHUser: LCCKUser {
 
     
-    
 }

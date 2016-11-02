@@ -70,6 +70,7 @@ class QQScanViewController: LBXScanViewController {
         let result:LBXScanResult = arrayResult[0]
         
         let vc = ScanResultController()
+        vc.isLogInMyBook = true
         vc.title = "扫码登陆"
         vc.codeResult = result
         navigationController?.pushViewController(vc, animated: true)

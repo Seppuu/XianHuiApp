@@ -12,12 +12,16 @@ import SnapKit
 import MBProgressHUD
 
 //扫码成功界面
+
+var MyBookLogInToken = ""
+
 class ScanResultController: UIViewController {
 
     var codeResult:LBXScanResult!
     
     var topLabel = UILabel()
     
+    var isLogInMyBook = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +34,15 @@ class ScanResultController: UIViewController {
             make.width.equalTo(view)
             make.height.equalTo(21)
         }
-        topLabel.text = "点击确认登陆Mybook系统."
+        
+        if isLogInMyBook == true {
+            topLabel.text = "点击确认登陆Mybook系统."
+        }
+        else {
+            topLabel.text = "点击确认退出Mybook系统."
+        }
+        
+        
         topLabel.textColor = UIColor.lightGray
         topLabel.textAlignment = .center
         
@@ -43,7 +55,14 @@ class ScanResultController: UIViewController {
             make.right.equalTo(view).offset(-20)
             make.height.equalTo(44)
         }
-        confirmButton.setTitle("确认登陆", for: UIControlState())
+        var title = ""
+        if isLogInMyBook == true {
+            title = "确认登陆"
+        }
+        else {
+            title = "确认退出"
+        }
+        confirmButton.setTitle(title, for: UIControlState())
         confirmButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         confirmButton.layer.cornerRadius = 5.0
         confirmButton.setTitleColor(UIColor.white, for: UIControlState())
@@ -55,29 +74,52 @@ class ScanResultController: UIViewController {
     
     
     func confirmTap() {
+        if isLogInMyBook == true {
        //确认登陆.向后台发送二维码
         if codeResult.strScanned != nil {
-            let qrCode = codeResult.strScanned!
-            LCCKUtil.showProgressText("登陆中", duration: 10.0)
-            NetworkManager.sharedManager.logInERPWith(qrCode, completion: { (success, json, error) in
+            
+            
+                let qrCode = codeResult.strScanned!
+                LCCKUtil.showProgressText("登陆中", duration: 10.0)
+                NetworkManager.sharedManager.logInERPWith(qrCode, completion: { (success, json, error) in
+                    
+                    if success == true {
+                        LCCKUtil.hideProgress()
+                        MyBookLogInToken = qrCode
+                        self.backToTopViewController()
+                        
+                    }
+                    else{
+                        //TODO: error
+                        LCCKUtil.showProgressText("登陆失败", duration: 2.0)
+                    }
+                    
+                })
+            
+            
+        }
+        else {
+            //解码错误
+        
+            }
+        }
+        else {
+            LCCKUtil.showProgressText("退出中", duration: 10.0)
+            NetworkManager.sharedManager.logOutERPWith(MyBookLogInToken, completion: { (success, json, error) in
                 
                 if success == true {
                     LCCKUtil.hideProgress()
+                    MyBookLogInToken = ""
                     self.backToTopViewController()
                     
                 }
                 else{
                     //TODO: error
-                    LCCKUtil.showProgressText("登陆失败", duration: 2.0)
+                    LCCKUtil.showProgressText("退出失败", duration: 2.0)
                 }
                 
             })
         }
-        else {
-            //解码错误
-        }
-        
-        
         
         
     }
