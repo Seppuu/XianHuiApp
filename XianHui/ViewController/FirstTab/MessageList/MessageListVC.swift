@@ -10,8 +10,6 @@ import UIKit
 import MJRefresh
 import ChatKit
 
-
-
 extension PalauDefaults {
     
     //0 是新手提示 1是跳转界面
@@ -44,19 +42,24 @@ let MyBookHasLoginNoti = "NoticeComingNoti"
 
 class MessageListVC: LCCKConversationListViewController {
     
-    var customStatusView = UILabel()
+    var customStatusView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        customStatusView = UILabel(frame: CGRect(x: 15, y: 0, width: screenWidth, height: 44))
-        customStatusView.text = "PC端已经登陆,点击退出"
-        customStatusView.font = UIFont.systemFont(ofSize: 12)
+        customStatusView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 44))
         customStatusView.backgroundColor = UIColor.init(hexString: "EDF0F1")
-        customStatusView.textColor = UIColor.init(hexString: "888C8E")
         let tap = UITapGestureRecognizer(target: self, action: #selector(MessageListVC.logOutMyBook))
         customStatusView.isUserInteractionEnabled = true
         customStatusView.addGestureRecognizer(tap)
+        
+        
+        let label  = UILabel(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 44))
+        label.text = "PC端已经登陆,点击退出"
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = UIColor.init(hexString: "888C8E")
+        customStatusView.addSubview(label)
     }
     
     override func didReceiveMemoryWarning() {
@@ -68,6 +71,16 @@ class MessageListVC: LCCKConversationListViewController {
     func addMyBookLoginStatusCell() {
         
         
+    }
+    
+    
+    override func updateStatusView() {
+        super.updateStatusView()
+        
+        let isConnected = LCChatKit.sharedInstance().sessionService.connect
+        if isConnected == true {
+            getMyBookERPLoginStatus()
+        }
     }
     
 
