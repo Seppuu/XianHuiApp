@@ -105,6 +105,8 @@ class ChatKitExample: LCChatKitExample {
                             }
                             //设置当前对话,为了消除未读标记.chatKit默认点击系统消息进入会话界面.
                             LCChatKit.sharedInstance().conversationService.currentConversation = conversation
+                            LCChatKit.sharedInstance().conversationService.updateConversationAsRead()
+
                             return
                         }
                     }

@@ -30,6 +30,10 @@ class XHChartData:NSObject {
     
 }
 
+let NeedUpdateMaxValueNoti = NSNotification.Name("NeedUpdateMaxValueNoti")
+
+let NoNeedUpdateMaxValueNoti = NSNotification.Name("NoNeedUpdateMaxValueNoti")
+
 class PieChartViewController: BaseChartViewController {
     
     //顶部数组
@@ -68,11 +72,12 @@ class PieChartViewController: BaseChartViewController {
     
     //TODO:需要后端自动化 饼图类型
     var pieType = [String]()
-    
-    
+
     var maxType:MaxValueType = .cashMax
     
     let viewHeight = ( screenHeight - 64)
+    
+    var needUpdateMaxValue = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -133,14 +138,6 @@ class PieChartViewController: BaseChartViewController {
         pageControl.pageIndicatorTintColor = UIColor ( red: 0.949, green: 0.902, blue: 0.8196, alpha: 1.0 )
         pageControl.numberOfPages = listOfChartDataArray[0].charts.count
         
-//        
-//        pieTypelabel = UILabel(frame: CGRect(x: 0, y:pageControl.frame.origin.y - 15 , width: screenWidth, height: 20))
-//        pieTypelabel.textAlignment = .Center
-//        pieTypelabel.font = UIFont.systemFontOfSize(12)
-//        pieTypelabel.textColor = UIColor ( red: 0.4549, green: 0.3922, blue: 0.3922, alpha: 1.0 )
-//        pieTypelabel.text = pieType[0]
-//        view.addSubview(pieTypelabel)
-        
         //tableViewSet
         tableView = UITableView(frame: CGRect.zero, style: .plain)
         view.addSubview(tableView)
@@ -159,6 +156,8 @@ class PieChartViewController: BaseChartViewController {
         tableView.dataSource = self
         
         self.tableViewTopConstraint?.update(offset: -screenWidth)
+        
+        
     }
     
     override func didReceiveMemoryWarning() {

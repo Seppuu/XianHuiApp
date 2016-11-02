@@ -63,7 +63,7 @@ class NoticeListVC: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        LCChatKit.sharedInstance().conversationService.updateConversationAsRead()
+      //  LCChatKit.sharedInstance().conversationService.updateConversationAsRead()
         
     }
     

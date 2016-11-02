@@ -32,7 +32,6 @@ class HelperVC: BaseViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        LCChatKit.sharedInstance().conversationService.updateConversationAsRead()
         
     }
     

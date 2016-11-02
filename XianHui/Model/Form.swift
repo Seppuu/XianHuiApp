@@ -14,7 +14,7 @@ class Form: NSObject {
     //日期 yyyy-MM-dd
     var date = "" {
         didSet {
-            let year = date.substring(0, length: 4)
+            let year = date.substring(0, length: 5)
             dateWithOutYear = date.chompLeft(year)
         }
     }

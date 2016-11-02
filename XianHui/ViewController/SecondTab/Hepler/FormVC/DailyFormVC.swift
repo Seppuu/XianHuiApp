@@ -446,11 +446,40 @@ class  PieViewController: PieChartViewController {
         super.viewDidLoad()
         
         setBarItem()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(PieViewController.showDot), name: NeedUpdateMaxValueNoti, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(PieViewController.disMissDot), name: NoNeedUpdateMaxValueNoti, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
+    }
+    
+    var dot = UIView()
+    
+    private let dotWidth:CGFloat = 6
+    
+    var isShowDot = false {
+        didSet {
+            if isShowDot == true {
+                dot.alpha = 1.0
+            }
+            else {
+                dot.alpha = 0.0
+            }
+        }
+    }
+    
+    func showDot() {
+        
+        isShowDot = true
+    }
+    
+    func disMissDot() {
+        
+        isShowDot = false
     }
     
     var rightBarItem = UIBarButtonItem()
@@ -459,6 +488,15 @@ class  PieViewController: PieChartViewController {
         
         rightBarItem = UIBarButtonItem(title: "设置", style: UIBarButtonItemStyle.plain, target: self, action: #selector(FormVC.settingTap(_:)))
         navigationItem.rightBarButtonItem = rightBarItem
+        
+        guard let view = rightBarItem.value(forKey: "view") as? UIView else {return}
+        
+        dot = UIView(frame: CGRect(x: view.center.x + 5 , y: 20 + 10, width: dotWidth, height: dotWidth))
+        dot.layer.cornerRadius = dotWidth/2
+        dot.layer.masksToBounds = true
+        dot.backgroundColor = UIColor.red
+        dot.alpha = 0.0
+        self.navigationController?.view.addSubview(dot)
         
     }
     

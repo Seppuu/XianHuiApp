@@ -110,7 +110,7 @@ class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDele
         let str01 = String(currentMonthAvgVaule)
         
         rightLabel01.text = "当月平均:" + str01
-        rightLabel01.textAlignment = .left
+        rightLabel01.textAlignment = .right
         addSubview(rightLabel01)
         rightLabel01.snp.makeConstraints { (make) in
             make.right.equalTo(self).offset(-15)
@@ -124,7 +124,7 @@ class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDele
         rightLabel02.font = UIFont.systemFont(ofSize: 12)
         let str02 = String(currentMonthAvgVaule)
         rightLabel02.text = "当月累计:" + str02
-        rightLabel02.textAlignment = .left
+        rightLabel02.textAlignment = .right
         addSubview(rightLabel02)
         rightLabel02.snp.makeConstraints { (make) in
             make.right.equalTo(self).offset(-15)
@@ -169,6 +169,20 @@ class XHBarChartView: OTPageView,OTPageScrollViewDataSource,OTPageScrollViewDele
         if val == 0 {
             //如果数值是0.加一点.防止UI界面消失
             val = 0.01
+        }
+        var maxValueNeedUpdate = false
+        
+        if (val / maxValue) > 1.0 {
+            val = maxValue
+            
+            maxValueNeedUpdate = true
+        }
+        
+        if maxValueNeedUpdate == true {
+            NotificationCenter.default.post(name: NeedUpdateMaxValueNoti, object: nil)
+        }
+        else {
+            NotificationCenter.default.post(name: NoNeedUpdateMaxValueNoti, object: nil)
         }
         
         view.value = val / maxValue
