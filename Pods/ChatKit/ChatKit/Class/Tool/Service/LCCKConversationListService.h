@@ -2,7 +2,7 @@
 //  LCCKConversationListService.h
 //  LeanCloudChatKit-iOS
 //
-//  v0.7.20 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/3/22.
+//  v0.8.0 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/3/22.
 //  Copyright © 2016年 ElonChan (wechat:chenyilong1010). All rights reserved.
 //
 
@@ -17,7 +17,7 @@ typedef void (^LCCKRecentConversationsCallback)(NSArray *conversations, NSIntege
 @interface LCCKConversationListService : LCCKSingleton <LCCKConversationsListService>
 
 typedef void(^LCCKPrepareConversationsWhenLoadBlock)(NSArray<AVIMConversation *> *conversations, LCCKBooleanResultBlock callback);
-@property (nonatomic, copy, readonly) LCCKPrepareConversationsWhenLoadBlock prepareConversationsWhenLoadBlock;
+@property (nonatomic, copy) LCCKPrepareConversationsWhenLoadBlock prepareConversationsWhenLoadBlock;
 - (void)setPrepareConversationsWhenLoadBlock:(LCCKPrepareConversationsWhenLoadBlock)prepareConversationsWhenLoadBlock;
 
 - (void)findRecentConversationsWithBlock:(LCCKRecentConversationsCallback)block;
@@ -26,7 +26,7 @@ typedef void(^LCCKPrepareConversationsWhenLoadBlock)(NSArray<AVIMConversation *>
  *  提供自定义行高的 Block
  */
 typedef CGFloat (^LCCKHeightForRowBlock) (UITableView *tableView, NSIndexPath *indexPath, AVIMConversation *conversation);
-@property (nonatomic, copy, readonly) LCCKHeightForRowBlock heightForRowBlock;
+@property (nonatomic, copy) LCCKHeightForRowBlock heightForRowBlock;
 - (void)setHeightForRowBlock:(LCCKHeightForRowBlock)heightForRowBlock;
 
 /**
@@ -34,7 +34,7 @@ typedef CGFloat (^LCCKHeightForRowBlock) (UITableView *tableView, NSIndexPath *i
  *  当使用自定义的 Cell 时，内部将不会处理 Cell，需要使用 configureCellBlock 自行配制 Cell
  */
 typedef UITableViewCell* (^LCCKCellForRowBlock)(UITableView *tableView, NSIndexPath *indexPath, AVIMConversation *conversation);
-@property (nonatomic, copy, readonly) LCCKCellForRowBlock cellForRowBlock;
+@property (nonatomic, copy) LCCKCellForRowBlock cellForRowBlock;
 - (void)setCellForRowBlock:(LCCKCellForRowBlock)cellForRowBlock;
 
 /**

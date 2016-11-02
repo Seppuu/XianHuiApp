@@ -1,22 +1,22 @@
 PODS:
   - AFViewShaker (0.0.2)
   - Alamofire (4.0.1)
-  - AVOSCloud (3.6.0)
-  - AVOSCloudIM (3.6.0):
-    - AVOSCloud (= 3.6.0)
-    - AVOSCloudIM/_ARC (= 3.6.0)
-    - AVOSCloudIM/_NOARC (= 3.6.0)
-  - AVOSCloudIM/_ARC (3.6.0):
-    - AVOSCloud (= 3.6.0)
-    - AVOSCloudIM/_NOARC (= 3.6.0)
-  - AVOSCloudIM/_NOARC (3.6.0):
-    - AVOSCloud (= 3.6.0)
+  - AVOSCloud (3.6.1)
+  - AVOSCloudIM (3.6.1):
+    - AVOSCloud (= 3.6.1)
+    - AVOSCloudIM/_ARC (= 3.6.1)
+    - AVOSCloudIM/_NOARC (= 3.6.1)
+  - AVOSCloudIM/_ARC (3.6.1):
+    - AVOSCloud (= 3.6.1)
+    - AVOSCloudIM/_NOARC (= 3.6.1)
+  - AVOSCloudIM/_NOARC (3.6.1):
+    - AVOSCloud (= 3.6.1)
   - BKPasscodeView (0.2.4):
     - AFViewShaker (~> 0.0)
   - Charts (3.0.0):
     - Charts/Core (= 3.0.0)
   - Charts/Core (3.0.0)
-  - ChatKit (0.7.22):
+  - ChatKit (0.8.0):
     - AVOSCloud (~> 3.6.0)
     - AVOSCloudIM (~> 3.6.0)
     - DACircularProgress (~> 2.3.1)
@@ -29,7 +29,7 @@ PODS:
     - pop (~> 1.0.9)
     - SDWebImage (~> 3.8.0)
     - UITableView+FDTemplateLayoutCell (~> 1.5.beta)
-  - CryptoSwift (0.6.3)
+  - CryptoSwift (0.6.5)
   - CTAssetsPickerController (3.3.1):
     - PureLayout (~> 3.0.0)
   - DACircularProgress (2.3.1)
@@ -54,11 +54,11 @@ PODS:
   - pop (1.0.9)
   - Proposer (1.0.0)
   - PureLayout (3.0.2)
-  - Realm (1.1.0):
-    - Realm/Headers (= 1.1.0)
-  - Realm/Headers (1.1.0)
-  - RealmSwift (1.1.0):
-    - Realm (= 1.1.0)
+  - Realm (2.0.3):
+    - Realm/Headers (= 2.0.3)
+  - Realm/Headers (2.0.3)
+  - RealmSwift (2.0.3):
+    - Realm (= 2.0.3)
   - Ruler (1.0.0)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
@@ -116,12 +116,12 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AFViewShaker: 7e4bc215ca3e92347b78da436fca74e1730b52e8
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
-  AVOSCloud: be838e80e13c3247abf24d95e325b3fd515f9d12
-  AVOSCloudIM: 7044ffb9c883fedb8d9055db12e4f28c5160795d
+  AVOSCloud: cc9b567da2d30f07e3da1e4db682cad9ff56a1b6
+  AVOSCloudIM: 7c30a50d1e8f6afee000a2037ea24eb6abcbc8db
   BKPasscodeView: 947e3542c126a9fa41c46318759d928919636e96
   Charts: beb341928d2135613b4325a6c6aff9f2f6de895e
-  ChatKit: 51d659978ecc84f5ea03be13cc7103faea6ca9fd
-  CryptoSwift: 623f81faf4bc34caf78b792f8625fda9fc309abd
+  ChatKit: 7c5fa96b01e69bcfc38b9158fdafe363ce56352b
+  CryptoSwift: d86b1d97d39b4a361ba44c77180b221e9c5b864f
   CTAssetsPickerController: b1d1d50ab87cf6b8b13531de5f4530482e7e53ed
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
@@ -139,8 +139,8 @@ SPEC CHECKSUMS:
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   Proposer: 73303728e11cb6dbe27102deac0da82956a51f16
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
-  Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
-  RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
+  Realm: 5f008bfe3c8c47142eddfc30b8c1584cde22db24
+  RealmSwift: 5afb451f65b682242f272dbb52d5c6f6e343c980
   Ruler: fa0067d052372fef191acea419917d4b42ebc3aa
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
