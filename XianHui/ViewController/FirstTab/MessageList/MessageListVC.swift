@@ -9,6 +9,7 @@
 import UIKit
 import MJRefresh
 import ChatKit
+import DZNEmptyDataSet
 
 extension PalauDefaults {
     
@@ -40,7 +41,7 @@ let NoticeComingNoti = "NoticeComingNoti"
 let MyBookHasLoginNoti = "NoticeComingNoti"
 
 
-class MessageListVC: LCCKConversationListViewController {
+class MessageListVC: LCCKConversationListViewController,DZNEmptyDataSetSource, DZNEmptyDataSetDelegate  {
     
     var customStatusView = UIView()
     
@@ -60,6 +61,20 @@ class MessageListVC: LCCKConversationListViewController {
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = UIColor.init(hexString: "888C8E")
         customStatusView.addSubview(label)
+        
+        
+        self.tableView.emptyDataSetSource = self
+        self.tableView.emptyDataSetDelegate = self
+    }
+    
+    
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        
+        let text = "暂无消息"
+        
+        let attrString = NSAttributedString(string: text)
+        
+        return attrString
     }
     
     override func didReceiveMemoryWarning() {
