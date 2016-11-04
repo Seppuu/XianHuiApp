@@ -13,6 +13,16 @@ import DZNEmptyDataSet
 
 extension PalauDefaults {
     
+    
+    public static var MyBookLogInToken: PalauDefaultsEntry<String> {
+        get {
+            return value("MyBookLogInToken").whenNil(use:"")
+        }
+        set {
+            
+        }
+    }
+    
     //0 是新手提示 1是跳转界面
     //助手
     public static var MessageListHelperLastTime: PalauDefaultsEntry<String> {
@@ -43,11 +53,13 @@ let MyBookHasLoginNoti = "NoticeComingNoti"
 
 class MessageListVC: LCCKConversationListViewController,DZNEmptyDataSetSource, DZNEmptyDataSetDelegate  {
     
+    var model = MessageListModel()
+    
     var customStatusView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         customStatusView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 44))
         customStatusView.backgroundColor = UIColor.init(hexString: "EDF0F1")
         let tap = UITapGestureRecognizer(target: self, action: #selector(MessageListVC.logOutMyBook))
@@ -65,7 +77,55 @@ class MessageListVC: LCCKConversationListViewController,DZNEmptyDataSetSource, D
         
         self.tableView.emptyDataSetSource = self
         self.tableView.emptyDataSetDelegate = self
+        
+        setLeftBarAvatar()
+        
+        ChatKitExample.updateMessageListVC()
     }
+    
+    func setLeftBarAvatar() {
+        
+        let user = User.currentUser()
+        
+        let avatarImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        avatarImageView.layer.cornerRadius = avatarImageView.ddWidth/2
+        avatarImageView.layer.masksToBounds = true
+        avatarImageView.contentMode = .scaleAspectFill
+        if let url = URL(string: (user?.avatarURL)!) {
+            avatarImageView.kf.setImage(with: url)
+        }
+        
+        
+        avatarImageView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(MessageListVC.userAvatarTap))
+        avatarImageView.addGestureRecognizer(tap)
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: avatarImageView)
+        
+    }
+    
+    func userAvatarTap() {
+        
+        let alert = UIAlertController(title: "状态", message: "切换当前状态", preferredStyle: .actionSheet)
+        
+        let action = UIAlertAction(title: "上班", style: .default, handler:  nil)
+        
+        let action1 = UIAlertAction(title: "休息", style: .default, handler:  nil)
+        
+        let action0 = UIAlertAction(title: "取消", style: .cancel, handler:  nil)
+        
+        alert.addAction(action)
+        alert.addAction(action1)
+        alert.addAction(action0)
+        
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+    
+    func refeshLeftBarAvatarImage() {
+        setLeftBarAvatar()
+    }
+
     
     
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {

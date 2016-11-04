@@ -1,24 +1,25 @@
 //
-//  NavigationController.swift
-//  MeiBu
+//  BaseNavigationController.swift
+//  XianHui
 //
-//  Created by Seppuu on 16/7/13.
+//  Created by jidanyu on 2016/11/4.
 //  Copyright © 2016年 mybook. All rights reserved.
 //
 
 import UIKit
+import Kingfisher
 
-class NavigationController: UINavigationController {
+class BaseNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.navigationBar.isTranslucent = true
         self.navigationBar.barTintColor = UIColor.navBarColor()
         self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         self.navigationBar.tintColor = UIColor.white
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
@@ -35,6 +36,12 @@ class NavigationController: UINavigationController {
             viewController.hidesBottomBarWhenPushed = true
         }
         super.pushViewController(viewController, animated: animated)
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //setLeftBarAvatar()
     }
 
 

@@ -74,7 +74,6 @@
 		3771EC941D7555F50064A060 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 3771EC931D7555F50064A060 /* .gitignore */; };
 		3776B8AE1D937FAC00A9C9DB /* CKSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8AD1D937FAC00A9C9DB /* CKSessionService.swift */; };
 		3776B8B21D93A45700A9C9DB /* HelperVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8B11D93A45700A9C9DB /* HelperVC.swift */; };
-		3776B8B61D93A4A700A9C9DB /* ContactList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3776B8B41D93A4A700A9C9DB /* ContactList.storyboard */; };
 		3776B8B71D93A4A700A9C9DB /* ContactListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8B51D93A4A700A9C9DB /* ContactListVC.swift */; };
 		3776B8BA1D93A4BF00A9C9DB /* NoticeListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8B91D93A4BF00A9C9DB /* NoticeListVC.swift */; };
 		3776B8BD1D93A4D700A9C9DB /* MyWorkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8BC1D93A4D700A9C9DB /* MyWorkVC.swift */; };
@@ -90,7 +89,6 @@
 		3776B8E11D93A81D00A9C9DB /* ProjectPlanningVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8DD1D93A81D00A9C9DB /* ProjectPlanningVC.swift */; };
 		3776B90B1D93A83900A9C9DB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8E31D93A83900A9C9DB /* BaseViewController.swift */; };
 		3776B90C1D93A83900A9C9DB /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8E41D93A83900A9C9DB /* BaseWebViewController.swift */; };
-		3776B90D1D93A83900A9C9DB /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8E51D93A83900A9C9DB /* NavigationController.swift */; };
 		3776B90E1D93A83900A9C9DB /* SegueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8E61D93A83900A9C9DB /* SegueViewController.swift */; };
 		3776B90F1D93A83900A9C9DB /* BaseChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8E91D93A83900A9C9DB /* BaseChartViewController.swift */; };
 		3776B9101D93A83900A9C9DB /* LineChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8EA1D93A83900A9C9DB /* LineChartViewController.swift */; };
@@ -271,6 +269,7 @@
 		37C1F39A1DB9C9410029D776 /* UIImage+ColorAtPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C1F3911DB9C9410029D776 /* UIImage+ColorAtPoint.m */; };
 		37C1F39B1DB9C9410029D776 /* UILabel+ContentSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C1F3931DB9C9410029D776 /* UILabel+ContentSize.m */; };
 		37C710DB1D825D3F000FE4DE /* FTPopOverMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C710DA1D825D3F000FE4DE /* FTPopOverMenu.m */; };
+		37C8CA8D1DCC1E94004F2A40 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8CA8C1DCC1E94004F2A40 /* BaseNavigationController.swift */; };
 		37D46F811D6FD16E00A0BBCE /* GoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D46F7F1D6FD16E00A0BBCE /* GoodCell.swift */; };
 		37D46F821D6FD16E00A0BBCE /* GoodCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D46F801D6FD16E00A0BBCE /* GoodCell.xib */; };
 		37D46F851D6FD46B00A0BBCE /* GoodDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D46F841D6FD46B00A0BBCE /* GoodDetailView.swift */; };
@@ -381,7 +380,6 @@
 		3771EC931D7555F50064A060 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		3776B8AD1D937FAC00A9C9DB /* CKSessionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKSessionService.swift; sourceTree = "<group>"; };
 		3776B8B11D93A45700A9C9DB /* HelperVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperVC.swift; sourceTree = "<group>"; };
-		3776B8B41D93A4A700A9C9DB /* ContactList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ContactList.storyboard; sourceTree = "<group>"; };
 		3776B8B51D93A4A700A9C9DB /* ContactListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactListVC.swift; sourceTree = "<group>"; };
 		3776B8B91D93A4BF00A9C9DB /* NoticeListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticeListVC.swift; sourceTree = "<group>"; };
 		3776B8BC1D93A4D700A9C9DB /* MyWorkVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyWorkVC.swift; sourceTree = "<group>"; };
@@ -397,7 +395,6 @@
 		3776B8DD1D93A81D00A9C9DB /* ProjectPlanningVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectPlanningVC.swift; sourceTree = "<group>"; };
 		3776B8E31D93A83900A9C9DB /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		3776B8E41D93A83900A9C9DB /* BaseWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWebViewController.swift; sourceTree = "<group>"; };
-		3776B8E51D93A83900A9C9DB /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		3776B8E61D93A83900A9C9DB /* SegueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueViewController.swift; sourceTree = "<group>"; };
 		3776B8E91D93A83900A9C9DB /* BaseChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseChartViewController.swift; sourceTree = "<group>"; };
 		3776B8EA1D93A83900A9C9DB /* LineChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChartViewController.swift; sourceTree = "<group>"; };
@@ -608,6 +605,7 @@
 		37C1F3941DB9C9410029D776 /* EBForeNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EBForeNotification.h; sourceTree = "<group>"; };
 		37C710D91D825D3F000FE4DE /* FTPopOverMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPopOverMenu.h; sourceTree = "<group>"; };
 		37C710DA1D825D3F000FE4DE /* FTPopOverMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPopOverMenu.m; sourceTree = "<group>"; };
+		37C8CA8C1DCC1E94004F2A40 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		37D46F7F1D6FD16E00A0BBCE /* GoodCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodCell.swift; sourceTree = "<group>"; };
 		37D46F801D6FD16E00A0BBCE /* GoodCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoodCell.xib; sourceTree = "<group>"; };
 		37D46F841D6FD46B00A0BBCE /* GoodDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodDetailView.swift; sourceTree = "<group>"; };
@@ -989,7 +987,6 @@
 		3776B8B31D93A4A700A9C9DB /* ContactListVC */ = {
 			isa = PBXGroup;
 			children = (
-				3776B8B41D93A4A700A9C9DB /* ContactList.storyboard */,
 				3776B8B51D93A4A700A9C9DB /* ContactListVC.swift */,
 			);
 			path = ContactListVC;
@@ -1119,10 +1116,10 @@
 			children = (
 				3776B8E31D93A83900A9C9DB /* BaseViewController.swift */,
 				3776B8E41D93A83900A9C9DB /* BaseWebViewController.swift */,
-				3776B8E51D93A83900A9C9DB /* NavigationController.swift */,
 				3776B8E61D93A83900A9C9DB /* SegueViewController.swift */,
 				37A81FC11D9E0DE1002720D3 /* BaseTableViewController.swift */,
 				37A81FC41D9E2EC2002720D3 /* BaseProfileViewController.swift */,
+				37C8CA8C1DCC1E94004F2A40 /* BaseNavigationController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -2196,7 +2193,6 @@
 			files = (
 				37BAB9A61D3E1059001E4680 /* SubscriptionTopCell.xib in Resources */,
 				3776B91F1D93A83900A9C9DB /* TaskList.storyboard in Resources */,
-				3776B8B61D93A4A700A9C9DB /* ContactList.storyboard in Resources */,
 				37BAB9781D3E1059001E4680 /* AddFriendSearchCell.xib in Resources */,
 				37EA56951D3E0A7000D63498 /* LaunchScreen.storyboard in Resources */,
 				372962991D40AF6500A947B4 /* BKPasscodeView.strings in Resources */,
@@ -2413,7 +2409,6 @@
 				37D46F851D6FD46B00A0BBCE /* GoodDetailView.swift in Sources */,
 				37A00DAF1DC1A06700E00CA7 /* VoiceRecordSampleView.swift in Sources */,
 				371041F21DC09C6F00BE20F9 /* LTInfiniteScrollView.swift in Sources */,
-				3776B90D1D93A83900A9C9DB /* NavigationController.swift in Sources */,
 				378B17761D6C4A7B00758C13 /* Production.swift in Sources */,
 				37BAB9D41D3E11B1001E4680 /* README.md in Sources */,
 				37BAB9791D3E1059001E4680 /* AlbumSelectCell.swift in Sources */,
@@ -2423,6 +2418,7 @@
 				371041ED1DC09C0E00BE20F9 /* PalauDefaultsArrayEntry.swift in Sources */,
 				37BAB8E91D3E1045001E4680 /* UIViewController+CYLTabBarControllerExtention.m in Sources */,
 				3724809A1D8151CD00B95C54 /* LCChatKitExample+Setting.m in Sources */,
+				37C8CA8D1DCC1E94004F2A40 /* BaseNavigationController.swift in Sources */,
 				3776B9331D93AC5B00A9C9DB /* ScheduleVC.swift in Sources */,
 				37BAB8BD1D3E1025001E4680 /* PhoneNumbers.swift in Sources */,
 				37BAB8A81D3E101C001E4680 /* Dictionary+DD.swift in Sources */,
@@ -2608,7 +2604,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "01fdb359-b1e3-4309-a8e6-56aa18a99b27";
@@ -2653,7 +2649,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "01cdd846-9331-4ff1-994b-910f569a8f04";
 				SDKROOT = iphoneos;

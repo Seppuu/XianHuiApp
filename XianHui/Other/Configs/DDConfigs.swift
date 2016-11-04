@@ -97,6 +97,22 @@ var getERPLogInStatusUrl:String {
 }
 
 
+///即时通讯
+
+//获取最近会话ID列表(包含系统消息)
+var GetConversationListUrl:String {
+    return DDBaseUrl + "/rest/employee/getconversationlist"
+}
+
+
+//保存最近会话ID列表(包含系统消息)
+var SaveConversationListUrl:String {
+    return DDBaseUrl + "/rest/employee/setconversationlist"
+}
+
+
+
+
 /// 日报表
 
 //获取日报表峰值

@@ -11,4 +11,6 @@ import ChatKit
 
 class MessageListCell: LCCKConversationListCell {
 
+    
+    
 }

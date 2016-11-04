@@ -685,6 +685,36 @@ extension NetworkManager {
     }
 }
 
+//及时通讯
+extension NetworkManager {
+    
+    
+    func getConversationList(_ completion:@escaping DDResultHandler) {
+        let urlString = GetConversationListUrl
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!
+        ]
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+    }
+    
+    
+    func saveConversationListwith(convIds ids:String,completion:@escaping DDResultHandler) {
+        let urlString = SaveConversationListUrl
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!,
+            "conv_id":ids
+        ]
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+    }
+    
+    
+    
+}
+
 //MARK:系统管理
 extension NetworkManager {
     

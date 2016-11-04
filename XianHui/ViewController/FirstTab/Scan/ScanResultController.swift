@@ -13,7 +13,7 @@ import MBProgressHUD
 
 //扫码成功界面
 
-var MyBookLogInToken = ""
+
 
 class ScanResultController: UIViewController {
 
@@ -85,7 +85,7 @@ class ScanResultController: UIViewController {
                     
                     if success == true {
                         LCCKUtil.hideProgress()
-                        MyBookLogInToken = qrCode
+                        Defaults.MyBookLogInToken.value = qrCode
                         self.backToTopViewController()
                         
                     }
@@ -105,11 +105,12 @@ class ScanResultController: UIViewController {
         }
         else {
             LCCKUtil.showProgressText("退出中", duration: 10.0)
-            NetworkManager.sharedManager.logOutERPWith(MyBookLogInToken, completion: { (success, json, error) in
+            let code = Defaults.MyBookLogInToken.value
+            NetworkManager.sharedManager.logOutERPWith(code!, completion: { (success, json, error) in
                 
                 if success == true {
                     LCCKUtil.hideProgress()
-                    MyBookLogInToken = ""
+                    Defaults.MyBookLogInToken.clear()
                     self.backToTopViewController()
                     
                 }

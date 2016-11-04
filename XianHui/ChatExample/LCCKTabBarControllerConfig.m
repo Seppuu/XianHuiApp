@@ -65,7 +65,7 @@
     });
     
     self.firstViewController = firstViewController;
-    NavigationController *firstNavigationController = [[NavigationController alloc]
+    BaseNavigationController *firstNavigationController = [[BaseNavigationController alloc]
                                                        initWithRootViewController:firstViewController];
     
     //联系人
@@ -84,12 +84,12 @@
 //    [secondViewController setDeleteContactCallback:^BOOL(UIViewController *viewController, NSString *peerId) {
 //        return [[LCCKContactManager defaultManager] removeContactForPeerId:peerId];
 //    }];
-    NavigationController *secondNavigationController = [[NavigationController alloc]
+    BaseNavigationController *secondNavigationController = [[BaseNavigationController alloc]
                                                         initWithRootViewController:secondViewController];
     
     //Mine VC
     UserCentreVC *thirdVC = [[UserCentreVC alloc] init];
-    NavigationController *thirdNavigationController = [[NavigationController alloc]
+    BaseNavigationController *thirdNavigationController = [[BaseNavigationController alloc]
                                                        initWithRootViewController:thirdVC];
     
     NSArray *viewControllers = @[

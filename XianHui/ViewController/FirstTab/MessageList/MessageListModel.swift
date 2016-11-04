@@ -16,6 +16,4 @@ class MessageListModel: LCCKConversationListViewModel {
         return self.dataArray.count
     }
     
-
-    
 }

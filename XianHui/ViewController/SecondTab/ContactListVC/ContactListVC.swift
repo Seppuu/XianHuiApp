@@ -34,12 +34,7 @@ class ContactListVC: LCCKContactListViewController {
             UIImage(named: "paperPencil")!
         ]
         
-        //setTableView()
-        
         super.viewDidLoad()
-        
-        //self.tableView.layoutMargins = UIEdgeInsetsMake(0, 64, 0, 0)
-        //setTopView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(ContactListVC.changeAllContacts), name: NSNotification.Name(rawValue: accountHasChangedNoti), object: nil)
         

@@ -24,6 +24,105 @@ class ChatKitExample: LCChatKitExample {
         super.exampleInit()
         
         addCustomerCellIntoMessageList()
+        
+        addSaveConvIdNoti()
+        
+    }
+    
+    
+    //监听,LCCKNotificationConversationListDataSourceUpdated来获取最新的最近消息列表IDs.保存至服务器
+    func addSaveConvIdNoti() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(ChatKitExample.saveConversationListID(_:)), name: NSNotification.Name(rawValue: LCCKNotificationConversationListDataSourceUpdated), object: nil)
+    }
+    
+    func saveConversationListID(_ noti:Notification) {
+        
+        guard let conversationService  = noti.object as? LCCKConversationService else {return}
+        
+        guard let convs = conversationService.allRecentConversations() as? [AVIMConversation] else {return}
+        
+        var idsParam = ""
+        
+        for conv in convs {
+            
+            guard let id = conv.conversationId else {return}
+            idsParam += id + ","
+        }
+        
+        idsParam.characters.removeLast()
+        
+        NetworkManager.sharedManager.saveConversationListwith(convIds: idsParam) { (success, json, error) in
+            
+            if success == true {
+                
+            }
+            else {
+                
+            }
+        }
+        
+    }
+    
+    public class func updateMessageListVC() {
+        
+        
+//        if isFirstLaunch == true {
+//            
+//        }
+//        else {
+//            return
+//        }
+//        
+        NetworkManager.sharedManager.getConversationList { (success, json, error) in
+            
+            if success == true {
+                var convIDs = [String]()
+                if let datas = json?.array {
+                    for data in datas {
+                        if let id = data["conv_id"].string {
+                            
+                            convIDs.append(id)
+                            
+                        }
+                    }
+                    
+                    self.updateConvsListInLocal(with:convIDs)
+                }
+                
+            }
+            else {
+                
+            }
+        }
+        
+        
+
+        
+    }
+    
+    class func updateConvsListInLocal(with conversationIDs:[String]) {
+        
+        let idSet = NSSet(array: conversationIDs)
+        let param = idSet as! Set<String>
+        LCChatKit.sharedInstance().conversationService.fetchConversations(withConversationIds: param) { (results, error) in
+            
+            if error == nil {
+                if let convs = results as? [AVIMConversation] {
+                    for conv in convs.reversed() {
+                        LCChatKit.sharedInstance().conversationService.insertRecentConversation(conv)
+                    }
+                    
+                }
+            }
+            else {
+                
+            }
+            
+        }
+
+
+        
     }
     
     func addCustomerCellIntoMessageList() {
@@ -48,7 +147,7 @@ class ChatKitExample: LCChatKitExample {
                     
                     if let attr = lastMessage.attributes {
                         
-                        if let noticeId = attr["notice_id"] as? String {
+                        if let _ = attr["notice_id"] as? String {
                             messageCell?.messageTextLabel.text = lastMessage.text
                             
                             //因为ChatKit中将系统消息按群聊处理了,所以这了对文本做些处理
