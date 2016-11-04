@@ -49,6 +49,9 @@ class ChatKitExample: LCChatKitExample {
             guard let id = conv.conversationId else {return}
             idsParam += id + ","
         }
+        if convs.count == 0 {
+           return
+        }
         
         idsParam.characters.removeLast()
         
@@ -96,9 +99,6 @@ class ChatKitExample: LCChatKitExample {
             }
         }
         
-        
-
-        
     }
     
     class func updateConvsListInLocal(with conversationIDs:[String]) {
@@ -108,6 +108,16 @@ class ChatKitExample: LCChatKitExample {
         LCChatKit.sharedInstance().conversationService.fetchConversations(withConversationIds: param) { (results, error) in
             
             if error == nil {
+                
+                /*我直接更新最近联系人会话，应该可以吧，因为 [[LCCKConversationService sharedInstance] updateRecentConversation:objects];
+                 这个方法最后会发送一个通知， [[NSNotificationCenter defaultCenter] postNotificationName:LCCKNotificationConversationListDataSourceUpdated object:self]，
+                 然后LCCKConversationListViewModel会Refresh tableView*/
+                LCChatKit.sharedInstance().conversationService.updateRecentConversation(results, shouldRefreshWhenFinished: true)
+//                NotificationCenter.default.post(name: NSNotification.Name(rawValue: LCCKNotificationConversationListDataSourceUpdated), object: nil)
+                
+                
+               // [[LCCKConversationService sharedInstance] updateRecentConversation:objects];
+                
                 if let convs = results as? [AVIMConversation] {
                     for conv in convs.reversed() {
                         LCChatKit.sharedInstance().conversationService.insertRecentConversation(conv)

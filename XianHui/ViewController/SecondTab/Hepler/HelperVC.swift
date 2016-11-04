@@ -200,11 +200,12 @@ extension HelperVC:UITableViewDelegate,UITableViewDataSource {
         if no.hasRead == true {
             
             cell.statusLabel.text = "已读"
-            cell.statusLabel.textColor = UIColor ( red: 1.0, green: 0.2072, blue: 0.2616, alpha: 1.0 )
+            cell.statusLabel.textColor = UIColor ( red: 0.0019, green: 0.6729, blue: 0.003, alpha: 1.0 )
+            
         }
         else {
             cell.statusLabel.text = "未读"
-            cell.statusLabel.textColor = UIColor ( red: 0.0019, green: 0.6729, blue: 0.003, alpha: 1.0 )
+            cell.statusLabel.textColor = UIColor ( red: 1.0, green: 0.2072, blue: 0.2616, alpha: 1.0 )
         }
         
         return cell
