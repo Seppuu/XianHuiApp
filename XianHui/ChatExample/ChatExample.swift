@@ -410,10 +410,12 @@ class ChatKitExample: LCChatKitExample {
             
             if conversation?.createAt == nil {return}
             
-            if ((conversation?.members!.count)! > 2) {
+            if conversation?.members == nil {return}
+            
+            if ((conversation?.members?.count)! > 2) {
                 super.lcck_setupOpenConversation()
             }
-            else if conversation?.members!.count == 2 {
+            else if conversation?.members?.count == 2 {
                 
                 aConversationController?.configureBarButtonItemStyle(.singleProfile, action: { (sender, event) in
                     
