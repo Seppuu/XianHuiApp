@@ -327,7 +327,7 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
                     cell.typeLabel.text = "无"
                 }
                 
-                cell.accessoryType = .disclosureIndicator
+                cell.accessoryView = UIImageView.xhAccessoryView()
             }
             
             return cell

@@ -354,7 +354,7 @@ extension PieChartViewController:UITableViewDelegate,UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! CertificateCell
         
-        cell.accessoryType = .disclosureIndicator
+        cell.accessoryView = UIImageView.xhAccessoryView()
         cell.leftLabel.text = dataOfPieChart[(indexPath as NSIndexPath).row]
         
         cell.rightLabel.text = "熟练"

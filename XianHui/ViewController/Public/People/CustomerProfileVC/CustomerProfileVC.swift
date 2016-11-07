@@ -189,25 +189,25 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
                 let currentUser = User.currentUser()
                 if currentUser?.reportType == 3 || currentUser?.reportType == 4 {
                     //当用户是店长或者拉板时,可以更换顾问
-                    cell.accessoryType = .disclosureIndicator
+                    cell.accessoryView = UIImageView.xhAccessoryView()
                 }
                 else {
-                    cell.accessoryType = .none
+                    cell.accessoryView = UIImageView.xhAccessoryViewClear()
                 }
                 
                 cell.typeLabel.text = customer.customerManager
                 
             }
             else if (indexPath as NSIndexPath).row == 1 {
-                cell.accessoryType = .disclosureIndicator
+                cell.accessoryView = UIImageView.xhAccessoryView()
                 cell.typeLabel.text = "共\(customer.cardTotal)张"
             }
             else if (indexPath as NSIndexPath).row == 2 {
-                cell.accessoryType = .disclosureIndicator
+                cell.accessoryView = UIImageView.xhAccessoryView()
                 cell.typeLabel.text = customer.lastConsumeDate == nil ? "暂无" : customer.lastConsumeDate
             }
             else if (indexPath as NSIndexPath).row == 3 {
-                cell.accessoryType = .disclosureIndicator
+                cell.accessoryView = UIImageView.xhAccessoryView()
                 if customer.planned == "1" {
                     cell.typeLabel.text = "已计划"
                 }
@@ -217,11 +217,11 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
                 
             }
             else if (indexPath as NSIndexPath).row == 4 {
-                cell.accessoryType = .disclosureIndicator
+                cell.accessoryView = UIImageView.xhAccessoryView()
                 cell.typeLabel.text = customer.scheduleTime == "" ? "无新预约" : customer.scheduleTime
             }
             else {
-                cell.accessoryType = .disclosureIndicator
+                cell.accessoryView = UIImageView.xhAccessoryView()
                 cell.typeLabel.text = "服务状态"
             }
             

@@ -60,7 +60,7 @@ class Customer: NSObject {
     var scheduleStartTime = ""
     //档案编号
     var number = ""
-    var vipStar = "VIP6"
+    var vipStar = "暂无"
     var sex   = "女"
     var birthDay = "1981.09.22"
     //卡包数量

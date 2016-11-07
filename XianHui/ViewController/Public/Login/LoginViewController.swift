@@ -193,8 +193,8 @@ class LoginViewController: UIViewController {
         loginButton.snp.makeConstraints { (make) in
             make.top.equalTo(passWordTextField.snp.bottom).offset(30)
             make.width.equalTo(buttonWidth)
-            make.left.equalTo(view).offset(10)
-            make.right.equalTo(view).offset(-10)
+            make.left.equalTo(view).offset(15)
+            make.right.equalTo(view).offset(-15)
             make.height.equalTo(40)
         }
         

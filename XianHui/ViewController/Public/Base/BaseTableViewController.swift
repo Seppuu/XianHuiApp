@@ -121,11 +121,13 @@ extension BaseTableViewController:UITableViewDelegate,UITableViewDataSource {
         cell?.typeLabel.text = baseModel.desc
         cell?.typeLabel.textAlignment = .right
         
+        
+        
         if baseModel.hasList == true {
-            cell?.accessoryType = .disclosureIndicator
+            cell?.accessoryView = UIImageView.xhAccessoryView()
         }
         else {
-            cell?.accessoryType = .none
+            cell?.accessoryView = UIImageView.xhAccessoryViewClear()
         }
         
         return cell!

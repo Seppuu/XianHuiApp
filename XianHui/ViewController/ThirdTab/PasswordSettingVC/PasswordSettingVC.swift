@@ -88,7 +88,7 @@ extension PasswordSettingVC:UITableViewDelegate,UITableViewDataSource {
         else {
             
             let cell = UITableViewCell()
-            cell.accessoryType = .disclosureIndicator
+            cell.accessoryView = UIImageView.xhAccessoryView()
             cell.textLabel?.text = titles[(indexPath as NSIndexPath).item]
             
             return cell

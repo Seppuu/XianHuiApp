@@ -82,7 +82,7 @@
         return customCell;
     }
     LCCKConversationListCell *cell = [LCCKConversationListCell dequeueOrCreateCellByTableView:tableView];
-    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [tableView setSeparatorColor:[[LCCKSettingService sharedInstance] defaultThemeColorForKey:@"TableView-SeparatorColor"]];
     __block NSString *displayName = nil;
     __block NSURL *avatarURL = nil;
@@ -122,6 +122,7 @@
     if (configureCellBlock) {
         configureCellBlock(cell, tableView, indexPath, conversation);
     }
+    
     return cell;
 }
 

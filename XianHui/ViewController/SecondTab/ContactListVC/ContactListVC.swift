@@ -13,12 +13,6 @@ import MJRefresh
 let accountHasChangedNoti = "accountHasChangedNoti"
 
 class ContactListVC: LCCKContactListViewController {
-
-    //var searchController: UISearchController!
-    
-    var topTableView:UITableView!
-    
-    var topView:UIView!
     
     var topTitle = ["助手","提醒","工作"]
     
@@ -148,7 +142,7 @@ extension ContactListVC {
                 let actualIndexPath = IndexPath(item: (indexPath as NSIndexPath).row, section: (indexPath as NSIndexPath).section - 1)
                 let cell = super.tableView(tableView, cellForRowAt: actualIndexPath)
                 cell.layoutMargins = UIEdgeInsetsMake(0, 64, 0, 0)
-                print((indexPath as NSIndexPath).row)
+               // print((indexPath as NSIndexPath).row)
                 return cell
             }
         }

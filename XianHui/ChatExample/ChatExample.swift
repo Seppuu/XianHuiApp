@@ -128,29 +128,17 @@ class ChatKitExample: LCChatKitExample {
             else {
                 
             }
-            
         }
-
-
-        
     }
     
     func addCustomerCellIntoMessageList() {
         
-//        LCChatKit.sharedInstance().conversationListService.cellForRowBlock = {
-//            (tableView,indexPath,conversation)  in
-//            
-//            let cellId = "cell"
-//            let cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
-//            cell.textLabel?.text = "这是一个自定义cell."
-//            
-//            return cell
-//        }
-//
-//        
-        
         LCChatKit.sharedInstance().conversationListService.configureCellBlock = {
             (cell,tableView,indexPath,conversation) in
+            tableView?.separatorStyle = .singleLine
+            //tableView?.cellLayoutMarginsFollowReadableWidth = false
+            tableView?.separatorInset = UIEdgeInsetsMake(0, 64, 0, 0)
+            cell?.layoutMargins = UIEdgeInsetsMake(0, 64, 0, 0)
             let messageCell = cell as? LCCKConversationListCell
             if let conv = conversation {
                 if let lastMessage = conv.lcck_lastMessage {
@@ -177,7 +165,7 @@ class ChatKitExample: LCChatKitExample {
                                 
                             }
                             
-                            
+        
                         }
                     }
                     

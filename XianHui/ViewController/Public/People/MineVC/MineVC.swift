@@ -67,7 +67,7 @@ extension MineVC:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell()
-        cell.accessoryType = .disclosureIndicator
+        cell.accessoryView = UIImageView.xhAccessoryView()
         cell.textLabel?.text = titles[(indexPath as NSIndexPath).item]
         
         return cell

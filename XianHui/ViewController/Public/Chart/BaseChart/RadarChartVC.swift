@@ -257,13 +257,15 @@ extension RadarChartVC:UITableViewDelegate,UITableViewDataSource {
         
         cell?.leftLabel.text = baseModel.name
         cell?.typeLabel.text = baseModel.desc
-        cell?.typeLabel.textAlignment = .right
+        cell?.typeLabel.textAlignment = .left
         
         if baseModel.hasList == true {
-            cell?.accessoryType = .disclosureIndicator
+            
+            cell?.accessoryView = UIImageView.xhAccessoryView()
         }
         else {
-            cell?.accessoryType = .none
+            
+            cell?.accessoryView = UIImageView.xhAccessoryViewClear()
         }
         
         return cell!

@@ -121,6 +121,7 @@
 		378E07671D461EC000B67621 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378E07661D461EC000B67621 /* BalloonMarker.swift */; };
 		378E076A1D4757CC00B67621 /* XHBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378E07691D4757CC00B67621 /* XHBarChartView.swift */; };
 		378F56911DAB790800D584EF /* HelpCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F56901DAB790800D584EF /* HelpCenterViewController.swift */; };
+		379C1E551DD02313006F8EA0 /* UIImageView+DD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C1E541DD02313006F8EA0 /* UIImageView+DD.swift */; };
 		379C737C1D9CA20300B41BA6 /* CustomerManagerSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C737B1D9CA20300B41BA6 /* CustomerManagerSelectVC.swift */; };
 		379C737E1D9CA53400B41BA6 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C737D1D9CA53400B41BA6 /* Manager.swift */; };
 		379C73811D9CAC3100B41BA6 /* CustomerCardListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C73801D9CAC3100B41BA6 /* CustomerCardListVC.swift */; };
@@ -427,6 +428,7 @@
 		378E07661D461EC000B67621 /* BalloonMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
 		378E07691D4757CC00B67621 /* XHBarChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHBarChartView.swift; sourceTree = "<group>"; };
 		378F56901DAB790800D584EF /* HelpCenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpCenterViewController.swift; sourceTree = "<group>"; };
+		379C1E541DD02313006F8EA0 /* UIImageView+DD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+DD.swift"; sourceTree = "<group>"; };
 		379C737B1D9CA20300B41BA6 /* CustomerManagerSelectVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomerManagerSelectVC.swift; path = ../../../SecondTab/MyWorkVC/CustomerManagerSelectVC.swift; sourceTree = "<group>"; };
 		379C737D1D9CA53400B41BA6 /* Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		379C73801D9CAC3100B41BA6 /* CustomerCardListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerCardListVC.swift; sourceTree = "<group>"; };
@@ -1319,6 +1321,13 @@
 			path = Web;
 			sourceTree = "<group>";
 		};
+		379C1E531DD022C4006F8EA0 /* XHAccessoryView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = XHAccessoryView;
+			sourceTree = "<group>";
+		};
 		379C737F1D9CAC1400B41BA6 /* Customer */ = {
 			isa = PBXGroup;
 			children = (
@@ -1458,6 +1467,7 @@
 				37B7914F1D51D4230032C164 /* UITableView+DD.swift */,
 				37FF8EDF1D90D58900676780 /* NSUserDefaults+DD.swift */,
 				311DC2DA1D9A09E1006EC8AB /* NSDate+DD.swift */,
+				379C1E541DD02313006F8EA0 /* UIImageView+DD.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1564,6 +1574,7 @@
 		37BAB8F21D3E1059001E4680 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				379C1E531DD022C4006F8EA0 /* XHAccessoryView */,
 				37A00DAB1DC1A06700E00CA7 /* AudioWaves */,
 				3771DD121DB0B10300636BCB /* XHSideFilterView */,
 				37D46F831D6FD45100A0BBCE /* GoodDetailView */,
@@ -2489,6 +2500,7 @@
 				37BAB8C21D3E1040001E4680 /* NetworkManager.swift in Sources */,
 				371041EB1DC09C0E00BE20F9 /* PalauDefaultable.swift in Sources */,
 				3776B9211D93A83900A9C9DB /* CustomerConsumeListVC.swift in Sources */,
+				379C1E551DD02313006F8EA0 /* UIImageView+DD.swift in Sources */,
 				37B79B501D7D48E200340C17 /* CustomerLargeCell.swift in Sources */,
 				37C1F39A1DB9C9410029D776 /* UIImage+ColorAtPoint.m in Sources */,
 				37BAB9A91D3E1059001E4680 /* UserAvatarCell.swift in Sources */,
