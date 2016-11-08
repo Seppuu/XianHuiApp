@@ -134,7 +134,9 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
                 cell.complete()
                 cell.dimView.alpha = 0.3
                 cell.hudView.alpha = 1.0
-                cell.avatarView.image = imageUploading
+                if let url = URL(string: (user?.avatarURL)!) {
+                    cell.avatarView.kf.setImage(with: url)
+                }
                 cell.hudView.startAnimating()
                 
             }

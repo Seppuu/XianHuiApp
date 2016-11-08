@@ -38,12 +38,13 @@ class XHStackedBarChart: UIView,ChartViewDelegate {
         
         chartView.chartDescription?.enabled = false
         chartView.backgroundColor = chartBackColor
-        chartView.maxVisibleCount = 40
+        chartView.maxVisibleCount = 7
         chartView.pinchZoomEnabled = false
         chartView.drawGridBackgroundEnabled = false
         chartView.drawBarShadowEnabled = false
         chartView.drawValueAboveBarEnabled = false
         chartView.highlightFullBarEnabled = false
+        
     
         
         let leftAxis = chartView.leftAxis
@@ -86,11 +87,6 @@ class XHStackedBarChart: UIView,ChartViewDelegate {
     
         for i in 0 ..< count {
             
-           // let  mult = (range + 1)
-//            let val1 = Double(arc4random_uniform(UInt32(mult))) + mult / 3
-//            let val2 = Double(arc4random_uniform(UInt32(mult))) + mult / 3
-//            let val3 = Double(arc4random_uniform(UInt32(mult))) + mult / 3
-            
             let val1 = YAxisValue
             let val2 = YAxisValue
             let val3 = YAxisValue
@@ -131,7 +127,8 @@ class XHStackedBarChart: UIView,ChartViewDelegate {
             data.setDrawValues(false)
             //data.setValueFormatter(DefaultValueFormatter(formatter: formatter))
             data.setValueTextColor(UIColor.black)
-            
+            //这个值是间隔百分比.最大值1.0 默认0.85
+            data.barWidth = 0.5
             chartView.fitBars = true
             chartView.data = data
         }
@@ -148,10 +145,10 @@ class WeekAxisValueFormatter: NSObject,IAxisValueFormatter {
     var weeks = ["周一","周二","周三","周四","周五","周六","周日"]
     
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-            let index = Int(value)
         
-            return weeks[index]
-        
+        let index = Int(value)
+
+        return weeks[index]
     }
 }
 

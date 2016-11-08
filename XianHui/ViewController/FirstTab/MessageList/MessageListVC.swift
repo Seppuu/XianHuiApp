@@ -82,11 +82,6 @@ class MessageListVC: LCCKConversationListViewController,DZNEmptyDataSetSource, D
         
         ChatKitExample.updateMessageListVC()
         
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         let container = UIView(frame: self.tableView.frame)
         container.backgroundColor = UIColor.white
         let chartView = XHStackedBarChart(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 300))
@@ -95,6 +90,12 @@ class MessageListVC: LCCKConversationListViewController,DZNEmptyDataSetSource, D
         container.addSubview(chartView)
         self.tableView.addSubview(container)
         chartView.updateChartData()
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
     }
     
     func setLeftBarAvatar() {
