@@ -78,9 +78,23 @@ class MessageListVC: LCCKConversationListViewController,DZNEmptyDataSetSource, D
         self.tableView.emptyDataSetSource = self
         self.tableView.emptyDataSetDelegate = self
         
-        setLeftBarAvatar()
+        //setLeftBarAvatar()
         
         ChatKitExample.updateMessageListVC()
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let container = UIView(frame: self.tableView.frame)
+        container.backgroundColor = UIColor.white
+        let chartView = XHStackedBarChart(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 300))
+        chartView.center = container.center
+        
+        container.addSubview(chartView)
+        self.tableView.addSubview(container)
+        chartView.updateChartData()
     }
     
     func setLeftBarAvatar() {

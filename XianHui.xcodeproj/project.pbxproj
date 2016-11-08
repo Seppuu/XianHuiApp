@@ -55,6 +55,7 @@
 		372480ED1D8151EF00B95C54 /* LCCKContactManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 372480D31D8151EF00B95C54 /* LCCKContactManager.m */; };
 		372480EE1D8151EF00B95C54 /* NSObject+LCCKHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 372480D71D8151EF00B95C54 /* NSObject+LCCKHUD.m */; };
 		372962991D40AF6500A947B4 /* BKPasscodeView.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3729629B1D40AF6500A947B4 /* BKPasscodeView.strings */; };
+		372FAB0A1DD15F96007F1CA0 /* XHStackedChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372FAB091DD15F96007F1CA0 /* XHStackedChartViewController.swift */; };
 		3730EC571DC717E80071E715 /* TKRadarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730EC561DC717E80071E715 /* TKRadarChart.swift */; };
 		37367B6F1D6AD96B00479E39 /* CustomerCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37367B6E1D6AD96B00479E39 /* CustomerCardView.swift */; };
 		37367B711D6ADA2100479E39 /* CustomerCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37367B701D6ADA2100479E39 /* CustomerCard.xib */; };
@@ -278,6 +279,7 @@
 		37D811DB1DAB3E0700A5B037 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D811DA1DAB3E0700A5B037 /* GuideViewController.swift */; };
 		37D811DD1DAB437E00A5B037 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37D811DC1DAB437E00A5B037 /* Assets.xcassets */; };
 		37DF88E51D8FD3D700B8DB73 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DF88E41D8FD3D700B8DB73 /* UserManager.swift */; };
+		37E754CA1DD05BBD0027A7A1 /* XHStackedBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E754C91DD05BBD0027A7A1 /* XHStackedBarChart.swift */; };
 		37E78A9A1D41F198007425A3 /* OTPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E78A971D41F198007425A3 /* OTPageScrollView.m */; };
 		37E78A9B1D41F198007425A3 /* OTPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E78A991D41F198007425A3 /* OTPageView.m */; };
 		37EA568B1D3E0A7000D63498 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EA568A1D3E0A7000D63498 /* AppDelegate.swift */; };
@@ -362,6 +364,7 @@
 		372480D61D8151EF00B95C54 /* NSObject+LCCKHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+LCCKHUD.h"; sourceTree = "<group>"; };
 		372480D71D8151EF00B95C54 /* NSObject+LCCKHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+LCCKHUD.m"; sourceTree = "<group>"; };
 		3729629A1D40AF6500A947B4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BKPasscodeView.strings"; sourceTree = "<group>"; };
+		372FAB091DD15F96007F1CA0 /* XHStackedChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHStackedChartViewController.swift; sourceTree = "<group>"; };
 		3730EC561DC717E80071E715 /* TKRadarChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKRadarChart.swift; sourceTree = "<group>"; };
 		37367B6E1D6AD96B00479E39 /* CustomerCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerCardView.swift; sourceTree = "<group>"; };
 		37367B701D6ADA2100479E39 /* CustomerCard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomerCard.xib; sourceTree = "<group>"; };
@@ -615,6 +618,7 @@
 		37D811DA1DAB3E0700A5B037 /* GuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
 		37D811DC1DAB437E00A5B037 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		37DF88E41D8FD3D700B8DB73 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		37E754C91DD05BBD0027A7A1 /* XHStackedBarChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHStackedBarChart.swift; sourceTree = "<group>"; };
 		37E78A961D41F198007425A3 /* OTPageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPageScrollView.h; sourceTree = "<group>"; };
 		37E78A971D41F198007425A3 /* OTPageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPageScrollView.m; sourceTree = "<group>"; };
 		37E78A981D41F198007425A3 /* OTPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPageView.h; sourceTree = "<group>"; };
@@ -1055,6 +1059,7 @@
 				3776B8C81D93A62E00A9C9DB /* MessageListCell.swift */,
 				3776B8C91D93A62E00A9C9DB /* MessageListModel.swift */,
 				3776B8CA1D93A62E00A9C9DB /* MessageListVC.swift */,
+				372FAB091DD15F96007F1CA0 /* XHStackedChartViewController.swift */,
 			);
 			path = MessageList;
 			sourceTree = "<group>";
@@ -1321,13 +1326,6 @@
 			path = Web;
 			sourceTree = "<group>";
 		};
-		379C1E531DD022C4006F8EA0 /* XHAccessoryView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = XHAccessoryView;
-			sourceTree = "<group>";
-		};
 		379C737F1D9CAC1400B41BA6 /* Customer */ = {
 			isa = PBXGroup;
 			children = (
@@ -1574,7 +1572,7 @@
 		37BAB8F21D3E1059001E4680 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				379C1E531DD022C4006F8EA0 /* XHAccessoryView */,
+				37E754C81DD05BA90027A7A1 /* XHStackedBarChart */,
 				37A00DAB1DC1A06700E00CA7 /* AudioWaves */,
 				3771DD121DB0B10300636BCB /* XHSideFilterView */,
 				37D46F831D6FD45100A0BBCE /* GoodDetailView */,
@@ -2047,6 +2045,14 @@
 			path = Guide;
 			sourceTree = "<group>";
 		};
+		37E754C81DD05BA90027A7A1 /* XHStackedBarChart */ = {
+			isa = PBXGroup;
+			children = (
+				37E754C91DD05BBD0027A7A1 /* XHStackedBarChart.swift */,
+			);
+			path = XHStackedBarChart;
+			sourceTree = "<group>";
+		};
 		37E78A951D41F198007425A3 /* OTPageView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2342,6 +2348,7 @@
 				372480DE1D8151EF00B95C54 /* LCCKVCardView.m in Sources */,
 				379C737C1D9CA20300B41BA6 /* CustomerManagerSelectVC.swift in Sources */,
 				37A81FC51D9E2EC2002720D3 /* BaseProfileViewController.swift in Sources */,
+				37E754CA1DD05BBD0027A7A1 /* XHStackedBarChart.swift in Sources */,
 				372480991D8151CD00B95C54 /* LCChatKitExample.m in Sources */,
 				37BAB9741D3E1059001E4680 /* MenuSheetView.swift in Sources */,
 				37BAB99B1D3E1059001E4680 /* typeCell.swift in Sources */,
@@ -2524,6 +2531,7 @@
 				372463B91D69F4180018CE37 /* Customer.swift in Sources */,
 				376D6D451D59C8E500F9A272 /* ChatExample.swift in Sources */,
 				37DF88E51D8FD3D700B8DB73 /* UserManager.swift in Sources */,
+				372FAB0A1DD15F96007F1CA0 /* XHStackedChartViewController.swift in Sources */,
 				37BAB8F01D3E1045001E4680 /* RESideMenu.m in Sources */,
 				37BAB97B1D3E1059001E4680 /* ChannelCell.swift in Sources */,
 				3776B90C1D93A83900A9C9DB /* BaseWebViewController.swift in Sources */,
