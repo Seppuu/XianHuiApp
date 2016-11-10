@@ -29,6 +29,7 @@ pod 'CryptoSwift'
 pod 'swiftScan', :git => 'https://github.com/CNKCQ/swiftScan.git', :branch => 'Swift3.0'
 
 
+
 end
 
 post_install do |installer|

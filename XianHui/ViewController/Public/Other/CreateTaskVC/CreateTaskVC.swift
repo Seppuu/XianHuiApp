@@ -141,7 +141,7 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             //标题
-            return 1
+            return 3
         }
         else if section == 1 {
             //开始时间,结束时间
@@ -199,22 +199,25 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
         
         if indexPath.section == 0 {
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: self.titleCellId, for: indexPath) as! formCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: timeSelectCellId, for: indexPath) as! typeCell
             
+            cell.accessoryView = UIImageView.xhAccessoryView()
             if (indexPath as NSIndexPath).row == 0 {
                 //标题
-                cell.leftTextField.placeholder = "标题"
-                cell.endEditHandler = { (textField) in
-                    
-                    
-                }
+                cell.leftLabel.text = "范围"
+                cell.typeLabel.text = "全公司"
             }
-//            else {
-//                //位置
-//                cell.leftTextField.placeholder = "位置"
-//                cell.leftTextField.userInteractionEnabled = false
-//                
-//            }
+            if (indexPath as NSIndexPath).row == 1 {
+                //标题
+                cell.leftLabel.text = "类型"
+                cell.typeLabel.text = "现金"
+                
+            }
+            else {
+                //位置
+                cell.leftLabel.text = "目标"
+                cell.typeLabel.text = "150,000"
+            }
             
             return cell
         }

@@ -99,7 +99,9 @@ class TaskListVC: BaseViewController {
 
     func createNewTask() {
         
-        performSegue(withIdentifier: "toCreateVC", sender: nil)
+        let vc = CreateTaskVC()
+        vc.title = "新建任务"
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     
@@ -131,19 +133,10 @@ extension TaskListVC:UITableViewDelegate,UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ConversationCell
         
-        cell.avatarImageView.backgroundColor = UIColor.red
+        cell.layoutMargins = UIEdgeInsetsMake(0, 76, 0, 0)
+        cell.avatarImageView.image = UIImage(named: "TaskIcon")
         cell.nameLabel.text = listOfTask[(indexPath as NSIndexPath).item]
-        cell.chatLabel.text = listOfDetail[(indexPath as NSIndexPath).item]
-        
-        if (indexPath as NSIndexPath).row == 0 {
-            cell.chatLabel.textColor = UIColor.gray
-        }
-        else {
-            cell.chatLabel.textColor = UIColor ( red: 0.0, green: 0.5586, blue: 1.0, alpha: 1.0 )
-        }
-        
-        cell.timeAgoLabel.text = listOftime[(indexPath as NSIndexPath).item]
-        
+       
         return cell
         
     }
@@ -152,6 +145,10 @@ extension TaskListVC:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let vc = TaskDetailVC()
+        vc.title = "进度详细"
+        navigationController?.pushViewController(vc ,animated: true)
         
     }
     

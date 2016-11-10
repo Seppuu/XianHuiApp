@@ -14,18 +14,17 @@ let accountHasChangedNoti = "accountHasChangedNoti"
 
 class ContactListVC: LCCKContactListViewController {
     
-    var topTitle = ["助手","提醒","工作"]
+    var topTitle = ["助手","提醒","工作","进度"]
     
     var topIcon = [UIImage]()
-    
-    var topColors = [UIColor.navBarColor(),UIColor.orange,UIColor.red]
     
     override func viewDidLoad() {
         
         topIcon = [
             UIImage(named: "analyze")!,
             UIImage(named: "bell")!,
-            UIImage(named: "paperPencil")!
+            UIImage(named: "paperPencil")!,
+            UIImage(named: "TaskIcon")!
         ]
         
         super.viewDidLoad()
@@ -101,7 +100,7 @@ extension ContactListVC {
         }
         else {
             if (section == 0) {
-                return 3
+                return topTitle.count
             }
             else {
                 return super.tableView(tableView, numberOfRowsInSection: section - 1)
@@ -171,11 +170,19 @@ extension ContactListVC {
                     
                     
                 }
-                else {
+                else if (indexPath as NSIndexPath).item == 2 {
+                    //工作
                     let vc = MyWorkVC()
                     vc.title = "我的工作"
                     navigationController?.pushViewController(vc, animated: true)
                     
+                    
+                }
+                else {
+                    //任务,进度
+                    let vc = TaskListVC()
+                    vc.title = "进度"
+                    navigationController?.pushViewController(vc, animated: true)
                 }
                 
                 tableView.deselectRow(at: indexPath, animated: true)

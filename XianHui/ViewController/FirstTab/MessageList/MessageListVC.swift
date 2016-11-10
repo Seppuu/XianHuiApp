@@ -82,14 +82,14 @@ class MessageListVC: LCCKConversationListViewController,DZNEmptyDataSetSource, D
         
         ChatKitExample.updateMessageListVC()
         
-        let container = UIView(frame: self.tableView.frame)
-        container.backgroundColor = UIColor.white
-        let chartView = XHStackedBarChart(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 300))
-        chartView.center = container.center
-        
-        container.addSubview(chartView)
-        self.tableView.addSubview(container)
-        chartView.updateChartData()
+//        let container = UIView(frame: self.tableView.frame)
+//        container.backgroundColor = UIColor.white
+//        let chartView = XHStackedBarChart(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 300))
+//        chartView.center = container.center
+//        
+//        container.addSubview(chartView)
+//        self.tableView.addSubview(container)
+//        chartView.updateChartData()
         
     }
     

@@ -67,6 +67,8 @@
 		37367B831D6BFED900479E39 /* chatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37367B811D6BFED900479E39 /* chatTableViewCell.xib */; };
 		37367B861D6C13F900479E39 /* chatSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37367B851D6C13F900479E39 /* chatSectionView.swift */; };
 		37367B881D6C141500479E39 /* chatSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37367B871D6C141500479E39 /* chatSectionView.xib */; };
+		375C6E151DD4480800B208BE /* GTProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375C6E141DD4480800B208BE /* GTProgressBar.swift */; };
+		375C6E171DD4504D00B208BE /* TaskDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375C6E161DD4504D00B208BE /* TaskDetailVC.swift */; };
 		376D6D411D59B37000F9A272 /* RealmUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376D6D401D59B37000F9A272 /* RealmUser.swift */; };
 		376D6D451D59C8E500F9A272 /* ChatExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376D6D441D59C8E500F9A272 /* ChatExample.swift */; };
 		3770DD841DA4FB2200786FB2 /* GoodDetailListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3770DD831DA4FB2200786FB2 /* GoodDetailListVC.swift */; };
@@ -376,6 +378,8 @@
 		37367B811D6BFED900479E39 /* chatTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = chatTableViewCell.xib; sourceTree = "<group>"; };
 		37367B851D6C13F900479E39 /* chatSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = chatSectionView.swift; sourceTree = "<group>"; };
 		37367B871D6C141500479E39 /* chatSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = chatSectionView.xib; sourceTree = "<group>"; };
+		375C6E141DD4480800B208BE /* GTProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTProgressBar.swift; sourceTree = "<group>"; };
+		375C6E161DD4504D00B208BE /* TaskDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailVC.swift; sourceTree = "<group>"; };
 		376D6D401D59B37000F9A272 /* RealmUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmUser.swift; sourceTree = "<group>"; };
 		376D6D441D59C8E500F9A272 /* ChatExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatExample.swift; sourceTree = "<group>"; };
 		3770DD831DA4FB2200786FB2 /* GoodDetailListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodDetailListVC.swift; sourceTree = "<group>"; };
@@ -1186,6 +1190,7 @@
 				3776B8FD1D93A83900A9C9DB /* FirstLaunchRemindVC */,
 				3776B8FF1D93A83900A9C9DB /* MemberListVC */,
 				3776B9011D93A83900A9C9DB /* TaskListVC */,
+				375C6E161DD4504D00B208BE /* TaskDetailVC.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -1494,6 +1499,7 @@
 		37BAB8C41D3E1045001E4680 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				375C6E141DD4480800B208BE /* GTProgressBar.swift */,
 				3730EC561DC717E80071E715 /* TKRadarChart.swift */,
 				37A00DB31DC1E74500E00CA7 /* RAReorderableLayout */,
 				371041FB1DC0A64400BE20F9 /* SwiftString */,
@@ -2392,6 +2398,7 @@
 				37C710DB1D825D3F000FE4DE /* FTPopOverMenu.m in Sources */,
 				3724809B1D8151CD00B95C54 /* LCCKTabBarControllerConfig.m in Sources */,
 				3776B8DE1D93A81D00A9C9DB /* ProdDateSetVC.swift in Sources */,
+				375C6E171DD4504D00B208BE /* TaskDetailVC.swift in Sources */,
 				37BAB8B01D3E101C001E4680 /* UINavigationBar+DD.swift in Sources */,
 				371041E21DC09B9B00BE20F9 /* CAPSPageMenu.swift in Sources */,
 				371430771D9B96C60006A314 /* MyWorkCell.swift in Sources */,
@@ -2504,6 +2511,7 @@
 				37C1F3951DB9C9410029D776 /* EBBannerView.m in Sources */,
 				37BAB9E11D3E124E001E4680 /* DDIMConfig.swift in Sources */,
 				378F56911DAB790800D584EF /* HelpCenterViewController.swift in Sources */,
+				375C6E151DD4480800B208BE /* GTProgressBar.swift in Sources */,
 				37BAB8C21D3E1040001E4680 /* NetworkManager.swift in Sources */,
 				371041EB1DC09C0E00BE20F9 /* PalauDefaultable.swift in Sources */,
 				3776B9211D93A83900A9C9DB /* CustomerConsumeListVC.swift in Sources */,
