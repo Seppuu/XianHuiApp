@@ -90,11 +90,8 @@ extension MemberListVC:UITableViewDelegate,UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! typeCell
         
-        cell.typeLabel.alpha = 0.0
-        cell.leftLabel.alpha = 0.0
-        
         cell.selectionStyle = .default
-        
+         cell.accessoryType = .none
         let id = members[(indexPath as NSIndexPath).row].id
         
         listOfMemberSelected.forEach { (user) in
@@ -104,7 +101,9 @@ extension MemberListVC:UITableViewDelegate,UITableViewDataSource {
             }
         }
         
-        cell.textLabel!.text = members[(indexPath as NSIndexPath).row].displayName
+        cell.leftLabel.text = members[(indexPath as NSIndexPath).row].displayName
+        
+        cell.typeLabel.alpha = 0.0
         
         return cell
     }
@@ -117,7 +116,7 @@ extension MemberListVC:UITableViewDelegate,UITableViewDataSource {
         if cell.accessoryType == .none {
             cell.accessoryType = .checkmark
             
-            let member = members[(indexPath as NSIndexPath).row]
+            let member = members[indexPath.row]
             
             listOfMemberSelected.append(member)
             
@@ -125,7 +124,7 @@ extension MemberListVC:UITableViewDelegate,UITableViewDataSource {
         else {
             cell.accessoryType = .none
             
-            let member = members[(indexPath as NSIndexPath).row]
+            let member = members[indexPath.row]
             
             listOfMemberSelected.forEach({ (user) in
                 

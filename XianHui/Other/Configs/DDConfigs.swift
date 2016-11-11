@@ -292,6 +292,32 @@ var getMyWorkProdProfileUrl:String {
     return DDBaseUrl + "/rest/employee/gethelperproductdetail"
 }
 
+///进度
+
+//获取任务选项
+var getTaskOptionsUrl:String {
+    return DDBaseUrl + "/rest/employee/gettaskaddinfo"
+}
+
+//保存任务
+var saveTaskUrl:String {
+    return DDBaseUrl + "/rest/employee/savetask"
+}
+
+//获取任务列表
+var getTaskListUrl:String {
+    return DDBaseUrl + "/rest/employee/gettasklist"
+}
+
+//获取任务明细
+var getTaskDetailUrl:String {
+    return DDBaseUrl + "/rest/employee/gettaskdetail"
+}
+
+//置顶任务
+var setTaskTopUrl:String {
+    return DDBaseUrl + "/rest/employee/settoptask"
+}
 
 
 /// 用户关系管理

@@ -711,9 +711,81 @@ extension NetworkManager {
         baseRequestWith(urlString, dict: dict, completion: completion)
     }
     
+}
+
+//MARK:进度
+
+extension NetworkManager {
     
+    //获取任务选项
+    func getTaskOptions(completion:@escaping DDResultHandler) {
+        
+        let urlString = getTaskOptionsUrl
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!
+        ]
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+    }
+    
+    //保存任务
+    func saveTaskInBack(_ type:String,range:String,target:Int,startDate:String,endDate:String,userList:String,note:String,completion:@escaping DDResultHandler) {
+        let urlString = saveTaskUrl
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!,
+            "type":type,
+            "range":range,
+            "target":target,
+            "start_date":startDate,
+            "end_date":endDate,
+            "user_list":userList,
+            "note":note
+        ]
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+    }
+    
+    //获取任务列表
+    func getTaskList(completion:@escaping DDResultHandler) {
+        let urlString = getTaskListUrl
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!
+        ]
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+    }
+    
+    //任务明细
+    func getTaskDetail(_ id:Int,completion:@escaping DDResultHandler) {
+        
+        let urlString = getTaskDetailUrl
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!,
+            "task_id":id
+        ]
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+    }
+    
+    //置顶任务
+    func setTaskTopInBack(_ id:Int,completion:@escaping DDResultHandler) {
+        
+        let urlString = setTaskTopUrl
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!,
+            "task_id":id
+        ]
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+    }
     
 }
+
 
 //MARK:系统管理
 extension NetworkManager {

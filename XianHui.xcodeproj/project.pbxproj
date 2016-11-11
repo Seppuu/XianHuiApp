@@ -14,6 +14,7 @@
 		370AAEA61D49F1B3000C64D1 /* UserNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AAEA41D49F1B3000C64D1 /* UserNameCell.swift */; };
 		370AAEA71D49F1B3000C64D1 /* UserNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 370AAEA51D49F1B3000C64D1 /* UserNameCell.xib */; };
 		370C4E7A1D9E346400312E9C /* MyWorkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370C4E791D9E346400312E9C /* MyWorkManager.swift */; };
+		370EA9351DD5999900271ABE /* TaskOptionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370EA9341DD5999900271ABE /* TaskOptionsVC.swift */; };
 		371041E21DC09B9B00BE20F9 /* CAPSPageMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371041E11DC09B9B00BE20F9 /* CAPSPageMenu.swift */; };
 		371041EA1DC09C0E00BE20F9 /* PalauCustomDefaultable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371041E41DC09C0E00BE20F9 /* PalauCustomDefaultable.swift */; };
 		371041EB1DC09C0E00BE20F9 /* PalauDefaultable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371041E51DC09C0E00BE20F9 /* PalauDefaultable.swift */; };
@@ -305,6 +306,7 @@
 		370AAEA41D49F1B3000C64D1 /* UserNameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNameCell.swift; sourceTree = "<group>"; };
 		370AAEA51D49F1B3000C64D1 /* UserNameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserNameCell.xib; sourceTree = "<group>"; };
 		370C4E791D9E346400312E9C /* MyWorkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyWorkManager.swift; sourceTree = "<group>"; };
+		370EA9341DD5999900271ABE /* TaskOptionsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskOptionsVC.swift; sourceTree = "<group>"; };
 		371041E11DC09B9B00BE20F9 /* CAPSPageMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAPSPageMenu.swift; sourceTree = "<group>"; };
 		371041E41DC09C0E00BE20F9 /* PalauCustomDefaultable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PalauCustomDefaultable.swift; sourceTree = "<group>"; };
 		371041E51DC09C0E00BE20F9 /* PalauDefaultable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PalauDefaultable.swift; sourceTree = "<group>"; };
@@ -1191,6 +1193,7 @@
 				3776B8FF1D93A83900A9C9DB /* MemberListVC */,
 				3776B9011D93A83900A9C9DB /* TaskListVC */,
 				375C6E161DD4504D00B208BE /* TaskDetailVC.swift */,
+				370EA9341DD5999900271ABE /* TaskOptionsVC.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -2486,6 +2489,7 @@
 				37BAB9B91D3E1059001E4680 /* BorderTextField.swift in Sources */,
 				37159E411D81082E00542B57 /* Form.swift in Sources */,
 				371041EF1DC09C0E00BE20F9 /* PalauEntry.swift in Sources */,
+				370EA9351DD5999900271ABE /* TaskOptionsVC.swift in Sources */,
 				37BAB8EB1D3E1045001E4680 /* MLPAutoCompleteTextField.m in Sources */,
 				37B791501D51D4230032C164 /* UITableView+DD.swift in Sources */,
 				371430741D9B8D8D0006A314 /* MyWorkListHepler.swift in Sources */,

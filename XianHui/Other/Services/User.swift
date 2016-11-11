@@ -288,10 +288,17 @@ class User:NSObject {
                 rmUser.clientId = clientId
                 clientIds.append(clientId)
             }
-            
-            if let name = data["display_name"].string {
-                rmUser.userName = name
+
+            //账户名
+            if let  userName = data["user_name"].string {
+                rmUser.userName = userName
             }
+            
+            
+            if let  userDisplayName = data["display_name"].string {
+                rmUser.displayName = userDisplayName
+            }
+            
             
             if let avatarUrl = data["avator_url"].string {
                 rmUser.avatarUrl = avatarUrl
@@ -316,7 +323,7 @@ class User:NSObject {
             let rmUser = rmUsersResult[0]
             guard let url = URL(string: rmUser.avatarUrl) else { return nil  }
             
-            let user = XHUser(userId: rmUser.userId, name: rmUser.userName, avatarURL:url, clientId: rmUser.clientId)
+            let user = XHUser(userId: rmUser.userId, name: rmUser.displayName, avatarURL:url, clientId: rmUser.clientId)
             
             return user
         }

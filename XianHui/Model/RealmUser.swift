@@ -15,6 +15,7 @@ class RealmUser: Object {
     
     dynamic var clientId = ""
     
+    //账户名
     dynamic var userName = ""
     
     dynamic var displayName = ""

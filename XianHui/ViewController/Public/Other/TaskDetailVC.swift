@@ -8,6 +8,12 @@
 
 import UIKit
 
+class TaskDetail: NSObject {
+    
+    var text = ""
+    var value = ""
+}
+
 class TaskDetailVC: UIViewController {
     
     var tableView:UITableView!
@@ -16,12 +22,24 @@ class TaskDetailVC: UIViewController {
     
     var bottomCellId = "typeCell"
     
+    
+    var task = Task()
+    
+    var dataListArr = [[TaskDetail](),[TaskDetail](),[TaskDetail]()]
+    
+    var data:[TaskDetail] {
+        
+        let list = dataListArr[currentIndex]
+        return list
+    }
+    
     var segmentView = UISegmentedControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-       setTableView()
+        
+        setTableView()
+        getTaskDetail()
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,12 +64,66 @@ class TaskDetailVC: UIViewController {
         
     }
     
+    func getTaskDetail() {
+        
+        NetworkManager.sharedManager.getTaskDetail(task.id) { (success, json, error) in
+            
+            if success == true {
+                self.makeTableList()
+            }
+            else {
+                
+            }
+        }
+        
+    }
+    
+    func makeTableList() {
+        //顾问
+        let first = ["李琴","张芳芳","吴琼","季安安"]
+        var firstArr = [TaskDetail]()
+        for name in first {
+            let detail = TaskDetail()
+            detail.text = name
+            detail.value = "3000"
+            firstArr.append(detail)
+        }
+        
+        let second = ["宋丹","谢凤梅","包雪梅","黄茜","邹芳","陈婷"]
+        var secondArr = [TaskDetail]()
+        for name in second {
+            let detail = TaskDetail()
+            detail.text = name
+            detail.value = "3000"
+            secondArr.append(detail)
+        }
+        
+        let third = ["沈夏兰","郑秀文","杨洋","徐葵","吴佳晶"]
+        var thirdArr = [TaskDetail]()
+        for name in third {
+            let detail = TaskDetail()
+            detail.text = name
+            detail.value = "3000"
+            thirdArr.append(detail)
+        }
+        
+        dataListArr[0] = firstArr
+        
+        dataListArr[1] = secondArr
+        
+        dataListArr[2] = thirdArr
+        
+        tableView.reloadData()
+    }
+    
     var currentIndex = 0
     
     func segmentVauleChanged(_ sender:UISegmentedControl) {
         currentIndex = sender.selectedSegmentIndex
         tableView.reloadData()
     }
+    
+    
     
 
 }
@@ -67,7 +139,7 @@ extension TaskDetailVC:UITableViewDelegate,UITableViewDataSource {
             return 1
         }
         else {
-            return 5
+            return data.count
         }
     }
     
@@ -116,7 +188,9 @@ extension TaskDetailVC:UITableViewDelegate,UITableViewDataSource {
             
             cell.layoutMargins = UIEdgeInsetsMake(0, 76, 0, 0)
             cell.avatarImageView.image = UIImage(named: "TaskIcon")
-            cell.nameLabel.text = "全公司"
+            cell.nameLabel.text = task.rangeName
+            cell.progressLabel.text = task.progressText
+            cell.progressView.progress = task.progress
             
             return cell
         }
@@ -132,9 +206,9 @@ extension TaskDetailVC:UITableViewDelegate,UITableViewDataSource {
                 tableView.register(nib, forCellReuseIdentifier: cellId)
                 cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? typeCell
             }
-            
-            cell?.leftLabel.text = "名字"
-            cell?.typeLabel.text = "详细"
+            let detail = data[indexPath.row]
+            cell?.leftLabel.text = detail.text
+            cell?.typeLabel.text = detail.value
             cell?.typeLabel.textAlignment = .right
             
 
