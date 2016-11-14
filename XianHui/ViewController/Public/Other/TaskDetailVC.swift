@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class TaskDetail: NSObject {
     
@@ -40,6 +41,7 @@ class TaskDetailVC: UIViewController {
         
         setTableView()
         getTaskDetail()
+        setNavBarItem()
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,12 +66,25 @@ class TaskDetailVC: UIViewController {
         
     }
     
+    func setNavBarItem() {
+        let rightBarItem = UIBarButtonItem(title: "查看", style: UIBarButtonItemStyle.plain, target: self, action: #selector(TaskDetailVC.toTaskCreate))
+        navigationItem.rightBarButtonItem = rightBarItem
+    }
+    
+    func toTaskCreate() {
+        let vc = CreateTaskVC()
+        vc.title = "资料"
+        vc.isShowDetail = true
+        vc.task = task
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func getTaskDetail() {
         
         NetworkManager.sharedManager.getTaskDetail(task.id) { (success, json, error) in
             
             if success == true {
-                self.makeTableList()
+                self.makeTableList(json!)
             }
             else {
                 
@@ -78,7 +93,70 @@ class TaskDetailVC: UIViewController {
         
     }
     
-    func makeTableList() {
+    func makeTableList(_ data:JSON) {
+        
+     
+        if let text = data["range"]["text"].string {
+            task.range.text = text
+            
+        }
+        
+        if let value = data["range"]["value"].string {
+            task.range.value = value
+            
+        }
+        
+        if let text = data["range"]["text"].string {
+            task.type.text = text
+            
+        }
+        
+        if let value = data["range"]["value"].string {
+            task.type.value = value
+            
+        }
+        
+        if let target = data["target"].int {
+            task.target = String(target)
+        }
+        
+        if let startDate = data["start_date"].string {
+            
+            task.startDateString = startDate
+            
+        }
+        
+        if let endDate = data["end_date"].string {
+            task.endDateString = endDate
+        }
+        
+        if let publishDate = data["publish_date"].string {
+            task.publishDateString = publishDate
+        }
+        
+        if let userList = data["user_list"].array {
+            
+            for user in userList {
+                let u = User()
+                if let name = user["text"].string {
+                    u.displayName = name
+                }
+                
+                if let id = user["value"].int {
+                    u.id = id
+                }
+                
+                task.members.append(u)
+            }
+            
+            
+        }
+        
+        if let remark = data["note"].string {
+            task.remark = remark
+        }
+        
+        
         //顾问
         let first = ["李琴","张芳芳","吴琼","季安安"]
         var firstArr = [TaskDetail]()
@@ -188,7 +266,7 @@ extension TaskDetailVC:UITableViewDelegate,UITableViewDataSource {
             
             cell.layoutMargins = UIEdgeInsetsMake(0, 76, 0, 0)
             cell.avatarImageView.image = UIImage(named: "TaskIcon")
-            cell.nameLabel.text = task.rangeName
+            cell.nameLabel.text = "范围:" + task.range.text + "  类型:" + task.type.text + "  截止:" + "11-31"
             cell.progressLabel.text = task.progressText
             cell.progressView.progress = task.progress
             

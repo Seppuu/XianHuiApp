@@ -127,21 +127,35 @@ public class GTProgressBar: UIView {
         centerVerticallyInView(view: progressLabel)
     }
     
+    //顶在左侧的假区域.为了奇怪的需求
+    var leftCommpontView = UIView()
+    
     private func setupBackgroundView() {
+        
         let xOffset = backgroundViewXOffset()
         let height = min(barMaxHeight ?? frame.size.height, frame.size.height)
         let size = CGSize(width: frame.size.width - xOffset, height: height)
-        let origin = CGPoint(x: xOffset, y: 0)
+//        let origin = CGPoint(x: xOffset, y: 0)
+        let origin = CGPoint(x: size.width * 0.03, y: 0)
         
         backgroundView.frame = CGRect(origin: origin, size: size)
         backgroundView.backgroundColor = barBackgroundColor
-        backgroundView.layer.borderWidth = barBorderWidth
-        backgroundView.layer.borderColor = barBorderColor.cgColor
-        backgroundView.layer.cornerRadius = cornerRadiusFor(view: backgroundView)
+        backgroundView.makeRound(corners: [.topRight, .bottomRight], radius: cornerRadiusFor(view: backgroundView), borderColor: barBorderColor, borderWidth: barBorderWidth)
+        
         
         if let _ = barMaxHeight {
             centerVerticallyInView(view: backgroundView)
         }
+        
+        var progressViewframe = backgroundView.frame
+        progressViewframe.origin.x = 0
+        progressViewframe.size.width = progressViewframe.size.width * (0.1)
+        leftCommpontView.backgroundColor = UIColor.init(hexString: "1BD691")
+        leftCommpontView.frame = progressViewframe
+        leftCommpontView.makeRound(corners: [.topLeft, .bottomLeft], radius: cornerRadiusFor(view: leftCommpontView), borderColor: barBorderColor, borderWidth: barBorderWidth)
+        addSubview(leftCommpontView)
+        
+        insertSubview(leftCommpontView, belowSubview: backgroundView)
     }
     
     private func setupFillView() {
@@ -151,7 +165,7 @@ public class GTProgressBar: UIView {
         
         fillView.frame = CGRect(origin: fillFrame.origin, size: fillFrameAdjustedSize)
         fillView.backgroundColor = barFillColor
-        fillView.layer.cornerRadius = cornerRadiusFor(view: fillView)
+        fillView.makeRound(corners: [.topRight, .bottomRight], radius:cornerRadiusFor(view: fillView), borderColor: UIColor.clear, borderWidth: 0.0)
     }
     
     private func backgroundViewXOffset() -> CGFloat {

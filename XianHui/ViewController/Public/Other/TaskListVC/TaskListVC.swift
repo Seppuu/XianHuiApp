@@ -13,14 +13,46 @@ import SwiftyJSON
 class  Task: NSObject {
     
     var id = 0
-    var rangeName = ""
-    var typeName = ""
+    var range = TaskOption()
+    var type  = TaskOption()
+    var target = ""
     var progress:CGFloat = 0.0
     
     var progressText = ""
     
     var isUpdated = false
     
+    var startDateString = "" {
+        didSet {
+            startDate = makeDate(startDateString)
+        }
+    }
+    var endDateString = "" {
+        didSet {
+            endDate = makeDate(endDateString)
+        }
+    }
+    var publishDateString = "" {
+        didSet {
+            publishDate = makeDate(publishDateString)
+        }
+    }
+    
+    var startDate = Date()
+    var endDate = Date()
+    var publishDate = Date()
+    //备注
+    var remark = ""
+    
+    var members = [User]()
+    
+    func makeDate(_ dateString:String) -> Date {
+        
+        let formmat = DateFormatter()
+        formmat.dateFormat = "YYYY-MM-dd"
+        
+        return formmat.date(from: dateString) == nil ? Date() : formmat.date(from: dateString)!
+    }
 }
 
 class TaskListVC: BaseViewController {
@@ -123,16 +155,18 @@ class TaskListVC: BaseViewController {
                 }
                 
                 if let rangeName = row["range_name"].string {
-                    t.rangeName = rangeName
+                    t.range.text = rangeName
                 }
                 
                 if let typeName = row["type_name"].string {
-                    t.typeName = typeName
+                    t.type.text = typeName
                 }
                 
                 if let percentage = row["percentage"].float {
-                    t.progress = CGFloat(percentage/100)
-                    t.progressText = String(Int(percentage)) + "%"
+//                    t.progress = CGFloat(percentage/100)
+//                    t.progressText = String(Int(percentage)) + "%"
+                    t.progress = CGFloat(50.0/100)
+                    t.progressText = String(Int(50.0)) + "%"
                 }
                 
                 if let isUpdated = row["is_update"].int {
@@ -203,7 +237,7 @@ extension TaskListVC:UITableViewDelegate,UITableViewDataSource {
         
         cell.layoutMargins = UIEdgeInsetsMake(0, 76, 0, 0)
         cell.avatarImageView.image = UIImage(named: "TaskIcon")
-        cell.nameLabel.text = task.rangeName
+        cell.nameLabel.text = "范围:" + task.range.text + "  类型:" + task.type.text + "  截止:" + "11-31"
         cell.progressLabel.text = task.progressText
         cell.progressView.progress = task.progress
         

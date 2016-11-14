@@ -12,6 +12,8 @@ import SwiftDate
 import IQKeyboardManagerSwift
 import SwiftyJSON
 
+//创建任务页面同时也是任务资料页面
+
 class CreateTaskVC: BaseViewController {
     
     var tableView: UITableView!
@@ -29,6 +31,20 @@ class CreateTaskVC: BaseViewController {
     
     var showBeginTimePicker  = false
     var showEndTimePicker    = false
+    
+    var task = Task()
+    
+    var isShowDetail = false {
+        didSet {
+            
+            if isShowDetail == true {
+                setEditMenu()
+            }
+            else {
+                setSaveCancelMenu()
+            }
+        }
+    }
     
     var beginDate = Date() {
         didSet {
@@ -50,8 +66,18 @@ class CreateTaskVC: BaseViewController {
     //备注
     var remark = ""
     
+    //目标
+    var target = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if isShowDetail == true {
+            setData()
+        }
+        else {
+            
+        }
         
         delayEndDate()
         
@@ -81,12 +107,43 @@ class CreateTaskVC: BaseViewController {
     
     func setNavBarItem() {
         
-        let rightBarItem = UIBarButtonItem(title: "发布", style: UIBarButtonItemStyle.plain, target: self, action: #selector(CreateTaskVC.saveTask))
-        navigationItem.rightBarButtonItem = rightBarItem
+        if isShowDetail == true {
+            setEditMenu()
+        }
+        else {
+            setSaveMenu()
+        }
         
     }
     
+    func setEditMenu() {
+        let rightBarItem = UIBarButtonItem(title: "修改", style: UIBarButtonItemStyle.plain, target: self, action: #selector(CreateTaskVC.showEditMode))
+        navigationItem.rightBarButtonItem = rightBarItem
+    }
+    
+    func setSaveMenu() {
+        let rightBarItem = UIBarButtonItem(title: "保存", style: UIBarButtonItemStyle.plain, target: self, action: #selector(CreateTaskVC.saveTask))
+        navigationItem.rightBarButtonItem = rightBarItem
+    }
+    
+    func setSaveCancelMenu() {
+        let cancelBarItem = UIBarButtonItem(title: "取消", style: UIBarButtonItemStyle.plain, target: self, action: #selector(CreateTaskVC.cancelEdit))
+        let rightBarItem = UIBarButtonItem(title: "保存", style: UIBarButtonItemStyle.plain, target: self, action: #selector(CreateTaskVC.saveTask))
+        navigationItem.rightBarButtonItems = [cancelBarItem,rightBarItem]
+    }
+    
     var taskSaveSuccessHandler:(()->())?
+    
+    func showEditMode() {
+        
+        isShowDetail = false
+        tableView.reloadData()
+    }
+    
+    func cancelEdit() {
+        isShowDetail = true
+        tableView.reloadData()
+    }
     
     func saveTask() {
         
@@ -104,7 +161,7 @@ class CreateTaskVC: BaseViewController {
         
         let path = IndexPath(item: 2, section: 0)
         let cell = tableView.cellForRow(at: path) as! BasicInfoCell
-        let target = cell.rightTextField.text
+        target = cell.rightTextField.text!
         if target == "" {
             DDAlert.alert(title: "提示", message: "请设定目标", dismissTitle: "好的", inViewController: self, withDismissAction: nil)
             return
@@ -134,7 +191,7 @@ class CreateTaskVC: BaseViewController {
         let note = cell2.profileTextView.text
 
         let hud = showHudWith(view, animated: true, mode: .indeterminate, text: "")
-        NetworkManager.sharedManager.saveTaskInBack(type, range: range, target: Int(target!)!, startDate: startDate, endDate: endDate, userList: userList, note: note!) { (success, json, error) in
+        NetworkManager.sharedManager.saveTaskInBack(type, range: range, target: Int(target)!, startDate: startDate, endDate: endDate, userList: userList, note: note!) { (success, json, error) in
             
             if success == true {
                 hud.hide(true, afterDelay: 1.0)
@@ -170,6 +227,8 @@ class CreateTaskVC: BaseViewController {
     var taskRange = TaskOption()
     
     var taskType  = TaskOption()
+    
+    var publishDate = Date()
     
     func getTaskOptions() {
         
@@ -242,15 +301,21 @@ class CreateTaskVC: BaseViewController {
         
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func setData() {
+     
+        taskRange = task.range
+        taskType  = task.type
+        target    = task.target
+        
+        beginDate = task.startDate
+        endDate   = task.endDate
+        publishDate = task.publishDate
+        
+        listOfMember = task.members
+        
+        remark = task.remark
+        
     }
-    */
 
 }
 
@@ -321,15 +386,18 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
         
         if indexPath.section == 0 {
             
-            
-            
-            
             if indexPath.row == 0 {
                 //标题
                 let cell = tableView.dequeueReusableCell(withIdentifier: timeSelectCellId, for: indexPath) as! typeCell
                 cell.leftLabel.text = "范围"
                 cell.typeLabel.text = taskRange.text == "" ? "请选择":taskRange.text
-                cell.accessoryView = UIImageView.xhAccessoryView()
+                if isShowDetail == true {
+                  cell.accessoryView = nil
+                }
+                else {
+                  cell.accessoryView = UIImageView.xhAccessoryView()
+                }
+                
                 return cell
             }
             else if indexPath.row == 1 {
@@ -338,6 +406,12 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
                 cell.leftLabel.text = "类型"
                 cell.typeLabel.text = taskType.text == "" ? "请选择":taskType.text
                 cell.accessoryView = UIImageView.xhAccessoryView()
+                if isShowDetail == true {
+                    cell.accessoryView = nil
+                }
+                else {
+                    cell.accessoryView = UIImageView.xhAccessoryView()
+                }
                 return cell
                 
             }
@@ -347,6 +421,15 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
                 cell.leftLabel.text = "目标"
                 cell.rightTextField.placeholder = "请输入"
                 cell.rightTextField.keyboardType = .numberPad
+                cell.rightTextField.textColor = UIColor.init(hexString: "B2B2B2")
+                if isShowDetail == true {
+                    cell.rightTextField.isEnabled = false
+                    cell.rightTextField.text = target
+                }
+                else {
+                    cell.rightTextField.isEnabled = true
+                    
+                }
                 return cell
             }
             
@@ -439,7 +522,14 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "MM月dd日"
                 
-                cell.typeLabel.text = dateFormatter.string(from: Date())
+                if isShowDetail == true {
+                    cell.typeLabel.text = dateFormatter.string(from: publishDate)
+                }
+                else {
+                    
+                    cell.typeLabel.text = dateFormatter.string(from: Date())
+                }
+                
             }
             else {
                 cell.leftLabel.text = "参与者"
@@ -465,7 +555,12 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
                     cell.typeLabel.text = "无"
                 }
                 
-                cell.accessoryView = UIImageView.xhAccessoryView()
+                if isShowDetail == true {
+                    cell.accessoryView = nil
+                }
+                else {
+                    cell.accessoryView = UIImageView.xhAccessoryView()
+                }
             }
             
             return cell
@@ -475,6 +570,14 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: remarkCellId, for: indexPath) as! ProfileCell
             cell.profileTextView.placeholder = "备注"
             
+            if isShowDetail == true {
+                cell.profileTextView.isEditable = false
+                cell.profileTextView.text = remark
+            }
+            else {
+                cell.profileTextView.isEditable = true
+            }
+            
             return cell
         }
         
@@ -482,7 +585,15 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        if isShowDetail == true {
+            return
+        }
+        else {
+            
+        }
+        
         if indexPath.section == 0 {
+            
             if indexPath.row == 0  {
                 
                 let vc = TaskOptionsVC()

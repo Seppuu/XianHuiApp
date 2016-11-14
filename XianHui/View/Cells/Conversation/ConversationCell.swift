@@ -30,6 +30,7 @@ class ConversationCell: UITableViewCell {
         avatarImageView.contentMode = .scaleAspectFill
         
         progressView.progress = 0.4
+        //progressView.backgroundColor = UIColor.orange
         progressView.barBorderColor = UIColor.clear
         progressView.barFillColor = UIColor.init(hexString: "1BD691")
         progressView.barBackgroundColor = UIColor.init(hexString: "236C51")

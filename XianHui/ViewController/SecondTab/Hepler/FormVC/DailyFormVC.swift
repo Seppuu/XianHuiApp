@@ -109,7 +109,6 @@ class DailyFormVC: RadarChartVC {
                     
                     let radarModel = RadarModel()
                     
-                    
                     if let name = data["name"].string {
                        radarModel.name = name
                     }
