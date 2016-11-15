@@ -31,6 +31,8 @@ class Notice: NSObject {
     
     var orgName = ""
     
+    var orgId = 0
+    
     var createTime = ""
     
     var hasRead = false

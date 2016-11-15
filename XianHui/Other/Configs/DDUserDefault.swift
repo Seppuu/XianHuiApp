@@ -82,6 +82,25 @@ extension PalauDefaults {
     
     //日报表最大值
     
+    //当前设置的最大值的门店ID,Name
+    public static var currentOrgNameForMaxValueSetting: PalauDefaultsEntry<String> {
+        get {
+            return value("currentOrgNameForMaxValueSetting").whenNil(use:"")
+        }
+        set {
+            
+        }
+    }
+    
+    public static var currentOrgIdForMaxValueSetting: PalauDefaultsEntry<Int> {
+        get {
+            return value("currentOrgIdForMaxValueSetting").whenNil(use:0)
+        }
+        set {
+            
+        }
+    }
+    
     //现金
     public static var cashMaxValue: PalauDefaultsEntry<Float> {
         get {

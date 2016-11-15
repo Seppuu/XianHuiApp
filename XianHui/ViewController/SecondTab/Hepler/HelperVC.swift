@@ -94,6 +94,10 @@ class HelperVC: BaseViewController {
                 no.orgName = orgName
             }
             
+            if let orgId = json["org_id"].int {
+                no.orgId = orgId
+            }
+            
             if let subject = json["subject"].string {
                 no.title = subject
             }
@@ -222,6 +226,10 @@ extension HelperVC:UITableViewDelegate,UITableViewDataSource {
             vc.noticeId = no.id
             vc.title = "日报表"
             navigationController?.pushViewController(vc, animated: true)
+            
+            Defaults.currentOrgNameForMaxValueSetting.value = no.orgName
+            Defaults.currentOrgIdForMaxValueSetting.value = no.orgId
+            
             
         case .project_plan:
             let vc = MyWorkVC()

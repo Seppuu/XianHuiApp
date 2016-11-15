@@ -30,7 +30,6 @@ class MaxValue: NSObject {
 }
 
 
-
 class FormSettingVC: UIViewController {
     
     var tableView: UITableView!
@@ -43,11 +42,19 @@ class FormSettingVC: UIViewController {
     
     var remmandText = "A,B,C 提供了现金,实操,产品的三种推荐档位标准.如果不符合要求,请自定义柱形图高度标准."
     
+    var currentOrgName:String {
+        return Defaults.currentOrgNameForMaxValueSetting.value!
+    }
+    var currentOrgId:Int {
+        return Defaults.currentOrgIdForMaxValueSetting.value!
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getDailyMaxValue()
+        title = "设置" + "(\(currentOrgName))"
         setTableView()
+        getDailyMaxValue()
         setNavBarItem()
     }
 
@@ -58,12 +65,13 @@ class FormSettingVC: UIViewController {
     
     func getDailyMaxValue() {
         
-        NetworkManager.sharedManager.getDailyReportMaxVaule { (success, json, error) in
+        NetworkManager.sharedManager.getDailyReportMaxVaule(currentOrgId) { (success, json, error) in
             if success == true {
-               self.listOfMaxVal =  self.makeMaxValueListWith(json!)
+                self.listOfMaxVal =  self.makeMaxValueListWith(json!)
                 self.tableView.reloadData()
             }
         }
+        
     }
     
     var maxValKey = ["cash_amount","project_amount","product_amount","room_turnover","employee_hours"]
@@ -144,6 +152,14 @@ class FormSettingVC: UIViewController {
         
         self.navigationItem.rightBarButtonItem = rightBar
         
+        let leftBar = UIBarButtonItem(title: "取消", style: .done, target: self, action: #selector(FormSettingVC.cancel))
+        
+        self.navigationItem.leftBarButtonItem = leftBar
+        
+    }
+    
+    func cancel() {
+        self.dismiss(animated: true, completion: nil)
     }
     
     func confirmTap() {
@@ -186,7 +202,7 @@ class FormSettingVC: UIViewController {
         let hud = MBProgressHUD.showAdded(to: view, animated: true)
         hud?.mode = .indeterminate
         
-        NetworkManager.sharedManager.saveDailyReportMaxVaule(cashMax, projectmax: projectmax, prodMax: prodMax, roomTurnoverMax: customerMax, employeeHoursmax: employeemax) { (success, json, error) in
+        NetworkManager.sharedManager.saveDailyReportMaxVaule(currentOrgId,cashMax:cashMax, projectmax: projectmax, prodMax: prodMax, roomTurnoverMax: customerMax, employeeHoursmax: employeemax) { (success, json, error) in
             
             if success == true {
                 hud?.hide(true)

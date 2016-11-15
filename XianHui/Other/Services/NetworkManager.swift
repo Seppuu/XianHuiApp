@@ -373,10 +373,11 @@ extension NetworkManager {
     
     
     //获取报表峰值
-    func getDailyReportMaxVaule(_ completion:@escaping DDResultHandler) {
+    func getDailyReportMaxVaule(_ orgId:Int,completion:@escaping DDResultHandler) {
         
         let dict:JSONDictionary = [
-            "token":Defaults.userToken.value!
+            "token":Defaults.userToken.value!,
+            "org_id":orgId
         ]
         
         let urlString = GetDailyReportMaxVauleUrl
@@ -385,9 +386,10 @@ extension NetworkManager {
     }
     
     //保存报表峰值
-    func saveDailyReportMaxVaule(_ cashMax:Float,projectmax:Float,prodMax:Float,roomTurnoverMax:Float,employeeHoursmax:Float,completion:@escaping DDResultHandler) {
+    func saveDailyReportMaxVaule(_ orgId:Int,cashMax:Float,projectmax:Float,prodMax:Float,roomTurnoverMax:Float,employeeHoursmax:Float,completion:@escaping DDResultHandler) {
         let dict:JSONDictionary = [
             "token":Defaults.userToken.value!,
+            "org_id":orgId,
             "cash_amount":cashMax,
             "project_amount":projectmax,
             "product_amount":prodMax,

@@ -17,6 +17,8 @@ class RadarChartVC: UIViewController, TKRadarChartDataSource,TKRadarChartDelegat
     
     var topDayLabel = UILabel()
     
+    var topOrgNameLabel = UILabel()
+    
     var tableView:UITableView!
     
     let viewHeight = screenHeight - 64
@@ -134,6 +136,18 @@ class RadarChartVC: UIViewController, TKRadarChartDataSource,TKRadarChartDelegat
         
         chartView.reloadData()
         
+        chartView.addSubview(topOrgNameLabel)
+        topOrgNameLabel.text = Defaults.currentOrgNameForMaxValueSetting.value!
+        topOrgNameLabel.textColor = UIColor ( red: 0.3779, green: 0.3171, blue: 0.3185, alpha: 1.0 )
+        topOrgNameLabel.font = UIFont.systemFont(ofSize: 14)
+        topOrgNameLabel.textAlignment = .left
+        topOrgNameLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(chartView).offset(15)
+            make.width.equalTo(200)
+            make.top.equalTo(chartView).offset(15)
+        }
+        
+        
         chartView.addSubview(topDayLabel)
         topDayLabel.text = ""
         topDayLabel.textColor = UIColor ( red: 0.3779, green: 0.3171, blue: 0.3185, alpha: 1.0 )
@@ -142,7 +156,7 @@ class RadarChartVC: UIViewController, TKRadarChartDataSource,TKRadarChartDelegat
         topDayLabel.snp.makeConstraints { (make) in
             make.left.equalTo(chartView).offset(15)
             make.width.equalTo(200)
-            make.top.equalTo(chartView).offset(15)
+            make.top.equalTo(topOrgNameLabel).offset(15)
         }
         
     }
