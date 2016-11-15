@@ -35,7 +35,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q62-bF-JaC" customClass="GTProgressBar" customModule="XianHui" customModuleProvider="target">
-                        <rect key="frame" x="70" y="45" width="368" height="15"/>
+                        <rect key="frame" x="70" y="45" width="361" height="15"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="9DK-UH-SbN"/>
@@ -50,8 +50,9 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wx0-6h-fNO">
-                        <rect key="frame" x="440" y="45" width="30" height="14"/>
+                        <rect key="frame" x="433" y="45" width="37" height="14"/>
                         <constraints>
+                            <constraint firstAttribute="width" constant="37" id="Qah-wU-N2k"/>
                             <constraint firstAttribute="height" constant="14" id="fTb-32-4kK"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -70,7 +71,6 @@
                     <constraint firstAttribute="trailing" secondItem="Wx0-6h-fNO" secondAttribute="trailing" constant="8" id="adh-ts-iNX"/>
                     <constraint firstItem="Wx0-6h-fNO" firstAttribute="centerY" secondItem="q62-bF-JaC" secondAttribute="centerY" id="k0y-IG-9cE"/>
                     <constraint firstItem="kjj-pV-aMN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="qc6-dY-qE3"/>
-                    <constraint firstAttribute="trailing" secondItem="q62-bF-JaC" secondAttribute="trailing" constant="40" id="sS7-ti-fnR"/>
                     <constraint firstItem="e3N-7V-FD4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="xZm-mw-2cD"/>
                 </constraints>
             </tableViewCellContentView>

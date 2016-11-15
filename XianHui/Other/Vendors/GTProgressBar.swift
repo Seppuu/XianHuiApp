@@ -136,11 +136,13 @@ public class GTProgressBar: UIView {
         let height = min(barMaxHeight ?? frame.size.height, frame.size.height)
         let size = CGSize(width: frame.size.width - xOffset, height: height)
 //        let origin = CGPoint(x: xOffset, y: 0)
-        let origin = CGPoint(x: size.width * 0.03, y: 0)
+        let origin = CGPoint(x: size.width * 0.05, y: 0)
         
         backgroundView.frame = CGRect(origin: origin, size: size)
         backgroundView.backgroundColor = barBackgroundColor
-        backgroundView.makeRound(corners: [.topRight, .bottomRight], radius: cornerRadiusFor(view: backgroundView), borderColor: barBorderColor, borderWidth: barBorderWidth)
+        backgroundView.layer.borderColor = barBorderColor.cgColor
+        backgroundView.layer.borderWidth = barBorderWidth
+        backgroundView.layer.cornerRadius =  cornerRadiusFor(view: backgroundView)
         
         
         if let _ = barMaxHeight {
@@ -149,21 +151,35 @@ public class GTProgressBar: UIView {
         
         var progressViewframe = backgroundView.frame
         progressViewframe.origin.x = 0
-        progressViewframe.size.width = progressViewframe.size.width * (0.1)
-        leftCommpontView.backgroundColor = UIColor.init(hexString: "1BD691")
-        leftCommpontView.frame = progressViewframe
-        leftCommpontView.makeRound(corners: [.topLeft, .bottomLeft], radius: cornerRadiusFor(view: leftCommpontView), borderColor: barBorderColor, borderWidth: barBorderWidth)
-        addSubview(leftCommpontView)
         
-        insertSubview(leftCommpontView, belowSubview: backgroundView)
+        
+        if _progress == 0.0 {
+            leftCommpontView.backgroundColor = barBackgroundColor
+            leftCommpontView.makeRound(corners: [.topLeft, .bottomLeft], radius: cornerRadiusFor(view: leftCommpontView), borderColor: barBorderColor, borderWidth: barBorderWidth)
+            
+            progressViewframe.size.width = progressViewframe.size.width * (0.1)
+        }
+        else {
+            leftCommpontView.backgroundColor = UIColor.init(hexString: "1BD691")
+            leftCommpontView.layer.borderColor = barBorderColor.cgColor
+            leftCommpontView.layer.borderWidth = barBorderWidth
+            leftCommpontView.layer.cornerRadius =  cornerRadiusFor(view: leftCommpontView)
+            
+            progressViewframe.size.width = progressViewframe.size.width * (0.05 + _progress)
+        }
+        
+        leftCommpontView.frame = progressViewframe
+        addSubview(leftCommpontView)
     }
     
+    //暂时不要这个view.alpha设置为0
     private func setupFillView() {
         let offset = barBorderWidth + barFillInset
         let fillFrame = backgroundView.frame.insetBy(dx: offset, dy: offset)
         let fillFrameAdjustedSize = CGSize(width: fillFrame.width * _progress, height: fillFrame.height)
         
         fillView.frame = CGRect(origin: fillFrame.origin, size: fillFrameAdjustedSize)
+        fillView.alpha = 0.0
         fillView.backgroundColor = barFillColor
         fillView.makeRound(corners: [.topRight, .bottomRight], radius:cornerRadiusFor(view: fillView), borderColor: UIColor.clear, borderWidth: 0.0)
     }
