@@ -9,11 +9,6 @@
 import UIKit
 import SwiftyJSON
 
-class TaskDetail: NSObject {
-    
-    var text = ""
-    var value = ""
-}
 
 class TaskDetailVC: UIViewController {
     
@@ -26,12 +21,17 @@ class TaskDetailVC: UIViewController {
     
     var task = Task()
     
-    var dataListArr = [[TaskDetail](),[TaskDetail](),[TaskDetail]()]
+    var dataListArr = [[BaseTableViewModelList]]()
     
-    var data:[TaskDetail] {
-        
-        let list = dataListArr[currentIndex]
-        return list
+    var data:[BaseTableViewModelList] {
+        if dataListArr.count == 0 {
+            return [BaseTableViewModelList]()
+        }
+        else {
+            let list = dataListArr[currentIndex]
+            return list
+        }
+
     }
     
     var segmentView = UISegmentedControl()
@@ -100,7 +100,7 @@ class TaskDetailVC: UIViewController {
         NetworkManager.sharedManager.getTaskDetailList(task.id) { (success, json, error) in
             
             if success == true {
-                self.makeListData   (json!)
+                self.makeListData(json!)
             }
             else {
                 
@@ -121,12 +121,13 @@ class TaskDetailVC: UIViewController {
             
         }
         
-        if let text = data["range"]["text"].string {
+        if let text = data["type"]["text"].string {
             task.type.text = text
             
         }
         
-        if let value = data["range"]["value"].string {
+        
+        if let value = data["type"]["value"].string {
             task.type.value = value
             
         }
@@ -174,39 +175,55 @@ class TaskDetailVC: UIViewController {
     }
     
     func makeListData(_ data:JSON) {
-        //顾问
-        let first = ["李琴","张芳芳","吴琼","季安安"]
-        var firstArr = [TaskDetail]()
-        for name in first {
-            let detail = TaskDetail()
-            detail.text = name
-            detail.value = "3000"
-            firstArr.append(detail)
+        
+        self.dataListArr.removeAll()
+        
+        let listKeyArray = ["adviser_list","engineer_list","customer_list"]
+        
+        for key in listKeyArray {
+            
+            if let homeLists = data[key].array {
+                let arr = BaseTableViewModelList()
+                arr.listName = ""
+                for data in homeLists {
+                    
+                    let dayModel = BaseTableViewModel()
+                    
+                    if let name = data["name"].string {
+                        dayModel.name = name
+                    }
+                    
+                    if let amount = data["amount"].string {
+                        dayModel.desc = amount
+                    }
+                    
+                    if let listModels = data["detail"].array {
+                        
+                        for listModel in listModels {
+                            
+                            let model = BaseTableViewModel()
+                            
+                            if let name = listModel["name"].string {
+                                model.name = name
+                            }
+                            
+                            if let amount = listModel["amount"].string {
+                                model.desc = amount
+                            }
+                            
+                            dayModel.hasList = true
+                            dayModel.listData.append(model)
+                        }
+                    }
+                    
+                    
+                    arr.list.append(dayModel)
+                    dataListArr.append([arr])
+                }
+                
+            }
+            
         }
-        
-        let second = ["宋丹","谢凤梅","包雪梅","黄茜","邹芳","陈婷"]
-        var secondArr = [TaskDetail]()
-        for name in second {
-            let detail = TaskDetail()
-            detail.text = name
-            detail.value = "3000"
-            secondArr.append(detail)
-        }
-        
-        let third = ["沈夏兰","郑秀文","杨洋","徐葵","吴佳晶"]
-        var thirdArr = [TaskDetail]()
-        for name in third {
-            let detail = TaskDetail()
-            detail.text = name
-            detail.value = "3000"
-            thirdArr.append(detail)
-        }
-        
-        dataListArr[0] = firstArr
-        
-        dataListArr[1] = secondArr
-        
-        dataListArr[2] = thirdArr
         
         tableView.reloadData()
 
@@ -291,24 +308,35 @@ extension TaskDetailVC:UITableViewDelegate,UITableViewDataSource {
             return cell
         }
         else {
-//            let baseModel = listArray[(indexPath as NSIndexPath).section].list[(indexPath as NSIndexPath).row]
+
+            let baseModel = data[indexPath.section - 1].list[indexPath.row]
             
             let cellId = "typeCell"
             
-            var cell = tableView.dequeueReusableCell(withIdentifier: bottomCellId) as? typeCell
+            var cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? typeCell
             cell?.selectionStyle = .none
             if cell == nil {
                 let nib = UINib(nibName: cellId, bundle: nil)
                 tableView.register(nib, forCellReuseIdentifier: cellId)
                 cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? typeCell
             }
-            let detail = data[indexPath.row]
-            cell?.leftLabel.text = detail.text
-            cell?.typeLabel.text = detail.value
-            cell?.typeLabel.textAlignment = .right
             
-
+            cell?.leftLabel.text = baseModel.name
+            cell?.typeLabel.text = baseModel.desc
+            cell?.typeLabel.textAlignment = .left
+            
+            if baseModel.hasList == true {
+                
+                cell?.accessoryView = UIImageView.xhAccessoryView()
+            }
+            else {
+                
+                cell?.accessoryView = UIImageView.xhAccessoryViewClear()
+            }
+            
             return cell!
+
+            
         }
         
     }
@@ -317,6 +345,27 @@ extension TaskDetailVC:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        if indexPath.section == 0 {
+            
+        }
+        else {
+            
+            let baseModel = data[indexPath.section - 1].list[indexPath.row]
+            
+            if baseModel.hasList == true {
+                let vc = BaseTableViewController()
+                let listArr = BaseTableViewModelList()
+                listArr.listName = ""
+                listArr.list = baseModel.listData
+                vc.listArray = [listArr]
+                vc.title = baseModel.name
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            else {
+                return
+            }
+        }
         
     }
     

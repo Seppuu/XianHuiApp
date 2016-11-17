@@ -191,7 +191,7 @@ class CreateTaskVC: BaseViewController {
         let note = cell2.profileTextView.text
 
         let hud = showHudWith(view, animated: true, mode: .indeterminate, text: "")
-        NetworkManager.sharedManager.saveTaskInBack(type, range: range, target: Int(target)!, startDate: startDate, endDate: endDate, userList: userList, note: note!) { (success, json, error) in
+        NetworkManager.sharedManager.saveTaskInBack(task.id,type:type, range: range, target: Int(target)!, startDate: startDate, endDate: endDate, userList: userList, note: note!) { (success, json, error) in
             
             if success == true {
                 hud.hide(true, afterDelay: 1.0)
@@ -322,7 +322,7 @@ class CreateTaskVC: BaseViewController {
 extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return isShowDetail == true ? 5:4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -343,8 +343,12 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
             //发起者,参与者
             return 2
         }
-        else {
+        else if section == 3 {
             //备注
+            return 1
+        }
+        else {
+            //删除
             return 1
         }
     }
@@ -565,7 +569,7 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
             
             return cell
         }
-        else {
+        else if indexPath.section == 3 {
             //备注
             let cell = tableView.dequeueReusableCell(withIdentifier: remarkCellId, for: indexPath) as! ProfileCell
             cell.profileTextView.placeholder = "备注"
@@ -580,12 +584,26 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
             
             return cell
         }
+        else {
+            //删除
+            let cell = UITableViewCell(style: .default, reuseIdentifier: "deleteCell")
+            cell.selectionStyle = .none
+            let button = UIButton(frame: cell.bounds)
+            button.setTitle("删除任务", for: .normal)
+            button.setTitleColor(UIColor.red, for: .normal)
+            cell.addSubview(button)
+            button.addTarget(self, action: #selector(CreateTaskVC.deleteTap), for: .touchUpInside)
+            
+            return cell
+            
+            
+        }
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if isShowDetail == true {
+        if isShowDetail == true  && indexPath.section != 4 {
             return
         }
         else {
@@ -642,6 +660,39 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
         
     }
     
+    
+    func deleteTap() {
+        
+        
+        let alert = UIAlertController(title: "提示", message: "确认删除任务吗?", preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler:  nil)
+        
+        let confirmAction = UIAlertAction(title: "删除", style: .destructive, handler: { (action) in
+            
+            //删除任务
+            //TODO:
+            let hud = showHudWith(self.view, animated: true, mode: .indeterminate, text: "")
+            NetworkManager.sharedManager.deleteTaskTopInBack(self.task.id, completion: { (success, json, error) in
+                hud.hide(true)
+                if success == true {
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
+                else {
+                    
+                }
+            })
+            
+            
+        })
+        
+        alert.addAction(cancelAction)
+        alert.addAction(confirmAction)
+        
+        self.present(alert, animated: true, completion: nil)
+        
+        
+    }
     
     //MARK: 时间选择功能点如下.
     fileprivate func setMinimumDateWith(_ picker:UIDatePicker,date:Date) {
@@ -795,18 +846,6 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
 }

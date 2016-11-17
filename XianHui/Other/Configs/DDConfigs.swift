@@ -325,6 +325,10 @@ var setTaskTopUrl:String {
     return DDBaseUrl + "/rest/employee/settoptask"
 }
 
+//TODO:删除任务
+var deleteTaskUrl:String {
+    return DDBaseUrl + "/rest/employee/gettaskdetail"
+}
 
 /// 用户关系管理
 

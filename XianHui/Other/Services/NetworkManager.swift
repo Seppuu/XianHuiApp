@@ -731,12 +731,13 @@ extension NetworkManager {
         baseRequestWith(urlString, dict: dict, completion: completion)
     }
     
-    //保存任务
-    func saveTaskInBack(_ type:String,range:String,target:Int,startDate:String,endDate:String,userList:String,note:String,completion:@escaping DDResultHandler) {
+    //保存,修改任务 task_id>0时修改任务，否则为添加任务
+    func saveTaskInBack(_ taskId:Int,type:String,range:String,target:Int,startDate:String,endDate:String,userList:String,note:String,completion:@escaping DDResultHandler) {
         let urlString = saveTaskUrl
         
         let dict:JSONDictionary = [
             "token":Defaults.userToken.value!,
+            "task_id":taskId,
             "type":type,
             "range":range,
             "target":target,
@@ -793,6 +794,19 @@ extension NetworkManager {
     func setTaskTopInBack(_ id:Int,completion:@escaping DDResultHandler) {
         
         let urlString = setTaskTopUrl
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!,
+            "task_id":id
+        ]
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+    }
+    
+    //删除任务
+    func deleteTaskTopInBack(_ id:Int,completion:@escaping DDResultHandler) {
+        
+        let urlString = deleteTaskUrl
         
         let dict:JSONDictionary = [
             "token":Defaults.userToken.value!,
