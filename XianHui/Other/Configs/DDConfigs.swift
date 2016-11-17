@@ -314,6 +314,12 @@ var getTaskDetailUrl:String {
     return DDBaseUrl + "/rest/employee/gettaskdetail"
 }
 
+//获取任务明细中的列表
+var getTaskDetailListUrl:String {
+    return DDBaseUrl + "/rest/employee/gettasklistdetail"
+}
+
+
 //置顶任务
 var setTaskTopUrl:String {
     return DDBaseUrl + "/rest/employee/settoptask"

@@ -41,6 +41,7 @@ class TaskDetailVC: UIViewController {
         
         setTableView()
         getTaskDetail()
+        getTaskDetailList()
         setNavBarItem()
     }
 
@@ -84,7 +85,7 @@ class TaskDetailVC: UIViewController {
         NetworkManager.sharedManager.getTaskDetail(task.id) { (success, json, error) in
             
             if success == true {
-                self.makeTableList(json!)
+                self.makeTaskDetail(json!)
             }
             else {
                 
@@ -93,7 +94,21 @@ class TaskDetailVC: UIViewController {
         
     }
     
-    func makeTableList(_ data:JSON) {
+    func getTaskDetailList() {
+        
+        
+        NetworkManager.sharedManager.getTaskDetailList(task.id) { (success, json, error) in
+            
+            if success == true {
+                self.makeListData   (json!)
+            }
+            else {
+                
+            }
+        }
+    }
+    
+    func makeTaskDetail(_ data:JSON) {
         
      
         if let text = data["range"]["text"].string {
@@ -156,7 +171,9 @@ class TaskDetailVC: UIViewController {
             task.remark = remark
         }
         
-        
+    }
+    
+    func makeListData(_ data:JSON) {
         //顾问
         let first = ["李琴","张芳芳","吴琼","季安安"]
         var firstArr = [TaskDetail]()
@@ -192,6 +209,7 @@ class TaskDetailVC: UIViewController {
         dataListArr[2] = thirdArr
         
         tableView.reloadData()
+
     }
     
     var currentIndex = 0

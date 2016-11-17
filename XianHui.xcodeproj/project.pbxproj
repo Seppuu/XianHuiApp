@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		311DC2DB1D9A09E1006EC8AB /* NSDate+DD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311DC2DA1D9A09E1006EC8AB /* NSDate+DD.swift */; };
 		311DC2DE1D9A3D01006EC8AB /* AccountManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311DC2DD1D9A3D01006EC8AB /* AccountManagerVC.swift */; };
+		37065C741DDD4C0C000134CD /* RealmMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37065C731DDD4C0C000134CD /* RealmMigration.swift */; };
 		3708C2691DA551E600D8E534 /* OrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3708C2671DA551E600D8E534 /* OrderCell.swift */; };
 		3708C26A1DA551E600D8E534 /* OrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3708C2681DA551E600D8E534 /* OrderCell.xib */; };
 		370AAEA61D49F1B3000C64D1 /* UserNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AAEA41D49F1B3000C64D1 /* UserNameCell.swift */; };
@@ -301,6 +302,7 @@
 		0677814338CEF00D20F722E0 /* Pods_XianHui.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XianHui.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		311DC2DA1D9A09E1006EC8AB /* NSDate+DD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+DD.swift"; sourceTree = "<group>"; };
 		311DC2DD1D9A3D01006EC8AB /* AccountManagerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountManagerVC.swift; sourceTree = "<group>"; };
+		37065C731DDD4C0C000134CD /* RealmMigration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmMigration.swift; sourceTree = "<group>"; };
 		3708C2671DA551E600D8E534 /* OrderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderCell.swift; sourceTree = "<group>"; };
 		3708C2681DA551E600D8E534 /* OrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderCell.xib; sourceTree = "<group>"; };
 		370AAEA41D49F1B3000C64D1 /* UserNameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNameCell.swift; sourceTree = "<group>"; };
@@ -663,6 +665,14 @@
 				311DC2DD1D9A3D01006EC8AB /* AccountManagerVC.swift */,
 			);
 			path = AccountManagerVC;
+			sourceTree = "<group>";
+		};
+		37065C721DDD4BEF000134CD /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				37065C731DDD4C0C000134CD /* RealmMigration.swift */,
+			);
+			path = Realm;
 			sourceTree = "<group>";
 		};
 		3708C2661DA551C700D8E534 /* OrderViewCell */ = {
@@ -1445,6 +1455,7 @@
 		37BAB8981D3E1012001E4680 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				37065C721DDD4BEF000134CD /* Realm */,
 				37BAB9DA1D3E124E001E4680 /* Configs */,
 				37BAB8C41D3E1045001E4680 /* Vendors */,
 				37BAB8BF1D3E1040001E4680 /* Services */,
@@ -2509,6 +2520,7 @@
 				3714307C1D9BC0350006A314 /* MyWorkDetailVC.swift in Sources */,
 				379C73811D9CAC3100B41BA6 /* CustomerCardListVC.swift in Sources */,
 				372480ED1D8151EF00B95C54 /* LCCKContactManager.m in Sources */,
+				37065C741DDD4C0C000134CD /* RealmMigration.swift in Sources */,
 				379C737E1D9CA53400B41BA6 /* Manager.swift in Sources */,
 				37BAB9B01D3E1059001E4680 /* DDPlaypartRecordAlertView.swift in Sources */,
 				378E076A1D4757CC00B67621 /* XHBarChartView.swift in Sources */,

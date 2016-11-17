@@ -8,11 +8,10 @@
 
 import UIKit
 import MBProgressHUD
-
 import SwiftyJSON
 import ChatKit
-
 import UserNotifications
+import RealmSwift
 
 
 @UIApplicationMain
@@ -25,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var remoteNotiData:[AnyHashable: Any]?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        checkRealmVersion()
         
         LCChatKit.sharedInstance().useDevPushCerticate = false
         ChatKitExample.invokeThisMethodInDidFinishLaunching()
@@ -60,6 +61,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     }
     
+    func checkRealmVersion() {
+        // 告诉 Realm 为默认的 Realm 数据库使用这个新的配置对象
+        Realm.Configuration.defaultConfiguration = RealmConfig
+        
+        // 现在我们已经告诉了 Realm 如何处理架构的变化，打开文件之后将会自动执行迁移
+        let _ = try! Realm()
+    }
+    
     //ios 10 推送注册
     func replyPushNotificationAuthorization(_ application:UIApplication) {
         
@@ -81,10 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func showLoginVC(_ vc:UIViewController) {
         
-        
-        
         let loginVC = LoginViewController()
-        //let nav = UINavigationController(rootViewController: loginVC)
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.ownSystemLoginSuccess(_:)), name: OwnSystemLoginSuccessNoti, object: nil)
         vc.navigationController?.isNavigationBarHidden = false
         vc.navigationController?.pushViewController(loginVC, animated: true)
@@ -109,8 +115,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = nav
         
         introductionVC.didSelectedEnter = {
-            //introductionVC.view.removeFromSuperview()
-            
+           
             self.showLoginVC(introductionVC)
 
         }
@@ -162,11 +167,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //first launch
             let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
             if launchedBefore  {
-                print("Not first launch.")
+                //print("Not first launch.")
             }
             else {
-                print("First launch, setting NSUserDefault.")
-                //self.setDailyReportMax()
+                //print("First launch, setting NSUserDefault.")
+                
                 UserDefaults.standard.set(true, forKey: "launchedBefore")
             }
             

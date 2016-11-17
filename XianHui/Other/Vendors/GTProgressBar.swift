@@ -164,8 +164,11 @@ public class GTProgressBar: UIView {
             leftCommpontView.layer.borderColor = barBorderColor.cgColor
             leftCommpontView.layer.borderWidth = barBorderWidth
             leftCommpontView.layer.cornerRadius =  cornerRadiusFor(view: leftCommpontView)
-            
-            progressViewframe.size.width = progressViewframe.size.width * (0.05 + _progress)
+            var leftPartWidth:CGFloat = 0.05
+            if _progress < 0.1 {
+                leftPartWidth = 0.1 - _progress
+            }
+            progressViewframe.size.width = progressViewframe.size.width * (leftPartWidth + _progress)
         }
         
         leftCommpontView.frame = progressViewframe

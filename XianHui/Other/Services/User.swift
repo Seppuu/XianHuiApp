@@ -41,6 +41,9 @@ class User:NSObject {
                 sharedUser!.levelText = Defaults.userLevelText.value!
                 sharedUser!.avatarURL = Defaults.userAvatarURL.value!
                 sharedUser!.reportType = Defaults.userReportType.value!
+                sharedUser!.orgName = Defaults.userOrgName.value!
+                sharedUser!.orgId   = Defaults.userOrgId.value!
+                
                 return sharedUser!
                 
             }
@@ -74,6 +77,11 @@ class User:NSObject {
     var userType = UserType.Default
 
     var passWord = ""
+    
+    //企业
+    var orgName = ""
+    
+    var orgId   = 0
     
     class func loginWithCode(_ mobile:String,code:String,usertype:UserLoginType,completion:@escaping ((_ user:User?,_ data:JSON?,_ error:String?)->())) {
         
@@ -117,6 +125,14 @@ class User:NSObject {
                 
                 if let avatarURL = data!["avator_url"].string  {
                     Defaults.userAvatarURL.value = avatarURL
+                }
+                
+                if let orgName = data!["org_name"].string {
+                    Defaults.userOrgName.value = orgName
+                }
+                
+                if let orgId = data!["org_id"].int {
+                    Defaults.userOrgId.value = orgId
                 }
                 
                 //获取联系人列表之后,完成登陆
@@ -229,6 +245,14 @@ class User:NSObject {
                     Defaults.userAvatarURL.value = avatarURL
                 }
                 
+                if let orgName = data?["org_name"].string {
+                    Defaults.userOrgName.value = orgName
+                }
+                
+                if let orgId = data?["org_id"].int {
+                    Defaults.userOrgId.value = orgId
+                }
+                
                 //save passWord and account for auto change account
                 Defaults.currentPassWord.value = passWord
                 Defaults.currentAccountName.value = mobile
@@ -304,6 +328,14 @@ class User:NSObject {
                 rmUser.avatarUrl = avatarUrl
             }
             
+            if let orgName = data["org_name"].string {
+                rmUser.orgName = orgName
+            }
+            
+            if let orgId = data["org_id"].int {
+                rmUser.orgId = orgId
+            }
+            
             try! realm.write {
                 realm.add(rmUser)
             }
@@ -370,7 +402,8 @@ class User:NSObject {
                 user.userName = rmUser.userName
                 user.displayName = rmUser.displayName
                 user.avatarURL = rmUser.avatarUrl
-                
+                user.orgName = rmUser.orgName
+                user.orgId   = rmUser.orgId
                 users.append(user)
             }
         }
@@ -459,6 +492,8 @@ class User:NSObject {
         Defaults.userAvatarURL.clear()
         Defaults.userLevelText.clear()
         Defaults.userReportType.clear()
+        Defaults.userOrgName.clear()
+        Defaults.userOrgId.clear()
         
         User.sharedUser = nil
         
@@ -474,6 +509,10 @@ class User:NSObject {
         self.avatarURL = ""
         
         self.clientId = ""
+        
+        self.orgName = ""
+        
+        self.orgId   = 0
         
     }
     
@@ -566,5 +605,24 @@ extension PalauDefaults {
         }
     }
     
+    
+    //企业 
+    public static var userOrgName: PalauDefaultsEntry<String> {
+        get {
+            return value("userOrgName").whenNil(use: "")
+        }
+        set {
+            
+        }
+    }
+    
+    public static var userOrgId: PalauDefaultsEntry<Int> {
+        get {
+            return value("userOrgId").whenNil(use: 0)
+        }
+        set {
+            
+        }
+    }
     
 }

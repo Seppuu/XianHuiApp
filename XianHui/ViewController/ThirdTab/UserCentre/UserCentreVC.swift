@@ -127,7 +127,7 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: AddUserAvatarCell) as! UserAvatarCell
             let user = User.currentUser()
             cell.nameLabel.text = user?.displayName
-            cell.levelTextLabel.text = ""
+            cell.levelTextLabel.text = user?.orgName
             
             if uploadingAvatar {
                 

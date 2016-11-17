@@ -22,6 +22,11 @@ class RealmUser: Object {
     
     dynamic var avatarUrl = ""
     
+    //企业
+    dynamic var orgName = ""
+    
+    dynamic var orgId = 0
+    
     //设置主键
 //    override static func primaryKey() -> String? {
 //        return "userId"

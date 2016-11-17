@@ -773,6 +773,22 @@ extension NetworkManager {
         baseRequestWith(urlString, dict: dict, completion: completion)
     }
     
+    //获取任务明细中的列表
+    func getTaskDetailList(_ id:Int,completion:@escaping DDResultHandler) {
+        
+        let urlString = getTaskDetailListUrl
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!,
+            "task_id":id
+        ]
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+    }
+
+    
+    
+    
     //置顶任务
     func setTaskTopInBack(_ id:Int,completion:@escaping DDResultHandler) {
         
