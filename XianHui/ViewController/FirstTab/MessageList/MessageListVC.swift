@@ -78,18 +78,12 @@ class MessageListVC: LCCKConversationListViewController,DZNEmptyDataSetSource, D
         self.tableView.emptyDataSetSource = self
         self.tableView.emptyDataSetDelegate = self
         
-        //setLeftBarAvatar()
         
         ChatKitExample.updateMessageListVC()
         
-//        let container = UIView(frame: self.tableView.frame)
-//        container.backgroundColor = UIColor.white
-//        let chartView = XHStackedBarChart(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 300))
-//        chartView.center = container.center
-//        
-//        container.addSubview(chartView)
-//        self.tableView.addSubview(container)
-//        chartView.updateChartData()
+        self.tableView.mj_header.endRefreshingCompletionBlock = {
+            self.hasLoadData = true
+        }
         
     }
     
@@ -162,20 +156,7 @@ class MessageListVC: LCCKConversationListViewController,DZNEmptyDataSetSource, D
         return hasLoadData
     }
     
-    override func refresh() {
-        
-        super.refresh()
-        
-        hasLoadData = true
-        
-    }
-    
-//    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        
-//        if hasLoadData == false {
-//            hasLoadData = true
-//        }
-//    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

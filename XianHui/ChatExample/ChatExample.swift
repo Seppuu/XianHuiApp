@@ -76,7 +76,7 @@ class ChatKitExample: LCChatKitExample {
 //        else {
 //            return
 //        }
-//        
+        
         NetworkManager.sharedManager.getConversationList { (success, json, error) in
             
             if success == true {
@@ -89,8 +89,9 @@ class ChatKitExample: LCChatKitExample {
                             
                         }
                     }
-                    
+
                     self.updateConvsListInLocal(with:convIDs)
+
                 }
                 
             }
@@ -98,6 +99,7 @@ class ChatKitExample: LCChatKitExample {
                 
             }
         }
+        
         
     }
     
@@ -135,6 +137,7 @@ class ChatKitExample: LCChatKitExample {
         
         LCChatKit.sharedInstance().conversationListService.configureCellBlock = {
             (cell,tableView,indexPath,conversation) in
+            
             tableView?.separatorStyle = .singleLine
             //tableView?.cellLayoutMarginsFollowReadableWidth = false
             tableView?.separatorInset = UIEdgeInsetsMake(0, 64, 0, 0)
