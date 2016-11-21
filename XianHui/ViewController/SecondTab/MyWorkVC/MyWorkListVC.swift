@@ -47,7 +47,6 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         addNoti()
         setTableView()
         setSearchBar()
-        //setSearch()
     }
 
     override func didReceiveMemoryWarning() {
@@ -197,6 +196,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
             self.getDataFromServer(self.filterParams)
         })        
 
+        
         dataHelper.cellSelectedHandler = {
             (index,objectId,objectName,obj) in
             
@@ -465,8 +465,16 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         return arr
     }
     
+    //空数据提示
     
-
+    var hasLoadData = false {
+        
+        didSet {
+            if hasLoadData == true {
+                self.tableView.reloadData()
+            }
+        }
+    }
     
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         
@@ -476,6 +484,11 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         
         return attrString
     }
+    
+    func emptyDataSetShouldDisplay(_ scrollView: UIScrollView!) -> Bool {
+        return hasLoadData
+    }
+    
     
     var pageSize = 20
     
@@ -518,15 +531,17 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         NetworkManager.sharedManager.getMyWorkListWith(params,urlString:urlString, pageSize: pageSize, pageNumber: pageNumber) { (success, json, error) in
             hideHudFrom(self.view)
             hideHudFrom(self.filterView)
+            
             if success == true {
                 if let rows = json!["rows"].array {
                     
                     if rows.count == 0 {
                         self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                        self.tableView.mj_footer.isAutomaticallyHidden = true
                     }
                     else {
                         self.tableView.mj_footer.endRefreshing()
-                        
+                        self.tableView.mj_footer.isAutomaticallyHidden = false
                         self.pageNumber += 1
                         self.jsons += rows
                         self.getDataWith(rows)
@@ -536,6 +551,9 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
             else {
                 
             }
+            
+            self.hasLoadData = true
+            
         }
 
         
@@ -697,7 +715,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
             work.rightLabelString = employee.status
             
             work.firstTagImage = UIImage(named: "place")!
-            work.secondTagImage = UIImage(named: "projectTotal")!
+            work.secondTagImage = UIImage(named: "calander")!
             work.thirdTagImage = UIImage(named: "timeTotal")!
             
             dataArray.append(work)
@@ -801,12 +819,12 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
             work.nameLabelString = p.name
             work.leftImageUrl = p.avatarUrl
             work.firstTagString = p.place
-            work.secondTagString = p.saleNum
-            work.thirdTagString = p.stockNum
+            work.secondTagString = p.stockNum
+            work.thirdTagString = p.saleNum
             work.id            = p.id
             work.firstTagImage = UIImage(named: "place")!
-            work.secondTagImage = UIImage(named: "clock")!
-            work.thirdTagImage = UIImage(named: "stockIcon")!
+            work.secondTagImage = UIImage(named: "stockIcon")!
+            work.thirdTagImage = UIImage(named: "shoppingCar")!
             
             dataArray.append(work)
             
@@ -828,6 +846,8 @@ extension MyWorkListVC:UISearchBarDelegate{
         }
         
     }
+    
+    
     
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {

@@ -71,6 +71,8 @@ class BaseTableViewController: UIViewController,DZNEmptyDataSetSource, DZNEmptyD
     }
     
     
+    
+    
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         
         let text = "暂无数据"
@@ -78,6 +80,19 @@ class BaseTableViewController: UIViewController,DZNEmptyDataSetSource, DZNEmptyD
         let attrString = NSAttributedString(string: text)
         
         return attrString
+    }
+    
+    var hasLoadData = false {
+        didSet {
+            if hasLoadData == true {
+                self.tableView.reloadData()
+            }
+            
+        }
+    }
+    
+    func emptyDataSetShouldDisplay(_ scrollView: UIScrollView!) -> Bool {
+        return hasLoadData
     }
     
     
@@ -152,6 +167,14 @@ extension BaseTableViewController:UITableViewDelegate,UITableViewDataSource {
         else {
             return
         }
+    }
+    
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if hasLoadData == false {
+            hasLoadData = true
+        }
+        
     }
 }
 

@@ -616,6 +616,7 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
                 
                 let vc = TaskOptionsVC()
                 vc.data = rangeOptions
+                vc.title = "范围"
                 vc.optionSelectedHandler = {
                     (option) in
                     self.taskRange = option
@@ -627,6 +628,7 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
                 
                 let vc = TaskOptionsVC()
                 vc.data = typeOptions
+                vc.title = "类型"
                 vc.optionSelectedHandler = {
                     (option) in
                     self.taskType = option

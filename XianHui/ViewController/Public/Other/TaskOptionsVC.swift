@@ -69,6 +69,10 @@ extension TaskOptionsVC:UITableViewDelegate,UITableViewDataSource {
         return 44
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return data[section].text
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellId = "typeCell"
         var cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? typeCell

@@ -163,10 +163,10 @@ class TaskListVC: BaseViewController {
                 }
                 
                 if let percentage = row["percentage"].float {
-//                    t.progress = CGFloat(percentage/100)
-//                    t.progressText = String(Int(percentage)) + "%"
-                    t.progress = CGFloat(100.0/100)
-                    t.progressText = String(Int(100.0)) + "%"
+                    t.progress = CGFloat(percentage/100)
+                    t.progressText = String(Int(percentage)) + "%"
+//                    t.progress = CGFloat(100.0/100)
+//                    t.progressText = String(Int(100.0)) + "%"
                 }
                 
                 if let isUpdated = row["is_update"].int {
@@ -259,8 +259,11 @@ extension TaskListVC:UITableViewDelegate,UITableViewDataSource {
         let task = listOfTask[indexPath.row]
         let vc = TaskDetailVC()
         vc.title = "进度详细"
+        task.isUpdated = false
         vc.task = task
         navigationController?.pushViewController(vc ,animated: true)
+        
+        tableView.reloadData()
         
     }
     

@@ -141,8 +141,6 @@ class MessageListVC: LCCKConversationListViewController,DZNEmptyDataSetSource, D
         setLeftBarAvatar()
     }
 
-    
-    
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         
         let text = "暂无消息"
@@ -151,6 +149,33 @@ class MessageListVC: LCCKConversationListViewController,DZNEmptyDataSetSource, D
         
         return attrString
     }
+    
+    var hasLoadData = false {
+        didSet {
+            if hasLoadData == true {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func emptyDataSetShouldDisplay(_ scrollView: UIScrollView!) -> Bool {
+        return hasLoadData
+    }
+    
+    override func refresh() {
+        
+        super.refresh()
+        
+        hasLoadData = true
+        
+    }
+    
+//    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        
+//        if hasLoadData == false {
+//            hasLoadData = true
+//        }
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -206,6 +231,7 @@ class MessageListVC: LCCKConversationListViewController,DZNEmptyDataSetSource, D
         navigationController?.pushViewController(vc, animated: true)
     }
 
+    
 
 }
 

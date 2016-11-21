@@ -192,6 +192,18 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
         return attrString
     }
     
+    var hasLoadData = false {
+        didSet {
+            if hasLoadData == true {
+                self.tableView.reloadData()
+            }
+            
+        }
+    }
+    
+    func emptyDataSetShouldDisplay(_ scrollView: UIScrollView!) -> Bool {
+        return hasLoadData
+    }
     
     
     func getOrderList() {
@@ -410,5 +422,11 @@ extension MyWorkDetailVC:UITableViewDelegate,UITableViewDataSource {
         return cell!
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if hasLoadData == false {
+            hasLoadData = true
+        }
+    }
     
 }

@@ -25,7 +25,7 @@ class TaskDetailVC: UIViewController {
     
     var data:[BaseTableViewModelList] {
         if dataListArr.count == 0 {
-            return [BaseTableViewModelList]()
+            return [BaseTableViewModelList()]
         }
         else {
             let list = dataListArr[currentIndex]
@@ -193,8 +193,8 @@ class TaskDetailVC: UIViewController {
                         dayModel.name = name
                     }
                     
-                    if let amount = data["amount"].string {
-                        dayModel.desc = amount
+                    if let amount = data["amount"].int {
+                        dayModel.desc = String(amount)
                     }
                     
                     if let listModels = data["detail"].array {
@@ -207,8 +207,8 @@ class TaskDetailVC: UIViewController {
                                 model.name = name
                             }
                             
-                            if let amount = listModel["amount"].string {
-                                model.desc = amount
+                            if let amount = listModel["amount"].int {
+                                model.desc = String(amount)
                             }
                             
                             dayModel.hasList = true
@@ -218,9 +218,9 @@ class TaskDetailVC: UIViewController {
                     
                     
                     arr.list.append(dayModel)
-                    dataListArr.append([arr])
+                    
                 }
-                
+                dataListArr.append([arr])
             }
             
         }
@@ -252,7 +252,7 @@ extension TaskDetailVC:UITableViewDelegate,UITableViewDataSource {
             return 1
         }
         else {
-            return data.count
+            return data[section - 1].list.count
         }
     }
     
@@ -304,6 +304,13 @@ extension TaskDetailVC:UITableViewDelegate,UITableViewDataSource {
             cell.nameLabel.text = "范围:" + task.range.text + "  类型:" + task.type.text + "  截止:" + "11-31"
             cell.progressLabel.text = task.progressText
             cell.progressView.progress = task.progress
+            
+            if task.isUpdated == false {
+                cell.unReadView.alpha = 0.0
+            }
+            else {
+                cell.unReadView.alpha = 1.0
+            }
             
             return cell
         }
