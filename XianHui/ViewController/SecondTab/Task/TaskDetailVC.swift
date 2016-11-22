@@ -236,8 +236,6 @@ class TaskDetailVC: UIViewController {
         tableView.reloadData()
     }
     
-    
-    
 
 }
 
@@ -301,9 +299,13 @@ extension TaskDetailVC:UITableViewDelegate,UITableViewDataSource {
             
             cell.layoutMargins = UIEdgeInsetsMake(0, 76, 0, 0)
             cell.avatarImageView.image = UIImage(named: "TaskIcon")
-            cell.nameLabel.text = "范围:" + task.range.text + "  类型:" + task.type.text + "  截止:" + "11-31"
             cell.progressLabel.text = task.progressText
             cell.progressView.progress = task.progress
+            
+            let formmat = DateFormatter()
+            formmat.dateFormat = "MM-dd"
+            
+            cell.nameLabel.text = "范围:" + task.range.text + "  类型:" + task.type.text + "  截止:" + formmat.string(from: task.endDate)
             
             if task.isUpdated == false {
                 cell.unReadView.alpha = 0.0

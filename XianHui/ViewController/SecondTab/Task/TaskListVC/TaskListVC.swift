@@ -178,6 +178,19 @@ class TaskListVC: BaseViewController {
                     }
                 }
                 
+                if let startDate = row["start_date"].string {
+                    t.startDateString = startDate
+                }
+                
+                if let endDate = row["end_date"].string {
+                    t.endDateString = endDate
+                }
+                
+                if let publishDate = row["publish_date"].string {
+                    t.publishDateString = publishDate
+                }
+                
+                
                 listOfTask.append(t)
             }
         }
@@ -237,7 +250,13 @@ extension TaskListVC:UITableViewDelegate,UITableViewDataSource {
         
         cell.layoutMargins = UIEdgeInsetsMake(0, 76, 0, 0)
         cell.avatarImageView.image = UIImage(named: "TaskIcon")
-        cell.nameLabel.text = "范围:" + task.range.text + "  类型:" + task.type.text + "  截止:" + "11-31"
+        
+        let formmat = DateFormatter()
+        formmat.dateFormat = "MM-dd"
+        
+        cell.nameLabel.text = "范围:" + task.range.text + "  类型:" + task.type.text + "  截止:" + formmat.string(from: task.endDate)
+            
+        
         cell.progressLabel.text = task.progressText
         cell.progressView.progress = task.progress
         

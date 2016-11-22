@@ -26,4 +26,9 @@
 - (void)lcck_setupForceReconect;
 - (void)lcck_setupOpenConversation;
 - (void)lcck_setupConversationsCellOperation;
+- (void)lcck_exampleOpenProfileForUser:(id<LCCKUserDelegate>)user
+                                userId:(NSString *)userId
+                      parentController:(__kindof UIViewController *)parentController;
+    
+    
 @end

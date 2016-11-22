@@ -48,7 +48,10 @@ class CreateTaskVC: BaseViewController {
     
     var beginDate = Date() {
         didSet {
-            delayEndDate()
+            if isShowDetail == true {
+               delayEndDate()
+            }
+            
         }
     }
     
@@ -76,10 +79,8 @@ class CreateTaskVC: BaseViewController {
             setData()
         }
         else {
-            
+            delayEndDate()
         }
-        
-        delayEndDate()
         
         setTableView()
         getTaskOptions()
@@ -117,6 +118,7 @@ class CreateTaskVC: BaseViewController {
     }
     
     func setEditMenu() {
+        navigationItem.rightBarButtonItems?.removeAll()
         let rightBarItem = UIBarButtonItem(title: "修改", style: UIBarButtonItemStyle.plain, target: self, action: #selector(CreateTaskVC.showEditMode))
         navigationItem.rightBarButtonItem = rightBarItem
     }
@@ -315,6 +317,7 @@ class CreateTaskVC: BaseViewController {
         
         remark = task.remark
         
+        
     }
 
 }
@@ -461,15 +464,18 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
                     let timePickerCell = tableView.dequeueReusableCell(withIdentifier: datePickerCellId, for: indexPath) as! pickerCell
                     let picker = timePickerCell.datePickerView
                     if isBegin == true {
+                        picker?.date = beginDate
+                        //不需要设置最早时间
                         //开始时间的最早时间是当前时间.
-                        let date = Date()
-                        setMinimumDateWith(picker!, date: date)
+                        //let date = beginDate
+                       // setMinimumDateWith(picker!, date: date)
                         
                     }
                     else {
-                        //结束时间的最早时间是开始时间的延后一个小时.
-                        let timeInterval:Double = 1*60*60 //一小时
-                        let date = Date(timeInterval: timeInterval, since: beginDate)
+                        picker?.date = endDate
+                        //结束时间的最早时间是开始时间的延后一天.
+                        //let timeInterval:Double = 1*60*60*24 //一小时
+                        let date = endDate
                         setMinimumDateWith(picker!, date: date)
                     }
                     
@@ -483,6 +489,8 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
                     
                     return timePickerCell
                 }
+            
+            
             
             if showBeginTimePicker == true {
                 if indexPath.row == 0 {
@@ -520,20 +528,13 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
         }
         else if indexPath.section == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: timeSelectCellId, for: indexPath) as! typeCell
-            if (indexPath as NSIndexPath).row == 0 {
+            if indexPath.row == 0 {
                 cell.leftLabel.text = "发布时间"
-                
+                cell.accessoryView = nil
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "MM月dd日"
                 
-                if isShowDetail == true {
-                    cell.typeLabel.text = dateFormatter.string(from: publishDate)
-                }
-                else {
-                    
-                    cell.typeLabel.text = dateFormatter.string(from: Date())
-                }
-                
+                cell.typeLabel.text = dateFormatter.string(from: publishDate)
             }
             else {
                 cell.leftLabel.text = "参与者"

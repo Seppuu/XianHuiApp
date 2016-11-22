@@ -100,10 +100,19 @@ class EmployeeProfileVC: BaseProfileViewController {
     var objectId:Int!
     var objectName = ""
     
+    var isShowRightBar = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setNavBarItem()
+        if isShowRightBar == true {
+            
+           setNavBarItem()
+        }
+        else {
+            
+        }
+        
     }
     
     func setNavBarItem() {

@@ -84,7 +84,7 @@
                   moduleName = "XianHui"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Dan/Documents/XianHuiApp/XianHui/ViewController/ThirdTab/UserCentre/UserCentreVC.swift"
-                  timestampString = "501488569.725441"
+                  timestampString = "501496290.843814"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "137"
@@ -99,7 +99,7 @@
                   moduleName = "XianHui"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Dan/Documents/XianHuiApp/XianHui/ViewController/ThirdTab/UserCentre/UserCentreVC.swift"
-                  timestampString = "501488569.727338"
+                  timestampString = "501496290.845411"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "137"
@@ -107,6 +107,22 @@
                   offsetFromSymbolStart = "1932">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "XianHui/ChatExample/LCChatKitExample.m"
+            timestampString = "501489129.794909"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "269"
+            endingLineNumber = "269"
+            landmarkName = "-exampleOpenProfileForUser:userId:parentController:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

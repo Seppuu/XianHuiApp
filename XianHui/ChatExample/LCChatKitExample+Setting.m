@@ -486,12 +486,12 @@ setLoadLatestMessagesHandler:^(LCCKConversationViewController *conversationContr
         title = [NSString stringWithFormat:@"打开自己的主页 \nClientId是 : %@", userId];
         subtitle = [NSString stringWithFormat:@"我自己的name是 : %@", user.name];
     }
-    else if ([parentController isKindOfClass:[LCCKConversationViewController class]]) {
-        LCCKConversationViewController *conversationViewController_ =
-        [[LCCKConversationViewController alloc] initWithPeerId:user.clientId ?: userId];
-        [[self class] lcck_pushToViewController:conversationViewController_];
-        return;
-    }
+//    else if ([parentController isKindOfClass:[LCCKConversationViewController class]]) {
+//        LCCKConversationViewController *conversationViewController_ =
+//        [[LCCKConversationViewController alloc] initWithPeerId:user.clientId ?: userId];
+//        [[self class] lcck_pushToViewController:conversationViewController_];
+//        return;
+//    }
     [LCCKUtil showNotificationWithTitle:title
                                subtitle:subtitle
                                    type:LCCKMessageNotificationTypeMessage];

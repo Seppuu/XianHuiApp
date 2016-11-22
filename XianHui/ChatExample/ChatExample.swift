@@ -393,6 +393,32 @@ class ChatKitExample: LCChatKitExample {
         
     }
     
+    //会话点击左右头像
+    override func lcck_exampleOpenProfile(forUser user: LCCKUserDelegate!, userId: String!, parentController: UIViewController!) {
+        let clientId = userId
+        if let user = User.getUserBy(clientId!) {
+            
+            if let id = user.userId.toInt() {
+                NetworkManager.sharedManager.getEmployeeDetailWith(id, completion: { (success, json, error) in
+                    // hud.hide(true)
+                    if success == true {
+                        let vc = EmployeeProfileVC()
+                        vc.isShowRightBar = false
+                        vc.title = "详细资料"
+                        vc.type = .employee
+                        vc.profileJSON = json!
+                        vc.profileDetailJSON = json!
+                        
+                        parentController.navigationController?.pushViewController(vc, animated: true)
+                    }
+                    
+                })
+            }
+        }
+        
+        
+    }
+    
     //会话点击右上icon,进入详细资料.
     override func lcck_setupOpenConversation() {
         
@@ -428,6 +454,7 @@ class ChatKitExample: LCChatKitExample {
                                    // hud.hide(true)
                                     if success == true {
                                         let vc = EmployeeProfileVC()
+                                        vc.isShowRightBar = false
                                         vc.title = "详细资料"
                                         vc.type = .employee
                                         vc.profileJSON = json!

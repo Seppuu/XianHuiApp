@@ -142,7 +142,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func openLeanCloudIMWith(_ clientId:String,autoLogin:Bool) {
         
         if let currentVC = self.window?.visibleViewController{
-            //let _ = showHudWith(currentVC.view, animated: true, mode: .indeterminate, text: "")
+            //继续显示启动页图片
             if let launchImage = appLaunchImage() {
                 let imageView = UIImageView(frame: currentVC.view.bounds)
                 imageView.image = launchImage
