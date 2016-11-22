@@ -496,14 +496,15 @@ extension NetworkManager {
     }
     
     //我的工作四种列表
-    func getMyWorkListWith(_ params:JSONDictionary,urlString:String,pageSize:Int,pageNumber:Int,completion:@escaping DDResultHandler) {
+    func getMyWorkListWith(_ searchText:String ,params:JSONDictionary,urlString:String,pageSize:Int,pageNumber:Int,completion:@escaping DDResultHandler) {
         
         let urlString = urlString
         
         var dict:JSONDictionary = [
             "token":Defaults.userToken.value!,
             "pageSize":pageSize,
-            "pageNumber":pageNumber
+            "pageNumber":pageNumber,
+            "searchText":searchText
         ]
         
         dict += params

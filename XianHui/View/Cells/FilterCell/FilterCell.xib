@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,6 +18,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日期" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Fc-kU-gso">
+                        <rect key="frame" x="0.0" y="6" width="80" height="28"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -24,8 +28,8 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="6Fc-kU-gso" secondAttribute="trailing" id="2GU-Nk-Ewx"/>
                 <constraint firstItem="6Fc-kU-gso" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="3su-e3-Q7S"/>
-                <constraint firstAttribute="bottom" secondItem="6Fc-kU-gso" secondAttribute="bottom" id="alK-ND-afa"/>
-                <constraint firstItem="6Fc-kU-gso" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="fE2-Fb-QJf"/>
+                <constraint firstAttribute="bottom" secondItem="6Fc-kU-gso" secondAttribute="bottom" constant="6" id="alK-ND-afa"/>
+                <constraint firstItem="6Fc-kU-gso" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="6" id="fE2-Fb-QJf"/>
             </constraints>
             <connections>
                 <outlet property="titleLabel" destination="6Fc-kU-gso" id="IPN-L8-dSa"/>

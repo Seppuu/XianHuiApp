@@ -38,8 +38,6 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     
     var searchResults = [MyWorkObject]()
     
-    var searchedObjId = [Int]()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -129,6 +127,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     
     func setSearch() {
         
+        isSearch = true
         //move tableView into superVC
         tableView.removeFromSuperview()
         dataHelper.dataArray = searchResults
@@ -138,11 +137,11 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         
         tableView.mj_footer.removeFromSuperview()
         
-        
     }
     
     func reSetTableView() {
         
+        isSearch = false
         tableView.removeFromSuperview()
         dataHelper.dataArray = originalDatas
         tableView.reloadData()
@@ -224,7 +223,6 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         }
         else if self.type == .employee {
             
-            
             let vc = EmployeeProfileVC()
             vc.title = "详细资料"
             vc.type = self.type
@@ -235,7 +233,6 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
             vc.objectName = objName
             
             self.parentNavigationController?.pushViewController(vc, animated: true)
-            
             
         }
         else if self.type == .project {
@@ -258,7 +255,6 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
                     
                 }
             })
-            
             
         }
         else if self.type == .prod {
@@ -478,7 +474,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         
-        let text = "暂无数据"
+        let text =  isSearch == true ? "无结果":"暂无数据"
         
         let attrString = NSAttributedString(string: text)
         
@@ -493,6 +489,17 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     var pageSize = 20
     
     var pageNumber = 1
+    
+    
+    var searchText = "" {
+        didSet {
+            //当前是搜索模式
+            self.searchResults.removeAll()
+            self.getDataFromServer(self.filterParams)
+        }
+    }
+    
+    var isSearch = false
     
     var totalUnit:String {
         
@@ -528,7 +535,17 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
             urlString = GetMyWorkProdUrl
         }
         
-        NetworkManager.sharedManager.getMyWorkListWith(params,urlString:urlString, pageSize: pageSize, pageNumber: pageNumber) { (success, json, error) in
+        var pageSize = self.pageSize
+        
+        var pageNumber = self.pageNumber
+        
+        //如果是搜索情况的时候,不需要分页.
+        if isSearch == true {
+            pageSize = 10000
+            pageNumber = 1
+        }
+        
+        NetworkManager.sharedManager.getMyWorkListWith(searchText,params:params,urlString:urlString, pageSize: pageSize, pageNumber: pageNumber) { (success, json, error) in
             hideHudFrom(self.view)
             hideHudFrom(self.filterView)
             
@@ -542,8 +559,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
                     else {
                         self.tableView.mj_footer.endRefreshing()
                         self.tableView.mj_footer.isAutomaticallyHidden = false
-                        self.pageNumber += 1
-                        self.jsons += rows
+                        
                         self.getDataWith(rows)
                     }
                 }
@@ -574,7 +590,17 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
             dataArray = getProductionData(datas)
         }
         
-        self.originalDatas += dataArray
+        if isSearch == true {
+            self.searchResults += dataArray
+        }
+        else {
+            
+            self.pageNumber += 1
+            self.jsons += datas
+            self.originalDatas += dataArray
+        }
+        
+        
         
         tableView.reloadData()
         
@@ -840,19 +866,24 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
 extension MyWorkListVC:UISearchBarDelegate{
     
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if let searchText = searchBar.text {
-            updateFilteredContentFor(searchText)
-        }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
+        if let searchText = searchBar.text {
+            getSearchResultFormBack(searchText)
+        }
     }
-    
-    
     
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         
         tableView.reloadData()
+    }
+    
+    
+    func getSearchResultFormBack(_ searchString:String) {
+        
+        searchText = searchString
+        
     }
     
     

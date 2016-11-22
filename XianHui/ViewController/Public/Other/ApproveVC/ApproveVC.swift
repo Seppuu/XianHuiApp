@@ -50,6 +50,7 @@ class bottomSubmitView: UIView {
     }
 }
 
+//审核页面
 class ApproveVC: BaseViewController {
 
     var bottomTableView:UITableView!

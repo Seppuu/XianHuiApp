@@ -224,12 +224,12 @@ extension XHSideFilterView:UICollectionViewDelegate,UICollectionViewDelegateFlow
         
         let threePiecesWidth = floor(((self.ddWidth) - 4*10) / 3)
         
-        return CGSize(width: threePiecesWidth, height: 35)
+        return CGSize(width: threePiecesWidth, height: 40)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        return UIEdgeInsetsMake(15, 10, 0, 10)
+        return UIEdgeInsetsMake(3, 10, 0, 10)
         
     }
     
@@ -239,7 +239,7 @@ extension XHSideFilterView:UICollectionViewDelegate,UICollectionViewDelegateFlow
     
     //上下间距
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 15.0
+        return 3.0
     }
     
     // 设置Header的尺寸
@@ -340,9 +340,6 @@ extension XHSideFilterView:UICollectionViewDelegate,UICollectionViewDelegateFlow
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! FilterCell
         
-        cell.layer.cornerRadius = 4
-        cell.layer.masksToBounds = true
-        
         cell.subviews.forEach { (view) in
             
             if view.tag == 10 || view.tag == 20 {
@@ -350,11 +347,11 @@ extension XHSideFilterView:UICollectionViewDelegate,UICollectionViewDelegateFlow
             }
         }
         
-        let model = dataArray[(indexPath as NSIndexPath).section].list[(indexPath as NSIndexPath).row]
+        let model = dataArray[indexPath.section].list[indexPath.row]
         
         cell.titleLabel.text = model.name
         let selectImage = UIImage(named: "filterCellSelected")
-        let selectImgaeView = UIImageView(frame: CGRect(x: 0, y: 0, width: 14, height: 14))
+        let selectImgaeView = UIImageView(frame: CGRect(x: 0, y: 6, width: 14, height: 14))
         selectImgaeView.tag = 10
         selectImgaeView.image = selectImage
         cell.addSubview(selectImgaeView)
@@ -365,18 +362,22 @@ extension XHSideFilterView:UICollectionViewDelegate,UICollectionViewDelegateFlow
             selectImgaeView.alpha = 0.0
         }
         
-        let borderView = UIView(frame: cell.bounds)
+        cell.titleLabel.layer.cornerRadius = 4
+        cell.titleLabel.layer.masksToBounds = true
+        
+        let borderView = UIView(frame: CGRect(x: 0, y: 6, width: cell.titleLabel.ddWidth, height: cell.titleLabel.ddHeight))
         borderView.tag = 20
-        borderView.backgroundColor = UIColor.clear
+        borderView.layer.cornerRadius = 4
+        borderView.layer.masksToBounds = true
         cell.addSubview(borderView)
         cell.insertSubview(borderView, at: 0)
         
         if model.disabled == true {
-            borderView.backgroundColor = UIColor.white
-            borderView.addDashedBorder(UIColor.init(hexString: "CACEDD"), lineWidth: 2.0)
+             borderView.backgroundColor = UIColor.white
+             borderView.addDashedBorder(UIColor.init(hexString: "CACEDD"), lineWidth: 2.0)
         }
         else {
-            borderView.backgroundColor = UIColor.init(hexString: "F1F2F6")
+             borderView.backgroundColor = UIColor.init(hexString: "F1F2F6")
             
         }
         
@@ -385,7 +386,7 @@ extension XHSideFilterView:UICollectionViewDelegate,UICollectionViewDelegateFlow
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //TODO:once selected one .reload all data ,check if multiple select enable
-        let model = dataArray[(indexPath as NSIndexPath).section].list[(indexPath as NSIndexPath).row]
+        let model = dataArray[indexPath.section].list[indexPath.row]
         
         if model.disabled == true {
 //            let hud = showHudWith(self, animated: true, mode: .Text, text: "条件不存在")
