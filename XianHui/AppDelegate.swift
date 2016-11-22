@@ -142,7 +142,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func openLeanCloudIMWith(_ clientId:String,autoLogin:Bool) {
         
         if let currentVC = self.window?.visibleViewController{
-            let _ = showHudWith(currentVC.view, animated: true, mode: .indeterminate, text: "")
+            //let _ = showHudWith(currentVC.view, animated: true, mode: .indeterminate, text: "")
+            if let launchImage = appLaunchImage() {
+                let imageView = UIImageView(frame: currentVC.view.bounds)
+                imageView.image = launchImage
+                currentVC.view.addSubview(imageView)
+                
+            }
         }
         
         ChatKitExample.invokeThisMethodAfterLoginSuccess(withClientId: clientId, success: {

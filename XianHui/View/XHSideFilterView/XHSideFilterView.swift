@@ -365,7 +365,7 @@ extension XHSideFilterView:UICollectionViewDelegate,UICollectionViewDelegateFlow
         cell.titleLabel.layer.cornerRadius = 4
         cell.titleLabel.layer.masksToBounds = true
         
-        let borderView = UIView(frame: CGRect(x: 0, y: 6, width: cell.titleLabel.ddWidth, height: cell.titleLabel.ddHeight))
+        let borderView = UIView(frame: CGRect(x: 0, y: 6, width: cell.ddWidth, height: cell.titleLabel.bounds.size.height))
         borderView.tag = 20
         borderView.layer.cornerRadius = 4
         borderView.layer.masksToBounds = true
