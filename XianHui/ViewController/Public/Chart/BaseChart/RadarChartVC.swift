@@ -78,7 +78,7 @@ class RadarChartVC: UIViewController, TKRadarChartDataSource,TKRadarChartDelegat
         chartView = TKRadarChart(frame:chartContainer.bounds)
         chartView.configuration.radius = w/3.5
         chartView.configuration.showBorder = true
-        chartView.configuration.showPoint = false
+        chartView.configuration.showPoint = true
         chartView.configuration.maxValue = 100.00
         chartView.configuration.minValue = 0.00
         chartView.dataSource = self
@@ -178,7 +178,7 @@ class RadarChartVC: UIViewController, TKRadarChartDataSource,TKRadarChartDelegat
     }
     
     func numberOfStepForRadarChart(_ radarChart: TKRadarChart) -> Int {
-        return 1
+        return 5
     }
     func numberOfRowForRadarChart(_ radarChart: TKRadarChart) -> Int {
         self.topDayLabel.text = form.date
@@ -209,7 +209,7 @@ class RadarChartVC: UIViewController, TKRadarChartDataSource,TKRadarChartDelegat
     }
     
     func colorOfLineForRadarChart(_ radarChart: TKRadarChart) -> UIColor {
-        return UIColor ( red: 224/255, green: 205/255, blue: 177/255, alpha: 1.0 )
+        return UIColor.init(hexString: "BEAC94")
     }
     
     func colorOfFillStepForRadarChart(_ radarChart: TKRadarChart, step: Int) -> UIColor {
@@ -219,9 +219,9 @@ class RadarChartVC: UIViewController, TKRadarChartDataSource,TKRadarChartDelegat
     
     func colorOfSectionFillForRadarChart(_ radarChart: TKRadarChart, section: Int) -> UIColor {
         if section == 0 {
-            return  UIColor ( red: 211/255, green: 184/255, blue: 141/255, alpha: 1.0 )
+            return  UIColor ( red: 214/255, green: 182/255, blue: 143/255, alpha: 0.6 )
         } else {
-            return UIColor ( red: 133/255, green: 96/255, blue: 73/255, alpha: 0.8 )
+            return UIColor ( red: 152/255, green: 117/255, blue: 95/255, alpha: 0.6 )
             
         }
         
@@ -229,7 +229,13 @@ class RadarChartVC: UIViewController, TKRadarChartDataSource,TKRadarChartDelegat
     
     func colorOfSectionBorderForRadarChart(_ radarChart: TKRadarChart, section: Int) -> UIColor {
 
-        return UIColor.clear
+        if section == 0 {
+            return UIColor ( red: 214/255, green: 182/255, blue: 143/255, alpha: 1.0 )
+        }
+        else {
+            return UIColor ( red: 152/255, green: 117/255, blue: 95/255, alpha:1.0 )
+        }
+        
     }
 
 
