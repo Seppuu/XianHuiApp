@@ -12,6 +12,15 @@
             symbolName = "-[NSException raise]"
             moduleName = "">
             <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[NSException raise]"
+                  moduleName = "CoreFoundation"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -75,12 +84,12 @@
                   moduleName = "XianHui"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Dan/Documents/XianHuiApp/XianHui/ViewController/ThirdTab/UserCentre/UserCentreVC.swift"
-                  timestampString = "501559012.66925"
+                  timestampString = "501568299.058274"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "137"
                   endingLineNumber = "137"
-                  offsetFromSymbolStart = "2305">
+                  offsetFromSymbolStart = "1792">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -90,12 +99,12 @@
                   moduleName = "XianHui"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Dan/Documents/XianHuiApp/XianHui/ViewController/ThirdTab/UserCentre/UserCentreVC.swift"
-                  timestampString = "501559012.671295"
+                  timestampString = "501568299.060498"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "137"
                   endingLineNumber = "137"
-                  offsetFromSymbolStart = "2489">
+                  offsetFromSymbolStart = "1932">
                </Location>
             </Locations>
          </BreakpointContent>

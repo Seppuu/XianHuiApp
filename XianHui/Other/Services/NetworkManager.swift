@@ -504,7 +504,7 @@ extension NetworkManager {
             "token":Defaults.userToken.value!,
             "pageSize":pageSize,
             "pageNumber":pageNumber,
-            "searchText":searchText
+            "keyword":searchText
         ]
         
         dict += params
