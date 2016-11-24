@@ -98,4 +98,11 @@ extension String {
         return (self as NSString).appendingPathComponent(path)
     }
     
+    
+    func removeSpecialCharsFromString() -> String {
+        let okayChars : Set<Character> =
+            Set("abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLKMNOPQRSTUVWXYZ1234567890+-*=().:!_".characters)
+        return String(self.characters.filter {okayChars.contains($0) })
+    }
+    
 }

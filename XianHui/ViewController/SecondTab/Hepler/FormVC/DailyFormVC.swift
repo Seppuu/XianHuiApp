@@ -20,12 +20,84 @@ class DailyFormVC: RadarChartVC {
         super.viewDidLoad()
         
         getDailyReportDataWith(noticeId)
+        setBarItem()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(PieViewController.showDot), name: NeedUpdateMaxValueNoti, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(PieViewController.disMissDot), name: NoNeedUpdateMaxValueNoti, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
     }
+    
+    var rightBarItem = UIBarButtonItem()
+    
+    var dot = UIView()
+    
+    private let dotWidth:CGFloat = 6
+    
+    var isShowDot = false {
+        didSet {
+            if isShowDot == true {
+                dot.alpha = 1.0
+            }
+            else {
+                dot.alpha = 0.0
+            }
+        }
+    }
+    
+    func showDot() {
+        
+        isShowDot = true
+    }
+    
+    func disMissDot() {
+        
+        isShowDot = false
+    }
+    
+    func setBarItem() {
+        
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 21))
+        button.setTitle("设置", for: .normal)
+        
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        button.setTitleColor(UIColor.white, for: UIControlState())
+        button.addTarget(self, action: #selector(DailyFormVC.settingTap(_:)), for: .touchUpInside)
+        rightBarItem = UIBarButtonItem(customView: button)
+        
+        dot = UIView(frame: CGRect(x: 40 - dotWidth , y: 0, width: dotWidth, height: dotWidth))
+        dot.layer.cornerRadius = dotWidth/2
+        dot.layer.masksToBounds = true
+        dot.backgroundColor = UIColor.red
+        dot.alpha = 0.0
+        button.addSubview(dot)
+        navigationItem.rightBarButtonItem = rightBarItem
+        
+        
+    }
+    
+    
+    func settingTap(_ sender:UIBarButtonItem) {
+        
+        let vc = FormSettingVC()
+        
+        vc.saveCompletion = {
+            
+            //设置完之后,重新刷新UI.
+            self.getDailyReportDataWith(self.noticeId)
+        }
+        
+        vc.title = "设置"
+        
+        let nav = UINavigationController(rootViewController: vc)
+        
+        self.present(nav, animated: true, completion: nil)
+    }
+    
     
     var formToday:Form {
         if formList.count > 0 {

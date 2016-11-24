@@ -499,8 +499,14 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         didSet {
             //当前是搜索模式
             self.searchResults.removeAll()
-            let _ = showHudWith(tableView, animated: true, mode: .indeterminate, text: "")
-            self.getDataFromServer(self.filterParams)
+           // let _ = showHudWith(tableView, animated: true, mode: .indeterminate, text: "")
+            if searchText != "" {
+               self.getDataFromServer(self.filterParams)
+            }
+            else {
+                self.tableView.reloadData()
+            }
+            
         }
     }
 
@@ -554,7 +560,6 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         NetworkManager.sharedManager.getMyWorkListWith(searchText,params:params,urlString:urlString, pageSize: pageSize, pageNumber: pageNumber) { (success, json, error) in
             hideHudFrom(self.view)
             hideHudFrom(self.filterView)
-            hideHudFrom(self.tableView)
             if success == true {
                 if let rows = json!["rows"].array {
                     
@@ -870,17 +875,19 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
 extension MyWorkListVC:UISearchBarDelegate{
     
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
-        if let searchText = searchBar.text {
-            getSearchResultFormBack(searchText)
-        }
-    }
-    
-    
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         
         tableView.reloadData()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if let searchText = searchBar.text  {
+            
+            getSearchResultFormBack(searchText)
+          
+            
+        }
     }
     
     

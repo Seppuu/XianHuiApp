@@ -56,6 +56,8 @@
 		372480ED1D8151EF00B95C54 /* LCCKContactManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 372480D31D8151EF00B95C54 /* LCCKContactManager.m */; };
 		372480EE1D8151EF00B95C54 /* NSObject+LCCKHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 372480D71D8151EF00B95C54 /* NSObject+LCCKHUD.m */; };
 		372962991D40AF6500A947B4 /* BKPasscodeView.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3729629B1D40AF6500A947B4 /* BKPasscodeView.strings */; };
+		372F45BE1DE573FF001101D8 /* MIDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372F45BC1DE573FF001101D8 /* MIDatePicker.swift */; };
+		372F45BF1DE573FF001101D8 /* MIDatePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 372F45BD1DE573FF001101D8 /* MIDatePicker.xib */; };
 		372FAB0A1DD15F96007F1CA0 /* XHStackedChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372FAB091DD15F96007F1CA0 /* XHStackedChartViewController.swift */; };
 		3730EC571DC717E80071E715 /* TKRadarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730EC561DC717E80071E715 /* TKRadarChart.swift */; };
 		37367B6F1D6AD96B00479E39 /* CustomerCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37367B6E1D6AD96B00479E39 /* CustomerCardView.swift */; };
@@ -369,6 +371,8 @@
 		372480D61D8151EF00B95C54 /* NSObject+LCCKHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+LCCKHUD.h"; sourceTree = "<group>"; };
 		372480D71D8151EF00B95C54 /* NSObject+LCCKHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+LCCKHUD.m"; sourceTree = "<group>"; };
 		3729629A1D40AF6500A947B4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BKPasscodeView.strings"; sourceTree = "<group>"; };
+		372F45BC1DE573FF001101D8 /* MIDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDatePicker.swift; sourceTree = "<group>"; };
+		372F45BD1DE573FF001101D8 /* MIDatePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MIDatePicker.xib; sourceTree = "<group>"; };
 		372FAB091DD15F96007F1CA0 /* XHStackedChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHStackedChartViewController.swift; sourceTree = "<group>"; };
 		3730EC561DC717E80071E715 /* TKRadarChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKRadarChart.swift; sourceTree = "<group>"; };
 		37367B6E1D6AD96B00479E39 /* CustomerCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerCardView.swift; sourceTree = "<group>"; };
@@ -924,6 +928,15 @@
 				372480D71D8151EF00B95C54 /* NSObject+LCCKHUD.m */,
 			);
 			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		372F45BB1DE573FF001101D8 /* MIDatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				372F45BC1DE573FF001101D8 /* MIDatePicker.swift */,
+				372F45BD1DE573FF001101D8 /* MIDatePicker.xib */,
+			);
+			path = MIDatePicker;
 			sourceTree = "<group>";
 		};
 		37367B6D1D6AD95700479E39 /* CustomerCardView */ = {
@@ -1483,6 +1496,7 @@
 		37BAB8C41D3E1045001E4680 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				372F45BB1DE573FF001101D8 /* MIDatePicker */,
 				375C6E141DD4480800B208BE /* GTProgressBar.swift */,
 				3730EC561DC717E80071E715 /* TKRadarChart.swift */,
 				37A00DB31DC1E74500E00CA7 /* RAReorderableLayout */,
@@ -2290,6 +2304,7 @@
 				3776B9181D93A83900A9C9DB /* LoginByPhoneVC.xib in Resources */,
 				37BAB99C1D3E1059001E4680 /* typeCell.xib in Resources */,
 				37BAB99A1D3E1059001E4680 /* SwitchCell.xib in Resources */,
+				372F45BF1DE573FF001101D8 /* MIDatePicker.xib in Resources */,
 				37BAB9921D3E1059001E4680 /* pickerCell.xib in Resources */,
 				37BAB9AC1D3E1059001E4680 /* WorkCell.xib in Resources */,
 				37D46F871D6FD5D100A0BBCE /* GoodDetail.xib in Resources */,
@@ -2509,6 +2524,7 @@
 				37159E411D81082E00542B57 /* Form.swift in Sources */,
 				371041EF1DC09C0E00BE20F9 /* PalauEntry.swift in Sources */,
 				37BAB8EB1D3E1045001E4680 /* MLPAutoCompleteTextField.m in Sources */,
+				372F45BE1DE573FF001101D8 /* MIDatePicker.swift in Sources */,
 				37B791501D51D4230032C164 /* UITableView+DD.swift in Sources */,
 				371430741D9B8D8D0006A314 /* MyWorkListHepler.swift in Sources */,
 				37C1F39B1DB9C9410029D776 /* UILabel+ContentSize.m in Sources */,

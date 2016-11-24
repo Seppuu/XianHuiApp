@@ -14,7 +14,7 @@ import SwiftyJSON
 
 //创建任务页面同时也是任务资料页面
 
-class CreateTaskVC: BaseViewController {
+class CreateTaskVC: BaseViewController{
     
     var tableView: UITableView!
     
@@ -48,7 +48,7 @@ class CreateTaskVC: BaseViewController {
     
     var beginDate = Date() {
         didSet {
-            if isShowDetail == true {
+            if isShowDetail == false {
                delayEndDate()
             }
             
@@ -72,6 +72,9 @@ class CreateTaskVC: BaseViewController {
     //目标
     var target = ""
     
+    //date picker
+    var datePicker = MIDatePicker()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -87,6 +90,7 @@ class CreateTaskVC: BaseViewController {
         
         setNavBarItem()
         
+        setDatePicker()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -103,6 +107,26 @@ class CreateTaskVC: BaseViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        
+    }
+    
+    func setDatePicker() {
+        
+        datePicker = MIDatePicker.getFromNib()
+        
+        datePicker.delegate = self
+        
+        datePicker.config.startDate = beginDate
+        
+        datePicker.config.animationDuration = 0.4
+        
+        datePicker.config.cancelButtonTitle = "取消"
+        datePicker.config.confirmButtonTitle = "确定"
+        
+        datePicker.config.contentBackgroundColor = UIColor(red: 253/255.0, green: 253/255.0, blue: 253/255.0, alpha: 1)
+        datePicker.config.headerBackgroundColor = UIColor(red: 244/255.0, green: 244/255.0, blue: 244/255.0, alpha: 1)
+        datePicker.config.confirmButtonColor = UIColor(red: 32/255.0, green: 146/255.0, blue: 227/255.0, alpha: 1)
+        datePicker.config.cancelButtonColor = UIColor(red: 32/255.0, green: 146/255.0, blue: 227/255.0, alpha: 1)
         
     }
     
@@ -163,7 +187,7 @@ class CreateTaskVC: BaseViewController {
         
         let path = IndexPath(item: 2, section: 0)
         let cell = tableView.cellForRow(at: path) as! BasicInfoCell
-        target = cell.rightTextField.text!
+        target = cell.realNumString
         if target == "" {
             DDAlert.alert(title: "提示", message: "请设定目标", dismissTitle: "好的", inViewController: self, withDismissAction: nil)
             return
@@ -335,11 +359,6 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
         }
         else if section == 1 {
             //开始时间,结束时间
-            
-            if showBeginTimePicker == true ||
-               showEndTimePicker   == true   {
-                return 3
-            }
             return 2
         }
         else if section == 2 {
@@ -359,29 +378,6 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if (indexPath as NSIndexPath).section == 3 {
             return 100
-        }
-        else if (indexPath as NSIndexPath).section == 1 {
-            //时间选择
-            if showBeginTimePicker == true {
-                if (indexPath as NSIndexPath).row == 0 || (indexPath as NSIndexPath).row == 2 {
-                    return 44
-                }
-                else {
-                    return 180
-                }
-            }
-            else if showEndTimePicker == true {
-                if (indexPath as NSIndexPath).row == 0 || (indexPath as NSIndexPath).row == 1 {
-                    return 44
-                }
-                else {
-                    return 180
-                }
-            }
-            else {
-                //默认情况
-                return 44
-            }
         }
         else {
             return 44
@@ -431,7 +427,18 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
                 cell.rightTextField.textColor = UIColor.init(hexString: "B2B2B2")
                 if isShowDetail == true {
                     cell.rightTextField.isEnabled = false
-                    cell.rightTextField.text = target
+                    
+                    let fmt = NumberFormatter()
+                    fmt.numberStyle = .decimal
+                    
+                    if let num = fmt.number(from: target) {
+                        
+                        let numString = fmt.string(from: num)
+                        
+                        cell.rightTextField.text = numString
+                    }
+                    
+                    
                 }
                 else {
                     cell.rightTextField.isEnabled = true
@@ -458,73 +465,16 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
                     
                     return textCell
                 }
+
             
-                func returnDatePickerCell(_ isBegin:Bool) -> pickerCell {
-                    
-                    let timePickerCell = tableView.dequeueReusableCell(withIdentifier: datePickerCellId, for: indexPath) as! pickerCell
-                    let picker = timePickerCell.datePickerView
-                    if isBegin == true {
-                        picker?.date = beginDate
-                        //不需要设置最早时间
-                        //开始时间的最早时间是当前时间.
-                        //let date = beginDate
-                       // setMinimumDateWith(picker!, date: date)
-                        
-                    }
-                    else {
-                        picker?.date = endDate
-                        //结束时间的最早时间是开始时间的延后一天.
-                        //let timeInterval:Double = 1*60*60*24 //一小时
-                        let date = endDate
-                        setMinimumDateWith(picker!, date: date)
-                    }
-                    
-                    //Value change
-                    timePickerCell.dateChangeHandler = { [weak self](date) in
-                        
-                        guard let strongSelf = self else {return}
-                        strongSelf.dateChangeHandler(date as Date)
-                        
-                    }
-                    
-                    return timePickerCell
-                }
-            
-            
-            
-            if showBeginTimePicker == true {
-                if indexPath.row == 0 {
-                    
-                    return returnTextCellWith("开始", date: beginDate)
-                }
-                else if indexPath.row == 2 {
-                    return returnTextCellWith("结束", date: endDate)
-                }
-                else {
-                    return returnDatePickerCell(true)
-                }
-            }
-            else if showEndTimePicker == true {
-                if indexPath.row == 0 {
-                    return returnTextCellWith("开始", date: beginDate)
-                }
-                else if indexPath.row == 1 {
-                    return returnTextCellWith("结束", date: endDate)
-                }
-                else {
-                    return returnDatePickerCell(false)
-                }
+            //默认情况
+            if indexPath.row == 0 {
+                return returnTextCellWith("开始", date: beginDate)
             }
             else {
-                //默认情况
-                if indexPath.row == 0 {
-                    return returnTextCellWith("开始", date: beginDate)
-                }
-                else {
-                    return returnTextCellWith("结束", date: endDate)
-                }
+                return returnTextCellWith("结束", date: endDate)
             }
-
+            
         }
         else if indexPath.section == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: timeSelectCellId, for: indexPath) as! typeCell
@@ -698,7 +648,7 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
     }
     
     //MARK: 时间选择功能点如下.
-    fileprivate func setMinimumDateWith(_ picker:UIDatePicker,date:Date) {
+    fileprivate func setMinimumDateWith(_ picker:UIDatePicker,date:Date?) {
         
         picker.minimumDate = date
         
@@ -764,7 +714,7 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
         
         if showBeginTimePicker == true {
             //end time cell is 2 1
-            let indexPath = IndexPath(row: 2, section: 1)
+            let indexPath = IndexPath(row: 1, section: 1)
             guard let cell = tableView.cellForRow(at: indexPath) as? typeCell else {return}
             cell.typeLabel.text = time
         }
@@ -796,59 +746,46 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
     fileprivate func sectionOfTimeTapWith(_ tableView:UITableView,indexPath:IndexPath) {
         
         if indexPath.row == 0 {
-            //如果结束选择器打开,先关闭
+            //开始
+            showEndTimePicker   = false
+            showBeginTimePicker = true
+            //不需要设置最早时间
+            //开始时间的最早时间是当前时间.
+            let date = beginDate
+            datePicker.config.startDate = date
+            setMinimumDateWith(datePicker.datePicker, date: nil)
+            datePicker.show(inVC: self)
             
-            if showEndTimePicker == true {
-                showEndTimePicker = !showEndTimePicker
-                let indexpath = IndexPath(row: 2, section: 1)
-                tableView.deleteRows(at: [indexpath], with: .fade)
-            }
-            
-            //起始时间
-            showBeginTimePicker = !showBeginTimePicker
-            let indexpath = IndexPath(row: 1, section: 1)
-            if showBeginTimePicker == true {
-                
-                tableView.insertRows(at: [indexpath], with: .fade)
-            }
-            else {
-                tableView.deleteRows(at: [indexpath], with: .fade)
-            }
-            
+           
         }
         else {
-            //如果起始选择器打开,先关闭
+            //结束
+            showEndTimePicker   = true
+            showBeginTimePicker = false
+            let date = endDate
+            datePicker.config.startDate = date
+            setMinimumDateWith(datePicker.datePicker, date: date)
+            datePicker.show(inVC: self)
             
-            if showBeginTimePicker == true {
-                showBeginTimePicker = !showBeginTimePicker
-                let indexpath = IndexPath(row: 1, section: 1)
-                tableView.deleteRows(at: [indexpath], with: .fade)
-            }
-            
-            //只找结束时间.
-            guard let _ = tableView.cellForRow(at: indexPath) as? typeCell else {return}
-            showEndTimePicker = !showEndTimePicker
-            
-            let indexpath2 = IndexPath(row: 2, section: 1)
-            
-            if showEndTimePicker == true {
-                
-                tableView.insertRows(at: [indexpath2], with: .fade)
-                
-            }
-            else {
-                tableView.deleteRows(at: [indexpath2], with: .fade)
-            }
-            
-            //TODO:分割线消失的问题.
             
         }
         
     }
-    
-    
-    
-    
 
+   
+}
+
+
+
+extension CreateTaskVC: MIDatePickerDelegate {
+    
+    func miDatePicker(amDatePicker: MIDatePicker, didSelect date: Date) {
+        
+        dateChangeHandler(date)
+        
+    }
+    func miDatePickerDidCancelSelection(amDatePicker: MIDatePicker) {
+        // NOP
+    }
     
 }

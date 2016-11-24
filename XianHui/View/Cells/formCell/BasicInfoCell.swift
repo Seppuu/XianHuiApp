@@ -28,9 +28,36 @@ class BasicInfoCell: UITableViewCell ,UITextFieldDelegate{
         
     }
     
+    
+    var realNumString = ""
+    
+    @IBAction func editValueChanged(_ sender: UITextField) {
+        
+        var text = sender.text
+        
+        text = text?.removeSpecialCharsFromString()
+        
+        let fmt = NumberFormatter()
+        fmt.numberStyle = .decimal
+        
+        guard text != nil else {return}
+        
+        if let num = fmt.number(from: text!) {
+            realNumString = text!
+            let numString = fmt.string(from: num)
+            
+            sender.text = numString
+        }
+   
+        
+    }
+    
+
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         
         if textField.text != "" {
+           
             hasTitle = true
         }
     }

@@ -35,7 +35,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q62-bF-JaC" customClass="GTProgressBar" customModule="XianHui" customModuleProvider="target">
-                        <rect key="frame" x="70" y="45" width="361" height="15"/>
+                        <rect key="frame" x="70" y="45" width="358" height="15"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="9DK-UH-SbN"/>
@@ -66,7 +66,7 @@
                     <constraint firstItem="kjj-pV-aMN" firstAttribute="leading" secondItem="e3N-7V-FD4" secondAttribute="trailing" constant="10" id="EcG-Mh-Kw7"/>
                     <constraint firstItem="q62-bF-JaC" firstAttribute="top" secondItem="kjj-pV-aMN" secondAttribute="bottom" constant="13" id="FO5-wP-ToI"/>
                     <constraint firstItem="m8z-5g-98J" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="GZd-jJ-Fc8"/>
-                    <constraint firstItem="Wx0-6h-fNO" firstAttribute="leading" secondItem="q62-bF-JaC" secondAttribute="trailing" constant="2" id="KBK-CS-AsR"/>
+                    <constraint firstItem="Wx0-6h-fNO" firstAttribute="leading" secondItem="q62-bF-JaC" secondAttribute="trailing" constant="5" id="KBK-CS-AsR"/>
                     <constraint firstItem="e3N-7V-FD4" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ZgS-US-1S8"/>
                     <constraint firstAttribute="trailing" secondItem="Wx0-6h-fNO" secondAttribute="trailing" constant="8" id="adh-ts-iNX"/>
                     <constraint firstItem="Wx0-6h-fNO" firstAttribute="centerY" secondItem="q62-bF-JaC" secondAttribute="centerY" id="k0y-IG-9cE"/>

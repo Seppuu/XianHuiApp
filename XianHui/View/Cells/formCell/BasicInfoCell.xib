@@ -28,13 +28,16 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="placehold" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="27X-Ee-FoL">
-                        <rect key="frame" x="208" y="7" width="97" height="30"/>
+                        <rect key="frame" x="155" y="7" width="150" height="30"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="97" id="2qk-E3-jcP"/>
+                            <constraint firstAttribute="width" constant="150" id="2qk-E3-jcP"/>
                             <constraint firstAttribute="height" constant="30" id="IQw-wa-hdA"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <textInputTraits key="textInputTraits"/>
+                        <connections>
+                            <action selector="editValueChanged:" destination="KGk-i7-Jjw" eventType="editingChanged" id="LVw-aH-7Cd"/>
+                        </connections>
                     </textField>
                 </subviews>
                 <constraints>

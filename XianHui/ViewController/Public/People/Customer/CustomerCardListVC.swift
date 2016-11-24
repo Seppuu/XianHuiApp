@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyJSON
 
+//卡包列表
 class CustomerCardListVC: BaseTableViewController {
     
     var customer = Customer()

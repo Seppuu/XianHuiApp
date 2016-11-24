@@ -85,10 +85,18 @@ class MessageListVC: LCCKConversationListViewController,DZNEmptyDataSetSource, D
             self.hasLoadData = true
         }
         
+        NotificationCenter.default.addObserver(self, selector: #selector(MessageListVC.changeMessageListByAccount), name: NSNotification.Name(rawValue: accountHasChangedNoti), object: nil)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+    }
+    
+    func changeMessageListByAccount() {
+        
+        self.refresh()
         
     }
     
