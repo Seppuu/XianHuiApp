@@ -8,14 +8,14 @@
 
 import UIKit
 import SwiftyJSON
+import MJRefresh
 
-class CustomerCardDetailVC: BaseTableViewController {
+class CustomerCardDetailVC: CustomerConsumeListVC {
 
     var cardNum = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getCardDetail()
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,14 +24,48 @@ class CustomerCardDetailVC: BaseTableViewController {
     }
 
     
+    override func setTableView() {
+        
+        tableView = UITableView(frame: view.bounds, style:.plain)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.tableFooterView = UIView()
+        view.addSubview(tableView)
+        
+        let nib  = UINib(nibName: cellId, bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: cellId)
+        
+        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
+            
+            self.getCardDetail()
+            
+        })
+        
+        tableView.mj_footer.beginRefreshing()
+        
+    }
+    
     func getCardDetail() {
         
         NetworkManager.sharedManager.getCustomerCardDetailWith(cardNum) { (success, json, error) in
             
             if success == true {
-                if let rows = json!["rows"].array {
-                    self.makeData(rows)
+                let jsonData = json!["rows"].array!
+                
+                if jsonData.count == 0 {
+                    
+                    self.tableView.mj_footer.endRefreshingWithNoMoreData()
                 }
+                else {
+                    
+                    self.goodListArray += self.makeGoodListWith(jsonData)
+                    
+                    self.tableView.reloadData()
+                    self.tableView.mj_footer.endRefreshing()
+                    
+                }
+                
+                
             }
             else {
                 
@@ -40,28 +74,95 @@ class CustomerCardDetailVC: BaseTableViewController {
         
     }
     
-    func makeData(_ datas:[JSON]) {
+    
+    
+    override func makeGoodListWith(_ jsons:[JSON]) -> [[Good]] {
         
-        let section0 = BaseTableViewModelList()
+        var list = [Good]()
         
-        for data in datas {
-            let model = BaseTableViewModel()
-            if let fullName = data["fullname"].string{
-                model.name = fullName
+        for g in jsons {
+            
+            let good = Good()
+            if let name = g["fullname"].string {
+                good.name  = name
+            }
+            if let id   = g["item_id"].int {
+                good.id = id
+            }
+            if let amount = g["amount"].string {
+                good.amount = amount
+            }
+            if let saledate = g["date"].string {
+                good.saledate = saledate
             }
             
-            if let amount = data["amount"].string{
-                model.desc = amount
+            if let cardNum = g["card_num"].string {
+                good.cardNum = cardNum
             }
-            section0.listName = "消费明细"
-            section0.list.append(model)
+            
+            list.append(good)
         }
         
-        self.listArray = [section0]
+        var lastDate = ""
         
-        self.tableView.reloadData()
+        list.forEach {
+            
+            if $0.saledate != lastDate {
+                lastDate = $0.saledate
+                
+                dateList.append(lastDate)
+            }
+        }
+        
+        var listArray = [[Good]]()
+        
+        for date in dateList {
+            
+            var aList = [Good]()
+            
+            list.forEach{
+                if $0.saledate == date {
+                    aList.append($0)
+                }
+            }
+            
+            listArray.append(aList)
+        }
+        
+        return listArray
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! typeCell
+        cell.selectionStyle = .none
+        
+        let good = goodListArray[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
+        
+        cell.leftLabel.text = good.name
+        cell.typeLabel.text = good.amount + "元"
+        
+        if good.cardNum == "" {
+            cell.accessoryView = UIImageView.xhAccessoryViewClear()
+        }
+        else {
+            cell.accessoryView = UIImageView.xhAccessoryView()
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let good = goodListArray[indexPath.section][indexPath.row]
+        
+        let vc = CustomerCardDetailVC()
+        vc.cardNum = good.cardNum
+        vc.title = good.name
+        self.navigationController?.pushViewController(vc, animated: true)
         
     }
+    
 
 }
 

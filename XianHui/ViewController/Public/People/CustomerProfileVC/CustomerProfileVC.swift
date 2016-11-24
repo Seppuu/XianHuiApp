@@ -164,7 +164,7 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if (indexPath as NSIndexPath).section == 0 {
+        if indexPath.section == 0 {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: topCellId, for: indexPath) as! CustomerLargeCell
             
@@ -183,8 +183,8 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
         else {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: typeCellId, for: indexPath) as! typeCell
-            cell.leftLabel.text = typeList[(indexPath as NSIndexPath).row]
-            if (indexPath as NSIndexPath).row == 0 {
+            cell.leftLabel.text = typeList[indexPath.row]
+            if indexPath.row == 0 {
                 
                 let currentUser = User.currentUser()
                 if currentUser?.reportType == 3 || currentUser?.reportType == 4 {
@@ -198,15 +198,15 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
                 cell.typeLabel.text = customer.customerManager
                 
             }
-            else if (indexPath as NSIndexPath).row == 1 {
+            else if indexPath.row == 1 {
                 cell.accessoryView = UIImageView.xhAccessoryView()
                 cell.typeLabel.text = "共\(customer.cardTotal)张"
             }
-            else if (indexPath as NSIndexPath).row == 2 {
+            else if indexPath.row == 2 {
                 cell.accessoryView = UIImageView.xhAccessoryView()
                 cell.typeLabel.text = customer.lastConsumeDate == nil ? "暂无" : customer.lastConsumeDate
             }
-            else if (indexPath as NSIndexPath).row == 3 {
+            else if indexPath.row == 3 {
                 cell.accessoryView = UIImageView.xhAccessoryView()
                 if customer.planned == "1" {
                     cell.typeLabel.text = "已计划"
@@ -216,7 +216,7 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
                 }
                 
             }
-            else if (indexPath as NSIndexPath).row == 4 {
+            else if indexPath.row == 4 {
                 cell.accessoryView = UIImageView.xhAccessoryView()
                 cell.typeLabel.text = customer.scheduleTime == "" ? "无新预约" : customer.scheduleTime
             }
@@ -233,9 +233,9 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if (indexPath as NSIndexPath).section == 1 {
+        if indexPath.section == 1 {
             
-            if (indexPath as NSIndexPath).row == 0 {
+            if indexPath.row == 0 {
                 
                 let currentUser = User.currentUser()
                 if currentUser?.reportType == 3 || currentUser?.reportType == 4 {
@@ -253,26 +253,26 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
                 
                 
             }
-            else if (indexPath as NSIndexPath).row == 1 {
+            else if indexPath.row == 1 {
                 let vc = CustomerCardListVC()
                 vc.customer = customer
                 self.navigationController?.pushViewController(vc, animated: true)
             }
-            else if (indexPath as NSIndexPath).row == 3 {
+            else if indexPath.row == 3 {
                 
                 let vc = ProjectPlanningVC()
                 vc.customer = customer
                 self.navigationController?.pushViewController(vc, animated: true)
                 
             }
-            else if (indexPath as NSIndexPath).row == 2 {
+            else if indexPath.row == 2 {
                 let vc = CustomerConsumeListVC()
                 vc.title = "消费记录"
                 vc.customer = customer
                 self.navigationController?.pushViewController(vc, animated: true)
                 
             }
-            else if (indexPath as NSIndexPath).row == 4 {
+            else if indexPath.row == 4 {
                 let vc = ProjectPlannedVC()
                 vc.customer = customer
                 vc.allPlan = true
@@ -287,15 +287,7 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
                 vc.objectId = customer.id
                 vc.objectName = customer.name
                 vc.type = .customer
-    
-//                if let plannedNum = obj.thirdTagString.toInt() {
-//                    vc.plannedNum = plannedNum
-//                }
-//                else {
-//    
-//                }
-//                
-//                vc.profileJSON = self.jsons[index]
+
                 self.navigationController?.pushViewController(vc, animated: true)
                 
             }

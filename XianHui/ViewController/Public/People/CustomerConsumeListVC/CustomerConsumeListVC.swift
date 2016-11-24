@@ -21,7 +21,7 @@ class CustomerConsumeListVC: UIViewController {
     
     var dateList = [String]()
     
-    var pageSize = 200
+    var pageSize = 10
     
     var pageNumber = 1
     
@@ -29,9 +29,6 @@ class CustomerConsumeListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-       // getListWith(customer.id, pageSize: pageSize, pageNumber: pageNumber)
         
         setTableView()
         
@@ -73,11 +70,19 @@ class CustomerConsumeListVC: UIViewController {
         }
     }
     
-    func makeGoodListWith(_ json:[JSON]) -> [[Good]] {
+    var data = [JSON]()
+    
+    func makeGoodListWith(_ jsons:[JSON]) -> [[Good]] {
+        
+        for json in jsons {
+            
+            data.append(json)
+            
+        }
         
         var list = [Good]()
         
-        for g in json {
+        for g in data {
             
             let good = Good()
             if let name = g["fullname"].string {

@@ -67,6 +67,8 @@ class Good: NSObject {
     
     var selected = false
     
+    var cardNum = ""
+    
     //库存
     var stockNum = "0"
     
