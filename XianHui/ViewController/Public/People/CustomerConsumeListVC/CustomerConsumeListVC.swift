@@ -9,9 +9,10 @@
 import UIKit
 import SwiftyJSON
 import MJRefresh
+import DZNEmptyDataSet
 
 //顾客消费记录列表(分页)
-class CustomerConsumeListVC: UIViewController {
+class CustomerConsumeListVC: UIViewController,DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
     var tableView:UITableView!
 
@@ -138,6 +139,10 @@ class CustomerConsumeListVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
+        
+        self.tableView.emptyDataSetSource = self
+        self.tableView.emptyDataSetDelegate = self
+        
         view.addSubview(tableView)
         
         let nib  = UINib(nibName: cellId, bundle: nil)
@@ -151,6 +156,32 @@ class CustomerConsumeListVC: UIViewController {
         
         tableView.mj_footer.beginRefreshing()
         
+        self.tableView.mj_footer.endRefreshingCompletionBlock = {
+            self.hasLoadData = true
+        }
+        
+    }
+    
+    
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        
+        let text = "无历史记录"
+        
+        let attrString = NSAttributedString(string: text)
+        
+        return attrString
+    }
+    
+    var hasLoadData = false {
+        didSet {
+            if hasLoadData == true {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func emptyDataSetShouldDisplay(_ scrollView: UIScrollView!) -> Bool {
+        return hasLoadData
     }
 
 }

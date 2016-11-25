@@ -163,10 +163,10 @@ class TaskListVC: BaseViewController {
                 }
                 
                 if let percentage = row["percentage"].float {
-//                    t.progress = CGFloat(percentage/100)
-//                    t.progressText = String(Int(percentage)) + "%"
-                    t.progress = CGFloat(100.0/100)
-                    t.progressText = String(Int(100.0)) + "%"
+                    t.progress = CGFloat(percentage/100)
+                    t.progressText = String(Int(percentage)) + "%"
+//                    t.progress = CGFloat(100.0/100)
+//                    t.progressText = String(Int(100.0)) + "%"
                 }
                 
                 if let isUpdated = row["is_update"].int {

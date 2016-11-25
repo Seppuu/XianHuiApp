@@ -10,6 +10,7 @@ import UIKit
 import SwiftyJSON
 import MJRefresh
 
+
 class CustomerCardDetailVC: CustomerConsumeListVC {
 
     var cardNum = ""
@@ -32,6 +33,9 @@ class CustomerCardDetailVC: CustomerConsumeListVC {
         tableView.tableFooterView = UIView()
         view.addSubview(tableView)
         
+        self.tableView.emptyDataSetSource = self
+        self.tableView.emptyDataSetDelegate = self
+        
         let nib  = UINib(nibName: cellId, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellId)
         
@@ -43,6 +47,9 @@ class CustomerCardDetailVC: CustomerConsumeListVC {
         
         tableView.mj_footer.beginRefreshing()
         
+        self.tableView.mj_footer.endRefreshingCompletionBlock = {
+            self.hasLoadData = true
+        }
     }
     
     func getCardDetail() {
@@ -52,18 +59,11 @@ class CustomerCardDetailVC: CustomerConsumeListVC {
             if success == true {
                 let jsonData = json!["rows"].array!
                 
-                if jsonData.count == 0 {
-                    
-                    self.tableView.mj_footer.endRefreshingWithNoMoreData()
-                }
-                else {
-                    
-                    self.goodListArray += self.makeGoodListWith(jsonData)
-                    
-                    self.tableView.reloadData()
-                    self.tableView.mj_footer.endRefreshing()
-                    
-                }
+                self.goodListArray = self.makeGoodListWith(jsonData)
+                
+                self.tableView.reloadData()
+                self.tableView.mj_footer.endRefreshing()
+                self.tableView.mj_footer.isHidden = true
                 
                 
             }
