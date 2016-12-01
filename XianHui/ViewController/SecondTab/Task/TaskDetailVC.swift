@@ -43,11 +43,25 @@ class TaskDetailVC: UIViewController {
         getTaskDetail()
         getTaskDetailList()
         setNavBarItem()
+        
+        addNoti()
+    }
+    
+    func addNoti() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(TaskDetailVC.refresh), name: TaskHasSavedNoti, object: nil)
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
        
+    }
+    
+    func refresh() {
+        
+        getTaskDetail()
+        getTaskDetailList()
     }
     
     func setTableView() {
@@ -86,6 +100,7 @@ class TaskDetailVC: UIViewController {
             
             if success == true {
                 self.makeTaskDetail(json!)
+                self.tableView.reloadData()
             }
             else {
                 
@@ -96,11 +111,11 @@ class TaskDetailVC: UIViewController {
     
     func getTaskDetailList() {
         
-        
         NetworkManager.sharedManager.getTaskDetailList(task.id) { (success, json, error) in
             
             if success == true {
                 self.makeListData(json!)
+                
             }
             else {
                 
@@ -109,6 +124,12 @@ class TaskDetailVC: UIViewController {
     }
     
     func makeTaskDetail(_ data:JSON) {
+        
+        if let percentage = data["percentage"].float {
+            task.progress = CGFloat(percentage/100)
+            task.progressText = String(Int(percentage)) + "%"
+            
+        }
         
      
         if let text = data["range"]["text"].string {
@@ -125,7 +146,6 @@ class TaskDetailVC: UIViewController {
             task.type.text = text
             
         }
-        
         
         if let value = data["type"]["value"].string {
             task.type.value = value
@@ -171,6 +191,8 @@ class TaskDetailVC: UIViewController {
         if let remark = data["note"].string {
             task.remark = remark
         }
+        
+        
         
     }
     

@@ -25,7 +25,6 @@ class CustomerCardListVC: BaseTableViewController {
         
     }
     
-    
     func getData() {
         
         NetworkManager.sharedManager.getCustomerCardListWith(customer.id) { (success, json, error) in

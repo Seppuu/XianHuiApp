@@ -14,6 +14,8 @@ import SwiftyJSON
 
 //创建任务页面同时也是任务资料页面
 
+let TaskHasSavedNoti =  Notification.Name(rawValue: "TaskHasSavedNoti")
+
 class CreateTaskVC: BaseViewController{
     
     var tableView: UITableView!
@@ -49,7 +51,7 @@ class CreateTaskVC: BaseViewController{
     var beginDate = Date() {
         didSet {
             if isShowDetail == false {
-               delayEndDate()
+               //delayEndDate()
             }
             
         }
@@ -158,7 +160,6 @@ class CreateTaskVC: BaseViewController{
         navigationItem.rightBarButtonItems = [cancelBarItem,rightBarItem]
     }
     
-    var taskSaveSuccessHandler:(()->())?
     
     func showEditMode() {
         
@@ -221,7 +222,7 @@ class CreateTaskVC: BaseViewController{
             
             if success == true {
                 hud.hide(true, afterDelay: 1.0)
-                self.taskSaveSuccessHandler?()
+                NotificationCenter.default.post(name: TaskHasSavedNoti, object: nil)
                 self.navigationController?.popViewController(animated: true)
                 
             }
@@ -434,7 +435,7 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
                     if let num = fmt.number(from: target) {
                         
                         let numString = fmt.string(from: num)
-                        
+                        cell.realNumString = target
                         cell.rightTextField.text = numString
                     }
                     
@@ -629,6 +630,7 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
             NetworkManager.sharedManager.deleteTaskTopInBack(self.task.id, completion: { (success, json, error) in
                 hud.hide(true)
                 if success == true {
+                    
                     self.navigationController?.popToRootViewController(animated: true)
                 }
                 else {
@@ -762,9 +764,8 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
             //结束
             showEndTimePicker   = true
             showBeginTimePicker = false
-            let date = endDate
-            datePicker.config.startDate = date
-            setMinimumDateWith(datePicker.datePicker, date: date)
+            datePicker.config.startDate = endDate
+            setMinimumDateWith(datePicker.datePicker, date: beginDate)
             datePicker.show(inVC: self)
             
             

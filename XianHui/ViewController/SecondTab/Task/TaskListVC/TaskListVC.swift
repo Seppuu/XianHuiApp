@@ -69,6 +69,17 @@ class TaskListVC: BaseViewController {
         setTableView()
         setSearchView()
         setNavBar()
+        addNoti()
+    }
+    
+    func addNoti() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(TaskListVC.refresh), name: TaskHasSavedNoti, object: nil)
+        
+    }
+    
+    func refresh() {
+        tableView.mj_header.beginRefreshing()
     }
     
     func setTableView() {
@@ -210,10 +221,6 @@ class TaskListVC: BaseViewController {
         
         let vc = CreateTaskVC()
         vc.title = "新建任务"
-        vc.taskSaveSuccessHandler = {
-            
-            self.getTaskList()
-        }
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
