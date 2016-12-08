@@ -29,6 +29,8 @@ class SliderCell: UITableViewCell {
         }
     }
     
+    var valueChangedHandler:((_ value:Float)->())?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -52,6 +54,7 @@ class SliderCell: UITableViewCell {
         
         rightLabel.text = String(sender.value) + unit
         
+        valueChangedHandler?(sender.value)
     }
     
 }

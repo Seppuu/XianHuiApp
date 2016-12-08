@@ -198,6 +198,21 @@ class ChatKitExample: LCChatKitExample {
                                 vc.title = "助手"
                                 LCChatKitExample.lcck_push(to: vc)
                             }
+                            else if noticeType == "process" {
+                                //进度的推送
+                                if let taskId = attr["extra_id"] as? String {
+                                    
+                                    let task = Task()
+                                    task.id = Int(taskId)!
+                                    
+                                    let vc = TaskDetailVC()
+                                    vc.title = "进度详细"
+                                    task.isUpdated = false
+                                    vc.task = task
+                                    LCChatKitExample.lcck_push(to: vc)
+                                }
+                                
+                            }
                             else {
                                 let vc = NoticeListVC()
                                 vc.title = "提醒"

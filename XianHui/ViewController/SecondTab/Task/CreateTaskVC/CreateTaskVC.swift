@@ -27,6 +27,8 @@ class CreateTaskVC: BaseViewController{
     
     let remindCellId = "BasicInfoCell"
     
+    let sliderCellId = "SliderCell"
+    
     let remarkCellId = "ProfileCell"
     
     let datePickerCellId = "pickerCell"
@@ -240,7 +242,7 @@ class CreateTaskVC: BaseViewController{
         tableView.dataSource = self
         view.addSubview(tableView)
         
-        let cellIds = [titleCellId,timeSelectCellId,remindCellId,remarkCellId,datePickerCellId]
+        let cellIds = [titleCellId,sliderCellId,timeSelectCellId,remindCellId,remarkCellId,datePickerCellId]
         for id in cellIds {
             tableView.register(UINib(nibName: id,bundle: nil), forCellReuseIdentifier: id)
         }
@@ -419,7 +421,7 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
                 return cell
                 
             }
-            else {
+            else if indexPath.row == 2 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: remindCellId, for: indexPath) as! BasicInfoCell
                 //位置
                 cell.leftLabel.text = "目标"
@@ -445,6 +447,28 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
                     cell.rightTextField.isEnabled = true
                     
                 }
+                return cell
+            }
+            else {
+                //有slider
+                let cell = tableView.dequeueReusableCell(withIdentifier: sliderCellId, for: indexPath) as! SliderCell
+                cell.selectionStyle = .none
+                cell.min = 0.0
+                cell.max = 1.0
+                cell.leftLabel.text = taskType.text == "" ? "无类型":taskType.text
+                
+                cell.valueChangedHandler = {
+                    
+                    (value) in
+                    
+                    let path = IndexPath(item: 2, section: 0)
+                    let targetCell = tableView.cellForRow(at: path) as! BasicInfoCell
+                    cell.realNumString = String(value)
+                    targetCell.rightTextField.text = String(value*100) + "%"
+                    
+                    
+                }
+                
                 return cell
             }
             
@@ -646,6 +670,29 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
         
         self.present(alert, animated: true, completion: nil)
         
+        
+    }
+    
+    //显示目标输入滑块,当目标是普及率等百分比的时候
+    fileprivate func showSliderCell() {
+        
+        //open picker view
+        showPicker = !showPicker
+        let indexpath = IndexPath(row: 5, section: 0)
+        let indexpath3 = IndexPath(row: 4, section: 0)
+        if showPicker {
+            
+            albumInfoTableView.insertRows(at: [indexpath], with: .fade)
+            
+            
+        }
+        else {
+            
+            albumInfoTableView.deleteRows(at: [indexpath], with: .fade)
+            
+        }
+        
+        albumInfoTableView.reloadRows(at: [indexpath3], with: .none)
         
     }
     

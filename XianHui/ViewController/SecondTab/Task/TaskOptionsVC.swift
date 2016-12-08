@@ -100,39 +100,45 @@ extension TaskOptionsVC:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard let cell = tableView.cellForRow(at: indexPath) else {return}
+        
+        for opArr in data {
+            
+            for op in opArr.options {
+                
+                op.selected = false
+                
+            }
+        }
+        
+        
+        
         let option = data[indexPath.section].options[indexPath.row]
-        if cell.accessoryType == .none {
+        
+        if option.selected == false {
             
-            cell.accessoryType = .checkmark
-            
-           option.selected = true
+            option.selected = true
             
             optionSelectedHandler?(option)
-            
         }
         else {
-            
-            cell.accessoryType = .none
-            
             option.selected = false
             
             optionSelectedHandler?(TaskOption())
         }
-
-        
-        
-    }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        
-        let option = data[indexPath.section].options[indexPath.row]
-        
-        option.selected = false
         
         tableView.reloadData()
+        
     }
     
+//    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+//        
+//        let option = data[indexPath.section].options[indexPath.row]
+//        
+//        option.selected = false
+//        
+//        tableView.reloadData()
+//    }
+//    
 
 
     
