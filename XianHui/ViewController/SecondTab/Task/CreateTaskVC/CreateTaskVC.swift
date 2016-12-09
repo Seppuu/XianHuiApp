@@ -59,6 +59,10 @@ class CreateTaskVC: BaseViewController{
         }
     }
     
+    var showPicker = false
+    
+    var needSliderCell = false
+    
     var endDate = Date()
     
     func delayEndDate() {
@@ -358,7 +362,7 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             //标题
-            return 3
+            return showPicker ? 4 : 3
         }
         else if section == 1 {
             //开始时间,结束时间
@@ -428,6 +432,24 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
                 cell.rightTextField.placeholder = "请输入"
                 cell.rightTextField.keyboardType = .numberPad
                 cell.rightTextField.textColor = UIColor.init(hexString: "B2B2B2")
+                
+                
+                if self.needSliderCell == true {
+                    cell.rightTextField.placeholder = "请点击选择"
+                    cell.rightTextField.isUserInteractionEnabled = false
+                }
+                else {
+                    if taskType.text != "" {
+                        cell.rightTextField.placeholder = "请输入"
+                        cell.rightTextField.isUserInteractionEnabled = true
+                    }
+                    else {
+                        cell.rightTextField.placeholder = "先选择类型"
+                        cell.rightTextField.isUserInteractionEnabled = false
+                    }
+                    
+                }
+                
                 if isShowDetail == true {
                     cell.rightTextField.isEnabled = false
                     
@@ -454,8 +476,9 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: sliderCellId, for: indexPath) as! SliderCell
                 cell.selectionStyle = .none
                 cell.min = 0.0
-                cell.max = 1.0
+                cell.max = 100.0
                 cell.leftLabel.text = taskType.text == "" ? "无类型":taskType.text
+                cell.leftLabel.alpha = 0.0
                 
                 cell.valueChangedHandler = {
                     
@@ -463,8 +486,8 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
                     
                     let path = IndexPath(item: 2, section: 0)
                     let targetCell = tableView.cellForRow(at: path) as! BasicInfoCell
-                    cell.realNumString = String(value)
-                    targetCell.rightTextField.text = String(value*100) + "%"
+                    targetCell.realNumString = String(value/100)
+                    targetCell.rightTextField.text = String(value) + "%"
                     
                     
                 }
@@ -607,10 +630,29 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
                 vc.title = "类型"
                 vc.optionSelectedHandler = {
                     (option) in
+                    
+                    if option.text == "普及率"  {
+                        //需要显示slider
+                        self.needSliderCell = true
+                    }
+                    else {
+                        self.needSliderCell = false
+                    }
                     self.taskType = option
                     self.tableView.reloadData()
                 }
                 navigationController?.pushViewController(vc, animated: true)
+            }
+            else if indexPath.row == 2 {
+                
+                if needSliderCell == true {
+                    showPicker = !showPicker
+                    showSliderCell()
+                }
+                else {
+                    
+                }
+                
             }
             else {
                 
@@ -673,26 +715,26 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
         
     }
     
+    
     //显示目标输入滑块,当目标是普及率等百分比的时候
     fileprivate func showSliderCell() {
         
         //open picker view
-        showPicker = !showPicker
-        let indexpath = IndexPath(row: 5, section: 0)
-        let indexpath3 = IndexPath(row: 4, section: 0)
+        
+        let indexpath = IndexPath(row: 3, section: 0)
         if showPicker {
             
-            albumInfoTableView.insertRows(at: [indexpath], with: .fade)
+            tableView.insertRows(at: [indexpath], with: .fade)
             
             
         }
         else {
             
-            albumInfoTableView.deleteRows(at: [indexpath], with: .fade)
+            tableView.deleteRows(at: [indexpath], with: .fade)
             
         }
         
-        albumInfoTableView.reloadRows(at: [indexpath3], with: .none)
+       // tableView.reloadRows(at: [indexpath3], with: .none)
         
     }
     
