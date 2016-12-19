@@ -118,17 +118,23 @@ class UserCentreVC: BaseViewController {
     
     func checkPassword(with password:String) {
         
-        if let user = User.currentUser() {
+        let userName = Defaults.currentAccountName.value
+        let hud = showHudWith(view, animated: true, mode: .indeterminate, text: "")
+        NetworkManager.sharedManager.verifyUserPassWordWith(userName!, usertype: .Employee, passWord: password, completion: { (success, json, error) in
             
-            if password == user.passWord {
-                //TODO:to changePassword vc
+            if success == true {
                 
+                hud.hide(true)
                 
-            }
+                let vc = UpdatePassWordVC()
+                vc.title = "修改密码"
+                self.navigationController?.pushViewController(vc, animated: true)            }
             else {
-                showWrongAlert()
+                hud.labelText = error!
+                hud.hide(true, afterDelay: 1.0)
             }
-        }
+            
+        })
         
     }
     

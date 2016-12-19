@@ -60,6 +60,9 @@ let verifyPhoneCodeUrl = BaseUrl + "/rest/loginsmsverify"
 //更新密码
 let updatePassWordUrl  = BaseUrl + "/rest/changeloginpassword"
 
+//验证登陆密码
+let verifyUserPasswordUrl = BaseUrl + "/rest/verifyloginpassword"
+
 //获取端口(企业)列表
 let getCompanyListUrl  = BaseUrl + "/rest/getagentlist"
 

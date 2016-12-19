@@ -129,6 +129,25 @@ class NetworkManager {
         
     }
     
+    //验证用户密码
+    func verifyUserPassWordWith(_ userName:String,usertype:UserLoginType,passWord:String,completion:@escaping DDResultHandler) {
+        
+        
+        let sign = (userName + "-" + usertype.rawValue + "-" + passWord + "-" + Date.currentDateString() + "-" + XHPublicKey).md5()
+        
+        let dict:JSONDictionary = [
+            "username":userName,
+            "type":usertype.rawValue,
+            "password":passWord,
+            "sign":sign
+        ]
+        
+        let urlString = verifyUserPasswordUrl
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+        
+    }
+    
     
     //获取企业列表
     func getCompanyListWith(_ userName:String,usertype:UserLoginType,completion:@escaping DDResultHandler) {

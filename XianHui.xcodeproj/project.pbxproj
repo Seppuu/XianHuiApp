@@ -11,6 +11,8 @@
 		311DC2DE1D9A3D01006EC8AB /* AccountManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311DC2DD1D9A3D01006EC8AB /* AccountManagerVC.swift */; };
 		37065C741DDD4C0C000134CD /* RealmMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37065C731DDD4C0C000134CD /* RealmMigration.swift */; };
 		3707CAEE1E078C60008AE4F2 /* UpdatePassWordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3707CAED1E078C60008AE4F2 /* UpdatePassWordVC.swift */; };
+		3707CAF11E07B449008AE4F2 /* PassWordFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3707CAEF1E07B449008AE4F2 /* PassWordFieldCell.swift */; };
+		3707CAF21E07B449008AE4F2 /* PassWordFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3707CAF01E07B449008AE4F2 /* PassWordFieldCell.xib */; };
 		3708C2691DA551E600D8E534 /* OrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3708C2671DA551E600D8E534 /* OrderCell.swift */; };
 		3708C26A1DA551E600D8E534 /* OrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3708C2681DA551E600D8E534 /* OrderCell.xib */; };
 		370AAEA61D49F1B3000C64D1 /* UserNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AAEA41D49F1B3000C64D1 /* UserNameCell.swift */; };
@@ -307,6 +309,8 @@
 		311DC2DD1D9A3D01006EC8AB /* AccountManagerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountManagerVC.swift; sourceTree = "<group>"; };
 		37065C731DDD4C0C000134CD /* RealmMigration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmMigration.swift; sourceTree = "<group>"; };
 		3707CAED1E078C60008AE4F2 /* UpdatePassWordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatePassWordVC.swift; sourceTree = "<group>"; };
+		3707CAEF1E07B449008AE4F2 /* PassWordFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassWordFieldCell.swift; sourceTree = "<group>"; };
+		3707CAF01E07B449008AE4F2 /* PassWordFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PassWordFieldCell.xib; sourceTree = "<group>"; };
 		3708C2671DA551E600D8E534 /* OrderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderCell.swift; sourceTree = "<group>"; };
 		3708C2681DA551E600D8E534 /* OrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderCell.xib; sourceTree = "<group>"; };
 		370AAEA41D49F1B3000C64D1 /* UserNameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNameCell.swift; sourceTree = "<group>"; };
@@ -1763,6 +1767,8 @@
 				37367B811D6BFED900479E39 /* chatTableViewCell.xib */,
 				378B17711D6C360800758C13 /* progressCell.swift */,
 				378B17721D6C360800758C13 /* progressCell.xib */,
+				3707CAEF1E07B449008AE4F2 /* PassWordFieldCell.swift */,
+				3707CAF01E07B449008AE4F2 /* PassWordFieldCell.xib */,
 			);
 			path = formCell;
 			sourceTree = "<group>";
@@ -2274,6 +2280,7 @@
 				37367B881D6C141500479E39 /* chatSectionView.xib in Resources */,
 				37BAB9801D3E1059001E4680 /* ContactsCell.xib in Resources */,
 				37BAB99E1D3E1059001E4680 /* HistoryCell.xib in Resources */,
+				3707CAF21E07B449008AE4F2 /* PassWordFieldCell.xib in Resources */,
 				37BAB9861D3E1059001E4680 /* BasicInfoCell.xib in Resources */,
 				37BAB9A41D3E1059001E4680 /* SubscriptionDetailCell.xib in Resources */,
 				3776B9161D93A83900A9C9DB /* CodeLoginVerifyVC.xib in Resources */,
@@ -2442,6 +2449,7 @@
 				37BAB9971D3E1059001E4680 /* SingleTapCell.swift in Sources */,
 				37BAB9AB1D3E1059001E4680 /* WorkCell.swift in Sources */,
 				371041FF1DC0A64400BE20F9 /* StringHTML.swift in Sources */,
+				3707CAF11E07B449008AE4F2 /* PassWordFieldCell.swift in Sources */,
 				37BAB8E71D3E1045001E4680 /* CYLTabBar.m in Sources */,
 				37C710DB1D825D3F000FE4DE /* FTPopOverMenu.m in Sources */,
 				3724809B1D8151CD00B95C54 /* LCCKTabBarControllerConfig.m in Sources */,
