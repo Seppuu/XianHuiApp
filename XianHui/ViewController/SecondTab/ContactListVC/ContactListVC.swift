@@ -168,14 +168,12 @@ extension ContactListVC {
                     vc.title = "提醒"
                     navigationController?.pushViewController(vc, animated: true)
                     
-                    
                 }
                 else if (indexPath as NSIndexPath).item == 2 {
                     //工作
                     let vc = MyWorkVC()
                     vc.title = "我的工作"
                     navigationController?.pushViewController(vc, animated: true)
-                    
                     
                 }
                 else {

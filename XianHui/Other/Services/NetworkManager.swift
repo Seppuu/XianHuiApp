@@ -714,6 +714,18 @@ extension NetworkManager {
         baseRequestWith(urlString, dict: dict, completion: completion)
     }
     
+    
+    func getUserGuideMessageWith(completion:@escaping DDResultHandler) {
+        let urlString = GetUserGuideMessageUrl
+        
+        let dict:JSONDictionary = [
+            "token":Defaults.userToken.value!
+        ]
+        
+        baseRequestWith(urlString, dict: dict, completion: completion)
+    }
+    
+    
 }
 
 //MARK:进度

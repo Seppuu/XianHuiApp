@@ -272,6 +272,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         vc.noticeId = noticeId.toInt()!
                         vc.title = "日报表"
                         viewController!.navigationController?.pushViewController(vc, animated: true)
+                        
                     }
                     
                     
@@ -302,6 +303,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     vc.title = "进度"
                     LCChatKitExample.lcck_push(to: vc)
                     
+                }
+                else if type == "tutorial" {
+                    //进度的推送
+                    let vc = BaseWebViewController()
+                    vc.webTitle = "新手指导"
+                    if let url = userInfo["web_url"] as? String {
+                        
+                        var acutalUrl = url + "?" + Defaults.userToken.value!
+                        vc.urlString = acutalUrl
+                        LCChatKitExample.lcck_push(to: vc)
+                    }
                 }
                 else {
                     

@@ -10,6 +10,7 @@
 		311DC2DB1D9A09E1006EC8AB /* NSDate+DD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311DC2DA1D9A09E1006EC8AB /* NSDate+DD.swift */; };
 		311DC2DE1D9A3D01006EC8AB /* AccountManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311DC2DD1D9A3D01006EC8AB /* AccountManagerVC.swift */; };
 		37065C741DDD4C0C000134CD /* RealmMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37065C731DDD4C0C000134CD /* RealmMigration.swift */; };
+		3707CAEE1E078C60008AE4F2 /* UpdatePassWordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3707CAED1E078C60008AE4F2 /* UpdatePassWordVC.swift */; };
 		3708C2691DA551E600D8E534 /* OrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3708C2671DA551E600D8E534 /* OrderCell.swift */; };
 		3708C26A1DA551E600D8E534 /* OrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3708C2681DA551E600D8E534 /* OrderCell.xib */; };
 		370AAEA61D49F1B3000C64D1 /* UserNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AAEA41D49F1B3000C64D1 /* UserNameCell.swift */; };
@@ -305,6 +306,7 @@
 		311DC2DA1D9A09E1006EC8AB /* NSDate+DD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+DD.swift"; sourceTree = "<group>"; };
 		311DC2DD1D9A3D01006EC8AB /* AccountManagerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountManagerVC.swift; sourceTree = "<group>"; };
 		37065C731DDD4C0C000134CD /* RealmMigration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmMigration.swift; sourceTree = "<group>"; };
+		3707CAED1E078C60008AE4F2 /* UpdatePassWordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatePassWordVC.swift; sourceTree = "<group>"; };
 		3708C2671DA551E600D8E534 /* OrderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderCell.swift; sourceTree = "<group>"; };
 		3708C2681DA551E600D8E534 /* OrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderCell.xib; sourceTree = "<group>"; };
 		370AAEA41D49F1B3000C64D1 /* UserNameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNameCell.swift; sourceTree = "<group>"; };
@@ -677,6 +679,14 @@
 				37065C731DDD4C0C000134CD /* RealmMigration.swift */,
 			);
 			path = Realm;
+			sourceTree = "<group>";
+		};
+		3707CAEC1E078C37008AE4F2 /* PassWordVC */ = {
+			isa = PBXGroup;
+			children = (
+				3707CAED1E078C60008AE4F2 /* UpdatePassWordVC.swift */,
+			);
+			path = PassWordVC;
 			sourceTree = "<group>";
 		};
 		3708C2661DA551C700D8E534 /* OrderViewCell */ = {
@@ -1211,6 +1221,7 @@
 		3776B8F71D93A83900A9C9DB /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				3707CAEC1E078C37008AE4F2 /* PassWordVC */,
 				3776B8F81D93A83900A9C9DB /* ApproveVC */,
 				3776B8FD1D93A83900A9C9DB /* FirstLaunchRemindVC */,
 			);
@@ -2471,6 +2482,7 @@
 				372480D81D8151EF00B95C54 /* LCCKUser.m in Sources */,
 				37D46F851D6FD46B00A0BBCE /* GoodDetailView.swift in Sources */,
 				37A00DAF1DC1A06700E00CA7 /* VoiceRecordSampleView.swift in Sources */,
+				3707CAEE1E078C60008AE4F2 /* UpdatePassWordVC.swift in Sources */,
 				371041F21DC09C6F00BE20F9 /* LTInfiniteScrollView.swift in Sources */,
 				378B17761D6C4A7B00758C13 /* Production.swift in Sources */,
 				37BAB9D41D3E11B1001E4680 /* README.md in Sources */,

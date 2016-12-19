@@ -110,6 +110,11 @@ var SaveConversationListUrl:String {
     return DDBaseUrl + "/rest/employee/setconversationlist"
 }
 
+//获取"新手指导"的系统消息
+var GetUserGuideMessageUrl:String {
+    return DDBaseUrl + "/rest/employee/sendnovicetutorialnotice"
+}
+
 
 
 

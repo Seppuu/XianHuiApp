@@ -52,7 +52,7 @@ class UserCentreVC: BaseViewController {
         
         title = "设置"
         
-        section1 = ["账号管理"]
+        section1 = ["账号管理","修改密码"]
         
         
         setTableView()
@@ -82,6 +82,75 @@ class UserCentreVC: BaseViewController {
         userTableView.reloadData()
     }
     
+    
+    func showPasswordAlert() {
+        let title = "验证原密码"
+        let message = "为了保障您的数据安全,修改密码前请填写原密码"
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        alert.addTextField { (textField) in
+            
+            textField.isSecureTextEntry = true
+        }
+        
+        let passWordTextField = alert.textFields?.first!
+        
+        
+        let cancelButton = UIAlertAction(title: "取消", style: .cancel) { (action) in
+            
+        }
+        
+        
+        let submitButton = UIAlertAction(title: "确认", style: .default) { (action) in
+            
+            let password = passWordTextField?.text
+            
+            self.checkPassword(with: password!)
+            
+        }
+        
+        alert.addAction(submitButton)
+        alert.addAction(cancelButton)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    func checkPassword(with password:String) {
+        
+        if let user = User.currentUser() {
+            
+            if password == user.passWord {
+                //TODO:to changePassword vc
+                
+                
+            }
+            else {
+                showWrongAlert()
+            }
+        }
+        
+    }
+    
+    
+    func showWrongAlert() {
+        
+        let title = "提示"
+        let message = "密码错误，请重新输入。如果忘记密码，可以联系管理员在电脑端进行修改。"
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let submitButton = UIAlertAction(title: "确认", style: .default) { (action) in
+            
+            self.showPasswordAlert()
+            
+        }
+        
+        alert.addAction(submitButton)
+        
+        self.present(alert, animated: true, completion: nil)
+        
+    }
 }
 
 extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
@@ -120,7 +189,7 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if (indexPath as NSIndexPath).section == 0 {
+        if indexPath.section == 0 {
             //用户信息,编辑,展示切换
             //let user = User.currentUser()
             
@@ -175,24 +244,15 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
             
         }
         else {
+            
             let cellID = "cellIDs1"
             let cell = UITableViewCell(style: .default, reuseIdentifier: cellID)
-            let user = User.currentUser()
-            if user?.userType == .Boss {
-                //隐私与安全
-                cell.textLabel?.text = section1[(indexPath as NSIndexPath).row]
-                cell.selectionStyle = .none
-                return cell
-                
-            }
-            else {
-                //切换企业端口.
-                cell.textLabel?.text = section1[(indexPath as NSIndexPath).row]
-                cell.selectionStyle = .none
-                return cell
-            }
-            
+            cell.selectionStyle = .none
 
+            cell.textLabel?.text = section1[indexPath.row]
+            
+            return cell
+            
         }
         
     }
@@ -200,19 +260,21 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if (indexPath as NSIndexPath).section == 1 {
+        if indexPath.section == 1 {
             
-            let user = User.currentUser()
-            if user?.userType == .Boss {
-                let vc = MineVC()
-                vc.title = "隐私与安全"
-                navigationController?.pushViewController(vc, animated: true)
-            }
-            else {
-                //
+            
+            if indexPath.row == 0 {
+                
                 let vc = AccountManagerVC()
                 vc.title = "账号管理"
                 navigationController?.pushViewController(vc, animated: true)
+                
+            }
+            else if indexPath.row == 1 {
+                
+                //TODO:输入现有密码.
+                showPasswordAlert()
+                
             }
             
         }

@@ -29,12 +29,13 @@ class ChatKitExample: LCChatKitExample {
         
     }
     
-    
     //监听,LCCKNotificationConversationListDataSourceUpdated来获取最新的最近消息列表IDs.保存至服务器
     func addSaveConvIdNoti() {
         
         NotificationCenter.default.addObserver(self, selector: #selector(ChatKitExample.saveConversationListID(_:)), name: NSNotification.Name(rawValue: LCCKNotificationConversationListDataSourceUpdated), object: nil)
     }
+    
+    var isSendingUserGuideMsg = false
     
     func saveConversationListID(_ noti:Notification) {
         
@@ -50,6 +51,25 @@ class ChatKitExample: LCChatKitExample {
             idsParam += id + ","
         }
         if convs.count == 0 {
+            
+            if isSendingUserGuideMsg == true {
+                return
+            }
+            
+            //TODO:通知后台发送,新手指导.
+            NetworkManager.sharedManager.getUserGuideMessageWith(completion: { (success, json, error) in
+                self.isSendingUserGuideMsg = false
+                //TODO:do something?
+                if success == true {
+                    
+                }
+                else {
+                    
+                }
+                
+            })
+            
+            
            return
         }
         
@@ -205,6 +225,17 @@ class ChatKitExample: LCChatKitExample {
                                 LCChatKitExample.lcck_push(to: vc)
                                 
                             }
+                            else if noticeType == "tutorial" {
+                                //进度的推送
+                                let vc = BaseWebViewController()
+                                vc.webTitle = "新手指导"
+                                if let url = attr["web_url"] as? String {
+                                    
+                                    var acutalUrl = url + "?token=" + Defaults.userToken.value!
+                                    vc.urlString = acutalUrl
+                                    LCChatKitExample.lcck_push(to: vc)
+                                }
+                            }
                             else {
                                 let vc = NoticeListVC()
                                 vc.title = "提醒"
@@ -220,7 +251,6 @@ class ChatKitExample: LCChatKitExample {
                     else {
                         
                     }
-                    
                     
                 }
             
