@@ -37,6 +37,7 @@ class ChatKitExample: LCChatKitExample {
     
     var isSendingUserGuideMsg = false
     
+    
     func saveConversationListID(_ noti:Notification) {
         
         guard let conversationService  = noti.object as? LCCKConversationService else {return}

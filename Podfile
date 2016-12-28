@@ -3,7 +3,7 @@ use_frameworks!
 
 target 'XianHui' do
 #Objective-C
-pod 'ChatKit'
+pod 'ChatKit', '0.8.5'
 pod 'CTAssetsPickerController',  '~> 3.3.0'
 pod 'DZNEmptyDataSet'
 pod 'TWMessageBarManager'

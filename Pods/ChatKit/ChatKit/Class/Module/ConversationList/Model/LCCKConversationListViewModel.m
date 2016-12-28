@@ -2,7 +2,7 @@
 //  LCCKConversationListViewModel.m
 //  LeanCloudChatKit-iOS
 //
-//  v0.8.0 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/3/22.
+//  v0.8.5 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/3/22.
 //  Copyright © 2016年 LeanCloud. All rights reserved.
 //
 
@@ -82,7 +82,7 @@
         return customCell;
     }
     LCCKConversationListCell *cell = [LCCKConversationListCell dequeueOrCreateCellByTableView:tableView];
-    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     [tableView setSeparatorColor:[[LCCKSettingService sharedInstance] defaultThemeColorForKey:@"TableView-SeparatorColor"]];
     __block NSString *displayName = nil;
     __block NSURL *avatarURL = nil;
@@ -122,7 +122,6 @@
     if (configureCellBlock) {
         configureCellBlock(cell, tableView, indexPath, conversation);
     }
-    
     return cell;
 }
 

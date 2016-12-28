@@ -2,7 +2,7 @@
 //  LCCKContactListViewController.m
 //  LeanCloudChatKit-iOS
 //
-//  v0.8.0 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/2/22.
+//  v0.8.5 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/2/22.
 //  Copyright © 2016年 LeanCloud. All rights reserved.
 //
 
@@ -36,6 +36,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 ///=============================================================================
 
 #pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
 #pragma clang diagnostic pop
 @property (nonatomic, copy) NSArray *searchContacts;
@@ -320,7 +321,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    LCCKContactCell *cell = [tableView dequeueReusableCellWithIdentifier:LCCKContactListViewControllerIdentifier];
+    LCCKContactCell *cell = [tableView dequeueReusableCellWithIdentifier:LCCKContactListViewControllerIdentifier forIndexPath:indexPath];
     id contact = [self contactAtIndexPath:indexPath tableView:tableView];
     NSURL *avatarURL = nil;
     NSString *name = nil;
@@ -395,7 +396,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    LCCKContactCell *cell = [tableView dequeueReusableCellWithIdentifier:LCCKContactListViewControllerIdentifier];
+    LCCKContactCell *cell = [tableView dequeueReusableCellWithIdentifier:LCCKContactListViewControllerIdentifier forIndexPath:indexPath];
     NSString *clientId = [self currentClientIdAtIndexPath:indexPath tableView:tableView];
     if (self.mode == LCCKContactListModeSingleSelection) {
         if (clientId == self.selectedContact) {

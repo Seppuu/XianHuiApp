@@ -107,7 +107,6 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
         }
         else if self.type == .employee {
             
-            
             let vc = EmployeeProfileVC()
             vc.title = "详细资料"
             vc.type = self.type
@@ -115,7 +114,6 @@ class MyWorkDetailVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDe
             vc.profileDetailJSON = profileJSON
             
             self.navigationController?.pushViewController(vc, animated: true)
-            
             
         }
         else if self.type == .project {

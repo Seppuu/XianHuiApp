@@ -2,7 +2,7 @@
 //  LCCKConversationService.m
 //  LeanCloudChatKit-iOS
 //
-//  v0.8.0 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/3/1.
+//  v0.8.5 Created by ElonChan (微信向我报BUG:chenyilong1010) on 16/3/1.
 //  Copyright © 2016年 LeanCloud. All rights reserved.
 //
 
@@ -221,7 +221,7 @@ NSString *const LCCKConversationServiceErrorDomain = @"LCCKConversationServiceEr
     AVIMConversation *conversation = self.currentConversation;
     NSString *conversationId = conversation.conversationId;
     if (!conversation.createAt || !conversation.imClient) {
-        NSAssert(conversation.imClient, @"类名与方法名：%@（在第%@行），描述：%@", @(__PRETTY_FUNCTION__), @(__LINE__), @"imClient or conversation is nil");
+        NSLog( @"类名与方法名：%@（在第%@行），描述：%@", @(__PRETTY_FUNCTION__), @(__LINE__), @"imClient or conversation is nil");
         return;
     }
     [self insertRecentConversation:conversation shouldRefreshWhenFinished:NO];

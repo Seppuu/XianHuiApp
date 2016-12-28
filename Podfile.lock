@@ -1,24 +1,24 @@
 PODS:
-  - AFViewShaker (0.0.2)
+  - AFViewShaker (0.0.4)
   - Alamofire (4.0.1)
-  - AVOSCloud (3.6.1)
-  - AVOSCloudIM (3.6.1):
-    - AVOSCloud (= 3.6.1)
-    - AVOSCloudIM/_ARC (= 3.6.1)
-    - AVOSCloudIM/_NOARC (= 3.6.1)
-  - AVOSCloudIM/_ARC (3.6.1):
-    - AVOSCloud (= 3.6.1)
-    - AVOSCloudIM/_NOARC (= 3.6.1)
-  - AVOSCloudIM/_NOARC (3.6.1):
-    - AVOSCloud (= 3.6.1)
+  - AVOSCloud (3.7.1)
+  - AVOSCloudIM (3.7.1):
+    - AVOSCloud (= 3.7.1)
+    - AVOSCloudIM/_ARC (= 3.7.1)
+    - AVOSCloudIM/_NOARC (= 3.7.1)
+  - AVOSCloudIM/_ARC (3.7.1):
+    - AVOSCloud (= 3.7.1)
+    - AVOSCloudIM/_NOARC (= 3.7.1)
+  - AVOSCloudIM/_NOARC (3.7.1):
+    - AVOSCloud (= 3.7.1)
   - BKPasscodeView (0.2.4):
     - AFViewShaker (~> 0.0)
-  - Charts (3.0.0):
-    - Charts/Core (= 3.0.0)
-  - Charts/Core (3.0.0)
-  - ChatKit (0.8.0):
-    - AVOSCloud (~> 3.6.0)
-    - AVOSCloudIM (~> 3.6.0)
+  - Charts (3.0.1):
+    - Charts/Core (= 3.0.1)
+  - Charts/Core (3.0.1)
+  - ChatKit (0.8.5):
+    - AVOSCloud (~> 3.7.1)
+    - AVOSCloudIM (~> 3.7.1)
     - DACircularProgress (~> 2.3.1)
     - FDStackView (~> 1.0)
     - FMDB (~> 2.6.2)
@@ -29,7 +29,7 @@ PODS:
     - pop (~> 1.0.9)
     - SDWebImage (~> 3.8.0)
     - UITableView+FDTemplateLayoutCell (~> 1.5.beta)
-  - CryptoSwift (0.6.5)
+  - CryptoSwift (0.6.7)
   - CTAssetsPickerController (3.3.1):
     - PureLayout (~> 3.0.0)
   - DACircularProgress (2.3.1)
@@ -54,17 +54,17 @@ PODS:
   - pop (1.0.9)
   - Proposer (1.0.0)
   - PureLayout (3.0.2)
-  - Realm (2.0.3):
-    - Realm/Headers (= 2.0.3)
-  - Realm/Headers (2.0.3)
-  - RealmSwift (2.0.3):
-    - Realm (= 2.0.3)
+  - Realm (2.1.2):
+    - Realm/Headers (= 2.1.2)
+  - Realm/Headers (2.1.2)
+  - RealmSwift (2.1.2):
+    - Realm (= 2.1.2)
   - Ruler (1.0.0)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
   - SnapKit (3.0.2)
-  - SwiftDate (4.0.7)
+  - SwiftDate (4.0.8)
   - swiftScan (1.0.8)
   - SwiftyJSON (2.3.2)
   - TWMessageBarManager (1.8.1)
@@ -77,7 +77,7 @@ DEPENDENCIES:
   - Alamofire (~> 4.0.0)
   - BKPasscodeView
   - Charts (~> 3.0.0)
-  - ChatKit
+  - ChatKit (= 0.8.5)
   - CryptoSwift
   - CTAssetsPickerController (~> 3.3.0)
   - DZNEmptyDataSet
@@ -114,14 +114,14 @@ CHECKOUT OPTIONS:
     :git: https://github.com/acegreen/SwiftyJSON.git
 
 SPEC CHECKSUMS:
-  AFViewShaker: 7e4bc215ca3e92347b78da436fca74e1730b52e8
+  AFViewShaker: 4296c638c24a037e02727b40d89d8f178df3b3f4
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
-  AVOSCloud: cc9b567da2d30f07e3da1e4db682cad9ff56a1b6
-  AVOSCloudIM: 7c30a50d1e8f6afee000a2037ea24eb6abcbc8db
+  AVOSCloud: 0ef0e068cbbe871c79257a501555c3e67fe8d866
+  AVOSCloudIM: 32f1beb173becc0264967a81a606ef538fd8687f
   BKPasscodeView: 947e3542c126a9fa41c46318759d928919636e96
-  Charts: beb341928d2135613b4325a6c6aff9f2f6de895e
-  ChatKit: 7c5fa96b01e69bcfc38b9158fdafe363ce56352b
-  CryptoSwift: d86b1d97d39b4a361ba44c77180b221e9c5b864f
+  Charts: 0e84f4418e87dad6a9edde221fba37ebb51d3ba7
+  ChatKit: 83cb69cda88a43921821f7b5712a7bf94125d88c
+  CryptoSwift: 685ae257941e5447474348a2b545583e1a16b573
   CTAssetsPickerController: b1d1d50ab87cf6b8b13531de5f4530482e7e53ed
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
@@ -139,12 +139,12 @@ SPEC CHECKSUMS:
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   Proposer: 73303728e11cb6dbe27102deac0da82956a51f16
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
-  Realm: 5f008bfe3c8c47142eddfc30b8c1584cde22db24
-  RealmSwift: 5afb451f65b682242f272dbb52d5c6f6e343c980
+  Realm: efe855f4d977c8ce5a82d3116d9f1ff155a6550c
+  RealmSwift: 17d6ee30b6f9df86364408c2197492e33bfea567
   Ruler: fa0067d052372fef191acea419917d4b42ebc3aa
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
-  SwiftDate: 0efb04a6751b1ab804049b2b09a69848cd304c12
+  SwiftDate: 9aa3259d8850d818bec02802f8f05aa9a8c26fdb
   swiftScan: 2dc76303bc7c2dcb7bde9c539f9bd6a7520abc8e
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   TWMessageBarManager: fd84e7948ba7968a2b5d9454859135761214ec56
@@ -153,6 +153,6 @@ SPEC CHECKSUMS:
   UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
   ValueStepper: a1a275491e3a1ab6fe80a589ce04781d4a795fb3
 
-PODFILE CHECKSUM: 2ad4a40a6ca92486324e84c6844d0ae4a9dddb6c
+PODFILE CHECKSUM: 6dd271dab0d0577394393dacd7351a2cbe5609b3
 
 COCOAPODS: 1.1.1

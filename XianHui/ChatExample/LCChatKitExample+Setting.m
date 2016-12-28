@@ -94,7 +94,7 @@ static NSString *const LCCKAPPKEY = @"eXUtSMYSxVCJhE4IHOiGWabv";
  *  ChatKit 会在需要用到 User信息时调用设置的这个逻辑。
  */
 - (void)lcck_setFetchProfiles {
-    //TODO:在子类中重写
+    //在子类中重写
 }
 
 #pragma mark - 最近联系人列表的设置
