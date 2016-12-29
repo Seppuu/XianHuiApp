@@ -206,7 +206,9 @@ class TaskDetailVC: UIViewController {
             
             if let homeLists = data[key].array {
                 let arr = BaseTableViewModelList()
+                
                 arr.listName = ""
+                
                 for data in homeLists {
                     
                     let dayModel = BaseTableViewModel()
@@ -215,8 +217,15 @@ class TaskDetailVC: UIViewController {
                         dayModel.name = name
                     }
                     
+                    if key == "customer_list" {
+                        if let customerId = data["id"].int {
+                            dayModel.id = customerId
+                        }
+                    }
+                    
                     if let amount = data["amount"].int {
-                        dayModel.desc = String(amount)
+                        
+                        dayModel.desc = amount.convertToKiloPerCommaString()
                     }
                     
                     if let listModels = data["detail"].array {
@@ -230,7 +239,7 @@ class TaskDetailVC: UIViewController {
                             }
                             
                             if let amount = listModel["amount"].int {
-                                model.desc = String(amount)
+                                model.desc = amount.convertToKiloPerCommaString()
                             }
                             
                             dayModel.hasList = true
@@ -385,12 +394,16 @@ extension TaskDetailVC:UITableViewDelegate,UITableViewDataSource {
             let baseModel = data[indexPath.section - 1].list[indexPath.row]
             
             if baseModel.hasList == true {
-                let vc = BaseTableViewController()
+                let vc = CustomerTaskDetailTableVC()
+                
                 let listArr = BaseTableViewModelList()
                 listArr.listName = ""
                 listArr.list = baseModel.listData
                 vc.listArray = [listArr]
                 vc.title = baseModel.name
+                vc.customerId = baseModel.id
+                
+                
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             else {
@@ -399,6 +412,35 @@ extension TaskDetailVC:UITableViewDelegate,UITableViewDataSource {
         }
         
     }
+    
+}
+
+
+class CustomerTaskDetailTableVC:BaseTableViewController {
+
+    var customerId:Int?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if customerId != nil {
+            let rightBar = UIBarButtonItem(title: "详细", style: .plain, target: self, action: #selector(CustomerTaskDetailTableVC.rightTap))
+            self.navigationItem.rightBarButtonItem = rightBar
+        }
+        else {
+            
+        }
+        
+    }
+    
+    func rightTap() {
+        
+        let vc = CustomerProfileVC()
+        vc.customerId = customerId!
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
     
 }
 

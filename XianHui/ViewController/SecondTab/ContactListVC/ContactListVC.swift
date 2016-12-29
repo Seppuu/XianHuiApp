@@ -120,7 +120,7 @@ extension ContactListVC {
             return super.tableView(tableView, cellForRowAt: indexPath)
         }
         else {
-            if ((indexPath as NSIndexPath).section == 0) {
+            if (indexPath.section == 0) {
                 let cellId = "ChannelCell"
                 var cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? ChannelCell
                 
@@ -130,15 +130,15 @@ extension ContactListVC {
                     cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? ChannelCell
                 }
                 
-                cell!.nameLabel.text = topTitle[(indexPath as NSIndexPath).item]
+                cell!.nameLabel.text = topTitle[indexPath.item]
                 
-                cell!.leftImageView.image = topIcon[(indexPath as NSIndexPath).item]
+                cell!.leftImageView.image = topIcon[indexPath.item]
                 cell!.leftImageView.contentMode = .center
                 cell!.layoutMargins = UIEdgeInsetsMake(0, 64, 0, 0)
                 return cell!
             }
             else {
-                let actualIndexPath = IndexPath(item: (indexPath as NSIndexPath).row, section: (indexPath as NSIndexPath).section - 1)
+                let actualIndexPath = IndexPath(item: indexPath.row, section: indexPath.section - 1)
                 let cell = super.tableView(tableView, cellForRowAt: actualIndexPath)
                 cell.layoutMargins = UIEdgeInsetsMake(0, 64, 0, 0)
                // print((indexPath as NSIndexPath).row)
@@ -153,15 +153,15 @@ extension ContactListVC {
             return super.tableView(tableView, didSelectRowAt: indexPath)
         }
         else{
-            if ((indexPath as NSIndexPath).section == 0) {
+            if (indexPath.section == 0) {
                 
-                if (indexPath as NSIndexPath).item == 0 {
+                if indexPath.item == 0 {
                     let vc = HelperVC()
                     vc.title = "助手"
                     navigationController?.pushViewController(vc, animated: true)
                     
                 }
-                else if (indexPath as NSIndexPath).item == 1 {
+                else if indexPath.item == 1 {
                     
                     //通知,提醒
                     let vc = NoticeListVC()
@@ -169,7 +169,7 @@ extension ContactListVC {
                     navigationController?.pushViewController(vc, animated: true)
                     
                 }
-                else if (indexPath as NSIndexPath).item == 2 {
+                else if indexPath.item == 2 {
                     //工作
                     let vc = MyWorkVC()
                     vc.title = "我的工作"
@@ -186,7 +186,7 @@ extension ContactListVC {
                 tableView.deselectRow(at: indexPath, animated: true)
             }
             else {
-                let actualIndexPath = IndexPath(item: (indexPath as NSIndexPath).row, section: (indexPath as NSIndexPath).section - 1)
+                let actualIndexPath = IndexPath(item: indexPath.row, section: indexPath.section - 1)
                 super.tableView(tableView, didSelectRowAt: actualIndexPath)
             }
         }

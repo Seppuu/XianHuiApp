@@ -232,7 +232,7 @@ class ChatKitExample: LCChatKitExample {
                                 vc.webTitle = "新手指导"
                                 if let url = attr["web_url"] as? String {
                                     
-                                    var acutalUrl = url + "?token=" + Defaults.userToken.value!
+                                    let acutalUrl = url + "?token=" + Defaults.userToken.value!
                                     vc.urlString = acutalUrl
                                     LCChatKitExample.lcck_push(to: vc)
                                 }

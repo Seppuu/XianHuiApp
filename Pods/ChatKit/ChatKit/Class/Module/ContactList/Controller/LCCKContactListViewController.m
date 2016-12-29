@@ -321,7 +321,8 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    LCCKContactCell *cell = [tableView dequeueReusableCellWithIdentifier:LCCKContactListViewControllerIdentifier forIndexPath:indexPath];
+    //xianhui
+    LCCKContactCell *cell = [tableView dequeueReusableCellWithIdentifier:LCCKContactListViewControllerIdentifier];
     id contact = [self contactAtIndexPath:indexPath tableView:tableView];
     NSURL *avatarURL = nil;
     NSString *name = nil;
@@ -396,7 +397,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    LCCKContactCell *cell = [tableView dequeueReusableCellWithIdentifier:LCCKContactListViewControllerIdentifier forIndexPath:indexPath];
+    LCCKContactCell *cell = [tableView dequeueReusableCellWithIdentifier:LCCKContactListViewControllerIdentifier];
     NSString *clientId = [self currentClientIdAtIndexPath:indexPath tableView:tableView];
     if (self.mode == LCCKContactListModeSingleSelection) {
         if (clientId == self.selectedContact) {

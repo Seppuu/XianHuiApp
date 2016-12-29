@@ -36,6 +36,11 @@ class Notice: NSObject {
     var createTime = ""
     
     var hasRead = false
+    
+    //是否是订单相关的提醒
+    var isOrder = false
+    
+    var customerId = 0
 }
 
 class NoticeListVC: UIViewController {
@@ -127,6 +132,13 @@ class NoticeListVC: UIViewController {
                 no.createTime = create_time
             }
             
+            
+            if let customerId = json["customer_id"].int {
+                no.customerId = customerId
+                no.isOrder = true
+            }
+        
+            
             switch json["notice_type"].string! {
             case "daily_report":
                 no.type = NoticeType.daily_report
@@ -191,7 +203,7 @@ extension NoticeListVC:UITableViewDelegate,UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! HeplerCell
         cell.selectionStyle = .none
-        let no = listOfNotice[(indexPath as NSIndexPath).row]
+        let no = listOfNotice[indexPath.row]
         
         cell.pushTimeLabel.text = no.createTime
         cell.nameLabel.text     = no.title
@@ -205,7 +217,16 @@ extension NoticeListVC:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let no = listOfNotice[indexPath.row]
+        
+        if no.isOrder == true {
+            let vc = CustomerProfileVC()
+            vc.customerId = no.customerId
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
+    
     
     
 }

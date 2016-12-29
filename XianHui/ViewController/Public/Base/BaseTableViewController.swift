@@ -26,6 +26,7 @@ class BaseTableViewModelList:NSObject {
     
     var listName = ""
     var list = [BaseTableViewModel]()
+    
 }
 
 typealias CellForRowHandler = ((UITableView,IndexPath) -> (UITableViewCell))

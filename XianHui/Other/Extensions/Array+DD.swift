@@ -30,4 +30,19 @@ extension Array where Element: Equatable {
     }
 }
 
+extension Int {
+   
+    //转化成逢千位加逗号
+    func convertToKiloPerCommaString() -> String {
+        
+        let fmt = NumberFormatter()
+        fmt.numberStyle = .decimal
+        let numString = fmt.string(from: NSNumber(value: self))
+        
+        return numString!
+    }
+}
+
+
+
 
