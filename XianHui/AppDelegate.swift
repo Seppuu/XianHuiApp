@@ -188,7 +188,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             }, failed: { (error) in
                 
-                print(error.debugDescription)
+                //print(error.debugDescription)
+                self.showGuide()
+                if let currentVC = self.window?.visibleViewController {
+                    let hud = showHudWith(currentVC.view, animated: true, mode: .text, text: "登陆失败")
+                    hud.detailsLabelText = error.debugDescription
+                    hud.hide(true, afterDelay: 3.0)
+                }
+                
         })
     }
     

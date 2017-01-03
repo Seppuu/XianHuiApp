@@ -73,7 +73,6 @@ func showHudWith(_ view:UIView,animated:Bool,mode:MBProgressHUDMode,text:String)
     let hud = MBProgressHUD.showAdded(to: view, animated: animated)
     hud?.mode = mode
     hud?.labelText = text
-    
     return hud!
 }
 

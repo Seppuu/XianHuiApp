@@ -96,7 +96,12 @@ class NoticeListVC: UIViewController {
                 }
             }
             else {
-                
+                self.tableView.mj_header.endRefreshing()
+//                self.tableView.mj_footer.isAutomaticallyHidden = true
+//                self.noDataMsg = "网络连接不上,请检查网络"
+//                self.hasLoadData = true
+                let hud = showHudWith(self.view, animated: true, mode: .text, text: error!)
+                hud.hide(true, afterDelay: 2.0)
             }
         }
     }

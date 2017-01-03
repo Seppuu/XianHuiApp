@@ -148,6 +148,8 @@ class TaskListVC: BaseViewController {
             }
             else {
                 
+                let hud = showHudWith(self.view, animated: true, mode: .text, text: error!)
+                hud.hide(true, afterDelay: 2.0)
             }
         }
         
