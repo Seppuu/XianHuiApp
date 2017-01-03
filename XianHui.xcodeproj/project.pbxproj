@@ -140,6 +140,7 @@
 		37A2466B1DAF69A3002ADC5C /* FourButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37A246691DAF69A3002ADC5C /* FourButtonCell.xib */; };
 		37A2466E1DAF69B4002ADC5C /* SliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A2466C1DAF69B4002ADC5C /* SliderCell.swift */; };
 		37A2466F1DAF69B4002ADC5C /* SliderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37A2466D1DAF69B4002ADC5C /* SliderCell.xib */; };
+		37A4C7591E14DD4700BF30E8 /* CustomizedChatKit.Other.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 37A4C7581E14DD4700BF30E8 /* CustomizedChatKit.Other.bundle */; };
 		37A76FD31D6D314600572B1D /* ProdDateSetTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A76FD21D6D314600572B1D /* ProdDateSetTableView.swift */; };
 		37A76FDA1D6D7DA200572B1D /* ReMarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A76FD81D6D7DA200572B1D /* ReMarkCell.swift */; };
 		37A76FDB1D6D7DA200572B1D /* ReMarkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37A76FD91D6D7DA200572B1D /* ReMarkCell.xib */; };
@@ -299,7 +300,6 @@
 		37F905311D69F9370078C06B /* CustomerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F9052F1D69F9370078C06B /* CustomerCell.swift */; };
 		37F905321D69F9370078C06B /* CustomerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F905301D69F9370078C06B /* CustomerCell.xib */; };
 		37FF8EE01D90D58900676780 /* NSUserDefaults+DD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FF8EDF1D90D58900676780 /* NSUserDefaults+DD.swift */; };
-		37FF8EE71D9143B200676780 /* CustomizedChatKitOther.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 37FF8EE61D9143B200676780 /* CustomizedChatKitOther.bundle */; };
 		7BF7C59FF39FAE1F05986482 /* Pods_XianHui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0677814338CEF00D20F722E0 /* Pods_XianHui.framework */; };
 /* End PBXBuildFile section */
 
@@ -459,6 +459,7 @@
 		37A246691DAF69A3002ADC5C /* FourButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FourButtonCell.xib; sourceTree = "<group>"; };
 		37A2466C1DAF69B4002ADC5C /* SliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderCell.swift; sourceTree = "<group>"; };
 		37A2466D1DAF69B4002ADC5C /* SliderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SliderCell.xib; sourceTree = "<group>"; };
+		37A4C7581E14DD4700BF30E8 /* CustomizedChatKit.Other.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CustomizedChatKit.Other.bundle; sourceTree = "<group>"; };
 		37A76FD21D6D314600572B1D /* ProdDateSetTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProdDateSetTableView.swift; sourceTree = "<group>"; };
 		37A76FD81D6D7DA200572B1D /* ReMarkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReMarkCell.swift; sourceTree = "<group>"; };
 		37A76FD91D6D7DA200572B1D /* ReMarkCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReMarkCell.xib; sourceTree = "<group>"; };
@@ -652,7 +653,6 @@
 		37F9052F1D69F9370078C06B /* CustomerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerCell.swift; sourceTree = "<group>"; };
 		37F905301D69F9370078C06B /* CustomerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomerCell.xib; sourceTree = "<group>"; };
 		37FF8EDF1D90D58900676780 /* NSUserDefaults+DD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSUserDefaults+DD.swift"; sourceTree = "<group>"; };
-		37FF8EE61D9143B200676780 /* CustomizedChatKitOther.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CustomizedChatKitOther.bundle; sourceTree = "<group>"; };
 		663D87182AC2C2DAAEDADDF3 /* Pods-XianHui.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XianHui.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XianHui/Pods-XianHui.debug.xcconfig"; sourceTree = "<group>"; };
 		8DE5361F0FC88D4B133ED962 /* Pods-XianHui.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XianHui.release.xcconfig"; path = "Pods/Target Support Files/Pods-XianHui/Pods-XianHui.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -2174,7 +2174,7 @@
 		37FF8EE51D91439D00676780 /* CustomizedChatKit */ = {
 			isa = PBXGroup;
 			children = (
-				37FF8EE61D9143B200676780 /* CustomizedChatKitOther.bundle */,
+				37A4C7581E14DD4700BF30E8 /* CustomizedChatKit.Other.bundle */,
 			);
 			path = CustomizedChatKit;
 			sourceTree = "<group>";
@@ -2296,6 +2296,7 @@
 				37F905321D69F9370078C06B /* CustomerCell.xib in Resources */,
 				37D811DD1DAB437E00A5B037 /* Assets.xcassets in Resources */,
 				372480DF1D8151EF00B95C54 /* LCCKVCardView.xib in Resources */,
+				37A4C7591E14DD4700BF30E8 /* CustomizedChatKit.Other.bundle in Resources */,
 				37BAB9961D3E1059001E4680 /* SegmentCell.xib in Resources */,
 				37C15CE41DE3EF7E0083AFAB /* TaskList.storyboard in Resources */,
 				37BAB97C1D3E1059001E4680 /* ChannelCell.xib in Resources */,
@@ -2311,7 +2312,6 @@
 				371430781D9B96C60006A314 /* MyWorkCell.xib in Resources */,
 				37BAB9981D3E1059001E4680 /* SingleTapCell.xib in Resources */,
 				37C1F3981DB9C9410029D776 /* EBMute.mp3 in Resources */,
-				37FF8EE71D9143B200676780 /* CustomizedChatKitOther.bundle in Resources */,
 				379C738B1D9CDCD000B41BA6 /* CheckBoxCell.xib in Resources */,
 				37BAB9821D3E1059001E4680 /* ConversationCell.xib in Resources */,
 				37BAB9AA1D3E1059001E4680 /* UserAvatarCell.xib in Resources */,

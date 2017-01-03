@@ -10,6 +10,9 @@ import UIKit
 import SwiftyJSON
 import DZNEmptyDataSet
 import MJRefresh
+import RealReachability
+
+
 
 
 class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
@@ -49,7 +52,9 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         addNoti()
         setTableView()
         setSearchBar()
+        
     }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -199,6 +204,10 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
             self.getDataFromServer(self.filterParams)
         })        
 
+        
+        tableView.mj_footer.endRefreshingCompletionBlock = {
+            self.hasLoadData = true
+        }
         
         dataHelper.cellSelectedHandler = {
             (index,objectId,objectName,obj) in
@@ -476,9 +485,11 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         }
     }
     
+    var noDataMsg = "暂无数据，如有疑问请联系系统管理员。"
+    
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         
-        let text =  isSearch == true ? "搜索全部:无结果":"暂无数据"
+        let text =  isSearch == true ? "搜索全部:无结果":noDataMsg
         
         let attrString = NSAttributedString(string: text)
         
@@ -535,6 +546,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     }
     
     func getDataFromServer(_ params:JSONDictionary) {
+        
         var urlString = ""
         switch self.type {
         case .customer:
@@ -564,10 +576,12 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
                 if let rows = json!["rows"].array {
                     
                     if rows.count == 0 {
+                        self.noDataMsg = "暂无数据,请联系系统管理员."
                         self.tableView.mj_footer.endRefreshingWithNoMoreData()
                         self.tableView.mj_footer.isAutomaticallyHidden = true
                     }
                     else {
+                        self.noDataMsg = ""
                         self.tableView.mj_footer.endRefreshing()
                         self.tableView.mj_footer.isAutomaticallyHidden = false
                         
@@ -576,13 +590,15 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
                 }
             }
             else {
-                
+                self.tableView.mj_footer.endRefreshing()
+                self.tableView.mj_footer.isAutomaticallyHidden = true
+                self.noDataMsg = "网络连接不上,请检查网络"
+                self.hasLoadData = true
+                let hud = showHudWith(self.view, animated: true, mode: .text, text: error!)
+                hud.hide(true, afterDelay: 2.0)
             }
             
-            self.hasLoadData = true
-            
         }
-
         
     }
     

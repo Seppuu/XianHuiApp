@@ -595,7 +595,7 @@ setLoadLatestMessagesHandler:^(LCCKConversationViewController *conversationContr
     actionItemMore.backgroundColor = [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0];
     UITableViewRowAction *actionItemDelete = [UITableViewRowAction
                                               rowActionWithStyle:UITableViewRowActionStyleDefault
-                                              title:@"删除"
+                                              title:LCCKLocalizedStrings(@"Delete")
                                               handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
                                                   [[LCChatKit sharedInstance]                                               deleteRecentConversationWithConversationId:conversation.conversationId];
                                               }];
