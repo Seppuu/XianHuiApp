@@ -12,6 +12,7 @@ import SwiftyJSON
 import RealmSwift
 import SwiftDate
 import RealReachability
+import ChatKit
 
 enum  VerifyCodeType: String{
     
@@ -932,20 +933,23 @@ extension NetworkManager {
     fileprivate func baseRequestWith(_ urlString:String,dict:JSONDictionary,completion:@escaping DDResultHandler) {
         
         //检测网络
+//        let isConnected = LCChatKit.sharedInstance().sessionService.connect
+//        if isConnected == false {
+//            completion(false, nil, "网络连接不上,请检查网络.")
+//        }
         let reachability = RealReachability.sharedInstance()
         guard let status = reachability?.currentReachabilityStatus() else {
-            completion(false, nil, "网络连接不上,请检查网络.")
+            
             return
         }
         
         switch status {
-        case .RealStatusNotReachable ,.RealStatusUnknown:
+        case .RealStatusNotReachable:
             completion(false, nil, "网络连接不上,请检查网络.")
             return
         default:
             break
         }
-        
         
         let parameters:Parameters = dict
         

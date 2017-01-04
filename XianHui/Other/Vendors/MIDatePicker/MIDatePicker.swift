@@ -25,8 +25,8 @@ class MIDatePicker: UIView {
         
         var startDate =  Date()
         
-        var confirmButtonTitle = "Seleziona"
-        var cancelButtonTitle = "Annulla"
+        var confirmButtonTitle = ""
+        var cancelButtonTitle = ""
         
         var headerHeight: CGFloat = 44
         
@@ -73,6 +73,14 @@ class MIDatePicker: UIView {
     @IBAction func cancelButtonDidTapped(_ sender: AnyObject) {
         dismiss()
         delegate?.miDatePickerDidCancelSelection(amDatePicker: self)
+    }
+    
+    
+    @IBAction func dateValueChanged(_ sender: UIDatePicker) {
+        
+        config.startDate = datePicker.date
+        
+        delegate?.miDatePicker(amDatePicker: self, didSelect: datePicker.date)
     }
     
     // MARK: - Private

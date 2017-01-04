@@ -10,10 +10,6 @@ import UIKit
 import SwiftyJSON
 import DZNEmptyDataSet
 import MJRefresh
-import RealReachability
-
-
-
 
 class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
 
@@ -53,8 +49,11 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         setTableView()
         setSearchBar()
         
+        setDatePicker()
+        setDropDownView()
+        
     }
-
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -84,6 +83,8 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         reSetNavBarItem()
+        
+        
     }
     
     
@@ -92,6 +93,9 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     var filterItem   = UIBarButtonItem()
     var negativeSpacer = UIBarButtonItem()
     var searchBar    = UISearchBar()
+    
+    
+    var dateItem     = UIBarButtonItem()
     
     func setSearchBar() {
         //searchButton.setTitle("搜索", forState: .Normal)
@@ -115,7 +119,22 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         negativeSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         negativeSpacer.width = -10
         
-        self.parentVC!.navigationItem.rightBarButtonItems = [negativeSpacer,filterItem,searchItem]
+        
+        if self.type == .customer {
+            let button = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+            button.setTitle("日期", for: .normal)
+            //button.setImage(UIImage(named: "filterIcon"), for: UIControlState())
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+            button.setTitleColor(UIColor.white, for: UIControlState())
+            button.addTarget(self, action: #selector(MyWorkListVC.showDropDownView), for: .touchUpInside)
+            dateItem = UIBarButtonItem(customView: button)
+            self.parentVC!.navigationItem.rightBarButtonItems = [negativeSpacer,filterItem,searchItem,dateItem]
+        }
+        else {
+           self.parentVC!.navigationItem.rightBarButtonItems = [negativeSpacer,filterItem,searchItem]
+        }
+        
+        
         
         searchBar.showsCancelButton = true
         searchBar.searchBarStyle = .minimal
@@ -133,6 +152,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         searchBar.setImage(UIImage(named: "Clear"), for: .clear, state: UIControlState())
         
     }
+    
     
     func setSearch() {
         
@@ -163,8 +183,13 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     }
     
     func reSetNavBarItem() {
+        if self.type == .customer {
+            self.parentVC!.navigationItem.rightBarButtonItems = [negativeSpacer,filterItem,searchItem,dateItem]
+        }
+        else {
+            self.parentVC!.navigationItem.rightBarButtonItems = [negativeSpacer,filterItem,searchItem]
+        }
         
-        self.parentVC!.navigationItem.rightBarButtonItems = [negativeSpacer,filterItem,searchItem]
     }
     
     func searchButtonTapped() {
@@ -300,7 +325,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     
     var filterView:XHSideFilterView!
 
-    var blackOverlay = UIControl()
+    var blackOverlay = UIView()
     
     func setFilterView() {
         
@@ -313,7 +338,8 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         
         inView.addSubview(self.blackOverlay)
         
-        self.blackOverlay.addTarget(self, action: #selector(MyWorkListVC.blackOverlayTap), for: .touchUpInside)
+        let blackTap = UITapGestureRecognizer(target: self, action: #selector(MyWorkListVC.blackOverlayTap))
+        self.blackOverlay.addGestureRecognizer(blackTap)
         
         filterView = XHSideFilterView(frame: CGRect(x: 40, y: 0, width: screenWidth - 40, height: screenHeight))
         filterView.frame.origin.x = screenWidth
@@ -362,9 +388,157 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         
     }
     
+    func setDropDownView() {
+        
+        dropDrownView = DropDownView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 44*3))
+        self.dropDrownView.frame.origin.y = -(CGFloat(44*3 + 22))
+        let inView = UIApplication.shared.keyWindow!
+        inView.addSubview(dropDrownView)
+        dropDrownView.firstTap = true
+        //self.parentVC?.view.bringSubview(toFront: dropDownView)
+        dropDrownView.confirmTapHandler = {
+            self.dismissDropDownView()
+            self.datePicker.dismiss()
+        }
+        
+        dropDrownView.beginTapHandler = {
+            
+            self.beginCellTap()
+        }
+        
+        dropDrownView.endTapHandler = {
+            self.endCellTap()
+        }
+        
+    }
+    
+    var dropDrownView :DropDownView!
+    
+    func showDropDownView() {
+        
+        showDatePicker()
+        beginCellTap()
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveLinear, animations: {
+            self.dropDrownView.frame.origin.y = 0
+            
+        }, completion: nil)
+        
+        
+    }
+    
+    func dismissDropDownView() {
+        
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveLinear, animations: {
+            self.dropDrownView.frame.origin.y = -(CGFloat(44*3 + 22))
+        }, completion: nil)
+        
+        self.showBeginTimePicker = false
+        self.showEndTimePicker = false
+    }
+    
+    func showDatePicker() {
+        
+        self.datePicker.config.startDate = self.beginDate
+        self.setMinimumDateWith(self.datePicker.datePicker, date: nil)
+        self.datePicker.show(inVC: self.parentVC!)
+        
+    }
+    
+    
+    func beginCellTap() {
+        
+        if showBeginTimePicker == true {
+            return
+        }
+        else {
+            
+            showBeginTimePicker = true
+            showEndTimePicker   = false
+            datePicker.config.startDate = beginDate
+            datePicker.datePicker.date = beginDate
+            setMinimumDateWith(datePicker.datePicker, date: nil)
+        }
+        
+    }
+    
+    
+    func endCellTap() {
+        
+        if showEndTimePicker == true {
+            
+            return
+        }
+        else {
+            
+            showEndTimePicker = true
+            showBeginTimePicker = false
+            datePicker.config.startDate = endDate
+            datePicker.datePicker.date = endDate
+            setMinimumDateWith(datePicker.datePicker, date: nil)
+            
+        }
+        
+    }
+    
+    var beginDate = Date()
+    
+    var endDate   = Date()
+    
+    var showBeginTimePicker = false
+    
+    var showEndTimePicker = false
+    
+    //date picker
+    var datePicker = MIDatePicker()
+    
+    func setDatePicker() {
+        
+        datePicker = MIDatePicker.getFromNib()
+        
+        datePicker.delegate = self
+        
+        datePicker.config.startDate = beginDate
+        
+        datePicker.config.animationDuration = 0.4
+        
+//        datePicker.config.cancelButtonTitle = "取消"
+//        datePicker.config.confirmButtonTitle = "确定"
+        datePicker.config.headerHeight = 0.001
+        
+        datePicker.config.contentBackgroundColor = UIColor(red: 253/255.0, green: 253/255.0, blue: 253/255.0, alpha: 1)
+//        datePicker.config.headerBackgroundColor = UIColor(red: 244/255.0, green: 244/255.0, blue: 244/255.0, alpha: 1)
+//        datePicker.config.confirmButtonColor = UIColor(red: 32/255.0, green: 146/255.0, blue: 227/255.0, alpha: 1)
+//        datePicker.config.cancelButtonColor = UIColor(red: 32/255.0, green: 146/255.0, blue: 227/255.0, alpha: 1)
+        
+    }
+    
+    
+    //MARK: 时间选择功能点如下.
+    fileprivate func setMinimumDateWith(_ picker:UIDatePicker,date:Date?) {
+        
+        picker.minimumDate = date
+      
+    }
+    
+    fileprivate func dateChangeHandler(_ date:Date) {
+        
+        if showBeginTimePicker == true {
+            beginDate = date //此时endDate也会改变
+            dropDrownView.beginDate = date
+        }
+        
+        
+        if showEndTimePicker == true {
+            endDate = date
+            dropDrownView.endDate = date
+        }
+        
+    }
+    
+    
     func filterButtonTap() {
         
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveLinear, animations: {
             self.filterView.frame.origin.x = 40
             self.blackOverlay.alpha = 1.0
             }, completion: nil)
@@ -372,7 +546,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     }
     
     func blackOverlayTap() {
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveLinear, animations: {
             self.filterView.frame.origin.x = screenWidth
             self.blackOverlay.alpha = 0.0
             }, completion: nil)
@@ -973,7 +1147,7 @@ extension MyWorkListVC:UISearchBarDelegate{
             }, completion: { (finish) in
                 self.reSetTableView()
                 self.parentVC!.navigationItem.titleView = nil
-                self.parentVC!.navigationItem.rightBarButtonItems = [self.negativeSpacer,self.filterItem,self.searchItem]
+                self.reSetNavBarItem()
                 self.searchButton.alpha = 0.0
                 
                 UIView.animate(withDuration: 0.15, animations: {
@@ -983,5 +1157,19 @@ extension MyWorkListVC:UISearchBarDelegate{
         
     }
     
+    
+}
+
+extension MyWorkListVC: MIDatePickerDelegate {
+    
+    func miDatePicker(amDatePicker: MIDatePicker, didSelect date: Date) {
+        
+        dateChangeHandler(date)
+        
+    }
+    func miDatePickerDidCancelSelection(amDatePicker: MIDatePicker) {
+        
+        self.dismissDropDownView()
+    }
     
 }

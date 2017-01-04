@@ -14,10 +14,17 @@ class typeCell: UITableViewCell {
     
     @IBOutlet weak var leftLabel: UILabel!
     
+    @IBOutlet weak var dotView: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         self.selectionStyle = .none
+        
+        dotView.layer.masksToBounds = true
+        dotView.layer.cornerRadius = 5
+        
+        dotView.alpha = 0.0
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

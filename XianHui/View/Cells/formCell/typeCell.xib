@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -35,19 +35,30 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bxy-HQ-6tZ">
+                        <rect key="frame" x="2" y="18" width="10" height="10"/>
+                        <color key="backgroundColor" red="0.14314846889999999" green="0.56071088319999995" blue="0.96596554489999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="10" id="Fcu-UC-Zvu"/>
+                            <constraint firstAttribute="height" constant="10" id="nul-e0-6lM"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="byd-5F-BFs" secondAttribute="trailing" constant="8" id="RMg-Ph-dGt"/>
                     <constraint firstItem="byd-5F-BFs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="aLL-v2-6cc"/>
                     <constraint firstItem="1C7-Lt-yfm" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="b6u-hu-a2x"/>
                     <constraint firstItem="1C7-Lt-yfm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="d1M-by-M1S"/>
+                    <constraint firstItem="Bxy-HQ-6tZ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="eTs-k2-dLK"/>
                     <constraint firstItem="1C7-Lt-yfm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="eVi-PB-1oz"/>
+                    <constraint firstItem="Bxy-HQ-6tZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="2" id="l3B-vG-gXq"/>
                     <constraint firstAttribute="bottom" secondItem="1C7-Lt-yfm" secondAttribute="bottom" constant="11.5" id="pGQ-7y-t4G"/>
                     <constraint firstAttribute="bottom" secondItem="byd-5F-BFs" secondAttribute="bottom" constant="10.5" id="rk7-6F-5E6"/>
                     <constraint firstItem="byd-5F-BFs" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="tmb-iS-qCO"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="dotView" destination="Bxy-HQ-6tZ" id="e3E-xG-7pd"/>
                 <outlet property="leftLabel" destination="1C7-Lt-yfm" id="YB3-9r-LEG"/>
                 <outlet property="typeLabel" destination="byd-5F-BFs" id="0f7-xu-16A"/>
             </connections>

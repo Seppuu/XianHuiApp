@@ -37,6 +37,7 @@
 		371430781D9B96C60006A314 /* MyWorkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 371430761D9B96C60006A314 /* MyWorkCell.xib */; };
 		3714307C1D9BC0350006A314 /* MyWorkDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3714307B1D9BC0350006A314 /* MyWorkDetailVC.swift */; };
 		37159E411D81082E00542B57 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37159E401D81082E00542B57 /* Form.swift */; };
+		37215F551E1C9060004E8AC2 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37215F541E1C9060004E8AC2 /* DropDownView.swift */; };
 		372463B91D69F4180018CE37 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372463B81D69F4180018CE37 /* Customer.swift */; };
 		372480991D8151CD00B95C54 /* LCChatKitExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 372480941D8151CD00B95C54 /* LCChatKitExample.m */; };
 		3724809A1D8151CD00B95C54 /* LCChatKitExample+Setting.m in Sources */ = {isa = PBXBuildFile; fileRef = 372480961D8151CD00B95C54 /* LCChatKitExample+Setting.m */; };
@@ -336,6 +337,7 @@
 		371430761D9B96C60006A314 /* MyWorkCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyWorkCell.xib; sourceTree = "<group>"; };
 		3714307B1D9BC0350006A314 /* MyWorkDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyWorkDetailVC.swift; sourceTree = "<group>"; };
 		37159E401D81082E00542B57 /* Form.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
+		37215F541E1C9060004E8AC2 /* DropDownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
 		372463B81D69F4180018CE37 /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		372480931D8151CD00B95C54 /* LCChatKitExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCChatKitExample.h; sourceTree = "<group>"; };
 		372480941D8151CD00B95C54 /* LCChatKitExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCChatKitExample.m; sourceTree = "<group>"; };
@@ -768,6 +770,14 @@
 				371041FD1DC0A64400BE20F9 /* StringHTML.swift */,
 			);
 			path = SwiftString;
+			sourceTree = "<group>";
+		};
+		37215F531E1C904B004E8AC2 /* DropDownView */ = {
+			isa = PBXGroup;
+			children = (
+				37215F541E1C9060004E8AC2 /* DropDownView.swift */,
+			);
+			path = DropDownView;
 			sourceTree = "<group>";
 		};
 		3724809C1D8151EF00B95C54 /* Model */ = {
@@ -1591,6 +1601,7 @@
 		37BAB8F21D3E1059001E4680 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				37215F531E1C904B004E8AC2 /* DropDownView */,
 				37E754C81DD05BA90027A7A1 /* XHStackedBarChart */,
 				37A00DAB1DC1A06700E00CA7 /* AudioWaves */,
 				3771DD121DB0B10300636BCB /* XHSideFilterView */,
@@ -2552,6 +2563,7 @@
 				3776B9281D93A84800A9C9DB /* PasswordSettingVC.swift in Sources */,
 				37BAB97F1D3E1059001E4680 /* ContactsCell.swift in Sources */,
 				37BAB9DF1D3E124E001E4680 /* DDConfigs.swift in Sources */,
+				37215F551E1C9060004E8AC2 /* DropDownView.swift in Sources */,
 				37F70E131D8E367100C55AC8 /* GoodDetailContainerView.swift in Sources */,
 				37A00DB01DC1A06700E00CA7 /* Waver.swift in Sources */,
 				37BAB8A71D3E101C001E4680 /* Array+DD.swift in Sources */,
