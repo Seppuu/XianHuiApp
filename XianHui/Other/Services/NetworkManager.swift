@@ -517,7 +517,7 @@ extension NetworkManager {
     }
     
     //我的工作四种列表
-    func getMyWorkListWith(_ searchText:String ,params:JSONDictionary,urlString:String,pageSize:Int,pageNumber:Int,completion:@escaping DDResultHandler) {
+    func getMyWorkListWith(_ searchText:String ,beginDate:String,endDate:String,params:JSONDictionary,urlString:String,pageSize:Int,pageNumber:Int,completion:@escaping DDResultHandler) {
         
         let urlString = urlString
         
@@ -525,7 +525,9 @@ extension NetworkManager {
             "token":Defaults.userToken.value!,
             "pageSize":pageSize,
             "pageNumber":pageNumber,
-            "keyword":searchText
+            "keyword":searchText,
+            "arrival_time_ge":beginDate,
+            "arrival_time_le":endDate
         ]
         
         dict += params

@@ -390,8 +390,8 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     
     func setDropDownView() {
         
-        dropDrownView = DropDownView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 44*3))
-        self.dropDrownView.frame.origin.y = -(CGFloat(44*3 + 22))
+        dropDrownView = DropDownView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 50*3))
+        self.dropDrownView.frame.origin.y = -(CGFloat(50*3 + 22))
         let inView = UIApplication.shared.keyWindow!
         inView.addSubview(dropDrownView)
         dropDrownView.firstTap = true
@@ -399,6 +399,15 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         dropDrownView.confirmTapHandler = {
             self.dismissDropDownView()
             self.datePicker.dismiss()
+            self.filterWithDate()
+        }
+        
+        dropDrownView.reSetTapHandler = {
+            
+            self.dismissDropDownView()
+            self.datePicker.dismiss()
+            self.reSetDateFilter()
+            
         }
         
         dropDrownView.beginTapHandler = {
@@ -429,7 +438,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     func dismissDropDownView() {
         
         UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveLinear, animations: {
-            self.dropDrownView.frame.origin.y = -(CGFloat(44*3 + 22))
+            self.dropDrownView.frame.origin.y = -(CGFloat(50*3 + 22))
         }, completion: nil)
         
         self.showBeginTimePicker = false
@@ -444,6 +453,35 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         
     }
     
+    func reSetDateFilter() {
+        
+        beginDateString = ""
+        endDateString = ""
+        
+        beginDate = Date()
+        endDate = Date()
+        
+        isFilterDate = false
+        
+        self.clearDataBeforeFilterSuccess()
+        self.getDataFromServer(self.filterParams)
+    }
+    
+    func filterWithDate() {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-dd"
+        
+        beginDateString = dateFormatter.string(from: beginDate)
+        
+        endDateString   = dateFormatter.string(from: endDate)
+        
+        isFilterDate    = true
+        
+        self.clearDataBeforeFilterSuccess()
+        self.getDataFromServer(self.filterParams)
+        
+    }
     
     func beginCellTap() {
         
@@ -487,6 +525,12 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     var showBeginTimePicker = false
     
     var showEndTimePicker = false
+    
+    var isFilterDate = false
+
+    var beginDateString = ""
+    
+    var endDateString   = ""
     
     //date picker
     var datePicker = MIDatePicker()
@@ -659,7 +703,11 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         }
     }
     
-    var noDataMsg = "暂无数据，如有疑问请联系系统管理员。"
+    var noDataMsg = "暂无数据，如有疑问请联系系统管理员。" {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
     
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         
@@ -743,15 +791,20 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
             pageNumber = 1
         }
         
-        NetworkManager.sharedManager.getMyWorkListWith(searchText,params:params,urlString:urlString, pageSize: pageSize, pageNumber: pageNumber) { (success, json, error) in
-            hideHudFrom(self.view)
-            hideHudFrom(self.filterView)
+        NetworkManager.sharedManager.getMyWorkListWith(searchText,beginDate:beginDateString,endDate:endDateString,params:params,urlString:urlString, pageSize: pageSize, pageNumber: pageNumber) { (success, json, error) in
+            
             if success == true {
                 if let rows = json!["rows"].array {
                     
                     if rows.count == 0 {
                         self.noDataMsg = "暂无数据,请联系系统管理员."
-                        self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                        if self.isFilterDate == true {
+                           self.tableView.mj_footer.endRefreshing()
+                        }
+                        else {
+                           self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                        }
+                        
                         self.tableView.mj_footer.isAutomaticallyHidden = true
                     }
                     else {

@@ -26,6 +26,8 @@ class DropDownView: UIView {
     
     var confirmTapHandler:(()->())?
     
+    var reSetTapHandler:(()->())?
+    
     var beginTapHandler:(()->())?
     
     var endTapHandler:(()->())?
@@ -53,6 +55,16 @@ class DropDownView: UIView {
     var firstTap = false
     
     var secondTap = false
+    
+    func confirmTap() {
+        
+        confirmTapHandler?()
+    }
+    
+    func reSetTap() {
+        
+        reSetTapHandler?()
+    }
 
 }
 
@@ -68,7 +80,7 @@ extension DropDownView:UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44
+        return 50
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -108,12 +120,29 @@ extension DropDownView:UITableViewDelegate,UITableViewDataSource {
             let cell = UITableViewCell()
             cell.selectionStyle = .none
             let label = UILabel(frame: cell.frame)
+            label.frame.origin.x = cell.ddWidth/2
+            label.frame.size.width = cell.ddWidth/2
             cell.addSubview(label)
             label.text = "确认"
             label.font = UIFont.systemFont(ofSize: 14)
             label.textAlignment = .center
             label.textColor = UIColor.white
             label.backgroundColor = UIColor.init(hexString: "4089DE")
+            label.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(DropDownView.confirmTap))
+            label.addGestureRecognizer(tap)
+            
+            let reSetLabel = UILabel(frame: cell.frame)
+            reSetLabel.frame.size.width = cell.ddWidth/2
+            cell.addSubview(reSetLabel)
+            reSetLabel.text = "重置"
+            reSetLabel.font = UIFont.systemFont(ofSize: 14)
+            reSetLabel.textAlignment = .center
+            reSetLabel.textColor = UIColor.white
+            reSetLabel.backgroundColor = UIColor.init(hexString: "E24A4A")
+            reSetLabel.isUserInteractionEnabled = true
+            let tap1 = UITapGestureRecognizer(target: self, action: #selector(DropDownView.reSetTap))
+            reSetLabel.addGestureRecognizer(tap1)
             
             return cell
         }
@@ -132,9 +161,6 @@ extension DropDownView:UITableViewDelegate,UITableViewDataSource {
             endTapHandler?()
             secondTap = true
             firstTap = false
-        }
-        else if indexPath.row == 2 {
-            confirmTapHandler?()
         }
         
         tableView.reloadData()
