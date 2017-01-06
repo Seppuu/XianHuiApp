@@ -54,8 +54,8 @@ class UserCentreVC: BaseViewController {
         
         section1 = ["账号管理","修改密码"]
         
-        
         setTableView()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(UserCentreVC.changeAllContacts), name: NSNotification.Name(rawValue: accountHasChangedNoti), object: nil)
     }
     
@@ -376,13 +376,4 @@ extension UserCentreVC: UIImagePickerControllerDelegate, UINavigationControllerD
         }
     }
 }
-
-
-
-
-
-
-
-
-
 

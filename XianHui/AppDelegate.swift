@@ -12,7 +12,7 @@ import SwiftyJSON
 import ChatKit
 import UserNotifications
 import RealmSwift
-import RealReachability
+
 
 
 @UIApplicationMain
@@ -26,9 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        //打开网络状况监测
-        let reachability = RealReachability.sharedInstance()
-        reachability?.startNotifier()
         
         checkRealmVersion()
         
@@ -322,7 +319,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     vc.webTitle = "新手指导"
                     if let url = userInfo["web_url"] as? String {
                         
-                        var acutalUrl = url + "?" + Defaults.userToken.value!
+                        let acutalUrl = url + "?" + Defaults.userToken.value!
                         vc.urlString = acutalUrl
                         LCChatKitExample.lcck_push(to: vc)
                     }

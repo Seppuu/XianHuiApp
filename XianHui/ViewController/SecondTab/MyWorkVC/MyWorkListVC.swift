@@ -84,9 +84,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         super.viewDidAppear(animated)
         reSetNavBarItem()
         
-        
     }
-    
     
     let searchButton = UIButton()
     var searchItem   = UIBarButtonItem()
@@ -122,8 +120,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         
         if self.type == .customer {
             let button = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-            button.setTitle("日期", for: .normal)
-            //button.setImage(UIImage(named: "filterIcon"), for: UIControlState())
+            button.setImage(UIImage(named: "Customer_Calendar"), for: UIControlState())
             button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
             button.setTitleColor(UIColor.white, for: UIControlState())
             button.addTarget(self, action: #selector(MyWorkListVC.showDropDownView), for: .touchUpInside)
@@ -134,13 +131,10 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
            self.parentVC!.navigationItem.rightBarButtonItems = [negativeSpacer,filterItem,searchItem]
         }
         
-        
-        
         searchBar.showsCancelButton = true
         searchBar.searchBarStyle = .minimal
         searchBar.delegate = self
         searchBar.tintColor = UIColor.white
-        
         
         if let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField {
             
@@ -183,10 +177,14 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     }
     
     func reSetNavBarItem() {
+        
+        self.parentVC!.navigationItem.hidesBackButton = false
+        
         if self.type == .customer {
             self.parentVC!.navigationItem.rightBarButtonItems = [negativeSpacer,filterItem,searchItem,dateItem]
         }
         else {
+            
             self.parentVC!.navigationItem.rightBarButtonItems = [negativeSpacer,filterItem,searchItem]
         }
         
@@ -201,7 +199,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
             }, completion: { (finished) in
                 
                 self.setSearch()
-                
+                self.parentVC!.navigationItem.hidesBackButton = true
                 self.parentVC!.navigationItem.rightBarButtonItems = nil
                 self.parentVC!.navigationItem.titleView = self.searchBar
                 self.searchBar.alpha = 0.0
@@ -219,7 +217,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     }
 
     func setTableView() {
-        tableView = UITableView(frame: CGRect(x: 0.0,y: 0.0, width: self.view.frame.width, height: self.view.frame.height), style: .grouped)
+        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: screenWidth, height:view.ddHeight - 64 - 40), style: .grouped)
         view.addSubview(tableView)
         tableView.delegate = dataHelper
         tableView.dataSource = dataHelper
@@ -245,6 +243,8 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         self.tableView.emptyDataSetDelegate = self
         
         tableView.mj_footer.beginRefreshing()
+        
+        //self.tableView.mj_footer.isAutomaticallyHidden = true
         
         setFilterView()
         getFilterData(JSONDictionary())
@@ -767,6 +767,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         }
     }
     
+    //获取筛选结果.
     func getDataFromServer(_ params:JSONDictionary) {
         
         var urlString = ""
@@ -798,19 +799,13 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
                     
                     if rows.count == 0 {
                         self.noDataMsg = "暂无数据,请联系系统管理员."
-                        if self.isFilterDate == true {
-                           self.tableView.mj_footer.endRefreshing()
-                        }
-                        else {
-                           self.tableView.mj_footer.endRefreshingWithNoMoreData()
-                        }
+                        self.tableView.mj_footer.endRefreshingWithNoMoreData()
                         
-                        self.tableView.mj_footer.isAutomaticallyHidden = true
                     }
                     else {
                         self.noDataMsg = ""
                         self.tableView.mj_footer.endRefreshing()
-                        self.tableView.mj_footer.isAutomaticallyHidden = false
+                        
                         
                         self.getDataWith(rows)
                     }
@@ -818,7 +813,6 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
             }
             else {
                 self.tableView.mj_footer.endRefreshing()
-                self.tableView.mj_footer.isAutomaticallyHidden = true
                 self.noDataMsg = "网络连接不上,请检查网络"
                 self.hasLoadData = true
                 let hud = showHudWith(self.view, animated: true, mode: .text, text: error!)

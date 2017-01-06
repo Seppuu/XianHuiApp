@@ -122,6 +122,7 @@ extension DropDownView:UITableViewDelegate,UITableViewDataSource {
             let label = UILabel(frame: cell.frame)
             label.frame.origin.x = cell.ddWidth/2
             label.frame.size.width = cell.ddWidth/2
+            label.frame.size.height = 50
             cell.addSubview(label)
             label.text = "确认"
             label.font = UIFont.systemFont(ofSize: 14)
@@ -134,6 +135,7 @@ extension DropDownView:UITableViewDelegate,UITableViewDataSource {
             
             let reSetLabel = UILabel(frame: cell.frame)
             reSetLabel.frame.size.width = cell.ddWidth/2
+            reSetLabel.frame.size.height = 50
             cell.addSubview(reSetLabel)
             reSetLabel.text = "重置"
             reSetLabel.font = UIFont.systemFont(ofSize: 14)

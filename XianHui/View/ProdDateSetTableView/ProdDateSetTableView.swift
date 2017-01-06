@@ -233,12 +233,12 @@ class ProdDateSetTableView: UIView , UITableViewDelegate,UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    //
+    
     func stepValueChanged(_ sender: ValueStepper) {
         
         self.production.oneTimeUse = sender.value
         //TODO:change the way to set data
-        self.production.endTime
+        let _ = self.production.endTime
         if showBeginTimePicker == true {
             let path = IndexPath(item: 2, section: 1)
             self.tableView.reloadRows(at: [path], with: .fade)

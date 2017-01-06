@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'A14560B4A8DE59388CC5FA33ADBF8762'
+               BlueprintIdentifier = 'CD469216AE71C5211D1AD7E206ECFA08'
                BlueprintName = 'Ruler'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Ruler.framework'>

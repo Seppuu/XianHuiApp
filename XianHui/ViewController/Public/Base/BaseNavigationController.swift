@@ -14,10 +14,11 @@ class BaseNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationBar.isTranslucent = true
+        //self.navigationBar.isTranslucent = true
         self.navigationBar.barTintColor = UIColor.navBarColor()
         self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         self.navigationBar.tintColor = UIColor.white
+        self.navigationBar.barStyle = .black
     }
     
     override func didReceiveMemoryWarning() {
@@ -25,10 +26,10 @@ class BaseNavigationController: UINavigationController {
         
     }
     
-    override var preferredStatusBarStyle : UIStatusBarStyle {
-        
-        return UIStatusBarStyle.lightContent
-    }
+//    override var preferredStatusBarStyle : UIStatusBarStyle {
+//        
+//        return UIStatusBarStyle.default
+//    }
     
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         
@@ -41,7 +42,7 @@ class BaseNavigationController: UINavigationController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //setLeftBarAvatar()
+        
     }
 
 

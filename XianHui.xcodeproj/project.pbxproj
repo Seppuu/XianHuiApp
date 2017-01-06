@@ -75,6 +75,7 @@
 		37367B861D6C13F900479E39 /* chatSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37367B851D6C13F900479E39 /* chatSectionView.swift */; };
 		37367B881D6C141500479E39 /* chatSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37367B871D6C141500479E39 /* chatSectionView.xib */; };
 		375C6E151DD4480800B208BE /* GTProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375C6E141DD4480800B208BE /* GTProgressBar.swift */; };
+		37617C571E1F2BA900D25F55 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37617C561E1F2BA900D25F55 /* SystemConfiguration.framework */; };
 		376D6D411D59B37000F9A272 /* RealmUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376D6D401D59B37000F9A272 /* RealmUser.swift */; };
 		376D6D451D59C8E500F9A272 /* ChatExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376D6D441D59C8E500F9A272 /* ChatExample.swift */; };
 		3770DD841DA4FB2200786FB2 /* GoodDetailListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3770DD831DA4FB2200786FB2 /* GoodDetailListVC.swift */; };
@@ -394,6 +395,7 @@
 		37367B851D6C13F900479E39 /* chatSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = chatSectionView.swift; sourceTree = "<group>"; };
 		37367B871D6C141500479E39 /* chatSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = chatSectionView.xib; sourceTree = "<group>"; };
 		375C6E141DD4480800B208BE /* GTProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTProgressBar.swift; sourceTree = "<group>"; };
+		37617C561E1F2BA900D25F55 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		376D6D401D59B37000F9A272 /* RealmUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmUser.swift; sourceTree = "<group>"; };
 		376D6D441D59C8E500F9A272 /* ChatExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatExample.swift; sourceTree = "<group>"; };
 		3770DD831DA4FB2200786FB2 /* GoodDetailListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodDetailListVC.swift; sourceTree = "<group>"; };
@@ -664,6 +666,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37617C571E1F2BA900D25F55 /* SystemConfiguration.framework in Frameworks */,
 				7BF7C59FF39FAE1F05986482 /* Pods_XianHui.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2193,6 +2196,7 @@
 		B6931119C14E45DB42D8A126 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				37617C561E1F2BA900D25F55 /* SystemConfiguration.framework */,
 				0677814338CEF00D20F722E0 /* Pods_XianHui.framework */,
 			);
 			name = Frameworks;

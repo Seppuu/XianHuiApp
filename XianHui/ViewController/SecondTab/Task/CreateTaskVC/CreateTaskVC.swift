@@ -229,7 +229,7 @@ class CreateTaskVC: BaseViewController{
             if success == true {
                 hud.hide(true, afterDelay: 1.0)
                 NotificationCenter.default.post(name: TaskHasSavedNoti, object: nil)
-                self.navigationController?.popViewController(animated: true)
+                let _ = self.navigationController?.popViewController(animated: true)
                 
             }
             else {
@@ -697,7 +697,7 @@ extension CreateTaskVC: UITableViewDelegate,UITableViewDataSource {
                 hud.hide(true)
                 if success == true {
                     
-                    self.navigationController?.popToRootViewController(animated: true)
+                    let _ = self.navigationController?.popToRootViewController(animated: true)
                 }
                 else {
                     

@@ -12,7 +12,6 @@ pod 'UITextView+Placeholder', '~> 1.2'
 pod 'BKPasscodeView'
 pod 'UAProgressView'
 pod 'EAIntroView', '~> 2.9.0'
-pod 'RealReachability'
 
 #Swift 3.0
 pod 'SwiftyJSON', :git => 'https://github.com/acegreen/SwiftyJSON.git', :branch => 'swift3'
@@ -28,8 +27,6 @@ pod 'SwiftDate', '~> 4.0'
 pod 'ValueStepper'
 pod 'CryptoSwift'
 pod 'swiftScan', :git => 'https://github.com/CNKCQ/swiftScan.git', :branch => 'Swift3.0'
-
-
 
 end
 
