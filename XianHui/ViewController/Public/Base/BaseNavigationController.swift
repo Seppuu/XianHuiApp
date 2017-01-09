@@ -14,18 +14,20 @@ class BaseNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //self.navigationBar.isTranslucent = true
+        self.navigationBar.isTranslucent = false
         self.navigationBar.barTintColor = UIColor.navBarColor()
-        self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        //self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         self.navigationBar.tintColor = UIColor.white
         self.navigationBar.barStyle = .black
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
     }
-        
+    
+    
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         
         if (self.viewControllers.count > 0) {

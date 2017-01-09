@@ -181,7 +181,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 }
 - (UISearchBar *)searchBar {
     if (!_searchBar) {
-        UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 44)];
+        UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
         searchBar.delegate = self;
         searchBar.placeholder = @"搜索";
         _searchBar = searchBar;

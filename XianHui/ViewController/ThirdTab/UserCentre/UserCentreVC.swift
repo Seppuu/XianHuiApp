@@ -35,6 +35,8 @@ class UserCentreVC: BaseViewController {
     fileprivate var uploadingAvatar = false
     
     var section1 = [String]()
+    
+    var section2 = [String]()
 
     var agentId:Int?
     
@@ -53,6 +55,8 @@ class UserCentreVC: BaseViewController {
         title = "设置"
         
         section1 = ["账号管理","修改密码"]
+        
+        section2 = ["问题反馈","关于闲惠"]
         
         setTableView()
         
@@ -163,7 +167,7 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -171,8 +175,11 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
         if section == 0 {
             return 1
         }
-        else {
+        else if section == 1{
             return section1.count
+        }
+        else {
+            return section2.count
         }
     }
     
@@ -249,16 +256,25 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
             return cell
             
         }
-        else {
+        else if indexPath.section == 1 {
             
             let cellID = "cellIDs1"
             let cell = UITableViewCell(style: .default, reuseIdentifier: cellID)
             cell.selectionStyle = .none
 
             cell.textLabel?.text = section1[indexPath.row]
-            
+            cell.accessoryType = .disclosureIndicator
             return cell
             
+        }
+        else {
+            let cellID = "cellIDs1"
+            let cell = UITableViewCell(style: .default, reuseIdentifier: cellID)
+            cell.selectionStyle = .none
+            
+            cell.textLabel?.text = section2[indexPath.row]
+            cell.accessoryType = .disclosureIndicator
+            return cell
         }
         
     }
@@ -267,7 +283,6 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.section == 1 {
-            
             
             if indexPath.row == 0 {
                 
@@ -283,6 +298,21 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
                 
             }
             
+        }
+        else if indexPath.section == 2 {
+            
+            if indexPath.row == 0 {
+                //问题反馈
+                let vc = FeedBackViewController()
+                vc.title = "问题反馈"
+                navigationController?.pushViewController(vc, animated: true)
+            }
+            else if indexPath.row == 1 {
+                //关于本App
+                let vc = AboutAppViewController()
+                vc.title = "账号管理"
+                navigationController?.pushViewController(vc, animated: true)
+            }
         }
     }
     

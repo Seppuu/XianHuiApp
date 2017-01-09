@@ -79,7 +79,7 @@ class MyWorkVC: BaseViewController,CAPSPageMenuDelegate {
         
         
         // Initialize scroll menu
-        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0.0, y: 64, width: self.view.frame.width, height: self.view.frame.height), pageMenuOptions: pageMenuParameters)
+        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0.0, y: 0, width: self.view.frame.width, height: self.view.frame.height), pageMenuOptions: pageMenuParameters)
         
         // Optional delegate
         pageMenu!.delegate = self
