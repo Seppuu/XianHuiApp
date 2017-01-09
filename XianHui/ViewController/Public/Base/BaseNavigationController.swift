@@ -25,12 +25,7 @@ class BaseNavigationController: UINavigationController {
         super.didReceiveMemoryWarning()
         
     }
-    
-//    override var preferredStatusBarStyle : UIStatusBarStyle {
-//        
-//        return UIStatusBarStyle.default
-//    }
-    
+        
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         
         if (self.viewControllers.count > 0) {

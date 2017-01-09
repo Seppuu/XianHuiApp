@@ -143,16 +143,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func openLeanCloudIMWith(_ clientId:String,autoLogin:Bool) {
         
-        if let currentVC = self.window?.visibleViewController{
-            //继续显示启动页图片
-            if let launchImage = appLaunchImage() {
-                let imageView = UIImageView(frame: currentVC.view.bounds)
-                imageView.image = launchImage
-                currentVC.view.addSubview(imageView)
+        if autoLogin == true {
+            
+            if let currentVC = self.window?.visibleViewController {
+                //继续显示启动页图片,如果是已经登陆过.
                 
+                if let launchImage = appLaunchImage() {
+                    let imageView = UIImageView(frame: currentVC.view.bounds)
+                    imageView.image = launchImage
+                    currentVC.view.addSubview(imageView)
+                    
+                }
             }
         }
-        
+
         ChatKitExample.invokeThisMethodAfterLoginSuccess(withClientId: clientId, success: {
             
             if let currentVC = self.window?.visibleViewController{
