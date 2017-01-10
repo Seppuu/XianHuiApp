@@ -506,7 +506,6 @@ extension NetworkManager {
         
         var dict:JSONDictionary = [
             "token":Defaults.userToken.value!
-            
         ]
         
         dict += params
@@ -858,14 +857,21 @@ extension NetworkManager {
 extension NetworkManager {
     
     //发送反馈
-    func submitFeedback(with content:String, completion:@escaping DDResultHandler) {
+    func submitFeedback(with userName:String,usertype:UserLoginType,agentId:Int,content:String, completion:@escaping DDResultHandler) {
         
-        let urlString = submitFeedBackURL
-        let jsonDict:JSONDictionary = [
-            "content":content
+        
+        let sign = (userName + "-" + usertype.rawValue + "-" + String(agentId) + "-" + Date.currentDateString() + "-" + XHPublicKey).md5()
+        
+        let dict:JSONDictionary = [
+            "username":userName,
+            "type":usertype.rawValue,
+            "agent_id":String(agentId),
+            "content":content,
+            "sign":sign
         ]
-        let dict = generatePostDictWithBaseDictOr(jsonDict)
-
+        
+        let urlString = SubmitFeedBackUrl
+        
         baseRequestWith(urlString, dict: dict, completion: completion)
     }
 }

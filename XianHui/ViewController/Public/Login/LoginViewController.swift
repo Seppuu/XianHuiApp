@@ -320,7 +320,6 @@ extension LoginViewController {
             hud.hide(true)
             if error == nil {
                 
-                
                 let clientId = String(user!.clientId)
                 NotificationCenter.default.post(name:OwnSystemLoginSuccessNoti, object: clientId)
             }

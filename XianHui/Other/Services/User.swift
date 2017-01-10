@@ -135,6 +135,11 @@ class User:NSObject {
                     Defaults.userOrgId.value = orgId
                 }
                 
+                //保存代理Id
+                if let agentId = data?["agent_info"]["agent_id"].string {
+                    Defaults.currentAgentId.value = Int(agentId)
+                }
+                
                 //获取联系人列表之后,完成登陆
                 
                 NetworkManager.sharedManager.getUserList { (success, json, error) in
@@ -256,6 +261,11 @@ class User:NSObject {
                 //save passWord and account for auto change account
                 Defaults.currentPassWord.value = passWord
                 Defaults.currentAccountName.value = mobile
+                
+                //保存代理Id
+                if let agentId = data?["agent_info"]["agent_id"].string {
+                    Defaults.currentAgentId.value = Int(agentId)
+                }
                 
                 //获取联系人列表之后,完成登陆
                 NetworkManager.sharedManager.getUserList { (success, json, error) in
@@ -495,8 +505,11 @@ class User:NSObject {
         Defaults.userOrgName.clear()
         Defaults.userOrgId.clear()
         
-        User.sharedUser = nil
+        Defaults.currentAgentId.clear()
+        Defaults.currentPassWord.clear()
+        Defaults.currentAccountName.clear()
         
+        User.sharedUser = nil
         
         self.userName = ""
     
@@ -599,6 +612,16 @@ extension PalauDefaults {
     public static var currentAccountName: PalauDefaultsEntry<String> {
         get {
             return value("currentAccountName").whenNil(use: "")
+        }
+        set {
+            
+        }
+    }
+    
+    
+    public static var currentAgentId: PalauDefaultsEntry<Int> {
+        get {
+            return value("currentAgentId").whenNil(use:0)
         }
         set {
             

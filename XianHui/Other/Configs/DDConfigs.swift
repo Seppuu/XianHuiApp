@@ -100,6 +100,11 @@ var getERPLogInStatusUrl:String {
 }
 
 
+//问题反馈
+var SubmitFeedBackUrl:String {
+    return BaseUrl + "/rest/feedback"
+}
+
 ///即时通讯
 
 //获取最近会话ID列表(包含系统消息)
@@ -343,11 +348,6 @@ var deleteTaskUrl:String {
 //用户联系人列表
 var userListUrl:String {
     return DDBaseUrl + "/rest/employee/getuserlist"
-}
-
-/// 系统管理
-var submitFeedBackURL:String {
-    return DDBaseUrl + "/system/index/rest?returnDataType=json&action=submitFeedback"
 }
 
 //用户协议

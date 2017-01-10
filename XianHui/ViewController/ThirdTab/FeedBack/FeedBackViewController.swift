@@ -85,19 +85,21 @@ class FeedBackViewController: BaseViewController,UITextViewDelegate {
         
         let content = feedBackTextView.text
         
-        //TODO:需要接口
-//        self.hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-//        self.hud.mode = .indeterminate
-//        self.hud.labelText = "提交中..."
-//        
-//        NetworkManager.sharedManager.submitFeedback(with: content!) { (success,_,_) in
-//            
-//            if success == true {
-//                self.hud.mode = .text
-//                self.hud.labelText = "提交成功,感谢您的意见!"
-//                self.hud.hide(true, afterDelay: 2.5)
-//            }
-//        }
+        self.hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        self.hud.mode = .indeterminate
+        self.hud.labelText = "提交中..."
+        
+        let user = User.currentUser()
+        let name = user?.userName
+        let agentId = Defaults.currentAgentId.value
+        NetworkManager.sharedManager.submitFeedback(with: name!, usertype: .Customer, agentId: agentId!, content: content!) { (success, _, _) in
+            if success == true {
+                self.hud.mode = .text
+                self.hud.labelText = "提交成功,感谢您的意见!"
+                self.hud.hide(true, afterDelay: 2.5)
+            }
+        }
+
     }
 
     
