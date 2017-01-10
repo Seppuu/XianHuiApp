@@ -268,7 +268,7 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
             
         }
         else {
-            let cellID = "cellIDs1"
+            let cellID = "cellIDs2"
             let cell = UITableViewCell(style: .default, reuseIdentifier: cellID)
             cell.selectionStyle = .none
             
@@ -310,7 +310,7 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
             else if indexPath.row == 1 {
                 //关于本App
                 let vc = AboutAppViewController()
-                vc.title = "账号管理"
+                vc.title = "关于闲惠"
                 navigationController?.pushViewController(vc, animated: true)
             }
         }
