@@ -221,8 +221,9 @@ class ProjectPlanningVC: UIViewController {
     var bottomView:PlanningTableView!
     
     func setTableView() {
-        
-        bottomView = PlanningTableView(frame:view.bounds)
+        var frame = view.bounds
+        frame.size.height -= 20
+        bottomView = PlanningTableView(frame:frame)
         bottomView.addRowTapHandler = {
             let vc = GoodListVC()
             vc.customer = self.customer

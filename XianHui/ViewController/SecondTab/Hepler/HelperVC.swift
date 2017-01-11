@@ -153,7 +153,9 @@ class HelperVC: BaseViewController {
     }
     
     func setTableView() {
-        tableView = UITableView(frame: view.bounds, style: .grouped)
+        var frame = view.bounds
+        frame.size.height -= 20
+        tableView = UITableView(frame:frame, style: .grouped)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
@@ -224,8 +226,7 @@ extension HelperVC:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        
-        let no = listOfNotice[(indexPath as NSIndexPath).row]
+        let no = listOfNotice[indexPath.row]
         
         switch no.type {
         case .daily_report:

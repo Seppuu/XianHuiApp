@@ -168,7 +168,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         tableView.removeFromSuperview()
         dataHelper.dataArray = originalDatas
         tableView.reloadData()
-        tableView.frame = CGRect(x: 0.0,y: 0.0, width: self.view.frame.width, height: self.view.frame.height)
+        tableView.frame = CGRect(x: 0, y: 0, width: screenWidth, height:view.ddHeight - 64 - 40)
         view.addSubview(tableView)
         
         tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {

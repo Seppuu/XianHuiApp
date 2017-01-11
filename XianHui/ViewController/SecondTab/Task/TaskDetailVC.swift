@@ -66,7 +66,9 @@ class TaskDetailVC: UIViewController {
     
     func setTableView() {
         
-        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight), style: .grouped)
+        var frame = view.bounds
+        frame.size.height -= 20
+        tableView = UITableView(frame:frame, style: .grouped)
         
         tableView.delegate = self
         tableView.dataSource = self

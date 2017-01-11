@@ -296,7 +296,9 @@ class GoodListVC: BaseViewController {
     
     func setTableView() {
         
-        tableView = UITableView(frame: view.bounds, style: .grouped)
+        var frame = view.bounds
+        frame.size.height -= 20
+        tableView = UITableView(frame:frame, style: .grouped)
         tableView.delegate = self
         tableView.dataSource = self
         

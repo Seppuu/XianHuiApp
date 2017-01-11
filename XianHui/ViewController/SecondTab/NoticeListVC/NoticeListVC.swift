@@ -161,7 +161,9 @@ class NoticeListVC: UIViewController {
     
     func setTableView() {
     
-        tableView = UITableView(frame: view.bounds, style: .grouped)
+        var frame = view.bounds
+        frame.size.height -= 20
+        tableView = UITableView(frame:frame, style: .grouped)
         
         view.addSubview(tableView)
         

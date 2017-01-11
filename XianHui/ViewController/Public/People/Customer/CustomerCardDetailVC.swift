@@ -26,8 +26,9 @@ class CustomerCardDetailVC: CustomerConsumeListVC {
 
     
     override func setTableView() {
-        
-        tableView = UITableView(frame: view.bounds, style:.plain)
+        var frame = view.bounds
+        frame.size.height -= 20
+        tableView = UITableView(frame:frame, style: .plain)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()

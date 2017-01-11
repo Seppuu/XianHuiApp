@@ -369,10 +369,11 @@ class ChatKitExample: LCChatKitExample {
 
             (aError,granted,viewController,completionHandler) in
             
-            
-            // - 用户允许重连请求，发起重连或强制登录
+            //用户允许重连请求，发起重连或强制登录
             if (granted == true) {
+                
                 var force = false
+                
                 var title = "正在重连聊天服务..."
                 
                 if aError == nil {
@@ -391,23 +392,27 @@ class ChatKitExample: LCChatKitExample {
                 
                 //get current viewController
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                
                 let vc = appDelegate.window?.visibleViewController!
+                
                 NSObject.lcck_showMessage(title, to: vc!.view)
-                let clientId = LCChatKit.sharedInstance().clientId
-                LCChatKit.sharedInstance().open(withClientId: clientId, force: force, callback: { (succeeded, error) in
+                
+                //let clientId = LCChatKit.sharedInstance().clientId
+                let currentClientId = Defaults.clientId.value!
+                LCChatKit.sharedInstance().open(withClientId: currentClientId, force: force, callback: { (succeeded, error) in
                     
                     NSObject.lcck_hideHUD(for: vc!.view)
+                    
                     completionHandler!(succeeded, error)
                 })
                 
                 return
             }
             
-            // 用户拒绝了重连请求
-            // - 退回登录页面
+            // 用户拒绝了重连请求,退回登录页面
             LCChatKitExample.lcck_clearLocalClientInfo()
             
-            //show intro
+            //显示引导以及登陆界面
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
             appDelegate.showGuide()

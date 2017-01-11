@@ -39,7 +39,9 @@ class MenuSheetView: UIView ,UITableViewDelegate,UITableViewDataSource{
     
     func setTableView() {
         
-        tableView = UITableView(frame:self.bounds, style: .plain)
+        var frame = bounds
+        frame.size.height -= 20
+        tableView = UITableView(frame:frame, style: .grouped)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.isScrollEnabled = false

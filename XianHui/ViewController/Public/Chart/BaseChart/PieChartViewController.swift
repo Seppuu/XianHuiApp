@@ -86,7 +86,7 @@ class PieChartViewController: BaseChartViewController {
         //automaticallyAdjustsScrollViewInsets：是否根据按所在界面的navigationbar与tabbar的高度，自动调整scrollview的 inset。
         self.automaticallyAdjustsScrollViewInsets = false
         
-        topPageView = XHBarChartView(frame: CGRect(x: 0, y: 64, width: screenWidth, height: viewHeight * 0.5))
+        topPageView = XHBarChartView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: viewHeight * 0.5))
         
         topPageView.listOfNumber2 = numbers
         topPageView.listOfDateString = listOfDateString
@@ -117,7 +117,7 @@ class PieChartViewController: BaseChartViewController {
         layout.itemSize = CGSize(width: screenWidth, height: viewHeight * 0.5)
         
         
-        bottomCollectionView = UICollectionView(frame: CGRect(x: 0, y: topPageView.ddHeight + 64, width: screenWidth, height: viewHeight * 0.5), collectionViewLayout: layout)
+        bottomCollectionView = UICollectionView(frame: CGRect(x: 0, y: topPageView.ddHeight, width: screenWidth, height: viewHeight * 0.5), collectionViewLayout: layout)
         
         bottomCollectionView.delegate = self
         bottomCollectionView.dataSource = self

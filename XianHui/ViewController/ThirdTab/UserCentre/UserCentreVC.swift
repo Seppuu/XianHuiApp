@@ -65,7 +65,10 @@ class UserCentreVC: BaseViewController {
     
     func setTableView() {
         
-        userTableView = UITableView(frame: view.bounds, style: .grouped)
+        var frame = view.bounds
+        frame.size.height -= 20
+
+        userTableView = UITableView(frame: frame, style: .grouped)
         view.addSubview(userTableView)
         
         userTableView.delegate = self

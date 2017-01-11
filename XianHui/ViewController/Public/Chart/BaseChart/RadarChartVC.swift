@@ -22,7 +22,7 @@ class RadarChartVC: UIViewController, TKRadarChartDataSource,TKRadarChartDelegat
     var tableView:UITableView!
     
     let viewHeight = screenHeight - 64
-    
+
     var topButtons = [UIButton]()
     
     let typeCellId = "typeCell"
@@ -70,7 +70,7 @@ class RadarChartVC: UIViewController, TKRadarChartDataSource,TKRadarChartDelegat
         
         self.view.backgroundColor = UIColor.init(hexString: "EDE4D6")
         
-        chartContainer = UIView(frame: CGRect(x: 0, y: 64, width: screenWidth, height: viewHeight * 0.5))
+        chartContainer = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: viewHeight * 0.5))
         chartContainer.backgroundColor = UIColor.init(hexString: "EDE4D6")
         view.addSubview(chartContainer)
         
@@ -163,7 +163,7 @@ class RadarChartVC: UIViewController, TKRadarChartDataSource,TKRadarChartDelegat
     
     func setBottomTableView() {
         
-        tableView = UITableView(frame:CGRect(x: 0, y: chartContainer.frame.size.height + chartContainer.frame.origin.y, width: screenWidth, height: viewHeight * 0.5) , style:.plain )
+        tableView = UITableView(frame:CGRect(x: 0, y: viewHeight * 0.5, width: screenWidth, height: viewHeight * 0.5) , style:.plain )
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self

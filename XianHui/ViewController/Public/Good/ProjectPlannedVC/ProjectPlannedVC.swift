@@ -36,8 +36,9 @@ class ProjectPlannedVC: UIViewController {
     }
     
     func setTableView() {
-        
-        bottomView = ChattingTableView(frame:view.bounds)
+        var frame = view.bounds
+        frame.size.height -= 20
+        bottomView = ChattingTableView(frame:frame)
         bottomView.listOfProject = datasArray
         bottomView.days = days
         

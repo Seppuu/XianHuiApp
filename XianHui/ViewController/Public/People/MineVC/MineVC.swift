@@ -30,7 +30,9 @@ class MineVC: BaseViewController {
     
     func setTableView() {
         
-        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenWidth), style: .plain)
+        var frame = view.bounds
+        frame.size.height -= 20
+        tableView = UITableView(frame:frame, style: .plain)
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
