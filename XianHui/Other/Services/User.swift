@@ -499,15 +499,19 @@ class User:NSObject {
         Defaults.clientId.clear()
         Defaults.userName.clear()
         Defaults.userDisplayName.clear()
-        Defaults.userAvatarURL.clear()
+        
         Defaults.userLevelText.clear()
         Defaults.userReportType.clear()
         Defaults.userOrgName.clear()
         Defaults.userOrgId.clear()
         
         Defaults.currentAgentId.clear()
-        Defaults.currentPassWord.clear()
-        Defaults.currentAccountName.clear()
+        
+        //为了做指纹登陆,保留,头像地址,账户和密码,指纹登陆和解锁功能tag,在沙盒中.
+        //Defaults.useTouchIDDeblock.claer()
+        //Defaults.currentPassWord.clear()
+        //Defaults.currentAccountName.clear()
+        //Defaults.userAvatarURL.clear()
         
         User.sharedUser = nil
         

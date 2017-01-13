@@ -53,11 +53,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         else {
             
-            showGuide()
+            self.window = UIWindow()
+            self.window!.frame = UIScreen.main.bounds
+            self.window?.makeKeyAndVisible()
+            
+            let vc = UIViewController()
+            
+            self.window?.rootViewController = vc
+            
+            let accountName =  Defaults.currentAccountName.value!
+            if accountName != "" && Defaults.useTouchIDLogIn.value! == true {
+                
+                showTouchIDView()
+                
+            }
+            else {
+                showGuide()
+            }
+            
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.eBBannerViewDidTap(_:)), name: NSNotification.Name(rawValue: EBBannerViewDidClick), object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.ownSystemLoginSuccess(_:)), name: OwnSystemLoginSuccessNoti, object: nil)
         
         return true
 
@@ -93,20 +111,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func showLoginVC(_ vc:UIViewController) {
         
         let loginVC = LoginViewController()
-        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.ownSystemLoginSuccess(_:)), name: OwnSystemLoginSuccessNoti, object: nil)
         vc.navigationController?.isNavigationBarHidden = false
         vc.navigationController?.pushViewController(loginVC, animated: true)
     }
     
+    func showTouchIDView() {
+        
+        
+        let vc = TouchIDViewController()
+        vc.isLogin = true
+        self.window?.rootViewController = vc
+        //self.window?.visibleViewController?.present(vc, animated: false, completion: nil)
+      
+        
+    }
+    
     func showGuide() {
         
-        self.window = UIWindow()
-        self.window!.frame = UIScreen.main.bounds
-        self.window?.makeKeyAndVisible()
-        
-        let vc = UIViewController()
-        
-        self.window?.rootViewController = vc
         // data source
         let backgroundImageNames = ["guide01","guide02", "guide03","guide04"]
 
@@ -141,6 +162,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
+    
     func openLeanCloudIMWith(_ clientId:String,autoLogin:Bool) {
         
         if autoLogin == true {
@@ -166,6 +188,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let tabBarControllerConfig = LCCKTabBarControllerConfig()
             
             self.window?.rootViewController = tabBarControllerConfig.tabBarController
+            
+            //如果是自动登陆,并且用户开启了指纹解锁,显示遮挡界面
+            if autoLogin == true && Defaults.useTouchIDDeblock.value! == true {
+                let vc = TouchIDViewController()
+                vc.isLogin = false
+                self.window?.visibleViewController?.present(vc, animated: false, completion: nil)
+                
+            }
             
             self.appHasLoginSuccess = true
             
@@ -201,16 +231,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        
-    }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         ChatKitExample.invokeThisMethodInDidRegisterForRemoteNotifications(withDeviceToken: deviceToken)
     }
     
+    var unActiveTime:Int = 0
+    
+    var timer:Timer?
+    
+    var resignActiveTime:Date?
+    
+    var becomeActiveTime:Date?
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        endTimer()
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
          ChatKitExample.invokeThisMethod(inApplicationWillResignActive: application)
+        startTimer()
+    }
+    
+    func startTimer() {
+        resignActiveTime = Date()
+    }
+    
+    func endTimer() {
+        
+        becomeActiveTime = Date()
+        
+        if resignActiveTime != nil {
+            
+            let times = (becomeActiveTime?.second)! - (resignActiveTime?.second)!
+            
+            if times >= 5*60  && Defaults.useTouchIDDeblock.value! == true{
+                
+                let vc = TouchIDViewController()
+                vc.isLogin = false
+                self.window?.visibleViewController?.present(vc, animated: false, completion: nil)
+            }
+        }
+    }
+    
+    func addTime() {
+        
+        unActiveTime += 1
+        
+        print(unActiveTime)
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

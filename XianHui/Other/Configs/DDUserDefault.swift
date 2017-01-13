@@ -61,10 +61,20 @@ extension PalauDefaults {
         }
     }
     
-    
-    public static var useTouchID: PalauDefaultsEntry<Bool> {
+    //指纹登陆
+    public static var useTouchIDLogIn: PalauDefaultsEntry<Bool> {
         get {
-            return value("useTouchID").whenNil(use:false )
+            return value("useTouchIDLogIn").whenNil(use:false )
+        }
+        set {
+            
+        }
+    }
+    
+    //指纹解锁
+    public static var useTouchIDDeblock: PalauDefaultsEntry<Bool> {
+        get {
+            return value("useTouchIDDeblock").whenNil(use:false )
         }
         set {
             

@@ -289,8 +289,8 @@ extension UserCentreVC:UITableViewDelegate,UITableViewDataSource {
             
             if indexPath.row == 0 {
                 
-                let vc = AccountManagerVC()
-                vc.title = "账号管理"
+                let vc = AccountAndSecurityVC()
+                vc.title = "账号和安全"
                 navigationController?.pushViewController(vc, animated: true)
                 
             }

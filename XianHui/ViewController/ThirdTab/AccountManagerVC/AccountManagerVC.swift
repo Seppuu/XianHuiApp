@@ -127,14 +127,6 @@ extension AccountManagerVC: UITableViewDelegate,UITableViewDataSource {
         return 44
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return "账号切换"
-        }
-        else {
-            return nil
-        }
-    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         

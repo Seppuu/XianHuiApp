@@ -950,9 +950,21 @@ extension NetworkManager {
                         if status == "ok" {
                             let dataInfo = json["data"]
                             completion(true,dataInfo,nil)
-                            
                         }
+                        
                         else {
+                            //登陆超时,显示窗口输入密码或者指纹登陆.
+                            
+                             if let errorCode =  json["data"]["errorCode"].string  {
+                                if errorCode == "0001" {
+                                    //登陆超时,显示窗口输入密码或者指纹登陆.
+                                    XHAccountManager.shared.loginWhenTimeOut()
+                                    
+                                    return
+                                }
+                            }
+                            
+                            
                             let msg = self.getErrorMsgFrom(json)
                             let dataInfo = json["data"]
                             completion(false, dataInfo, msg)

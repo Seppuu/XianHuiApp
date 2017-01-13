@@ -37,6 +37,10 @@
 		371430781D9B96C60006A314 /* MyWorkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 371430761D9B96C60006A314 /* MyWorkCell.xib */; };
 		3714307C1D9BC0350006A314 /* MyWorkDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3714307B1D9BC0350006A314 /* MyWorkDetailVC.swift */; };
 		37159E411D81082E00542B57 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37159E401D81082E00542B57 /* Form.swift */; };
+		371D310A1E27221C006A3422 /* SecurityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371D31091E27221C006A3422 /* SecurityManager.swift */; };
+		371D310D1E275530006A3422 /* TouchIDSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371D310C1E275530006A3422 /* TouchIDSettingVC.swift */; };
+		371D31101E2758C2006A3422 /* AccountAndSecurityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371D310F1E2758C2006A3422 /* AccountAndSecurityVC.swift */; };
+		371D31131E27702E006A3422 /* TouchIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371D31121E27702E006A3422 /* TouchIDViewController.swift */; };
 		37215F551E1C9060004E8AC2 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37215F541E1C9060004E8AC2 /* DropDownView.swift */; };
 		372463B91D69F4180018CE37 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372463B81D69F4180018CE37 /* Customer.swift */; };
 		372480991D8151CD00B95C54 /* LCChatKitExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 372480941D8151CD00B95C54 /* LCChatKitExample.m */; };
@@ -292,7 +296,7 @@
 		37D46F871D6FD5D100A0BBCE /* GoodDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D46F861D6FD5D100A0BBCE /* GoodDetail.xib */; };
 		37D811DB1DAB3E0700A5B037 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D811DA1DAB3E0700A5B037 /* GuideViewController.swift */; };
 		37D811DD1DAB437E00A5B037 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37D811DC1DAB437E00A5B037 /* Assets.xcassets */; };
-		37DF88E51D8FD3D700B8DB73 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DF88E41D8FD3D700B8DB73 /* UserManager.swift */; };
+		37DD59E91E25FC4D00CA8B0F /* XHConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DD59E81E25FC4D00CA8B0F /* XHConfigs.swift */; };
 		37E754CA1DD05BBD0027A7A1 /* XHStackedBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E754C91DD05BBD0027A7A1 /* XHStackedBarChart.swift */; };
 		37E78A9A1D41F198007425A3 /* OTPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E78A971D41F198007425A3 /* OTPageScrollView.m */; };
 		37E78A9B1D41F198007425A3 /* OTPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E78A991D41F198007425A3 /* OTPageView.m */; };
@@ -340,6 +344,10 @@
 		371430761D9B96C60006A314 /* MyWorkCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyWorkCell.xib; sourceTree = "<group>"; };
 		3714307B1D9BC0350006A314 /* MyWorkDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyWorkDetailVC.swift; sourceTree = "<group>"; };
 		37159E401D81082E00542B57 /* Form.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
+		371D31091E27221C006A3422 /* SecurityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityManager.swift; sourceTree = "<group>"; };
+		371D310C1E275530006A3422 /* TouchIDSettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchIDSettingVC.swift; sourceTree = "<group>"; };
+		371D310F1E2758C2006A3422 /* AccountAndSecurityVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountAndSecurityVC.swift; sourceTree = "<group>"; };
+		371D31121E27702E006A3422 /* TouchIDViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchIDViewController.swift; sourceTree = "<group>"; };
 		37215F541E1C9060004E8AC2 /* DropDownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
 		372463B81D69F4180018CE37 /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		372480931D8151CD00B95C54 /* LCChatKitExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCChatKitExample.h; sourceTree = "<group>"; };
@@ -644,7 +652,7 @@
 		37D46F861D6FD5D100A0BBCE /* GoodDetail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoodDetail.xib; sourceTree = "<group>"; };
 		37D811DA1DAB3E0700A5B037 /* GuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
 		37D811DC1DAB437E00A5B037 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		37DF88E41D8FD3D700B8DB73 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		37DD59E81E25FC4D00CA8B0F /* XHConfigs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XHConfigs.swift; path = ../Configs/XHConfigs.swift; sourceTree = "<group>"; };
 		37E754C91DD05BBD0027A7A1 /* XHStackedBarChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHStackedBarChart.swift; sourceTree = "<group>"; };
 		37E78A961D41F198007425A3 /* OTPageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPageScrollView.h; sourceTree = "<group>"; };
 		37E78A971D41F198007425A3 /* OTPageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPageScrollView.m; sourceTree = "<group>"; };
@@ -777,6 +785,30 @@
 				371041FD1DC0A64400BE20F9 /* StringHTML.swift */,
 			);
 			path = SwiftString;
+			sourceTree = "<group>";
+		};
+		371D310B1E27551F006A3422 /* TouchIDSettingVC */ = {
+			isa = PBXGroup;
+			children = (
+				371D310C1E275530006A3422 /* TouchIDSettingVC.swift */,
+			);
+			path = TouchIDSettingVC;
+			sourceTree = "<group>";
+		};
+		371D310E1E2758B5006A3422 /* AccountAndSecurityVC */ = {
+			isa = PBXGroup;
+			children = (
+				371D310F1E2758C2006A3422 /* AccountAndSecurityVC.swift */,
+			);
+			path = AccountAndSecurityVC;
+			sourceTree = "<group>";
+		};
+		371D31111E276FFC006A3422 /* TouchIDViewController */ = {
+			isa = PBXGroup;
+			children = (
+				371D31121E27702E006A3422 /* TouchIDViewController.swift */,
+			);
+			path = TouchIDViewController;
 			sourceTree = "<group>";
 		};
 		37215F531E1C904B004E8AC2 /* DropDownView */ = {
@@ -1260,6 +1292,9 @@
 		3776B8F71D93A83900A9C9DB /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				371D31111E276FFC006A3422 /* TouchIDViewController */,
+				371D310E1E2758B5006A3422 /* AccountAndSecurityVC */,
+				371D310B1E27551F006A3422 /* TouchIDSettingVC */,
 				3707CAEC1E078C37008AE4F2 /* PassWordVC */,
 				3776B8F81D93A83900A9C9DB /* ApproveVC */,
 				3776B8FD1D93A83900A9C9DB /* FirstLaunchRemindVC */,
@@ -1537,8 +1572,9 @@
 		37BAB8BF1D3E1040001E4680 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				37DD59E81E25FC4D00CA8B0F /* XHConfigs.swift */,
 				37BAB8C01D3E1040001E4680 /* NetworkManager.swift */,
-				37DF88E41D8FD3D700B8DB73 /* UserManager.swift */,
+				371D31091E27221C006A3422 /* SecurityManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -2448,6 +2484,7 @@
 				37A81FC51D9E2EC2002720D3 /* BaseProfileViewController.swift in Sources */,
 				37E754CA1DD05BBD0027A7A1 /* XHStackedBarChart.swift in Sources */,
 				372480991D8151CD00B95C54 /* LCChatKitExample.m in Sources */,
+				371D310D1E275530006A3422 /* TouchIDSettingVC.swift in Sources */,
 				37BAB9741D3E1059001E4680 /* MenuSheetView.swift in Sources */,
 				373A842A1E2366E000A2B1E4 /* AboutAppViewController.swift in Sources */,
 				37BAB99B1D3E1059001E4680 /* typeCell.swift in Sources */,
@@ -2468,6 +2505,7 @@
 				3776B8D11D93A62E00A9C9DB /* MessageListVC.swift in Sources */,
 				37BAB9891D3E1059001E4680 /* CoverAddCell.swift in Sources */,
 				3776B8AE1D937FAC00A9C9DB /* CKSessionService.swift in Sources */,
+				371D310A1E27221C006A3422 /* SecurityManager.swift in Sources */,
 				3771DD141DB0B11B00636BCB /* XHSideFilterView.swift in Sources */,
 				37BAB9851D3E1059001E4680 /* BasicInfoCell.swift in Sources */,
 				3776B92E1D93A85C00A9C9DB /* FormVC.swift in Sources */,
@@ -2529,11 +2567,13 @@
 				37D46F851D6FD46B00A0BBCE /* GoodDetailView.swift in Sources */,
 				37A00DAF1DC1A06700E00CA7 /* VoiceRecordSampleView.swift in Sources */,
 				3707CAEE1E078C60008AE4F2 /* UpdatePassWordVC.swift in Sources */,
+				371D31131E27702E006A3422 /* TouchIDViewController.swift in Sources */,
 				371041F21DC09C6F00BE20F9 /* LTInfiniteScrollView.swift in Sources */,
 				378B17761D6C4A7B00758C13 /* Production.swift in Sources */,
 				37BAB9D41D3E11B1001E4680 /* README.md in Sources */,
 				37BAB9791D3E1059001E4680 /* AlbumSelectCell.swift in Sources */,
 				3776B9171D93A83900A9C9DB /* LoginByPhoneVC.swift in Sources */,
+				371D31101E2758C2006A3422 /* AccountAndSecurityVC.swift in Sources */,
 				3776B8E01D93A81D00A9C9DB /* ProjectPlannedVC.swift in Sources */,
 				37C15CE91DE3EFF50083AFAB /* MemberListVC.swift in Sources */,
 				37BAB8B11D3E101C001E4680 /* UINavigationItem+DD.swift in Sources */,
@@ -2636,8 +2676,8 @@
 				37BAB9771D3E1059001E4680 /* AddFriendSearchCell.swift in Sources */,
 				372463B91D69F4180018CE37 /* Customer.swift in Sources */,
 				376D6D451D59C8E500F9A272 /* ChatExample.swift in Sources */,
-				37DF88E51D8FD3D700B8DB73 /* UserManager.swift in Sources */,
 				372FAB0A1DD15F96007F1CA0 /* XHStackedChartViewController.swift in Sources */,
+				37DD59E91E25FC4D00CA8B0F /* XHConfigs.swift in Sources */,
 				37BAB8F01D3E1045001E4680 /* RESideMenu.m in Sources */,
 				37BAB97B1D3E1059001E4680 /* ChannelCell.swift in Sources */,
 				3776B90C1D93A83900A9C9DB /* BaseWebViewController.swift in Sources */,
@@ -2799,7 +2839,7 @@
 				CODE_SIGN_ENTITLEMENTS = XianHui/XianHui.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEPLOYMENT_POSTPROCESSING = YES;
+				DEPLOYMENT_POSTPROCESSING = NO;
 				DEVELOPMENT_TEAM = 2F9H286LLV;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2834,7 +2874,7 @@
 				CODE_SIGN_ENTITLEMENTS = XianHui/XianHui.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEPLOYMENT_POSTPROCESSING = YES;
+				DEPLOYMENT_POSTPROCESSING = NO;
 				DEVELOPMENT_TEAM = 2F9H286LLV;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

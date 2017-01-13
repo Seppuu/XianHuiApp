@@ -74,14 +74,14 @@ extension PasswordSettingVC:UITableViewDelegate,UITableViewDataSource {
         
         
         
-        if (indexPath as NSIndexPath).row == 3 {
+        if indexPath.row == 3 {
             let cell = tableView.dequeueReusableCell(withIdentifier: SwitchCellId, for: indexPath) as! SwitchCell
-            cell.leftLabel.text = titles[(indexPath as NSIndexPath).item]
-            let useTouchID = Defaults.useTouchID.value!
+            cell.leftLabel.text = titles[indexPath.item]
+            let useTouchID = Defaults.useTouchIDLogIn.value!
             cell.switchButton.isOn = useTouchID ? true : false
             cell.switchTapHandler = { (on) in
                 
-                Defaults.useTouchID.value = on
+                Defaults.useTouchIDLogIn.value = on
             }
             
             return cell
@@ -91,7 +91,7 @@ extension PasswordSettingVC:UITableViewDelegate,UITableViewDataSource {
             
             let cell = UITableViewCell()
             cell.accessoryView = UIImageView.xhAccessoryView()
-            cell.textLabel?.text = titles[(indexPath as NSIndexPath).item]
+            cell.textLabel?.text = titles[indexPath.item]
             
             return cell
         }
@@ -100,13 +100,13 @@ extension PasswordSettingVC:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if (indexPath as NSIndexPath).row == 0{
+        if indexPath.row == 0{
             self.presentPasscodeViewControllerWithType(BKPasscodeViewControllerNewPasscodeType)
         }
-        else if (indexPath as NSIndexPath).row == 1 {
+        else if indexPath.row == 1 {
             self.presentPasscodeViewControllerWithType(BKPasscodeViewControllerChangePasscodeType)
         }
-        else if (indexPath as NSIndexPath).row == 2 {
+        else if indexPath.row == 2 {
             self.presentPasscodeViewControllerWithType(BKPasscodeViewControllerCheckPasscodeType)
         }
         else {
@@ -134,7 +134,7 @@ extension PasswordSettingVC:UITableViewDelegate,UITableViewDataSource {
         
         
         
-        if (Defaults.useTouchID.value! == true && vc.type == BKPasscodeViewControllerCheckPasscodeType) {
+        if (Defaults.useTouchIDLogIn.value! == true && vc.type == BKPasscodeViewControllerCheckPasscodeType) {
             
             // To prevent duplicated selection before showing Touch ID user interface.
             self.tableView.isUserInteractionEnabled = false
@@ -185,9 +185,6 @@ extension PasswordSettingVC:UITableViewDelegate,UITableViewDataSource {
         aViewController.dismiss(animated: true, completion: nil)
     }
     
-    
-    
-    
     func passcodeViewController(_ aViewController: BKPasscodeViewController!, authenticatePasscode aPasscode: String!, resultHandler aResultHandler: ((Bool) -> Void)!) {
         
         if aPasscode == Defaults.localPassword.value! {
@@ -198,17 +195,6 @@ extension PasswordSettingVC:UITableViewDelegate,UITableViewDataSource {
         }
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+   
     
 }

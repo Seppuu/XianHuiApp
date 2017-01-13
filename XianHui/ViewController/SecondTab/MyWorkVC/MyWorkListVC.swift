@@ -239,8 +239,24 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
             
         }
         
-        self.tableView.emptyDataSetSource = self
-        self.tableView.emptyDataSetDelegate = self
+        //第一次使用上次保存的数据来显示
+        var lastData = [MyWorkObject]()
+        switch type {
+        case .customer:
+            lastData = XHTableViewDataManager.shared.myWorkCustomerTableViewData
+        case .employee:
+            lastData = XHTableViewDataManager.shared.myWorkEmployeeTableViewData
+        case .project:
+            lastData = XHTableViewDataManager.shared.myWorkProjectTableViewData
+        case .prod:
+            lastData = XHTableViewDataManager.shared.myWorkProductionTableViewData
+        }
+        
+        dataHelper.dataArray = lastData
+        tableView.reloadData()
+        
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
         
         tableView.mj_footer.beginRefreshing()
         
@@ -826,16 +842,31 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     func getDataWith(_ datas:[JSON]) {
         
         var dataArray = [MyWorkObject]()
-        
+        //只保存第一页的数据.
         switch self.type {
         case .customer:
             dataArray = getCustomerDataWith(datas)
+            if self.pageNumber == 1 {
+                XHTableViewDataManager.shared.myWorkCustomerTableViewData = dataArray
+            }
+            
         case .employee:
             dataArray = getEmployeeData(datas)
+            if self.pageNumber == 1 {
+                XHTableViewDataManager.shared.myWorkEmployeeTableViewData = dataArray
+            }
+            
         case .project:
             dataArray = getProjectData(datas)
+            if self.pageNumber == 1 {
+                XHTableViewDataManager.shared.myWorkProjectTableViewData = dataArray
+            }
+            
         case .prod:
             dataArray = getProductionData(datas)
+            if self.pageNumber == 1 {
+                XHTableViewDataManager.shared.myWorkProductionTableViewData = dataArray
+            }
         }
         
         if isSearch == true {
