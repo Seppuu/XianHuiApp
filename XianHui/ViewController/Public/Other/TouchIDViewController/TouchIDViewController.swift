@@ -32,6 +32,11 @@ class TouchIDViewController: UIViewController {
         setSubView()
         
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        useTouchID()
+    }
 
     func setSubView() {
         

@@ -54,7 +54,7 @@ class UserCentreVC: BaseViewController {
         
         title = "设置"
         
-        section1 = ["账号管理","修改密码"]
+        section1 = ["账号与安全","修改密码"]
         
         section2 = ["问题反馈","关于闲惠"]
         
