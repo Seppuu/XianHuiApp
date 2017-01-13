@@ -80,13 +80,8 @@ class CustomerCardListVC: BaseTableViewController {
                     model.num = cardNum
                 }
                 
-                if let project_list = data["project_list"].array {
-                    var times = 0
-                    for p in project_list {
-                        times += p["times"].string!.toInt()!
-                        model.desc = String(times) + "次"
-                    }
-                    
+                if let times = data["times"].string {
+                    model.desc = times + "次"
                 }
                 
                 model.hasList = true

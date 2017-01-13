@@ -94,7 +94,6 @@
  */
 + (void)exampleCreateGroupConversationFromViewController:(UIViewController *)viewController;
 
-+ (void)signOutFromViewController:(UIViewController *)viewController;
 
 
 @end

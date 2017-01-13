@@ -15,7 +15,6 @@
 #endif
 #import "LCCKContactManager.h"
 #import "LCCKExampleConstants.h"
-#import "LCCKLoginViewController.h"
 #import "LCChatKitExample+Setting.h"
 #import "MWPhotoBrowser.h"
 #import "NSObject+LCCKHUD.h"
@@ -325,34 +324,6 @@ setLoadLatestMessagesHandler:^(LCCKConversationViewController *conversationContr
         
         // 用户拒绝了重连请求
         // - 退回登录页面
-        [[self class] lcck_clearLocalClientInfo];
-        LCCKLoginViewController *loginViewController = [[LCCKLoginViewController alloc] init];
-        [loginViewController setClientIDHandler:^(NSString *clientID) {
-            [LCCKUtil showProgressText:@"open client ..." duration:10.0f];
-            [LCChatKitExample invokeThisMethodAfterLoginSuccessWithClientId:clientID
-                                                                    success:^{
-                                                                        [LCCKUtil hideProgress];
-                                                                        LCCKTabBarControllerConfig *tabBarControllerConfig =
-                                                                        [[LCCKTabBarControllerConfig alloc] init];
-                                                                        [UIApplication sharedApplication].keyWindow.rootViewController =
-                                                                        tabBarControllerConfig.tabBarController;
-                                                                    }
-                                                                     failed:^(NSError *error) {
-                                                                         [LCCKUtil hideProgress];
-                                                                         NSLog(@"%@", error);
-                                                                     }];
-        }];
-        [[self class] lcck_tryPresentViewControllerViewController:loginViewController];
-        // - 显示返回信息
-        NSInteger code = 0;
-        NSString *errorReasonText = @"not granted";
-        NSDictionary *errorInfo = @{
-                                    @"code" : @(code),
-                                    NSLocalizedDescriptionKey : errorReasonText,
-                                    };
-        NSError *error =
-        [NSError errorWithDomain:NSStringFromClass([self class]) code:code userInfo:errorInfo];
-        !completionHandler ?: completionHandler(NO, error);
     }];
 }
 /**

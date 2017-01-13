@@ -67,13 +67,14 @@ class XHAccountManager {
         
         let anotherButton = UIAlertAction(title: "指纹登陆", style: .default) { (action) in
             
-            SecurityManager.shared.authenticateWithTouchID(notSupport: { 
+            SecurityManager.shared.authenticateWithTouchID(notSupport: {
                 //不支持
                 let msg = "您的指纹信息发生变更,请在手机中重新添加指纹后返回解锁或者直接使用密码登陆。"
-                let hud = showHudWith((self.currentVC!.view)!, animated: true, mode: .text, text: msg)
-                hud.hide(true, afterDelay: 1.5)
+                let hud = showHudWith((self.currentVC!.view)!, animated: true, mode: .text, text: "提示")
+                hud.detailsLabelText = msg
+                hud.hide(true, afterDelay: 3.0)
                 self.loginWhenTimeOut()
-            }, succeed: { 
+            }, succeed: {
                 //成功
                 self.loginWithCurrentAccount()
                 
@@ -81,8 +82,9 @@ class XHAccountManager {
                 //用户取消
                 self.loginWhenTimeOut()
             }, falied: { (_, error) in
-                let hud = showHudWith((self.currentVC!.view)!, animated: true, mode: .text, text: error!)
-                hud.hide(true, afterDelay: 1.5)
+                let hud = showHudWith((self.currentVC!.view)!, animated: true, mode: .text, text: "提示")
+                hud.detailsLabelText = error!
+                hud.hide(true, afterDelay: 3.0)
                 self.loginWhenTimeOut()
                 //print(error)
             })
@@ -93,11 +95,11 @@ class XHAccountManager {
         alert.addAction(submitButton)
         //如果没有开启指纹登陆功能(不显示该选项)
         if Defaults.useTouchIDLogIn.value! == true {
-           alert.addAction(anotherButton)
+            alert.addAction(anotherButton)
         }
         
         if currentVC != nil {
-           currentVC!.present(alert, animated: true, completion: nil)
+            currentVC!.present(alert, animated: true, completion: nil)
         }
         
     }
@@ -122,7 +124,7 @@ class XHAccountManager {
         let passWord = passWord
         
         let hud = showHudWith((currentVC!.view)!, animated: true, mode: .indeterminate, text: "")
-       
+        
         User.loginWith(userName, passWord: passWord, usertype: UserLoginType.Employee) { (user, data, error) in
             
             if error == nil {
@@ -158,22 +160,22 @@ class XHAccountManager {
         }
     }
     
-//    func connectWithLeanCloudIMWith(_ clientId:String,hud:MBProgressHUD) {
-//        
-//        ChatKitExample.invokeThisMethodAfterLoginSuccess(withClientId: clientId, success: {
-//            hud.mode = .text
-//            hud.labelText = "登陆成功"
-//            hud.hide(true, afterDelay: 1.5)
-//            
-//        }, failed: { (error) in
-//            
-//            hud.mode = .text
-//            hud.labelText = error.debugDescription
-//            hud.hide(true, afterDelay: 1.5)
-//            self.reLogin()
-//            
-//        })
-//    }
-
+    //    func connectWithLeanCloudIMWith(_ clientId:String,hud:MBProgressHUD) {
+    //
+    //        ChatKitExample.invokeThisMethodAfterLoginSuccess(withClientId: clientId, success: {
+    //            hud.mode = .text
+    //            hud.labelText = "登陆成功"
+    //            hud.hide(true, afterDelay: 1.5)
+    //
+    //        }, failed: { (error) in
+    //
+    //            hud.mode = .text
+    //            hud.labelText = error.debugDescription
+    //            hud.hide(true, afterDelay: 1.5)
+    //            self.reLogin()
+    //            
+    //        })
+    //    }
+    
     
 }

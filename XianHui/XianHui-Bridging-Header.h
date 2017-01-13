@@ -15,7 +15,7 @@
 #import "LCCKUser.h"
 #import "KCPinyinHelper.h"
 
-#import "LCCKLoginViewController.h"
+//#import "LCCKLoginViewController.h"
 #import "LCCKTabBarControllerConfig.h"
 
 #import "CYLTabBarController.h"

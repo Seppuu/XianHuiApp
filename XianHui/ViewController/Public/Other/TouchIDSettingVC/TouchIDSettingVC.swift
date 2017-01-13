@@ -41,8 +41,9 @@ class TouchIDSettingVC: BaseViewController {
         SecurityManager.shared.authenticateWithTouchID(notSupport: {
             //不支持,或者指纹功能关闭着.
             let msg = "您的指纹信息发生变更,请在手机设置中重新添加指纹后返回开启指纹功能。"
-            let hud = showHudWith(self.view, animated: true, mode: .text, text: msg)
-            hud.hide(true, afterDelay: 1.5)
+            let hud = showHudWith(self.view, animated: true, mode: .text, text: "提示")
+            hud.detailsLabelText = msg
+            hud.hide(true, afterDelay: 3.0)
             result(false)
         }, succeed: {
             //成功
@@ -53,7 +54,7 @@ class TouchIDSettingVC: BaseViewController {
             result(false)
         }, falied: { (_, error) in
             let hud = showHudWith(self.view, animated: true, mode: .text, text: error!)
-            hud.hide(true, afterDelay: 1.5)
+            hud.hide(true, afterDelay: 3.0)
             result(false)
 
         })

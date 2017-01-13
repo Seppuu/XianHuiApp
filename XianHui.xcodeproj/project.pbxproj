@@ -47,19 +47,6 @@
 		3724809A1D8151CD00B95C54 /* LCChatKitExample+Setting.m in Sources */ = {isa = PBXBuildFile; fileRef = 372480961D8151CD00B95C54 /* LCChatKitExample+Setting.m */; };
 		3724809B1D8151CD00B95C54 /* LCCKTabBarControllerConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 372480981D8151CD00B95C54 /* LCCKTabBarControllerConfig.m */; };
 		372480D81D8151EF00B95C54 /* LCCKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3724809E1D8151EF00B95C54 /* LCCKUser.m */; };
-		372480D91D8151EF00B95C54 /* LCCKInputViewPluginConversationBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 372480A31D8151EF00B95C54 /* LCCKInputViewPluginConversationBackground.m */; };
-		372480DA1D8151EF00B95C54 /* LCCKVCardMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 372480A81D8151EF00B95C54 /* LCCKVCardMessage.m */; };
-		372480DB1D8151EF00B95C54 /* calling_card_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 372480AA1D8151EF00B95C54 /* calling_card_bg@2x.png */; };
-		372480DC1D8151EF00B95C54 /* LCCKInputViewPluginVCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 372480AD1D8151EF00B95C54 /* LCCKInputViewPluginVCard.m */; };
-		372480DD1D8151EF00B95C54 /* LCCKVCardMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 372480AF1D8151EF00B95C54 /* LCCKVCardMessageCell.m */; };
-		372480DE1D8151EF00B95C54 /* LCCKVCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 372480B11D8151EF00B95C54 /* LCCKVCardView.m */; };
-		372480DF1D8151EF00B95C54 /* LCCKVCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 372480B21D8151EF00B95C54 /* LCCKVCardView.xib */; };
-		372480E01D8151EF00B95C54 /* LCCKLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 372480B61D8151EF00B95C54 /* LCCKLoginViewController.m */; };
-		372480E11D8151EF00B95C54 /* LCCKLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 372480B71D8151EF00B95C54 /* LCCKLoginViewController.xib */; };
-		372480E21D8151EF00B95C54 /* DEMOCustomAutoCompleteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 372480BA1D8151EF00B95C54 /* DEMOCustomAutoCompleteObject.m */; };
-		372480E31D8151EF00B95C54 /* DEMODataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 372480BC1D8151EF00B95C54 /* DEMODataSource.m */; };
-		372480E41D8151EF00B95C54 /* LCCKLoginDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 372480BE1D8151EF00B95C54 /* LCCKLoginDataSource.m */; };
-		372480E51D8151EF00B95C54 /* LCCKMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 372480C21D8151EF00B95C54 /* LCCKMapViewController.m */; };
 		372480E61D8151EF00B95C54 /* LCCKUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 372480C51D8151EF00B95C54 /* LCCKUtil.m */; };
 		372480ED1D8151EF00B95C54 /* LCCKContactManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 372480D31D8151EF00B95C54 /* LCCKContactManager.m */; };
 		372480EE1D8151EF00B95C54 /* NSObject+LCCKHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 372480D71D8151EF00B95C54 /* NSObject+LCCKHUD.m */; };
@@ -72,7 +59,6 @@
 		37367B711D6ADA2100479E39 /* CustomerCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37367B701D6ADA2100479E39 /* CustomerCard.xib */; };
 		37367B741D6AE68F00479E39 /* PlanningTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37367B731D6AE68F00479E39 /* PlanningTableView.swift */; };
 		37367B771D6AE6DB00479E39 /* ChattingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37367B761D6AE6DB00479E39 /* ChattingTableView.swift */; };
-		37367B7A1D6AE70300479E39 /* TrackingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37367B791D6AE70300479E39 /* TrackingTableView.swift */; };
 		37367B7C1D6AE7FD00479E39 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37367B7B1D6AE7FD00479E39 /* Project.swift */; };
 		37367B821D6BFED900479E39 /* chatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37367B801D6BFED900479E39 /* chatTableViewCell.swift */; };
 		37367B831D6BFED900479E39 /* chatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37367B811D6BFED900479E39 /* chatTableViewCell.xib */; };
@@ -120,14 +106,10 @@
 		3776B91D1D93A83900A9C9DB /* FirstLaunchRemindVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B8FE1D93A83900A9C9DB /* FirstLaunchRemindVC.swift */; };
 		3776B9211D93A83900A9C9DB /* CustomerConsumeListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B9061D93A83900A9C9DB /* CustomerConsumeListVC.swift */; };
 		3776B9221D93A83900A9C9DB /* CustomerProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B9081D93A83900A9C9DB /* CustomerProfileVC.swift */; };
-		3776B9231D93A83900A9C9DB /* MineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B90A1D93A83900A9C9DB /* MineVC.swift */; };
-		3776B9281D93A84800A9C9DB /* PasswordSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B9251D93A84800A9C9DB /* PasswordSettingVC.swift */; };
 		3776B9291D93A84800A9C9DB /* UserCentreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B9271D93A84800A9C9DB /* UserCentreVC.swift */; };
 		3776B92D1D93A85C00A9C9DB /* DailyFormVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B92B1D93A85C00A9C9DB /* DailyFormVC.swift */; };
 		3776B92E1D93A85C00A9C9DB /* FormVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B92C1D93A85C00A9C9DB /* FormVC.swift */; };
 		3776B9331D93AC5B00A9C9DB /* ScheduleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B9311D93AC5B00A9C9DB /* ScheduleVC.swift */; };
-		378B17731D6C360800758C13 /* progressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378B17711D6C360800758C13 /* progressCell.swift */; };
-		378B17741D6C360800758C13 /* progressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 378B17721D6C360800758C13 /* progressCell.xib */; };
 		378B17761D6C4A7B00758C13 /* Production.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378B17751D6C4A7B00758C13 /* Production.swift */; };
 		378E07671D461EC000B67621 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378E07661D461EC000B67621 /* BalloonMarker.swift */; };
 		378E076A1D4757CC00B67621 /* XHBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378E07691D4757CC00B67621 /* XHBarChartView.swift */; };
@@ -290,13 +272,13 @@
 		37C1F39B1DB9C9410029D776 /* UILabel+ContentSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C1F3931DB9C9410029D776 /* UILabel+ContentSize.m */; };
 		37C710DB1D825D3F000FE4DE /* FTPopOverMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C710DA1D825D3F000FE4DE /* FTPopOverMenu.m */; };
 		37C8CA8D1DCC1E94004F2A40 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8CA8C1DCC1E94004F2A40 /* BaseNavigationController.swift */; };
+		37CCF7521E28ABB1009A62B3 /* XHAccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CCF7511E28ABB1009A62B3 /* XHAccountManager.swift */; };
 		37D46F811D6FD16E00A0BBCE /* GoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D46F7F1D6FD16E00A0BBCE /* GoodCell.swift */; };
 		37D46F821D6FD16E00A0BBCE /* GoodCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D46F801D6FD16E00A0BBCE /* GoodCell.xib */; };
 		37D46F851D6FD46B00A0BBCE /* GoodDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D46F841D6FD46B00A0BBCE /* GoodDetailView.swift */; };
 		37D46F871D6FD5D100A0BBCE /* GoodDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D46F861D6FD5D100A0BBCE /* GoodDetail.xib */; };
 		37D811DB1DAB3E0700A5B037 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D811DA1DAB3E0700A5B037 /* GuideViewController.swift */; };
 		37D811DD1DAB437E00A5B037 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37D811DC1DAB437E00A5B037 /* Assets.xcassets */; };
-		37DD59E91E25FC4D00CA8B0F /* XHConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DD59E81E25FC4D00CA8B0F /* XHConfigs.swift */; };
 		37E754CA1DD05BBD0027A7A1 /* XHStackedBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E754C91DD05BBD0027A7A1 /* XHStackedBarChart.swift */; };
 		37E78A9A1D41F198007425A3 /* OTPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E78A971D41F198007425A3 /* OTPageScrollView.m */; };
 		37E78A9B1D41F198007425A3 /* OTPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E78A991D41F198007425A3 /* OTPageView.m */; };
@@ -358,29 +340,6 @@
 		372480981D8151CD00B95C54 /* LCCKTabBarControllerConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCCKTabBarControllerConfig.m; sourceTree = "<group>"; };
 		3724809D1D8151EF00B95C54 /* LCCKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCCKUser.h; sourceTree = "<group>"; };
 		3724809E1D8151EF00B95C54 /* LCCKUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCCKUser.m; sourceTree = "<group>"; };
-		372480A21D8151EF00B95C54 /* LCCKInputViewPluginConversationBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCCKInputViewPluginConversationBackground.h; sourceTree = "<group>"; };
-		372480A31D8151EF00B95C54 /* LCCKInputViewPluginConversationBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCCKInputViewPluginConversationBackground.m; sourceTree = "<group>"; };
-		372480A71D8151EF00B95C54 /* LCCKVCardMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCCKVCardMessage.h; sourceTree = "<group>"; };
-		372480A81D8151EF00B95C54 /* LCCKVCardMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCCKVCardMessage.m; sourceTree = "<group>"; };
-		372480AA1D8151EF00B95C54 /* calling_card_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calling_card_bg@2x.png"; sourceTree = "<group>"; };
-		372480AC1D8151EF00B95C54 /* LCCKInputViewPluginVCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCCKInputViewPluginVCard.h; sourceTree = "<group>"; };
-		372480AD1D8151EF00B95C54 /* LCCKInputViewPluginVCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCCKInputViewPluginVCard.m; sourceTree = "<group>"; };
-		372480AE1D8151EF00B95C54 /* LCCKVCardMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCCKVCardMessageCell.h; sourceTree = "<group>"; };
-		372480AF1D8151EF00B95C54 /* LCCKVCardMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCCKVCardMessageCell.m; sourceTree = "<group>"; };
-		372480B01D8151EF00B95C54 /* LCCKVCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCCKVCardView.h; sourceTree = "<group>"; };
-		372480B11D8151EF00B95C54 /* LCCKVCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCCKVCardView.m; sourceTree = "<group>"; };
-		372480B21D8151EF00B95C54 /* LCCKVCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LCCKVCardView.xib; sourceTree = "<group>"; };
-		372480B51D8151EF00B95C54 /* LCCKLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCCKLoginViewController.h; sourceTree = "<group>"; };
-		372480B61D8151EF00B95C54 /* LCCKLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCCKLoginViewController.m; sourceTree = "<group>"; };
-		372480B71D8151EF00B95C54 /* LCCKLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LCCKLoginViewController.xib; sourceTree = "<group>"; };
-		372480B91D8151EF00B95C54 /* DEMOCustomAutoCompleteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMOCustomAutoCompleteObject.h; sourceTree = "<group>"; };
-		372480BA1D8151EF00B95C54 /* DEMOCustomAutoCompleteObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMOCustomAutoCompleteObject.m; sourceTree = "<group>"; };
-		372480BB1D8151EF00B95C54 /* DEMODataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMODataSource.h; sourceTree = "<group>"; };
-		372480BC1D8151EF00B95C54 /* DEMODataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMODataSource.m; sourceTree = "<group>"; };
-		372480BD1D8151EF00B95C54 /* LCCKLoginDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCCKLoginDataSource.h; sourceTree = "<group>"; };
-		372480BE1D8151EF00B95C54 /* LCCKLoginDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCCKLoginDataSource.m; sourceTree = "<group>"; };
-		372480C11D8151EF00B95C54 /* LCCKMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCCKMapViewController.h; sourceTree = "<group>"; };
-		372480C21D8151EF00B95C54 /* LCCKMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCCKMapViewController.m; sourceTree = "<group>"; };
 		372480C31D8151EF00B95C54 /* LCCKConstantsDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCCKConstantsDefinition.h; sourceTree = "<group>"; };
 		372480C41D8151EF00B95C54 /* LCCKUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCCKUtil.h; sourceTree = "<group>"; };
 		372480C51D8151EF00B95C54 /* LCCKUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCCKUtil.m; sourceTree = "<group>"; };
@@ -398,7 +357,6 @@
 		37367B701D6ADA2100479E39 /* CustomerCard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomerCard.xib; sourceTree = "<group>"; };
 		37367B731D6AE68F00479E39 /* PlanningTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanningTableView.swift; sourceTree = "<group>"; };
 		37367B761D6AE6DB00479E39 /* ChattingTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingTableView.swift; sourceTree = "<group>"; };
-		37367B791D6AE70300479E39 /* TrackingTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackingTableView.swift; sourceTree = "<group>"; };
 		37367B7B1D6AE7FD00479E39 /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		37367B801D6BFED900479E39 /* chatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = chatTableViewCell.swift; sourceTree = "<group>"; };
 		37367B811D6BFED900479E39 /* chatTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = chatTableViewCell.xib; sourceTree = "<group>"; };
@@ -446,14 +404,10 @@
 		3776B8FE1D93A83900A9C9DB /* FirstLaunchRemindVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstLaunchRemindVC.swift; sourceTree = "<group>"; };
 		3776B9061D93A83900A9C9DB /* CustomerConsumeListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerConsumeListVC.swift; sourceTree = "<group>"; };
 		3776B9081D93A83900A9C9DB /* CustomerProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerProfileVC.swift; sourceTree = "<group>"; };
-		3776B90A1D93A83900A9C9DB /* MineVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineVC.swift; sourceTree = "<group>"; };
-		3776B9251D93A84800A9C9DB /* PasswordSettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordSettingVC.swift; sourceTree = "<group>"; };
 		3776B9271D93A84800A9C9DB /* UserCentreVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCentreVC.swift; sourceTree = "<group>"; };
 		3776B92B1D93A85C00A9C9DB /* DailyFormVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyFormVC.swift; sourceTree = "<group>"; };
 		3776B92C1D93A85C00A9C9DB /* FormVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormVC.swift; sourceTree = "<group>"; };
 		3776B9311D93AC5B00A9C9DB /* ScheduleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleVC.swift; sourceTree = "<group>"; };
-		378B17711D6C360800758C13 /* progressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = progressCell.swift; sourceTree = "<group>"; };
-		378B17721D6C360800758C13 /* progressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = progressCell.xib; sourceTree = "<group>"; };
 		378B17751D6C4A7B00758C13 /* Production.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Production.swift; sourceTree = "<group>"; };
 		378E07661D461EC000B67621 /* BalloonMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
 		378E07691D4757CC00B67621 /* XHBarChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHBarChartView.swift; sourceTree = "<group>"; };
@@ -646,13 +600,13 @@
 		37C710D91D825D3F000FE4DE /* FTPopOverMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPopOverMenu.h; sourceTree = "<group>"; };
 		37C710DA1D825D3F000FE4DE /* FTPopOverMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPopOverMenu.m; sourceTree = "<group>"; };
 		37C8CA8C1DCC1E94004F2A40 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
+		37CCF7511E28ABB1009A62B3 /* XHAccountManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHAccountManager.swift; sourceTree = "<group>"; };
 		37D46F7F1D6FD16E00A0BBCE /* GoodCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodCell.swift; sourceTree = "<group>"; };
 		37D46F801D6FD16E00A0BBCE /* GoodCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoodCell.xib; sourceTree = "<group>"; };
 		37D46F841D6FD46B00A0BBCE /* GoodDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodDetailView.swift; sourceTree = "<group>"; };
 		37D46F861D6FD5D100A0BBCE /* GoodDetail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoodDetail.xib; sourceTree = "<group>"; };
 		37D811DA1DAB3E0700A5B037 /* GuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
 		37D811DC1DAB437E00A5B037 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		37DD59E81E25FC4D00CA8B0F /* XHConfigs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XHConfigs.swift; path = ../Configs/XHConfigs.swift; sourceTree = "<group>"; };
 		37E754C91DD05BBD0027A7A1 /* XHStackedBarChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHStackedBarChart.swift; sourceTree = "<group>"; };
 		37E78A961D41F198007425A3 /* OTPageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPageScrollView.h; sourceTree = "<group>"; };
 		37E78A971D41F198007425A3 /* OTPageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPageScrollView.m; sourceTree = "<group>"; };
@@ -831,146 +785,19 @@
 		3724809F1D8151EF00B95C54 /* Module */ = {
 			isa = PBXGroup;
 			children = (
-				372480A01D8151EF00B95C54 /* Customize */,
-				372480B31D8151EF00B95C54 /* Login */,
 				372480BF1D8151EF00B95C54 /* Main */,
-				372480C91D8151EF00B95C54 /* Other */,
 			);
 			path = Module;
-			sourceTree = "<group>";
-		};
-		372480A01D8151EF00B95C54 /* Customize */ = {
-			isa = PBXGroup;
-			children = (
-				372480A11D8151EF00B95C54 /* CustomizedConversationBackground */,
-				372480A41D8151EF00B95C54 /* CustomizedMessage */,
-			);
-			path = Customize;
-			sourceTree = "<group>";
-		};
-		372480A11D8151EF00B95C54 /* CustomizedConversationBackground */ = {
-			isa = PBXGroup;
-			children = (
-				372480A21D8151EF00B95C54 /* LCCKInputViewPluginConversationBackground.h */,
-				372480A31D8151EF00B95C54 /* LCCKInputViewPluginConversationBackground.m */,
-			);
-			path = CustomizedConversationBackground;
-			sourceTree = "<group>";
-		};
-		372480A41D8151EF00B95C54 /* CustomizedMessage */ = {
-			isa = PBXGroup;
-			children = (
-				372480A51D8151EF00B95C54 /* VCardMessage */,
-			);
-			path = CustomizedMessage;
-			sourceTree = "<group>";
-		};
-		372480A51D8151EF00B95C54 /* VCardMessage */ = {
-			isa = PBXGroup;
-			children = (
-				372480A61D8151EF00B95C54 /* Model */,
-				372480A91D8151EF00B95C54 /* Resources */,
-				372480AB1D8151EF00B95C54 /* View */,
-			);
-			path = VCardMessage;
-			sourceTree = "<group>";
-		};
-		372480A61D8151EF00B95C54 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				372480A71D8151EF00B95C54 /* LCCKVCardMessage.h */,
-				372480A81D8151EF00B95C54 /* LCCKVCardMessage.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		372480A91D8151EF00B95C54 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				372480AA1D8151EF00B95C54 /* calling_card_bg@2x.png */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		372480AB1D8151EF00B95C54 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				372480AC1D8151EF00B95C54 /* LCCKInputViewPluginVCard.h */,
-				372480AD1D8151EF00B95C54 /* LCCKInputViewPluginVCard.m */,
-				372480AE1D8151EF00B95C54 /* LCCKVCardMessageCell.h */,
-				372480AF1D8151EF00B95C54 /* LCCKVCardMessageCell.m */,
-				372480B01D8151EF00B95C54 /* LCCKVCardView.h */,
-				372480B11D8151EF00B95C54 /* LCCKVCardView.m */,
-				372480B21D8151EF00B95C54 /* LCCKVCardView.xib */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		372480B31D8151EF00B95C54 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				372480B41D8151EF00B95C54 /* Controller */,
-				372480B81D8151EF00B95C54 /* Model */,
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
-		372480B41D8151EF00B95C54 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				372480B51D8151EF00B95C54 /* LCCKLoginViewController.h */,
-				372480B61D8151EF00B95C54 /* LCCKLoginViewController.m */,
-				372480B71D8151EF00B95C54 /* LCCKLoginViewController.xib */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		372480B81D8151EF00B95C54 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				372480B91D8151EF00B95C54 /* DEMOCustomAutoCompleteObject.h */,
-				372480BA1D8151EF00B95C54 /* DEMOCustomAutoCompleteObject.m */,
-				372480BB1D8151EF00B95C54 /* DEMODataSource.h */,
-				372480BC1D8151EF00B95C54 /* DEMODataSource.m */,
-				372480BD1D8151EF00B95C54 /* LCCKLoginDataSource.h */,
-				372480BE1D8151EF00B95C54 /* LCCKLoginDataSource.m */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		372480BF1D8151EF00B95C54 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				372480C01D8151EF00B95C54 /* Controller */,
 				372480C31D8151EF00B95C54 /* LCCKConstantsDefinition.h */,
 				372480C41D8151EF00B95C54 /* LCCKUtil.h */,
 				372480C51D8151EF00B95C54 /* LCCKUtil.m */,
-				372480C61D8151EF00B95C54 /* View */,
 			);
 			path = Main;
-			sourceTree = "<group>";
-		};
-		372480C01D8151EF00B95C54 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				372480C11D8151EF00B95C54 /* LCCKMapViewController.h */,
-				372480C21D8151EF00B95C54 /* LCCKMapViewController.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		372480C61D8151EF00B95C54 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		372480C91D8151EF00B95C54 /* Other */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Other;
 			sourceTree = "<group>";
 		};
 		372480D11D8151EF00B95C54 /* Tool */ = {
@@ -1025,14 +852,6 @@
 				37367B761D6AE6DB00479E39 /* ChattingTableView.swift */,
 			);
 			path = ChattingTableView;
-			sourceTree = "<group>";
-		};
-		37367B781D6AE6F800479E39 /* TrackingTableView */ = {
-			isa = PBXGroup;
-			children = (
-				37367B791D6AE70300479E39 /* TrackingTableView.swift */,
-			);
-			path = TrackingTableView;
 			sourceTree = "<group>";
 		};
 		37367B841D6C13E400479E39 /* chatSectionView */ = {
@@ -1132,7 +951,6 @@
 				373A84281E2366C800A2B1E4 /* AboutApp */,
 				373A84271E2366C200A2B1E4 /* FeedBack */,
 				311DC2DC1D9A3CDF006EC8AB /* AccountManagerVC */,
-				3776B9241D93A84800A9C9DB /* PasswordSettingVC */,
 				3776B9261D93A84800A9C9DB /* UserCentre */,
 			);
 			path = ThirdTab;
@@ -1325,7 +1143,6 @@
 				379C737F1D9CAC1400B41BA6 /* Customer */,
 				3776B9051D93A83900A9C9DB /* CustomerConsumeListVC */,
 				3776B9071D93A83900A9C9DB /* CustomerProfileVC */,
-				3776B9091D93A83900A9C9DB /* MineVC */,
 			);
 			path = People;
 			sourceTree = "<group>";
@@ -1344,22 +1161,6 @@
 				3776B9081D93A83900A9C9DB /* CustomerProfileVC.swift */,
 			);
 			path = CustomerProfileVC;
-			sourceTree = "<group>";
-		};
-		3776B9091D93A83900A9C9DB /* MineVC */ = {
-			isa = PBXGroup;
-			children = (
-				3776B90A1D93A83900A9C9DB /* MineVC.swift */,
-			);
-			path = MineVC;
-			sourceTree = "<group>";
-		};
-		3776B9241D93A84800A9C9DB /* PasswordSettingVC */ = {
-			isa = PBXGroup;
-			children = (
-				3776B9251D93A84800A9C9DB /* PasswordSettingVC.swift */,
-			);
-			path = PasswordSettingVC;
 			sourceTree = "<group>";
 		};
 		3776B9261D93A84800A9C9DB /* UserCentre */ = {
@@ -1572,9 +1373,9 @@
 		37BAB8BF1D3E1040001E4680 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				37DD59E81E25FC4D00CA8B0F /* XHConfigs.swift */,
 				37BAB8C01D3E1040001E4680 /* NetworkManager.swift */,
 				371D31091E27221C006A3422 /* SecurityManager.swift */,
+				37CCF7511E28ABB1009A62B3 /* XHAccountManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1669,7 +1470,6 @@
 				37D46F831D6FD45100A0BBCE /* GoodDetailView */,
 				37A76FD11D6D313400572B1D /* ProdDateSetTableView */,
 				37367B841D6C13E400479E39 /* chatSectionView */,
-				37367B781D6AE6F800479E39 /* TrackingTableView */,
 				37367B751D6AE6D200479E39 /* ChattingTableView */,
 				37367B721D6AE66F00479E39 /* PlanningTableView */,
 				37367B6D1D6AD95700479E39 /* CustomerCardView */,
@@ -1837,8 +1637,6 @@
 				37BAB92B1D3E1059001E4680 /* typeCell.xib */,
 				37367B801D6BFED900479E39 /* chatTableViewCell.swift */,
 				37367B811D6BFED900479E39 /* chatTableViewCell.xib */,
-				378B17711D6C360800758C13 /* progressCell.swift */,
-				378B17721D6C360800758C13 /* progressCell.xib */,
 				3707CAEF1E07B449008AE4F2 /* PassWordFieldCell.swift */,
 				3707CAF01E07B449008AE4F2 /* PassWordFieldCell.xib */,
 			);
@@ -2347,7 +2145,6 @@
 				37BAB98C1D3E1059001E4680 /* coverCell.xib in Resources */,
 				371041FA1DC09CF700BE20F9 /* Info.plist in Resources */,
 				3776B8D21D93A62E00A9C9DB /* CodeScan.bundle in Resources */,
-				372480DB1D8151EF00B95C54 /* calling_card_bg@2x.png in Resources */,
 				37BAB9881D3E1059001E4680 /* CertificateCell.xib in Resources */,
 				37A2466B1DAF69A3002ADC5C /* FourButtonCell.xib in Resources */,
 				37367B881D6C141500479E39 /* chatSectionView.xib in Resources */,
@@ -2368,14 +2165,12 @@
 				37BAB9D31D3E11B1001E4680 /* LICENSE in Resources */,
 				37F905321D69F9370078C06B /* CustomerCell.xib in Resources */,
 				37D811DD1DAB437E00A5B037 /* Assets.xcassets in Resources */,
-				372480DF1D8151EF00B95C54 /* LCCKVCardView.xib in Resources */,
 				37A4C7591E14DD4700BF30E8 /* CustomizedChatKit.Other.bundle in Resources */,
 				37BAB9961D3E1059001E4680 /* SegmentCell.xib in Resources */,
 				37C15CE41DE3EF7E0083AFAB /* TaskList.storyboard in Resources */,
 				37BAB97C1D3E1059001E4680 /* ChannelCell.xib in Resources */,
 				37EA56901D3E0A7000D63498 /* Main.storyboard in Resources */,
 				3771EC941D7555F50064A060 /* .gitignore in Resources */,
-				378B17741D6C360800758C13 /* progressCell.xib in Resources */,
 				37BAB97A1D3E1059001E4680 /* AlbumSelectCell.xib in Resources */,
 				37C15CE11DE3EF7E0083AFAB /* CreateTask.storyboard in Resources */,
 				37A76FE41D6D8D1200572B1D /* StepperCell.xib in Resources */,
@@ -2407,7 +2202,6 @@
 				37BAB9A81D3E1059001E4680 /* SubscriptionTopView.xib in Resources */,
 				37BAB9941D3E1059001E4680 /* ProfileCell.xib in Resources */,
 				37BAB9AD1D3E1059001E4680 /* CountDown.xib in Resources */,
-				372480E11D8151EF00B95C54 /* LCCKLoginViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2467,7 +2261,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3776B9151D93A83900A9C9DB /* CodeLoginVerifyVC.swift in Sources */,
-				37367B7A1D6AE70300479E39 /* TrackingTableView.swift in Sources */,
 				37BAB98F1D3E1059001E4680 /* formCell.swift in Sources */,
 				37BAB9831D3E1059001E4680 /* FilterCell.swift in Sources */,
 				37BAB8AC1D3E101C001E4680 /* UIApplication+DD.swift in Sources */,
@@ -2479,7 +2272,6 @@
 				37A76FE31D6D8D1200572B1D /* StepperCell.swift in Sources */,
 				37BAB8B21D3E101C001E4680 /* UIView+DD.swift in Sources */,
 				37BAB8AB1D3E101C001E4680 /* String+DD.swift in Sources */,
-				372480DE1D8151EF00B95C54 /* LCCKVCardView.m in Sources */,
 				379C737C1D9CA20300B41BA6 /* CustomerManagerSelectVC.swift in Sources */,
 				37A81FC51D9E2EC2002720D3 /* BaseProfileViewController.swift in Sources */,
 				37E754CA1DD05BBD0027A7A1 /* XHStackedBarChart.swift in Sources */,
@@ -2497,7 +2289,6 @@
 				37E78A9B1D41F198007425A3 /* OTPageView.m in Sources */,
 				37BAB8A91D3E101C001E4680 /* NSFileManager+DD.swift in Sources */,
 				3776B8E11D93A81D00A9C9DB /* ProjectPlanningVC.swift in Sources */,
-				372480DA1D8151EF00B95C54 /* LCCKVCardMessage.m in Sources */,
 				37A2466E1DAF69B4002ADC5C /* SliderCell.swift in Sources */,
 				311DC2DB1D9A09E1006EC8AB /* NSDate+DD.swift in Sources */,
 				37A76FD31D6D314600572B1D /* ProdDateSetTableView.swift in Sources */,
@@ -2516,7 +2307,6 @@
 				37BAB8C31D3E1040001E4680 /* User.swift in Sources */,
 				37BAB9991D3E1059001E4680 /* SwitchCell.swift in Sources */,
 				37BAB8AF1D3E101C001E4680 /* UIImage+DD.swift in Sources */,
-				372480DC1D8151EF00B95C54 /* LCCKInputViewPluginVCard.m in Sources */,
 				37BAB8EC1D3E1045001E4680 /* NSString+Levenshtein.m in Sources */,
 				37BAB9A11D3E1059001E4680 /* StaffPicksCardCell.swift in Sources */,
 				37E78A9A1D41F198007425A3 /* OTPageScrollView.m in Sources */,
@@ -2535,7 +2325,6 @@
 				371041E21DC09B9B00BE20F9 /* CAPSPageMenu.swift in Sources */,
 				371430771D9B96C60006A314 /* MyWorkCell.swift in Sources */,
 				37C15CE61DE3EF7E0083AFAB /* TaskOptionsVC.swift in Sources */,
-				378B17731D6C360800758C13 /* progressCell.swift in Sources */,
 				37BAB8ED1D3E1045001E4680 /* KCPinyinHelper.m in Sources */,
 				3776B8B71D93A4A700A9C9DB /* ContactListVC.swift in Sources */,
 				37D46F811D6FD16E00A0BBCE /* GoodCell.swift in Sources */,
@@ -2546,8 +2335,6 @@
 				37BAB99F1D3E1059001E4680 /* SheetCell.swift in Sources */,
 				3770DD861DA506A800786FB2 /* GoodProfileVC.swift in Sources */,
 				3776B9131D93A83900A9C9DB /* FormSettingVC.swift in Sources */,
-				372480E41D8151EF00B95C54 /* LCCKLoginDataSource.m in Sources */,
-				372480E31D8151EF00B95C54 /* DEMODataSource.m in Sources */,
 				3776B92D1D93A85C00A9C9DB /* DailyFormVC.swift in Sources */,
 				37BAB9B41D3E1059001E4680 /* FilterCollectionView.swift in Sources */,
 				378E07671D461EC000B67621 /* BalloonMarker.swift in Sources */,
@@ -2558,7 +2345,6 @@
 				37BAB9871D3E1059001E4680 /* CertificateCell.swift in Sources */,
 				3776B90F1D93A83900A9C9DB /* BaseChartViewController.swift in Sources */,
 				3776B8BD1D93A4D700A9C9DB /* MyWorkVC.swift in Sources */,
-				372480DD1D8151EF00B95C54 /* LCCKVCardMessageCell.m in Sources */,
 				371041EE1DC09C0E00BE20F9 /* PalauDefaultsEntry.swift in Sources */,
 				37A81FC21D9E0DE1002720D3 /* BaseTableViewController.swift in Sources */,
 				371041F91DC09CF700BE20F9 /* ICSPullToRefresh.swift in Sources */,
@@ -2585,7 +2371,6 @@
 				37BAB8BD1D3E1025001E4680 /* PhoneNumbers.swift in Sources */,
 				37BAB8A81D3E101C001E4680 /* Dictionary+DD.swift in Sources */,
 				37C1F3991DB9C9410029D776 /* EBMuteDetector.m in Sources */,
-				372480E01D8151EF00B95C54 /* LCCKLoginViewController.m in Sources */,
 				37BAB8B31D3E101C001E4680 /* UIViewController+DD.swift in Sources */,
 				3776B91D1D93A83900A9C9DB /* FirstLaunchRemindVC.swift in Sources */,
 				37C0C3B61D66BD77002B8772 /* XHUser.swift in Sources */,
@@ -2628,7 +2413,6 @@
 				371430741D9B8D8D0006A314 /* MyWorkListHepler.swift in Sources */,
 				37C1F39B1DB9C9410029D776 /* UILabel+ContentSize.m in Sources */,
 				37367B771D6AE6DB00479E39 /* ChattingTableView.swift in Sources */,
-				3776B9281D93A84800A9C9DB /* PasswordSettingVC.swift in Sources */,
 				37BAB97F1D3E1059001E4680 /* ContactsCell.swift in Sources */,
 				37BAB9DF1D3E124E001E4680 /* DDConfigs.swift in Sources */,
 				37215F551E1C9060004E8AC2 /* DropDownView.swift in Sources */,
@@ -2661,12 +2445,10 @@
 				37A00DB11DC1A06700E00CA7 /* YepWaverView.swift in Sources */,
 				3708C2691DA551E600D8E534 /* OrderCell.swift in Sources */,
 				371041EA1DC09C0E00BE20F9 /* PalauCustomDefaultable.swift in Sources */,
-				3776B9231D93A83900A9C9DB /* MineVC.swift in Sources */,
 				37BAB9B11D3E1059001E4680 /* DDPopSheetView.swift in Sources */,
 				37BAB9A31D3E1059001E4680 /* SubscriptionDetailCell.swift in Sources */,
 				37BAB98B1D3E1059001E4680 /* coverCell.swift in Sources */,
 				3770DD841DA4FB2200786FB2 /* GoodDetailListVC.swift in Sources */,
-				372480E21D8151EF00B95C54 /* DEMOCustomAutoCompleteObject.m in Sources */,
 				37A76FDA1D6D7DA200572B1D /* ReMarkCell.swift in Sources */,
 				37BAB8BB1D3E1025001E4680 /* DecibelObserver.swift in Sources */,
 				37BAB8E81D3E1045001E4680 /* CYLTabBarController.m in Sources */,
@@ -2677,22 +2459,20 @@
 				372463B91D69F4180018CE37 /* Customer.swift in Sources */,
 				376D6D451D59C8E500F9A272 /* ChatExample.swift in Sources */,
 				372FAB0A1DD15F96007F1CA0 /* XHStackedChartViewController.swift in Sources */,
-				37DD59E91E25FC4D00CA8B0F /* XHConfigs.swift in Sources */,
 				37BAB8F01D3E1045001E4680 /* RESideMenu.m in Sources */,
 				37BAB97B1D3E1059001E4680 /* ChannelCell.swift in Sources */,
 				3776B90C1D93A83900A9C9DB /* BaseWebViewController.swift in Sources */,
 				379C738A1D9CDCD000B41BA6 /* CheckBoxCell.swift in Sources */,
 				3776B90B1D93A83900A9C9DB /* BaseViewController.swift in Sources */,
-				372480D91D8151EF00B95C54 /* LCCKInputViewPluginConversationBackground.m in Sources */,
 				37EA568B1D3E0A7000D63498 /* AppDelegate.swift in Sources */,
 				3776B9191D93A83900A9C9DB /* LoginViewController.swift in Sources */,
 				37BAB98D1D3E1059001E4680 /* FirstViewCell.swift in Sources */,
 				3776B9101D93A83900A9C9DB /* LineChartViewController.swift in Sources */,
+				37CCF7521E28ABB1009A62B3 /* XHAccountManager.swift in Sources */,
 				3776B91A1D93A83900A9C9DB /* ApproveVC.swift in Sources */,
 				37BAB8EE1D3E1045001E4680 /* Popover.swift in Sources */,
 				37C15CE21DE3EF7E0083AFAB /* CreateTaskVC.swift in Sources */,
 				371041FE1DC0A64400BE20F9 /* StringExtensions.swift in Sources */,
-				372480E51D8151EF00B95C54 /* LCCKMapViewController.m in Sources */,
 				37C15CE51DE3EF7E0083AFAB /* TaskListVC.swift in Sources */,
 				37A76FDF1D6D8CBA00572B1D /* ANStepperView.m in Sources */,
 				370C4E7A1D9E346400312E9C /* MyWorkManager.swift in Sources */,

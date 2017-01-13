@@ -104,8 +104,9 @@ class TouchIDViewController: UIViewController {
         SecurityManager.shared.authenticateWithTouchID(notSupport: { 
             
             let msg = "您的指纹信息发生变更,请在手机中重新添加指纹后返回解锁或者直接使用密码登陆。"
-            let hud = showHudWith(self.view, animated: true, mode: .text, text: msg)
-            hud.hide(true, afterDelay: 1.5)
+            let hud = showHudWith(self.view, animated: true, mode: .text, text: "提示")
+            hud.detailsLabelText = msg
+            hud.hide(true, afterDelay: 3.0)
             
         }, succeed: {
             if self.isLogin == true {
@@ -121,7 +122,7 @@ class TouchIDViewController: UIViewController {
             
         }) { (_, error) in
             let hud = showHudWith(self.view, animated: true, mode: .text, text: error!)
-            hud.hide(true, afterDelay: 1.5)
+            hud.hide(true, afterDelay: 3.0)
             
         }
     }

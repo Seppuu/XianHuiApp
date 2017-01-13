@@ -255,9 +255,6 @@
                        } dismissBlock:nil];
 }
 
-- (void)signOut {
-    [LCChatKitExample signOutFromViewController:self.secondViewController];
-}
 
 - (void)changeGroupAvatar {
     [LCChatKitExample exampleChangeGroupAvatarURLsForConversationId:@"570da6a9daeb3a63ca5b07b0"];

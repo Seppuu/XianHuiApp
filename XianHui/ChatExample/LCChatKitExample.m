@@ -19,8 +19,6 @@
 #endif
 #import "LCCKContactManager.h"
 #import "LCCKExampleConstants.h"
-#import "LCCKLoginViewController.h"
-#import "LCCKVCardMessageCell.h"
 #import "LCChatKitExample+Setting.h"
 
 //==================================================================================================================================
@@ -233,30 +231,6 @@
     [self lcck_pushToViewController:conversationViewController];
 }
 
-+ (void)signOutFromViewController:(UIViewController *)viewController {
-    [LCCKUtil showProgressText:@"close client ..." duration:10.0f];
-    [LCChatKitExample invokeThisMethodBeforeLogoutSuccess:^{
-        [LCCKUtil hideProgress];
-        LCCKLoginViewController *loginViewController = [[LCCKLoginViewController alloc] init];
-        [loginViewController setClientIDHandler:^(NSString *clientID) {
-            [LCChatKitExample invokeThisMethodAfterLoginSuccessWithClientId:clientID
-                                                                    success:^{
-                                                                        LCCKTabBarControllerConfig *tabBarControllerConfig =
-                                                                        [[LCCKTabBarControllerConfig alloc] init];
-                                                                        [self cyl_tabBarController].rootWindow.rootViewController =
-                                                                        tabBarControllerConfig.tabBarController;
-                                                                    }
-                                                                     failed:^(NSError *error) {
-                                                                         LCCKLog(@"%@", error);
-                                                                     }];
-        }];
-        [viewController presentViewController:loginViewController animated:YES completion:nil];
-    }
-                                                   failed:^(NSError *error) {
-                                                       [LCCKUtil hideProgress];
-                                                       LCCKLog(@"%@", error);
-                                                   }];
-}
 
 - (void)exampleOpenProfileForUser:(id<LCCKUserDelegate>)user
                            userId:(NSString *)userId
