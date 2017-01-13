@@ -101,7 +101,7 @@ class AboutAppViewController: BaseViewController {
         label1.textColor = UIColor.gray
         label1.font = UIFont.systemFont(ofSize: 12)
         label1.textAlignment = .center
-        label1.text = "Copyright © 2014-2016 MyBook.All Rights Reserved."
+        label1.text = "Copyright © 2014-2017 MyBook.All Rights Reserved."
         label1.snp.makeConstraints { (make) in
             make.bottom.equalTo(container.snp.bottom).offset(-30)
             make.left.right.equalTo(container)

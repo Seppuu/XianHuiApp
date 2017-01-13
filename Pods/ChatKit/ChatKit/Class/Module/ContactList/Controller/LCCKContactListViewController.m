@@ -492,25 +492,26 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
     /**
      *   这里不考虑查询人数与返回人数不一致的情况，比如查询100人，服务器只返回一人，那么也只显示一人，其余99人不予显示
      */
-    LCCKHUDActionBlock theHUDActionBlock = [LCCKUIService sharedInstance].HUDActionBlock;
-    if (theHUDActionBlock) {
-        theHUDActionBlock(self, nil, @"获取联系人信息...", LCCKMessageHUDActionTypeShow);
-    }
+    //xianhui 去掉这些HUD.
+    //LCCKHUDActionBlock theHUDActionBlock = [LCCKUIService sharedInstance].HUDActionBlock;
+//    if (theHUDActionBlock) {
+//        theHUDActionBlock(self, nil, @"获取联系人信息...", LCCKMessageHUDActionTypeShow);
+//    }
     [[LCChatKit sharedInstance] getProfilesInBackgroundForUserIds:[NSArray arrayWithArray:[_userIds allObjects]] callback:^(NSArray<id<LCCKUserDelegate>> *users, NSError *error) {
-        if (theHUDActionBlock) {
-            theHUDActionBlock(self, nil, nil, LCCKMessageHUDActionTypeHide);
-        }
+//        if (theHUDActionBlock) {
+//            theHUDActionBlock(self, nil, nil, LCCKMessageHUDActionTypeHide);
+//        }
         if (users.count > 0) {
-            if (theHUDActionBlock) {
-                theHUDActionBlock(self, nil, @"获取成功", LCCKMessageHUDActionTypeSuccess);
-            }
+//            if (theHUDActionBlock) {
+//                theHUDActionBlock(self, nil, @"获取成功", LCCKMessageHUDActionTypeSuccess);
+//            }
             self.contacts = [NSSet setWithArray:users];
         } else {
             //在添加 UserIds（ClientIds） 的情况下，但获取用户信息失败的情况下，也刷新，至少展示 UserIds（ClientIds）。
             self.needReloadDataSource = YES;
-            if (theHUDActionBlock) {
-                theHUDActionBlock(self, nil, @"获取失败", LCCKMessageHUDActionTypeError);
-            }
+//            if (theHUDActionBlock) {
+//                theHUDActionBlock(self, nil, @"获取失败", LCCKMessageHUDActionTypeError);
+//            }
         }
         [self.tableView reloadData];
     }];

@@ -43,15 +43,16 @@ class ContactListVC: LCCKContactListViewController {
     
     //TODO:refresh contact list data
     func reSetUserIds() {
-        let hud = showHudWith(view, animated: true, mode: .text, text: "更新联系人...")
+        
         User.getContactList { (success, json, error) in
             self.tableView.mj_header.endRefreshing()
             if success == true {
-                hud.hide(true)
+                //hud.hide(true)
                 self.changeAllContacts()
             }
             else {
-                hud.labelText = error
+                let hud = showHudWith(self.view, animated: true, mode: .text, text: "提示")
+                hud.detailsLabelText = error
                 hud.hide(true, afterDelay: 2.0)
             }
         }
