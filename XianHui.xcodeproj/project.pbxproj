@@ -50,7 +50,6 @@
 		372480E61D8151EF00B95C54 /* LCCKUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 372480C51D8151EF00B95C54 /* LCCKUtil.m */; };
 		372480ED1D8151EF00B95C54 /* LCCKContactManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 372480D31D8151EF00B95C54 /* LCCKContactManager.m */; };
 		372480EE1D8151EF00B95C54 /* NSObject+LCCKHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 372480D71D8151EF00B95C54 /* NSObject+LCCKHUD.m */; };
-		372962991D40AF6500A947B4 /* BKPasscodeView.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3729629B1D40AF6500A947B4 /* BKPasscodeView.strings */; };
 		372F45BE1DE573FF001101D8 /* MIDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372F45BC1DE573FF001101D8 /* MIDatePicker.swift */; };
 		372F45BF1DE573FF001101D8 /* MIDatePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 372F45BD1DE573FF001101D8 /* MIDatePicker.xib */; };
 		372FAB0A1DD15F96007F1CA0 /* XHStackedChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372FAB091DD15F96007F1CA0 /* XHStackedChartViewController.swift */; };
@@ -130,7 +129,6 @@
 		37A2466B1DAF69A3002ADC5C /* FourButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37A246691DAF69A3002ADC5C /* FourButtonCell.xib */; };
 		37A2466E1DAF69B4002ADC5C /* SliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A2466C1DAF69B4002ADC5C /* SliderCell.swift */; };
 		37A2466F1DAF69B4002ADC5C /* SliderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37A2466D1DAF69B4002ADC5C /* SliderCell.xib */; };
-		37A4C7591E14DD4700BF30E8 /* CustomizedChatKit.Other.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 37A4C7581E14DD4700BF30E8 /* CustomizedChatKit.Other.bundle */; };
 		37A76FD31D6D314600572B1D /* ProdDateSetTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A76FD21D6D314600572B1D /* ProdDateSetTableView.swift */; };
 		37A76FDA1D6D7DA200572B1D /* ReMarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A76FD81D6D7DA200572B1D /* ReMarkCell.swift */; };
 		37A76FDB1D6D7DA200572B1D /* ReMarkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37A76FD91D6D7DA200572B1D /* ReMarkCell.xib */; };
@@ -348,7 +346,6 @@
 		372480D41D8151EF00B95C54 /* LCCKExampleConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCCKExampleConstants.h; sourceTree = "<group>"; };
 		372480D61D8151EF00B95C54 /* NSObject+LCCKHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+LCCKHUD.h"; sourceTree = "<group>"; };
 		372480D71D8151EF00B95C54 /* NSObject+LCCKHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+LCCKHUD.m"; sourceTree = "<group>"; };
-		3729629A1D40AF6500A947B4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BKPasscodeView.strings"; sourceTree = "<group>"; };
 		372F45BC1DE573FF001101D8 /* MIDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDatePicker.swift; sourceTree = "<group>"; };
 		372F45BD1DE573FF001101D8 /* MIDatePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MIDatePicker.xib; sourceTree = "<group>"; };
 		372FAB091DD15F96007F1CA0 /* XHStackedChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHStackedChartViewController.swift; sourceTree = "<group>"; };
@@ -429,7 +426,6 @@
 		37A246691DAF69A3002ADC5C /* FourButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FourButtonCell.xib; sourceTree = "<group>"; };
 		37A2466C1DAF69B4002ADC5C /* SliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderCell.swift; sourceTree = "<group>"; };
 		37A2466D1DAF69B4002ADC5C /* SliderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SliderCell.xib; sourceTree = "<group>"; };
-		37A4C7581E14DD4700BF30E8 /* CustomizedChatKit.Other.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CustomizedChatKit.Other.bundle; sourceTree = "<group>"; };
 		37A76FD21D6D314600572B1D /* ProdDateSetTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProdDateSetTableView.swift; sourceTree = "<group>"; };
 		37A76FD81D6D7DA200572B1D /* ReMarkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReMarkCell.swift; sourceTree = "<group>"; };
 		37A76FD91D6D7DA200572B1D /* ReMarkCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReMarkCell.xib; sourceTree = "<group>"; };
@@ -685,7 +681,6 @@
 		370AAEA81D4AF3F6000C64D1 /* ChatExample */ = {
 			isa = PBXGroup;
 			children = (
-				37FF8EE51D91439D00676780 /* CustomizedChatKit */,
 				372480931D8151CD00B95C54 /* LCChatKitExample.h */,
 				372480941D8151CD00B95C54 /* LCChatKitExample.m */,
 				372480951D8151CD00B95C54 /* LCChatKitExample+Setting.h */,
@@ -2027,7 +2022,6 @@
 				37EA568E1D3E0A7000D63498 /* Main.storyboard */,
 				37EA56931D3E0A7000D63498 /* LaunchScreen.storyboard */,
 				37EA56961D3E0A7000D63498 /* Info.plist */,
-				3729629B1D40AF6500A947B4 /* BKPasscodeView.strings */,
 			);
 			path = XianHui;
 			sourceTree = "<group>";
@@ -2039,14 +2033,6 @@
 				37F905301D69F9370078C06B /* CustomerCell.xib */,
 			);
 			path = CustomerCell;
-			sourceTree = "<group>";
-		};
-		37FF8EE51D91439D00676780 /* CustomizedChatKit */ = {
-			isa = PBXGroup;
-			children = (
-				37A4C7581E14DD4700BF30E8 /* CustomizedChatKit.Other.bundle */,
-			);
-			path = CustomizedChatKit;
 			sourceTree = "<group>";
 		};
 		B6931119C14E45DB42D8A126 /* Frameworks */ = {
@@ -2141,7 +2127,6 @@
 				37BAB9A61D3E1059001E4680 /* SubscriptionTopCell.xib in Resources */,
 				37BAB9781D3E1059001E4680 /* AddFriendSearchCell.xib in Resources */,
 				37EA56951D3E0A7000D63498 /* LaunchScreen.storyboard in Resources */,
-				372962991D40AF6500A947B4 /* BKPasscodeView.strings in Resources */,
 				37BAB98C1D3E1059001E4680 /* coverCell.xib in Resources */,
 				371041FA1DC09CF700BE20F9 /* Info.plist in Resources */,
 				3776B8D21D93A62E00A9C9DB /* CodeScan.bundle in Resources */,
@@ -2165,7 +2150,6 @@
 				37BAB9D31D3E11B1001E4680 /* LICENSE in Resources */,
 				37F905321D69F9370078C06B /* CustomerCell.xib in Resources */,
 				37D811DD1DAB437E00A5B037 /* Assets.xcassets in Resources */,
-				37A4C7591E14DD4700BF30E8 /* CustomizedChatKit.Other.bundle in Resources */,
 				37BAB9961D3E1059001E4680 /* SegmentCell.xib in Resources */,
 				37C15CE41DE3EF7E0083AFAB /* TaskList.storyboard in Resources */,
 				37BAB97C1D3E1059001E4680 /* ChannelCell.xib in Resources */,
@@ -2484,14 +2468,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		3729629B1D40AF6500A947B4 /* BKPasscodeView.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3729629A1D40AF6500A947B4 /* zh-Hans */,
-			);
-			name = BKPasscodeView.strings;
-			sourceTree = "<group>";
-		};
 		37EA568E1D3E0A7000D63498 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
