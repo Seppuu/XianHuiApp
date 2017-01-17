@@ -106,6 +106,10 @@ class CustomerProfileVC: UIViewController {
         if let planned = json["planed"].int {
             self.customer.planned   =  String(planned)
         }
+        
+        if let orderStatus = json["schedule_status"].int {
+            self.customer.orderStatus = orderStatus
+        }
     }
     
     func setTableView() {
@@ -225,7 +229,26 @@ extension CustomerProfileVC:UITableViewDelegate,UITableViewDataSource {
             }
             else {
                 cell.accessoryView = UIImageView.xhAccessoryView()
-                cell.typeLabel.text = "服务状态"
+                var text = ""
+                if customer.orderStatus == nil {
+                    text = "暂无"
+                }
+                else if customer.orderStatus == 0 {
+                    text = "已预约"
+                }
+                else if customer.orderStatus == 1{
+                    text = "已开始"
+                }
+                else if customer.orderStatus == 2 {
+                    text = "已结束"
+                }
+                else if customer.orderStatus == 3 {
+                    text = "已结单"
+                }
+                
+                cell.typeLabel.text = text
+                
+                
             }
             
             return cell

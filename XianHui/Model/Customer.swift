@@ -52,6 +52,9 @@ class Customer: NSObject {
         return scheduleTime.toDate("yyyy-mm-dd")
     }
     
+    //今日订单信息
+    var orderStatus:Int? = nil
+    
     //项目数
     var projectTotal = 0
     //预约状态
