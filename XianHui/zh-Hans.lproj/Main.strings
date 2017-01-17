@@ -1,0 +1,9 @@
+
+/* Class = "UILabel"; text = "验证码"; ObjectID = "RV5-EW-Nic"; */
+"RV5-EW-Nic.text" = "验证码";
+
+/* Class = "UILabel"; text = "+86 186 5280 5163"; ObjectID = "nsD-c5-DsH"; */
+"nsD-c5-DsH.text" = "+86 186 5280 5163";
+
+/* Class = "UITextField"; placeholder = "手机号"; ObjectID = "xNd-fu-U7T"; */
+"xNd-fu-U7T.placeholder" = "手机号";

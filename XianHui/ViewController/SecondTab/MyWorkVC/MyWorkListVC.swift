@@ -155,7 +155,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         tableView.removeFromSuperview()
         searchResults = [MyWorkObject]()
         tableView.reloadData()
-        tableView.frame = CGRect(x: 0.0, y: 64, width: self.parentVC!.view.frame.width, height: self.parentVC!.view.frame.height - 64)
+        tableView.frame = CGRect(x: 0.0, y: 0, width: screenWidth, height: self.parentVC!.view.frame.height)
         self.parentVC?.view.addSubview(tableView)
         
         tableView.mj_footer.removeFromSuperview()
@@ -168,8 +168,10 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         tableView.removeFromSuperview()
         dataHelper.dataArray = originalDatas
         tableView.reloadData()
-        tableView.frame = CGRect(x: 0, y: 0, width: screenWidth, height:view.ddHeight - 64 - 40)
         view.addSubview(tableView)
+        tableView.frame = CGRect(x: 0, y: 0, width: screenWidth, height:view.bounds.size.height)
+            //CGRect(x: 0, y: 0, width: screenWidth, height:view.ddHeight - 64 - 40)
+        
         
         tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
             self.getDataFromServer(self.filterParams)
@@ -217,7 +219,7 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
     }
 
     func setTableView() {
-        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: screenWidth, height:view.ddHeight - 64 - 40), style: .grouped)
+        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: screenWidth, height:view.bounds.size.height - 64 - 40), style: .grouped)
         view.addSubview(tableView)
         tableView.delegate = dataHelper
         tableView.dataSource = dataHelper

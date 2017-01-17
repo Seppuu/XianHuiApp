@@ -42,7 +42,7 @@ class DropDownView: UIView {
     func setTableView() {
         
         var frame = bounds
-        frame.size.height -= 20
+        //frame.size.height -= 20
         tableView = UITableView(frame:frame, style: .plain)
         tableView.frame.origin.y = 22
         tableView.delegate = self

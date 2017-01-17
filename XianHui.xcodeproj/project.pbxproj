@@ -435,6 +435,8 @@
 		37A76FE21D6D8D1200572B1D /* StepperCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepperCell.xib; sourceTree = "<group>"; };
 		37A81FC11D9E0DE1002720D3 /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		37A81FC41D9E2EC2002720D3 /* BaseProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseProfileViewController.swift; sourceTree = "<group>"; };
+		37A864851E2DAFAB008233AB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		37A864861E2DAFAB008233AB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		37B791481D51C9070032C164 /* Hepler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hepler.swift; sourceTree = "<group>"; };
 		37B7914B1D51CA780032C164 /* HeplerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeplerCell.swift; sourceTree = "<group>"; };
 		37B7914C1D51CA780032C164 /* HeplerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeplerCell.xib; sourceTree = "<group>"; };
@@ -2106,8 +2108,6 @@
 			knownRegions = (
 				en,
 				Base,
-				"zh-Hans",
-				"zh-Hans-CN",
 			);
 			mainGroup = 37EA567E1D3E0A7000D63498;
 			productRefGroup = 37EA56881D3E0A7000D63498 /* Products */;
@@ -2472,6 +2472,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				37EA568F1D3E0A7000D63498 /* Base */,
+				37A864851E2DAFAB008233AB /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -2480,6 +2481,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				37EA56941D3E0A7000D63498 /* Base */,
+				37A864861E2DAFAB008233AB /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
