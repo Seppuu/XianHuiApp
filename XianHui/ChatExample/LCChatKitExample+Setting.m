@@ -144,7 +144,7 @@ static NSString *const LCCKAPPKEY = @"eXUtSMYSxVCJhE4IHOiGWabv";
         if (conversation.members.count > 2) { //设置点击rightButton为群聊Style,和对应事件
             [aConversationController
              configureBarButtonItemStyle:LCCKBarButtonItemStyleGroupProfile
-             action:^(UIBarButtonItem *sender, UIEvent *event) {
+             action:^(__kindof LCCKBaseViewController *viewController, UIBarButtonItem *sender, UIEvent *event) {
                  NSString *title = @"打开群聊详情";
                  NSString *subTitle =
                  [NSString stringWithFormat:@"群聊id：%@",
@@ -158,7 +158,7 @@ static NSString *const LCCKAPPKEY = @"eXUtSMYSxVCJhE4IHOiGWabv";
         } else if (conversation.members.count == 2) { //设置点击rightButton为单聊的Style,和对应事件
             [aConversationController
              configureBarButtonItemStyle:LCCKBarButtonItemStyleSingleProfile
-             action:^(UIBarButtonItem *sender, UIEvent *event) {
+             action:^(__kindof LCCKBaseViewController *viewController, UIBarButtonItem *sender, UIEvent *event) {
                  NSString *title = @"打开用户详情";
                  NSArray *members = conversation.members;
                  NSPredicate *predicate =
@@ -566,7 +566,7 @@ setLoadLatestMessagesHandler:^(LCCKConversationViewController *conversationContr
     actionItemMore.backgroundColor = [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0];
     UITableViewRowAction *actionItemDelete = [UITableViewRowAction
                                               rowActionWithStyle:UITableViewRowActionStyleDefault
-                                              title:LCCKLocalizedStrings(@"Delete")
+                                              title:@"删除"
                                               handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
                                                   [[LCChatKit sharedInstance]                                               deleteRecentConversationWithConversationId:conversation.conversationId];
                                               }];

@@ -10,7 +10,12 @@
 #import "LCCKContactCell.h"
 #import "LCCKAlertController.h"
 #import "LCCKUIService.h"
-#import "LCCKDeallocBlockExecutor.h"
+
+#if __has_include(<CYLDeallocBlockExecutor/CYLDeallocBlockExecutor.h>)
+#import <CYLDeallocBlockExecutor/CYLDeallocBlockExecutor.h>
+#else
+#import "CYLDeallocBlockExecutor.h"
+#endif
 
 NSString *const LCCKContactListViewControllerContactsDidChanged = @"LCCKContactListViewControllerContactsDidChanged";
 static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactListViewControllerIdentifier";
@@ -36,7 +41,6 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 ///=============================================================================
 
 #pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
 #pragma clang diagnostic pop
 @property (nonatomic, copy) NSArray *searchContacts;
@@ -99,8 +103,8 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
     _userIds = userIds;
     //TODO:
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataSourceUpdated:) name:LCCKNotificationContactListDataSourceUpdated object:nil];
-    __unsafe_unretained typeof(self) weakSelf = self;
-    [self lcck_executeAtDealloc:^{
+    __unsafe_unretained __typeof(self) weakSelf = self;
+    [self cyl_executeAtDealloc:^{
         [[NSNotificationCenter defaultCenter] removeObserver:weakSelf];
     }];
     return self;
@@ -181,7 +185,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 }
 - (UISearchBar *)searchBar {
     if (!_searchBar) {
-        UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+        UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 44)];
         searchBar.delegate = self;
         searchBar.placeholder = @"搜索";
         _searchBar = searchBar;
@@ -449,7 +453,7 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 
 - (void)setUserIds:(NSSet<NSString *> *)userIds {
     _userIds = [userIds copy];
-    [self forceReloadByUserId];
+    //[self forceReloadByUserId];
 }
 
 - (NSSet *)userIdsFrom:(NSSet *)contacts {
@@ -494,24 +498,24 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
      */
     //xianhui 去掉这些HUD.
     //LCCKHUDActionBlock theHUDActionBlock = [LCCKUIService sharedInstance].HUDActionBlock;
-//    if (theHUDActionBlock) {
-//        theHUDActionBlock(self, nil, @"获取联系人信息...", LCCKMessageHUDActionTypeShow);
-//    }
+    //    if (theHUDActionBlock) {
+    //        theHUDActionBlock(self, nil, @"获取联系人信息...", LCCKMessageHUDActionTypeShow);
+    //    }
     [[LCChatKit sharedInstance] getProfilesInBackgroundForUserIds:[NSArray arrayWithArray:[_userIds allObjects]] callback:^(NSArray<id<LCCKUserDelegate>> *users, NSError *error) {
-//        if (theHUDActionBlock) {
-//            theHUDActionBlock(self, nil, nil, LCCKMessageHUDActionTypeHide);
-//        }
+        //        if (theHUDActionBlock) {
+        //            theHUDActionBlock(self, nil, nil, LCCKMessageHUDActionTypeHide);
+        //        }
         if (users.count > 0) {
-//            if (theHUDActionBlock) {
-//                theHUDActionBlock(self, nil, @"获取成功", LCCKMessageHUDActionTypeSuccess);
-//            }
+            //            if (theHUDActionBlock) {
+            //                theHUDActionBlock(self, nil, @"获取成功", LCCKMessageHUDActionTypeSuccess);
+            //            }
             self.contacts = [NSSet setWithArray:users];
         } else {
             //在添加 UserIds（ClientIds） 的情况下，但获取用户信息失败的情况下，也刷新，至少展示 UserIds（ClientIds）。
             self.needReloadDataSource = YES;
-//            if (theHUDActionBlock) {
-//                theHUDActionBlock(self, nil, @"获取失败", LCCKMessageHUDActionTypeError);
-//            }
+            //            if (theHUDActionBlock) {
+            //                theHUDActionBlock(self, nil, @"获取失败", LCCKMessageHUDActionTypeError);
+            //            }
         }
         [self.tableView reloadData];
     }];
@@ -710,12 +714,12 @@ static NSString *const LCCKContactListViewControllerIdentifier = @"LCCKContactLi
 #pragma mark - UISearchDisplayDelegate
 
 // return YES to reload table. called when search string/option changes. convenience methods on top UISearchBar delegate methods
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(nullable NSString *)searchString NS_DEPRECATED_IOS(3_0,8_0){
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(nullable NSString *)searchString {
     [self filterContentForSearchText:searchString];
     return YES;
 }
 
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption NS_DEPRECATED_IOS(3_0,8_0){
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption {
     return YES;
 }
 

@@ -15,7 +15,8 @@
 /**
  *  最后一条消息。通过 SDK 的消息缓存找到的
  */
-@property (nonatomic, strong) AVIMTypedMessage *lcck_lastMessage;
+@property (nonatomic, strong, readonly) AVIMTypedMessage *lcck_lastMessage;
+@property (nonatomic, strong, readonly) NSDate *lcck_lastMessageAt;
 
 /**
  *  未读消息数，保存在了数据库。收消息的时候，更新数据库
@@ -63,5 +64,8 @@
 - (void)lcck_setObject:(id)object forKey:(NSString *)key callback:(LCCKBooleanResultBlock)callback;
 
 - (void)lcck_removeObjectForKey:(NSString *)key callback:(LCCKBooleanResultBlock)callback;
+
+- (void)lcck_setConversationWithMute:(BOOL)mute callback:(LCCKBooleanResultBlock)callback;
+- (BOOL)lcck_isCreaterForCurrentUser;
 
 @end

@@ -66,7 +66,6 @@ class MessageListVC: LCCKConversationListViewController,DZNEmptyDataSetSource, D
         customStatusView.isUserInteractionEnabled = true
         customStatusView.addGestureRecognizer(tap)
         
-        
         let label  = UILabel(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 44))
         label.text = "PC端已经登陆,点击退出"
         label.textAlignment = .center
@@ -79,7 +78,7 @@ class MessageListVC: LCCKConversationListViewController,DZNEmptyDataSetSource, D
         self.tableView.emptyDataSetDelegate = self
         
         
-        ChatKitExample.updateMessageListVC()
+        //ChatKitExample.updateMessageListVC()
         
         self.tableView.mj_header.endRefreshingCompletionBlock = {
             self.hasLoadData = true
@@ -99,6 +98,7 @@ class MessageListVC: LCCKConversationListViewController,DZNEmptyDataSetSource, D
         self.refresh()
         
     }
+    
     
     func setLeftBarAvatar() {
         
@@ -193,6 +193,8 @@ class MessageListVC: LCCKConversationListViewController,DZNEmptyDataSetSource, D
         getMyBookERPLoginStatus()
         
         
+        print("-----------^^^^^^^^^^^^^^^^^^^");
+        self.refresh()
     }
 
     

@@ -25,17 +25,21 @@ static BOOL enableAutomatic = NO;
 
 @implementation  AVUser
 
-@synthesize sessionToken = _sessionToken;
-@synthesize isNew = _isNew;
-@synthesize username = _username;
-@synthesize password = _password;
-@synthesize email = _email;
-@synthesize mobilePhoneVerified = _mobilePhoneVerified;
-@synthesize facebookToken = _facebookToken;
-@synthesize twitterToken = _twitterToken;
-@synthesize sinaWeiboToken = _sinaWeiboToken;
-@synthesize qqWeiboToken = _qqWeiboToken;
-@synthesize mobilePhoneNumber = _mobilePhoneNumber;
+@dynamic sessionToken;
+@dynamic isNew;
+@dynamic username;
+@dynamic password;
+@dynamic email;
+@dynamic mobilePhoneVerified;
+@dynamic facebookToken;
+@dynamic twitterToken;
+@dynamic sinaWeiboToken;
+@dynamic qqWeiboToken;
+@dynamic mobilePhoneNumber;
+
++ (void)load {
+    [self registerSubclass];
+}
 
 + (NSString *)parseClassName
 {
@@ -131,6 +135,10 @@ static BOOL enableAutomatic = NO;
     return [query findObjects:error];
 }
 
+- (NSArray<AVRole *> *)getRolesAndThrowsWithError:(NSError * _Nullable __autoreleasing *)error {
+    return [self getRoles:error];
+}
+
 - (void)getRolesInBackgroundWithBlock:(void (^)(NSArray<AVRole *> * _Nullable, NSError * _Nullable))block {
     [AVUtils asynchronizeTask:^{
         NSError *error = nil;
@@ -194,6 +202,10 @@ static BOOL enableAutomatic = NO;
 - (BOOL)signUp:(NSError *__autoreleasing *)error
 {
     return [self saveWithOption:nil eventually:NO verifyBefore:NO error:error];
+}
+
+- (BOOL)signUpAndThrowsWithError:(NSError * _Nullable __autoreleasing *)error {
+    return [self signUp:error];
 }
 
 - (void)signUpInBackground
@@ -863,32 +875,25 @@ static BOOL enableAutomatic = NO;
 }
 
 #pragma mark - Override from AVObject
+
+/**
+ Avoid session token to be removed after fetching or refreshing.
+ */
+- (void)removeLocalData {
+    NSString *sessionToken = self.localData[@"sessionToken"];
+
+    [super removeLocalData];
+
+    if (sessionToken)
+        self.localData[@"sessionToken"] = sessionToken;
+}
+
 -(NSMutableDictionary *)postData
 {
     // TO BE REMOVED
     NSMutableDictionary * data = [super postData];
     [data addEntriesFromDictionary:[self userDictionary]];
     return data;
-}
-
--(void)setUsername:(NSString *)username {
-    _username = username;
-    [self addSetRequest:usernameTag object:username];
-}
-
--(void)setPassword:(NSString *)password {
-    _password = password;
-    [self addSetRequest:passwordTag object:password];
-}
-
--(void)setEmail:(NSString *)email {
-    _email = email;
-    [self addSetRequest:emailTag object:email];
-}
-
-- (void)setMobilePhoneNumber:(NSString *)mobilePhoneNumber {
-    _mobilePhoneNumber = mobilePhoneNumber;
-    [self addSetRequest:mobilePhoneNumberTag object:mobilePhoneNumber];
 }
 
 - (NSDictionary *)snapshot {

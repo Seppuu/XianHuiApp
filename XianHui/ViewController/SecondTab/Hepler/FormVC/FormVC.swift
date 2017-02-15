@@ -14,9 +14,7 @@ import Charts
 
 class FormVC: UIViewController,CAPSPageMenuDelegate {
     
-    var topView = SubscriptionTopView()
     var collectionView:UICollectionView!
-    let cellID = "SubscriptionDetailCell"
     
     var pageMenu : CAPSPageMenu?
     var chartTitleLabel = UILabel()

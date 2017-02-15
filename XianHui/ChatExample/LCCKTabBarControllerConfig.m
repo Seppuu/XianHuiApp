@@ -70,6 +70,10 @@
     
     //联系人
     NSArray *userIds = [ChatKitExample getAllUserIds];
+    
+    NSLog(@"-----------------%@",userIds);
+    
+    
     NSArray *users = [[LCChatKit sharedInstance] getProfilesForUserIds:userIds error:nil];
     
     NSString *currentClientID = [[LCChatKit sharedInstance] clientId];

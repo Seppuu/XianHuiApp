@@ -14,7 +14,6 @@ import UserNotifications
 import RealmSwift
 
 
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -29,10 +28,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         checkRealmVersion()
         
+        
         LCChatKit.sharedInstance().useDevPushCerticate = false
+        
         ChatKitExample.invokeThisMethodInDidFinishLaunching()
         //ios 10 兼容
         replyPushNotificationAuthorization(application)
+        
         
         if launchOptions != nil {
             if let notificationPayload = launchOptions![UIApplicationLaunchOptionsKey.remoteNotification] as? [AnyHashable: Any] {
@@ -162,7 +164,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
-    
     func openLeanCloudIMWith(_ clientId:String,autoLogin:Bool) {
         
         if autoLogin == true {
@@ -229,8 +230,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
         })
     }
-    
-    
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         ChatKitExample.invokeThisMethodInDidRegisterForRemoteNotifications(withDeviceToken: deviceToken)

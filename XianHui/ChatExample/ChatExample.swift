@@ -25,7 +25,7 @@ class ChatKitExample: LCChatKitExample {
         
         addCustomerCellIntoMessageList()
         
-        addSaveConvIdNoti()
+        //addSaveConvIdNoti()
         
     }
     
@@ -90,7 +90,6 @@ class ChatKitExample: LCChatKitExample {
     
     public class func updateMessageListVC() {
         
-        
 //        if isFirstLaunch == true {
 //            
 //        }
@@ -149,6 +148,8 @@ class ChatKitExample: LCChatKitExample {
                 }
             }
             else {
+                
+                print(error?.localizedDescription)
                 
             }
         }
@@ -244,8 +245,7 @@ class ChatKitExample: LCChatKitExample {
                             }
                             //设置当前对话,为了消除未读标记.chatKit默认点击系统消息进入会话界面.
                             LCChatKit.sharedInstance().conversationService.currentConversation = conversation
-                            LCChatKit.sharedInstance().conversationService.updateConversationAsRead()
-
+                            LCChatKit.sharedInstance().conversationService.updateConversationAsRead(withLast: lastMessage)
                             return
                         }
                     }
@@ -477,7 +477,7 @@ class ChatKitExample: LCChatKitExample {
             }
             else if conversation?.members?.count == 2 {
                 
-                aConversationController?.configureBarButtonItemStyle(.singleProfile, action: { (sender, event) in
+                aConversationController?.configureBarButtonItemStyle(.singleProfile, action: { (_,sender, event) in
                     
                    // let hud = showHudWith(aConversationController.view, animated: true, mode: .Indeterminate, text: "")
                     if let memebers = conversation?.members as? [String] {

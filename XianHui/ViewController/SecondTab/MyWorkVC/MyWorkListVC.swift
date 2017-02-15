@@ -727,6 +727,17 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         }
     }
     
+//    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
+//        
+//        let text =  isSearch == true ? "搜索全部:无结果":noDataMsg
+//        
+//        let attrString = NSAttributedString(string: text)
+//        
+//        return attrString
+//        
+//    }
+    
+    
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         
         let text =  isSearch == true ? "搜索全部:无结果":noDataMsg
@@ -736,8 +747,13 @@ class MyWorkListVC: UIViewController ,DZNEmptyDataSetSource, DZNEmptyDataSetDele
         return attrString
     }
     
+    
     func emptyDataSetShouldDisplay(_ scrollView: UIScrollView!) -> Bool {
         return hasLoadData
+    }
+    
+    func emptyDataSetShouldAllowTouch(_ scrollView: UIScrollView!) -> Bool {
+        return true
     }
     
     

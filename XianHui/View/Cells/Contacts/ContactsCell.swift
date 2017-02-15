@@ -37,9 +37,6 @@ class ContactsCell: UITableViewCell {
     override func layoutSubviews() {
         
         super.layoutSubviews()
-        
-        self.avatarImageView.layer.cornerRadius =  avatarImageView.ddWidth/2
-        self.avatarImageView.layer.masksToBounds = true
     }
 
     
